@@ -38,3 +38,6 @@ class User(abc.ABC):
 
     def __repr__(self):
         return f"User(name={self.name}, role={self.role.value}, user_id={self.user_id})"
+
+    def __eq__(self, other):
+        return self.name == other.name and self.role == other.role and self.user_id == other.user_id
