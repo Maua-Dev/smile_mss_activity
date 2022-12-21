@@ -35,3 +35,6 @@ class User(abc.ABC):
             return False
 
         return True
+
+    def __repr__(self):
+        return f"User(name={self.name}, role={self.role.value}, user_id={self.user_id})"
