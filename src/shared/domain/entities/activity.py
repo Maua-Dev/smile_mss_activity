@@ -2,7 +2,6 @@ import abc
 import datetime
 from typing import List
 
-from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
@@ -22,13 +21,12 @@ class Activity(abc.ABC):
     duration: int #minutes
     encharged_professors: List[User]
     speakers: List[Speaker]
-    enrollments: List[Enrollment]
     total_slots: int
     taken_slots: int
     accepting_new_subscriptions: bool
     stop_accepting_new_subscriptions_before: datetime.datetime
 
-    def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool, delivery_model: DELIVERY_MODEL, start_date: datetime.datetime, duration: int, encharged_professors: List[User], speakers: List[Speaker], enrollments: List[Enrollment], total_slots: int, taken_slots: int, accepting_new_subscriptions: bool, stop_accepting_new_subscriptions_before: datetime.datetime):
+    def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool, delivery_model: DELIVERY_MODEL, start_date: datetime.datetime, duration: int, encharged_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int, accepting_new_subscriptions: bool, stop_accepting_new_subscriptions_before: datetime.datetime):
         if type(code) != str:
             raise EntityError("code")
         self.code = code
@@ -64,10 +62,10 @@ class Activity(abc.ABC):
         if type(encharged_professors) != list:
             raise EntityError("encharged_professors")
 
-        if not all([type(encharged_professor) == User for encharged_professor in encharged_professors]): # check if all elements are User
+        elif not all([type(encharged_professor) == User for encharged_professor in encharged_professors]): # check if all elements are User
             raise EntityError("encharged_professors")
 
-        if not all([encharged_professor.role == ROLE.PROFESSOR for encharged_professor in encharged_professors]):  # check if all elements are professors
+        elif not all([encharged_professor.role == ROLE.PROFESSOR for encharged_professor in encharged_professors]):  # check if all elements are professors
             raise EntityError("encharged_professors")
 
         self.encharged_professors = encharged_professors
@@ -78,13 +76,6 @@ class Activity(abc.ABC):
         if not all([type(speaker) == Speaker for speaker in speakers]): # check if all elements are Speaker
             raise EntityError("speakers")
         self.speakers = speakers
-
-        if type(enrollments) != list:
-            raise EntityError("enrollments")
-
-        if not all([type(enrollment) == Enrollment for enrollment in enrollments]): # check if all elements are Enrollment
-            raise EntityError("enrollments")
-        self.enrollments = enrollments
 
         if type(total_slots) != int:
             raise EntityError("total_slots")
