@@ -1,5 +1,5 @@
 import pytest
-
+#apagar
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.helpers.errors.domain_errors import EntityError
 
