@@ -94,8 +94,16 @@ class Activity(abc.ABC):
             raise EntityError("accepting_new_subscriptions")
         self.accepting_new_subscriptions = accepting_new_subscriptions
 
-        if type(stop_accepting_new_subscriptions_before) != datetime.datetime:
+        if type(stop_accepting_new_subscriptions_before) == datetime.datetime:
+            if stop_accepting_new_subscriptions_before > start_date:
+                raise EntityError("stop_accepting_new_subscriptions_before")
+
+        elif stop_accepting_new_subscriptions_before is None:
+            self.stop_accepting_new_subscriptions_before = stop_accepting_new_subscriptions_before
+
+        else:
             raise EntityError("stop_accepting_new_subscriptions_before")
+
         self.stop_accepting_new_subscriptions_before = stop_accepting_new_subscriptions_before
 
     def __repr__(self):
