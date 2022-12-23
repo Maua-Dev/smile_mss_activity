@@ -1,4 +1,4 @@
-from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_old import User
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
 
