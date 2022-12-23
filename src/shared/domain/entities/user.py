@@ -8,6 +8,7 @@ class User(abc.ABC):
     role: ROLE
     user_id: str
     MIN_NAME_LENGTH = 2
+    USER_ID_LENGTH = 4
 
     def __init__(self, name: str, role: ROLE, user_id: str):
         if not User.validate_name(name):
@@ -20,7 +21,7 @@ class User(abc.ABC):
 
         if type(user_id) != str:
             raise EntityError("user_id")
-        if len(user_id) != 4:
+        if len(user_id) != self.USER_ID_LENGTH:
             raise EntityError("user_id")
 
         self.user_id = user_id
