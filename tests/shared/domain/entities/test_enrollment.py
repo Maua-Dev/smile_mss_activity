@@ -53,11 +53,15 @@ class Test_Enrollment:
         )
 
         assert type(enrollment) == Enrollment
+        assert enrollment.activity.code == "1234"
+        assert enrollment.user.name == "Marcos"
+        assert enrollment.state == ENROLLMENT_STATE.ENROLLED
+        assert enrollment.date_subscribed == datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
 
 
     def test_enrollment_with_invalid_activity(self):
         with pytest.raises(EntityError):
-            Enrollment(
+            enrollment = Enrollment(
                 activity="1234",
                 user=User(
                     name="Marcos",
@@ -70,7 +74,7 @@ class Test_Enrollment:
 
     def test_enrollment_with_invalid_user(self):
         with pytest.raises(EntityError):
-            Enrollment(
+            enrollment = Enrollment(
                 activity=Activity(
                     code="1234",
                     title="Palestra Microsoft",
@@ -106,7 +110,7 @@ class Test_Enrollment:
 
     def test_enrollment_with_invalid_state(self):
         with pytest.raises(EntityError):
-            Enrollment(
+            enrollment = Enrollment(
                 activity=Activity(
                     code="1234",
                     title="Palestra Microsoft",
@@ -146,7 +150,7 @@ class Test_Enrollment:
 
     def test_enrollment_with_invalid_date_subscribed(self):
         with pytest.raises(EntityError):
-            Enrollment(
+            enrollment = Enrollment(
                 activity=Activity(
                     code="1234",
                     title="Palestra Microsoft",
