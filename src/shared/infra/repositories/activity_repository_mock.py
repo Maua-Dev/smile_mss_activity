@@ -13,6 +13,7 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 
 
 class ActivityRepositoryMock(IActivityRepository):
+
     speakers: List[Speaker]
     users: List[User]
     activities: List[Activity]
@@ -318,3 +319,9 @@ class ActivityRepositoryMock(IActivityRepository):
             Enrollment(activity=self.activities[12], user=self.users[4], state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=datetime.datetime(2022, 11, 29, 19, 16, 52, 998305)),
         ]
+
+    def get_enrollment(self, user_id: str, code: str) -> Enrollment:
+        for enrollment in self.enrollments:
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+                return enrollment
+        return None
