@@ -24,7 +24,7 @@ class Test_Enrollment:
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
             duration=120,
-            encharged_professors=[
+            responsible_professors=[
                 User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
@@ -80,7 +80,7 @@ class Test_Enrollment:
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
                     start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
                     duration=120,
-                    encharged_professors=[
+                    responsible_professors=[
                         User(
                             name="Marcos",
                             role=ROLE.PROFESSOR,
@@ -116,7 +116,7 @@ class Test_Enrollment:
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
                     start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
                     duration=120,
-                    encharged_professors=[
+                    responsible_professors=[
                         User(
                             name="Marcos",
                             role=ROLE.PROFESSOR,
@@ -156,7 +156,7 @@ class Test_Enrollment:
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
                     start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
                     duration=120,
-                    encharged_professors=[
+                    responsible_professors=[
                         User(
                             name="Marcos",
                             role=ROLE.PROFESSOR,

@@ -23,7 +23,7 @@ class Test_Activity:
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
             duration=120,
-            encharged_professors=[
+            responsible_professors=[
                 User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
@@ -57,7 +57,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -87,7 +87,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -117,7 +117,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -148,7 +148,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -178,7 +178,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -208,7 +208,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -238,7 +238,7 @@ class Test_Activity:
                 delivery_model="IN_PERSON",
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -268,7 +268,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date="2022-12-22 13:56:05.430523",
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -298,7 +298,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration="DUAS HORAS",
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -317,7 +317,7 @@ class Test_Activity:
                 stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
-    def test_activity_invalid_encharged_professors(self):
+    def test_activity_invalid_responsible_professors(self):
         with pytest.raises(EntityError):
             activity = Activity(
                 code="1234",
@@ -328,7 +328,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=None,
+                responsible_professors=None,
                 speakers=[
                     Speaker(
                         name="Marcos Tales",
@@ -352,7 +352,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     Speaker(
                         name="Marcos Tales",
                         bio="Salve",
@@ -369,7 +369,7 @@ class Test_Activity:
                 accepting_new_subscriptions=True,
                 stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
-    def test_activity_invalid_encharged_professors_not_professor(self):
+    def test_activity_invalid_responsible_professors_not_professor(self):
         with pytest.raises(EntityError):
             activity = Activity(
                 code="1234",
@@ -380,7 +380,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.STUDENT,
@@ -410,7 +410,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -436,7 +436,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -467,7 +467,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -498,7 +498,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -529,7 +529,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -559,7 +559,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -590,7 +590,7 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
-                encharged_professors=[
+                responsible_professors=[
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
@@ -620,7 +620,7 @@ class Test_Activity:
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
                     start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                     duration=120,
-                    encharged_professors=[
+                    responsible_professors=[
                         User(
                             name="Marcos",
                             role=ROLE.PROFESSOR,

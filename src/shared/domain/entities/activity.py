@@ -19,7 +19,7 @@ class Activity(abc.ABC):
     delivery_model: DELIVERY_MODEL
     start_date: datetime.datetime
     duration: int  # minutes
-    encharged_professors: List[User]
+    responsible_professors: List[User]
     speakers: List[Speaker]
     total_slots: int
     taken_slots: int
@@ -28,7 +28,7 @@ class Activity(abc.ABC):
 
     def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: datetime.datetime, duration: int,
-                 encharged_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int,
+                 responsible_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int,
                  accepting_new_subscriptions: bool, stop_accepting_new_subscriptions_before: datetime.datetime):
         if type(code) != str:
             raise EntityError("code")
@@ -62,18 +62,18 @@ class Activity(abc.ABC):
             raise EntityError("duration")
         self.duration = duration
 
-        if type(encharged_professors) != list:
-            raise EntityError("encharged_professors")
+        if type(responsible_professors) != list:
+            raise EntityError("responsible_professors")
 
         elif not all([type(encharged_professor) == User for encharged_professor in
-                      encharged_professors]):  # check if all elements are User
-            raise EntityError("encharged_professors")
+                      responsible_professors]):  # check if all elements are User
+            raise EntityError("responsible_professors")
 
         elif not all([encharged_professor.role == ROLE.PROFESSOR for encharged_professor in
-                      encharged_professors]):  # check if all elements are professors
-            raise EntityError("encharged_professors")
+                      responsible_professors]):  # check if all elements are professors
+            raise EntityError("responsible_professors")
 
-        self.encharged_professors = encharged_professors
+        self.responsible_professors = responsible_professors
 
         if type(speakers) != list:
             raise EntityError("speakers")
@@ -107,7 +107,7 @@ class Activity(abc.ABC):
         self.stop_accepting_new_subscriptions_before = stop_accepting_new_subscriptions_before
 
     def __repr__(self):
-        return f"Activity(code={self.code}, title={self.title}, description={self.description}, activity_type={self.activity_type.value}, is_extensive={self.is_extensive}, delivery_model={self.delivery_model.value}, start_date={self.start_date.isoformat()}, duration={self.duration}, encharged_professors={self.encharged_professors}, speakers={self.speakers}, total_slots={self.total_slots}, taken_slots={self.taken_slots}, accepting_new_subscriptions={self.accepting_new_subscriptions}, stop_accepting_new_subscriptions_before={self.stop_accepting_new_subscriptions_before.isoformat() if self.stop_accepting_new_subscriptions_before is not None else None})"
+        return f"Activity(code={self.code}, title={self.title}, description={self.description}, activity_type={self.activity_type.value}, is_extensive={self.is_extensive}, delivery_model={self.delivery_model.value}, start_date={self.start_date.isoformat()}, duration={self.duration}, responsible_professors={self.responsible_professors}, speakers={self.speakers}, total_slots={self.total_slots}, taken_slots={self.taken_slots}, accepting_new_subscriptions={self.accepting_new_subscriptions}, stop_accepting_new_subscriptions_before={self.stop_accepting_new_subscriptions_before.isoformat() if self.stop_accepting_new_subscriptions_before is not None else None})"
 
     def __eq__(self, other):
-        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.encharged_professors == other.encharged_professors and self.speakers == other.speakers and self.enrollments == other.enrollments and self.total_slots == other.total_slots and self.taken_slots == other.taken_slots and self.accepting_new_subscriptions == other.accepting_new_subscriptions and self.stop_accepting_new_subscriptions_before == other.stop_accepting_new_subscriptions_before
+        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.enrollments == other.enrollments and self.total_slots == other.total_slots and self.taken_slots == other.taken_slots and self.accepting_new_subscriptions == other.accepting_new_subscriptions and self.stop_accepting_new_subscriptions_before == other.stop_accepting_new_subscriptions_before
