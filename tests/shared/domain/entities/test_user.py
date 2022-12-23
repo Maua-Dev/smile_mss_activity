@@ -9,6 +9,7 @@ class Test_User:
     def test_user(self):
         user = User(name="VITOR", role=ROLE.ADMIN, user_id="b16f")
 
+        assert type(user) == User
         assert user.name == "VITOR"
         assert user.role == ROLE.ADMIN
         assert user.user_id == "b16f"
