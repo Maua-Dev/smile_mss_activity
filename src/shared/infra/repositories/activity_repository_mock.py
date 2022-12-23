@@ -36,6 +36,8 @@ class ActivityRepositoryMock(IActivityRepository):
             User(name="Simone Romanato", role=ROLE.EXTERNAL, user_id="d23a"),
             User(name="Viviani Soller", role=ROLE.EXTERNAL, user_id="d673"),
             User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="c695"),
+            User(name="Rafael Santos", role=ROLE.PROFESSOR, user_id="12mf"),
+            User(name="Rodrigo Santos", role=ROLE.PROFESSOR, user_id="b2f1"),
         ]
 
         self.activities = [
