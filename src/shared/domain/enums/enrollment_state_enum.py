@@ -1,0 +1,9 @@
+from enum import Enum
+
+
+class ENROLLMENT_STATE(Enum):
+    ENROLLED = "ENROLLED"
+    DROPPED = "DROPPED"
+    COMPLETED = "COMPLETED"
+    REJECTED = "REJECTED"
+    IN_QUEUE = "IN_QUEUE"

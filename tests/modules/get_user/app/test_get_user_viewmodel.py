@@ -1,5 +1,5 @@
 from src.modules.get_user.app.get_user_viewmodel import GetUserViewmodel
-from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_old import User
 from src.shared.domain.enums.state_enum import STATE
 
 
