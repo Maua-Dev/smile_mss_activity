@@ -34,7 +34,7 @@ class User(abc.ABC):
             return False
 
         return True
-    
+
     @staticmethod
     def validate_user_id(user_id: str) -> bool:
         if type(user_id) != str:
