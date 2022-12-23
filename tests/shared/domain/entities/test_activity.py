@@ -45,6 +45,19 @@ class Test_Activity:
 
         assert type(activity) == Activity
         assert activity.code == "1234"
+        assert activity.title == "Palestra Microsoft"
+        assert activity.description == "Palestra informacional de como usar a Azure"
+        assert activity.activity_type == ACTIVITY_TYPE.LECTURES
+        assert activity.is_extensive == True
+        assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
+        assert activity.start_date == datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+        assert activity.duration == 120
+        assert activity.responsible_professors[0].name == "Marcos"
+        assert activity.speakers[0].name == "Marcos Tales"
+        assert activity.total_slots == 120
+        assert activity.taken_slots == 33
+        assert activity.accepting_new_subscriptions == True
+        assert activity.stop_accepting_new_subscriptions_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
 
     def test_activity_invalid_code_none(self):
         with pytest.raises(EntityError):
@@ -136,6 +149,35 @@ class Test_Activity:
                 stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
+    def test_activity_invalid_title_none(self):
+        with pytest.raises(EntityError):
+            activity = Activity(
+                code="1234",
+                title=None,
+                description="Palestra informacional de como usar a Azure",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                duration=120,
+                responsible_professors=[
+                    User(
+                        name="Marcos",
+                        role=ROLE.PROFESSOR,
+                        user_id="123d"
+                    )
+                ],
+                speakers=[
+                    Speaker(
+                        name="Marcos Tales",
+                        bio="Salve",
+                        company="Microsoft"
+                    )],
+                total_slots=120,
+                taken_slots=33,
+                accepting_new_subscriptions=True,
+                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+            )
 
     def test_activity_invalid_description(self):
         with pytest.raises(EntityError):
@@ -341,7 +383,7 @@ class Test_Activity:
                 stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
-    def test_activity_invalid_enchard_professor_not_users(self):
+    def test_activity_invalid_responsible_professors_not_users(self):
         with pytest.raises(EntityError):
             activity = Activity(
                 code="1234",
@@ -357,6 +399,11 @@ class Test_Activity:
                         name="Marcos Tales",
                         bio="Salve",
                         company="Microsoft"
+                    ),
+                    User(
+                        name="Marcos",
+                        role=ROLE.PROFESSOR,
+                        user_id="123d"
                     )],
                 speakers=[
                     Speaker(
@@ -385,8 +432,12 @@ class Test_Activity:
                         name="Marcos",
                         role=ROLE.STUDENT,
                         user_id="123d"
-                    )
-                ],
+                    ),
+                    User(
+                        name="Marcos",
+                        role=ROLE.PROFESSOR,
+                        user_id="123d"
+                    )],
                 speakers=[
                     Speaker(
                         name="Marcos Tales",
@@ -415,6 +466,11 @@ class Test_Activity:
                         name="Marcos",
                         role=ROLE.PROFESSOR,
                         user_id="123d"
+                    ),
+                    Speaker(
+                        name="Marcos Tales",
+                        bio="Salve",
+                        company="Microsoft"
                     )
                 ],
                 speakers=None,
@@ -578,6 +634,8 @@ class Test_Activity:
                 accepting_new_subscriptions=True,
                 stop_accepting_new_subscriptions_before=None
             )
+
+            assert activity.stop_accepting_new_subscriptions_before is None
 
     def test_activity_invalid_stop_accepting_new_subscriptions_before_int(self):
         with pytest.raises(EntityError):
