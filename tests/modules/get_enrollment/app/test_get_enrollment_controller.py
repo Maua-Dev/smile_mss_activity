@@ -10,7 +10,7 @@ class Test_GetEnrollmentController:
         repo = ActivityRepositoryMock()
         usecase = GetEnrollmentUsecase(repo)
         controller = GetEnrollmentController(usecase)
-        request = HttpRequest(body={'user_id': repo.enrollments[0].user.user_id, 'code': repo.enrollments[0].activity.code})
+        request = HttpRequest(query_params={'user_id': repo.enrollments[0].user.user_id, 'code': repo.enrollments[0].activity.code})
 
         response = controller(request)
 
@@ -26,7 +26,7 @@ class Test_GetEnrollmentController:
             repo = ActivityRepositoryMock()
             usecase = GetEnrollmentUsecase(repo)
             controller = GetEnrollmentController(usecase)
-            request = HttpRequest(body={'code': repo.enrollments[0].activity.code})
+            request = HttpRequest(query_params={'code': repo.enrollments[0].activity.code})
 
             response = controller(request)
 
@@ -38,7 +38,7 @@ class Test_GetEnrollmentController:
                 repo = ActivityRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(body={'user_id': repo.enrollments[0].user.user_id})
+                request = HttpRequest(query_params={'user_id': repo.enrollments[0].user.user_id})
 
                 response = controller(request)
 
@@ -50,7 +50,7 @@ class Test_GetEnrollmentController:
                     repo = ActivityRepositoryMock()
                     usecase = GetEnrollmentUsecase(repo)
                     controller = GetEnrollmentController(usecase)
-                    request = HttpRequest(body={'user_id': 'invalid_user_id', 'code': 'ECM2345'})
+                    request = HttpRequest(query_params={'user_id': 'invalid_user_id', 'code': 'ECM2345'})
 
                     response = controller(request)
 
@@ -62,7 +62,7 @@ class Test_GetEnrollmentController:
                 repo = ActivityRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(body={'user_id': 'db41', 'code': 'ECM2345'})
+                request = HttpRequest(query_params={'user_id': 'db41', 'code': 'ECM2345'})
 
                 response = controller(request)
 
@@ -73,7 +73,7 @@ class Test_GetEnrollmentController:
                 repo = ActivityRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(body={'user_id': 'db43', 'code': 'ECM2341'})
+                request = HttpRequest(query_params={'user_id': 'db43', 'code': 'ECM2341'})
 
                 response = controller(request)
 
