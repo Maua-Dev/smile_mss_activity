@@ -86,14 +86,14 @@ class ActivityViewmodel:
             "activity_type": self.activity_type.value,
             "is_extensive": self.is_extensive,
             "delivery_model": self.delivery_model.value,
-            "start_date": self.start_date.strftime("%Y-%m-%d %H:%M:%S"),
+            "start_date": self.start_date.isoformat(),
             "duration": self.duration,
             "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
             "speakers": [speaker.to_dict() for speaker in self.speakers],
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_subscriptions": self.accepting_new_subscriptions,
-            "stop_accepting_new_subscriptions_before": self.stop_accepting_new_subscriptions_before.strftime("%Y-%m-%d %H:%M:%S")
+            "stop_accepting_new_subscriptions_before": self.stop_accepting_new_subscriptions_before.isoformat()
         }
 
 
@@ -114,6 +114,6 @@ class GetEnrollmentViewmodel:
             "activity": self.activity.to_dict(),
             "user": self.user.to_dict(),
             "state": self.state.value,
-            "date_subscribed": self.date_subscribed.strftime("%Y-%m-%d %H:%M:%S"),
+            "date_subscribed": self.date_subscribed.isoformat(),
             "message": "the enrollment was retrieved"
         }
