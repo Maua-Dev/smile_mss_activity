@@ -27,12 +27,12 @@ class GetEnrollmentController:
             if not request.data.get('code'):
                 raise MissingParameters('code')
 
-            user = self.GetEnrollmentUsecase(
+            enrollment = self.GetEnrollmentUsecase(
                 user_id=request.data.get('user_id'),
                 code=request.data.get('code')
             )
 
-            viewmodel = GetEnrollmentViewmodel(user)
+            viewmodel = GetEnrollmentViewmodel(enrollment)
 
             return OK(viewmodel.to_dict())
 
