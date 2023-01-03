@@ -17,13 +17,6 @@ class GetEnrollmentController:
             if request.data.get('user_id') is None:
                 raise MissingParameters('user_id')
 
-            if type(request.data.get('user_id')) != str:
-                raise WrongTypeParameter(
-                    fieldName="user_id",
-                    fieldTypeExpected="str",
-                    fieldTypeReceived=request.data.get('user_id').__class__.__name__
-                )
-
             if not request.data.get('code'):
                 raise MissingParameters('code')
 
