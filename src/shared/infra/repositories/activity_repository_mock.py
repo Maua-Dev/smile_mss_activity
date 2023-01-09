@@ -55,7 +55,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[0]],
                 total_slots=4,
                 taken_slots=4,
-                accepting_new_enrollments=False,
+                accepting_new_enrollments=True,
                 stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305)
             ),
             Activity(
@@ -167,7 +167,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[1]],
                 total_slots=2,
                 taken_slots=2,
-                accepting_new_enrollments=False,
+                accepting_new_enrollments=True,
                 stop_accepting_new_enrollments_before=None
             ),
             Activity(
@@ -231,7 +231,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[2]],
                 total_slots=3,
                 taken_slots=3,
-                accepting_new_enrollments=False,
+                accepting_new_enrollments=True,
                 stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 15, 16, 51, 998305)
             ),
             Activity(
@@ -247,7 +247,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[2], self.speakers[1]],
                 total_slots=10,
                 taken_slots=4,
-                accepting_new_enrollments=False,
+                accepting_new_enrollments=True,
                 stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 1, 15, 16, 51, 998305)
             ),
 
