@@ -55,8 +55,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[0]],
                 total_slots=4,
                 taken_slots=4,
-                accepting_new_subscriptions=False,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305)
+                accepting_new_enrollments=False,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305)
             ),
             Activity(
                 code="ELET355",
@@ -71,8 +71,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[1]],
                 total_slots=10,
                 taken_slots=1,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="COD1468",
@@ -87,8 +87,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[2]],
                 total_slots=50,
                 taken_slots=1,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="CODIGO",
@@ -103,8 +103,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[0], self.speakers[1], self.speakers[2]],
                 total_slots=15,
                 taken_slots=2,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305)
             ),
             Activity(
                 code="AC000",
@@ -119,8 +119,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[1]],
                 total_slots=50,
                 taken_slots=2,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)
             ),
             Activity(
                 code="ECM251",
@@ -135,8 +135,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[2]],
                 total_slots=20,
                 taken_slots=1,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="SC456",
@@ -151,8 +151,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[0]],
                 total_slots=10,
                 taken_slots=1,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="CAFE",
@@ -167,8 +167,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[1]],
                 total_slots=2,
                 taken_slots=2,
-                accepting_new_subscriptions=False,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=False,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="CODE",
@@ -183,8 +183,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[2]],
                 total_slots=50,
                 taken_slots=0,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="PRF246",
@@ -199,8 +199,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[0]],
                 total_slots=50,
                 taken_slots=0,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="2468",
@@ -215,8 +215,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[1]],
                 total_slots=25,
                 taken_slots=0,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="ULTIMA",
@@ -231,8 +231,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[2]],
                 total_slots=3,
                 taken_slots=3,
-                accepting_new_subscriptions=False,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 15, 16, 51, 998305)
+                accepting_new_enrollments=False,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 15, 16, 51, 998305)
             ),
             Activity(
                 code="PINOQ1",
@@ -247,8 +247,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[2], self.speakers[1]],
                 total_slots=10,
                 taken_slots=4,
-                accepting_new_subscriptions=False,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 1, 15, 16, 51, 998305)
+                accepting_new_enrollments=False,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 1, 15, 16, 51, 998305)
             ),
 
         ]

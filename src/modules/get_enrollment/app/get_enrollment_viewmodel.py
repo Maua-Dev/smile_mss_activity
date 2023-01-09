@@ -59,8 +59,8 @@ class ActivityViewmodel:
     speakers: List[SpeakerViewmodel]
     total_slots: int
     taken_slots: int
-    accepting_new_subscriptions: bool
-    stop_accepting_new_subscriptions_before: datetime.datetime
+    accepting_new_enrollments: bool
+    stop_accepting_new_enrollments_before: datetime.datetime
 
     def __init__(self, activity: Activity):
         self.code = activity.code
@@ -75,8 +75,8 @@ class ActivityViewmodel:
         self.speakers = [SpeakerViewmodel(speaker) for speaker in activity.speakers]
         self.total_slots = activity.total_slots
         self.taken_slots = activity.taken_slots
-        self.accepting_new_subscriptions = activity.accepting_new_subscriptions
-        self.stop_accepting_new_subscriptions_before = activity.stop_accepting_new_subscriptions_before
+        self.accepting_new_enrollments = activity.accepting_new_enrollments
+        self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
 
     def to_dict(self):
         return {
@@ -92,8 +92,8 @@ class ActivityViewmodel:
             "speakers": [speaker.to_dict() for speaker in self.speakers],
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
-            "accepting_new_subscriptions": self.accepting_new_subscriptions,
-            "stop_accepting_new_subscriptions_before": self.stop_accepting_new_subscriptions_before.isoformat()
+            "accepting_new_enrollments": self.accepting_new_enrollments,
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat()
         }
 
 
