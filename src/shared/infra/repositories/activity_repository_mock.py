@@ -247,7 +247,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 speakers=[self.speakers[2], self.speakers[1]],
                 total_slots=10,
                 taken_slots=4,
-                accepting_new_enrollments=True,
+                accepting_new_enrollments=False,
                 stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 1, 15, 16, 51, 998305)
             ),
 
