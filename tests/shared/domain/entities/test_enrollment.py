@@ -40,8 +40,8 @@ class Test_Enrollment:
             ],
             total_slots=120,
             taken_slots=33,
-            accepting_new_subscriptions=True,
-            stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 21, 13, 56, 5, 430523)
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 21, 13, 56, 5, 430523)
         ),
             user=User(
                 name="Marcos",
@@ -100,8 +100,8 @@ class Test_Enrollment:
                     ],
                     total_slots=120,
                     taken_slots=33,
-                    accepting_new_subscriptions=True,
-                    stop_accepting_new_subscriptions_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    accepting_new_enrollments=True,
+                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
                 ),
                 user="Marcos",
                 state=ENROLLMENT_STATE.ENROLLED,
@@ -136,8 +136,8 @@ class Test_Enrollment:
                     ],
                     total_slots=120,
                     taken_slots=33,
-                    accepting_new_subscriptions=True,
-                    stop_accepting_new_subscriptions_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    accepting_new_enrollments=True,
+                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
                 ),
                 user=User(
                     name="Marcos",
@@ -176,8 +176,8 @@ class Test_Enrollment:
                     ],
                     total_slots=120,
                     taken_slots=33,
-                    accepting_new_subscriptions=True,
-                    stop_accepting_new_subscriptions_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    accepting_new_enrollments=True,
+                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
                 ),
                 user=User(
                     name="Marcos",

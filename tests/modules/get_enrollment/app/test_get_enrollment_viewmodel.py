@@ -20,8 +20,8 @@ class Test_GetEnrollmentViewmodel:
                                               {'name': 'Lucas Soller', 'bio': 'Daora', 'company': 'Microsoft'},
                                               {'name': 'Daniel Romanato', 'bio': 'Buscando descobrir o mundo',
                                                'company': 'Samsung'}], 'total_slots': 15, 'taken_slots': 2,
-                                 'accepting_new_subscriptions': True,
-                                 'stop_accepting_new_subscriptions_before': '2022-12-22T19:16:52.998305'},
+                                 'accepting_new_enrollments': True,
+                                 'stop_accepting_new_enrollments_before': '2022-12-22T19:16:52.998305'},
                     'user': {'name': 'Marcos Romanato', 'user_id': 'bea2', 'role': 'STUDENT'}, 'state': 'ENROLLED',
                     'date_subscribed': '2022-12-21T19:16:52.998305', 'message': 'the enrollment was retrieved'}
 

@@ -23,13 +23,13 @@ class Activity(abc.ABC):
     speakers: List[Speaker]
     total_slots: int
     taken_slots: int
-    accepting_new_subscriptions: bool
-    stop_accepting_new_subscriptions_before: datetime.datetime
+    accepting_new_enrollments: bool
+    stop_accepting_new_enrollments_before: datetime.datetime
 
     def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: datetime.datetime, duration: int,
                  responsible_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int,
-                 accepting_new_subscriptions: bool, stop_accepting_new_subscriptions_before: datetime.datetime):
+                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: datetime.datetime):
         if type(code) != str:
             raise EntityError("code")
         self.code = code
@@ -90,24 +90,24 @@ class Activity(abc.ABC):
             raise EntityError("taken_slots")
         self.taken_slots = taken_slots
 
-        if type(accepting_new_subscriptions) != bool:
-            raise EntityError("accepting_new_subscriptions")
-        self.accepting_new_subscriptions = accepting_new_subscriptions
+        if type(accepting_new_enrollments) != bool:
+            raise EntityError("accepting_new_enrollments")
+        self.accepting_new_enrollments = accepting_new_enrollments
 
-        if type(stop_accepting_new_subscriptions_before) == datetime.datetime:
-            if stop_accepting_new_subscriptions_before > start_date:
-                raise EntityError("stop_accepting_new_subscriptions_before")
+        if type(stop_accepting_new_enrollments_before) == datetime.datetime:
+            if stop_accepting_new_enrollments_before > start_date:
+                raise EntityError("stop_accepting_new_enrollments_before")
 
-        elif stop_accepting_new_subscriptions_before is None:
-            self.stop_accepting_new_subscriptions_before = stop_accepting_new_subscriptions_before
+        elif stop_accepting_new_enrollments_before is None:
+            self.stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
 
         else:
-            raise EntityError("stop_accepting_new_subscriptions_before")
+            raise EntityError("stop_accepting_new_enrollments_before")
 
-        self.stop_accepting_new_subscriptions_before = stop_accepting_new_subscriptions_before
+        self.stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
 
     def __repr__(self):
-        return f"Activity(code={self.code}, title={self.title}, description={self.description}, activity_type={self.activity_type.value}, is_extensive={self.is_extensive}, delivery_model={self.delivery_model.value}, start_date={self.start_date.isoformat()}, duration={self.duration}, responsible_professors={self.responsible_professors}, speakers={self.speakers}, total_slots={self.total_slots}, taken_slots={self.taken_slots}, accepting_new_subscriptions={self.accepting_new_subscriptions}, stop_accepting_new_subscriptions_before={self.stop_accepting_new_subscriptions_before.isoformat() if self.stop_accepting_new_subscriptions_before is not None else None})"
+        return f"Activity(code={self.code}, title={self.title}, description={self.description}, activity_type={self.activity_type.value}, is_extensive={self.is_extensive}, delivery_model={self.delivery_model.value}, start_date={self.start_date.isoformat()}, duration={self.duration}, responsible_professors={self.responsible_professors}, speakers={self.speakers}, total_slots={self.total_slots}, taken_slots={self.taken_slots}, accepting_new_enrollments={self.accepting_new_enrollments}, stop_accepting_new_enrollments_before={self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None})"
 
     def __eq__(self, other):
-        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.taken_slots == other.taken_slots and self.accepting_new_subscriptions == other.accepting_new_subscriptions and self.stop_accepting_new_subscriptions_before == other.stop_accepting_new_subscriptions_before
+        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.taken_slots == other.taken_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before

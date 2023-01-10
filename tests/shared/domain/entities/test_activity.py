@@ -39,8 +39,8 @@ class Test_Activity:
             ],
             total_slots=120,
             taken_slots=33,
-            accepting_new_subscriptions=True,
-            stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
         )
 
         assert type(activity) == Activity
@@ -56,8 +56,8 @@ class Test_Activity:
         assert activity.speakers[0].name == "Marcos Tales"
         assert activity.total_slots == 120
         assert activity.taken_slots == 33
-        assert activity.accepting_new_subscriptions == True
-        assert activity.stop_accepting_new_subscriptions_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+        assert activity.accepting_new_enrollments == True
+        assert activity.stop_accepting_new_enrollments_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
 
     def test_activity_invalid_code_none(self):
         with pytest.raises(EntityError):
@@ -85,8 +85,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_code_int(self):
@@ -115,8 +115,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_title(self):
@@ -145,8 +145,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_title_none(self):
@@ -175,8 +175,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_description(self):
@@ -205,8 +205,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_activity_type(self):
@@ -235,8 +235,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_is_extensive(self):
@@ -265,8 +265,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_delivery_model(self):
@@ -295,8 +295,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_start_date(self):
@@ -325,8 +325,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_duration(self):
@@ -355,8 +355,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_responsible_professors(self):
@@ -379,8 +379,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_responsible_professors_not_users(self):
@@ -413,8 +413,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
     def test_activity_invalid_responsible_professors_not_professor(self):
         with pytest.raises(EntityError):
@@ -446,8 +446,8 @@ class Test_Activity:
                     )],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_speakers(self):
@@ -476,8 +476,8 @@ class Test_Activity:
                 speakers=None,
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
 
@@ -508,8 +508,8 @@ class Test_Activity:
                 ],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_total_slots(self):
@@ -539,8 +539,8 @@ class Test_Activity:
                 ],
                 total_slots=None,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
     def test_activity_invalid_taken_slots(self):
@@ -570,11 +570,11 @@ class Test_Activity:
                 ],
                 total_slots=120,
                 taken_slots=None,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
-    def test_activity_invalid_accepting_new_subscriptions(self):
+    def test_activity_invalid_accepting_new_enrollments(self):
         with pytest.raises(EntityError):
             activity = Activity(
                 code="1234",
@@ -601,11 +601,11 @@ class Test_Activity:
                 ],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=None,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                accepting_new_enrollments=None,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
             )
 
-    def test_activity_invalid_stop_accepting_new_subscriptions_before_none(self):
+    def test_activity_invalid_stop_accepting_new_enrollments_before_none(self):
             activity = Activity(
                 code="1234",
                 title="Palestra Microsoft",
@@ -631,13 +631,13 @@ class Test_Activity:
                 ],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             )
 
-            assert activity.stop_accepting_new_subscriptions_before is None
+            assert activity.stop_accepting_new_enrollments_before is None
 
-    def test_activity_invalid_stop_accepting_new_subscriptions_before_int(self):
+    def test_activity_invalid_stop_accepting_new_enrollments_before_int(self):
         with pytest.raises(EntityError):
             activity = Activity(
                 code="1234",
@@ -664,10 +664,10 @@ class Test_Activity:
                 ],
                 total_slots=120,
                 taken_slots=33,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=2
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=2
             )
-    def test_activity_invalid_stop_accepting_new_subscriptions_before_after_start(self):
+    def test_activity_invalid_stop_accepting_new_enrollments_before_after_start(self):
             with pytest.raises(EntityError):
                 activity = Activity(
                     code="1234",
@@ -694,6 +694,6 @@ class Test_Activity:
                     ],
                     total_slots=120,
                     taken_slots=33,
-                    accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 25, 13, 56, 5, 430523)
+                    accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 25, 13, 56, 5, 430523)
             )
