@@ -36,3 +36,15 @@ class Test_ActivityRepositoryMock:
         activity, enrollments = repo.get_activity_with_enrollments("2468")
         assert activity is not None
         assert enrollments is not None
+
+    def test_update_activity_title(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.update_activity(code="2468", new_title="Novo título")
+        assert activity is not None
+        assert activity.title == "Novo título"
+
+    def test_update_activity_taken_slots(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.update_activity(code="2468", new_taken_slots=10)
+        assert activity is not None
+        assert activity.taken_slots == 10

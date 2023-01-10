@@ -1,8 +1,13 @@
 from abc import ABC, abstractmethod
+import datetime
 from typing import List, Tuple
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
+from src.shared.domain.entities.speaker import Speaker
+from src.shared.domain.entities.user import User
+from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
+from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 
 
@@ -34,4 +39,10 @@ class IActivityRepository(ABC):
         If activity with the given code exists, returns it and the list of enrollments,
         else returns None, None
         """
+        pass
+
+    def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
+                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None,
+                 new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
+                 new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
         pass
