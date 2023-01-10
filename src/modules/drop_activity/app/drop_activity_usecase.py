@@ -23,7 +23,8 @@ class DropActivityUsecase:
         taken_slots = activity.taken_slots
 
         enrollment = self.repo.update_enrollment(user_id=user_id, code=code, state=ENROLLMENT_STATE.DROPPED)
-
+        if enrollment is None:
+            raise NoItemsFound('enrollment')
         if taken_slots >= activity.total_slots:
             activity, enrollments = self.repo.get_activity_with_enrollments(code)
             in_queue_enrollments = list(filter(lambda enrollment: enrollment.state == ENROLLMENT_STATE.IN_QUEUE, enrollments))
