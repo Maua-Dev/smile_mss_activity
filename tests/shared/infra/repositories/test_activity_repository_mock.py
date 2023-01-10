@@ -22,3 +22,12 @@ class Test_ActivityRepositoryMock:
         repo = ActivityRepositoryMock()
         activity = repo.get_activity("CODIGO_INEXISTENTE")
         assert activity is None
+
+    def test_drop_activity(self):
+        repo = ActivityRepositoryMock()
+        lenBefore = len(repo.enrollments)
+        enrollment = repo.drop_activity("db43", "ECM2345")
+        lenAfter = len(repo.enrollments)
+
+        assert lenAfter == lenBefore - 1
+        assert enrollment is not None

@@ -332,3 +332,10 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity
         return None
 
+    def drop_activity(self, user_id: str, code: str) -> Enrollment:
+        for idx, enrollment in enumerate(self.enrollments):
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+                enrollment.state = ENROLLMENT_STATE.DROPPED
+                return self.enrollments.pop(idx)
+        return None
+

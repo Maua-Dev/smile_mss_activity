@@ -20,3 +20,9 @@ class IActivityRepository(ABC):
         else returns None
         """
         pass
+
+    def drop_activity(self, user_id: str, code: str) -> Enrollment:
+        """
+        If the user is enrolled in the activity, drops the enrollment.
+        """
+        pass
