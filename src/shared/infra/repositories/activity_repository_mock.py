@@ -335,6 +335,11 @@ class ActivityRepositoryMock(IActivityRepository):
     def update_enrollment(self, user_id: str, code: str, state: ENROLLMENT_STATE) -> Enrollment:
         for enrollment in self.enrollments:
             if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+                if state == ENROLLMENT_STATE.DROPPED:
+                    self.update_activity(code=code, new_taken_slots=enrollment.activity.taken_slots - 1)
+                elif state == ENROLLMENT_STATE.ENROLLED:
+                    self.update_activity(code=code, new_taken_slots=enrollment.activity.taken_slots + 1)
+
                 enrollment.state = state
                 return enrollment
         return None
