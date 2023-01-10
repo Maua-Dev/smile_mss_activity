@@ -325,3 +325,10 @@ class ActivityRepositoryMock(IActivityRepository):
             if enrollment.user.user_id == user_id and enrollment.activity.code == code:
                 return enrollment
         return None
+
+    def get_activity(self, code:str) -> Activity:
+        for activity in self.activities:
+            if activity.code == code:
+                return activity
+        return None
+
