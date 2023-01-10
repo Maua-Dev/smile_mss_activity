@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
+from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 
 
 class IActivityRepository(ABC):
@@ -21,8 +22,8 @@ class IActivityRepository(ABC):
         """
         pass
 
-    def drop_activity(self, user_id: str, code: str) -> Enrollment:
+    def update_enrollment(self, user_id: str, code: str, state: ENROLLMENT_STATE) -> Enrollment:
         """
-        If the user is enrolled in the activity, drops the enrollment.
+        If the user is enrolled in the activity, update the state of enrollment.
         """
         pass

@@ -1,3 +1,4 @@
+from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 
@@ -23,11 +24,9 @@ class Test_ActivityRepositoryMock:
         activity = repo.get_activity("CODIGO_INEXISTENTE")
         assert activity is None
 
-    def test_drop_activity(self):
+    def test_update_enrollment(self):
         repo = ActivityRepositoryMock()
-        lenBefore = len(repo.enrollments)
-        enrollment = repo.drop_activity("db43", "ECM2345")
-        lenAfter = len(repo.enrollments)
+        enrollment = repo.update_enrollment(user_id="db43", code="ECM2345", state=ENROLLMENT_STATE.DROPPED)
 
-        assert lenAfter == lenBefore - 1
         assert enrollment is not None
+        assert enrollment.state == ENROLLMENT_STATE.DROPPED
