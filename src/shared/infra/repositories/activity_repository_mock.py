@@ -1,5 +1,5 @@
 import datetime
-from typing import List
+from typing import List, Tuple
 
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
@@ -339,3 +339,9 @@ class ActivityRepositoryMock(IActivityRepository):
                 return enrollment
         return None
 
+    def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
+        for activity in self.activities:
+            if activity.code == code:
+                enrollments = [enrollment for enrollment in self.enrollments if enrollment.activity.code == code]
+                return activity, enrollments
+        return None, None

@@ -30,3 +30,9 @@ class Test_ActivityRepositoryMock:
 
         assert enrollment is not None
         assert enrollment.state == ENROLLMENT_STATE.DROPPED
+
+    def test_get_activity_with_enrollments(self):
+        repo = ActivityRepositoryMock()
+        activity, enrollments = repo.get_activity_with_enrollments("2468")
+        assert activity is not None
+        assert enrollments is not None
