@@ -27,7 +27,7 @@ class Test_ActivityRepositoryMock:
     def test_update_enrollment_drop(self):
         repo = ActivityRepositoryMock()
         taken_slots_before = repo.activities[0].taken_slots
-        enrollment = repo.update_enrollment(user_id="db43", code="ECM2345", state=ENROLLMENT_STATE.DROPPED)
+        enrollment = repo.update_enrollment(user_id="db43", code="ECM2345", new_state=ENROLLMENT_STATE.DROPPED)
 
         assert repo.activities[0].taken_slots == taken_slots_before - 1
         assert enrollment is not None
@@ -36,7 +36,7 @@ class Test_ActivityRepositoryMock:
     def test_update_enrollment_enroll(self):
         repo = ActivityRepositoryMock()
         taken_slots_before = repo.activities[0].taken_slots
-        enrollment = repo.update_enrollment(user_id="9257", code="ECM2345", state=ENROLLMENT_STATE.ENROLLED)
+        enrollment = repo.update_enrollment(user_id="9257", code="ECM2345", new_state=ENROLLMENT_STATE.ENROLLED)
 
         assert repo.activities[0].taken_slots == taken_slots_before + 1
         assert enrollment is not None

@@ -28,7 +28,7 @@ class IActivityRepository(ABC):
         """
         pass
 
-    def update_enrollment(self, user_id: str, code: str, state: ENROLLMENT_STATE) -> Enrollment:
+    def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
         """
         If the user is enrolled in the activity, updates the state of enrollment.
         else returns None
