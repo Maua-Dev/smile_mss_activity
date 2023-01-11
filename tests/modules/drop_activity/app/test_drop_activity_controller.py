@@ -55,7 +55,7 @@ class Test_DropActivityController:
 
         reponse = controller(request)
 
-        assert reponse.status_code == 400
+        assert reponse.status_code == 403
         assert reponse.body == 'That action is forbidden for this Enrollment'
 
     def test_drop_activity_controller_activity_not_found(self):

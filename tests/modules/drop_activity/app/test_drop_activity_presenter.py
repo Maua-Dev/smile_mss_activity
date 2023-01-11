@@ -287,7 +287,7 @@ class Test_DropActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field code is not valid"
 
-    def test_drop_activity_presenter_400_forbidden_action(self):
+    def test_drop_activity_presenter_403_forbidden_action(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -341,7 +341,7 @@ class Test_DropActivityPresenter:
         }
 
         response = lambda_handler(event, None)
-        assert response["statusCode"] == 400
+        assert response["statusCode"] == 403
         assert json.loads(response["body"]) == 'That action is forbidden for this Enrollment'
 
     def test_drop_activity_presenter_400_no_items_found_activity(self):
