@@ -13,22 +13,32 @@ class Test_DropActivityUsecase:
         repo = ActivityRepositoryMock()
         usecase = DropActivityUsecase(repo)
         taken_slots_before = repo.activities[1].taken_slots
-        dropped_enrollment = usecase("b16f", "ELET355")
+        dropped_enrollment = usecase(repo.users[1].user_id,  repo.activities[1].code)
 
         assert type(dropped_enrollment) == Enrollment
-        assert repo.enrollments[7].state == ENROLLMENT_STATE.DROPPED
+        assert dropped_enrollment.user.user_id == repo.users[1].user_id
+        assert dropped_enrollment.activity.code == repo.activities[1].code
+        assert dropped_enrollment.state == ENROLLMENT_STATE.DROPPED
         assert taken_slots_before - 1 == repo.activities[1].taken_slots
+
+        assert repo.enrollments[7].state == ENROLLMENT_STATE.DROPPED
 
     def test_drop_activity_usecase_with_queue(self):
         repo = ActivityRepositoryMock()
         usecase = DropActivityUsecase(repo)
         taken_slots_before = repo.activities[1].taken_slots
-        dropped_enrollment = usecase("d7f1", "ECM2345")
+        dropped_enrollment = usecase(repo.users[2].user_id, repo.activities[0].code)
 
         assert type(dropped_enrollment) == Enrollment
+        assert dropped_enrollment.user.user_id == repo.users[2].user_id
+        assert dropped_enrollment.activity.code == repo.activities[0].code
+        assert dropped_enrollment.state == ENROLLMENT_STATE.DROPPED
+        assert taken_slots_before == repo.activities[1].taken_slots
+
         assert repo.enrollments[2].state == ENROLLMENT_STATE.DROPPED
         assert repo.enrollments[4].state == ENROLLMENT_STATE.ENROLLED
-        assert  taken_slots_before == repo.activities[1].taken_slots
+
+
 
     def test_drop_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
