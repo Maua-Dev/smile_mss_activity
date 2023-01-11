@@ -21,6 +21,7 @@ class IActivityRepository(ABC):
         """
         pass
 
+    @abstractmethod
     def get_activity(self, code:str) -> Activity:
         """
         If activity with the given code exists, returns it
@@ -30,6 +31,7 @@ class IActivityRepository(ABC):
         """
         pass
 
+    @abstractmethod
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
         """
         If the user is enrolled in the activity, updates the state of enrollment.
@@ -39,6 +41,7 @@ class IActivityRepository(ABC):
         """
         pass
 
+    @abstractmethod
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
         """
         If activity with the given code exists, returns it and the list of enrollments,
@@ -46,6 +49,7 @@ class IActivityRepository(ABC):
         """
         pass
 
+    @abstractmethod
     def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
                  new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None,
                  new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
