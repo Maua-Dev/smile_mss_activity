@@ -25,6 +25,8 @@ class IActivityRepository(ABC):
         """
         If activity with the given code exists, returns it
         else returns None
+
+        In dynamoRepo it needs to calculate the taken_slots
         """
         pass
 
