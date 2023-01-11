@@ -1,5 +1,5 @@
 import datetime
-from typing import List
+from typing import List, Tuple
 
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
@@ -332,3 +332,57 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity
         return None
 
+    def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
+        for enrollment in self.enrollments:
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+                if new_state == ENROLLMENT_STATE.DROPPED:
+                    self.update_activity(code=code, new_taken_slots=enrollment.activity.taken_slots - 1)
+                elif new_state == ENROLLMENT_STATE.ENROLLED:
+                    self.update_activity(code=code, new_taken_slots=enrollment.activity.taken_slots + 1)
+
+                enrollment.state = new_state
+                return enrollment
+        return None
+
+    def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
+        for activity in self.activities:
+            if activity.code == code:
+                enrollments = [enrollment for enrollment in self.enrollments if enrollment.activity.code == code]
+                return activity, enrollments
+        return None, None
+
+    def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
+                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None,
+                 new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
+                 new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
+        for activity in self.activities:
+            if activity.code == code:
+                if new_title is not None:
+                    activity.title = new_title
+                if new_description is not None:
+                    activity.description = new_description
+                if new_activity_type is not None:
+                    activity.activity_type = new_activity_type
+                if new_is_extensive is not None:
+                    activity.is_extensive = new_is_extensive
+                if new_delivery_model is not None:
+                    activity.delivery_model = new_delivery_model
+                if new_start_date is not None:
+                    activity.start_date = new_start_date
+                if new_duration is not None:
+                    activity.duration = new_duration
+                if new_responsible_professors is not None:
+                    activity.responsible_professors = new_responsible_professors
+                if new_speakers is not None:
+                    activity.speakers = new_speakers
+                if new_total_slots is not None:
+                    activity.total_slots = new_total_slots
+                if new_taken_slots is not None:
+                    activity.taken_slots = new_taken_slots
+                if new_accepting_new_enrollments is not None:
+                    activity.accepting_new_enrollments = new_accepting_new_enrollments
+                if new_stop_accepting_new_enrollments_before is not None:
+                    activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
+                return activity
+
+        return None
