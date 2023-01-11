@@ -344,7 +344,7 @@ class Test_DropActivityPresenter:
         assert response["statusCode"] == 403
         assert json.loads(response["body"]) == 'That action is forbidden for this Enrollment'
 
-    def test_drop_activity_presenter_400_no_items_found_activity(self):
+    def test_drop_activity_presenter_404_no_items_found_activity(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -401,7 +401,7 @@ class Test_DropActivityPresenter:
         assert response["statusCode"] == 404
         assert json.loads(response["body"]) == 'No items found for Activity'
 
-    def test_drop_activity_presenter_400_not_found_enrollment(self):
+    def test_drop_activity_presenter_404_not_found_enrollment(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
