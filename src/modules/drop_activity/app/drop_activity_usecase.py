@@ -21,16 +21,16 @@ class DropActivityUsecase:
         if activity is None:
             raise NoItemsFound('activity')
         taken_slots = activity.taken_slots
-        enrollment = self.repo.get_enrollment(user_id, code)
-        if enrollment is None:
+        original_enrollment = self.repo.get_enrollment(user_id, code)
+        if original_enrollment is None:
             raise NoItemsFound('enrollment')
 
-        if enrollment.state != ENROLLMENT_STATE.ENROLLED or enrollment != ENROLLMENT_STATE.IN_QUEUE:
+        original_state = original_enrollment.state
+        if original_state != ENROLLMENT_STATE.ENROLLED and original_state != ENROLLMENT_STATE.IN_QUEUE:
             raise ForbiddenAction('enrollment')
-
         updated_enrollment = self.repo.update_enrollment(user_id=user_id, code=code, state=ENROLLMENT_STATE.DROPPED)
 
-        if taken_slots >= activity.total_slots:
+        if taken_slots >= activity.total_slots and original_state == ENROLLMENT_STATE.ENROLLED:
             activity, enrollments = self.repo.get_activity_with_enrollments(code)
             in_queue_enrollments = list(filter(lambda enrollment: enrollment.state == ENROLLMENT_STATE.IN_QUEUE, enrollments))
             if len(in_queue_enrollments) > 0:
