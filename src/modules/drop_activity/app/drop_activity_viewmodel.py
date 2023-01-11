@@ -115,5 +115,5 @@ class DropActivityViewmodel:
             "user": self.user.to_dict(),
             "state": self.state.value,
             "date_subscribed": self.date_subscribed.isoformat(),
-            "message": f"the enrollment was {'dropped' if self.state == ENROLLMENT_STATE.DROPPED else 'set in_queue'}"
+            "message": "the enrollment was dropped"
         }
