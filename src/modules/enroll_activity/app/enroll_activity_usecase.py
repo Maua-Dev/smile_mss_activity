@@ -22,43 +22,28 @@ class EnrollActivity:
         if type(code) is not str:
             raise EntityError('code')
 
+        if Activity.accepting_new_enrollments == True:
+                
 
-
-        if  Activity.taken_slots >= Activity.total_slots:
-
-            enrollement = Enrollment(
-                activity =get_activity(code),
-                user = get_user(user_id),
-                state = ENROLLMENT_STATE.IN_QUEUE,
-                date_subscribed = datetime.datetime
-            )
-            return self.enrollment   
-
-        if  Activity.taken_slots < Activity.total_slots:
-
+            if  Activity.taken_slots >= Activity.total_slots:
 
                 enrollement = Enrollment(
                     activity =get_activity(code),
                     user = get_user(user_id),
-                    state = ENROLLMENT_STATE.ENROLLED,
+                    state = ENROLLMENT_STATE.IN_QUEUE,
                     date_subscribed = datetime.datetime
                 )
-                return self.enrollment                      
+                return self.enrollment   
+
+            if  Activity.taken_slots < Activity.total_slots:
+
+
+                    enrollement = Enrollment(
+                        activity =get_activity(code),
+                        user = get_user(user_id),
+                        state = ENROLLMENT_STATE.ENROLLED,
+                        date_subscribed = datetime.datetime
+                    )
+                    return self.enrollment                      
 
         return self.repo.create_enrollment(enrollement)
-
-
-    def get_user(self, user_id : str) -> User:
-        for user in self.user:
-            if User.user_id == user_id:
-                return user
-        return None
-
-    def get_activity(self, code : str) -> Activity:
-        for activity in self.activity:
-            if Activity.code == code:
-                return activity
-        return None
-    
-    
-
