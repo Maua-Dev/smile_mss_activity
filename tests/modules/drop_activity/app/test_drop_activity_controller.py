@@ -56,7 +56,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'That action is forbidden for this enrollment'
+        assert reponse.body == 'That action is forbidden for this Enrollment'
 
     def test_drop_activity_controller_activity_not_found(self):
         repo = ActivityRepositoryMock()
@@ -68,7 +68,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 404
-        assert reponse.body == 'No items found for activity'
+        assert reponse.body == 'No items found for Activity'
 
     def test_drop_activity_controller_no_enrollment_found(self):
         repo = ActivityRepositoryMock()
@@ -80,7 +80,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 404
-        assert reponse.body == 'No items found for enrollment'
+        assert reponse.body == 'No items found for Enrollment'
 
     def test_drop_activity_invalid_user_id(self):
         repo = ActivityRepositoryMock()

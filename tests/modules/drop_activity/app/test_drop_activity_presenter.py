@@ -342,7 +342,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == 'That action is forbidden for this enrollment'
+        assert json.loads(response["body"]) == 'That action is forbidden for this Enrollment'
 
     def test_drop_activity_presenter_400_no_items_found_activity(self):
         event = {
@@ -399,7 +399,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for activity'
+        assert json.loads(response["body"]) == 'No items found for Activity'
 
     def test_drop_activity_presenter_400_not_found_enrollment(self):
         event = {
@@ -456,7 +456,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for enrollment'
+        assert json.loads(response["body"]) == 'No items found for Enrollment'
 
 
 
