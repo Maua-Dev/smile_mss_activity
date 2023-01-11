@@ -59,6 +59,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 200
+        assert json.loads(response["body"])['message'] == 'the enrollment was dropped'
 
     def test_drop_activity_presenter_400_user_id_missing(self):
             event = {
