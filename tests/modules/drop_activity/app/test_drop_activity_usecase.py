@@ -76,11 +76,6 @@ class Test_DropActivityUsecase:
             assert repo.enrollments[27].state == ENROLLMENT_STATE.ENROLLED
 
 
-
-
-
-
-
     def test_drop_activity_usecase_already_dropped(self):
         repo = ActivityRepositoryMock()
         usecase = DropActivityUsecase(repo)
