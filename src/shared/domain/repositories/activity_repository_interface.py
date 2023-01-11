@@ -30,7 +30,8 @@ class IActivityRepository(ABC):
 
     def update_enrollment(self, user_id: str, code: str, state: ENROLLMENT_STATE) -> Enrollment:
         """
-        If the user is enrolled in the activity, update the state of enrollment.
+        If the user is enrolled in the activity, updates the state of enrollment.
+        else returns None
         """
         pass
 
