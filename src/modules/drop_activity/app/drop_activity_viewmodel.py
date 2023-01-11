@@ -93,7 +93,7 @@ class ActivityViewmodel:
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat()
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None
         }
 
 
@@ -115,5 +115,5 @@ class DropActivityViewmodel:
             "user": self.user.to_dict(),
             "state": self.state.value,
             "date_subscribed": self.date_subscribed.isoformat(),
-            "message": "the enrollment was dropped"
+            "message": f"the enrollment was {'dropped' if self.state == ENROLLMENT_STATE.DROPPED else 'set in_queue'}"
         }
