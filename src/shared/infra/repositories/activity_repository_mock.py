@@ -326,6 +326,18 @@ class ActivityRepositoryMock(IActivityRepository):
                 return enrollment
         return None
 
+    def create_enrollment(self, user_id: str, code: str, state:ENROLLMENT_STATE) ->Enrollment:
+
+        if Activity.accepting_new_enrollments == False:
+            ENROLLMENT_STATE.IN_QUEUE
+        
+        
+
+
+        
+
+        if Activity.accepting_new_enrollments
+
     def get_activity(self, code:str) -> Activity:
         for activity in self.activities:
             if activity.code == code:
