@@ -384,3 +384,5 @@ class ActivityRepositoryMock(IActivityRepository):
                 if new_stop_accepting_new_enrollments_before is not None:
                     activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
                 return activity
+
+        return None

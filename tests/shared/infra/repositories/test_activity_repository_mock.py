@@ -54,6 +54,12 @@ class Test_ActivityRepositoryMock:
         assert activity is not None
         assert activity.title == "Novo título"
 
+    def test_update_activity_not_fouind(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.update_activity(code="CODIGO_INEXISTENTE", new_title="Novo Título")
+
+        assert activity is None
+
     def test_update_activity_taken_slots(self):
         repo = ActivityRepositoryMock()
         activity = repo.update_activity(code="2468", new_taken_slots=10)
