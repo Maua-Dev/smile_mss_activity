@@ -1,5 +1,5 @@
-from src.modules.get_enrollment.app.get_enrollment_usecase import GetEnrollmentUsecase
-from src.modules.get_enrollment.app.get_enrollment_viewmodel import GetEnrollmentViewmodel
+from .get_enrollment_usecase import GetEnrollmentUsecase
+from .get_enrollment_viewmodel import GetEnrollmentViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound

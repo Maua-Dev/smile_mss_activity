@@ -1,5 +1,5 @@
-from src.modules.get_enrollment.app.get_enrollment_controller import GetEnrollmentController
-from src.modules.get_enrollment.app.get_enrollment_usecase import GetEnrollmentUsecase
+from .get_enrollment_controller import GetEnrollmentController
+from .get_enrollment_usecase import GetEnrollmentUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
