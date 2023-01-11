@@ -32,6 +32,8 @@ class IActivityRepository(ABC):
         """
         If the user is enrolled in the activity, updates the state of enrollment.
         else returns None
+
+        In dynamoRepo, doest not need to call update_activity to change taken_slots
         """
         pass
 
