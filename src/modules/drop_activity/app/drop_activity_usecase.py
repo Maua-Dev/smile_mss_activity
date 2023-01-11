@@ -3,7 +3,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction
 
 
 class DropActivityUsecase:
@@ -21,10 +21,14 @@ class DropActivityUsecase:
         if activity is None:
             raise NoItemsFound('activity')
         taken_slots = activity.taken_slots
+        enrollment = self.repo.get_enrollment(user_id, code)
+        if enrollment is None:
+            raise NoItemsFound('enrollment')
+
+        if enrollment.state != ENROLLMENT_STATE.ENROLLED or enrollment != ENROLLMENT_STATE.IN_QUEUE:
+            raise ForbiddenAction('enrollment')
 
         updated_enrollment = self.repo.update_enrollment(user_id=user_id, code=code, state=ENROLLMENT_STATE.DROPPED)
-        if updated_enrollment is None:
-            raise NoItemsFound('enrollment')
 
         if taken_slots >= activity.total_slots:
             activity, enrollments = self.repo.get_activity_with_enrollments(code)
