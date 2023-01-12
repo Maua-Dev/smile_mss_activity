@@ -329,10 +329,10 @@ class ActivityRepositoryMock(IActivityRepository):
     def create_enrollment(self, enrollment : Enrollment) -> Enrollment:
         self.enrollments.append(enrollment)
         return enrollment
-        
+      
     def get_user(self, user_id : str) -> User:
-        for user in self.user:
-            if User.user_id == user_id:
+        for user in self.users:
+            if user.user_id == user_id:
                 return user
         return None
 
