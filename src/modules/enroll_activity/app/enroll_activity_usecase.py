@@ -50,4 +50,4 @@ class EnrollActivityUsecase:
                     )
                     return enrollment                      
 
-        return self.repo.create_enrollment(enrollement)
+        return self.repo.create_enrollment(enrollment)

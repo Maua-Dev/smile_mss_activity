@@ -256,7 +256,7 @@ class ActivityRepositoryMock(IActivityRepository):
         self.enrollments = [
             Enrollment(activity=self.activities[0], user=self.users[0], state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)),
-            Enrollment(activity=self.activities[0], user=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity=self.activities[0], user=self.users[1], state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=datetime.datetime(2022, 12, 17, 19, 16, 52, 998305)),
             Enrollment(activity=self.activities[0], user=self.users[2], state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=datetime.datetime(2022, 12, 18, 19, 16, 52, 998305)),
@@ -268,7 +268,7 @@ class ActivityRepositoryMock(IActivityRepository):
                        date_subscribed=datetime.datetime(2022, 12, 20, 19, 17, 52, 998305)),
             Enrollment(activity=self.activities[0], user=self.users[6], state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=datetime.datetime(2022, 12, 20, 19, 18, 52, 998305)),
-            Enrollment(activity=self.activities[1], user=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity=self.activities[1], user=self.users[1], state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
             Enrollment(activity=self.activities[2], user=self.users[3], state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 51, 998305)),
