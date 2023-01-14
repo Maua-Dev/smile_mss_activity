@@ -10,7 +10,7 @@ from src.shared.helpers.errors.domain_errors import EntityError
 
 class Test_EnrollActivityUsecase:
 
-    #teste user_id
+    #test user_id
     def test_enroll_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
