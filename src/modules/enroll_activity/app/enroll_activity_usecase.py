@@ -28,19 +28,19 @@ class EnrollActivityUsecase:
             if enrollment.state == ENROLLMENT_STATE.ENROLLED:
                 raise ForbiddenAction('Enrollment')
 
-        if activity.accepting_new_enrollments == True:
+            if activity.accepting_new_enrollments == True:
 
-            if  activity.taken_slots >= activity.total_slots:
+                if  activity.taken_slots >= activity.total_slots:
 
-                enrollment = Enrollment(
-                    activity = self.repo.get_activity(code),
-                    user = self.repo.get_user(user_id),
-                    state = ENROLLMENT_STATE.IN_QUEUE,
-                    date_subscribed = datetime.datetime.now()
-                )
-                return enrollment
+                    enrollment = Enrollment(
+                        activity = self.repo.get_activity(code),
+                        user = self.repo.get_user(user_id),
+                        state = ENROLLMENT_STATE.IN_QUEUE,
+                        date_subscribed = datetime.datetime.now()
+                    )
+                    return enrollment
 
-            if  activity.taken_slots < activity.total_slots:
+                if  activity.taken_slots < activity.total_slots:
 
                     enrollment = Enrollment(
                         activity = self.repo.get_activity(code),
@@ -48,6 +48,6 @@ class EnrollActivityUsecase:
                         state = ENROLLMENT_STATE.ENROLLED,
                         date_subscribed = datetime.datetime.now()
                     )
-                    return enrollment                      
+                    return enrollment
 
         return self.repo.create_enrollment(enrollment)
