@@ -3,7 +3,7 @@ from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivi
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
-repo = Environments.get_activity_repo()
+repo = Environments.get_activity_repo()()
 usecase = EnrollActivityUsecase(repo)
 controller = EnrollActivityController(usecase)
 

@@ -22,6 +22,9 @@ class EnrollActivityUsecase:
             raise EntityError('code')
 
         activity = self.repo.get_activity(code=code)
+        if activity is None:
+            raise NoItemsFound('Activity')
+            
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
 
         if type(enrollment) != None:

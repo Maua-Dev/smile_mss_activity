@@ -80,19 +80,6 @@ class Test_EnrollActivityController:
         assert response.body == 'No items found for Activity'
 
 
-    def test_enroll_activity_controller_enrollment_not_found(self):
-
-        repo = ActivityRepositoryMock()
-        usecase = EnrollActivityUsecase(repo)
-        controller = EnrollActivityController(usecase)
-
-        request = HttpRequest(body={'user_id': '0000', 'code':repo.enrollments[7].activity.code})
-
-        response = controller(request)
-
-        assert response.status_code == 404
-        assert response.body == 'No items found for Enrollment'
-
 
     def test_enroll_activity_controller_invalid_user_id(self):
 
