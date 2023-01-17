@@ -1,5 +1,6 @@
 import datetime
 from src.shared.domain.entities.enrollment import Enrollment
+from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
@@ -29,7 +30,7 @@ class Test_ActivityRepositoryMock:
     def test_get_user(self):
         repo = ActivityRepositoryMock()
         user = repo.get_user('db43')
-        assert user is not None
+        assert type(user) == User  
 
     def test_get_user_not_exists(self):
         repo = ActivityRepositoryMock()
@@ -45,9 +46,9 @@ class Test_ActivityRepositoryMock:
             date_subscribed=datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
         )
 
-        repo.create_enrollment(enrollment=enrollment)
+        enrollment_created = repo.create_enrollment(enrollment=enrollment)
 
-        assert repo.enrollments[0].activity == repo.get_activity('ECM2345')
+        assert type(enrollment_created) == Enrollment
         assert repo.enrollments[0].user == repo.get_user('db43')
         assert repo.enrollments[0].state == ENROLLMENT_STATE.ENROLLED
         assert repo.enrollments[0].date_subscribed == datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)

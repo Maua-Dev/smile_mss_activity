@@ -59,6 +59,7 @@ class Test_EnrollActivityPresenter:
               }
 
               response = lambda_handler(event, None)
+
               assert response["statusCode"] == 200
               assert json.loads(response["body"])['message'] == 'the enrollment has been done'
 
@@ -116,6 +117,7 @@ class Test_EnrollActivityPresenter:
               }
 
               response = lambda_handler(event, None)
+
               assert response["statusCode"] == 400
               assert json.loads(response["body"]) == "Field user_id is missing"
 
@@ -173,6 +175,7 @@ class Test_EnrollActivityPresenter:
               }
 
               response = lambda_handler(event, None)
+
               assert response["statusCode"] == 400
               assert json.loads(response["body"]) == "Field code is missing"
        def test_enroll_activity_presenter_400_user_id_invalid(self):
@@ -229,6 +232,7 @@ class Test_EnrollActivityPresenter:
               }
 
               response = lambda_handler(event, None)
+
               assert response["statusCode"] == 400
               assert json.loads(response["body"]) == "Field user_id is not valid"
 
@@ -286,6 +290,7 @@ class Test_EnrollActivityPresenter:
               }
 
               response = lambda_handler(event, None)
+
               assert response["statusCode"] == 400
               assert json.loads(response["body"]) == "Field code is not valid"
 
@@ -343,6 +348,7 @@ class Test_EnrollActivityPresenter:
               }
 
               response = lambda_handler(event, None)
+
               assert response["statusCode"] == 403
               assert json.loads(response["body"]) == 'That action is forbidden for this Enrollment'
 
@@ -400,5 +406,6 @@ class Test_EnrollActivityPresenter:
               }
 
               response = lambda_handler(event, None)
+              
               assert response["statusCode"] == 404
               assert json.loads(response["body"]) == 'No items found for Activity'

@@ -51,6 +51,17 @@ class Test_EnrollActivityController:
         assert response.status_code == 400
         assert response.body == 'Field code is missing'
 
+    def test_enroll_activity_controller_enrollment_already_enrolled(self):
+        repo = ActivityRepositoryMock()
+        usecase = EnrollActivityUsecase(repo)
+        controller = EnrollActivityController(usecase)
+
+        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': repo.enrollments[7].activity.code})
+
+        response = controller(request)
+
+        assert response.status_code == 403
+        assert response.body == 'That action is forbidden for this Enrollment'
 
     def test_enroll_activity_controller_forbidden_action(self):
 
@@ -80,7 +91,6 @@ class Test_EnrollActivityController:
         assert response.body == 'No items found for Activity'
 
 
-
     def test_enroll_activity_controller_invalid_user_id(self):
 
         repo = ActivityRepositoryMock()
@@ -108,5 +118,4 @@ class Test_EnrollActivityController:
         assert response.status_code == 400
         assert response.body == 'Field code is not valid'
 
-    
     

@@ -116,4 +116,5 @@ class EnrollActivityViewmodel:
             "state": self.state.value,
             "date_subscribed": self.date_subscribed.isoformat(),
             "message": "the enrollment has been done"
+
         }
