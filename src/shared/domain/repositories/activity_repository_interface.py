@@ -46,12 +46,14 @@ class IActivityRepository(ABC):
         """
         If user with the given code exists, returns it
         else returns None
+        """
+        pass
 
+    @abstractmethod 
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
         """
         If activity with the given code exists, returns it and the list of enrollments,
         else returns None, None
-
         """
         pass
 
