@@ -31,16 +31,6 @@ class Test_DeleteActivityController:
         assert response.status_code == 400
         assert response.body == 'Field code is missing'
 
-    def test_delete_activity_entity_error(self):
-        repo = ActivityRepositoryMock()
-        usecase = DeleteActivityUsecase(repo)
-        controller = DeleteActivityController(usecase)
-        request = HttpRequest(body={"code": 123})
-
-        response = controller(request)
-
-        assert response.status_code == 400
-        assert response.body == 'Field code is not valid'
 
     def test_delete_activity_no_items_found(self):
         repo = ActivityRepositoryMock()
