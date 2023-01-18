@@ -15,7 +15,7 @@ class IActivityRepository(ABC):
         else returns None
         """
         pass
-    
+
     @abstractmethod
     def get_activity(self, code:str) -> Activity:
         """
@@ -33,7 +33,7 @@ class IActivityRepository(ABC):
         pass
 
     @abstractmethod
-    def create_enrollments(self, enrollment:Enrollment) -> Enrollment:
+    def create_enrollment(self, enrollment:Enrollment) -> Enrollment:
         """
         If enrollment with the given attributes exists, returns it
         else returns None
