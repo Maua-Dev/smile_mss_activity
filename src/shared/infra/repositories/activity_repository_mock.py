@@ -356,11 +356,6 @@ class ActivityRepositoryMock(IActivityRepository):
                 return enrollment
         return None
 
-    def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None,
-                new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
-                new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
-
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
         for activity in self.activities:
             if activity.code == code:
