@@ -124,3 +124,10 @@ class Test_ActivityRepositoryMock:
         activity = repo.delete_activity(code="CODIGO_INEXISTENTE")
 
         assert activity is None
+
+    def test_batch_update_enrollment(self):
+        repo = ActivityRepositoryMock()
+        new_enrollments = repo.batch_update_enrollment(repo.enrollments, state=ENROLLMENT_STATE.DROPPED)
+
+        assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in new_enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in repo.enrollments)

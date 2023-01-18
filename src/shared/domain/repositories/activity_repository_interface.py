@@ -88,3 +88,10 @@ class IActivityRepository(ABC):
         else returns None
         """
         pass
+
+    @abstractmethod
+    def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
+        """
+        Updated many enrollments in a batch
+        """
+        pass
