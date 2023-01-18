@@ -21,8 +21,7 @@ class DeleteActivityUsecase:
 
         activity = self.repo.delete_activity(code)
 
-        for enrollment in enrollments:
-            self.repo.update_enrollment(user_id=enrollment.user.user_id, code=code, new_state=ENROLLMENT_STATE.ACTIVITY_CANCELLED)
+        new_enrollemnts = self.repo.batch_update_enrollment(enrollments, ENROLLMENT_STATE.ACTIVITY_CANCELLED)
 
         return activity
 
