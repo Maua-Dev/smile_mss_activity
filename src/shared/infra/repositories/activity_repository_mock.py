@@ -432,3 +432,10 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity
 
         return None
+
+    def delete_activity(self, code: str) -> Activity:
+        for idx, activity in enumerate(self.activities):
+            if activity.code == code:
+                 return self.activities.pop(idx)
+
+        return None
