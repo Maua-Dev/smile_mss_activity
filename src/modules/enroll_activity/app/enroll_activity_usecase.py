@@ -30,34 +30,31 @@ class EnrollActivityUsecase:
         if user is None:
             raise NoItemsFound('User')
 
-
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
 
-        if type(enrollment) is not None:
+        if enrollment is not None:
             if enrollment.state == ENROLLMENT_STATE.ENROLLED:
                 raise ForbiddenAction('Enrollment')
                 
-            if not activity.accepting_new_enrollments:
-                raise ForbiddenAction("Activity")
+        if not activity.accepting_new_enrollments:
+            raise ForbiddenAction("Activity")
 
-            if activity.accepting_new_enrollments == True:
+        else:
 
-                if  activity.taken_slots >= activity.total_slots:
+            if  activity.taken_slots >= activity.total_slots:
+                enrollment = Enrollment(
+                    activity = activity,
+                    user = user,
+                    state = ENROLLMENT_STATE.IN_QUEUE,
+                    date_subscribed = datetime.datetime.now()
+                )
 
-                    enrollment = Enrollment(
-                        activity = activity,
-                        user = user,
-                        state = ENROLLMENT_STATE.IN_QUEUE,
-                        date_subscribed = datetime.datetime.now()
-                    )
-
-                else:
-                    
-                    enrollment = Enrollment(
-                        activity = activity,
-                        user = user,
-                        state = ENROLLMENT_STATE.ENROLLED,
-                        date_subscribed = datetime.datetime.now()
-                    )
+            else:
+                enrollment = Enrollment(
+                    activity = activity,
+                    user = user,
+                    state = ENROLLMENT_STATE.ENROLLED,
+                    date_subscribed = datetime.datetime.now()
+                )
 
         return self.repo.create_enrollment(enrollment)
