@@ -3,6 +3,7 @@ import pytest
 from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivityUsecase
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.activity import Activity
+from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -33,6 +34,7 @@ class Test_EnrollActivityUsecase:
         assert enrollment_activity.activity.taken_slots >= enrollment_activity.activity.total_slots
         assert enrollment_activity.activity.accepting_new_enrollments == True
         assert taken_slots_old + 1 == enrollment_activity.activity.taken_slots
+        assert enrollment_activity.state == ENROLLMENT_STATE.IN_QUEUE
 
     def test_enroll_activity_usecase_enrolled(self):
         repo = ActivityRepositoryMock()
@@ -46,7 +48,8 @@ class Test_EnrollActivityUsecase:
         assert enrollment_activity.activity.taken_slots < enrollment_activity.activity.total_slots
         assert enrollment_activity.activity.accepting_new_enrollments == True
         assert taken_slots_old + 1 == enrollment_activity.activity.taken_slots
-
+        assert enrollment_activity.state == ENROLLMENT_STATE.ENROLLED
+        
     def test_enroll_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)   

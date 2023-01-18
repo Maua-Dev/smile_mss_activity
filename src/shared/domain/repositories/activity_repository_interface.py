@@ -15,7 +15,8 @@ class IActivityRepository(ABC):
         else returns None
         """
         pass
-
+    
+    @abstractmethod
     def get_activity(self, code:str) -> Activity:
         """
         If activity with the given code exists, returns it
@@ -23,13 +24,15 @@ class IActivityRepository(ABC):
         """
         pass
 
+    @abstractmethod
     def get_user(self, user_id:str) -> User:
         """
         If user with the given code exists, returns it
         else returns None
         """
         pass
-       
+
+    @abstractmethod
     def create_enrollments(self, enrollment:Enrollment) -> Enrollment:
         """
         If enrollment with the given attributes exists, returns it
@@ -37,6 +40,7 @@ class IActivityRepository(ABC):
         """
         pass
 
+    @abstractmethod
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
         """
         If the user is enrolled in the activity, updates the state of enrollment.

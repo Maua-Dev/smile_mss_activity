@@ -80,7 +80,7 @@ class Test_EnrollActivityController:
         assert response.status_code == 403
         assert response.body == 'That action is forbidden for this Enrollment'
 
-    def test_enroll_activity_controller_forbidden_action(self):
+    def test_enroll_activity_controller_forbidden_action_wrong_role(self):
 
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
