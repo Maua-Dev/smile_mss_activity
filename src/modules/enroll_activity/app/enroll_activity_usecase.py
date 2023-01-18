@@ -12,7 +12,6 @@ from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 class EnrollActivityUsecase:
     def __init__(self, repo: IActivityRepository):
         self.repo = repo
-    
 
     def __call__(self, user_id: str, code: str) -> Enrollment:
         if not User.validate_user_id(user_id):
@@ -33,15 +32,14 @@ class EnrollActivityUsecase:
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
 
         if enrollment is not None:
-            if enrollment.state == ENROLLMENT_STATE.ENROLLED:
-                raise ForbiddenAction('Enrollment')
+            raise ForbiddenAction('Enrollment')
                 
         if not activity.accepting_new_enrollments:
             raise ForbiddenAction("Activity")
 
         else:
 
-            if  activity.taken_slots >= activity.total_slots:
+            if activity.taken_slots >= activity.total_slots:
                 enrollment = Enrollment(
                     activity = activity,
                     user = user,

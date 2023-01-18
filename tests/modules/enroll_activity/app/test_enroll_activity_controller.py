@@ -31,16 +31,15 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)  
 
-        request = HttpRequest(body={'user_id': repo.enrollments[4].user.user_id, 'code': repo.enrollments[4].activity.code})
+        request = HttpRequest(body={'user_id': repo.users[7].user_id, 'code': repo.activities[0].code})
 
         response = controller(request)
 
         assert response.status_code == 200
         assert response.body['message'] == "the enrollment was in queue"
-        assert response.body['activity']['code'] == "ECM2345"
-        assert response.body['user']['user_id'] == "9257"
+        assert response.body['activity']['code'] == repo.activities[0].code
+        assert response.body['user']['user_id'] == repo.users[7].user_id
         assert response.body['state'] == "IN_QUEUE"
-        assert response.body['activity']['stop_accepting_new_enrollments_before'] == '2022-12-22T18:16:52.998305'
 
     def test_enroll_activity_controller_missing_user_id(self):
 
