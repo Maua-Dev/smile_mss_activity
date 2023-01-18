@@ -326,6 +326,18 @@ class ActivityRepositoryMock(IActivityRepository):
                 return enrollment
         return None
 
+    def create_enrollment(self, enrollment : Enrollment) -> Enrollment:
+        self.enrollments.append(enrollment)
+        self.update_enrollment(enrollment.user.user_id, enrollment.activity.code, ENROLLMENT_STATE.ENROLLED)
+
+        return enrollment
+      
+    def get_user(self, user_id : str) -> User:
+        for user in self.users:
+            if user.user_id == user_id:
+                return user
+        return None
+
     def get_activity(self, code:str) -> Activity:
         for activity in self.activities:
             if activity.code == code:
@@ -384,5 +396,6 @@ class ActivityRepositoryMock(IActivityRepository):
                 if new_stop_accepting_new_enrollments_before is not None:
                     activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
                 return activity
+
 
         return None
