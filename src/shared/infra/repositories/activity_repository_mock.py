@@ -1,5 +1,5 @@
 import datetime
-from typing import List
+from typing import List, Tuple
 
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
@@ -360,6 +360,18 @@ class ActivityRepositoryMock(IActivityRepository):
                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None,
                 new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                 new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
+
+    def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
+        for activity in self.activities:
+            if activity.code == code:
+                enrollments = [enrollment for enrollment in self.enrollments if enrollment.activity.code == code]
+                return activity, enrollments
+        return None, None
+
+    def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
+                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None,
+                 new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
+                 new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 if new_title is not None:
@@ -389,5 +401,6 @@ class ActivityRepositoryMock(IActivityRepository):
                 if new_stop_accepting_new_enrollments_before is not None:
                     activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
                 return activity
+
 
         return None

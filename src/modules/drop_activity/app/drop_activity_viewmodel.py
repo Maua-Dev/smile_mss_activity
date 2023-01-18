@@ -93,10 +93,11 @@ class ActivityViewmodel:
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None}
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None
+        }
 
 
-class GetEnrollmentViewmodel:
+class DropActivityViewmodel:
     activity: ActivityViewmodel
     user: UserViewmodel
     state: ENROLLMENT_STATE
@@ -114,5 +115,5 @@ class GetEnrollmentViewmodel:
             "user": self.user.to_dict(),
             "state": self.state.value,
             "date_subscribed": self.date_subscribed.isoformat(),
-            "message": "the enrollment was retrieved"
+            "message": "the enrollment was dropped"
         }

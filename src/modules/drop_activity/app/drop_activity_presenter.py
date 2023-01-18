@@ -1,12 +1,11 @@
-from .get_enrollment_controller import GetEnrollmentController
-from .get_enrollment_usecase import GetEnrollmentUsecase
+from .drop_activity_controller import DropActivityController
+from .drop_activity_usecase import DropActivityUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
 repo = Environments.get_activity_repo()()
-usecase = GetEnrollmentUsecase(repo)
-controller = GetEnrollmentController(usecase)
-
+usecase = DropActivityUsecase(repo)
+controller = DropActivityController(usecase)
 
 def lambda_handler(event, context):
     httpRequest = LambdaHttpRequest(data=event)
