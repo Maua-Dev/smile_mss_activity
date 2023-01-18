@@ -24,6 +24,8 @@ class Test_Enrollment:
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
             duration=120,
+            link=None,
+            place="H332",
             responsible_professors=[
                 User(
                     name="Marcos",
@@ -40,8 +42,8 @@ class Test_Enrollment:
             ],
             total_slots=120,
             taken_slots=33,
-            accepting_new_subscriptions=True,
-            stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 21, 13, 56, 5, 430523)
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 21, 13, 56, 5, 430523)
         ),
             user=User(
                 name="Marcos",
@@ -84,6 +86,8 @@ class Test_Enrollment:
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
                     start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
                     duration=120,
+                    link=None,
+                    place="H332",
                     responsible_professors=[
                         User(
                             name="Marcos",
@@ -100,8 +104,8 @@ class Test_Enrollment:
                     ],
                     total_slots=120,
                     taken_slots=33,
-                    accepting_new_subscriptions=True,
-                    stop_accepting_new_subscriptions_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    accepting_new_enrollments=True,
+                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
                 ),
                 user="Marcos",
                 state=ENROLLMENT_STATE.ENROLLED,
@@ -120,6 +124,8 @@ class Test_Enrollment:
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
                     start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
                     duration=120,
+                    link=None,
+                    place="H332",
                     responsible_professors=[
                         User(
                             name="Marcos",
@@ -136,8 +142,8 @@ class Test_Enrollment:
                     ],
                     total_slots=120,
                     taken_slots=33,
-                    accepting_new_subscriptions=True,
-                    stop_accepting_new_subscriptions_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    accepting_new_enrollments=True,
+                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
                 ),
                 user=User(
                     name="Marcos",
@@ -160,6 +166,8 @@ class Test_Enrollment:
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
                     start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
                     duration=120,
+                    link=None,
+                    place="H332",
                     responsible_professors=[
                         User(
                             name="Marcos",
@@ -176,8 +184,8 @@ class Test_Enrollment:
                     ],
                     total_slots=120,
                     taken_slots=33,
-                    accepting_new_subscriptions=True,
-                    stop_accepting_new_subscriptions_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    accepting_new_enrollments=True,
+                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
                 ),
                 user=User(
                     name="Marcos",

@@ -19,9 +19,7 @@ class User(abc.ABC):
             raise EntityError("role")
         self.role = role
 
-        if type(user_id) != str:
-            raise EntityError("user_id")
-        if len(user_id) != self.USER_ID_LENGTH:
+        if not User.validate_user_id(user_id):
             raise EntityError("user_id")
 
         self.user_id = user_id
@@ -35,6 +33,14 @@ class User(abc.ABC):
         elif len(name) < User.MIN_NAME_LENGTH:
             return False
 
+        return True
+
+    @staticmethod
+    def validate_user_id(user_id: str) -> bool:
+        if type(user_id) != str:
+            return False
+        if len(user_id) != User.USER_ID_LENGTH:
+            return False
         return True
 
     def __repr__(self):

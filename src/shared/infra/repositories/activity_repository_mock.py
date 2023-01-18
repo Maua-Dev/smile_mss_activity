@@ -1,5 +1,5 @@
 import datetime
-from typing import List
+from typing import List, Tuple
 
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
@@ -13,6 +13,7 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 
 
 class ActivityRepositoryMock(IActivityRepository):
+
     speakers: List[Speaker]
     users: List[User]
     activities: List[Activity]
@@ -50,12 +51,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
                 duration=120,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[0]],
                 total_slots=4,
                 taken_slots=4,
-                accepting_new_subscriptions=False,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305)
             ),
             Activity(
                 code="ELET355",
@@ -66,12 +69,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
                 duration=400,
+                link="https://devmaua.com",
+                place="H332",
                 responsible_professors=[self.users[10]],
                 speakers=[self.speakers[1]],
                 total_slots=10,
                 taken_slots=1,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="COD1468",
@@ -82,12 +87,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
                 duration=60,
+                link="https://devmaua.com",
+                place=None,
                 responsible_professors=[self.users[2], self.users[10]],
                 speakers=[self.speakers[2]],
                 total_slots=50,
                 taken_slots=1,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="CODIGO",
@@ -98,12 +105,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
                 duration=60,
+                link="https://devmaua.com",
+                place=None,
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[0], self.speakers[1], self.speakers[2]],
                 total_slots=15,
                 taken_slots=2,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305)
             ),
             Activity(
                 code="AC000",
@@ -114,12 +123,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
                 duration=190,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[10]],
                 speakers=[self.speakers[1]],
                 total_slots=50,
                 taken_slots=2,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)
             ),
             Activity(
                 code="ECM251",
@@ -130,12 +141,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=datetime.datetime(2022, 12, 22, 15, 16, 52, 998305),
                 duration=40,
+                link="https://devmaua.com",
+                place="H332",
                 responsible_professors=[self.users[10]],
                 speakers=[self.speakers[2]],
                 total_slots=20,
                 taken_slots=1,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="SC456",
@@ -146,12 +159,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=datetime.datetime(2022, 12, 20, 16, 16, 52, 998305),
                 duration=80,
+                link="https://devmaua.com",
+                place=None,
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[0]],
                 total_slots=10,
                 taken_slots=1,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="CAFE",
@@ -162,12 +177,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
                 duration=20,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[10]],
                 speakers=[self.speakers[1]],
                 total_slots=2,
                 taken_slots=2,
-                accepting_new_subscriptions=False,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="CODE",
@@ -178,12 +195,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305),
                 duration=120,
+                link="https://devmaua.com",
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[2]],
                 total_slots=50,
                 taken_slots=0,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="PRF246",
@@ -194,12 +213,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
                 duration=140,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[0]],
                 total_slots=50,
                 taken_slots=0,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="2468",
@@ -210,12 +231,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
                 duration=60,
+                link="https://devmaua.com",
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[1]],
                 total_slots=25,
                 taken_slots=0,
-                accepting_new_subscriptions=True,
-                stop_accepting_new_subscriptions_before=None
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
             ),
             Activity(
                 code="ULTIMA",
@@ -226,12 +249,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 15, 16, 52, 998305),
                 duration=45,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[2]],
                 total_slots=3,
                 taken_slots=3,
-                accepting_new_subscriptions=False,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 22, 15, 16, 51, 998305)
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 15, 16, 51, 998305)
             ),
             Activity(
                 code="PINOQ1",
@@ -242,12 +267,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 2, 15, 16, 52, 998305),
                 duration=45,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[2], self.speakers[1]],
                 total_slots=10,
                 taken_slots=4,
-                accepting_new_subscriptions=False,
-                stop_accepting_new_subscriptions_before=datetime.datetime(2022, 12, 1, 15, 16, 51, 998305)
+                accepting_new_enrollments=False,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 1, 15, 16, 51, 998305)
             ),
 
         ]
@@ -318,3 +345,90 @@ class ActivityRepositoryMock(IActivityRepository):
             Enrollment(activity=self.activities[12], user=self.users[4], state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=datetime.datetime(2022, 11, 29, 19, 16, 52, 998305)),
         ]
+
+    def get_enrollment(self, user_id: str, code: str) -> Enrollment:
+        for enrollment in self.enrollments:
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+                return enrollment
+        return None
+
+    def create_enrollment(self, enrollment : Enrollment) -> Enrollment:
+        self.enrollments.append(enrollment)
+        self.update_enrollment(enrollment.user.user_id, enrollment.activity.code, ENROLLMENT_STATE.ENROLLED)
+
+        return enrollment
+      
+    def get_user(self, user_id : str) -> User:
+        for user in self.users:
+            if user.user_id == user_id:
+                return user
+        return None
+
+    def get_activity(self, code:str) -> Activity:
+        for activity in self.activities:
+            if activity.code == code:
+                return activity
+        return None
+
+    def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
+        for enrollment in self.enrollments:
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+                if new_state == ENROLLMENT_STATE.DROPPED:
+                    self.update_activity(code=code, new_taken_slots=enrollment.activity.taken_slots - 1)
+                elif new_state == ENROLLMENT_STATE.ENROLLED:
+                    self.update_activity(code=code, new_taken_slots=enrollment.activity.taken_slots + 1)
+
+                enrollment.state = new_state
+                return enrollment
+        return None
+
+    def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
+        for activity in self.activities:
+            if activity.code == code:
+                enrollments = [enrollment for enrollment in self.enrollments if enrollment.activity.code == code]
+                return activity, enrollments
+        return None, None
+
+    def update_activity(self, code: str, new_title: str = None, new_description: str = None,
+                        new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
+                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None,
+                        new_duration: int = None, new_link: str = None, new_place: str = None,
+                        new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None,
+                        new_total_slots: int = None, new_taken_slots: int = None,
+                        new_accepting_new_enrollments: bool = None,
+                        new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
+        for activity in self.activities:
+            if activity.code == code:
+                if new_title is not None:
+                    activity.title = new_title
+                if new_description is not None:
+                    activity.description = new_description
+                if new_activity_type is not None:
+                    activity.activity_type = new_activity_type
+                if new_is_extensive is not None:
+                    activity.is_extensive = new_is_extensive
+                if new_delivery_model is not None:
+                    activity.delivery_model = new_delivery_model
+                if new_start_date is not None:
+                    activity.start_date = new_start_date
+                if new_duration is not None:
+                    activity.duration = new_duration
+                if new_link is not None:
+                    activity.link = new_link
+                if new_place is not None:
+                    activity.place = new_place
+                if new_responsible_professors is not None:
+                    activity.responsible_professors = new_responsible_professors
+                if new_speakers is not None:
+                    activity.speakers = new_speakers
+                if new_total_slots is not None:
+                    activity.total_slots = new_total_slots
+                if new_taken_slots is not None:
+                    activity.taken_slots = new_taken_slots
+                if new_accepting_new_enrollments is not None:
+                    activity.accepting_new_enrollments = new_accepting_new_enrollments
+                if new_stop_accepting_new_enrollments_before is not None:
+                    activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
+                return activity
+
+        return None
