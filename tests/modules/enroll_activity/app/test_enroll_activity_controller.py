@@ -8,7 +8,7 @@ from src.shared.infra.repositories.activity_repository_mock import ActivityRepos
 
 class Test_EnrollActivityController:
 
-    def test_enroll_activity_controller(self):
+    def test_enroll_activity_controller_enrolled(self):
 
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
