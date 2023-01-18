@@ -24,6 +24,7 @@ class Test_EnrollActivityUsecase:
     def test_enroll_activity_usecase_in_queue(self):
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
+        taken_slots_old = repo.activities[0].taken_slots
         enrollment_activity = usecase(repo.users[4].user_id, repo.activities[0].code)
 
         assert type(enrollment_activity) == Enrollment
@@ -31,10 +32,12 @@ class Test_EnrollActivityUsecase:
         assert enrollment_activity.activity.code == repo.activities[0].code
         assert enrollment_activity.activity.taken_slots >= enrollment_activity.activity.total_slots
         assert enrollment_activity.activity.accepting_new_enrollments == True
+        assert taken_slots_old + 1 == enrollment_activity.activity.taken_slots
 
     def test_enroll_activity_usecase_enrolled(self):
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
+        taken_slots_old = repo.activities[2].taken_slots
         enrollment_activity = usecase(repo.users[3].user_id, repo.activities[2].code)
 
         assert type(enrollment_activity) == Enrollment
@@ -42,6 +45,7 @@ class Test_EnrollActivityUsecase:
         assert enrollment_activity.activity.code == repo.activities[2].code
         assert enrollment_activity.activity.taken_slots < enrollment_activity.activity.total_slots
         assert enrollment_activity.activity.accepting_new_enrollments == True
+        assert taken_slots_old + 1 == enrollment_activity.activity.taken_slots
 
     def test_enroll_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
@@ -75,7 +79,7 @@ class Test_EnrollActivityUsecase:
     def test_enroll_activity_usecase_user_none(self):
 
         repo = ActivityRepositoryMock()
-        usecase = EnrollActivityUsecase(repo)  
+        usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
             enrollment_activity = usecase('0000', repo.activities[0].code)

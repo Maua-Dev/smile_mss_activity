@@ -1,5 +1,5 @@
-from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivityUsecase
-from src.modules.enroll_activity.app.enroll_activity_viewmodel import EnrollActivityViewmodel
+from .enroll_activity_usecase import EnrollActivityUsecase
+from .enroll_activity_viewmodel import EnrollActivityViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound

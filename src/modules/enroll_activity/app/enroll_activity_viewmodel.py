@@ -115,6 +115,6 @@ class EnrollActivityViewmodel:
             "user": self.user.to_dict(),
             "state": self.state.value,
             "date_subscribed": self.date_subscribed.isoformat(),
-            "message": "the enrollment has been done"
+            "message": f"the enrollment was {self.state.value.lower().replace('_', ' ')}"
 
         }

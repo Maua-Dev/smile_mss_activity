@@ -46,9 +46,13 @@ class Test_ActivityRepositoryMock:
             date_subscribed=datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
         )
 
+        len_before = len(repo.enrollments)
         enrollment_created = repo.create_enrollment(enrollment=enrollment)
+        len_after = len(repo.enrollments)
 
         assert type(enrollment_created) == Enrollment
+        assert repo.enrollments[0].activity == repo.get_activity('ECM2345')
         assert repo.enrollments[0].user == repo.get_user('db43')
         assert repo.enrollments[0].state == ENROLLMENT_STATE.ENROLLED
         assert repo.enrollments[0].date_subscribed == datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
+        assert len_before == len_after - 1

@@ -49,5 +49,5 @@ class Test_EnrollActivityViewmodel:
                      },
                      "state":"ENROLLED",
                      "date_subscribed":"2022-12-17T19:16:52.998305",
-                     "message":"the enrollment has been done"
+                     "message":"the enrollment was enrolled"
                      }

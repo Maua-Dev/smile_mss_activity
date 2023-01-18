@@ -1,5 +1,5 @@
-from src.modules.enroll_activity.app.enroll_activity_controller import EnrollActivityController
-from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivityUsecase
+from .enroll_activity_controller import EnrollActivityController
+from .enroll_activity_usecase import EnrollActivityUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
