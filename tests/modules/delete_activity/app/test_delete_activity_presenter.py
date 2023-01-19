@@ -116,6 +116,7 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
+        assert json.loads(response["body"]) == "Field code is missing"
 
     def test_delete_activity_presenter_invalid_code(self):
         event = {
@@ -172,6 +173,7 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
+        assert json.loads(response["body"]) == 'Field code is not valid'
 
     def test_delete_activity_no_items_found(self):
         event = {
@@ -228,4 +230,5 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
+        assert json.loads(response["body"]) == "No items found for Activity"
 
