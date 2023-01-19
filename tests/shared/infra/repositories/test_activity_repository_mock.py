@@ -109,3 +109,9 @@ class Test_ActivityRepositoryMock:
 
         assert type(activity) == Activity
         assert activity.taken_slots == 10
+
+    def test_get_all_activities_admin(self):
+        repo = ActivityRepositoryMock()
+        activity_with_enrollments = repo.get_all_activities_admin()
+
+        assert len(activity_with_enrollments) == len(repo.activities)

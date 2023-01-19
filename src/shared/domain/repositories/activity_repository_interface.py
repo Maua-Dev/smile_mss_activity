@@ -81,3 +81,10 @@ class IActivityRepository(ABC):
                  new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
         pass
 
+    @abstractmethod
+    def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
+        """
+        Returns all activities with list of Enrollments
+        """
+        pass
+

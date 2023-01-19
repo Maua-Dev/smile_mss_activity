@@ -432,3 +432,10 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity
 
         return None
+
+    def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
+        activity_with_enrollments = list()
+        for activity in self.activities:
+            activity, enrollments = self.get_activity_with_enrollments(code=activity.code)
+            activity_with_enrollments.append((activity, enrollments))
+        return activity_with_enrollments
