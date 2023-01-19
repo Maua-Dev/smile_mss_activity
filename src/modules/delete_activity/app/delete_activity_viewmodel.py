@@ -61,6 +61,8 @@ class ActivityViewmodel:
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: datetime.datetime
+    link: str
+    place: str
 
     def __init__(self, activity: Activity):
         self.code = activity.code
@@ -77,6 +79,8 @@ class ActivityViewmodel:
         self.taken_slots = activity.taken_slots
         self.accepting_new_enrollments = activity.accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
+        self.link = activity.link
+        self.place = activity.place
 
     def to_dict(self):
         return {
@@ -88,6 +92,8 @@ class ActivityViewmodel:
             "delivery_model": self.delivery_model.value,
             "start_date": self.start_date.isoformat(),
             "duration": self.duration,
+            'link': self.link,
+            'place': self.place,
             "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
             "speakers": [speaker.to_dict() for speaker in self.speakers],
             "total_slots": self.total_slots,
