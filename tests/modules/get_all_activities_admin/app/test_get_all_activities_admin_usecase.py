@@ -8,8 +8,8 @@ class Test_GetAllActivitiesAdminUsecase:
     def test_get_all_activities_admin(self):
         repo = ActivityRepositoryMock()
         usecase = GetAllActivitiesAdminUsecase(repo=repo)
-        activities_enrollments = usecase()
+        all_activities_with_enrollments = usecase()
 
-        assert type(activities_enrollments) == list
-        assert type(activities_enrollments[0]) == tuple
-        assert len(activities_enrollments) == len(repo.activities)
+        assert type(all_activities_with_enrollments) == list
+        assert type(all_activities_with_enrollments[0]) == tuple
+        assert len(all_activities_with_enrollments) == len(repo.activities)
