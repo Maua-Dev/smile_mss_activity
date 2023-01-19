@@ -9,12 +9,13 @@ class Test_GetEnrollmentViewmodel:
 
         enrollment = repo.enrollments[12]
 
-        getEnrollmentViewmodel = GetEnrollmentViewmodel(enrollment).to_dict()
+        get_enrollment_viewmodel = GetEnrollmentViewmodel(enrollment).to_dict()
 
         expected = {'activity': {'code': 'CODIGO', 'title': 'Atividade da CÓDIGO',
                                  'description': 'Isso DEFINITIVAMENTE é uma atividade!',
                                  'activity_type': 'TECHNICAL_VISITS', 'is_extensive': False, 'delivery_model': 'ONLINE',
-                                 'start_date': '2022-12-25T19:16:52.998305', 'duration': 60, 'responsible_professors': [
+                                 'start_date': '2022-12-25T19:16:52.998305', 'duration': 60,
+                                 'link': 'https://devmaua.com', 'place': None, 'responsible_professors': [
                 {'name': 'Caio Toledo', 'user_id': 'd7f1', 'role': 'PROFESSOR'}],
                                  'speakers': [{'name': 'Vitor Briquez', 'bio': 'Incrível', 'company': 'Apple'},
                                               {'name': 'Lucas Soller', 'bio': 'Daora', 'company': 'Microsoft'},
@@ -25,16 +26,25 @@ class Test_GetEnrollmentViewmodel:
                     'user': {'name': 'Marcos Romanato', 'user_id': 'bea2', 'role': 'STUDENT'}, 'state': 'ENROLLED',
                     'date_subscribed': '2022-12-21T19:16:52.998305', 'message': 'the enrollment was retrieved'}
 
-        assert getEnrollmentViewmodel == expected
+        assert get_enrollment_viewmodel == expected
 
     def test_get_enrollment_viewmodel_date_none(self):
         repo = ActivityRepositoryMock()
 
         enrollment = repo.enrollments[7]
 
-        getEnrollmentViewmodel = GetEnrollmentViewmodel(enrollment).to_dict()
+        get_enrollment_viewmodel = GetEnrollmentViewmodel(enrollment).to_dict()
 
-        expected = {'activity': {'code': 'ELET355', 'title': 'Atividade da ELET 355', 'description': 'Isso é uma atividade, sério.', 'activity_type': 'LECTURES', 'is_extensive': True, 'delivery_model': 'HYBRID', 'start_date': '2022-12-21T19:16:52.998305', 'duration': 400, 'responsible_professors': [{'name': 'Patricia Santos', 'user_id': 'c695', 'role': 'PROFESSOR'}], 'speakers': [{'name': 'Lucas Soller', 'bio': 'Daora', 'company': 'Microsoft'}], 'total_slots': 10, 'taken_slots': 1, 'accepting_new_enrollments': True, 'stop_accepting_new_enrollments_before': None}, 'user': {'name': 'Bruno Soller', 'user_id': 'b16f', 'role': 'STUDENT'}, 'state': 'ENROLLED', 'date_subscribed': '2022-12-19T19:16:52.998305', 'message': 'the enrollment was retrieved'}
+        expected = {'activity': {'code': 'ELET355', 'title': 'Atividade da ELET 355',
+                                 'description': 'Isso é uma atividade, sério.', 'activity_type': 'LECTURES',
+                                 'is_extensive': True, 'delivery_model': 'HYBRID',
+                                 'start_date': '2022-12-21T19:16:52.998305', 'duration': 400,
+                                 'link': 'https://devmaua.com', 'place': 'H332', 'responsible_professors': [
+                {'name': 'Patricia Santos', 'user_id': 'c695', 'role': 'PROFESSOR'}],
+                                 'speakers': [{'name': 'Lucas Soller', 'bio': 'Daora', 'company': 'Microsoft'}],
+                                 'total_slots': 10, 'taken_slots': 1, 'accepting_new_enrollments': True,
+                                 'stop_accepting_new_enrollments_before': None},
+                    'user': {'name': 'Bruno Soller', 'user_id': 'b16f', 'role': 'STUDENT'}, 'state': 'ENROLLED',
+                    'date_subscribed': '2022-12-19T19:16:52.998305', 'message': 'the enrollment was retrieved'}
 
-        assert getEnrollmentViewmodel == expected
-
+        assert get_enrollment_viewmodel == expected
