@@ -115,3 +115,5 @@ class Test_ActivityRepositoryMock:
         activity_with_enrollments = repo.get_all_activities_admin()
 
         assert len(activity_with_enrollments) == len(repo.activities)
+        assert all(type(activity) == Activity for activity, enrollments in activity_with_enrollments)
+        assert all(all(type(enrollment) == Enrollment for enrollment in enrollments) for activity, enrollments in activity_with_enrollments)
