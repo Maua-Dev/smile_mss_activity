@@ -348,13 +348,14 @@ class ActivityRepositoryMock(IActivityRepository):
 
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code and enrollment.state != ENROLLMENT_STATE.DROPPED and enrollment.state != ENROLLMENT_STATE.ACTIVITY_CANCELLED:
                 return enrollment
         return None
 
-    def create_enrollment(self, enrollment : Enrollment) -> Enrollment:
+    def create_enrollment(self, enrollment: Enrollment) -> Enrollment:
         self.enrollments.append(enrollment)
-        self.update_enrollment(enrollment.user.user_id, enrollment.activity.code, ENROLLMENT_STATE.ENROLLED)
+        if enrollment.state == ENROLLMENT_STATE.ENROLLED:
+            self.update_activity(code=enrollment.activity.code, new_taken_slots=enrollment.activity.taken_slots + 1)
 
         return enrollment
       
