@@ -434,8 +434,8 @@ class ActivityRepositoryMock(IActivityRepository):
         return None
 
     def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
-        activity_with_enrollments = list()
+        activities_with_enrollments = list()
         for activity in self.activities:
             activity, enrollments = self.get_activity_with_enrollments(code=activity.code)
-            activity_with_enrollments.append((activity, enrollments))
-        return activity_with_enrollments
+            activities_with_enrollments.append((activity, enrollments))
+        return activities_with_enrollments
