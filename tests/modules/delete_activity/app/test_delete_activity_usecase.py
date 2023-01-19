@@ -23,6 +23,16 @@ class Test_DeleteActivityUsecase:
         assert repo.enrollments[26].state == ENROLLMENT_STATE.ACTIVITY_CANCELLED
         assert repo.enrollments[27].state == ENROLLMENT_STATE.ACTIVITY_CANCELLED
 
+    def test_delete_activity_usecase_no_enrollments(self):
+        repo = ActivityRepositoryMock()
+        repo.activities.pop(7)
+        usecase = DeleteActivityUsecase(repo)
+        len_before = len(repo.activities)
+        activity = usecase(code=repo.activities[1].code)
+
+        assert type(activity) == Activity
+        assert len(repo.activities) == len_before - 1
+
     def test_delete_activity_usecase_not_exists(self):
         repo = ActivityRepositoryMock()
         usecase = DeleteActivityUsecase(repo)
