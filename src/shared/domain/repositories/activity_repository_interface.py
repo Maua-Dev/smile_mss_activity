@@ -88,3 +88,10 @@ class IActivityRepository(ABC):
         Updated many enrollments in a batch
         """
         pass
+
+    @abstractmethod
+    def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
+        """
+        Returns all activities with list of Enrollments
+        """
+        pass

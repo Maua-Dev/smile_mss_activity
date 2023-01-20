@@ -434,11 +434,18 @@ class ActivityRepositoryMock(IActivityRepository):
 
         return None
 
+
+    def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
+        activities_with_enrollments = list()
+        for activity in self.activities:
+            activity, enrollments = self.get_activity_with_enrollments(code=activity.code)
+            activities_with_enrollments.append((activity, enrollments))
+        return activities_with_enrollments
+
     def delete_activity(self, code: str) -> Activity:
         for idx, activity in enumerate(self.activities):
             if activity.code == code:
                  return self.activities.pop(idx)
-
         return None
 
     def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
@@ -448,3 +455,4 @@ class ActivityRepositoryMock(IActivityRepository):
             new_enrollments.append(new_enrollment)
 
         return new_enrollments
+

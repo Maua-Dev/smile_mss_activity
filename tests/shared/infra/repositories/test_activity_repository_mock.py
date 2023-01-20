@@ -110,6 +110,14 @@ class Test_ActivityRepositoryMock:
         assert type(activity) == Activity
         assert activity.taken_slots == 10
 
+    def test_get_all_activities_admin(self):
+        repo = ActivityRepositoryMock()
+        activity_with_enrollments = repo.get_all_activities_admin()
+
+        assert len(activity_with_enrollments) == len(repo.activities)
+        assert all(type(activity) == Activity for activity, enrollments in activity_with_enrollments)
+        assert all(all(type(enrollment) == Enrollment for enrollment in enrollments) for activity, enrollments in activity_with_enrollments)
+
     def test_delete_activity(self):
         repo = ActivityRepositoryMock()
         len_before = len(repo.activities)
@@ -131,3 +139,4 @@ class Test_ActivityRepositoryMock:
 
         assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in new_enrollments)
         assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in repo.enrollments)
+
