@@ -433,3 +433,18 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity
 
         return None
+
+    def delete_activity(self, code: str) -> Activity:
+        for idx, activity in enumerate(self.activities):
+            if activity.code == code:
+                 return self.activities.pop(idx)
+
+        return None
+
+    def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
+        new_enrollments = []
+        for enrollment in enrollments:
+            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity.code, new_state=state)
+            new_enrollments.append(new_enrollment)
+
+        return new_enrollments

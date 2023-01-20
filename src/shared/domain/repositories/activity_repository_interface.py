@@ -74,3 +74,17 @@ class IActivityRepository(ABC):
                  new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
         pass
 
+    @abstractmethod
+    def delete_activity(self, code: str) -> Activity:
+        """
+        If activity with the given code exists, deletes it and returns it
+        else returns None
+        """
+        pass
+
+    @abstractmethod
+    def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
+        """
+        Updated many enrollments in a batch
+        """
+        pass
