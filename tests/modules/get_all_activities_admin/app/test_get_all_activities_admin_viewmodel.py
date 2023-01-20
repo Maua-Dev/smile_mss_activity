@@ -19,9 +19,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "COURSE",
                          "is_extensive": False,
                          "delivery_model": "IN_PERSON",
-                         "start_date": "2022-12-22T19: 16: 52.998305",
+                         "start_date": "2022-12-22T19:16:52.998305",
                          "duration": 120,
-                         "link": "None",
+                         "link": None,
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -40,7 +40,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 4,
                          "taken_slots": 4,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "2022-12-22T18: 16: 52.998305",
+                         "stop_accepting_new_enrollments_before": "2022-12-22T18:16:52.998305",
                          "enrollments": [
                             {
                                "user": {
@@ -49,7 +49,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "ADMIN"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-16T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-16T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -58,7 +58,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-17T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-17T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -67,7 +67,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "PROFESSOR"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-18T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-18T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -76,7 +76,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "INTERNATIONAL_STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -85,7 +85,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EXTERNAL"
                                },
                                "state": "IN_QUEUE",
-                               "date_subscribed": "2022-12-20T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-20T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -94,7 +94,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EMPLOYEE"
                                },
                                "state": "IN_QUEUE",
-                               "date_subscribed": "2022-12-20T19: 17: 52.998305"
+                               "date_subscribed": "2022-12-20T19:17:52.998305"
                             },
                             {
                                "user": {
@@ -103,7 +103,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "IN_QUEUE",
-                               "date_subscribed": "2022-12-20T19: 18: 52.998305"
+                               "date_subscribed": "2022-12-20T19:18:52.998305"
                             }
                          ]
                       },
@@ -114,9 +114,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "LECTURES",
                          "is_extensive": True,
                          "delivery_model": "HYBRID",
-                         "start_date": "2022-12-21T19: 16: 52.998305",
+                         "start_date": "2022-12-21T19:16:52.998305",
                          "duration": 400,
-                         "link": "https: //devmaua.com",
+                         "link": "https://devmaua.com",
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -135,7 +135,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 10,
                          "taken_slots": 1,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "None",
+                         "stop_accepting_new_enrollments_before": None,
                          "enrollments": [
                             {
                                "user": {
@@ -144,7 +144,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             }
                          ]
                       },
@@ -155,10 +155,10 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "HIGH_IMPACT_LECTURES",
                          "is_extensive": True,
                          "delivery_model": "ONLINE",
-                         "start_date": "2022-12-21T19: 16: 52.998305",
+                         "start_date": "2022-12-21T19:16:52.998305",
                          "duration": 60,
-                         "link": "https: //devmaua.com",
-                         "place": "None",
+                         "link": "https://devmaua.com",
+                         "place": None,
                          "responsible_professors": [
                             {
                                "name": "Caio Toledo",
@@ -181,7 +181,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 50,
                          "taken_slots": 1,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "None",
+                         "stop_accepting_new_enrollments_before": None,
                          "enrollments": [
                             {
                                "user": {
@@ -190,7 +190,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "INTERNATIONAL_STUDENT"
                                },
                                "state": "DROPPED",
-                               "date_subscribed": "2022-12-19T19: 16: 51.998305"
+                               "date_subscribed": "2022-12-19T19:16:51.998305"
                             },
                             {
                                "user": {
@@ -199,7 +199,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EXTERNAL"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             }
                          ]
                       },
@@ -210,10 +210,10 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "TECHNICAL_VISITS",
                          "is_extensive": False,
                          "delivery_model": "ONLINE",
-                         "start_date": "2022-12-25T19: 16: 52.998305",
+                         "start_date": "2022-12-25T19:16:52.998305",
                          "duration": 60,
-                         "link": "https: //devmaua.com",
-                         "place": "None",
+                         "link": "https://devmaua.com",
+                         "place": None,
                          "responsible_professors": [
                             {
                                "name": "Caio Toledo",
@@ -241,7 +241,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 15,
                          "taken_slots": 2,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "2022-12-22T19: 16: 52.998305",
+                         "stop_accepting_new_enrollments_before": "2022-12-22T19:16:52.998305",
                          "enrollments": [
                             {
                                "user": {
@@ -250,7 +250,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EXTERNAL"
                                },
                                "state": "REJECTED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -259,7 +259,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EMPLOYEE"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-20T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-20T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -268,7 +268,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-21T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-21T19:16:52.998305"
                             }
                          ]
                       },
@@ -279,9 +279,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "ACADEMIC_COMPETITIONS",
                          "is_extensive": True,
                          "delivery_model": "IN_PERSON",
-                         "start_date": "2022-12-21T19: 16: 52.998305",
+                         "start_date": "2022-12-21T19:16:52.998305",
                          "duration": 190,
-                         "link": "None",
+                         "link": None,
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -300,7 +300,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 50,
                          "taken_slots": 2,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "2022-12-20T19: 16: 52.998305",
+                         "stop_accepting_new_enrollments_before": "2022-12-20T19:16:52.998305",
                          "enrollments": [
                             {
                                "user": {
@@ -309,7 +309,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EMPLOYEE"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-19T17: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T17:16:52.998305"
                             },
                             {
                                "user": {
@@ -318,7 +318,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             }
                          ]
                       },
@@ -329,9 +329,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "HACKATHON",
                          "is_extensive": False,
                          "delivery_model": "HYBRID",
-                         "start_date": "2022-12-22T15: 16: 52.998305",
+                         "start_date": "2022-12-22T15:16:52.998305",
                          "duration": 40,
-                         "link": "https: //devmaua.com",
+                         "link": "https://devmaua.com",
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -350,7 +350,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 20,
                          "taken_slots": 1,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "None",
+                         "stop_accepting_new_enrollments_before": None,
                          "enrollments": [
                             {
                                "user": {
@@ -359,7 +359,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             }
                          ]
                       },
@@ -370,10 +370,10 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "INTERNSHIP_FAIR",
                          "is_extensive": False,
                          "delivery_model": "ONLINE",
-                         "start_date": "2022-12-20T16: 16: 52.998305",
+                         "start_date": "2022-12-20T16:16:52.998305",
                          "duration": 80,
-                         "link": "https: //devmaua.com",
-                         "place": "None",
+                         "link": "https://devmaua.com",
+                         "place": None,
                          "responsible_professors": [
                             {
                                "name": "Caio Toledo",
@@ -391,7 +391,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 10,
                          "taken_slots": 1,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "None",
+                         "stop_accepting_new_enrollments_before": None,
                          "enrollments": [
                             {
                                "user": {
@@ -400,7 +400,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             }
                          ]
                       },
@@ -411,9 +411,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "ALUMNI_CAFE",
                          "is_extensive": True,
                          "delivery_model": "IN_PERSON",
-                         "start_date": "2022-12-21T19: 16: 52.998305",
+                         "start_date": "2022-12-21T19:16:52.998305",
                          "duration": 20,
-                         "link": "None",
+                         "link": None,
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -432,7 +432,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 2,
                          "taken_slots": 2,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "None",
+                         "stop_accepting_new_enrollments_before": None,
                          "enrollments": [
                             {
                                "user": {
@@ -441,7 +441,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EXTERNAL"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-18T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-18T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -450,7 +450,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -459,7 +459,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "PROFESSOR"
                                },
                                "state": "DROPPED",
-                               "date_subscribed": "2022-12-20T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-20T19:16:52.998305"
                             }
                          ]
                       },
@@ -470,9 +470,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "PROFESSORS_ACADEMY",
                          "is_extensive": True,
                          "delivery_model": "HYBRID",
-                         "start_date": "2022-12-19T19: 16: 52.998305",
+                         "start_date": "2022-12-19T19:16:52.998305",
                          "duration": 120,
-                         "link": "https: //devmaua.com",
+                         "link": "https://devmaua.com",
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -491,7 +491,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 50,
                          "taken_slots": 0,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "None",
+                         "stop_accepting_new_enrollments_before": None,
                          "enrollments": [
                             {
                                "user": {
@@ -500,7 +500,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EXTERNAL"
                                },
                                "state": "DROPPED",
-                               "date_subscribed": "2022-12-17T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-17T19:16:52.998305"
                             }
                          ]
                       },
@@ -511,9 +511,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "CULTURAL_ACTIVITY",
                          "is_extensive": True,
                          "delivery_model": "IN_PERSON",
-                         "start_date": "2022-12-25T19: 16: 52.998305",
+                         "start_date": "2022-12-25T19:16:52.998305",
                          "duration": 140,
-                         "link": "None",
+                         "link": None,
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -532,7 +532,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 50,
                          "taken_slots": 0,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "None",
+                         "stop_accepting_new_enrollments_before": None,
                          "enrollments": [
                             {
                                "user": {
@@ -541,7 +541,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "ADMIN"
                                },
                                "state": "DROPPED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             }
                          ]
                       },
@@ -552,9 +552,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "GCSP",
                          "is_extensive": False,
                          "delivery_model": "HYBRID",
-                         "start_date": "2022-12-25T19: 16: 52.998305",
+                         "start_date": "2022-12-25T19:16:52.998305",
                          "duration": 60,
-                         "link": "https: //devmaua.com",
+                         "link": "https://devmaua.com",
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -573,7 +573,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 25,
                          "taken_slots": 0,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "None",
+                         "stop_accepting_new_enrollments_before": None,
                          "enrollments": [
                             {
                                "user": {
@@ -582,7 +582,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "DROPPED",
-                               "date_subscribed": "2022-12-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-19T19:16:52.998305"
                             }
                          ]
                       },
@@ -593,9 +593,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "SPORTS_ACTIVITY",
                          "is_extensive": False,
                          "delivery_model": "IN_PERSON",
-                         "start_date": "2022-12-22T15: 16: 52.998305",
+                         "start_date": "2022-12-22T15:16:52.998305",
                          "duration": 45,
-                         "link": "None",
+                         "link": None,
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -614,7 +614,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 3,
                          "taken_slots": 3,
                          "accepting_new_enrollments": True,
-                         "stop_accepting_new_enrollments_before": "2022-12-22T15: 16: 51.998305",
+                         "stop_accepting_new_enrollments_before": "2022-12-22T15:16:51.998305",
                          "enrollments": [
                             {
                                "user": {
@@ -623,7 +623,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-10T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-10T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -632,7 +632,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "PROFESSOR"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-11T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-11T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -641,7 +641,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "INTERNATIONAL_STUDENT"
                                },
                                "state": "DROPPED",
-                               "date_subscribed": "2022-12-12T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-12T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -650,7 +650,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EMPLOYEE"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-12-13T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-13T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -659,7 +659,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EXTERNAL"
                                },
                                "state": "IN_QUEUE",
-                               "date_subscribed": "2022-12-21T19: 16: 52.998305"
+                               "date_subscribed": "2022-12-21T19:16:52.998305"
                             }
                          ]
                       },
@@ -670,9 +670,9 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "activity_type": "CULTURAL_ACTIVITY",
                          "is_extensive": False,
                          "delivery_model": "IN_PERSON",
-                         "start_date": "2022-12-02T15: 16: 52.998305",
+                         "start_date": "2022-12-02T15:16:52.998305",
                          "duration": 45,
-                         "link": "None",
+                         "link": None,
                          "place": "H332",
                          "responsible_professors": [
                             {
@@ -696,7 +696,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                          "total_slots": 10,
                          "taken_slots": 4,
                          "accepting_new_enrollments": False,
-                         "stop_accepting_new_enrollments_before": "2022-12-01T15: 16: 51.998305",
+                         "stop_accepting_new_enrollments_before": "2022-12-01T15:16:51.998305",
                          "enrollments": [
                             {
                                "user": {
@@ -705,7 +705,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "STUDENT"
                                },
                                "state": "COMPLETED",
-                               "date_subscribed": "2022-11-19T19: 16: 52.998305"
+                               "date_subscribed": "2022-11-19T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -714,7 +714,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "PROFESSOR"
                                },
                                "state": "COMPLETED",
-                               "date_subscribed": "2022-11-20T19: 16: 52.998305"
+                               "date_subscribed": "2022-11-20T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -723,7 +723,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "INTERNATIONAL_STUDENT"
                                },
                                "state": "COMPLETED",
-                               "date_subscribed": "2022-11-21T19: 16: 52.998305"
+                               "date_subscribed": "2022-11-21T19:16:52.998305"
                             },
                             {
                                "user": {
@@ -732,7 +732,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                                   "role": "EXTERNAL"
                                },
                                "state": "ENROLLED",
-                               "date_subscribed": "2022-11-29T19: 16: 52.998305"
+                               "date_subscribed": "2022-11-29T19:16:52.998305"
                             }
                          ]
                       }
