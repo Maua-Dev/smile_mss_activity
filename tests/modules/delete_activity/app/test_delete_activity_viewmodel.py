@@ -1,15 +1,19 @@
-from src.modules.enroll_activity.app.enroll_activity_viewmodel import EnrollActivityViewmodel
+import datetime
+
+from src.modules.delete_activity.app.delete_activity_viewmodel import DeleteActivityViewmodel
+from src.shared.domain.entities.activity import Activity
+from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
+from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 
-class Test_EnrollActivityViewmodel:
+class Test_DeleteActivityViewmodel:
 
-    def test_enroll_activity_viewmodel(self):
+    def test_delete_activity_viewmodel(self):
         repo = ActivityRepositoryMock()
-
-        enrollment = repo.enrollments[1]
-
-        enroll_activity_viewmodel = EnrollActivityViewmodel(enrollment).to_dict()
+        viewmodel = DeleteActivityViewmodel(
+            repo.activities[0]
+        )
 
         expected = {
             'activity': {'code': 'ECM2345', 'title': 'Atividade da ECM 2345', 'description': 'Isso é uma atividade',
@@ -19,7 +23,6 @@ class Test_EnrollActivityViewmodel:
                          'speakers': [{'name': 'Vitor Briquez', 'bio': 'Incrível', 'company': 'Apple'}],
                          'total_slots': 4, 'taken_slots': 4, 'accepting_new_enrollments': True,
                          'stop_accepting_new_enrollments_before': '2022-12-22T18:16:52.998305'},
-            'user': {'name': 'Bruno Soller', 'user_id': 'b16f', 'role': 'STUDENT'}, 'state': 'ENROLLED',
-            'date_subscribed': '2022-12-17T19:16:52.998305', 'message': 'the enrollment was enrolled'}
+            'message': 'the activity was deleted'}
 
-        assert enroll_activity_viewmodel == expected
+        assert viewmodel.to_dict() == expected

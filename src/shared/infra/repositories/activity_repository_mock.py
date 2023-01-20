@@ -348,13 +348,14 @@ class ActivityRepositoryMock(IActivityRepository):
 
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code and enrollment.state != ENROLLMENT_STATE.DROPPED and enrollment.state != ENROLLMENT_STATE.ACTIVITY_CANCELLED:
                 return enrollment
         return None
 
-    def create_enrollment(self, enrollment : Enrollment) -> Enrollment:
+    def create_enrollment(self, enrollment: Enrollment) -> Enrollment:
         self.enrollments.append(enrollment)
-        self.update_enrollment(enrollment.user.user_id, enrollment.activity.code, ENROLLMENT_STATE.ENROLLED)
+        if enrollment.state == ENROLLMENT_STATE.ENROLLED:
+            self.update_activity(code=enrollment.activity.code, new_taken_slots=enrollment.activity.taken_slots + 1)
 
         return enrollment
       
@@ -433,9 +434,25 @@ class ActivityRepositoryMock(IActivityRepository):
 
         return None
 
+
     def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
         activities_with_enrollments = list()
         for activity in self.activities:
             activity, enrollments = self.get_activity_with_enrollments(code=activity.code)
             activities_with_enrollments.append((activity, enrollments))
         return activities_with_enrollments
+
+    def delete_activity(self, code: str) -> Activity:
+        for idx, activity in enumerate(self.activities):
+            if activity.code == code:
+                 return self.activities.pop(idx)
+        return None
+
+    def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
+        new_enrollments = []
+        for enrollment in enrollments:
+            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity.code, new_state=state)
+            new_enrollments.append(new_enrollment)
+
+        return new_enrollments
+

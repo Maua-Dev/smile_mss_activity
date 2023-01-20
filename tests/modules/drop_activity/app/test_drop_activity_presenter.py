@@ -335,7 +335,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "80fb", "code": "COD1468"}',
+            "body": '{"user_id": "9257", "code": "CODIGO"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None

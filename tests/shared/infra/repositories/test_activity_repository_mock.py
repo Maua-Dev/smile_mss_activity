@@ -117,3 +117,26 @@ class Test_ActivityRepositoryMock:
         assert len(activity_with_enrollments) == len(repo.activities)
         assert all(type(activity) == Activity for activity, enrollments in activity_with_enrollments)
         assert all(all(type(enrollment) == Enrollment for enrollment in enrollments) for activity, enrollments in activity_with_enrollments)
+
+    def test_delete_activity(self):
+        repo = ActivityRepositoryMock()
+        len_before = len(repo.activities)
+        activity = repo.delete_activity(code="2468")
+        len_after = len(repo.activities)
+
+        assert type(activity) == Activity
+        assert len_before == len_after + 1
+
+    def test_delete_activity_not_found(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.delete_activity(code="CODIGO_INEXISTENTE")
+
+        assert activity is None
+
+    def test_batch_update_enrollment(self):
+        repo = ActivityRepositoryMock()
+        new_enrollments = repo.batch_update_enrollment(repo.enrollments, state=ENROLLMENT_STATE.DROPPED)
+
+        assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in new_enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in repo.enrollments)
+

@@ -55,14 +55,14 @@ class ActivityViewmodel:
     delivery_model: DELIVERY_MODEL
     start_date: datetime.datetime
     duration: int  # minutes
-    link: str
-    place: str
     responsible_professors: List[UserViewmodel]
     speakers: List[SpeakerViewmodel]
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: datetime.datetime
+    link: str
+    place: str
 
     def __init__(self, activity: Activity):
         self.code = activity.code
@@ -73,14 +73,14 @@ class ActivityViewmodel:
         self.delivery_model = activity.delivery_model
         self.start_date = activity.start_date
         self.duration = activity.duration
-        self.link = activity.link
-        self.place = activity.place
         self.responsible_professors = [UserViewmodel(professor) for professor in activity.responsible_professors]
         self.speakers = [SpeakerViewmodel(speaker) for speaker in activity.speakers]
         self.total_slots = activity.total_slots
         self.taken_slots = activity.taken_slots
         self.accepting_new_enrollments = activity.accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
+        self.link = activity.link
+        self.place = activity.place
 
     def to_dict(self):
         return {
@@ -99,27 +99,17 @@ class ActivityViewmodel:
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None,
         }
 
 
-class DropActivityViewmodel:
+class DeleteActivityViewmodel:
     activity: ActivityViewmodel
-    user: UserViewmodel
-    state: ENROLLMENT_STATE
-    date_subscribed: datetime.datetime
 
-    def __init__(self, enrollment: Enrollment):
-        self.activity = ActivityViewmodel(enrollment.activity)
-        self.user = UserViewmodel(enrollment.user)
-        self.state = enrollment.state
-        self.date_subscribed = enrollment.date_subscribed
+    def __init__(self, activity: Activity):
+        self.activity = ActivityViewmodel(activity)
 
     def to_dict(self):
         return {
             "activity": self.activity.to_dict(),
-            "user": self.user.to_dict(),
-            "state": self.state.value,
-            "date_subscribed": self.date_subscribed.isoformat(),
-            "message": "the enrollment was dropped"
-        }
+            "message": "the activity was deleted"}
