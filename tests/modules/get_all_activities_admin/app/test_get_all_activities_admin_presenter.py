@@ -1,3 +1,5 @@
+import json
+
 from src.modules.get_all_activities_admin.app.get_all_activities_admin_presenter import lambda_handler
 
 
@@ -57,3 +59,4 @@ class Test_GetAllActivitiesAdminPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 200
+        assert json.loads(response["body"])['message'] == "the activities were retrieved by admin"
