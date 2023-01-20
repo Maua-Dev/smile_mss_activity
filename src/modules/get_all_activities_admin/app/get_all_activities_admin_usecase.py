@@ -6,9 +6,9 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 
 
 class GetAllActivitiesAdminUsecase:
+
     def __init__(self, repo: IActivityRepository):
         self.repo = repo
 
     def __call__(self) -> List[Tuple[Activity, List[Enrollment]]]:
-
         return self.repo.get_all_activities_admin()
