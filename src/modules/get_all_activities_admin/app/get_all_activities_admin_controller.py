@@ -14,7 +14,6 @@ class GetAllActivitiesAdminController:
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
-
             all_activities_with_enrollments = self.GetAllActivitiesAdminUsecase()
 
             viewmodel = GetAllActivitiesAdminViewmodel(all_activities_with_enrollments)
@@ -22,5 +21,4 @@ class GetAllActivitiesAdminController:
             return OK(viewmodel.to_dict())
 
         except Exception as err:
-
             return InternalServerError(body=err.args[0])
