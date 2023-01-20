@@ -1,5 +1,5 @@
-from src.modules.get_all_activities_admin.app.get_all_activities_admin_controller import GetAllActivitiesAdminController
-from src.modules.get_all_activities_admin.app.get_all_activities_admin_usecase import GetAllActivitiesAdminUsecase
+from .get_all_activities_admin_controller import GetAllActivitiesAdminController
+from .get_all_activities_admin_usecase import GetAllActivitiesAdminUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
