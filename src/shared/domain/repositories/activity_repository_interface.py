@@ -95,3 +95,10 @@ class IActivityRepository(ABC):
         Returns all activities with list of Enrollments
         """
         pass
+
+    @abstractmethod
+    def get_all_activities(self) -> List[Activity]:
+        """
+        Returns all activities without list of Enrollments and responsible professors
+        """
+        pass

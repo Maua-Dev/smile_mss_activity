@@ -118,6 +118,13 @@ class Test_ActivityRepositoryMock:
         assert all(type(activity) == Activity for activity, enrollments in activity_with_enrollments)
         assert all(all(type(enrollment) == Enrollment for enrollment in enrollments) for activity, enrollments in activity_with_enrollments)
 
+    def test_get_all_activities(self):
+        repo = ActivityRepositoryMock()
+        activities = repo.get_all_activities()
+
+        assert len(activities) == len(repo.activities)
+        assert all(type(activity) == Activity for activity in activities)
+
     def test_delete_activity(self):
         repo = ActivityRepositoryMock()
         len_before = len(repo.activities)
