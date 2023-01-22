@@ -20,12 +20,14 @@ class Test_UpdateActivityViewmodel:
                             'delivery_model': 'IN_PERSON',
                             'description': 'Isso é uma atividade',
                             'duration': 120,
+                            'link': None,
+                            'place': 'H332',
                             'is_extensive': False,
                             'responsible_professors': [
                                    {
                                           'name': 'Caio Toledo',
-                                                                      'role': 'PROFESSOR',
-                                                                      'user_id': 'd7f1'}],
+                                          'role': 'PROFESSOR',
+                                          'user_id': 'd7f1'}],
                                           'speakers': [{'bio': 'Incrível',
                                                         'company': 'Apple',
                                                         'name': 'Vitor Briquez'}],

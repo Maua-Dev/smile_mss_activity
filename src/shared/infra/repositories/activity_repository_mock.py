@@ -51,6 +51,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
                 duration=120,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[0]],
                 total_slots=4,
@@ -67,6 +69,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
                 duration=400,
+                link="https://devmaua.com",
+                place="H332",
                 responsible_professors=[self.users[10]],
                 speakers=[self.speakers[1]],
                 total_slots=10,
@@ -83,6 +87,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
                 duration=60,
+                link="https://devmaua.com",
+                place=None,
                 responsible_professors=[self.users[2], self.users[10]],
                 speakers=[self.speakers[2]],
                 total_slots=50,
@@ -99,6 +105,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
                 duration=60,
+                link="https://devmaua.com",
+                place=None,
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[0], self.speakers[1], self.speakers[2]],
                 total_slots=15,
@@ -115,6 +123,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
                 duration=190,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[10]],
                 speakers=[self.speakers[1]],
                 total_slots=50,
@@ -131,6 +141,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=datetime.datetime(2022, 12, 22, 15, 16, 52, 998305),
                 duration=40,
+                link="https://devmaua.com",
+                place="H332",
                 responsible_professors=[self.users[10]],
                 speakers=[self.speakers[2]],
                 total_slots=20,
@@ -147,6 +159,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=datetime.datetime(2022, 12, 20, 16, 16, 52, 998305),
                 duration=80,
+                link="https://devmaua.com",
+                place=None,
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[0]],
                 total_slots=10,
@@ -163,6 +177,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
                 duration=20,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[10]],
                 speakers=[self.speakers[1]],
                 total_slots=2,
@@ -179,6 +195,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305),
                 duration=120,
+                link="https://devmaua.com",
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[2]],
                 total_slots=50,
@@ -195,6 +213,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
                 duration=140,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[0]],
                 total_slots=50,
@@ -211,6 +231,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
                 duration=60,
+                link="https://devmaua.com",
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[1]],
                 total_slots=25,
@@ -227,6 +249,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 15, 16, 52, 998305),
                 duration=45,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[2]],
                 total_slots=3,
@@ -243,6 +267,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 2, 15, 16, 52, 998305),
                 duration=45,
+                link=None,
+                place="H332",
                 responsible_professors=[self.users[2]],
                 speakers=[self.speakers[2], self.speakers[1]],
                 total_slots=10,
@@ -322,8 +348,21 @@ class ActivityRepositoryMock(IActivityRepository):
 
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code and enrollment.state != ENROLLMENT_STATE.DROPPED and enrollment.state != ENROLLMENT_STATE.ACTIVITY_CANCELLED:
                 return enrollment
+        return None
+
+    def create_enrollment(self, enrollment: Enrollment) -> Enrollment:
+        self.enrollments.append(enrollment)
+        if enrollment.state == ENROLLMENT_STATE.ENROLLED:
+            self.update_activity(code=enrollment.activity.code, new_taken_slots=enrollment.activity.taken_slots + 1)
+
+        return enrollment
+      
+    def get_user(self, user_id : str) -> User:
+        for user in self.users:
+            if user.user_id == user_id:
+                return user
         return None
 
     def get_activity(self, code:str) -> Activity:
@@ -351,10 +390,14 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity, enrollments
         return None, None
 
-    def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None,
-                 new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
-                 new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
+    def update_activity(self, code: str, new_title: str = None, new_description: str = None,
+                        new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
+                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None,
+                        new_duration: int = None, new_link: str = None, new_place: str = None,
+                        new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None,
+                        new_total_slots: int = None, new_taken_slots: int = None,
+                        new_accepting_new_enrollments: bool = None,
+                        new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 if new_title is not None:
@@ -371,6 +414,10 @@ class ActivityRepositoryMock(IActivityRepository):
                     activity.start_date = new_start_date
                 if new_duration is not None:
                     activity.duration = new_duration
+                if new_link is not None:
+                    activity.link = new_link
+                if new_place is not None:
+                    activity.place = new_place
                 if new_responsible_professors is not None:
                     activity.responsible_professors = new_responsible_professors
                 if new_speakers is not None:
@@ -386,3 +433,31 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity
 
         return None
+
+    def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
+        activities_with_enrollments = list()
+        for activity in self.activities:
+            activity, enrollments = self.get_activity_with_enrollments(code=activity.code)
+            activities_with_enrollments.append((activity, enrollments))
+        return activities_with_enrollments
+
+    def get_all_activities(self) -> List[Activity]:
+        activities = list()
+        for activity in self.activities:
+            activities.append(activity)
+        return activities
+
+    def delete_activity(self, code: str) -> Activity:
+        for idx, activity in enumerate(self.activities):
+            if activity.code == code:
+                 return self.activities.pop(idx)
+        return None
+
+    def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
+        new_enrollments = []
+        for enrollment in enrollments:
+            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity.code, new_state=state)
+            new_enrollments.append(new_enrollment)
+
+        return new_enrollments
+

@@ -23,6 +23,8 @@ class Test_Activity:
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
             duration=120,
+            link="https://devmaua.com",
+            place="H333",
             responsible_professors=[
                 User(
                     name="Marcos",
@@ -59,6 +61,136 @@ class Test_Activity:
         assert activity.accepting_new_enrollments == True
         assert activity.stop_accepting_new_enrollments_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
 
+    def test_activity_link_none(self):
+        activity = Activity(
+            code="1234",
+            title="Palestra Microsoft",
+            description="Palestra informacional de como usar a Azure",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.IN_PERSON,
+            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            duration=120,
+            link=None,
+            place="H333",
+            responsible_professors=[
+                User(
+                    name="Marcos",
+                    role=ROLE.PROFESSOR,
+                    user_id="123d"
+                )
+            ],
+            speakers=[
+                Speaker(
+                    name="Marcos Tales",
+                    bio="Salve",
+                    company="Microsoft"
+                )
+            ],
+            total_slots=120,
+            taken_slots=33,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+        )
+
+        assert type(activity) == Activity
+        assert activity.code == "1234"
+        assert activity.title == "Palestra Microsoft"
+        assert activity.description == "Palestra informacional de como usar a Azure"
+        assert activity.activity_type == ACTIVITY_TYPE.LECTURES
+        assert activity.is_extensive == True
+        assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
+        assert activity.start_date == datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+        assert activity.duration == 120
+        assert activity.responsible_professors[0].name == "Marcos"
+        assert activity.speakers[0].name == "Marcos Tales"
+        assert activity.total_slots == 120
+        assert activity.taken_slots == 33
+        assert activity.accepting_new_enrollments == True
+        assert activity.stop_accepting_new_enrollments_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+
+    def test_activity_none_place(self):
+        activity = Activity(
+            code="1234",
+            title="Palestra Microsoft",
+            description="Palestra informacional de como usar a Azure",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.IN_PERSON,
+            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            duration=120,
+            link="https://devmaua.com",
+            place=None,
+            responsible_professors=[
+                User(
+                    name="Marcos",
+                    role=ROLE.PROFESSOR,
+                    user_id="123d"
+                )
+            ],
+            speakers=[
+                Speaker(
+                    name="Marcos Tales",
+                    bio="Salve",
+                    company="Microsoft"
+                )
+            ],
+            total_slots=120,
+            taken_slots=33,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+        )
+
+        assert type(activity) == Activity
+        assert activity.code == "1234"
+        assert activity.title == "Palestra Microsoft"
+        assert activity.description == "Palestra informacional de como usar a Azure"
+        assert activity.activity_type == ACTIVITY_TYPE.LECTURES
+        assert activity.is_extensive == True
+        assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
+        assert activity.start_date == datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+        assert activity.duration == 120
+        assert activity.responsible_professors[0].name == "Marcos"
+        assert activity.speakers[0].name == "Marcos Tales"
+        assert activity.total_slots == 120
+        assert activity.taken_slots == 33
+        assert activity.accepting_new_enrollments == True
+        assert activity.stop_accepting_new_enrollments_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+
+
+    def test_activity_none_link_place(self):
+        with pytest.raises(EntityError):
+            activity = Activity(
+            code="1234",
+            title="Palestra Microsoft",
+            description="Palestra informacional de como usar a Azure",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.IN_PERSON,
+            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            duration=120,
+            link=None,
+            place=None,
+            responsible_professors=[
+                User(
+                    name="Marcos",
+                    role=ROLE.PROFESSOR,
+                    user_id="123d"
+                )
+            ],
+            speakers=[
+                Speaker(
+                    name="Marcos Tales",
+                    bio="Salve",
+                    company="Microsoft"
+                )
+            ],
+            total_slots=120,
+            taken_slots=33,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+        )
+
     def test_activity_invalid_code_none(self):
         with pytest.raises(EntityError):
             activity = Activity(
@@ -70,6 +202,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -100,6 +234,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -121,33 +257,35 @@ class Test_Activity:
 
     def test_activity_invalid_title(self):
         with pytest.raises(EntityError):
-            activity = Activity(
-                code="1234",
-                title=1234,
-                description="Palestra informacional de como usar a Azure",
-                activity_type=ACTIVITY_TYPE.LECTURES,
-                is_extensive=True,
-                delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
-                duration=120,
-                responsible_professors=[
-                    User(
-                        name="Marcos",
-                        role=ROLE.PROFESSOR,
-                        user_id="123d"
-                    )
-                ],
-                speakers=[
-                    Speaker(
-                        name="Marcos Tales",
-                        bio="Salve",
-                        company="Microsoft"
-                    )],
-                total_slots=120,
-                taken_slots=33,
-                accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
-            )
+                activity = Activity(
+                    code="1234",
+                    title=1234,
+                    description="Palestra informacional de como usar a Azure",
+                    activity_type=ACTIVITY_TYPE.LECTURES,
+                    is_extensive=True,
+                    delivery_model=DELIVERY_MODEL.IN_PERSON,
+                    start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                    duration=120,
+                    link="https://devmaua.com",
+                    place="H333",
+                    responsible_professors=[
+                        User(
+                            name="Marcos",
+                            role=ROLE.PROFESSOR,
+                            user_id="123d"
+                        )
+                    ],
+                    speakers=[
+                        Speaker(
+                            name="Marcos Tales",
+                            bio="Salve",
+                            company="Microsoft"
+                        )],
+                    total_slots=120,
+                    taken_slots=33,
+                    accepting_new_enrollments=True,
+                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                )
 
     def test_activity_invalid_title_none(self):
         with pytest.raises(EntityError):
@@ -160,6 +298,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -190,6 +330,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -220,6 +362,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -250,6 +394,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -280,6 +426,8 @@ class Test_Activity:
                 delivery_model="IN_PERSON",
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -310,6 +458,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date="2022-12-22 13:56:05.430523",
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -340,6 +490,72 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration="DUAS HORAS",
+                link="https://devmaua.com",
+                place="H333",
+                responsible_professors=[
+                    User(
+                        name="Marcos",
+                        role=ROLE.PROFESSOR,
+                        user_id="123d"
+                    )
+                ],
+                speakers=[
+                    Speaker(
+                        name="Marcos Tales",
+                        bio="Salve",
+                        company="Microsoft"
+                    )],
+                total_slots=120,
+                taken_slots=33,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+            )
+
+    def test_activity_invalid_place(self):
+        with pytest.raises(EntityError):
+            activity = Activity(
+                code="1234",
+                title="Palestra Microsoft",
+                description="Palestra informacional de como usar a Azure",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                duration=120,
+                link="https://devmaua.com",
+                place=123,
+                responsible_professors=[
+                    User(
+                        name="Marcos",
+                        role=ROLE.PROFESSOR,
+                        user_id="123d"
+                    )
+                ],
+                speakers=[
+                    Speaker(
+                        name="Marcos Tales",
+                        bio="Salve",
+                        company="Microsoft"
+                    )],
+                total_slots=120,
+                taken_slots=33,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+            )
+
+    def test_activity_invalid_link(self):
+        with pytest.raises(EntityError):
+            activity = Activity(
+                code="1234",
+                title="Palestra Microsoft",
+                description="Palestra informacional de como usar a Azure",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                duration=120,
+                link=123,
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -370,6 +586,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=None,
                 speakers=[
                     Speaker(
@@ -394,6 +612,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     Speaker(
                         name="Marcos Tales",
@@ -427,6 +647,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -461,6 +683,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -492,6 +716,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -523,6 +749,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -554,6 +782,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -585,6 +815,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -606,36 +838,38 @@ class Test_Activity:
             )
 
     def test_activity_invalid_stop_accepting_new_enrollments_before_none(self):
-            activity = Activity(
-                code="1234",
-                title="Palestra Microsoft",
-                description="Palestra informacional de como usar a Azure",
-                activity_type=ACTIVITY_TYPE.LECTURES,
-                is_extensive=True,
-                delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
-                duration=120,
-                responsible_professors=[
-                    User(
-                        name="Marcos",
-                        role=ROLE.PROFESSOR,
-                        user_id="123d"
-                    )
-                ],
-                speakers=[
-                    Speaker(
-                        name="Marcos Tales",
-                        bio="Salve",
-                        company="Microsoft"
-                    )
-                ],
-                total_slots=120,
-                taken_slots=33,
-                accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
-            )
+        activity = Activity(
+            code="1234",
+            title="Palestra Microsoft",
+            description="Palestra informacional de como usar a Azure",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.IN_PERSON,
+            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            duration=120,
+            link="https://devmaua.com",
+            place="H333",
+            responsible_professors=[
+                User(
+                    name="Marcos",
+                    role=ROLE.PROFESSOR,
+                    user_id="123d"
+                )
+            ],
+            speakers=[
+                Speaker(
+                    name="Marcos Tales",
+                    bio="Salve",
+                    company="Microsoft"
+                )
+            ],
+            total_slots=120,
+            taken_slots=33,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None
+        )
 
-            assert activity.stop_accepting_new_enrollments_before is None
+        assert activity.stop_accepting_new_enrollments_before is None
 
     def test_activity_invalid_stop_accepting_new_enrollments_before_int(self):
         with pytest.raises(EntityError):
@@ -648,6 +882,8 @@ class Test_Activity:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
                 duration=120,
+                link="https://devmaua.com",
+                place="H333",
                 responsible_professors=[
                     User(
                         name="Marcos",
@@ -668,32 +904,34 @@ class Test_Activity:
                 stop_accepting_new_enrollments_before=2
             )
     def test_activity_invalid_stop_accepting_new_enrollments_before_after_start(self):
-            with pytest.raises(EntityError):
-                activity = Activity(
-                    code="1234",
-                    title="Palestra Microsoft",
-                    description="Palestra informacional de como usar a Azure",
-                    activity_type=ACTIVITY_TYPE.LECTURES,
-                    is_extensive=True,
-                    delivery_model=DELIVERY_MODEL.IN_PERSON,
-                    start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
-                    duration=120,
-                    responsible_professors=[
-                        User(
-                            name="Marcos",
-                            role=ROLE.PROFESSOR,
-                            user_id="123d"
-                        )
-                    ],
-                    speakers=[
-                        Speaker(
-                            name="Marcos Tales",
-                            bio="Salve",
-                            company="Microsoft"
-                        )
-                    ],
-                    total_slots=120,
-                    taken_slots=33,
-                    accepting_new_enrollments=True,
+        with pytest.raises(EntityError):
+            activity = Activity(
+                code="1234",
+                title="Palestra Microsoft",
+                description="Palestra informacional de como usar a Azure",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                duration=120,
+                link="https://devmaua.com",
+                place="H333",
+                responsible_professors=[
+                    User(
+                        name="Marcos",
+                        role=ROLE.PROFESSOR,
+                        user_id="123d"
+                    )
+                ],
+                speakers=[
+                    Speaker(
+                        name="Marcos Tales",
+                        bio="Salve",
+                        company="Microsoft"
+                    )
+                ],
+                total_slots=120,
+                taken_slots=33,
+                accepting_new_enrollments=True,
                 stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 25, 13, 56, 5, 430523)
             )

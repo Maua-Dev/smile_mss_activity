@@ -1,7 +1,9 @@
-from src.shared.domain.entities.activity import Activity
+
+import datetime
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
@@ -25,11 +27,41 @@ class Test_ActivityRepositoryMock:
 
         assert type(activity) == Activity
 
-
     def test_get_activity_not_exists(self):
         repo = ActivityRepositoryMock()
         activity = repo.get_activity("CODIGO_INEXISTENTE")
         assert activity is None
+
+
+    def test_get_user(self):
+        repo = ActivityRepositoryMock()
+        user = repo.get_user('db43')
+        assert type(user) == User  
+
+    def test_get_user_not_exists(self):
+        repo = ActivityRepositoryMock()
+        user = repo.get_user('NAO-EXISTE')
+        assert user is None
+
+    def test_create_enrollment(self):
+        repo = ActivityRepositoryMock()
+        enrollment = Enrollment(
+            repo.get_activity('ECM2345'),
+            repo.get_user('db43'),
+            state=ENROLLMENT_STATE.ENROLLED,
+            date_subscribed=datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
+        )
+
+        len_before = len(repo.enrollments)
+        enrollment_created = repo.create_enrollment(enrollment=enrollment)
+        len_after = len(repo.enrollments)
+
+        assert type(enrollment_created) == Enrollment
+        assert repo.enrollments[0].activity == repo.get_activity('ECM2345')
+        assert repo.enrollments[0].user == repo.get_user('db43')
+        assert repo.enrollments[0].state == ENROLLMENT_STATE.ENROLLED
+        assert repo.enrollments[0].date_subscribed == datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
+        assert len_before == len_after - 1
 
     def test_update_enrollment_drop(self):
         repo = ActivityRepositoryMock()
@@ -92,3 +124,41 @@ class Test_ActivityRepositoryMock:
 
         assert type(activity) == Activity
         assert activity.responsible_professors == [repo.users[2]]
+
+    def test_get_all_activities_admin(self):
+        repo = ActivityRepositoryMock()
+        activity_with_enrollments = repo.get_all_activities_admin()
+
+        assert len(activity_with_enrollments) == len(repo.activities)
+        assert all(type(activity) == Activity for activity, enrollments in activity_with_enrollments)
+        assert all(all(type(enrollment) == Enrollment for enrollment in enrollments) for activity, enrollments in activity_with_enrollments)
+
+    def test_get_all_activities(self):
+        repo = ActivityRepositoryMock()
+        activities = repo.get_all_activities()
+
+        assert len(activities) == len(repo.activities)
+        assert all(type(activity) == Activity for activity in activities)
+
+    def test_delete_activity(self):
+        repo = ActivityRepositoryMock()
+        len_before = len(repo.activities)
+        activity = repo.delete_activity(code="2468")
+        len_after = len(repo.activities)
+
+        assert type(activity) == Activity
+        assert len_before == len_after + 1
+
+    def test_delete_activity_not_found(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.delete_activity(code="CODIGO_INEXISTENTE")
+
+        assert activity is None
+
+    def test_batch_update_enrollment(self):
+        repo = ActivityRepositoryMock()
+        new_enrollments = repo.batch_update_enrollment(repo.enrollments, state=ENROLLMENT_STATE.DROPPED)
+
+        assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in new_enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in repo.enrollments)
+

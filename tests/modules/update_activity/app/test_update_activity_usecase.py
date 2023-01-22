@@ -2,6 +2,7 @@ import datetime
 import pytest
 
 from src.modules.update_activity.app.update_activity_usecase import UpdateActivityUsecase
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
@@ -9,6 +10,32 @@ from src.shared.infra.repositories.activity_repository_mock import ActivityRepos
 from src.shared.helpers.errors.domain_errors import EntityError
 
 class Test_UpdateActivityUsecase:
+
+       def test_update_activity(self):
+              repo = ActivityRepositoryMock()
+              usecase = UpdateActivityUsecase(repo)
+              update_activity = usecase(code=repo.activities[0].code, new_description='nova descricao')
+
+              assert type(update_activity) == Activity
+              assert repo.activities[0].description == update_activity.description
+
+       def test_update_activity_enum(self):
+              repo = ActivityRepositoryMock()
+              usecase = UpdateActivityUsecase(repo)
+              update_activity = usecase(code=repo.activities[0].code, new_activity_type="LECTURES", new_delivery_model="HYBRID")
+
+              assert type(update_activity) == Activity
+              assert repo.activities[0].activity_type == update_activity.activity_type
+              assert repo.activities[0].delivery_model == update_activity.delivery_model
+
+       def test_update_activity_title_taken_slots(self):
+              repo = ActivityRepositoryMock()
+              usecase = UpdateActivityUsecase(repo)
+              update_activity = usecase(code=repo.activities[0].code, new_title='NOVO TITULO', new_taken_slots=40)
+
+              assert type(update_activity) == Activity
+              assert repo.activities[0].title == update_activity.title
+              assert repo.activities[0].taken_slots == update_activity.taken_slots
 
        def test_update_activity_invalid_code(self):
               repo = ActivityRepositoryMock()
@@ -113,10 +140,5 @@ class Test_UpdateActivityUsecase:
               usecase = UpdateActivityUsecase(repo)
 
               with pytest.raises(NoItemsFound):
-                     update_activity = usecase(code='', new_title='novo titulo', new_description='nova descricao',
-                                                 new_activity_type=ACTIVITY_TYPE.ACADEMIC_COMPETITIONS, new_is_extensive=True,
-                                                 new_delivery_model=DELIVERY_MODEL.IN_PERSON, new_start_date=datetime.datetime(2023, 11, 22, 18, 16, 52, 998305),
-                                                 new_duration=120, new_responsible_professors=[repo.users[2]],
-                                                 new_speakers=[repo.speakers[1]], new_total_slots=50, new_taken_slots=10,
-                                                 new_accepting_new_enrollments=True, new_stop_accepting_new_enrollments_before=datetime.datetime(2023, 12, 22, 18, 16, 52, 998305))
+                     update_activity = usecase(code='')
        

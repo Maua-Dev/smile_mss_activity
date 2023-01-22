@@ -68,6 +68,8 @@ class ActivityViewmodel:
        self.delivery_model = activity.delivery_model
        self.start_date = activity.start_date
        self.duration = activity.duration
+       self.link = activity.link,
+       self.place = activity.place,
        self.responsible_professors = [UserViewmodel(professor) for professor in activity.responsible_professors]
        self.speakers = [SpeakerViewmodel(speaker) for speaker in activity.speakers]
        self.total_slots = activity.total_slots
@@ -85,6 +87,8 @@ class ActivityViewmodel:
            "delivery_model": self.delivery_model.value,
            "start_date": self.start_date.isoformat(),
            "duration": self.duration,
+           "link": self.link,
+           "place": self.place,
            "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
            "speakers": [speaker.to_dict() for speaker in self.speakers],
            "total_slots": self.total_slots,

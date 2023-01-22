@@ -15,7 +15,7 @@ class UpdateActivityController:
                      if not request.data.get('code'):
                             raise MissingParameters('code')
 
-                     update_activity = self.UpdateActivityUsecase(code = request.data.get('code'))
+                     update_activity = self.UpdateActivityUsecase(**request.data)
 
                      viewmodel = UpdateActivityViewmodel(update_activity)
 

@@ -51,7 +51,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[8].user.user_id, 'code': repo.enrollments[8].activity.code})
+        request = HttpRequest(body={'user_id': repo.enrollments[10].user.user_id, 'code': repo.enrollments[10].activity.code})
 
         reponse = controller(request)
 
