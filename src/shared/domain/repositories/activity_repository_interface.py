@@ -81,3 +81,7 @@ class IActivityRepository(ABC):
                  new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
         pass
 
+    @abstractmethod
+    def create_activity(self, activity:Activity) -> Activity:
+        
+        pass

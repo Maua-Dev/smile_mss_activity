@@ -357,7 +357,7 @@ class ActivityRepositoryMock(IActivityRepository):
         self.update_enrollment(enrollment.user.user_id, enrollment.activity.code, ENROLLMENT_STATE.ENROLLED)
 
         return enrollment
-      
+
     def get_user(self, user_id : str) -> User:
         for user in self.users:
             if user.user_id == user_id:
@@ -432,3 +432,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity
 
         return None
+
+    def create_activity(self, activity: Activity) -> Activity:
+        self.activities.append(activity)
+
+        return activity
