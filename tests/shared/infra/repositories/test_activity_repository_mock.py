@@ -1,5 +1,7 @@
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
+from src.shared.domain.entities.user import User
+from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
@@ -76,3 +78,17 @@ class Test_ActivityRepositoryMock:
 
         assert type(activity) == Activity
         assert activity.taken_slots == 10
+
+    def test_update_activity_new_type(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.update_activity(code='2468', new_activity_type=ACTIVITY_TYPE.GCSP)
+
+        assert type(activity) == Activity
+        assert activity.activity_type == ACTIVITY_TYPE.GCSP
+
+    def test_update_activity_new_responsible_professors(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.update_activity(code='2468', new_responsible_professors=[repo.users[2]])
+
+        assert type(activity) == Activity
+        assert activity.responsible_professors == [repo.users[2]]
