@@ -30,9 +30,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811,
-                                    "message": "the activity was created"
-                                    })
+                                    "stop_accepting_new_enrollments_before": 1666451811,})
 
         response = controller(request=request)
 
@@ -78,7 +76,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -112,7 +110,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -146,7 +144,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -181,7 +179,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -213,9 +211,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811,
-                                    "message": "the activity was created"
-                                    })
+                                    "stop_accepting_new_enrollments_before": 1666451811,})
 
         response = controller(request=request)
 
@@ -247,7 +243,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -281,7 +277,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -313,9 +309,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811,
-                                    "message": "the activity was created"
-                                    })
+                                    "stop_accepting_new_enrollments_before": 1666451811,})
 
         response = controller(request=request)
 
@@ -348,7 +342,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -383,7 +377,7 @@ class Test_CreateActivityController:
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
                 "stop_accepting_new_enrollments_before": 1666451811,
-                "message": "the activity was created"
+                
             }
         )
 
@@ -417,7 +411,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -451,7 +445,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -481,7 +475,7 @@ class Test_CreateActivityController:
                   "total_slots": 100,
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -516,7 +510,7 @@ class Test_CreateActivityController:
                   }],
                   "accepting_new_enrollments": True,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
+                  
                   }
         )
 
@@ -550,7 +544,6 @@ class Test_CreateActivityController:
                   }],
                   "total_slots": 100,
                   "stop_accepting_new_enrollments_before": 1666451811,
-                  "message": "the activity was created"
                   }
         )
 
@@ -582,9 +575,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": "1666451811",
-                                    "message": "the activity was created"
-                                    })
+                                    "stop_accepting_new_enrollments_before": "1666451811",})
 
         response = controller(request=request)
 
