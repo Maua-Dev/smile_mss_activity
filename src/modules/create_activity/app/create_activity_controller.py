@@ -57,8 +57,6 @@ class CreateActivityController:
                 raise MissingParameters('speakers')
             if request.data.get('total_slots') is None:
                 raise MissingParameters('total_slots')
-            if request.data.get('taken_slots') is None:
-                raise MissingParameters('taken_slots')
             if request.data.get('accepting_new_enrollments') is None:
                 raise MissingParameters('accepting_new_enrollments')
 
@@ -82,7 +80,6 @@ class CreateActivityController:
                     responsible_professors_user_id = request.data.get('responsible_professors'),
                     speakers = request.data.get('speakers'),
                     total_slots = request.data.get('total_slots'),
-                    taken_slots = request.data.get('taken_slots'),
                     accepting_new_enrollments = request.data.get('accepting_new_enrollments'),
                     stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
                     )
