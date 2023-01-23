@@ -96,10 +96,6 @@ class CreateActivityController:
 
             return BadRequest(body=err.message)
 
-        except ForbiddenAction as err:
-
-            return Forbidden(body=err.message)
-
         except WrongTypeParameter as err:
 
             return BadRequest(body=err.message)
