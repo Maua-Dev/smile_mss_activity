@@ -76,12 +76,12 @@ class Test_DropActivityUsecase:
             assert repo.enrollments[27].state == ENROLLMENT_STATE.ENROLLED
 
 
-    def test_drop_activity_usecase_already_dropped(self):
+    def test_drop_activity_usecase_already_rejected(self):
         repo = ActivityRepositoryMock()
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(ForbiddenAction):
-            dropped_enrollment = usecase(repo.enrollments[8].user.user_id, repo.enrollments[8].activity.code)
+            dropped_enrollment = usecase(repo.enrollments[10].user.user_id, repo.enrollments[10].activity.code)
 
     def test_drop_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()

@@ -18,6 +18,8 @@ class IActivityRepository(ABC):
         """
         If the user is enrolled in the activity, returns the enrollment.
         else returns None
+
+        Ignore dropped enrollments
         """
         pass
 
@@ -66,24 +68,44 @@ class IActivityRepository(ABC):
         pass
 
     @abstractmethod
-    def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
-        """
-        If the user is enrolled in the activity, updates the state of enrollment.
-        else returns None
-        In dynamoRepo, does not need to call update_activity to change taken_slots
-        """
-        pass
-        
-    @abstractmethod
     def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None,
+                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None, new_duration: int = None, new_link: str = None, new_place: str = None,
                  new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                  new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
         pass
 
     @abstractmethod
+    def delete_activity(self, code: str) -> Activity:
+        """
+        If activity with the given code exists, deletes it and returns it
+        else returns None
+        """
+        pass
+
+    @abstractmethod
+    def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
+        """
+        Updated many enrollments in a batch
+        """
+        pass
+
+    @abstractmethod
+    def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
+        """
+        Returns all activities with list of Enrollments
+        """
+        pass
+
+    @abstractmethod
+    def get_all_activities(self) -> List[Activity]:
+        """
+        Returns all activities without list of Enrollments and responsible professors
+        """
+        pass
+
+    @abstractmethod
     def create_activity(self, activity:Activity) -> Activity:
-        
+
         pass
 
     @abstractmethod
