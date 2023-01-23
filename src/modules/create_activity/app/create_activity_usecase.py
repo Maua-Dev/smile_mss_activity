@@ -1,5 +1,5 @@
 import datetime
-from typing import List
+from typing import List, Dict
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker
@@ -12,22 +12,40 @@ from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFoun
 
 
 class CreateActivityUsecase:
-    def __init__(self , repo: IActivityRepository):
+    def __init__(self, repo: IActivityRepository):
         self.repo = repo
-    
+
     def __call__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: datetime.datetime, duration: int, link: str, place: str, total_slots: int, taken_slots: int,
-                 accepting_new_enrollments: bool,responsible_professors:List[User], stop_accepting_new_enrollments_before: datetime.datetime, speakers:List[Speaker]) -> Activity:
-       
-        if type(code)!=str:
+                 delivery_model: DELIVERY_MODEL, start_date: datetime.datetime, duration: int, link: str, place: str,
+                 total_slots: int, taken_slots: int,
+                 accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
+                 stop_accepting_new_enrollments_before: datetime.datetime, speakers: List[Dict]) -> Activity:
+
+        if type(code) != str:
             raise EntityError("code")
-            
-        if self.repo.get_activity(code = code) is not None:
+
+        if self.repo.get_activity(code=code) is not None:
             raise DuplicatedItem("code")
+
+        if type(speakers) != list:
+            raise EntityError("speakers")
+
+        try:
+            speakers = [Speaker(**speaker) for speaker in speakers]
+        except:
+            raise EntityError("speakers")
+
+        if type(responsible_professors_user_id) != list:
+            raise EntityError("responsible_professors_user")
+
+        responsible_professors = self.repo.get_users(responsible_professors_user_id)
+
+        if len(responsible_professors) != len(responsible_professors_user_id):
+            raise NoItemsFound("responsible_professors_user")
 
         activity = Activity(
             code=code,
-            title=title, 
+            title=title,
             description=description,
             activity_type=activity_type,
             is_extensive=is_extensive,
@@ -45,4 +63,3 @@ class CreateActivityUsecase:
         )
 
         return self.repo.create_activity(activity)
- 
