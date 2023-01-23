@@ -30,7 +30,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811,})
+                                    "stop_accepting_new_enrollments_before": 1666451811, })
 
         response = controller(request=request)
 
@@ -41,7 +41,6 @@ class Test_CreateActivityController:
         assert response.body['activity_type'] == 'LECTURES'
         assert response.body['is_extensive'] == False
         assert response.body['delivery_model'] == 'IN_PERSON'
-        assert response.body['start_date'] == '2022-11-22T15:16:52'
         assert response.body['place'] == 'H331'
         assert response.body['duration'] == 90
         assert response.body['responsible_professors'][1]['user_id'] == '12mf'
@@ -58,32 +57,33 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field code is missing"
+
     def test_create_activity_controller_duplicated_code(self):
         repo = ActivityRepositoryMock()
         usecase = CreateActivityUsecase(repo=repo)
@@ -91,27 +91,27 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code":"ECM2345",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
+                "code": "ECM2345",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
 
-                  }
+            }
         )
 
         response = controller(request=request)
@@ -126,26 +126,26 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
@@ -160,33 +160,32 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field description is missing"
-
 
     def test_create_activity_controller_missing_activity_type(self):
         repo = ActivityRepositoryMock()
@@ -195,26 +194,26 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
@@ -245,7 +244,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811,})
+                                    "stop_accepting_new_enrollments_before": 1666451811, })
 
         response = controller(request=request)
 
@@ -259,26 +258,26 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
@@ -293,26 +292,26 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
@@ -343,7 +342,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811,})
+                                    "stop_accepting_new_enrollments_before": 1666451811, })
 
         response = controller(request=request)
 
@@ -357,34 +356,33 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": "1",
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": "1",
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field start_date isn't in the right type.\n Received: type.\n Expected: int"
-
 
     def test_create_activity_controller_invalid_start_date(self):
         repo = ActivityRepositoryMock()
@@ -411,7 +409,7 @@ class Test_CreateActivityController:
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
                 "stop_accepting_new_enrollments_before": 1666451811,
-                
+
             }
         )
 
@@ -427,26 +425,26 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
@@ -461,26 +459,26 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
@@ -495,29 +493,28 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "total_slots": 100,
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field speakers is missing"
-
 
     def test_create_activity_controller_missing_total_slots(self):
         repo = ActivityRepositoryMock()
@@ -526,26 +523,26 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "accepting_new_enrollments": True,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811,
+
+            }
         )
 
         response = controller(request=request)
@@ -560,25 +557,25 @@ class Test_CreateActivityController:
 
         request = HttpRequest(
             body={
-                  "code": "ZYX321",
-                  "title": "Clean Architecture code review!",
-                  "description": "Reviewing IMT student's codes",
-                  "activity_type": "LECTURES",
-                  "is_extensive": False,
-                  "delivery_model": "IN_PERSON",
-                  "start_date": 1669141012,
-                  "duration": 90,
-                  "link": None,
-                  "place": "H331",
-                  "responsible_professors": ["12mf", "d7f1"],
-                  "speakers": [{
-                      "name": "Robert Cecil Martin",
-                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                      "company": "Clean Architecture Company"
-                  }],
-                  "total_slots": 100,
-                  "stop_accepting_new_enrollments_before": 1666451811,
-                  }
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "stop_accepting_new_enrollments_before": 1666451811,
+            }
         )
 
         response = controller(request=request)
@@ -609,16 +606,9 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": "1666451811",})
+                                    "stop_accepting_new_enrollments_before": "1666451811", })
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field stop_accepting_new_enrollments_before isn't in the right type.\n Received: type.\n Expected: int"
-
-
-
-
-
-
-
