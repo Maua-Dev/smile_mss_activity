@@ -84,6 +84,40 @@ class Test_CreateActivityController:
 
         assert response.status_code == 400
         assert response.body == "Field code is missing"
+    def test_create_activity_controller_duplicated_code(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                  "code":"ECM2345",
+                  "title": "Clean Architecture code review!",
+                  "description": "Reviewing IMT student's codes",
+                  "activity_type": "LECTURES",
+                  "is_extensive": False,
+                  "delivery_model": "IN_PERSON",
+                  "start_date": 1669141012,
+                  "duration": 90,
+                  "link": None,
+                  "place": "H331",
+                  "responsible_professors": ["12mf", "d7f1"],
+                  "speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "total_slots": 100,
+                  "accepting_new_enrollments": True,
+                  "stop_accepting_new_enrollments_before": 1666451811,
+
+                  }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == 'The item alredy exists for this code'
 
     def test_create_activity_controller_missing_title(self):
         repo = ActivityRepositoryMock()

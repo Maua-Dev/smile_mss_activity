@@ -5,7 +5,7 @@ from .create_activity_usecase import CreateActivityUsecase
 from .create_activity_viewmodel import CreateActivityViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, DuplicatedItem
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import BadRequest, Created, Forbidden, InternalServerError, NotFound
 
@@ -93,6 +93,10 @@ class CreateActivityController:
             return NotFound(body=err.message)
 
         except MissingParameters as err:
+
+            return BadRequest(body=err.message)
+
+        except DuplicatedItem as err:
 
             return BadRequest(body=err.message)
 
