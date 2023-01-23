@@ -116,6 +116,7 @@ class Test_ActivityRepositoryMock:
 
     def test_create_activity(self):
         repo = ActivityRepositoryMock()
+        len_before = len(repo.activities)
         activity = repo.create_activity(
             Activity(
                 code="newCode",
@@ -140,3 +141,13 @@ class Test_ActivityRepositoryMock:
                 stop_accepting_new_enrollments_before=None
             )
         )
+        assert type(activity) == Activity
+        assert len(repo.activities) == len_before + 1
+
+    def test_get_users(self):
+        repo = ActivityRepositoryMock()
+        users = repo.get_users(["12mf", "d7f1"])
+        assert type(users) == list
+        assert all(type(user) == User for user in users)
+        assert len(users) == 2
+
