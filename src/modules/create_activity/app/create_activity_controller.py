@@ -43,8 +43,12 @@ class CreateActivityController:
 
             if request.data.get('start_date') is None:
                 raise MissingParameters('start_date')
+
             start_date = request.data.get('start_date')
-            start_date = datetime.date.fromisoformat(start_date)
+            if type(start_date) != int:
+                raise WrongTypeParameter('start_date', 'int', type(start_date).__class__.__name__)
+            start_date = datetime.datetime.fromtimestamp(start_date)
+
             if request.data.get('duration') is None:
                 raise MissingParameters('duration')
             if request.data.get('responsible_professors') is None:
@@ -57,6 +61,12 @@ class CreateActivityController:
                 raise MissingParameters('taken_slots')
             if request.data.get('accepting_new_enrollments') is None:
                 raise MissingParameters('accepting_new_enrollments')
+
+            stop_accepting_new_enrollments_before = request.data.get('stop_accepting_new_enrollments_before')
+            if stop_accepting_new_enrollments_before is not None:
+                if type(stop_accepting_new_enrollments_before) != int:
+                    raise WrongTypeParameter('stop_accepting_new_enrollments_before', 'int', type(stop_accepting_new_enrollments_before).__class__.__name__)
+                stop_accepting_new_enrollments_before = datetime.datetime.fromtimestamp(stop_accepting_new_enrollments_before)
             
             activity = self.CreateActivityUsecase(
                     code = request.data.get('code'), 
@@ -69,12 +79,12 @@ class CreateActivityController:
                     duration = request.data.get('duration'),
                     link = request.data.get('link'),
                     place = request.data.get('place'),
-                    responsible_professors = request.data.get('responsible_professors'),
+                    responsible_professors_user_id = request.data.get('responsible_professors'),
                     speakers = request.data.get('speakers'),
                     total_slots = request.data.get('total_slots'),
                     taken_slots = request.data.get('taken_slots'),
                     accepting_new_enrollments = request.data.get('accepting_new_enrollments'),
-                    stop_accepting_new_enrollments_before = request.data.get('stop_accepting_new_enrollments_before')
+                    stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
                     )
                     
             viewmodel = CreateActivityViewmodel(activity)
