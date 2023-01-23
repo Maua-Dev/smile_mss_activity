@@ -14,13 +14,13 @@ from src.shared.helpers.errors.domain_errors import EntityError
 
 class Test_CreateActivityUsecase:
 
-    def test_create_activity_user(self):
+    def test_create_activity_usecase(self):
         repo = ActivityRepositoryMock()
         usecase = CreateActivityUsecase(repo)
         activitiesLenBefore = len(repo.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                           duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                           duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
                            start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
@@ -44,7 +44,7 @@ class Test_CreateActivityUsecase:
         assert repo.activities[activitiesLenBefore].place == "H332"
         assert repo.activities[activitiesLenBefore].total_slots == 4
         assert repo.activities[activitiesLenBefore].is_extensive == True
-        assert repo.activities[activitiesLenBefore].taken_slots == 4
+        assert repo.activities[activitiesLenBefore].taken_slots == 0
         assert repo.activities[activitiesLenBefore].accepting_new_enrollments == True
         assert repo.activities[activitiesLenBefore].start_date == datetime.datetime(2022, 12, 22, 19, 16, 52, 998305)
         assert repo.activities[activitiesLenBefore].stop_accepting_new_enrollments_before == datetime.datetime(2022, 12,
@@ -63,7 +63,7 @@ class Test_CreateActivityUsecase:
         activitiesLenBefore = len(repo.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                           duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                           duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
                            start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
@@ -91,7 +91,7 @@ class Test_CreateActivityUsecase:
         activitiesLenBefore = len(repo.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                           duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                           duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
                            start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
@@ -115,7 +115,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(EntityError):
             usecase(code=00000, title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
@@ -135,7 +135,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(DuplicatedItem):
             usecase(code="ECM2345", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
@@ -155,7 +155,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(EntityError):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
@@ -179,7 +179,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(EntityError):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
@@ -205,7 +205,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(EntityError):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
@@ -221,7 +221,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(NoItemsFound):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),

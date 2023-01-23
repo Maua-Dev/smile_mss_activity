@@ -17,7 +17,7 @@ class CreateActivityUsecase:
 
     def __call__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: datetime.datetime, duration: int, link: str, place: str,
-                 total_slots: int, taken_slots: int,
+                 total_slots: int,
                  accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
                  stop_accepting_new_enrollments_before: datetime.datetime, speakers: List[Dict]) -> Activity:
 
@@ -60,7 +60,7 @@ class CreateActivityUsecase:
             responsible_professors=responsible_professors,
             speakers=speakers,
             total_slots=total_slots,
-            taken_slots=taken_slots,
+            taken_slots=0,
             accepting_new_enrollments=accepting_new_enrollments,
             stop_accepting_new_enrollments_before=stop_accepting_new_enrollments_before
         )
