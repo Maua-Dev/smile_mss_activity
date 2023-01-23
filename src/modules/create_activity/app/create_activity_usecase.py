@@ -36,12 +36,15 @@ class CreateActivityUsecase:
             raise EntityError("speakers")
 
         if type(responsible_professors_user_id) != list:
-            raise EntityError("responsible_professors_user")
+            raise EntityError("responsible_professors")
+
+        if not all(type(user_id) == str for user_id in responsible_professors_user_id):
+            raise EntityError("responsible_professors")
 
         responsible_professors = self.repo.get_users(responsible_professors_user_id)
 
         if len(responsible_professors) != len(responsible_professors_user_id):
-            raise NoItemsFound("responsible_professors_user")
+            raise NoItemsFound("responsible_professors")
 
         activity = Activity(
             code=code,

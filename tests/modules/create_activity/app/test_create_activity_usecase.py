@@ -7,6 +7,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.role_enum import ROLE
+from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.helpers.errors.domain_errors import EntityError
 
@@ -119,19 +120,119 @@ class Test_CreateActivityUsecase:
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
                     stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
-                    speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
+                    speakers=[
+                        {
+                            "name": "Robert Cecil Martin",
+                            "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                            "company": "Clean Architecture Company"
+                        }
+                    ],
                     responsible_professors_user_id=[repo.users[2].user_id])
 
-    def test_create_activity_usecase_not_str(self):
+    def test_create_activity_usecase_duplicated_item(self):
         repo = ActivityRepositoryMock()
         usecase = CreateActivityUsecase(repo=repo)
 
-        with pytest.raises(EntityError):
-            usecase(code=123, title="Atividade da ECM 2345", description="Isso é uma atividade",
+        with pytest.raises(DuplicatedItem):
+            usecase(code="ECM2345", title="Atividade da ECM 2345", description="Isso é uma atividade",
                     duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
                     stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
-                    speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
+                    speakers=[
+                        {
+                            "name": "Robert Cecil Martin",
+                            "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                            "company": "Clean Architecture Company"
+                        }
+                    ],
                     responsible_professors_user_id=[repo.users[2].user_id])
+
+    def test_create_activity_usecase_invalid_speaker_missing_parameter(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+
+        with pytest.raises(EntityError):
+            usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                    delivery_model=DELIVERY_MODEL.HYBRID,
+                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
+                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    speakers=[
+                        {
+                            "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                            "company": "Clean Architecture Company"
+                        },
+                        {
+                            "name": "Vitor Soller",
+                            "bio": "SOCORRRO ALGUEM ME AJUDA",
+                            "company": "Clean Architecture Company"
+                        }
+                    ],
+                    responsible_professors_user_id=[repo.users[2].user_id])
+
+    def test_create_activity_usecase_invalid_speaker_invalid_parameter(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+
+        with pytest.raises(EntityError):
+            usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                    delivery_model=DELIVERY_MODEL.HYBRID,
+                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
+                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    speakers=[
+                        {
+                            "name":1,
+                            "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                            "company": "Clean Architecture Company"
+                        },
+                        {
+                            "name": "Vitor Soller",
+                            "bio": "SOCORRRO ALGUEM ME AJUDA",
+                            "company": "Clean Architecture Company"
+                        }
+                    ],
+                    responsible_professors_user_id=[repo.users[2].user_id])
+
+
+    def test_create_activity_usecase_invalid_speaker(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+
+        with pytest.raises(EntityError):
+            usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                    delivery_model=DELIVERY_MODEL.HYBRID,
+                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
+                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    speakers=[
+                        "Vitor Soller",
+                    ],
+                    responsible_professors_user_id=[repo.users[2].user_id])
+
+    def test_create_activity_usecase_missing_responsible_professor(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+
+        with pytest.raises(NoItemsFound):
+            usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                    accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                    delivery_model=DELIVERY_MODEL.HYBRID,
+                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
+                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    speakers=[
+                        {
+                            "name": "Vitor Soller",
+                            "bio": "SOCORRRO ALGUEM ME AJUDA",
+                            "company": "Clean Architecture Company"
+                        }
+                    ],
+                    responsible_professors_user_id=[repo.users[2].user_id, "0000"])
+
+
