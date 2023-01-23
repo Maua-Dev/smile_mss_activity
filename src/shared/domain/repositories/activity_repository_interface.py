@@ -85,3 +85,7 @@ class IActivityRepository(ABC):
     def create_activity(self, activity:Activity) -> Activity:
         
         pass
+
+    @abstractmethod
+    def get_users(self, user_ids: List[str]) -> List[User]:
+        pass
