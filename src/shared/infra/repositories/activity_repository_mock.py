@@ -13,18 +13,12 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 
 
 class ActivityRepositoryMock(IActivityRepository):
-
     speakers: List[Speaker]
     users: List[User]
     activities: List[Activity]
     enrollments: List[Enrollment]
 
     def __init__(self):
-        self.speakers = [
-            Speaker(name="Vitor Briquez", bio="Incrível", company="Apple"),
-            Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
-            Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")
-        ]
         self.users = [
             User(name="João Vilas", role=ROLE.ADMIN, user_id="db43"),
             User(name="Bruno Soller", role=ROLE.STUDENT, user_id="b16f"),
@@ -54,7 +48,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[0]],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=4,
                 taken_slots=4,
                 accepting_new_enrollments=True,
@@ -72,7 +66,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[self.users[10]],
-                speakers=[self.speakers[1]],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=10,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -90,7 +84,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[self.users[2], self.users[10]],
-                speakers=[self.speakers[2]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=50,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -108,7 +102,9 @@ class ActivityRepositoryMock(IActivityRepository):
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[0], self.speakers[1], self.speakers[2]],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple"),
+                          Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                          Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=15,
                 taken_slots=2,
                 accepting_new_enrollments=True,
@@ -126,7 +122,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[10]],
-                speakers=[self.speakers[1]],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=50,
                 taken_slots=2,
                 accepting_new_enrollments=True,
@@ -144,7 +140,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[self.users[10]],
-                speakers=[self.speakers[2]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=20,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -162,7 +158,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[0]],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=10,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -180,7 +176,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[10]],
-                speakers=[self.speakers[1]],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=2,
                 taken_slots=2,
                 accepting_new_enrollments=True,
@@ -198,7 +194,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[2]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=50,
                 taken_slots=0,
                 accepting_new_enrollments=True,
@@ -216,7 +212,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[0]],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=50,
                 taken_slots=0,
                 accepting_new_enrollments=True,
@@ -234,7 +230,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[1]],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=25,
                 taken_slots=0,
                 accepting_new_enrollments=True,
@@ -252,7 +248,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[2]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=3,
                 taken_slots=3,
                 accepting_new_enrollments=True,
@@ -270,7 +266,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[2], self.speakers[1]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung"),
+                          Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=10,
                 taken_slots=4,
                 accepting_new_enrollments=False,
@@ -358,14 +355,14 @@ class ActivityRepositoryMock(IActivityRepository):
             self.update_activity(code=enrollment.activity.code, new_taken_slots=enrollment.activity.taken_slots + 1)
 
         return enrollment
-      
-    def get_user(self, user_id : str) -> User:
+
+    def get_user(self, user_id: str) -> User:
         for user in self.users:
             if user.user_id == user_id:
                 return user
         return None
 
-    def get_activity(self, code:str) -> Activity:
+    def get_activity(self, code: str) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 return activity
@@ -450,14 +447,14 @@ class ActivityRepositoryMock(IActivityRepository):
     def delete_activity(self, code: str) -> Activity:
         for idx, activity in enumerate(self.activities):
             if activity.code == code:
-                 return self.activities.pop(idx)
+                return self.activities.pop(idx)
         return None
 
     def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
         new_enrollments = []
         for enrollment in enrollments:
-            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity.code, new_state=state)
+            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity.code,
+                                                    new_state=state)
             new_enrollments.append(new_enrollment)
 
         return new_enrollments
-
