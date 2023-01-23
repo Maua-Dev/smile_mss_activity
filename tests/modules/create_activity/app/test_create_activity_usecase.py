@@ -28,7 +28,7 @@ class Test_CreateActivityUsecase:
                                "name": "Robert Cecil Martin",
                                "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
                                "company": "Clean Architecture Company"
-                           }], responsible_professors_user_id=["12mf"])
+                           }], responsible_professors_user_id=[repo.users[2].user_id])
 
         activitiesLenAfter = activitiesLenBefore + 1
 
@@ -54,9 +54,7 @@ class Test_CreateActivityUsecase:
         assert repo.activities[activitiesLenBefore].speakers[
                    0].bio == "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design"
         assert repo.activities[activitiesLenBefore].speakers[0].company == "Clean Architecture Company"
-        assert repo.activities[activitiesLenBefore].responsible_professors[0].name == "Rafael Santos"
-        assert repo.activities[activitiesLenBefore].responsible_professors[0].role == ROLE.PROFESSOR
-        assert repo.activities[activitiesLenBefore].responsible_professors[0].user_id == "12mf"
+        assert repo.activities[activitiesLenBefore].responsible_professors[0] == repo.users[2]
 
     def test_create_activity_usecase_two_speakers(self):
         repo = ActivityRepositoryMock()
@@ -70,24 +68,45 @@ class Test_CreateActivityUsecase:
                            start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
                            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
                            speakers=[{
-                                   "name": "Robert Cecil Martin",
-                                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                                   "company": "Clean Architecture Company"
+                               "name": "Robert Cecil Martin",
+                               "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                               "company": "Clean Architecture Company"
                            },
-                                 {
-                                    "name": "Vitor Soller",
-                                    "bio": "SOCORRRO ALGUEM ME AJUDA",
-                                    "company": "Clean Architecture Company"
-                                 }
-                           ], responsible_professors_user_id=["12mf"])
+                               {
+                                   "name": "Vitor Soller",
+                                   "bio": "SOCORRRO ALGUEM ME AJUDA",
+                                   "company": "Clean Architecture Company"
+                               }
+                           ], responsible_professors_user_id=[repo.users[2].user_id])
 
         assert len(repo.activities) == activitiesLenBefore + 1
         assert len(repo.activities[activitiesLenBefore].speakers) == 2
         assert repo.activities[activitiesLenBefore].speakers[0].name == "Robert Cecil Martin"
         assert repo.activities[activitiesLenBefore].speakers[1].name == "Vitor Soller"
 
+    def test_create_activity_usecase_with_two_professors(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo)
+        activitiesLenBefore = len(repo.activities)
 
+        activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                           duration=120, link=None, place="H332", total_slots=4, is_extensive=True, taken_slots=4,
+                           accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                           delivery_model=DELIVERY_MODEL.HYBRID,
+                           start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
+                           stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                           speakers=[{
+                               "name": "Robert Cecil Martin",
+                               "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                               "company": "Clean Architecture Company"
+                           }], responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id])
 
+        activitiesLenAfter = activitiesLenBefore + 1
+
+        assert len(repo.activities) == activitiesLenAfter
+        assert len(repo.activities[activitiesLenBefore].responsible_professors) == 2
+        assert repo.activities[activitiesLenBefore].responsible_professors[0] == repo.users[2]
+        assert repo.activities[activitiesLenBefore].responsible_professors[1] == repo.users[11]
 
     def test_create_activity_usecase_invalid_code_int(self):
         repo = ActivityRepositoryMock()
@@ -101,7 +120,7 @@ class Test_CreateActivityUsecase:
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
                     stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
                     speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
-                    responsible_professors_user_id=["12mf"])
+                    responsible_professors_user_id=[repo.users[2].user_id])
 
     def test_create_activity_usecase_not_str(self):
         repo = ActivityRepositoryMock()
@@ -115,4 +134,4 @@ class Test_CreateActivityUsecase:
                     start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
                     stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
                     speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
-                    responsible_professors_user_id=["12mf"])
+                    responsible_professors_user_id=[repo.users[2].user_id])
