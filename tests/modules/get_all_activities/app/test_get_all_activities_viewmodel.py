@@ -167,7 +167,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'INTERNSHIP_FAIR',
                     'is_extensive': False,
                     'delivery_model': 'ONLINE',
-                    'start_date': 1671563812,
+                    'start_date': 1671563813000000,
                     'duration': 80,
                     'link': 'https://devmaua.com',
                     'place': None,
