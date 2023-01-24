@@ -22,7 +22,7 @@ class Test_Enrollment:
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
-            start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
+            start_date=1040489765000000,
             duration=120,
             link=None,
             place="H332",
@@ -43,7 +43,7 @@ class Test_Enrollment:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 21, 13, 56, 5, 430523)
+            stop_accepting_new_enrollments_before=1030489765000000
         ),
             user=User(
                 name="Marcos",
@@ -84,7 +84,7 @@ class Test_Enrollment:
                     activity_type=ACTIVITY_TYPE.LECTURES,
                     is_extensive=True,
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
-                    start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
+                    start_date=1671814565000000,
                     duration=120,
                     link=None,
                     place="H332",
@@ -122,7 +122,7 @@ class Test_Enrollment:
                     activity_type=ACTIVITY_TYPE.LECTURES,
                     is_extensive=True,
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
-                    start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
+                    start_date=1671814565000000,
                     duration=120,
                     link=None,
                     place="H332",
@@ -164,7 +164,7 @@ class Test_Enrollment:
                     activity_type=ACTIVITY_TYPE.LECTURES,
                     is_extensive=True,
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
-                    start_date=datetime.datetime(2022, 12, 23, 13, 56, 5, 430523),
+                    start_date=1671814565000000,
                     duration=120,
                     link=None,
                     place="H332",
@@ -185,7 +185,7 @@ class Test_Enrollment:
                     total_slots=120,
                     taken_slots=33,
                     accepting_new_enrollments=True,
-                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    stop_accepting_new_enrollments_before=1040489765000000
                 ),
                 user=User(
                     name="Marcos",

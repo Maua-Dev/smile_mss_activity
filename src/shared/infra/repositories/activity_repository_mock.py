@@ -43,7 +43,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.COURSES,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
+                start_date=1671747413000000,
                 duration=120,
                 link=None,
                 place="H332",
@@ -52,7 +52,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=4,
                 taken_slots=4,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305)
+                stop_accepting_new_enrollments_before=1671743812000000
             ),
             Activity(
                 code="ELET355",
@@ -61,7 +61,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671661013000000,
                 duration=400,
                 link="https://devmaua.com",
                 place="H332",
@@ -79,7 +79,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671661013000000,
                 duration=60,
                 link="https://devmaua.com",
                 place=None,
@@ -97,7 +97,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.TECHNICAL_VISITS,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
+                start_date=1672006613000000,
                 duration=60,
                 link="https://devmaua.com",
                 place=None,
@@ -108,7 +108,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=15,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305)
+                stop_accepting_new_enrollments_before=1671747413000000
             ),
             Activity(
                 code="AC000",
@@ -117,7 +117,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.ACADEMIC_COMPETITIONS,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671661013000000,
                 duration=190,
                 link=None,
                 place="H332",
@@ -126,7 +126,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=50,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)
+                stop_accepting_new_enrollments_before=1671574613000000
             ),
             Activity(
                 code="ECM251",
@@ -135,7 +135,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.HACKATHON,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=datetime.datetime(2022, 12, 22, 15, 16, 52, 998305),
+                start_date=1671733013000000,
                 duration=40,
                 link="https://devmaua.com",
                 place="H332",
@@ -153,7 +153,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.INTERNSHIP_FAIR,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=datetime.datetime(2022, 12, 20, 16, 16, 52, 998305),
+                start_date=1671563812,
                 duration=80,
                 link="https://devmaua.com",
                 place=None,
@@ -171,7 +171,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.ALUMNI_CAFE,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671661013000000,
                 duration=20,
                 link=None,
                 place="H332",
@@ -189,7 +189,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.PROFESSORS_ACADEMY,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305),
+                start_date=1671488213000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H332",
@@ -207,7 +207,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
+                start_date=1672006613000000,
                 duration=140,
                 link=None,
                 place="H332",
@@ -225,7 +225,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.GCSP,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
+                start_date=1672006613000000,
                 duration=60,
                 link="https://devmaua.com",
                 place="H332",
@@ -243,7 +243,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.SPORTS_ACTIVITY,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 15, 16, 52, 998305),
+                start_date=1671733013000000,
                 duration=45,
                 link=None,
                 place="H332",
@@ -252,7 +252,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=3,
                 taken_slots=3,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 15, 16, 51, 998305)
+                stop_accepting_new_enrollments_before=1671733012000000
             ),
             Activity(
                 code="PINOQ1",
@@ -261,7 +261,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 2, 15, 16, 52, 998305),
+                start_date=1670005013000000,
                 duration=45,
                 link=None,
                 place="H332",
@@ -271,7 +271,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=10,
                 taken_slots=4,
                 accepting_new_enrollments=False,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 1, 15, 16, 51, 998305)
+                stop_accepting_new_enrollments_before=1669918612000000
             ),
 
         ]

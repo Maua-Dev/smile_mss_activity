@@ -14,7 +14,7 @@ class Test_DropActivityViewmodel:
         expected = {'activity': {'code': 'COD1468', 'title': 'Atividade da COD 1468',
                                  'description': 'Isso definitivamente é uma atividade',
                                  'activity_type': 'HIGH_IMPACT_LECTURES', 'is_extensive': True,
-                                 'delivery_model': 'ONLINE', 'start_date': '2022-12-21T19:16:52.998305', 'duration': 60,
+                                 'delivery_model': 'ONLINE', 'start_date': 1671661013000000, 'duration': 60,
                                  'link': 'https://devmaua.com', 'place': None, 'responsible_professors': [
                 {'name': 'Caio Toledo', 'user_id': 'd7f1', 'role': 'PROFESSOR'},
                 {'name': 'Patricia Santos', 'user_id': 'c695', 'role': 'PROFESSOR'}], 'speakers': [
