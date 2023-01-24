@@ -18,7 +18,7 @@ class Test_GetEnrollmentController:
         assert response.body['activity']['code'] == repo.enrollments[0].activity.code
         assert response.body['user']['user_id'] == repo.enrollments[0].user.user_id
         assert response.body['state'] == repo.enrollments[0].state.value
-        assert response.body['date_subscribed'] == repo.enrollments[0].date_subscribed.isoformat()
+        assert response.body['date_subscribed'] == repo.enrollments[0].date_subscribed
         assert response.body['message'] == "the enrollment was retrieved"
 
     def test_get_enrrolment_missing_user_id(self):

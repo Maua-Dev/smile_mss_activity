@@ -44,7 +44,7 @@ class EnrollActivityUsecase:
                     activity = activity,
                     user = user,
                     state = ENROLLMENT_STATE.IN_QUEUE,
-                    date_subscribed = datetime.datetime.now()
+                    date_subscribed = int(datetime.datetime.now().timestamp())
                 )
 
             else:
@@ -52,7 +52,7 @@ class EnrollActivityUsecase:
                     activity = activity,
                     user = user,
                     state = ENROLLMENT_STATE.ENROLLED,
-                    date_subscribed = datetime.datetime.now()
+                    date_subscribed = int(datetime.datetime.now().timestamp())
                 )
 
         return self.repo.create_enrollment(enrollment)

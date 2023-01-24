@@ -21,7 +21,7 @@ class Test_Activity:
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
-            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            start_date=1671728165000000,
             duration=120,
             link="https://devmaua.com",
             place="H333",
@@ -42,7 +42,7 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+            stop_accepting_new_enrollments_before=1671724560000000
         )
 
         assert type(activity) == Activity
@@ -52,14 +52,14 @@ class Test_Activity:
         assert activity.activity_type == ACTIVITY_TYPE.LECTURES
         assert activity.is_extensive == True
         assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
-        assert activity.start_date == datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+        assert activity.start_date == 1671728165000000
         assert activity.duration == 120
         assert activity.responsible_professors[0].name == "Marcos"
         assert activity.speakers[0].name == "Marcos Tales"
         assert activity.total_slots == 120
         assert activity.taken_slots == 33
         assert activity.accepting_new_enrollments == True
-        assert activity.stop_accepting_new_enrollments_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+        assert activity.stop_accepting_new_enrollments_before == 1671724560000000
 
     def test_activity_link_none(self):
         activity = Activity(
@@ -69,7 +69,7 @@ class Test_Activity:
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
-            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            start_date=1671728165000000,
             duration=120,
             link=None,
             place="H333",
@@ -90,7 +90,7 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+            stop_accepting_new_enrollments_before=1671724565000000
         )
 
         assert type(activity) == Activity
@@ -100,14 +100,14 @@ class Test_Activity:
         assert activity.activity_type == ACTIVITY_TYPE.LECTURES
         assert activity.is_extensive == True
         assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
-        assert activity.start_date == datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+        assert activity.start_date == 1671728165000000
         assert activity.duration == 120
         assert activity.responsible_professors[0].name == "Marcos"
         assert activity.speakers[0].name == "Marcos Tales"
         assert activity.total_slots == 120
         assert activity.taken_slots == 33
         assert activity.accepting_new_enrollments == True
-        assert activity.stop_accepting_new_enrollments_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+        assert activity.stop_accepting_new_enrollments_before == 1671724565000000
 
     def test_activity_none_place(self):
         activity = Activity(
@@ -117,7 +117,7 @@ class Test_Activity:
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
-            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            start_date=1671728165000000,
             duration=120,
             link="https://devmaua.com",
             place=None,
@@ -138,7 +138,7 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+            stop_accepting_new_enrollments_before=1671724565000000
         )
 
         assert type(activity) == Activity
@@ -148,14 +148,14 @@ class Test_Activity:
         assert activity.activity_type == ACTIVITY_TYPE.LECTURES
         assert activity.is_extensive == True
         assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
-        assert activity.start_date == datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+        assert activity.start_date == 1671728165000000
         assert activity.duration == 120
         assert activity.responsible_professors[0].name == "Marcos"
         assert activity.speakers[0].name == "Marcos Tales"
         assert activity.total_slots == 120
         assert activity.taken_slots == 33
         assert activity.accepting_new_enrollments == True
-        assert activity.stop_accepting_new_enrollments_before == datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+        assert activity.stop_accepting_new_enrollments_before == 1671724565000000
 
 
     def test_activity_none_link_place(self):
@@ -167,7 +167,7 @@ class Test_Activity:
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
-            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            start_date=1671728165000000,
             duration=120,
             link=None,
             place=None,
@@ -188,7 +188,7 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+            stop_accepting_new_enrollments_before=1671724565000000
         )
 
     def test_activity_invalid_code_none(self):
@@ -200,7 +200,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -220,7 +220,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_code_int(self):
@@ -232,7 +232,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -252,7 +252,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_title(self):
@@ -264,7 +264,7 @@ class Test_Activity:
                     activity_type=ACTIVITY_TYPE.LECTURES,
                     is_extensive=True,
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
-                    start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                    start_date=1671728165000000,
                     duration=120,
                     link="https://devmaua.com",
                     place="H333",
@@ -284,7 +284,7 @@ class Test_Activity:
                     total_slots=120,
                     taken_slots=33,
                     accepting_new_enrollments=True,
-                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                    stop_accepting_new_enrollments_before=1671724565000000
                 )
 
     def test_activity_invalid_title_none(self):
@@ -296,7 +296,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -316,7 +316,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_description(self):
@@ -328,7 +328,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -348,7 +348,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_activity_type(self):
@@ -360,7 +360,7 @@ class Test_Activity:
                 activity_type="LECTURES",
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -380,7 +380,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_is_extensive(self):
@@ -392,7 +392,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive="True",
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -412,7 +412,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_delivery_model(self):
@@ -424,7 +424,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model="IN_PERSON",
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -444,7 +444,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_start_date(self):
@@ -476,7 +476,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_duration(self):
@@ -488,7 +488,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration="DUAS HORAS",
                 link="https://devmaua.com",
                 place="H333",
@@ -508,7 +508,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_place(self):
@@ -520,7 +520,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place=123,
@@ -540,7 +540,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_link(self):
@@ -552,7 +552,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link=123,
                 place="H333",
@@ -572,7 +572,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_responsible_professors(self):
@@ -584,7 +584,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -598,7 +598,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_responsible_professors_not_users(self):
@@ -610,7 +610,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -634,7 +634,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
     def test_activity_invalid_responsible_professors_not_professor(self):
         with pytest.raises(EntityError):
@@ -645,7 +645,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -669,7 +669,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_speakers(self):
@@ -681,7 +681,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -701,7 +701,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
 
@@ -714,7 +714,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -735,7 +735,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_total_slots(self):
@@ -747,7 +747,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -768,7 +768,7 @@ class Test_Activity:
                 total_slots=None,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_taken_slots(self):
@@ -780,7 +780,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -801,7 +801,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=None,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_accepting_new_enrollments(self):
@@ -813,7 +813,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -834,7 +834,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=None,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 12, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671724565000000
             )
 
     def test_activity_invalid_stop_accepting_new_enrollments_before_none(self):
@@ -845,7 +845,7 @@ class Test_Activity:
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
-            start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+            start_date=1671728165000000,
             duration=120,
             link="https://devmaua.com",
             place="H333",
@@ -880,7 +880,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
@@ -901,7 +901,7 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=2
+                stop_accepting_new_enrollments_before="2"
             )
     def test_activity_invalid_stop_accepting_new_enrollments_before_after_start(self):
         with pytest.raises(EntityError):
@@ -912,7 +912,7 @@ class Test_Activity:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523),
+                start_date=1671728165000000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
