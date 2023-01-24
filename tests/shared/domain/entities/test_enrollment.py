@@ -51,14 +51,14 @@ class Test_Enrollment:
                 user_id="123d"
             ),
             state=ENROLLMENT_STATE.ENROLLED,
-            date_subscribed=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+            date_subscribed=1671728165000000
         )
 
         assert type(enrollment) == Enrollment
         assert enrollment.activity.code == "1234"
         assert enrollment.user.name == "Marcos"
         assert enrollment.state == ENROLLMENT_STATE.ENROLLED
-        assert enrollment.date_subscribed == datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+        assert enrollment.date_subscribed == 1671728165000000
 
 
     def test_enrollment_with_invalid_activity(self):
@@ -71,7 +71,7 @@ class Test_Enrollment:
                     user_id="123d"
                 ),
                 state=ENROLLMENT_STATE.ENROLLED,
-                date_subscribed=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+                date_subscribed=1671728165000000
             )
 
     def test_enrollment_with_invalid_user(self):
@@ -105,11 +105,11 @@ class Test_Enrollment:
                     total_slots=120,
                     taken_slots=33,
                     accepting_new_enrollments=True,
-                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    stop_accepting_new_enrollments_before=  1040489765000000
                 ),
                 user="Marcos",
                 state=ENROLLMENT_STATE.ENROLLED,
-                date_subscribed=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+                date_subscribed=1671728165000000
             )
 
     def test_enrollment_with_invalid_state(self):
@@ -143,7 +143,7 @@ class Test_Enrollment:
                     total_slots=120,
                     taken_slots=33,
                     accepting_new_enrollments=True,
-                    stop_accepting_new_enrollments_before=datetime.datetime(22, 12, 21, 13, 56, 5, 430523)
+                    stop_accepting_new_enrollments_before=1040489765000000
                 ),
                 user=User(
                     name="Marcos",
@@ -151,7 +151,7 @@ class Test_Enrollment:
                     user_id="123d"
                 ),
                 state="ENROLLED",
-                date_subscribed=datetime.datetime(2022, 12, 22, 13, 56, 5, 430523)
+                date_subscribed=1671728165000000
             )
 
     def test_enrollment_with_invalid_date_subscribed(self):

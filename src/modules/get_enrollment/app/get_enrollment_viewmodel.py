@@ -119,6 +119,6 @@ class GetEnrollmentViewmodel:
             "activity": self.activity.to_dict(),
             "user": self.user.to_dict(),
             "state": self.state.value,
-            "date_subscribed": self.date_subscribed.isoformat(),
+            "date_subscribed": self.date_subscribed,
             "message": "the enrollment was retrieved"
         }

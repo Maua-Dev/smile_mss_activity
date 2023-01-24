@@ -60,7 +60,7 @@ class EnrollmentViewmodel:
         return {
             "user": self.user.to_dict(),
             "state": self.state.value,
-            "date_subscribed": self.date_subscribed.isoformat(),
+            "date_subscribed": self.date_subscribed,
         }
 
 

@@ -11,9 +11,9 @@ class Enrollment(abc.ABC):
     activity: Activity
     user: User
     state: ENROLLMENT_STATE
-    date_subscribed: datetime.datetime
+    date_subscribed: int
 
-    def __init__(self, activity: Activity, user: User, state: ENROLLMENT_STATE, date_subscribed: datetime.datetime):
+    def __init__(self, activity: Activity, user: User, state: ENROLLMENT_STATE, date_subscribed: int):
 
         if type(activity) != Activity:
             raise EntityError("activity")
@@ -27,12 +27,12 @@ class Enrollment(abc.ABC):
             raise EntityError("state")
         self.state = state
 
-        if type(date_subscribed) != datetime.datetime:
+        if type(date_subscribed) != int:
             raise EntityError("date_subscribed")
         self.date_subscribed = date_subscribed
 
     def __repr__(self):
-        return f"Enrollment(activity={self.activity}, user={self.user}, state={self.state.value}, date_subscribed={self.date_subscribed.isoformat()})"
+        return f"Enrollment(activity={self.activity}, user={self.user}, state={self.state.value}, date_subscribed={self.date_subscribed})"
 
     def __eq__(self, other):
         return self.activity == other.activity and self.user == other.user and self.state == other.state and self.date_subscribed == other.date_subscribed

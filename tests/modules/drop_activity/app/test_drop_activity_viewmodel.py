@@ -22,7 +22,7 @@ class Test_DropActivityViewmodel:
                                  'total_slots': 50, 'taken_slots': 1, 'accepting_new_enrollments': True,
                                  'stop_accepting_new_enrollments_before': None},
                     'user': {'name': 'Pedro Marcelino', 'user_id': '80fb', 'role': 'INTERNATIONAL_STUDENT'},
-                    'state': 'DROPPED', 'date_subscribed': '2022-12-19T19:16:51.998305',
+                    'state': 'DROPPED', 'date_subscribed': 1671488212000000,
                     'message': 'the enrollment was dropped'}
 
         assert drop_activity_viewmodel == expected
