@@ -16,10 +16,10 @@ class CreateActivityUsecase:
         self.repo = repo
 
     def __call__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: datetime.datetime, duration: int, link: str, place: str,
+                 delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
                  total_slots: int,
                  accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
-                 stop_accepting_new_enrollments_before: datetime.datetime, speakers: List[Dict]) -> Activity:
+                 stop_accepting_new_enrollments_before: int, speakers: List[Dict]) -> Activity:
 
         if type(code) != str:
             raise EntityError("code")

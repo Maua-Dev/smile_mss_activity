@@ -23,8 +23,8 @@ class Test_CreateActivityUsecase:
                            duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
-                           start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                           stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                           start_date=1671747413000000,
+                           stop_accepting_new_enrollments_before=1671743813000000,
                            speakers=[{
                                "name": "Robert Cecil Martin",
                                "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -46,11 +46,8 @@ class Test_CreateActivityUsecase:
         assert repo.activities[activitiesLenBefore].is_extensive == True
         assert repo.activities[activitiesLenBefore].taken_slots == 0
         assert repo.activities[activitiesLenBefore].accepting_new_enrollments == True
-        assert repo.activities[activitiesLenBefore].start_date == datetime.datetime(2022, 12, 22, 19, 16, 52, 998305)
-        assert repo.activities[activitiesLenBefore].stop_accepting_new_enrollments_before == datetime.datetime(2022, 12,
-                                                                                                               22, 18,
-                                                                                                               16, 52,
-                                                                                                               998305)
+        assert repo.activities[activitiesLenBefore].start_date == 1671747413000000
+        assert repo.activities[activitiesLenBefore].stop_accepting_new_enrollments_before == 1671743813000000
         assert repo.activities[activitiesLenBefore].speakers[0].name == "Robert Cecil Martin"
         assert repo.activities[activitiesLenBefore].speakers[
                    0].bio == "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design"
@@ -66,8 +63,8 @@ class Test_CreateActivityUsecase:
                            duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
-                           start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                           stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                           start_date=1671747413000000,
+                           stop_accepting_new_enrollments_before=1671743813000000,
                            speakers=[{
                                "name": "Robert Cecil Martin",
                                "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -94,8 +91,8 @@ class Test_CreateActivityUsecase:
                            duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
-                           start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                           stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                           start_date=1671747413000000,
+                           stop_accepting_new_enrollments_before=1671743813000000,
                            speakers=[{
                                "name": "Robert Cecil Martin",
                                "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -118,8 +115,8 @@ class Test_CreateActivityUsecase:
                     duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
-                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    start_date=1671747413000000,
+                    stop_accepting_new_enrollments_before=1671743813000000,
                     speakers=[
                         {
                             "name": "Robert Cecil Martin",
@@ -138,8 +135,8 @@ class Test_CreateActivityUsecase:
                     duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
-                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    start_date=1671747413000000,
+                    stop_accepting_new_enrollments_before=1671743813000000,
                     speakers=[
                         {
                             "name": "Robert Cecil Martin",
@@ -158,8 +155,8 @@ class Test_CreateActivityUsecase:
                     duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
-                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    start_date=1671747413000000,
+                    stop_accepting_new_enrollments_before=1671743813000000,
                     speakers=[
                         {
                             "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -182,8 +179,8 @@ class Test_CreateActivityUsecase:
                     duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
-                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    start_date=1671747413000000,
+                    stop_accepting_new_enrollments_before=1671743813000000,
                     speakers=[
                         {
                             "name":1,
@@ -208,8 +205,8 @@ class Test_CreateActivityUsecase:
                     duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
-                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    start_date=1671747413000000,
+                    stop_accepting_new_enrollments_before=1671743813000000,
                     speakers=[
                         "Vitor Soller",
                     ],
@@ -224,8 +221,8 @@ class Test_CreateActivityUsecase:
                     duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
-                    start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
-                    stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305),
+                    start_date=1671747413000000,
+                    stop_accepting_new_enrollments_before=1671743813000000,
                     speakers=[
                         {
                             "name": "Vitor Soller",

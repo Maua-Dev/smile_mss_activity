@@ -51,7 +51,7 @@ class CreateActivityViewmodel:
     activity_type: ACTIVITY_TYPE
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
-    start_date: datetime.datetime
+    start_date: int
     duration: int
     link: str
     place: str
@@ -60,7 +60,7 @@ class CreateActivityViewmodel:
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
-    stop_accepting_new_enrollments_before: datetime.datetime
+    stop_accepting_new_enrollments_before: int
 
     def __init__(self, activity:Activity):
         self.code = activity.code
@@ -88,7 +88,7 @@ class CreateActivityViewmodel:
             "activity_type":self.activity_type,
             "is_extensive":self.is_extensive,
             "delivery_model":self.delivery_model,
-            "start_date":self.start_date.isoformat(),
+            "start_date":self.start_date,
             "duration":self.duration,
             "link":self.link,
             "place":self.place,
@@ -97,6 +97,6 @@ class CreateActivityViewmodel:
             "total_slots":self.total_slots,
             "taken_slots":self.taken_slots,
             "accepting_new_enrollments":self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before":self.stop_accepting_new_enrollments_before.isoformat(),
+            "stop_accepting_new_enrollments_before":self.stop_accepting_new_enrollments_before,
             "message":"the activity was created"
         }

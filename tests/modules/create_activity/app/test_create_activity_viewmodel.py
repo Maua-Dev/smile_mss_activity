@@ -32,7 +32,7 @@ class Test_CreateActivityViewmodel:
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=False,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
-            start_date=datetime.datetime(2022, 11, 22, 15, 16, 52, 998305),
+            start_date=1669141013000000,
             duration=90,
             link=None,
             place="H331",
@@ -41,7 +41,7 @@ class Test_CreateActivityViewmodel:
             total_slots=100,
             taken_slots=97,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=datetime.datetime(2022, 10, 22, 12, 16, 51, 998305)
+            stop_accepting_new_enrollments_before=1666451812000000
         )
         activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
         
@@ -52,7 +52,7 @@ class Test_CreateActivityViewmodel:
             "activity_type":"LECTURES",
             "is_extensive":False,
             "delivery_model":"IN_PERSON",
-            "start_date":"2022-11-22T15:16:52.998305",
+            "start_date": 1669141013000000,
             "duration":90,
             "link":None,
             "place":"H331",
@@ -69,7 +69,7 @@ class Test_CreateActivityViewmodel:
             "total_slots":100,
             "taken_slots":97,
             "accepting_new_enrollments":True,
-            "stop_accepting_new_enrollments_before":"2022-10-22T12:16:51.998305",
+            "stop_accepting_new_enrollments_before": 1666451812000000,
             "message":"the activity was created"
             }
 

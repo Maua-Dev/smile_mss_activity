@@ -163,7 +163,7 @@ class Test_ActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.ALUMNI_CAFE,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671743813000000,
                 duration=20,
                 link=None,
                 place="H332",

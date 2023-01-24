@@ -47,7 +47,6 @@ class CreateActivityController:
             start_date = request.data.get('start_date')
             if type(start_date) != int:
                 raise WrongTypeParameter('start_date', 'int', type(start_date).__class__.__name__)
-            start_date = datetime.datetime.fromtimestamp(start_date)
 
             if request.data.get('duration') is None:
                 raise MissingParameters('duration')
@@ -64,8 +63,7 @@ class CreateActivityController:
             if stop_accepting_new_enrollments_before is not None:
                 if type(stop_accepting_new_enrollments_before) != int:
                     raise WrongTypeParameter('stop_accepting_new_enrollments_before', 'int', type(stop_accepting_new_enrollments_before).__class__.__name__)
-                stop_accepting_new_enrollments_before = datetime.datetime.fromtimestamp(stop_accepting_new_enrollments_before)
-            
+
             activity = self.CreateActivityUsecase(
                     code = request.data.get('code'), 
                     title = request.data.get('title'),
