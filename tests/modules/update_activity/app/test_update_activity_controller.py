@@ -20,7 +20,7 @@ class Test_UpdateActivityController:
                   "new_activity_type": "LECTURES",
                   "new_is_extensive": False,
                   "new_delivery_model": "IN_PERSON",
-                  "new_start_date": 1669141012,
+                  "new_start_date": 1669141012000000,
                   "new_duration": 90,
                   "new_link": None,
                   "new_place": "H331",
@@ -32,7 +32,7 @@ class Test_UpdateActivityController:
                   }],
                   "new_total_slots": 100,
                   "new_accepting_new_enrollments": True,
-                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+                  "new_stop_accepting_new_enrollments_before": 1666451811000000, }
         )
 
         response = controller(request)
@@ -44,7 +44,7 @@ class Test_UpdateActivityController:
         assert response.body['activity']['activity_type'] == 'LECTURES'
         assert response.body['activity']['is_extensive'] == False
         assert response.body['activity']['delivery_model'] == 'IN_PERSON'
-        # assert response.body['activity']['start_date'] == datetime.datetime(2022, 11, 22, 15, 16, 52).isoformat()
+        assert response.body['activity']['start_date'] == 1669141012000000
         assert response.body['activity']['duration'] == 90
         assert response.body['activity']['link'] == None
         assert response.body['activity']['place'] == 'H331'
@@ -55,7 +55,7 @@ class Test_UpdateActivityController:
         assert response.body['activity']['speakers'][0]['company'] == 'Clean Architecture Company'
         assert response.body['activity']['total_slots'] == 100
         assert response.body['activity']['accepting_new_enrollments'] == True
-        # assert response.body['activity']['stop_accepting_new_enrollments_before'] == datetime.datetime(2022, 10, 22, 12, 16, 51).isoformat()
+        assert response.body['activity']['stop_accepting_new_enrollments_before'] == 1666451811000000
         assert response.body['message'] == "the activity was updated"
 
     def test_update_activity_missing_code(self):

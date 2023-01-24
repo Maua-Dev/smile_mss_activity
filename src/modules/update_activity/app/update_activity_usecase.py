@@ -17,11 +17,11 @@ class UpdateActivityUsecase:
 
     def __call__(self, code: str, new_title: str, new_description: str, new_activity_type: ACTIVITY_TYPE,
                  new_is_extensive: bool, new_delivery_model: DELIVERY_MODEL,
-                 new_start_date: datetime.datetime, new_duration: int, new_link: str, new_place: str,
+                 new_start_date: int, new_duration: int, new_link: str, new_place: str,
                  new_responsible_professors_user_id: List[str],
                  new_speakers: List[Speaker], new_total_slots: int,
                  new_accepting_new_enrollments: bool,
-                 new_stop_accepting_new_enrollments_before: datetime.datetime) -> Activity:
+                 new_stop_accepting_new_enrollments_before: int) -> Activity:
 
         if type(code) != str:
             raise EntityError("code")

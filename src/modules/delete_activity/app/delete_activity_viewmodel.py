@@ -60,7 +60,7 @@ class ActivityViewmodel:
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
-    stop_accepting_new_enrollments_before: datetime.datetime
+    stop_accepting_new_enrollments_before: int
     link: str
     place: str
 

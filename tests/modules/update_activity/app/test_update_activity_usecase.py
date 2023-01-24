@@ -16,11 +16,12 @@ class Test_UpdateActivityUsecase:
     def test_update_activity(self):
         repo = ActivityRepositoryMock()
         usecase = UpdateActivityUsecase(repo)
-        update_activity = usecase(code=repo.activities[0].code, new_title="NOVO TITULO", new_description='nova descricao',
+        update_activity = usecase(code=repo.activities[0].code, new_title="NOVO TITULO",
+                                  new_description='nova descricao',
                                   new_activity_type=ACTIVITY_TYPE.LECTURES,
                                   new_is_extensive=True,
                                   new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=datetime.datetime(2021, 9, 1, 0, 0), new_duration=15,
+                                  new_start_date=1630465200000000, new_duration=15,
                                   new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
                                   new_place="Sala 1",
                                   new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id],
@@ -49,31 +50,32 @@ class Test_UpdateActivityUsecase:
         assert repo.activities[0].speakers == update_activity.speakers
         assert repo.activities[0].total_slots == update_activity.total_slots
         assert repo.activities[0].accepting_new_enrollments == update_activity.accepting_new_enrollments
-        assert repo.activities[0].stop_accepting_new_enrollments_before == update_activity.stop_accepting_new_enrollments_before
-
-
+        assert repo.activities[
+                   0].stop_accepting_new_enrollments_before == update_activity.stop_accepting_new_enrollments_before
 
     def test_update_activity_invalid_enum(self):
         repo = ActivityRepositoryMock()
         usecase = UpdateActivityUsecase(repo)
         with pytest.raises(EntityError):
-            update_activity = usecase(code=repo.activities[0].code, new_title="NOVO TITULO", new_description='nova descricao',
-                                  new_activity_type="LECTURES",
-                                  new_is_extensive=True,
-                                  new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=datetime.datetime(2021, 9, 1, 0, 0), new_duration=15,
-                                  new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                  new_place="Sala 1",
-                                  new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id],
-                                  new_speakers=[
-                                      Speaker(
-                                          name="Fulano de Tal",
-                                          bio="Fulano de Tal é um professor de Engenharia de Software",
-                                          company="Universidade Federal de Fulano de tal",
-                                      )
-                                  ], new_total_slots=100,
-                                  new_accepting_new_enrollments=True,
-                                  new_stop_accepting_new_enrollments_before=None)
+            update_activity = usecase(code=repo.activities[0].code, new_title="NOVO TITULO",
+                                      new_description='nova descricao',
+                                      new_activity_type="LECTURES",
+                                      new_is_extensive=True,
+                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                      new_start_date=1630465200000000, new_duration=15,
+                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
+                                      new_place="Sala 1",
+                                      new_responsible_professors_user_id=[repo.users[2].user_id,
+                                                                          repo.users[11].user_id],
+                                      new_speakers=[
+                                          Speaker(
+                                              name="Fulano de Tal",
+                                              bio="Fulano de Tal é um professor de Engenharia de Software",
+                                              company="Universidade Federal de Fulano de tal",
+                                          )
+                                      ], new_total_slots=100,
+                                      new_accepting_new_enrollments=True,
+                                      new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_invalid_code(self):
         repo = ActivityRepositoryMock()
@@ -81,22 +83,23 @@ class Test_UpdateActivityUsecase:
 
         with pytest.raises(EntityError):
             update_activity = usecase(code=555, new_title="NOVO TITULO", new_description='nova descricao',
-                                  new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                  new_is_extensive=True,
-                                  new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=datetime.datetime(2021, 9, 1, 0, 0), new_duration=15,
-                                  new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                  new_place="Sala 1",
-                                  new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id],
-                                  new_speakers=[
-                                      Speaker(
-                                          name="Fulano de Tal",
-                                          bio="Fulano de Tal é um professor de Engenharia de Software",
-                                          company="Universidade Federal de Fulano de tal",
-                                      )
-                                  ], new_total_slots=100,
-                                  new_accepting_new_enrollments=True,
-                                  new_stop_accepting_new_enrollments_before=None)
+                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                      new_is_extensive=True,
+                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                      new_start_date=1630465200000000, new_duration=15,
+                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
+                                      new_place="Sala 1",
+                                      new_responsible_professors_user_id=[repo.users[2].user_id,
+                                                                          repo.users[11].user_id],
+                                      new_speakers=[
+                                          Speaker(
+                                              name="Fulano de Tal",
+                                              bio="Fulano de Tal é um professor de Engenharia de Software",
+                                              company="Universidade Federal de Fulano de tal",
+                                          )
+                                      ], new_total_slots=100,
+                                      new_accepting_new_enrollments=True,
+                                      new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_invalid_title(self):
         repo = ActivityRepositoryMock()
@@ -104,88 +107,95 @@ class Test_UpdateActivityUsecase:
 
         with pytest.raises(EntityError):
             update_activity = usecase(code=repo.activities[0].code, new_title=123, new_description='nova descricao',
-                                  new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                  new_is_extensive=True,
-                                  new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=datetime.datetime(2021, 9, 1, 0, 0), new_duration=15,
-                                  new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                  new_place="Sala 1",
-                                  new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id],
-                                  new_speakers=[
-                                      Speaker(
-                                          name="Fulano de Tal",
-                                          bio="Fulano de Tal é um professor de Engenharia de Software",
-                                          company="Universidade Federal de Fulano de tal",
-                                      )
-                                  ], new_total_slots=100,
-                                  new_accepting_new_enrollments=True,
-                                  new_stop_accepting_new_enrollments_before=None)
+                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                      new_is_extensive=True,
+                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                      new_start_date=1630465200000000, new_duration=15,
+                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
+                                      new_place="Sala 1",
+                                      new_responsible_professors_user_id=[repo.users[2].user_id,
+                                                                          repo.users[11].user_id],
+                                      new_speakers=[
+                                          Speaker(
+                                              name="Fulano de Tal",
+                                              bio="Fulano de Tal é um professor de Engenharia de Software",
+                                              company="Universidade Federal de Fulano de tal",
+                                          )
+                                      ], new_total_slots=100,
+                                      new_accepting_new_enrollments=True,
+                                      new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_is_not_found(self):
         repo = ActivityRepositoryMock()
         usecase = UpdateActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            update_activity = usecase(code=repo.activities[0].code+"1", new_title="NOVO TITULO", new_description='nova descricao',
-                                  new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                  new_is_extensive=True,
-                                  new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=datetime.datetime(2021, 9, 1, 0, 0), new_duration=15,
-                                  new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                  new_place="Sala 1",
-                                  new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id],
-                                  new_speakers=[
-                                      Speaker(
-                                          name="Fulano de Tal",
-                                          bio="Fulano de Tal é um professor de Engenharia de Software",
-                                          company="Universidade Federal de Fulano de tal",
-                                      )
-                                  ], new_total_slots=100,
-                                  new_accepting_new_enrollments=True,
-                                  new_stop_accepting_new_enrollments_before=None)
+            update_activity = usecase(code=repo.activities[0].code + "1", new_title="NOVO TITULO",
+                                      new_description='nova descricao',
+                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                      new_is_extensive=True,
+                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                      new_start_date=1630465200000000, new_duration=15,
+                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
+                                      new_place="Sala 1",
+                                      new_responsible_professors_user_id=[repo.users[2].user_id,
+                                                                          repo.users[11].user_id],
+                                      new_speakers=[
+                                          Speaker(
+                                              name="Fulano de Tal",
+                                              bio="Fulano de Tal é um professor de Engenharia de Software",
+                                              company="Universidade Federal de Fulano de tal",
+                                          )
+                                      ], new_total_slots=100,
+                                      new_accepting_new_enrollments=True,
+                                      new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_invalid_responsible_professors(self):
         repo = ActivityRepositoryMock()
         usecase = UpdateActivityUsecase(repo)
 
         with pytest.raises(EntityError):
-            update_activity = usecase(code=repo.activities[0].code, new_title="NOVO TITULO", new_description='nova descricao',
-                                  new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                  new_is_extensive=True,
-                                  new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=datetime.datetime(2021, 9, 1, 0, 0), new_duration=15,
-                                  new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                  new_place="Sala 1",
-                                  new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id, 999],
-                                  new_speakers=[
-                                      Speaker(
-                                          name="Fulano de Tal",
-                                          bio="Fulano de Tal é um professor de Engenharia de Software",
-                                          company="Universidade Federal de Fulano de tal",
-                                      )
-                                  ], new_total_slots=100,
-                                  new_accepting_new_enrollments=True,
-                                  new_stop_accepting_new_enrollments_before=None)
+            update_activity = usecase(code=repo.activities[0].code, new_title="NOVO TITULO",
+                                      new_description='nova descricao',
+                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                      new_is_extensive=True,
+                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                      new_start_date=1630465200000000, new_duration=15,
+                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
+                                      new_place="Sala 1",
+                                      new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id,
+                                                                          999],
+                                      new_speakers=[
+                                          Speaker(
+                                              name="Fulano de Tal",
+                                              bio="Fulano de Tal é um professor de Engenharia de Software",
+                                              company="Universidade Federal de Fulano de tal",
+                                          )
+                                      ], new_total_slots=100,
+                                      new_accepting_new_enrollments=True,
+                                      new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_invalid_responsible_professors_not_found(self):
         repo = ActivityRepositoryMock()
         usecase = UpdateActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            update_activity = usecase(code=repo.activities[0].code, new_title="NOVO TITULO", new_description='nova descricao',
-                                  new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                  new_is_extensive=True,
-                                  new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=datetime.datetime(2021, 9, 1, 0, 0), new_duration=15,
-                                  new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                  new_place="Sala 1",
-                                  new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id, "9999"],
-                                  new_speakers=[
-                                      Speaker(
-                                          name="Fulano de Tal",
-                                          bio="Fulano de Tal é um professor de Engenharia de Software",
-                                          company="Universidade Federal de Fulano de tal",
-                                      )
-                                  ], new_total_slots=100,
-                                  new_accepting_new_enrollments=True,
-                                  new_stop_accepting_new_enrollments_before=None)
+            update_activity = usecase(code=repo.activities[0].code, new_title="NOVO TITULO",
+                                      new_description='nova descricao',
+                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                      new_is_extensive=True,
+                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                      new_start_date=1630465200000000, new_duration=15,
+                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
+                                      new_place="Sala 1",
+                                      new_responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id,
+                                                                          "9999"],
+                                      new_speakers=[
+                                          Speaker(
+                                              name="Fulano de Tal",
+                                              bio="Fulano de Tal é um professor de Engenharia de Software",
+                                              company="Universidade Federal de Fulano de tal",
+                                          )
+                                      ], new_total_slots=100,
+                                      new_accepting_new_enrollments=True,
+                                      new_stop_accepting_new_enrollments_before=None)

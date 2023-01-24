@@ -32,8 +32,8 @@ class Test_UpdateActivityViewmodel:
                 'speakers': [{'bio': 'Incrível',
                               'company': 'Apple',
                               'name': 'Vitor Briquez'}],
-                'start_date': '2022-12-22T19:16:52.998305',
-                'stop_accepting_new_enrollments_before': '2022-12-22T18:16:52.998305',
+                'start_date': 1671747413000000,
+                'stop_accepting_new_enrollments_before': 1671743812000000,
                 'taken_slots': 4,
                 'title': 'Atividade da ECM 2345',
                 'total_slots': 4

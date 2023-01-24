@@ -60,7 +60,7 @@ class ActivityViewmodel:
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
-    stop_accepting_new_enrollments_before: datetime.datetime
+    stop_accepting_new_enrollments_before: int
 
     def __init__(self, activity: Activity):
         self.code = activity.code
@@ -88,7 +88,7 @@ class ActivityViewmodel:
             "activity_type": self.activity_type.value,
             "is_extensive": self.is_extensive,
             "delivery_model": self.delivery_model.value,
-            "start_date": self.start_date.isoformat(),
+            "start_date": self.start_date,
             "duration": self.duration,
             "link": self.link,
             "place": self.place,
@@ -97,7 +97,7 @@ class ActivityViewmodel:
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None
         }
 
 
