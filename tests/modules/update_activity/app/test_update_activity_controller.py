@@ -3,40 +3,593 @@ from src.modules.update_activity.app.update_activity_usecase import UpdateActivi
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
+
 class Test_UpdateActivityController:
-       
-       def test_update_activity_missing_code(self):
-              repo = ActivityRepositoryMock()
-              usecase = UpdateActivityUsecase(repo)
-              controller = UpdateActivityController(usecase)
 
-              request = HttpRequest(body={})
+    def test_update_activity_controller(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
 
-              response = controller(request)
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
 
-              assert response.status_code == 400
-              assert response.body == 'Field code is missing'
+        response = controller(request)
 
-       def test_update_activity_controller_activity_not_found(self):
-              repo = ActivityRepositoryMock()
-              usecase = UpdateActivityUsecase(repo)
-              controller = UpdateActivityController(usecase)
+        assert response.status_code == 200
+        assert response.body['message'] == "the activity was updated"
 
-              request = HttpRequest(body={"code": "CODIGO INEXISTENTE"})
+    def test_update_activity_missing_code(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
 
-              response = controller(request)
+        request = HttpRequest(body={
+            "new_title": "Clean Architecture code review!",
+            "new_description": "Reviewing IMT student's codes",
+            "new_activity_type": "LECTURES",
+            "new_is_extensive": False,
+            "new_delivery_model": "IN_PERSON",
+            "new_start_date": 1669141012,
+            "new_duration": 90,
+            "new_link": None,
+            "new_place": "H331",
+            "new_responsible_professors": ["12mf", "d7f1"],
+            "new_speakers": [{
+                "name": "Robert Cecil Martin",
+                "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                "company": "Clean Architecture Company"
+            }],
+            "new_total_slots": 100,
+            "new_accepting_new_enrollments": True,
+            "new_stop_accepting_new_enrollments_before": 1666451811, })
 
-              assert response.status_code == 404
-              assert response.body == 'No items found for Activity'
+        response = controller(request)
 
-       def test_update_activity_controller_invalid_code(self):
-              repo = ActivityRepositoryMock()
-              usecase = UpdateActivityUsecase(repo)
-              controller = UpdateActivityController(usecase)
+        assert response.status_code == 400
+        assert response.body == 'Field code is missing'
 
-              request = HttpRequest(body={"code": 2456})
+    def test_update_activity_controller_activity_not_found(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
 
-              response = controller(request)
+        request = HttpRequest(
+            body={"code": "ECM23451",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
 
-              assert response.status_code == 400
-              assert response.body == 'Field code is not valid'
+        response = controller(request)
+
+        assert response.status_code == 404
+        assert response.body == 'No items found for Activity'
+
+    def test_update_activity_controller_invalid_code(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": 2345,
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == 'Field code is not valid'
+
+    def test_update_activity_missing_new_title(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_title is missing"
+
+    def test_update_activity_missing_new_description(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_description is missing"
+
+    def test_update_activity_missing_new_activity_type(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_activity_type is missing"
+
+    def test_update_activity_invalid_new_activity_type(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "INVALID",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_activity_type is not valid"
+
+    def test_update_activity_missing_new_is_extensive(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_is_extensive is missing"
+
+    def test_update_activity_missing_new_delivery_model(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_delivery_model is missing"
+
+    def test_update_activity_invalid_new_delivery_model(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "INVALID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_delivery_model is not valid"
+
+    def test_update_activity_missing_new_start_date(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_start_date is missing"
+
+    def test_update_activity_missing_new_duration(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_duration is missing"
+
+    def test_update_activity_missing_new_responsible_professors(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_responsible_professors is missing"
+
+    def test_update_activity_missing_new_speakers(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_speakers is missing"
+
+    def test_update_activity_invalid_new_speakers(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": ["Pedro", "Juan"],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_speakers is not valid"
+
+    def test_update_activity_invalid_entity_new_speakers(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company",
+                      "invalid_field": "invalid"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_speakers is not valid"
+
+    def test_update_activity_missing_new_total_slots(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_total_slots is missing"
+
+    def test_update_activity_missing_new_accepting_new_enrollments(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_accepting_new_enrollments is missing"
