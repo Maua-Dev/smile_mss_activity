@@ -90,7 +90,7 @@ class ActivityViewmodel:
             "activity_type": self.activity_type.value,
             "is_extensive": self.is_extensive,
             "delivery_model": self.delivery_model.value,
-            "start_date": self.start_date.isoformat(),
+            "start_date": self.start_date,
             "duration": self.duration,
             'link': self.link,
             'place': self.place,
@@ -99,7 +99,7 @@ class ActivityViewmodel:
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None
         }
 
 
@@ -120,6 +120,6 @@ class DropActivityViewmodel:
             "activity": self.activity.to_dict(),
             "user": self.user.to_dict(),
             "state": self.state.value,
-            "date_subscribed": self.date_subscribed.isoformat(),
+            "date_subscribed": self.date_subscribed,
             "message": "the enrollment was dropped"
         }
