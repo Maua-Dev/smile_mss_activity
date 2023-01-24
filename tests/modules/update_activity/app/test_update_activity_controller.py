@@ -1,3 +1,5 @@
+import datetime
+
 from src.modules.update_activity.app.update_activity_controller import UpdateActivityController
 from src.modules.update_activity.app.update_activity_usecase import UpdateActivityUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
@@ -36,6 +38,24 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 200
+        assert response.body['activity']['code'] == 'ECM2345'
+        assert response.body['activity']['title'] == 'Clean Architecture code review!'
+        assert response.body['activity']['description'] == "Reviewing IMT student's codes"
+        assert response.body['activity']['activity_type'] == 'LECTURES'
+        assert response.body['activity']['is_extensive'] == False
+        assert response.body['activity']['delivery_model'] == 'IN_PERSON'
+        # assert response.body['activity']['start_date'] == datetime.datetime(2022, 11, 22, 15, 16, 52).isoformat()
+        assert response.body['activity']['duration'] == 90
+        assert response.body['activity']['link'] == None
+        assert response.body['activity']['place'] == 'H331'
+        assert response.body['activity']['responsible_professors'][1]['user_id'] == '12mf'
+        assert response.body['activity']['responsible_professors'][0]['user_id'] == 'd7f1'
+        assert response.body['activity']['speakers'][0]['name'] == 'Robert Cecil Martin'
+        assert response.body['activity']['speakers'][0]['bio'] == 'Author of Clean Architecture: A Craftsman\'s Guide to Software Structure and Design'
+        assert response.body['activity']['speakers'][0]['company'] == 'Clean Architecture Company'
+        assert response.body['activity']['total_slots'] == 100
+        assert response.body['activity']['accepting_new_enrollments'] == True
+        # assert response.body['activity']['stop_accepting_new_enrollments_before'] == datetime.datetime(2022, 10, 22, 12, 16, 51).isoformat()
         assert response.body['message'] == "the activity was updated"
 
     def test_update_activity_missing_code(self):
