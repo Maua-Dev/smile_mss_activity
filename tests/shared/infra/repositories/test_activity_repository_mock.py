@@ -48,7 +48,7 @@ class Test_ActivityRepositoryMock:
             repo.get_activity('ECM2345'),
             repo.get_user('db43'),
             state=ENROLLMENT_STATE.ENROLLED,
-            date_subscribed=datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
+            date_subscribed=1671229013000000
         )
 
         len_before = len(repo.enrollments)
@@ -59,7 +59,7 @@ class Test_ActivityRepositoryMock:
         assert repo.enrollments[0].activity == repo.get_activity('ECM2345')
         assert repo.enrollments[0].user == repo.get_user('db43')
         assert repo.enrollments[0].state == ENROLLMENT_STATE.ENROLLED
-        assert repo.enrollments[0].date_subscribed == datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
+        assert repo.enrollments[0].date_subscribed == 1671229013000000
         assert len_before == len_after - 1
 
     def test_update_enrollment_drop(self):
