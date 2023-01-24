@@ -153,7 +153,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.INTERNSHIP_FAIR,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=1671563812,
+                start_date=1671563813000000,
                 duration=80,
                 link="https://devmaua.com",
                 place=None,
