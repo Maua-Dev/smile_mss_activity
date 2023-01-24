@@ -7,22 +7,24 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 
+
 class UserViewmodel:
     name: str
     user_id: str
     role: str
 
     def __init__(self, user: User):
-       self.name = user.name
-       self.user_id = user.user_id
-       self.role = user.role.value
+        self.name = user.name
+        self.user_id = user.user_id
+        self.role = user.role.value
 
     def to_dict(self):
-       return {
-           "name": self.name,
-           "user_id": self.user_id,
-           "role": self.role
-       }
+        return {
+            "name": self.name,
+            "user_id": self.user_id,
+            "role": self.role
+        }
+
 
 class SpeakerViewmodel:
     name: str
@@ -30,16 +32,17 @@ class SpeakerViewmodel:
     company: str
 
     def __init__(self, speaker: Speaker):
-       self.name = speaker.name
-       self.bio = speaker.bio
-       self.company = speaker.company
+        self.name = speaker.name
+        self.bio = speaker.bio
+        self.company = speaker.company
 
     def to_dict(self):
-       return {
-           "name": self.name,
-           "bio": self.bio,
-           "company": self.company
-       }
+        return {
+            "name": self.name,
+            "bio": self.bio,
+            "company": self.company
+        }
+
 
 class ActivityViewmodel:
     code: str
@@ -60,51 +63,52 @@ class ActivityViewmodel:
     stop_accepting_new_enrollments_before: datetime.datetime
 
     def __init__(self, activity: Activity):
-       self.code = activity.code
-       self.title = activity.title
-       self.description = activity.description
-       self.activity_type = activity.activity_type
-       self.is_extensive = activity.is_extensive
-       self.delivery_model = activity.delivery_model
-       self.start_date = activity.start_date
-       self.duration = activity.duration
-       self.link = activity.link,
-       self.place = activity.place,
-       self.responsible_professors = [UserViewmodel(professor) for professor in activity.responsible_professors]
-       self.speakers = [SpeakerViewmodel(speaker) for speaker in activity.speakers]
-       self.total_slots = activity.total_slots
-       self.taken_slots = activity.taken_slots
-       self.accepting_new_enrollments = activity.accepting_new_enrollments
-       self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
+        self.code = activity.code
+        self.title = activity.title
+        self.description = activity.description
+        self.activity_type = activity.activity_type
+        self.is_extensive = activity.is_extensive
+        self.delivery_model = activity.delivery_model
+        self.start_date = activity.start_date
+        self.duration = activity.duration
+        self.link = activity.link
+        self.place = activity.place
+        self.responsible_professors = [UserViewmodel(professor) for professor in activity.responsible_professors]
+        self.speakers = [SpeakerViewmodel(speaker) for speaker in activity.speakers]
+        self.total_slots = activity.total_slots
+        self.taken_slots = activity.taken_slots
+        self.accepting_new_enrollments = activity.accepting_new_enrollments
+        self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
 
     def to_dict(self):
-       return {
-           "code": self.code,
-           "title": self.title,
-           "description": self.description,
-           "activity_type": self.activity_type.value,
-           "is_extensive": self.is_extensive,
-           "delivery_model": self.delivery_model.value,
-           "start_date": self.start_date.isoformat(),
-           "duration": self.duration,
-           "link": self.link,
-           "place": self.place,
-           "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
-           "speakers": [speaker.to_dict() for speaker in self.speakers],
-           "total_slots": self.total_slots,
-           "taken_slots": self.taken_slots,
-           "accepting_new_enrollments": self.accepting_new_enrollments,
-           "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None
-       }
+        return {
+            "code": self.code,
+            "title": self.title,
+            "description": self.description,
+            "activity_type": self.activity_type.value,
+            "is_extensive": self.is_extensive,
+            "delivery_model": self.delivery_model.value,
+            "start_date": self.start_date.isoformat(),
+            "duration": self.duration,
+            "link": self.link,
+            "place": self.place,
+            "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
+            "speakers": [speaker.to_dict() for speaker in self.speakers],
+            "total_slots": self.total_slots,
+            "taken_slots": self.taken_slots,
+            "accepting_new_enrollments": self.accepting_new_enrollments,
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before.isoformat() if self.stop_accepting_new_enrollments_before is not None else None
+        }
+
 
 class UpdateActivityViewmodel:
-       update_activity: ActivityViewmodel
+    update_activity: ActivityViewmodel
 
-       def __init__(self, update_activity: Activity):
-           self.update_activity = ActivityViewmodel(update_activity)
+    def __init__(self, update_activity: Activity):
+        self.update_activity = ActivityViewmodel(update_activity)
 
-       def to_dict(self):
-              return {
-                "activity": self.update_activity.to_dict(),
-                "message": "the activity was updated"
-              }
+    def to_dict(self):
+        return {
+            "activity": self.update_activity.to_dict(),
+            "message": "the activity was updated"
+        }
