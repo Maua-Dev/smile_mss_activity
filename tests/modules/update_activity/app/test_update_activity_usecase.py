@@ -54,6 +54,44 @@ class Test_UpdateActivityUsecase:
         assert repo.activities[
                    0].stop_accepting_new_enrollments_before == update_activity.stop_accepting_new_enrollments_before
 
+    def test_update_activity_usecase_one_parameter(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        old_activity = repo.activities[0]
+        update_activity = usecase(code=repo.activities[0].code,
+                                  new_title="NOVO TITULO",
+                                  new_description="Isso é uma atividade",
+                                  new_activity_type=ACTIVITY_TYPE.COURSES,
+                                  new_is_extensive=False,
+                                  new_delivery_model=DELIVERY_MODEL.IN_PERSON,
+                                  new_start_date=1671747413000000,
+                                  new_duration=120,
+                                  new_link=None,
+                                  new_place="H332",
+                                  new_responsible_professors_user_id=["d7f1"],
+                                  new_speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
+                                  new_total_slots=4,
+                                  new_accepting_new_enrollments=True,
+                                  new_stop_accepting_new_enrollments_before=1671743812000000)
+
+        assert type(update_activity) == Activity
+
+        assert repo.activities[0].title == old_activity.title
+        assert repo.activities[0].description == old_activity.description
+        assert repo.activities[0].activity_type == old_activity.activity_type
+        assert repo.activities[0].activity_type == ACTIVITY_TYPE.COURSES
+        assert repo.activities[0].is_extensive == old_activity.is_extensive
+        assert repo.activities[0].delivery_model == old_activity.delivery_model
+        assert repo.activities[0].start_date == old_activity.start_date
+        assert repo.activities[0].duration == old_activity.duration
+        assert repo.activities[0].link == old_activity.link
+        assert repo.activities[0].place == old_activity.place
+        assert repo.activities[0].responsible_professors == old_activity.responsible_professors
+        assert repo.activities[0].speakers == old_activity.speakers
+        assert repo.activities[0].total_slots == old_activity.total_slots
+        assert repo.activities[0].accepting_new_enrollments == old_activity.accepting_new_enrollments
+        assert repo.activities[0].stop_accepting_new_enrollments_before == old_activity.stop_accepting_new_enrollments_before
+
     def test_update_activity_invalid_enum(self):
         repo = ActivityRepositoryMock()
         usecase = UpdateActivityUsecase(repo)
