@@ -27,6 +27,9 @@ class CreateActivityUsecase:
         if self.repo.get_activity(code=code) is not None:
             raise DuplicatedItem("code")
 
+        if len(responsible_professors_user_id) == 0:
+            raise EntityError("responsible_professors")
+
         if type(responsible_professors_user_id) != list:
             raise EntityError("responsible_professors")
 
