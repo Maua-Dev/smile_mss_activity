@@ -105,7 +105,6 @@ class IActivityRepository(ABC):
 
     @abstractmethod
     def create_activity(self, activity:Activity) -> Activity:
-
         pass
 
     @abstractmethod
