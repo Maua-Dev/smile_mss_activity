@@ -189,3 +189,10 @@ class Test_ActivityRepositoryMock:
         assert all(type(user) == User for user in users)
         assert len(users) == 2
 
+    def test_get_users_not_found(self):
+        repo = ActivityRepositoryMock()
+        users = repo.get_users(["000", "d7f1"])
+        assert type(users) == list
+        assert all(type(user) == User for user in users)
+        assert len(users) == 1
+
