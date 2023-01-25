@@ -92,7 +92,7 @@ class Test_UpdateActivityUsecase:
         assert repo.activities[0].accepting_new_enrollments == old_activity.accepting_new_enrollments
         assert repo.activities[0].stop_accepting_new_enrollments_before == old_activity.stop_accepting_new_enrollments_before
 
-    def test_update_activity_invalid_enum(self):
+    def test_update_activity_new_activity_invalid_enum(self):
         repo = ActivityRepositoryMock()
         usecase = UpdateActivityUsecase(repo)
         with pytest.raises(EntityError):
