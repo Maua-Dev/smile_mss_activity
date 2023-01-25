@@ -38,6 +38,7 @@ class Test_UpdateActivityUsecase:
         assert type(update_activity) == Activity
 
         assert repo.activities[0].title == update_activity.title
+        assert repo.activities[0].title == "NOVO TITULO"
         assert repo.activities[0].description == update_activity.description
         assert repo.activities[0].activity_type == update_activity.activity_type
         assert repo.activities[0].is_extensive == update_activity.is_extensive
