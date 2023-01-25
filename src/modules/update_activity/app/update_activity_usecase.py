@@ -30,6 +30,9 @@ class UpdateActivityUsecase:
         if activity is None:
             raise NoItemsFound("Activity")
 
+        if type(new_responsible_professors_user_id) != list:
+            raise EntityError("responsible_professors")
+
         if not all(type(user_id) == str for user_id in new_responsible_professors_user_id):
             raise EntityError("responsible_professors")
 
