@@ -617,6 +617,35 @@ class Test_UpdateActivityController:
         assert response.status_code == 400
         assert response.body == "Field new_speakers is not valid"
 
+    def test_update_activity_new_speakers_not_dict(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["12mf", "d7f1"],
+                  "new_speakers": 1,
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field new_speakers is not valid"
+
+
     def test_update_activity_missing_new_total_slots(self):
         repo = ActivityRepositoryMock()
         usecase = UpdateActivityUsecase(repo)
@@ -678,3 +707,4 @@ class Test_UpdateActivityController:
 
         assert response.status_code == 400
         assert response.body == "Field new_accepting_new_enrollments is missing"
+
