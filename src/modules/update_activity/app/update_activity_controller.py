@@ -51,8 +51,6 @@ class UpdateActivityController:
                 raise MissingParameters('new_start_date')
 
             new_start_date = request.data.get('new_start_date')
-            if type(new_start_date) != int:
-                raise WrongTypeParameter('new_start_date', 'int', type(new_start_date).__class__.__name__)
 
             if request.data.get('new_duration') is None:
                 raise MissingParameters('new_duration')
@@ -79,10 +77,6 @@ class UpdateActivityController:
                 raise MissingParameters('new_accepting_new_enrollments')
 
             new_stop_accepting_new_enrollments_before = request.data.get('new_stop_accepting_new_enrollments_before')
-            if new_stop_accepting_new_enrollments_before is not None:
-                if type(new_stop_accepting_new_enrollments_before) != int:
-                    raise WrongTypeParameter('new_stop_accepting_new_enrollments_before', 'int',
-                                             type(new_stop_accepting_new_enrollments_before).__class__.__name__)
 
             updated_activity = self.UpdateActivityUsecase(
                 code=request.data.get('code'),
@@ -110,10 +104,6 @@ class UpdateActivityController:
             return NotFound(body=err.message)
 
         except MissingParameters as err:
-
-            return BadRequest(body=err.message)
-
-        except WrongTypeParameter as err:
 
             return BadRequest(body=err.message)
 
