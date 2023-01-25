@@ -350,41 +350,6 @@ class Test_CreateActivityController:
         assert response.status_code == 400
         assert response.body == "Field delivery_model is not valid"
 
-    def test_create_activity_controller_missing_start_date(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
-        controller = CreateActivityController(usecase=usecase)
-
-        request = HttpRequest(
-            body={
-                "code": "ZYX321",
-                "title": "Clean Architecture code review!",
-                "description": "Reviewing IMT student's codes",
-                "activity_type": "LECTURES",
-                "is_extensive": False,
-                "delivery_model": "IN_PERSON",
-                "start_date": "1",
-                "duration": 90,
-                "link": None,
-                "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
-                "speakers": [{
-                    "name": "Robert Cecil Martin",
-                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                    "company": "Clean Architecture Company"
-                }],
-                "total_slots": 100,
-                "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000000,
-
-            }
-        )
-
-        response = controller(request=request)
-
-        assert response.status_code == 400
-        assert response.body == "Field start_date isn't in the right type.\n Received: type.\n Expected: int"
-
     def test_create_activity_controller_invalid_start_date(self):
         repo = ActivityRepositoryMock()
         usecase = CreateActivityUsecase(repo=repo)
@@ -583,33 +548,3 @@ class Test_CreateActivityController:
 
         assert response.status_code == 400
         assert response.body == "Field accepting_new_enrollments is missing"
-
-    def test_create_activity_controller_invalid_stop_accepting_new_enrollments_before(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
-        controller = CreateActivityController(usecase=usecase)
-
-        request = HttpRequest(body={"code": "ZYX321",
-                                    "title": "Clean Architecture code review!",
-                                    "description": "Reviewing IMT student's codes",
-                                    "activity_type": "LECTURES",
-                                    "is_extensive": False,
-                                    "delivery_model": "IN_PERSON",
-                                    "start_date": 1669141012000000,
-                                    "duration": 90,
-                                    "link": None,
-                                    "place": "H331",
-                                    "responsible_professors": ["12mf", "d7f1"],
-                                    "speakers": [{
-                                        "name": "Robert Cecil Martin",
-                                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                                        "company": "Clean Architecture Company"
-                                    }],
-                                    "total_slots": 100,
-                                    "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": "1666451811000000", })
-
-        response = controller(request=request)
-
-        assert response.status_code == 400
-        assert response.body == "Field stop_accepting_new_enrollments_before isn't in the right type.\n Received: type.\n Expected: int"

@@ -47,8 +47,6 @@ class CreateActivityController:
                 raise MissingParameters('start_date')
 
             start_date = request.data.get('start_date')
-            if type(start_date) != int:
-                raise WrongTypeParameter('start_date', 'int', type(start_date).__class__.__name__)
 
             if request.data.get('duration') is None:
                 raise MissingParameters('duration')
@@ -73,9 +71,6 @@ class CreateActivityController:
                 raise MissingParameters('accepting_new_enrollments')
 
             stop_accepting_new_enrollments_before = request.data.get('stop_accepting_new_enrollments_before')
-            if stop_accepting_new_enrollments_before is not None:
-                if type(stop_accepting_new_enrollments_before) != int:
-                    raise WrongTypeParameter('stop_accepting_new_enrollments_before', 'int', type(stop_accepting_new_enrollments_before).__class__.__name__)
 
             activity = self.CreateActivityUsecase(
                     code = request.data.get('code'), 
@@ -108,10 +103,6 @@ class CreateActivityController:
             return BadRequest(body=err.message)
 
         except DuplicatedItem as err:
-
-            return BadRequest(body=err.message)
-
-        except WrongTypeParameter as err:
 
             return BadRequest(body=err.message)
 
