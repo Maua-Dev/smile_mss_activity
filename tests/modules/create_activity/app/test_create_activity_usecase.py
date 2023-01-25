@@ -171,7 +171,7 @@ class Test_CreateActivityUsecase:
                     ],
                     responsible_professors_user_id=[repo.users[2].user_id])
 
-    def test_create_activity_usecase_invalid_speaker(self):
+    def test_create_activity_usecase_invalid_speaker_not_speaker(self):
         repo = ActivityRepositoryMock()
         usecase = CreateActivityUsecase(repo=repo)
 
@@ -226,3 +226,23 @@ class Test_CreateActivityUsecase:
                             )
                         ],
                         responsible_professors_user_id=[])
+
+    def test_create_activity_usecase_invalid_responsible_professor_not_list(self):
+            repo = ActivityRepositoryMock()
+            usecase = CreateActivityUsecase(repo=repo)
+
+            with pytest.raises(EntityError):
+                usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                        duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                        accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                        delivery_model=DELIVERY_MODEL.HYBRID,
+                        start_date=1671747413000000,
+                        stop_accepting_new_enrollments_before=1671743813000000,
+                        speakers=[
+                            Speaker(
+                                name="Robert Cecil Martin",
+                                bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                company="Clean Architecture Company",
+                            )
+                        ],
+                        responsible_professors_user_id="0000")
