@@ -85,6 +85,41 @@ class Test_CreateActivityController:
         assert response.status_code == 400
         assert response.body == "Field code is missing"
 
+    def test_create_activity_controller_wrong_code(self):
+            repo = ActivityRepositoryMock()
+            usecase = CreateActivityUsecase(repo=repo)
+            controller = CreateActivityController(usecase=usecase)
+
+            request = HttpRequest(
+                body={
+                    "code" : 123,
+                    "title": "Clean Architecture code review!",
+                    "description": "Reviewing IMT student's codes",
+                    "activity_type": "LECTURES",
+                    "is_extensive": False,
+                    "delivery_model": "IN_PERSON",
+                    "start_date": 1669141012000000,
+                    "duration": 90,
+                    "link": None,
+                    "place": "H331",
+                    "responsible_professors": ["12mf", "d7f1"],
+                    "speakers": [{
+                        "name": "Robert Cecil Martin",
+                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                        "company": "Clean Architecture Company"
+                    }],
+                    "total_slots": 100,
+                    "accepting_new_enrollments": True,
+                    "stop_accepting_new_enrollments_before": 1666451811000000,
+
+                }
+            )
+
+            response = controller(request=request)
+
+            assert response.status_code == 400
+            assert response.body == "Field code is not valid"
+
     def test_create_activity_controller_duplicated_code(self):
         repo = ActivityRepositoryMock()
         usecase = CreateActivityUsecase(repo=repo)
@@ -452,6 +487,76 @@ class Test_CreateActivityController:
         assert response.status_code == 400
         assert response.body == "Field responsible_professors is missing"
 
+    def test_create_activity_invalid_responsible_professors(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012000000,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": 123,
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811000000,
+
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Field responsible_professors is not valid"
+
+    def test_create_activity_invalid_responsible_professors_id_invalid(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012000000,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ['123'],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811000000,
+
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 404
+        assert response.body == "No items found for responsible_professors"
+
     def test_create_activity_controller_missing_speakers(self):
         repo = ActivityRepositoryMock()
         usecase = CreateActivityUsecase(repo=repo)
@@ -481,6 +586,73 @@ class Test_CreateActivityController:
 
         assert response.status_code == 400
         assert response.body == "Field speakers is missing"
+
+    def test_create_actvivity_invalid_speaker_type(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012000000,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": "123",
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811000000,
+
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Field speakers is not valid"
+
+    def test_create_activity_invalid_speaker_parameter(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                "code": "ZYX321",
+                "title": "Clean Architecture code review!",
+                "description": "Reviewing IMT student's codes",
+                "activity_type": "LECTURES",
+                "is_extensive": False,
+                "delivery_model": "IN_PERSON",
+                "start_date": 1669141012000000,
+                "duration": 90,
+                "link": None,
+                "place": "H331",
+                "responsible_professors": ["12mf", "d7f1"],
+                "speakers": [{
+                    "name": "Robert Cecil Martin",
+                    "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                    "company": "Clean Architecture Company",
+                    "invalid": "invalid"
+                }],
+                "total_slots": 100,
+                "accepting_new_enrollments": True,
+                "stop_accepting_new_enrollments_before": 1666451811000000,
+
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Field speakers is not valid"
 
     def test_create_activity_controller_missing_total_slots(self):
         repo = ActivityRepositoryMock()
