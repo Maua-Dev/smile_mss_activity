@@ -176,7 +176,7 @@ class Test_UpdateActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field code is not valid"
 
-    def test_update_activity_presenter_missing_parameter_codey(self):
+    def test_update_activity_presenter_missing_parameter_code(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
