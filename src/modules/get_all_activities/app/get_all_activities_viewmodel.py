@@ -32,7 +32,7 @@ class ActivityViewmodel:
     activity_type: ACTIVITY_TYPE
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
-    start_date: datetime.datetime
+    start_date: int
     duration: int  # minutes
     link: str
     place: str
@@ -40,7 +40,7 @@ class ActivityViewmodel:
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
-    stop_accepting_new_enrollments_before: datetime.datetime
+    stop_accepting_new_enrollments_before: int
 
     def __init__(self, activity: Activity):
         self.code = activity.code

@@ -1,9 +1,13 @@
 
 import datetime
 from src.shared.domain.entities.enrollment import Enrollment
+from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
 from src.shared.domain.entities.activity import Activity
+from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
+from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 
@@ -146,4 +150,49 @@ class Test_ActivityRepositoryMock:
 
         assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in new_enrollments)
         assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in repo.enrollments)
+
+
+    def test_create_activity(self):
+        repo = ActivityRepositoryMock()
+        len_before = len(repo.activities)
+        activity = repo.create_activity(
+            Activity(
+                code="newCode",
+                title="Atividade da CAFE",
+                description="Atividade pra tomar café",
+                activity_type=ACTIVITY_TYPE.ALUMNI_CAFE,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1671743813000000,
+                duration=20,
+                link=None,
+                place="H332",
+                responsible_professors=[
+                    User(name="Rodrigo Santos", role=ROLE.PROFESSOR, user_id="b2f1")
+                ],
+                speakers=[
+                    Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")
+                ],
+                total_slots=2,
+                taken_slots=2,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
+            )
+        )
+        assert type(activity) == Activity
+        assert len(repo.activities) == len_before + 1
+
+    def test_get_users(self):
+        repo = ActivityRepositoryMock()
+        users = repo.get_users(["12mf", "d7f1"])
+        assert type(users) == list
+        assert all(type(user) == User for user in users)
+        assert len(users) == 2
+
+    def test_get_users_not_found(self):
+        repo = ActivityRepositoryMock()
+        users = repo.get_users(["000", "d7f1"])
+        assert type(users) == list
+        assert all(type(user) == User for user in users)
+        assert len(users) == 1
 
