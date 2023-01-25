@@ -1,4 +1,6 @@
 import datetime
+
+from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from .create_activity_usecase import CreateActivityUsecase
@@ -52,8 +54,19 @@ class CreateActivityController:
                 raise MissingParameters('duration')
             if request.data.get('responsible_professors') is None:
                 raise MissingParameters('responsible_professors')
-            if request.data.get('speakers') is None:
+
+            speakers = request.data.get('speakers')
+            if speakers is None:
                 raise MissingParameters('speakers')
+
+            if type(speakers) != list:
+                raise EntityError('speakers')
+
+            try:
+                speakers = [Speaker(**speaker) for speaker in speakers]
+            except:
+                raise EntityError("speakers")
+
             if request.data.get('total_slots') is None:
                 raise MissingParameters('total_slots')
             if request.data.get('accepting_new_enrollments') is None:
@@ -76,7 +89,7 @@ class CreateActivityController:
                     link = request.data.get('link'),
                     place = request.data.get('place'),
                     responsible_professors_user_id = request.data.get('responsible_professors'),
-                    speakers = request.data.get('speakers'),
+                    speakers = speakers,
                     total_slots = request.data.get('total_slots'),
                     accepting_new_enrollments = request.data.get('accepting_new_enrollments'),
                     stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before

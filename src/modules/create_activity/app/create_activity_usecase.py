@@ -19,21 +19,13 @@ class CreateActivityUsecase:
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
                  total_slots: int,
                  accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
-                 stop_accepting_new_enrollments_before: int, speakers: List[Dict]) -> Activity:
+                 stop_accepting_new_enrollments_before: int, speakers: List[Speaker]) -> Activity:
 
         if type(code) != str:
             raise EntityError("code")
 
         if self.repo.get_activity(code=code) is not None:
             raise DuplicatedItem("code")
-
-        if type(speakers) != list:
-            raise EntityError("speakers")
-
-        try:
-            speakers = [Speaker(**speaker) for speaker in speakers]
-        except:
-            raise EntityError("speakers")
 
         if type(responsible_professors_user_id) != list:
             raise EntityError("responsible_professors")
