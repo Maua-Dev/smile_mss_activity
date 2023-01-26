@@ -41,24 +41,76 @@ class UpdateActivityUsecase:
         if len(new_responsible_professors) != len(new_responsible_professors_user_id):
             raise NoItemsFound("responsible_professors")
 
-        new_activity = Activity(
-            code=code,
-            title=new_title,
-            description=new_description,
-            activity_type=new_activity_type,
-            is_extensive=new_is_extensive,
-            delivery_model=new_delivery_model,
-            start_date=new_start_date,
-            duration=new_duration,
-            link=new_link,
-            place=new_place,
-            responsible_professors=new_responsible_professors,
-            speakers=new_speakers,
-            total_slots=new_total_slots,
-            taken_slots=activity.taken_slots,
-            accepting_new_enrollments=new_accepting_new_enrollments,
-            stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before
-        )
+
+
+
+        if type(new_title) != str:
+            raise EntityError("title")
+
+        if type(new_description) != str:
+            raise EntityError("description")
+
+        if type(new_activity_type) != ACTIVITY_TYPE:
+            raise EntityError("activity_type")
+
+        if type(new_is_extensive) != bool:
+            raise EntityError("is_extensive")
+
+        if type(new_delivery_model) != DELIVERY_MODEL:
+            raise EntityError("delivery_model")
+
+        if type(new_start_date) != int:
+            raise EntityError("start_date")
+
+        if type(new_duration) != int:
+            raise EntityError("duration")
+
+        if new_link is None and new_place is None:
+            raise EntityError("link or place")
+
+        if type(new_link) != str and new_link is not None:
+            raise EntityError("link")
+
+        if type(new_place) != str and new_place is not None:
+            raise EntityError("place")
+
+
+        if type(new_responsible_professors) != list:
+            raise EntityError("responsible_professors")
+
+        elif not all([type(encharged_professor) == User for encharged_professor in
+                      new_responsible_professors]):  # check if all elements are User
+            raise EntityError("responsible_professors")
+
+        elif not all([encharged_professor.role == ROLE.PROFESSOR for encharged_professor in
+                      new_responsible_professors]):  # check if all elements are professors
+            raise EntityError("responsible_professors")
+
+
+        if type(new_speakers) != list:
+            raise EntityError("speakers")
+
+        if not all([type(speaker) == Speaker for speaker in new_speakers]):  # check if all elements are Speaker
+            raise EntityError("speakers")
+
+        if type(new_total_slots) != int:
+            raise EntityError("total_slots")
+
+        if type(activity.taken_slots) != int:
+            raise EntityError("taken_slots")
+
+        if type(new_accepting_new_enrollments) != bool:
+            raise EntityError("accepting_new_enrollments")
+
+        if type(new_stop_accepting_new_enrollments_before) == int:
+            if new_stop_accepting_new_enrollments_before > activity.start_date:
+                raise EntityError("stop_accepting_new_enrollments_before")
+
+        elif new_stop_accepting_new_enrollments_before is not None:
+            raise EntityError("stop_accepting_new_enrollments_before")
+
+
+        
 
         return self.repo.update_activity(code=code,
                                          new_title=new_title,
