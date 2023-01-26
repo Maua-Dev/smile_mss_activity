@@ -53,7 +53,7 @@ class ActivityViewmodel:
     activity_type: ACTIVITY_TYPE
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
-    start_date: datetime.datetime
+    start_date: int
     duration: int  # minutes
     responsible_professors: List[UserViewmodel]
     speakers: List[SpeakerViewmodel]

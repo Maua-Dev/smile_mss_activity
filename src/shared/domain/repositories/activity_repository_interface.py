@@ -102,3 +102,11 @@ class IActivityRepository(ABC):
         Returns all activities without list of Enrollments and responsible professors
         """
         pass
+
+    @abstractmethod
+    def create_activity(self, activity:Activity) -> Activity:
+        pass
+
+    @abstractmethod
+    def get_users(self, user_ids: List[str]) -> List[User]:
+        pass
