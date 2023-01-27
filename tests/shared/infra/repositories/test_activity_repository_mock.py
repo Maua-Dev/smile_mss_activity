@@ -53,7 +53,7 @@ class Test_ActivityRepositoryMock:
             repo.get_activity('ECM2345'),
             repo.get_user('db43'),
             state=ENROLLMENT_STATE.ENROLLED,
-            date_subscribed=1671229013000000
+            date_subscribed=1671229013000
         )
 
         len_before = len(repo.enrollments)
@@ -64,7 +64,7 @@ class Test_ActivityRepositoryMock:
         assert repo.enrollments[0].activity == repo.get_activity('ECM2345')
         assert repo.enrollments[0].user == repo.get_user('db43')
         assert repo.enrollments[0].state == ENROLLMENT_STATE.ENROLLED
-        assert repo.enrollments[0].date_subscribed == 1671229013000000
+        assert repo.enrollments[0].date_subscribed == 1671229013000
         assert len_before == len_after - 1
 
     def test_update_enrollment_drop(self):
@@ -178,7 +178,7 @@ class Test_ActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.ALUMNI_CAFE,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1671743813000000,
+                start_date=1671743813000,
                 duration=20,
                 link=None,
                 place="H332",

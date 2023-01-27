@@ -11,7 +11,7 @@ class Enrollment(abc.ABC):
     activity: Activity
     user: User
     state: ENROLLMENT_STATE
-    date_subscribed: int # microsseconds
+    date_subscribed: int # milliseconds
 
     def __init__(self, activity: Activity, user: User, state: ENROLLMENT_STATE, date_subscribed: int):
 

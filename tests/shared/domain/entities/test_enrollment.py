@@ -22,7 +22,7 @@ class Test_Enrollment:
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
-            start_date=1040489765000000,
+            start_date=1040489765000,
             duration=120,
             link=None,
             place="H332",
@@ -43,7 +43,7 @@ class Test_Enrollment:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=1030489765000000
+            stop_accepting_new_enrollments_before=1030489765000
         ),
             user=User(
                 name="Marcos",
@@ -51,14 +51,14 @@ class Test_Enrollment:
                 user_id="123d"
             ),
             state=ENROLLMENT_STATE.ENROLLED,
-            date_subscribed=1671728165000000
+            date_subscribed=1671728165000
         )
 
         assert type(enrollment) == Enrollment
         assert enrollment.activity.code == "1234"
         assert enrollment.user.name == "Marcos"
         assert enrollment.state == ENROLLMENT_STATE.ENROLLED
-        assert enrollment.date_subscribed == 1671728165000000
+        assert enrollment.date_subscribed == 1671728165000
 
 
     def test_enrollment_with_invalid_activity(self):
@@ -71,7 +71,7 @@ class Test_Enrollment:
                     user_id="123d"
                 ),
                 state=ENROLLMENT_STATE.ENROLLED,
-                date_subscribed=1671728165000000
+                date_subscribed=1671728165000
             )
 
     def test_enrollment_with_invalid_user(self):
@@ -84,7 +84,7 @@ class Test_Enrollment:
                     activity_type=ACTIVITY_TYPE.LECTURES,
                     is_extensive=True,
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
-                    start_date=1671814565000000,
+                    start_date=1671814565000,
                     duration=120,
                     link=None,
                     place="H332",
@@ -105,11 +105,11 @@ class Test_Enrollment:
                     total_slots=120,
                     taken_slots=33,
                     accepting_new_enrollments=True,
-                    stop_accepting_new_enrollments_before=  1040489765000000
+                    stop_accepting_new_enrollments_before=  1040489765000
                 ),
                 user="Marcos",
                 state=ENROLLMENT_STATE.ENROLLED,
-                date_subscribed=1671728165000000
+                date_subscribed=1671728165000
             )
 
     def test_enrollment_with_invalid_state(self):
@@ -122,7 +122,7 @@ class Test_Enrollment:
                     activity_type=ACTIVITY_TYPE.LECTURES,
                     is_extensive=True,
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
-                    start_date=1671814565000000,
+                    start_date=1671814565000,
                     duration=120,
                     link=None,
                     place="H332",
@@ -143,7 +143,7 @@ class Test_Enrollment:
                     total_slots=120,
                     taken_slots=33,
                     accepting_new_enrollments=True,
-                    stop_accepting_new_enrollments_before=1040489765000000
+                    stop_accepting_new_enrollments_before=1040489765000
                 ),
                 user=User(
                     name="Marcos",
@@ -151,7 +151,7 @@ class Test_Enrollment:
                     user_id="123d"
                 ),
                 state="ENROLLED",
-                date_subscribed=1671728165000000
+                date_subscribed=1671728165000
             )
 
     def test_enrollment_with_invalid_date_subscribed(self):
@@ -164,7 +164,7 @@ class Test_Enrollment:
                     activity_type=ACTIVITY_TYPE.LECTURES,
                     is_extensive=True,
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
-                    start_date=1671814565000000,
+                    start_date=1671814565000,
                     duration=120,
                     link=None,
                     place="H332",
@@ -185,7 +185,7 @@ class Test_Enrollment:
                     total_slots=120,
                     taken_slots=33,
                     accepting_new_enrollments=True,
-                    stop_accepting_new_enrollments_before=1040489765000000
+                    stop_accepting_new_enrollments_before=1040489765000
                 ),
                 user=User(
                     name="Marcos",

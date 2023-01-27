@@ -17,7 +17,7 @@ class Activity(abc.ABC):
     activity_type: ACTIVITY_TYPE
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
-    start_date: int  # microseconds
+    start_date: int  # milliseconds
     duration: int  # minutes
     link: str
     place: str
@@ -26,7 +26,7 @@ class Activity(abc.ABC):
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
-    stop_accepting_new_enrollments_before: int  # microseconds
+    stop_accepting_new_enrollments_before: int  # milliseconds
 
     def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
