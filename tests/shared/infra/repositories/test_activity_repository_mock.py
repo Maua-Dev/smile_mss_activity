@@ -1,9 +1,14 @@
 
 import datetime
 from src.shared.domain.entities.enrollment import Enrollment
+from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
+from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.entities.activity import Activity
+from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
+from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 
@@ -48,7 +53,7 @@ class Test_ActivityRepositoryMock:
             repo.get_activity('ECM2345'),
             repo.get_user('db43'),
             state=ENROLLMENT_STATE.ENROLLED,
-            date_subscribed=datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
+            date_subscribed=1671229013000
         )
 
         len_before = len(repo.enrollments)
@@ -59,7 +64,7 @@ class Test_ActivityRepositoryMock:
         assert repo.enrollments[0].activity == repo.get_activity('ECM2345')
         assert repo.enrollments[0].user == repo.get_user('db43')
         assert repo.enrollments[0].state == ENROLLMENT_STATE.ENROLLED
-        assert repo.enrollments[0].date_subscribed == datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)
+        assert repo.enrollments[0].date_subscribed == 1671229013000
         assert len_before == len_after - 1
 
     def test_update_enrollment_drop(self):
@@ -109,3 +114,100 @@ class Test_ActivityRepositoryMock:
 
         assert type(activity) == Activity
         assert activity.taken_slots == 10
+
+    def test_update_activity_new_type(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.update_activity(code='2468', new_activity_type=ACTIVITY_TYPE.GCSP)
+
+        assert type(activity) == Activity
+        assert activity.activity_type == ACTIVITY_TYPE.GCSP
+
+    def test_update_activity_new_responsible_professors(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.update_activity(code='2468', new_responsible_professors=[repo.users[2]])
+
+        assert type(activity) == Activity
+        assert activity.responsible_professors == [repo.users[2]]
+
+    def test_get_all_activities_admin(self):
+        repo = ActivityRepositoryMock()
+        activity_with_enrollments = repo.get_all_activities_admin()
+
+        assert len(activity_with_enrollments) == len(repo.activities)
+        assert all(type(activity) == Activity for activity, enrollments in activity_with_enrollments)
+        assert all(all(type(enrollment) == Enrollment for enrollment in enrollments) for activity, enrollments in activity_with_enrollments)
+
+    def test_get_all_activities(self):
+        repo = ActivityRepositoryMock()
+        activities = repo.get_all_activities()
+
+        assert len(activities) == len(repo.activities)
+        assert all(type(activity) == Activity for activity in activities)
+
+    def test_delete_activity(self):
+        repo = ActivityRepositoryMock()
+        len_before = len(repo.activities)
+        activity = repo.delete_activity(code="2468")
+        len_after = len(repo.activities)
+
+        assert type(activity) == Activity
+        assert len_before == len_after + 1
+
+    def test_delete_activity_not_found(self):
+        repo = ActivityRepositoryMock()
+        activity = repo.delete_activity(code="CODIGO_INEXISTENTE")
+
+        assert activity is None
+
+    def test_batch_update_enrollment(self):
+        repo = ActivityRepositoryMock()
+        new_enrollments = repo.batch_update_enrollment(repo.enrollments, state=ENROLLMENT_STATE.DROPPED)
+
+        assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in new_enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.DROPPED for enrollment in repo.enrollments)
+
+
+    def test_create_activity(self):
+        repo = ActivityRepositoryMock()
+        len_before = len(repo.activities)
+        activity = repo.create_activity(
+            Activity(
+                code="newCode",
+                title="Atividade da CAFE",
+                description="Atividade pra tomar café",
+                activity_type=ACTIVITY_TYPE.ALUMNI_CAFE,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1671743813000,
+                duration=20,
+                link=None,
+                place="H332",
+                responsible_professors=[
+                    User(name="Rodrigo Santos", role=ROLE.PROFESSOR, user_id="b2f1")
+                ],
+                speakers=[
+                    Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")
+                ],
+                total_slots=2,
+                taken_slots=2,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None
+            )
+        )
+        assert type(activity) == Activity
+        assert len(repo.activities) == len_before + 1
+
+    def test_get_users(self):
+        repo = ActivityRepositoryMock()
+        users = repo.get_users(["12mf", "d7f1"])
+        assert type(users) == list
+        assert all(type(user) == User for user in users)
+        assert len(users) == 2
+
+    def test_get_users_not_found(self):
+        repo = ActivityRepositoryMock()
+        users = repo.get_users(["000", "d7f1"])
+        assert type(users) == list
+        assert all(type(user) == User for user in users)
+        assert len(users) == 1
+

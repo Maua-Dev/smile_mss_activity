@@ -15,25 +15,24 @@ class Test_EnrollActivityUsecase:
     def test_enroll_activity_usecase_accepting_new_enrollments(self):
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
-        enrollment_activity = usecase(repo.users[6].user_id, repo.activities[0].code)
+
+        taken_slots_old = repo.activities[8].taken_slots
+        enrollment_activity = usecase(repo.users[6].user_id, repo.activities[8].code)
 
         assert type(enrollment_activity) == Enrollment
         assert enrollment_activity.user.user_id == repo.users[6].user_id
-        assert enrollment_activity.activity.code == repo.activities[0].code
-        assert enrollment_activity.activity.accepting_new_enrollments == True
-     
+        assert enrollment_activity.activity.code == repo.activities[8].code
+        assert enrollment_activity.state == ENROLLMENT_STATE.ENROLLED
+        assert taken_slots_old + 1 == enrollment_activity.activity.taken_slots
+
     def test_enroll_activity_usecase_in_queue(self):
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
-        taken_slots_old = repo.activities[0].taken_slots
-        enrollment_activity = usecase(repo.users[4].user_id, repo.activities[0].code)
+        enrollment_activity = usecase(repo.users[8].user_id, repo.activities[0].code)
 
         assert type(enrollment_activity) == Enrollment
-        assert enrollment_activity.user.user_id == repo.users[4].user_id
+        assert enrollment_activity.user.user_id == repo.users[8].user_id
         assert enrollment_activity.activity.code == repo.activities[0].code
-        assert enrollment_activity.activity.taken_slots >= enrollment_activity.activity.total_slots
-        assert enrollment_activity.activity.accepting_new_enrollments == True
-        assert taken_slots_old + 1 == enrollment_activity.activity.taken_slots
         assert enrollment_activity.state == ENROLLMENT_STATE.IN_QUEUE
 
     def test_enroll_activity_usecase_enrolled(self):
@@ -93,4 +92,3 @@ class Test_EnrollActivityUsecase:
 
         with pytest.raises(ForbiddenAction):
             enrollment = usecase(usecase(repo.users[4].user_id, repo.activities[12].code))
-    

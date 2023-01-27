@@ -13,18 +13,12 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 
 
 class ActivityRepositoryMock(IActivityRepository):
-
     speakers: List[Speaker]
     users: List[User]
     activities: List[Activity]
     enrollments: List[Enrollment]
 
     def __init__(self):
-        self.speakers = [
-            Speaker(name="Vitor Briquez", bio="Incrível", company="Apple"),
-            Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
-            Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")
-        ]
         self.users = [
             User(name="João Vilas", role=ROLE.ADMIN, user_id="db43"),
             User(name="Bruno Soller", role=ROLE.STUDENT, user_id="b16f"),
@@ -49,16 +43,16 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.COURSES,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305),
+                start_date=1671747413000,
                 duration=120,
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[0]],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=4,
                 taken_slots=4,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 18, 16, 52, 998305)
+                stop_accepting_new_enrollments_before=1671743812000
             ),
             Activity(
                 code="ELET355",
@@ -67,12 +61,12 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671661013000,
                 duration=400,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[self.users[10]],
-                speakers=[self.speakers[1]],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=10,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -85,12 +79,12 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671661013000,
                 duration=60,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[self.users[2], self.users[10]],
-                speakers=[self.speakers[2]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=50,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -103,16 +97,18 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.TECHNICAL_VISITS,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
+                start_date=1672006613000,
                 duration=60,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[0], self.speakers[1], self.speakers[2]],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple"),
+                          Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                          Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=15,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 19, 16, 52, 998305)
+                stop_accepting_new_enrollments_before=1671747413000
             ),
             Activity(
                 code="AC000",
@@ -121,16 +117,16 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.ACADEMIC_COMPETITIONS,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671661013000,
                 duration=190,
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[10]],
-                speakers=[self.speakers[1]],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=50,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)
+                stop_accepting_new_enrollments_before=1671574613000
             ),
             Activity(
                 code="ECM251",
@@ -139,12 +135,12 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.HACKATHON,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=datetime.datetime(2022, 12, 22, 15, 16, 52, 998305),
+                start_date=1671733013000,
                 duration=40,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[self.users[10]],
-                speakers=[self.speakers[2]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=20,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -157,12 +153,12 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.INTERNSHIP_FAIR,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=datetime.datetime(2022, 12, 20, 16, 16, 52, 998305),
+                start_date=1671563813000,
                 duration=80,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[0]],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=10,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -175,12 +171,12 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.ALUMNI_CAFE,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305),
+                start_date=1671661013000,
                 duration=20,
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[10]],
-                speakers=[self.speakers[1]],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=2,
                 taken_slots=2,
                 accepting_new_enrollments=True,
@@ -193,12 +189,12 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.PROFESSORS_ACADEMY,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305),
+                start_date=1671488213000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[2]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=50,
                 taken_slots=0,
                 accepting_new_enrollments=True,
@@ -211,12 +207,12 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
+                start_date=1672006613000,
                 duration=140,
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[0]],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=50,
                 taken_slots=0,
                 accepting_new_enrollments=True,
@@ -229,12 +225,12 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.GCSP,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=datetime.datetime(2022, 12, 25, 19, 16, 52, 998305),
+                start_date=1672006613000,
                 duration=60,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[1]],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=25,
                 taken_slots=0,
                 accepting_new_enrollments=True,
@@ -247,16 +243,16 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.SPORTS_ACTIVITY,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 22, 15, 16, 52, 998305),
+                start_date=1671733013000,
                 duration=45,
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[2]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=3,
                 taken_slots=3,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 22, 15, 16, 51, 998305)
+                stop_accepting_new_enrollments_before=1671733012000
             ),
             Activity(
                 code="PINOQ1",
@@ -265,106 +261,108 @@ class ActivityRepositoryMock(IActivityRepository):
                 activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=datetime.datetime(2022, 12, 2, 15, 16, 52, 998305),
+                start_date=1670005013000,
                 duration=45,
                 link=None,
                 place="H332",
                 responsible_professors=[self.users[2]],
-                speakers=[self.speakers[2], self.speakers[1]],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung"),
+                          Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=10,
                 taken_slots=4,
                 accepting_new_enrollments=False,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 1, 15, 16, 51, 998305)
+                stop_accepting_new_enrollments_before=1669918612000
             ),
 
         ]
 
         self.enrollments = [
             Enrollment(activity=self.activities[0], user=self.users[0], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 16, 19, 16, 52, 998305)),
+                       date_subscribed=1671229013000),
             Enrollment(activity=self.activities[0], user=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 17, 19, 16, 52, 998305)),
+                       date_subscribed=1671315413000),
             Enrollment(activity=self.activities[0], user=self.users[2], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 18, 19, 16, 52, 998305)),
+                       date_subscribed=1671401813000),
             Enrollment(activity=self.activities[0], user=self.users[3], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[0], user=self.users[4], state=ENROLLMENT_STATE.IN_QUEUE,
-                       date_subscribed=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)),
+                       date_subscribed=1671574613000),
             Enrollment(activity=self.activities[0], user=self.users[5], state=ENROLLMENT_STATE.IN_QUEUE,
-                       date_subscribed=datetime.datetime(2022, 12, 20, 19, 17, 52, 998305)),
+                       date_subscribed=1671574673000),
             Enrollment(activity=self.activities[0], user=self.users[6], state=ENROLLMENT_STATE.IN_QUEUE,
-                       date_subscribed=datetime.datetime(2022, 12, 20, 19, 18, 52, 998305)),
+                       date_subscribed=1671574733000),
             Enrollment(activity=self.activities[1], user=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[2], user=self.users[3], state=ENROLLMENT_STATE.DROPPED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 51, 998305)),
+                       date_subscribed=1671488212000),
             Enrollment(activity=self.activities[2], user=self.users[4], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[3], user=self.users[4], state=ENROLLMENT_STATE.REJECTED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[3], user=self.users[5], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)),
+                       date_subscribed=1671574613000),
             Enrollment(activity=self.activities[3], user=self.users[6], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305)),
+                       date_subscribed=1671661013000),
             Enrollment(activity=self.activities[4], user=self.users[5], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 17, 16, 52, 998305)),
+                       date_subscribed=1671481013000),
             Enrollment(activity=self.activities[4], user=self.users[6], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[5], user=self.users[6], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[6], user=self.users[7], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[7], user=self.users[8], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 18, 19, 16, 52, 998305)),
+                       date_subscribed=1671401813000),
             Enrollment(activity=self.activities[7], user=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[7], user=self.users[2], state=ENROLLMENT_STATE.DROPPED,
-                       date_subscribed=datetime.datetime(2022, 12, 20, 19, 16, 52, 998305)),
+                       date_subscribed=1671574613000),
             Enrollment(activity=self.activities[8], user=self.users[9], state=ENROLLMENT_STATE.DROPPED,
-                       date_subscribed=datetime.datetime(2022, 12, 17, 19, 16, 52, 998305)),
+                       date_subscribed=1671315413000),
             Enrollment(activity=self.activities[9], user=self.users[0], state=ENROLLMENT_STATE.DROPPED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[10], user=self.users[1], state=ENROLLMENT_STATE.DROPPED,
-                       date_subscribed=datetime.datetime(2022, 12, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1671488213000),
             Enrollment(activity=self.activities[11], user=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 10, 19, 16, 52, 998305)),
+                       date_subscribed=1670710613000),
             Enrollment(activity=self.activities[11], user=self.users[2], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 11, 19, 16, 52, 998305)),
+                       date_subscribed=1670710614000),
             Enrollment(activity=self.activities[11], user=self.users[3], state=ENROLLMENT_STATE.DROPPED,
-                       date_subscribed=datetime.datetime(2022, 12, 12, 19, 16, 52, 998305)),
+                       date_subscribed=1670710615000),
             Enrollment(activity=self.activities[11], user=self.users[5], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 12, 13, 19, 16, 52, 998305)),
+                       date_subscribed=1670710616000),
             Enrollment(activity=self.activities[11], user=self.users[4], state=ENROLLMENT_STATE.IN_QUEUE,
-                       date_subscribed=datetime.datetime(2022, 12, 21, 19, 16, 52, 998305)),
+                       date_subscribed=1671661013000),
             Enrollment(activity=self.activities[12], user=self.users[1], state=ENROLLMENT_STATE.COMPLETED,
-                       date_subscribed=datetime.datetime(2022, 11, 19, 19, 16, 52, 998305)),
+                       date_subscribed=1668896213000),
             Enrollment(activity=self.activities[12], user=self.users[2], state=ENROLLMENT_STATE.COMPLETED,
-                       date_subscribed=datetime.datetime(2022, 11, 20, 19, 16, 52, 998305)),
+                       date_subscribed=1668982612000),
             Enrollment(activity=self.activities[12], user=self.users[3], state=ENROLLMENT_STATE.COMPLETED,
-                       date_subscribed=datetime.datetime(2022, 11, 21, 19, 16, 52, 998305)),
+                       date_subscribed=1669069013000),
             Enrollment(activity=self.activities[12], user=self.users[4], state=ENROLLMENT_STATE.ENROLLED,
-                       date_subscribed=datetime.datetime(2022, 11, 29, 19, 16, 52, 998305)),
+                       date_subscribed=1669760213000),
         ]
 
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+            if enrollment.user.user_id == user_id and enrollment.activity.code == code and enrollment.state != ENROLLMENT_STATE.DROPPED and enrollment.state != ENROLLMENT_STATE.ACTIVITY_CANCELLED:
                 return enrollment
         return None
 
-    def create_enrollment(self, enrollment : Enrollment) -> Enrollment:
+    def create_enrollment(self, enrollment: Enrollment) -> Enrollment:
         self.enrollments.append(enrollment)
-        self.update_enrollment(enrollment.user.user_id, enrollment.activity.code, ENROLLMENT_STATE.ENROLLED)
+        if enrollment.state == ENROLLMENT_STATE.ENROLLED:
+            self.update_activity(code=enrollment.activity.code, new_taken_slots=enrollment.activity.taken_slots + 1)
 
         return enrollment
-      
-    def get_user(self, user_id : str) -> User:
+
+    def get_user(self, user_id: str) -> User:
         for user in self.users:
             if user.user_id == user_id:
                 return user
         return None
 
-    def get_activity(self, code:str) -> Activity:
+    def get_activity(self, code: str) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 return activity
@@ -391,12 +389,12 @@ class ActivityRepositoryMock(IActivityRepository):
 
     def update_activity(self, code: str, new_title: str = None, new_description: str = None,
                         new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: datetime.datetime = None,
+                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None,
                         new_duration: int = None, new_link: str = None, new_place: str = None,
                         new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None,
                         new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
-                        new_stop_accepting_new_enrollments_before: datetime.datetime = None) -> Activity:
+                        new_stop_accepting_new_enrollments_before: int = None) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 if new_title is not None:
@@ -432,3 +430,43 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity
 
         return None
+
+    def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
+        activities_with_enrollments = list()
+        for activity in self.activities:
+            activity, enrollments = self.get_activity_with_enrollments(code=activity.code)
+            activities_with_enrollments.append((activity, enrollments))
+        return activities_with_enrollments
+
+    def get_all_activities(self) -> List[Activity]:
+        activities = list()
+        for activity in self.activities:
+            activities.append(activity)
+        return activities
+
+    def delete_activity(self, code: str) -> Activity:
+        for idx, activity in enumerate(self.activities):
+            if activity.code == code:
+                return self.activities.pop(idx)
+        return None
+
+    def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
+        new_enrollments = []
+        for enrollment in enrollments:
+            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity.code,
+                                                    new_state=state)
+            new_enrollments.append(new_enrollment)
+
+        return new_enrollments
+
+    def create_activity(self, activity: Activity) -> Activity:
+        self.activities.append(activity)
+
+        return activity
+
+    def get_users(self, user_ids: List[str]) -> List[User]:
+        users = list()
+        for user in self.users:
+            if user.user_id in user_ids:
+                users.append(user)
+        return users
