@@ -19,7 +19,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'COURSE',
                     'is_extensive': False,
                     'delivery_model': 'IN_PERSON',
-                    'start_date': 1671747413000000,
+                    'start_date': 1671747413000,
                     'duration': 120,
                     'link': None,
                     'place': 'H332',
@@ -33,7 +33,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 4,
                     'taken_slots': 4,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671743812000000
+                    'stop_accepting_new_enrollments_before': 1671743812000
                 },
                 {
                     'code': 'ELET355',
@@ -42,7 +42,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'LECTURES',
                     'is_extensive': True,
                     'delivery_model': 'HYBRID',
-                    'start_date': 1671661013000000,
+                    'start_date': 1671661013000,
                     'duration': 400,
                     'link': 'https://devmaua.com',
                     'place': 'H332',
@@ -65,7 +65,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'HIGH_IMPACT_LECTURES',
                     'is_extensive': True,
                     'delivery_model': 'ONLINE',
-                    'start_date': 1671661013000000,
+                    'start_date': 1671661013000,
                     'duration': 60,
                     'link': 'https://devmaua.com',
                     'place': None,
@@ -88,7 +88,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'TECHNICAL_VISITS',
                     'is_extensive': False,
                     'delivery_model': 'ONLINE',
-                    'start_date': 1672006613000000,
+                    'start_date': 1672006613000,
                     'duration': 60,
                     'link': 'https://devmaua.com',
                     'place': None,
@@ -112,7 +112,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 15,
                     'taken_slots': 2,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671747413000000
+                    'stop_accepting_new_enrollments_before': 1671747413000
                 },
                 {
                     'code': 'AC000',
@@ -121,7 +121,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'ACADEMIC_COMPETITIONS',
                     'is_extensive': True,
                     'delivery_model': 'IN_PERSON',
-                    'start_date': 1671661013000000,
+                    'start_date': 1671661013000,
                     'duration': 190,
                     'link': None,
                     'place': 'H332',
@@ -135,7 +135,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 50,
                     'taken_slots': 2,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671574613000000
+                    'stop_accepting_new_enrollments_before': 1671574613000
                 },
                 {
                     'code': 'ECM251',
@@ -144,7 +144,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'HACKATHON',
                     'is_extensive': False,
                     'delivery_model': 'HYBRID',
-                    'start_date': 1671733013000000,
+                    'start_date': 1671733013000,
                     'duration': 40,
                     'link': 'https://devmaua.com',
                     'place': 'H332',
@@ -167,7 +167,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'INTERNSHIP_FAIR',
                     'is_extensive': False,
                     'delivery_model': 'ONLINE',
-                    'start_date': 1671563813000000,
+                    'start_date': 1671563813000,
                     'duration': 80,
                     'link': 'https://devmaua.com',
                     'place': None,
@@ -190,7 +190,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'ALUMNI_CAFE',
                     'is_extensive': True,
                     'delivery_model': 'IN_PERSON',
-                    'start_date': 1671661013000000,
+                    'start_date': 1671661013000,
                     'duration': 20,
                     'link': None,
                     'place': 'H332',
@@ -213,7 +213,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'PROFESSORS_ACADEMY',
                     'is_extensive': True,
                     'delivery_model': 'HYBRID',
-                    'start_date': 1671488213000000,
+                    'start_date': 1671488213000,
                     'duration': 120,
                     'link': 'https://devmaua.com',
                     'place': 'H332',
@@ -236,7 +236,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'CULTURAL_ACTIVITY',
                     'is_extensive': True,
                     'delivery_model': 'IN_PERSON',
-                    'start_date': 1672006613000000,
+                    'start_date': 1672006613000,
                     'duration': 140,
                     'link': None,
                     'place': 'H332',
@@ -259,7 +259,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'GCSP',
                     'is_extensive': False,
                     'delivery_model': 'HYBRID',
-                    'start_date': 1672006613000000,
+                    'start_date': 1672006613000,
                     'duration': 60,
                     'link': 'https://devmaua.com',
                     'place': 'H332',
@@ -282,7 +282,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'SPORTS_ACTIVITY',
                     'is_extensive': False,
                     'delivery_model': 'IN_PERSON',
-                    'start_date': 1671733013000000,
+                    'start_date': 1671733013000,
                     'duration': 45,
                     'link': None,
                     'place': 'H332',
@@ -296,7 +296,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 3,
                     'taken_slots': 3,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671733012000000
+                    'stop_accepting_new_enrollments_before': 1671733012000
                 },
                 {
                     'code': 'PINOQ1',
@@ -305,7 +305,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'activity_type': 'CULTURAL_ACTIVITY',
                     'is_extensive': False,
                     'delivery_model': 'IN_PERSON',
-                    'start_date': 1670005013000000,
+                    'start_date': 1670005013000,
                     'duration': 45,
                     'link': None,
                     'place': 'H332',
@@ -324,7 +324,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 10,
                     'taken_slots': 4,
                     'accepting_new_enrollments': False,
-                    'stop_accepting_new_enrollments_before': 1669918612000000
+                    'stop_accepting_new_enrollments_before': 1669918612000
                 }
             ],
             'message': 'the activities were retrieved'
