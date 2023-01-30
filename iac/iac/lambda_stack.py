@@ -56,3 +56,39 @@ class LambdaStack(Construct):
             mss_student_api_resource=api_gateway_resource,
             environment_variables=environment_variables
         )
+
+        self.get_enrollment_function = self.create_lambda_api_gateway_integration(
+            module_name="create_activity",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables
+        )
+
+        self.get_enrollment_function = self.create_lambda_api_gateway_integration(
+            module_name="delete_activity",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables
+        )
+
+        self.get_enrollment_function = self.create_lambda_api_gateway_integration(
+            module_name="update_activity",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables
+        )
+
+        self.get_enrollment_function = self.create_lambda_api_gateway_integration(
+            module_name="get_all_activities",
+            method="GET",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables
+        )
+
+        self.get_enrollment_function = self.create_lambda_api_gateway_integration(
+            module_name="get_all_activities_admin",
+            method="GET",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables
+        )
+
