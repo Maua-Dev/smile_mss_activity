@@ -35,21 +35,21 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 201
-        assert response.body['code'] == 'ZYX321'
-        assert response.body['title'] == 'Clean Architecture code review!'
-        assert response.body['description'] == "Reviewing IMT student's codes"
-        assert response.body['activity_type'] == 'LECTURES'
-        assert response.body['is_extensive'] == False
-        assert response.body['delivery_model'] == 'IN_PERSON'
-        assert response.body['start_date'] == 1669141012000
-        assert response.body['place'] == 'H331'
-        assert response.body['duration'] == 90
-        assert response.body['responsible_professors'][1]['user_id'] == '12mf'
-        assert response.body['speakers'][0]['name'] == "Robert Cecil Martin"
-        assert response.body['total_slots'] == 100
-        assert response.body['taken_slots'] == 0
-        assert response.body['accepting_new_enrollments'] == True
-        assert response.body['stop_accepting_new_enrollments_before'] == 1666451811000
+        assert response.body['activity']['code'] == 'ZYX321'
+        assert response.body['activity']['title'] == 'Clean Architecture code review!'
+        assert response.body['activity']['description'] == "Reviewing IMT student's codes"
+        assert response.body['activity']['activity_type'] == 'LECTURES'
+        assert response.body['activity']['is_extensive'] == False
+        assert response.body['activity']['delivery_model'] == 'IN_PERSON'
+        assert response.body['activity']['start_date'] == 1669141012000
+        assert response.body['activity']['place'] == 'H331'
+        assert response.body['activity']['duration'] == 90
+        assert response.body['activity']['responsible_professors'][1]['user_id'] == '12mf'
+        assert response.body['activity']['speakers'][0]['name'] == "Robert Cecil Martin"
+        assert response.body['activity']['total_slots'] == 100
+        assert response.body['activity']['taken_slots'] == 0
+        assert response.body['activity']['accepting_new_enrollments'] == True
+        assert response.body['activity']['stop_accepting_new_enrollments_before'] == 1666451811000
 
     def test_create_activity_controller_missing_code(self):
         repo = ActivityRepositoryMock()
