@@ -1,6 +1,6 @@
 from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_usecase import GetEnrollmentsByUserIdUsecase
 from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_viewmodel import \
-    GetEnrollmentsByUserIdViewModel
+    GetEnrollmentsByUserIdViewmodel
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 
@@ -12,7 +12,7 @@ class Test_GetEnrollmentsByUserId:
 
         list_enrollments = usecase(user_id=repo.users[1].user_id)
 
-        viewmodel = GetEnrollmentsByUserIdViewModel(list_enrollments)
+        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments)
 
         expected = {
             'enrollments': [

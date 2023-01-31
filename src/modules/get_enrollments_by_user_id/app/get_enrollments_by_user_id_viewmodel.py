@@ -122,7 +122,7 @@ class EmrollmentViewmodel:
         }
 
 
-class GetEnrollmentsByUserIdViewModel:
+class GetEnrollmentsByUserIdViewmodel:
     enrollments: List[EmrollmentViewmodel]
 
     def __init__(self, enrollments: List[Enrollment]):
