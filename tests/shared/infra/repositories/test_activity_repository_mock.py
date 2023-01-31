@@ -211,3 +211,26 @@ class Test_ActivityRepositoryMock:
         assert all(type(user) == User for user in users)
         assert len(users) == 1
 
+    def test_get_enrollments_by_user_id(self):
+        repo = ActivityRepositoryMock()
+        enrollments = repo.get_enrollments_by_user_id(repo.users[8].user_id)
+        assert type(enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED for enrollment in enrollments)
+        assert len(enrollments) == 1
+
+    def test_get_enrollments_by_user_id_more_enrollments(self):
+        repo = ActivityRepositoryMock()
+        enrollments = repo.get_enrollments_by_user_id(repo.users[1].user_id)
+        assert type(enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED for enrollment in enrollments)
+        assert len(enrollments) == 4
+
+    def test_get_enrollments_by_user_id_no_enrollments(self):
+        repo = ActivityRepositoryMock()
+        enrollments = repo.get_enrollments_by_user_id(repo.users[11].user_id)
+        assert type(enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert len(enrollments) == 0
+
