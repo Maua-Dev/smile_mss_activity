@@ -131,5 +131,5 @@ class GetEnrollmentsByUserIdViewmodel:
     def to_dict(self):
         return {
             "enrollments": [enrollment.to_dict() for enrollment in self.enrollments],
-            "message": "the emrollments were retrieved"
+            "message": "the enrollments were retrieved"
         }

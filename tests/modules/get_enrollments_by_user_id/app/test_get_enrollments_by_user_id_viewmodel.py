@@ -173,7 +173,7 @@ class Test_GetEnrollmentsByUserId:
                     'date_subscribed': 1670710613000
                 }
             ],
-            'message': "the emrollments were retrieved"
+            'message': "the enrollments were retrieved"
         }
 
         assert viewmodel.to_dict() == expected
