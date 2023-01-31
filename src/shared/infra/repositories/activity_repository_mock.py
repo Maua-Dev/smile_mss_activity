@@ -474,6 +474,6 @@ class ActivityRepositoryMock(IActivityRepository):
     def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
         enrollments = list()
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id:
+            if enrollment.user.user_id == user_id and enrollment.state == ENROLLMENT_STATE.ENROLLED:
                 enrollments.append(enrollment)
         return enrollments
