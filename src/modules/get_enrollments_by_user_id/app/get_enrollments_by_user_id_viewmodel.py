@@ -101,7 +101,7 @@ class ActivityViewmodel:
             "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None}
 
 
-class EmrollmentViewmodel:
+class EnrollmentViewmodel:
     activity: ActivityViewmodel
     user: UserViewmodel
     state: ENROLLMENT_STATE
@@ -123,10 +123,10 @@ class EmrollmentViewmodel:
 
 
 class GetEnrollmentsByUserIdViewmodel:
-    enrollments: List[EmrollmentViewmodel]
+    enrollments: List[EnrollmentViewmodel]
 
     def __init__(self, enrollments: List[Enrollment]):
-        self.enrollments = [EmrollmentViewmodel(enrollment) for enrollment in enrollments]
+        self.enrollments = [EnrollmentViewmodel(enrollment) for enrollment in enrollments]
 
     def to_dict(self):
         return {
