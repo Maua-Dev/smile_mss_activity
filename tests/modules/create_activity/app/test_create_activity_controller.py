@@ -44,7 +44,7 @@ class Test_CreateActivityController:
         assert response.body['activity']['start_date'] == 1669141012000
         assert response.body['activity']['place'] == 'H331'
         assert response.body['activity']['duration'] == 90
-        assert response.body['activity']['responsible_professors'][1]['user_id'] == '12mf'
+        assert response.body['activity']['responsible_professors'][1]['user_id'] == '62cafdd4-a110-11ed-a8fc-0242ac120002'
         assert response.body['activity']['speakers'][0]['name'] == "Robert Cecil Martin"
         assert response.body['activity']['total_slots'] == 100
         assert response.body['activity']['taken_slots'] == 0
