@@ -205,7 +205,7 @@ class Test_CreateActivityUsecase:
                             company="Clean Architecture Company",
                         )
                     ],
-                    responsible_professors_user_id=[repo.users[2].user_id, "0000"])
+                    responsible_professors_user_id=[repo.users[2].user_id, "0000-0000-00000-000000-0000000-00000"])
 
     def test_create_activity_usecase_invalid_zero_responsible_professor(self):
             repo = ActivityRepositoryMock()
@@ -245,4 +245,4 @@ class Test_CreateActivityUsecase:
                                 company="Clean Architecture Company",
                             )
                         ],
-                        responsible_professors_user_id="0000")
+                        responsible_professors_user_id="0000-0000-00000-000000-0000000-00000")

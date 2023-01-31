@@ -68,7 +68,7 @@ class Test_UpdateActivityUsecase:
                                   new_duration=120,
                                   new_link=None,
                                   new_place="H332",
-                                  new_responsible_professors_user_id=["d7f1"],
+                                  new_responsible_professors_user_id=["03555624-a110-11ed-a8fc-0242ac120002"],
                                   new_speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                                   new_total_slots=4,
                                   new_accepting_new_enrollments=True,

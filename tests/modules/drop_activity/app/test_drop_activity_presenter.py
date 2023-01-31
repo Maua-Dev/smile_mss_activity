@@ -51,7 +51,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "b16f", "code": "ELET355"}',
+            "body": '{"user_id": "0355535e-a110-11ed-a8fc-0242ac120002", "code": "ELET355"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -165,7 +165,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "b16f"}',
+            "body": '{"user_id": "0355535e-a110-11ed-a8fc-0242ac120002"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -278,7 +278,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "b16f", "code": 3}',
+            "body": '{"user_id": "0355535e-a110-11ed-a8fc-0242ac120002", "code": 3}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -335,7 +335,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "9257", "code": "CODIGO"}',
+            "body": '{"user_id": "03555872-a110-11ed-a8fc-0242ac120002", "code": "CODIGO"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -392,7 +392,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "80fb", "code": "CODIGO_INEXISTENTE"}',
+            "body": '{"user_id": "0355573c-a110-11ed-a8fc-0242ac120002", "code": "CODIGO_INEXISTENTE"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -449,7 +449,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "0000", "code": "COD1468"}',
+            "body": '{"user_id": "0000-0000-00000-000000-0000000-00000", "code": "COD1468"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None

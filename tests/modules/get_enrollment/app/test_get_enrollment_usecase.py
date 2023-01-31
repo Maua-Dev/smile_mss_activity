@@ -21,7 +21,7 @@ class Test_GetEnrollmentUsecase:
         usecase = GetEnrollmentUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            enrollment = usecase(user_id="0000", code=repo.enrollments[3].activity.code)
+            enrollment = usecase(user_id="0000-0000-00000-000000-0000000-00000", code=repo.enrollments[3].activity.code)
 
     def test_get_enrollment_usecase_with_wrong_code(self):
         repo = ActivityRepositoryMock()

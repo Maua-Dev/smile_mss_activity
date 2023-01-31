@@ -28,7 +28,7 @@ class Test_UpdateActivityViewmodel:
                     {
                         'name': 'Caio Toledo',
                         'role': 'PROFESSOR',
-                        'user_id': 'd7f1'}],
+                        'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
                 'speakers': [{'bio': 'Incrível',
                               'company': 'Apple',
                               'name': 'Vitor Briquez'}],

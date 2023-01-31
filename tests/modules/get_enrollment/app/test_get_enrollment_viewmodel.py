@@ -16,14 +16,14 @@ class Test_GetEnrollmentViewmodel:
                                  'activity_type': 'TECHNICAL_VISITS', 'is_extensive': False, 'delivery_model': 'ONLINE',
                                  'start_date': 1672006613000, 'duration': 60,
                                  'link': 'https://devmaua.com', 'place': None, 'responsible_professors': [
-                {'name': 'Caio Toledo', 'user_id': 'd7f1', 'role': 'PROFESSOR'}],
+                {'name': 'Caio Toledo', 'user_id': '03555624-a110-11ed-a8fc-0242ac120002', 'role': 'PROFESSOR'}],
                                  'speakers': [{'name': 'Vitor Briquez', 'bio': 'Incrível', 'company': 'Apple'},
                                               {'name': 'Lucas Soller', 'bio': 'Daora', 'company': 'Microsoft'},
                                               {'name': 'Daniel Romanato', 'bio': 'Buscando descobrir o mundo',
                                                'company': 'Samsung'}], 'total_slots': 15, 'taken_slots': 2,
                                  'accepting_new_enrollments': True,
                                  'stop_accepting_new_enrollments_before': 1671747413000},
-                    'user': {'name': 'Marcos Romanato', 'user_id': 'bea2', 'role': 'STUDENT'}, 'state': 'ENROLLED',
+                    'user': {'name': 'Marcos Romanato', 'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002', 'role': 'STUDENT'}, 'state': 'ENROLLED',
                     'date_subscribed': 1671661013000, 'message': 'the enrollment was retrieved'}
 
         assert get_enrollment_viewmodel == expected
@@ -40,11 +40,11 @@ class Test_GetEnrollmentViewmodel:
                                  'is_extensive': True, 'delivery_model': 'HYBRID',
                                  'start_date': 1671661013000, 'duration': 400,
                                  'link': 'https://devmaua.com', 'place': 'H332', 'responsible_professors': [
-                {'name': 'Patricia Santos', 'user_id': 'c695', 'role': 'PROFESSOR'}],
+                {'name': 'Patricia Santos', 'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002', 'role': 'PROFESSOR'}],
                                  'speakers': [{'name': 'Lucas Soller', 'bio': 'Daora', 'company': 'Microsoft'}],
                                  'total_slots': 10, 'taken_slots': 1, 'accepting_new_enrollments': True,
                                  'stop_accepting_new_enrollments_before': None},
-                    'user': {'name': 'Bruno Soller', 'user_id': 'b16f', 'role': 'STUDENT'}, 'state': 'ENROLLED',
+                    'user': {'name': 'Bruno Soller', 'user_id': '0355535e-a110-11ed-a8fc-0242ac120002', 'role': 'STUDENT'}, 'state': 'ENROLLED',
                     'date_subscribed': 1671488213000, 'message': 'the enrollment was retrieved'}
 
         assert get_enrollment_viewmodel == expected

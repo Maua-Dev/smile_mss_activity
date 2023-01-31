@@ -29,7 +29,7 @@ class Test_Activity:
                 User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 )
             ],
             speakers=[
@@ -77,7 +77,7 @@ class Test_Activity:
                 User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 )
             ],
             speakers=[
@@ -125,7 +125,7 @@ class Test_Activity:
                 User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 )
             ],
             speakers=[
@@ -175,7 +175,7 @@ class Test_Activity:
                 User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 )
             ],
             speakers=[
@@ -208,7 +208,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -240,7 +240,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -272,7 +272,7 @@ class Test_Activity:
                         User(
                             name="Marcos",
                             role=ROLE.PROFESSOR,
-                            user_id="123d"
+                            user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                         )
                     ],
                     speakers=[
@@ -304,7 +304,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -336,7 +336,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -368,7 +368,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -400,7 +400,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -432,7 +432,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -464,7 +464,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -496,7 +496,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -528,7 +528,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -560,7 +560,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -623,7 +623,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )],
                 speakers=[
                     Speaker(
@@ -653,12 +653,12 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.STUDENT,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     ),
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )],
                 speakers=[
                     Speaker(
@@ -689,7 +689,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     ),
                     Speaker(
                         name="Marcos Tales",
@@ -722,14 +722,14 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
                     User(
                         name="Marcos",
                         role=ROLE.STUDENT,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 total_slots=120,
@@ -755,7 +755,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -788,7 +788,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -821,7 +821,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -853,7 +853,7 @@ class Test_Activity:
                 User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 )
             ],
             speakers=[
@@ -888,7 +888,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[
@@ -920,7 +920,7 @@ class Test_Activity:
                     User(
                         name="Marcos",
                         role=ROLE.PROFESSOR,
-                        user_id="123d"
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                     )
                 ],
                 speakers=[

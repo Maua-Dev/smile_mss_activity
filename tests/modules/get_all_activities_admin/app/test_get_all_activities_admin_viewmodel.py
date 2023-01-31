@@ -26,7 +26,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -45,7 +45,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'João Vilas',
-                                'user_id': 'db43',
+                                'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002',
                                 'role': 'ADMIN'
                             },
                             'state': 'ENROLLED',
@@ -54,7 +54,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Bruno Soller',
-                                'user_id': 'b16f',
+                                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -63,7 +63,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Caio Toledo',
-                                'user_id': 'd7f1',
+                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                                 'role': 'PROFESSOR'
                             },
                             'state': 'ENROLLED',
@@ -72,7 +72,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Pedro Marcelino',
-                                'user_id': '80fb',
+                                'user_id': '0355573c-a110-11ed-a8fc-0242ac120002',
                                 'role': 'INTERNATIONAL_STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -81,7 +81,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Hector Guerrini',
-                                'user_id': '9257',
+                                'user_id': '03555872-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EXTERNAL'
                             },
                             'state': 'IN_QUEUE',
@@ -90,7 +90,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Ricardo Soller',
-                                'user_id': 'f664',
+                                'user_id': '2f0df47e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EMPLOYEE'
                             },
                             'state': 'IN_QUEUE',
@@ -99,7 +99,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Marcos Romanato',
-                                'user_id': 'bea2',
+                                'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'IN_QUEUE',
@@ -121,7 +121,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Patricia Santos',
-                            'user_id': 'c695',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -140,7 +140,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Bruno Soller',
-                                'user_id': 'b16f',
+                                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -162,12 +162,12 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         },
                         {
                             'name': 'Patricia Santos',
-                            'user_id': 'c695',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -186,7 +186,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Pedro Marcelino',
-                                'user_id': '80fb',
+                                'user_id': '0355573c-a110-11ed-a8fc-0242ac120002',
                                 'role': 'INTERNATIONAL_STUDENT'
                             },
                             'state': 'DROPPED',
@@ -195,7 +195,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Hector Guerrini',
-                                'user_id': '9257',
+                                'user_id': '03555872-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EXTERNAL'
                             },
                             'state': 'ENROLLED',
@@ -217,7 +217,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -246,7 +246,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Hector Guerrini',
-                                'user_id': '9257',
+                                'user_id': '03555872-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EXTERNAL'
                             },
                             'state': 'REJECTED',
@@ -255,7 +255,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Ricardo Soller',
-                                'user_id': 'f664',
+                                'user_id': '2f0df47e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EMPLOYEE'
                             },
                             'state': 'ENROLLED',
@@ -264,7 +264,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Marcos Romanato',
-                                'user_id': 'bea2',
+                                'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -286,7 +286,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Patricia Santos',
-                            'user_id': 'c695',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -305,7 +305,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Ricardo Soller',
-                                'user_id': 'f664',
+                                'user_id': '2f0df47e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EMPLOYEE'
                             },
                             'state': 'ENROLLED',
@@ -314,7 +314,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Marcos Romanato',
-                                'user_id': 'bea2',
+                                'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -336,7 +336,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Patricia Santos',
-                            'user_id': 'c695',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -355,7 +355,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Marcos Romanato',
-                                'user_id': 'bea2',
+                                'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -377,7 +377,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -396,7 +396,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Marco Briquez',
-                                'user_id': 'f26f',
+                                'user_id': '452a5f9a-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -418,7 +418,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Patricia Santos',
-                            'user_id': 'c695',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -437,7 +437,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Simone Romanato',
-                                'user_id': 'd23a',
+                                'user_id': '4d1d64ae-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EXTERNAL'
                             },
                             'state': 'ENROLLED',
@@ -446,7 +446,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Bruno Soller',
-                                'user_id': 'b16f',
+                                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -455,7 +455,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Caio Toledo',
-                                'user_id': 'd7f1',
+                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                                 'role': 'PROFESSOR'
                             },
                             'state': 'DROPPED',
@@ -477,7 +477,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -496,7 +496,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Viviani Soller',
-                                'user_id': 'd673',
+                                'user_id': '5a49ad2c-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EXTERNAL'
                             },
                             'state': 'DROPPED',
@@ -518,7 +518,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -537,7 +537,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'João Vilas',
-                                'user_id': 'db43',
+                                'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002',
                                 'role': 'ADMIN'
                             },
                             'state': 'DROPPED',
@@ -559,7 +559,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -578,7 +578,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Bruno Soller',
-                                'user_id': 'b16f',
+                                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'DROPPED',
@@ -600,7 +600,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -619,7 +619,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Bruno Soller',
-                                'user_id': 'b16f',
+                                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'ENROLLED',
@@ -628,7 +628,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Caio Toledo',
-                                'user_id': 'd7f1',
+                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                                 'role': 'PROFESSOR'
                             },
                             'state': 'ENROLLED',
@@ -637,7 +637,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Pedro Marcelino',
-                                'user_id': '80fb',
+                                'user_id': '0355573c-a110-11ed-a8fc-0242ac120002',
                                 'role': 'INTERNATIONAL_STUDENT'
                             },
                             'state': 'DROPPED',
@@ -646,7 +646,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Ricardo Soller',
-                                'user_id': 'f664',
+                                'user_id': '2f0df47e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EMPLOYEE'
                             },
                             'state': 'ENROLLED',
@@ -655,7 +655,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Hector Guerrini',
-                                'user_id': '9257',
+                                'user_id': '03555872-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EXTERNAL'
                             },
                             'state': 'IN_QUEUE',
@@ -677,7 +677,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'user_id': 'd7f1',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                             'role': 'PROFESSOR'
                         }
                     ],
@@ -701,7 +701,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Bruno Soller',
-                                'user_id': 'b16f',
+                                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
                                 'role': 'STUDENT'
                             },
                             'state': 'COMPLETED',
@@ -710,7 +710,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Caio Toledo',
-                                'user_id': 'd7f1',
+                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
                                 'role': 'PROFESSOR'
                             },
                             'state': 'COMPLETED',
@@ -719,7 +719,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Pedro Marcelino',
-                                'user_id': '80fb',
+                                'user_id': '0355573c-a110-11ed-a8fc-0242ac120002',
                                 'role': 'INTERNATIONAL_STUDENT'
                             },
                             'state': 'COMPLETED',
@@ -728,7 +728,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         {
                             'user': {
                                 'name': 'Hector Guerrini',
-                                'user_id': '9257',
+                                'user_id': '03555872-a110-11ed-a8fc-0242ac120002',
                                 'role': 'EXTERNAL'
                             },
                             'state': 'ENROLLED',

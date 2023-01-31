@@ -88,7 +88,7 @@ class Test_DropActivityUsecase:
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(EntityError):
-            dropped_enrollment = usecase("b16f1", "ELET355")
+            dropped_enrollment = usecase("0355535e-a110-11ed-a8fc-0242ac1200021", "ELET355")
 
 
     def test_drop_activity_usecase_invalid_code(self):
@@ -96,14 +96,14 @@ class Test_DropActivityUsecase:
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(EntityError):
-            dropped_enrollment = usecase("b16f", 123)
+            dropped_enrollment = usecase("0355535e-a110-11ed-a8fc-0242ac120002", 123)
 
     def test_drop_activity_usecase_no_activity_found(self):
         repo = ActivityRepositoryMock()
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            dropped_enrollment = usecase("b16f", "CODIGO_INEXISTENTE")
+            dropped_enrollment = usecase("0355535e-a110-11ed-a8fc-0242ac120002", "CODIGO_INEXISTENTE")
 
 
     def test_drop_activity_usecase_no_enrollment_found(self):
@@ -111,6 +111,6 @@ class Test_DropActivityUsecase:
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            dropped_enrollment = usecase("0000", "ELET355")
+            dropped_enrollment = usecase("0000-0000-00000-000000-0000000-00000", "ELET355")
 
 
