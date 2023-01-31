@@ -15,7 +15,7 @@ class Test_CreateActivityViewmodel:
         user = User(
             name = "Dummy Name",
             role = ROLE.PROFESSOR,
-            user_id = "a1z2"
+            user_id = "71f06f24-a110-11ed-a8fc-0242ac120002"
         )
 
 
@@ -60,7 +60,7 @@ class Test_CreateActivityViewmodel:
             "responsible_professors":[{ 
                 "name":"Dummy Name",
                 "role":"PROFESSOR",
-                "user_id":"a1z2"
+                "user_id":"71f06f24-a110-11ed-a8fc-0242ac120002"
             }],
             "speakers":[{
                 "name":"Robert Cecil Martin",
@@ -81,7 +81,7 @@ class Test_CreateActivityViewmodel:
             user = User(
                 name = "Dummy Name",
                 role = ROLE.PROFESSOR,
-                user_id = "a1z2"
+                user_id = "71f06f24-a110-11ed-a8fc-0242ac120002"
             )
 
 
@@ -125,7 +125,7 @@ class Test_CreateActivityViewmodel:
                 "responsible_professors":[{
                     "name":"Dummy Name",
                     "role":"PROFESSOR",
-                    "user_id":"a1z2"
+                    "user_id":"71f06f24-a110-11ed-a8fc-0242ac120002"
                 }],
                 "speakers":[{
                     "name":"Robert Cecil Martin",

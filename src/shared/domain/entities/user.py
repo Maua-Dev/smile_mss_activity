@@ -8,7 +8,7 @@ class User(abc.ABC):
     role: ROLE
     user_id: str
     MIN_NAME_LENGTH = 2
-    USER_ID_LENGTH = 4
+    USER_ID_LENGTH = 36
 
     def __init__(self, name: str, role: ROLE, user_id: str):
         if not User.validate_name(name):

@@ -21,7 +21,7 @@ class Test_EnrollActivityController:
         assert response.status_code == 200
         assert response.body['message'] == "the enrollment was enrolled"
         assert response.body['activity']['code'] == "COD1468"
-        assert response.body['user']['user_id'] == "80fb"
+        assert response.body['user']['user_id'] == "0355573c-a110-11ed-a8fc-0242ac120002"
         assert response.body['state'] == "ENROLLED"
         assert response.body['activity']['stop_accepting_new_enrollments_before'] == None
 
@@ -112,7 +112,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': '0000', 'code':repo.enrollments[0].activity.code})
+        request = HttpRequest(body={'user_id': "0000-0000-00000-000000-0000000-00000", 'code':repo.enrollments[0].activity.code})
 
         response = controller(request)
 

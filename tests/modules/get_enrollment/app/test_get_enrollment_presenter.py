@@ -20,7 +20,7 @@ class Test_GetEnrollmentPresenter:
                 "header2": "value1,value2"
             },
             "queryStringParameters": {
-                'user_id': "db43",
+                'user_id': "d61dbf66-a10f-11ed-a8fc-0242ac120002",
                 'code': "ECM2345"
             },
             "requestContext": {
@@ -77,7 +77,7 @@ class Test_GetEnrollmentPresenter:
                     "header2": "value1,value2"
                 },
                 "queryStringParameters": {
-                    'user_id': "db43",
+                    'user_id': "d61dbf66-a10f-11ed-a8fc-0242ac120002",
                     'code': "ECM2341"
                 },
                 "requestContext": {
