@@ -177,3 +177,20 @@ class Test_GetEnrollmentsByUserId:
         }
 
         assert viewmodel.to_dict() == expected
+
+    def test_get_enrollments_by_user_id_viewmodel_zero_enrollments(self):
+        repo = ActivityRepositoryMock()
+        usecase = GetEnrollmentsByUserIdUsecase(repo)
+
+        list_enrollments = usecase(user_id=repo.users[11].user_id)
+
+        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments)
+
+        expected = {
+            'enrollments': [
+
+            ],
+            'message': 'the enrollments were retrieved'
+        }
+
+        assert viewmodel.to_dict() == expected
