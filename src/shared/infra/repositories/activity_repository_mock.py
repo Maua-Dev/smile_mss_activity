@@ -470,3 +470,10 @@ class ActivityRepositoryMock(IActivityRepository):
             if user.user_id in user_ids:
                 users.append(user)
         return users
+
+    def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
+        enrollments = list()
+        for enrollment in self.enrollments:
+            if enrollment.user.user_id == user_id:
+                enrollments.append(enrollment)
+        return enrollments

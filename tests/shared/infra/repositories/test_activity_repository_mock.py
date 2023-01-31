@@ -211,3 +211,9 @@ class Test_ActivityRepositoryMock:
         assert all(type(user) == User for user in users)
         assert len(users) == 1
 
+    def test_get_enrollments_by_user_id(self):
+        repo = ActivityRepositoryMock()
+        enrollments = repo.get_enrollments_by_user_id(repo.users[8].user_id)
+        assert type(enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert len(enrollments) == 1

@@ -110,3 +110,7 @@ class IActivityRepository(ABC):
     @abstractmethod
     def get_users(self, user_ids: List[str]) -> List[User]:
         pass
+
+    @abstractmethod
+    def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
+        pass
