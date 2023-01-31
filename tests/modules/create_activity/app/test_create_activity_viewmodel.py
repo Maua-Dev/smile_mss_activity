@@ -18,11 +18,10 @@ class Test_CreateActivityViewmodel:
             user_id = "71f06f24-a110-11ed-a8fc-0242ac120002"
         )
 
-
         speaker = Speaker(
-            name = "Robert Cecil Martin",
-            bio = "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-            company = "Clean Architecture Company"
+            name="Robert Cecil Martin",
+            bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+            company="Clean Architecture Company"
         )
 
         activity = Activity(
@@ -45,7 +44,7 @@ class Test_CreateActivityViewmodel:
         )
 
         activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
-        
+
         expected = {
             "code":"ZYX321",
             "title":"Clean Architecture code review!",
