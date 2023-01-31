@@ -61,7 +61,47 @@ class Test_GetEnrollmentsByUserIdPresenter:
         response = lambda_handler(event, None)
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['message'] == "the enrollments were retrieved"
-        assert type(json.loads(response["body"])['enrollments']) == list
+        assert json.loads(response["body"])['enrollments'] == [
+            {
+                'activity': {
+                    'code': 'ECM2345',
+                    'title': 'Atividade da ECM 2345',
+                    'description': 'Isso é uma atividade',
+                    'activity_type': 'COURSE',
+                    'is_extensive': False,
+                    'delivery_model': 'IN_PERSON',
+                    'start_date': 1671747413000,
+                    'duration': 120,
+                    'link': None,
+                    'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
+                            'role': 'PROFESSOR'
+                        }
+                    ],
+                    'speakers': [
+                        {
+                            'name': 'Vitor Briquez',
+                            'bio': 'Incrível',
+                            'company': 'Apple'
+                        }
+                    ],
+                    'total_slots': 4,
+                    'taken_slots': 4,
+                    'accepting_new_enrollments': True,
+                    'stop_accepting_new_enrollments_before': 1671743812000
+                },
+                'user': {
+                    'name': 'João Vilas',
+                    'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002',
+                    'role': 'ADMIN'
+                },
+                'state': 'ENROLLED',
+                'date_subscribed': 1671229013000
+            }
+        ]
 
     def test_get_enrollmenst_by_user_id_presenter_400(self):
         event = {
