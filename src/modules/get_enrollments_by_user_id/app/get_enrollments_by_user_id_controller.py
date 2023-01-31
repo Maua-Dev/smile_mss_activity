@@ -1,5 +1,5 @@
-from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_usecase import GetEnrollmentsByUserIdUsecase
-from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_viewmodel import \
+from .get_enrollments_by_user_id_usecase import GetEnrollmentsByUserIdUsecase
+from .get_enrollments_by_user_id_viewmodel import \
     GetEnrollmentsByUserIdViewmodel
 
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
