@@ -61,6 +61,7 @@ class Test_GetEnrollmentsByUserIdPresenter:
         response = lambda_handler(event, None)
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['message'] == "the enrollments were retrieved"
+        assert type(json.loads(response["body"])['enrollments']) == list
 
     def test_get_enrollmenst_by_user_id_presenter_400(self):
         event = {
