@@ -16,13 +16,13 @@ class Test_ActivityRepositoryMock:
 
     def test_get_enrollment(self):
         repo = ActivityRepositoryMock()
-        enrollment = repo.get_enrollment('db43', 'ECM2345')
+        enrollment = repo.get_enrollment('d61dbf66-a10f-11ed-a8fc-0242ac120002', 'ECM2345')
 
         assert type(enrollment) == Enrollment
 
     def test_get_enrollment_not_exists(self):
         repo = ActivityRepositoryMock()
-        enrollment = repo.get_enrollment('db43', 'CODIGO_INEXISTENTE')
+        enrollment = repo.get_enrollment('d61dbf66-a10f-11ed-a8fc-0242ac120002', 'CODIGO_INEXISTENTE')
         assert enrollment is None
 
     def test_get_activity(self):
@@ -39,7 +39,7 @@ class Test_ActivityRepositoryMock:
 
     def test_get_user(self):
         repo = ActivityRepositoryMock()
-        user = repo.get_user('db43')
+        user = repo.get_user('d61dbf66-a10f-11ed-a8fc-0242ac120002')
         assert type(user) == User  
 
     def test_get_user_not_exists(self):
@@ -51,7 +51,7 @@ class Test_ActivityRepositoryMock:
         repo = ActivityRepositoryMock()
         enrollment = Enrollment(
             repo.get_activity('ECM2345'),
-            repo.get_user('db43'),
+            repo.get_user('d61dbf66-a10f-11ed-a8fc-0242ac120002'),
             state=ENROLLMENT_STATE.ENROLLED,
             date_subscribed=1671229013000
         )
@@ -62,7 +62,7 @@ class Test_ActivityRepositoryMock:
 
         assert type(enrollment_created) == Enrollment
         assert repo.enrollments[0].activity == repo.get_activity('ECM2345')
-        assert repo.enrollments[0].user == repo.get_user('db43')
+        assert repo.enrollments[0].user == repo.get_user('d61dbf66-a10f-11ed-a8fc-0242ac120002')
         assert repo.enrollments[0].state == ENROLLMENT_STATE.ENROLLED
         assert repo.enrollments[0].date_subscribed == 1671229013000
         assert len_before == len_after - 1
@@ -70,7 +70,7 @@ class Test_ActivityRepositoryMock:
     def test_update_enrollment_drop(self):
         repo = ActivityRepositoryMock()
         taken_slots_before = repo.activities[0].taken_slots
-        enrollment = repo.update_enrollment(user_id="db43", code="ECM2345", new_state=ENROLLMENT_STATE.DROPPED)
+        enrollment = repo.update_enrollment(user_id="d61dbf66-a10f-11ed-a8fc-0242ac120002", code="ECM2345", new_state=ENROLLMENT_STATE.DROPPED)
 
         assert repo.activities[0].taken_slots == taken_slots_before - 1
         assert type(enrollment) == Enrollment
@@ -79,7 +79,7 @@ class Test_ActivityRepositoryMock:
     def test_update_enrollment_enroll(self):
         repo = ActivityRepositoryMock()
         taken_slots_before = repo.activities[0].taken_slots
-        enrollment = repo.update_enrollment(user_id="9257", code="ECM2345", new_state=ENROLLMENT_STATE.ENROLLED)
+        enrollment = repo.update_enrollment(user_id="03555872-a110-11ed-a8fc-0242ac120002", code="ECM2345", new_state=ENROLLMENT_STATE.ENROLLED)
 
         assert repo.activities[0].taken_slots == taken_slots_before + 1
         assert type(enrollment) == Enrollment
@@ -183,7 +183,7 @@ class Test_ActivityRepositoryMock:
                 link=None,
                 place="H332",
                 responsible_professors=[
-                    User(name="Rodrigo Santos", role=ROLE.PROFESSOR, user_id="b2f1")
+                    User(name="Rodrigo Santos", role=ROLE.PROFESSOR, user_id="71f06f24-a110-11ed-a8fc-0242ac120002")
                 ],
                 speakers=[
                     Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")
@@ -199,15 +199,38 @@ class Test_ActivityRepositoryMock:
 
     def test_get_users(self):
         repo = ActivityRepositoryMock()
-        users = repo.get_users(["12mf", "d7f1"])
+        users = repo.get_users(["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"])
         assert type(users) == list
         assert all(type(user) == User for user in users)
         assert len(users) == 2
 
     def test_get_users_not_found(self):
         repo = ActivityRepositoryMock()
-        users = repo.get_users(["000", "d7f1"])
+        users = repo.get_users(["000", "03555624-a110-11ed-a8fc-0242ac120002"])
         assert type(users) == list
         assert all(type(user) == User for user in users)
         assert len(users) == 1
+
+    def test_get_enrollments_by_user_id(self):
+        repo = ActivityRepositoryMock()
+        enrollments = repo.get_enrollments_by_user_id(repo.users[8].user_id)
+        assert type(enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED for enrollment in enrollments)
+        assert len(enrollments) == 1
+
+    def test_get_enrollments_by_user_id_more_enrollments(self):
+        repo = ActivityRepositoryMock()
+        enrollments = repo.get_enrollments_by_user_id(repo.users[1].user_id)
+        assert type(enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED for enrollment in enrollments)
+        assert len(enrollments) == 4
+
+    def test_get_enrollments_by_user_id_no_enrollments(self):
+        repo = ActivityRepositoryMock()
+        enrollments = repo.get_enrollments_by_user_id(repo.users[11].user_id)
+        assert type(enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert len(enrollments) == 0
 

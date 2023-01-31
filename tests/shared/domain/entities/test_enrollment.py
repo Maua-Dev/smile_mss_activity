@@ -30,7 +30,7 @@ class Test_Enrollment:
                 User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 )
             ],
             speakers=[
@@ -48,7 +48,7 @@ class Test_Enrollment:
             user=User(
                 name="Marcos",
                 role=ROLE.PROFESSOR,
-                user_id="123d"
+                user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
             ),
             state=ENROLLMENT_STATE.ENROLLED,
             date_subscribed=1671728165000
@@ -68,7 +68,7 @@ class Test_Enrollment:
                 user=User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 ),
                 state=ENROLLMENT_STATE.ENROLLED,
                 date_subscribed=1671728165000
@@ -92,7 +92,7 @@ class Test_Enrollment:
                         User(
                             name="Marcos",
                             role=ROLE.PROFESSOR,
-                            user_id="123d"
+                            user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                         )
                     ],
                     speakers=[
@@ -130,7 +130,7 @@ class Test_Enrollment:
                         User(
                             name="Marcos",
                             role=ROLE.PROFESSOR,
-                            user_id="123d"
+                            user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                         )
                     ],
                     speakers=[
@@ -148,7 +148,7 @@ class Test_Enrollment:
                 user=User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 ),
                 state="ENROLLED",
                 date_subscribed=1671728165000
@@ -172,7 +172,7 @@ class Test_Enrollment:
                         User(
                             name="Marcos",
                             role=ROLE.PROFESSOR,
-                            user_id="123d"
+                            user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                         )
                     ],
                     speakers=[
@@ -190,7 +190,7 @@ class Test_Enrollment:
                 user=User(
                     name="Marcos",
                     role=ROLE.PROFESSOR,
-                    user_id="123d"
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
                 ),
                 state=ENROLLMENT_STATE.ENROLLED,
                 date_subscribed="2022-12-22 13:56:05.430523"

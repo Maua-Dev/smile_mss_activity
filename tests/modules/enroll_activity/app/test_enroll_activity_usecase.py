@@ -61,14 +61,14 @@ class Test_EnrollActivityUsecase:
         usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(EntityError):
-            enrollment_activity = usecase('b16f', 852)
+            enrollment_activity = usecase('0355535e-a110-11ed-a8fc-0242ac120002', 852)
 
     def test_enroll_activity_usecase_user_already_enrolled(self):
         repo = ActivityRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(ForbiddenAction):
-            enrollment_activity = usecase('b16f', 'ELET355')
+            enrollment_activity = usecase('0355535e-a110-11ed-a8fc-0242ac120002', 'ELET355')
 
     def test_enroll_activity_usecase_activity_none(self):
 
@@ -84,7 +84,7 @@ class Test_EnrollActivityUsecase:
         usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            enrollment_activity = usecase('0000', repo.activities[0].code)
+            enrollment_activity = usecase("0000-0000-00000-000000-0000000-00000", repo.activities[0].code)
 
     def test_enroll_activity_usecase_not_accepting_new_enrollment(self):
         repo = ActivityRepositoryMock()

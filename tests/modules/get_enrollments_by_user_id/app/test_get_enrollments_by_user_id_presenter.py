@@ -1,11 +1,11 @@
 import json
 
-from src.modules.get_enrollment.app.get_enrollment_presenter import lambda_handler
+from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_presenter import lambda_handler
 
 
-class Test_GetEnrollmentPresenter:
+class Test_GetEnrollmentsByUserIdPresenter:
 
-    def test_get_enrollment_presenter(self):
+    def test_get_enrollmenst_by_user_id_presenter(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -21,7 +21,6 @@ class Test_GetEnrollmentPresenter:
             },
             "queryStringParameters": {
                 'user_id': "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                'code': "ECM2345"
             },
             "requestContext": {
                 "accountId": "123456789012",
@@ -61,66 +60,50 @@ class Test_GetEnrollmentPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 200
-
-    def test_get_enrollment_presenter_404(self):
-            event = {
-                "version": "2.0",
-                "routeKey": "$default",
-                "rawPath": "/my/path",
-                "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
-                "cookies": [
-                    "cookie1",
-                    "cookie2"
-                ],
-                "headers": {
-                    "header1": "value1",
-                    "header2": "value1,value2"
-                },
-                "queryStringParameters": {
-                    'user_id': "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                    'code': "ECM2341"
-                },
-                "requestContext": {
-                    "accountId": "123456789012",
-                    "apiId": "<urlid>",
-                    "authentication": None,
-                    "authorizer": {
-                        "iam": {
-                            "accessKey": "AKIA...",
-                            "accountId": "111122223333",
-                            "callerId": "AIDA...",
-                            "cognitoIdentity": None,
-                            "principalOrgId": None,
-                            "userArn": "arn:aws:iam::111122223333:user/example-user",
-                            "userId": "AIDA..."
+        assert json.loads(response["body"])['message'] == "the enrollments were retrieved"
+        assert json.loads(response["body"])['enrollments'] == [
+            {
+                'activity': {
+                    'code': 'ECM2345',
+                    'title': 'Atividade da ECM 2345',
+                    'description': 'Isso é uma atividade',
+                    'activity_type': 'COURSE',
+                    'is_extensive': False,
+                    'delivery_model': 'IN_PERSON',
+                    'start_date': 1671747413000,
+                    'duration': 120,
+                    'link': None,
+                    'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
+                            'role': 'PROFESSOR'
                         }
-                    },
-                    "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
-                    "domainPrefix": "<url-id>",
-                    "external_interfaces": {
-                        "method": "POST",
-                        "path": "/my/path",
-                        "protocol": "HTTP/1.1",
-                        "sourceIp": "123.123.123.123",
-                        "userAgent": "agent"
-                    },
-                    "requestId": "id",
-                    "routeKey": "$default",
-                    "stage": "$default",
-                    "time": "12/Mar/2020:19:03:58 +0000",
-                    "timeEpoch": 1583348638390
+                    ],
+                    'speakers': [
+                        {
+                            'name': 'Vitor Briquez',
+                            'bio': 'Incrível',
+                            'company': 'Apple'
+                        }
+                    ],
+                    'total_slots': 4,
+                    'taken_slots': 4,
+                    'accepting_new_enrollments': True,
+                    'stop_accepting_new_enrollments_before': 1671743812000
                 },
-                "body": "Hello from client!",
-                "pathParameters": None,
-                "isBase64Encoded": None,
-                "stageVariables": None
+                'user': {
+                    'name': 'João Vilas',
+                    'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002',
+                    'role': 'ADMIN'
+                },
+                'state': 'ENROLLED',
+                'date_subscribed': 1671229013000
             }
+        ]
 
-            response = lambda_handler(event, None)
-            assert response["statusCode"] == 404
-            assert json.loads(response['body']) == 'No items found for enrollment'
-
-    def test_get_enrollment_presenter_400(self):
+    def test_get_enrollmenst_by_user_id_presenter_400(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -135,7 +118,6 @@ class Test_GetEnrollmentPresenter:
                 "header2": "value1,value2"
             },
             "queryStringParameters": {
-                'code': "ECM2341"
             },
             "requestContext": {
                 "accountId": "123456789012",

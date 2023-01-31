@@ -22,7 +22,7 @@ class Test_CreateActivityController:
                                     "duration": 90,
                                     "link": None,
                                     "place": "H331",
-                                    "responsible_professors": ["12mf", "d7f1"],
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                                     "speakers": [{
                                         "name": "Robert Cecil Martin",
                                         "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -44,7 +44,7 @@ class Test_CreateActivityController:
         assert response.body['activity']['start_date'] == 1669141012000
         assert response.body['activity']['place'] == 'H331'
         assert response.body['activity']['duration'] == 90
-        assert response.body['activity']['responsible_professors'][1]['user_id'] == '12mf'
+        assert response.body['activity']['responsible_professors'][1]['user_id'] == '62cafdd4-a110-11ed-a8fc-0242ac120002'
         assert response.body['activity']['speakers'][0]['name'] == "Robert Cecil Martin"
         assert response.body['activity']['total_slots'] == 100
         assert response.body['activity']['taken_slots'] == 0
@@ -67,7 +67,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -102,7 +102,7 @@ class Test_CreateActivityController:
                     "duration": 90,
                     "link": None,
                     "place": "H331",
-                    "responsible_professors": ["12mf", "d7f1"],
+                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                     "speakers": [{
                         "name": "Robert Cecil Martin",
                         "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -137,7 +137,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -171,7 +171,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -205,7 +205,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -239,7 +239,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -272,7 +272,7 @@ class Test_CreateActivityController:
                                     "duration": 90,
                                     "link": None,
                                     "place": "H331",
-                                    "responsible_professors": ["12mf", "d7f1"],
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                                     "speakers": [{
                                         "name": "Robert Cecil Martin",
                                         "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -303,7 +303,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -337,7 +337,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -370,7 +370,7 @@ class Test_CreateActivityController:
                                     "duration": 90,
                                     "link": None,
                                     "place": "H331",
-                                    "responsible_professors": ["12mf", "d7f1"],
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                                     "speakers": [{
                                         "name": "Robert Cecil Martin",
                                         "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -401,7 +401,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -435,7 +435,7 @@ class Test_CreateActivityController:
                 "start_date": 1669141012000,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -574,7 +574,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
                 "stop_accepting_new_enrollments_before": 1666451811000,
@@ -604,7 +604,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": "123",
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
@@ -635,7 +635,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -671,7 +671,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -705,7 +705,7 @@ class Test_CreateActivityController:
                 "duration": 90,
                 "link": None,
                 "place": "H331",
-                "responsible_professors": ["12mf", "d7f1"],
+                "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "speakers": [{
                     "name": "Robert Cecil Martin",
                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",

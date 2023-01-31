@@ -18,7 +18,7 @@ class Test_DropActivityController:
         assert reponse.status_code == 200
         assert reponse.body['message'] == "the enrollment was dropped"
         assert reponse.body['activity']['code'] == "ELET355"
-        assert reponse.body['user']['user_id'] == "b16f"
+        assert reponse.body['user']['user_id'] == "0355535e-a110-11ed-a8fc-0242ac120002"
         assert reponse.body['state'] == "DROPPED"
         assert reponse.body['activity']['stop_accepting_new_enrollments_before'] == None
 
@@ -75,7 +75,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': '0000', 'code': repo.enrollments[7].activity.code})
+        request = HttpRequest(body={'user_id': "0000-0000-00000-000000-0000000-00000", 'code': repo.enrollments[7].activity.code})
 
         reponse = controller(request)
 
