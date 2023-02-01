@@ -40,19 +40,11 @@ class EnrollActivityUsecase:
         else:
 
             if activity.taken_slots >= activity.total_slots:
-                enrollment = Enrollment(
-                    activity = activity,
-                    user = user,
-                    state = ENROLLMENT_STATE.IN_QUEUE,
-                    date_subscribed = int(datetime.datetime.now().timestamp()*1000)
-                )
+                enrollment = Enrollment(activity_code=activity, user=user, state=ENROLLMENT_STATE.IN_QUEUE,
+                                        date_subscribed=int(datetime.datetime.now().timestamp() * 1000))
 
             else:
-                enrollment = Enrollment(
-                    activity = activity,
-                    user = user,
-                    state = ENROLLMENT_STATE.ENROLLED,
-                    date_subscribed = int(datetime.datetime.now().timestamp()*1000)
-                )
+                enrollment = Enrollment(activity_code=activity, user=user, state=ENROLLMENT_STATE.ENROLLED,
+                                        date_subscribed=int(datetime.datetime.now().timestamp() * 1000))
 
         return self.repo.create_enrollment(enrollment)

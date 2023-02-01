@@ -13,11 +13,11 @@ class Enrollment(abc.ABC):
     state: ENROLLMENT_STATE
     date_subscribed: int # milliseconds
 
-    def __init__(self, activity: Activity, user: User, state: ENROLLMENT_STATE, date_subscribed: int):
+    def __init__(self, activity_code: Activity, user: User, state: ENROLLMENT_STATE, date_subscribed: int):
 
-        if type(activity) != Activity:
+        if type(activity_code) != Activity:
             raise EntityError("activity_code")
-        self.activity_code = activity
+        self.activity_code = activity_code
 
         if type(user) != User:
             raise EntityError("user")
