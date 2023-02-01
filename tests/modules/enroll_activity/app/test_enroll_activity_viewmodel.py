@@ -9,7 +9,7 @@ class Test_EnrollActivityViewmodel:
 
         enrollment = repo.enrollments[1]
 
-        enroll_activity_viewmodel = EnrollActivityViewmodel(enrollment).to_dict()
+        enroll_activity_viewmodel = EnrollActivityViewmodel(enrollment, repo.users[1]).to_dict()
 
         expected = {
             'activity_code': 'ECM2345',
