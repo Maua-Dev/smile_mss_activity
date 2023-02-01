@@ -26,15 +26,12 @@ class Test_DropActivityPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                     "claims":
+                        {
+                            "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
+                            "cognito:username": "Bruno Soller",
+                            "custom:role": "STUDENT",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -51,7 +48,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "0355535e-a110-11ed-a8fc-0242ac120002", "code": "ELET355"}',
+            "body": '{"code": "ELET355"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -83,15 +80,7 @@ class Test_DropActivityPresenter:
                     "apiId": "<urlid>",
                     "authentication": None,
                     "authorizer": {
-                        "iam": {
-                            "accessKey": "AKIA...",
-                            "accountId": "111122223333",
-                            "callerId": "AIDA...",
-                            "cognitoIdentity": None,
-                            "principalOrgId": None,
-                            "userArn": "arn:aws:iam::111122223333:user/example-user",
-                            "userId": "AIDA..."
-                        }
+
                     },
                     "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                     "domainPrefix": "<url-id>",
@@ -116,7 +105,7 @@ class Test_DropActivityPresenter:
 
             response = lambda_handler(event, None)
             assert response["statusCode"] == 400
-            assert json.loads(response["body"]) == "Field user_id is missing"
+            assert json.loads(response["body"]) == "Field requester_user is missing"
 
     def test_drop_activity_presenter_400_code_mising(self):
         event = {
@@ -140,15 +129,12 @@ class Test_DropActivityPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
+                            "cognito:username": "Bruno Soller",
+                            "custom:role": "STUDENT",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -196,15 +182,12 @@ class Test_DropActivityPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "INVALID_USER_ID",
+                            "cognito:username": "Bruno Soller",
+                            "custom:role": "STUDENT",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -253,15 +236,12 @@ class Test_DropActivityPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
+                            "cognito:username": "Bruno Soller",
+                            "custom:role": "STUDENT",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -310,15 +290,12 @@ class Test_DropActivityPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "03555872-a110-11ed-a8fc-0242ac120002",
+                            "cognito:username": "Hector Guerrini",
+                            "custom:role": "EXTERNAL",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -335,7 +312,7 @@ class Test_DropActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "03555872-a110-11ed-a8fc-0242ac120002", "code": "CODIGO"}',
+            "body": '{"code": "CODIGO"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -367,15 +344,12 @@ class Test_DropActivityPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
+                            "cognito:username": "Bruno Soller",
+                            "custom:role": "STUDENT",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -424,15 +398,12 @@ class Test_DropActivityPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
+                            "cognito:username": "Bruno Soller",
+                            "custom:role": "STUDENT",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",

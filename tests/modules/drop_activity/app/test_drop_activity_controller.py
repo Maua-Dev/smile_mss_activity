@@ -11,8 +11,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': repo.enrollments[7].activity_code})
-
+        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": repo.users[1].user_id, "cognito:username": repo.users[1].name, "custom:role": repo.users[1].role.value}})
         reponse = controller(request)
 
         assert reponse.status_code == 200
@@ -28,17 +27,19 @@ class Test_DropActivityController:
 
         request = HttpRequest(body={'code': repo.enrollments[7].activity_code})
 
+
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field user_id is missing'
+        assert reponse.body == 'Field requester_user is missing'
 
     def test_drop_activity_controller_missing_code(self):
         repo = ActivityRepositoryMock()
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id})
+        request = HttpRequest(body={'requester_user': {"sub": repo.users[1].user_id, "cognito:username": repo.users[1].name, "custom:role": repo.users[1].role.value}})
+
 
         reponse = controller(request)
 
@@ -50,7 +51,8 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[10].user.user_id, 'code': repo.enrollments[10].activity_code})
+        request = HttpRequest(body={'code': repo.enrollments[10].activity_code, 'requester_user': {"sub": repo.users[4].user_id, "cognito:username": repo.users[4].name, "custom:role": repo.users[4].role.value}})
+
 
         reponse = controller(request)
 
@@ -62,7 +64,8 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': 'CODIGO_INEXISTENTE'})
+        request = HttpRequest(body={'code': 'CODIGO_INEXISTENTE', 'requester_user': {"sub": repo.users[1].user_id, "cognito:username": repo.users[1].name, "custom:role": repo.users[1].role.value}})
+
 
         reponse = controller(request)
 
@@ -74,7 +77,8 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': "0000-0000-00000-000000-0000000-00000", 'code': repo.enrollments[7].activity_code})
+        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "cognito:username": repo.users[1].name, "custom:role": repo.users[1].role.value}})
+
 
         reponse = controller(request)
 
@@ -86,7 +90,8 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': '1', 'code': repo.enrollments[7].activity_code})
+        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": '1', "cognito:username": repo.users[1].name, "custom:role": repo.users[1].role.value}})
+
         reponse = controller(request)
 
         assert reponse.status_code == 400
@@ -97,7 +102,8 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': 1})
+        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': 1, 'requester_user': {"sub": repo.users[1].user_id, "cognito:username": repo.users[1].name, "custom:role": repo.users[1].role.value}})
+
         reponse = controller(request)
 
         assert reponse.status_code == 400
