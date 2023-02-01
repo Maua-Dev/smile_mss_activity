@@ -21,14 +21,14 @@ class GetEnrollmentController:
             if not request.data.get('code'):
                 raise MissingParameters('code')
 
-            request_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 
             enrollment = self.GetEnrollmentUsecase(
-                user_id=request_user.user_id,
+                user_id=requester_user.user_id,
                 code=request.data.get('code')
             )
 
-            viewmodel = GetEnrollmentViewmodel(enrollment)
+            viewmodel = GetEnrollmentViewmodel(enrollment, requester_user)
 
             return OK(viewmodel.to_dict())
 

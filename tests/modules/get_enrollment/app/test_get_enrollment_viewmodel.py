@@ -9,7 +9,7 @@ class Test_GetEnrollmentViewmodel:
 
         enrollment = repo.enrollments[12]
 
-        get_enrollment_viewmodel = GetEnrollmentViewmodel(enrollment).to_dict()
+        get_enrollment_viewmodel = GetEnrollmentViewmodel(enrollment, enrollment.user).to_dict()
 
         expected = {'activity_code': 'CODIGO',
                     'user': {'name': 'Marcos Romanato', 'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002', 'role': 'STUDENT'}, 'state': 'ENROLLED',
@@ -22,7 +22,7 @@ class Test_GetEnrollmentViewmodel:
 
         enrollment = repo.enrollments[7]
 
-        get_enrollment_viewmodel = GetEnrollmentViewmodel(enrollment).to_dict()
+        get_enrollment_viewmodel = GetEnrollmentViewmodel(enrollment, enrollment.user).to_dict()
 
         expected = {'activity_code': 'ELET355',
                     'user': {'name': 'Bruno Soller', 'user_id': '0355535e-a110-11ed-a8fc-0242ac120002', 'role': 'STUDENT'}, 'state': 'ENROLLED',

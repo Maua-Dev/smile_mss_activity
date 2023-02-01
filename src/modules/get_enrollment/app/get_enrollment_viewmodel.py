@@ -52,9 +52,9 @@ class GetEnrollmentViewmodel:
     state: ENROLLMENT_STATE
     date_subscribed: datetime.datetime
 
-    def __init__(self, enrollment: Enrollment):
+    def __init__(self, enrollment: Enrollment, user: User):
         self.activity_code = enrollment.activity_code
-        self.user = UserViewmodel(enrollment.user)
+        self.user = UserViewmodel(user)
         self.state = enrollment.state
         self.date_subscribed = enrollment.date_subscribed
 
