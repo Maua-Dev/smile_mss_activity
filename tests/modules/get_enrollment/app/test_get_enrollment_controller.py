@@ -10,7 +10,7 @@ class Test_GetEnrollmentController:
         repo = ActivityRepositoryMock()
         usecase = GetEnrollmentUsecase(repo)
         controller = GetEnrollmentController(usecase)
-        request = HttpRequest(query_params={'user_id': repo.enrollments[0].user.user_id, 'code': repo.enrollments[0].activity_code})
+        request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code}, body={'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
 
         response = controller(request)
 
@@ -21,7 +21,7 @@ class Test_GetEnrollmentController:
         assert response.body['date_subscribed'] == repo.enrollments[0].date_subscribed
         assert response.body['message'] == "the enrollment was retrieved"
 
-    def test_get_enrrolment_missing_user_id(self):
+    def test_get_enrollment_missing_requester_user(self):
 
             repo = ActivityRepositoryMock()
             usecase = GetEnrollmentUsecase(repo)
@@ -31,14 +31,14 @@ class Test_GetEnrollmentController:
             response = controller(request)
 
             assert response.status_code == 400
-            assert response.body == 'Field user_id is missing'
+            assert response.body == 'Field requester_user is missing'
 
     def test_get_enrrolment_missing_code(self):
 
                 repo = ActivityRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(query_params={'user_id': repo.enrollments[0].user.user_id})
+                request = HttpRequest(query_params={}, body={'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
 
                 response = controller(request)
 
@@ -50,7 +50,7 @@ class Test_GetEnrollmentController:
                     repo = ActivityRepositoryMock()
                     usecase = GetEnrollmentUsecase(repo)
                     controller = GetEnrollmentController(usecase)
-                    request = HttpRequest(query_params={'user_id': 'invalid_user_id', 'code': 'ECM2345'})
+                    request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code}, body={'requester_user': {"sub": "repo.users[0].user_id", "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
 
                     response = controller(request)
 
@@ -62,18 +62,19 @@ class Test_GetEnrollmentController:
                 repo = ActivityRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(query_params={'user_id': '0000-0000-00000-000000-0000000-00000', 'code': 'ECM2345'})
+                request = HttpRequest(query_params={'code': 'ECM2345'}, body={'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
 
                 response = controller(request)
 
                 assert response.status_code == 404
                 assert response.body == 'No items found for enrollment'
+
     def test_get_enrollment_no_items_found_code_not_found(self):
 
                 repo = ActivityRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(query_params={'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002', 'code': 'ECM2341'})
+                request = HttpRequest(query_params={'code': 'ECM2341'}, body={'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
 
                 response = controller(request)
 
