@@ -46,7 +46,7 @@ class Test_CreateActivityViewmodel:
         activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
 
         expected = {
-            "activity_code": {
+            "activity": {
             "code": "ZYX321",
             "title": "Clean Architecture code review!",
             "description": "Reviewing IMT student's codes",
@@ -71,7 +71,7 @@ class Test_CreateActivityViewmodel:
             "taken_slots": 97,
             "accepting_new_enrollments": True,
             "stop_accepting_new_enrollments_before": 1666451812000 },
-            "message":"the activity_code was created"
+            "message":"the activity was created"
             }
 
         assert expected == activity_viewmodel
@@ -111,7 +111,7 @@ class Test_CreateActivityViewmodel:
             )
             activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
 
-            expected = {"activity_code":
+            expected = {"activity":
                 {"code": "ZYX321",
                  "title": "Clean Architecture code review!",
                  "description": "Reviewing IMT student's codes",
@@ -136,7 +136,7 @@ class Test_CreateActivityViewmodel:
                  "taken_slots": 97,
                  "accepting_new_enrollments": True,
                  "stop_accepting_new_enrollments_before": 1666451812000 },
-                "message":"the activity_code was created"
+                "message":"the activity was created"
                 }
 
             assert expected == activity_viewmodel

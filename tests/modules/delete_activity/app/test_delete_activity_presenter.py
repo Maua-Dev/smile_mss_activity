@@ -59,7 +59,7 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 200
-        assert json.loads(response["body"])['message'] == "the activity_code was deleted"
+        assert json.loads(response["body"])['message'] == "the activity was deleted"
 
     def test_delete_activity_presenter_missing_code(self):
         event = {

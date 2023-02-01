@@ -111,5 +111,5 @@ class DeleteActivityViewmodel:
 
     def to_dict(self):
         return {
-            "activity_code": self.activity.to_dict(),
-            "message": "the activity_code was deleted"}
+            "activity": self.activity.to_dict(),
+            "message": "the activity was deleted"}

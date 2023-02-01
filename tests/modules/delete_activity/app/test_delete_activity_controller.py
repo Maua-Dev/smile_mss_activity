@@ -15,10 +15,10 @@ class Test_DeleteActivityController:
         response = controller(request)
 
         assert response.status_code == 200
-        assert response.body['message'] == "the activity_code was deleted"
-        assert response.body['activity_code']['code'] == activity.code
-        assert response.body['activity_code']['title'] == activity.title
-        assert response.body['activity_code']['description'] == activity.description
+        assert response.body['message'] == "the activity was deleted"
+        assert response.body['activity']['code'] == activity.code
+        assert response.body['activity']['title'] == activity.title
+        assert response.body['activity']['description'] == activity.description
 
     def test_delete_activity_missing_code(self):
         repo = ActivityRepositoryMock()

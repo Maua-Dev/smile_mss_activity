@@ -13,8 +13,8 @@ class Test_UpdateActivityViewmodel:
         viewmodel = UpdateActivityViewmodel(repo.activities[0])
 
         expected = {
-            'message': 'the activity_code was updated',
-            'activity_code': {
+            'message': 'the activity was updated',
+            'activity': {
                 'accepting_new_enrollments': True,
                 'activity_type': 'COURSE',
                 'code': 'ECM2345',

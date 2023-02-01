@@ -60,7 +60,7 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 200
-        assert json.loads(response["body"])['message'] == 'the activity_code was updated'
+        assert json.loads(response["body"])['message'] == 'the activity was updated'
 
     def test_update_activity_presenter_no_items_found(self):
         event = {
