@@ -5,6 +5,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
+from .dynamo_stack import DynamoStack
 from .lambda_stack import LambdaStack
 from aws_cdk.aws_apigateway import RestApi, Cors
 
@@ -45,4 +46,5 @@ class IacStack(Stack):
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES)
 
+        self.dynamo_stack = DynamoStack(self)
 
