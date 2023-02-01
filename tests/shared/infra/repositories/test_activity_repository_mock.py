@@ -49,7 +49,7 @@ class Test_ActivityRepositoryMock:
 
     def test_create_enrollment(self):
         repo = ActivityRepositoryMock()
-        enrollment = Enrollment(repo.get_activity('ECM2345'), repo.get_user('d61dbf66-a10f-11ed-a8fc-0242ac120002'),
+        enrollment = Enrollment(activity_code='ECM2345', user=repo.users[0],
                                 state=ENROLLMENT_STATE.ENROLLED, date_subscribed=1671229013000)
 
         len_before = len(repo.enrollments)
@@ -57,8 +57,8 @@ class Test_ActivityRepositoryMock:
         len_after = len(repo.enrollments)
 
         assert type(enrollment_created) == Enrollment
-        assert repo.enrollments[0].activity_code == repo.get_activity('ECM2345')
-        assert repo.enrollments[0].user == repo.get_user('d61dbf66-a10f-11ed-a8fc-0242ac120002')
+        assert repo.enrollments[0].activity_code == 'ECM2345'
+        assert repo.enrollments[0].user == repo.users[0]
         assert repo.enrollments[0].state == ENROLLMENT_STATE.ENROLLED
         assert repo.enrollments[0].date_subscribed == 1671229013000
         assert len_before == len_after - 1

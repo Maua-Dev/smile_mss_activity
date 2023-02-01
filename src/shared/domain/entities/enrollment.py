@@ -8,14 +8,14 @@ from src.shared.helpers.errors.domain_errors import EntityError
 
 
 class Enrollment(abc.ABC):
-    activity_code: Activity
+    activity_code: str
     user: User
     state: ENROLLMENT_STATE
     date_subscribed: int # milliseconds
 
-    def __init__(self, activity_code: Activity, user: User, state: ENROLLMENT_STATE, date_subscribed: int):
+    def __init__(self, activity_code: str, user: User, state: ENROLLMENT_STATE, date_subscribed: int):
 
-        if type(activity_code) != Activity:
+        if type(activity_code) != str:
             raise EntityError("activity_code")
         self.activity_code = activity_code
 

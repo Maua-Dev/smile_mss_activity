@@ -10,12 +10,12 @@ class Test_GetEnrollmentController:
         repo = ActivityRepositoryMock()
         usecase = GetEnrollmentUsecase(repo)
         controller = GetEnrollmentController(usecase)
-        request = HttpRequest(query_params={'user_id': repo.enrollments[0].user.user_id, 'code': repo.enrollments[0].activity_code.code})
+        request = HttpRequest(query_params={'user_id': repo.enrollments[0].user.user_id, 'code': repo.enrollments[0].activity_code})
 
         response = controller(request)
 
         assert response.status_code == 200
-        assert response.body['activity_code']['code'] == repo.enrollments[0].activity_code.code
+        assert response.body['activity_code'] == repo.enrollments[0].activity_code
         assert response.body['user']['user_id'] == repo.enrollments[0].user.user_id
         assert response.body['state'] == repo.enrollments[0].state.value
         assert response.body['date_subscribed'] == repo.enrollments[0].date_subscribed
@@ -26,7 +26,7 @@ class Test_GetEnrollmentController:
             repo = ActivityRepositoryMock()
             usecase = GetEnrollmentUsecase(repo)
             controller = GetEnrollmentController(usecase)
-            request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code.code})
+            request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code})
 
             response = controller(request)
 

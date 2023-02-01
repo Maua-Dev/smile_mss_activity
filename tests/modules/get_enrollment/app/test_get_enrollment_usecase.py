@@ -12,7 +12,7 @@ class Test_GetEnrollmentUsecase:
         repo = ActivityRepositoryMock()
         usecase = GetEnrollmentUsecase(repo)
 
-        enrollment = usecase(user_id=repo.enrollments[3].user.user_id, code=repo.enrollments[3].activity_code.code)
+        enrollment = usecase(user_id=repo.enrollments[3].user.user_id, code=repo.enrollments[3].activity_code)
 
         assert enrollment == repo.enrollments[3]
 
@@ -21,7 +21,7 @@ class Test_GetEnrollmentUsecase:
         usecase = GetEnrollmentUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            enrollment = usecase(user_id="0000-0000-00000-000000-0000000-00000", code=repo.enrollments[3].activity_code.code)
+            enrollment = usecase(user_id="0000-0000-00000-000000-0000000-00000", code=repo.enrollments[3].activity_code)
 
     def test_get_enrollment_usecase_with_wrong_code(self):
         repo = ActivityRepositoryMock()
@@ -35,7 +35,7 @@ class Test_GetEnrollmentUsecase:
         usecase = GetEnrollmentUsecase(repo)
 
         with pytest.raises(EntityError):
-            enrollment = usecase(user_id=123, code=repo.enrollments[3].activity_code.code)
+            enrollment = usecase(user_id=123, code=repo.enrollments[3].activity_code)
 
     def test_get_enrollment_usecase_wrong_code_int(self):
         repo = ActivityRepositoryMock()

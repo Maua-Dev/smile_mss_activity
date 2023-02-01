@@ -17,36 +17,7 @@ class Test_GetEnrollmentsByUserId:
         expected = {
             'enrollments': [
                 {
-                    'activity_code': {
-                        'code': 'ECM2345',
-                        'title': 'Atividade da ECM 2345',
-                        'description': 'Isso é uma atividade',
-                        'activity_type': 'COURSE',
-                        'is_extensive': False,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1671747413000,
-                        'duration': 120,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Vitor Briquez',
-                                'bio': 'Incrível',
-                                'company': 'Apple'
-                            }
-                        ],
-                        'total_slots': 4,
-                        'taken_slots': 4,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671743812000
-                    },
+                    'activity_code': 'ECM2345',
                     'user': {
                         'name': 'Bruno Soller',
                         'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
@@ -56,36 +27,7 @@ class Test_GetEnrollmentsByUserId:
                     'date_subscribed': 1671315413000
                 },
                 {
-                    'activity_code': {
-                        'code': 'ELET355',
-                        'title': 'Atividade da ELET 355',
-                        'description': 'Isso é uma atividade, sério.',
-                        'activity_type': 'LECTURES',
-                        'is_extensive': True,
-                        'delivery_model': 'HYBRID',
-                        'start_date': 1671661013000,
-                        'duration': 400,
-                        'link': 'https://devmaua.com',
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Patricia Santos',
-                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            }
-                        ],
-                        'total_slots': 10,
-                        'taken_slots': 1,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
-                    },
+                    'activity_code': 'ELET355',
                     'user': {
                         'name': 'Bruno Soller',
                         'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
@@ -95,36 +37,7 @@ class Test_GetEnrollmentsByUserId:
                     'date_subscribed': 1671488213000
                 },
                 {
-                    'activity_code': {
-                        'code': 'CAFE',
-                        'title': 'Atividade da CAFE',
-                        'description': 'Atividade pra tomar café',
-                        'activity_type': 'ALUMNI_CAFE',
-                        'is_extensive': True,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1671661013000,
-                        'duration': 20,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Patricia Santos',
-                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            }
-                        ],
-                        'total_slots': 2,
-                        'taken_slots': 2,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
-                    },
+                    'activity_code': 'CAFE',
                     'user': {
                         'name': 'Bruno Soller',
                         'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
@@ -134,36 +47,7 @@ class Test_GetEnrollmentsByUserId:
                     'date_subscribed': 1671488213000
                 },
                 {
-                    'activity_code': {
-                        'code': 'ULTIMA',
-                        'title': 'Última atividade',
-                        'description': 'Atividade pra acabar',
-                        'activity_type': 'SPORTS_ACTIVITY',
-                        'is_extensive': False,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1671733013000,
-                        'duration': 45,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Daniel Romanato',
-                                'bio': 'Buscando descobrir o mundo',
-                                'company': 'Samsung'
-                            }
-                        ],
-                        'total_slots': 3,
-                        'taken_slots': 3,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671733012000
-                    },
+                    'activity_code': 'ULTIMA',
                     'user': {
                         'name': 'Bruno Soller',
                         'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',

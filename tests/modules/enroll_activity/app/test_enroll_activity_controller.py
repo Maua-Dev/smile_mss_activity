@@ -14,16 +14,15 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)  
 
-        request = HttpRequest(body={'user_id': repo.enrollments[8].user.user_id, 'code': repo.enrollments[8].activity_code.code})
+        request = HttpRequest(body={'user_id': repo.enrollments[8].user.user_id, 'code': repo.enrollments[8].activity_code})
 
         response = controller(request)
 
         assert response.status_code == 200
         assert response.body['message'] == "the enrollment was enrolled"
-        assert response.body['activity_code']['code'] == "COD1468"
+        assert response.body['activity_code'] == "COD1468"
         assert response.body['user']['user_id'] == "0355573c-a110-11ed-a8fc-0242ac120002"
         assert response.body['state'] == "ENROLLED"
-        assert response.body['activity_code']['stop_accepting_new_enrollments_before'] == None
 
     def test_enroll_activity_controller_in_queue(self):
 
@@ -37,7 +36,7 @@ class Test_EnrollActivityController:
 
         assert response.status_code == 200
         assert response.body['message'] == "the enrollment was in queue"
-        assert response.body['activity_code']['code'] == repo.activities[0].code
+        assert response.body['activity_code'] == repo.activities[0].code
         assert response.body['user']['user_id'] == repo.users[7].user_id
         assert response.body['state'] == "IN_QUEUE"
 
@@ -47,7 +46,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[8].activity_code.code})
+        request = HttpRequest(body={'code': repo.enrollments[8].activity_code})
 
         response = controller(request)
 
@@ -72,7 +71,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': repo.enrollments[7].activity_code.code})
+        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': repo.enrollments[7].activity_code})
 
         response = controller(request)
 
@@ -85,7 +84,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[2].user.user_id, 'code': repo.enrollments[2].activity_code.code})
+        request = HttpRequest(body={'user_id': repo.enrollments[2].user.user_id, 'code': repo.enrollments[2].activity_code})
 
         response = controller(request)
 
@@ -112,7 +111,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': "0000-0000-00000-000000-0000000-00000", 'code':repo.enrollments[0].activity_code.code})
+        request = HttpRequest(body={'user_id': "0000-0000-00000-000000-0000000-00000", 'code':repo.enrollments[0].activity_code})
 
         response = controller(request)
 
@@ -126,7 +125,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'user_id' : 'inexistent_user', 'code':repo.enrollments[2].activity_code.code})
+        request = HttpRequest(body={'user_id' : 'inexistent_user', 'code':repo.enrollments[2].activity_code})
 
         response = controller(request)
 
