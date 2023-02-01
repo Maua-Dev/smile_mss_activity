@@ -60,7 +60,7 @@ class Test_CreateActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 201
-        assert json.loads(response["body"])["message"] == "the activity was created"
+        assert json.loads(response["body"])["message"] == "the activity_code was created"
 
     def test_create_activity_presenter_no_items_found(self):
         event = {

@@ -40,7 +40,7 @@ class Environments:
         self.stage = STAGE[os.environ.get("STAGE")]
 
         if self.stage == STAGE.TEST:
-            self.s3_bucket_name = "activity-bucket-test"
+            self.s3_bucket_name = "activity_code-bucket-test"
             self.region = "sa-east-1"
             self.endpoint_url = "http://localhost:8000"
             self.dynamo_table_name = "smile_mss_activity-table"

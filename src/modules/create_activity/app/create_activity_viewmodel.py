@@ -108,6 +108,6 @@ class CreateActivityViewmodel:
 
     def to_dict(self) -> dict:
         return {
-            "activity": self.activity.to_dict(),
-            "message": "the activity was created"
+            "activity_code": self.activity.to_dict(),
+            "message": "the activity_code was created"
         }

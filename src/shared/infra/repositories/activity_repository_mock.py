@@ -345,14 +345,14 @@ class ActivityRepositoryMock(IActivityRepository):
 
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.activity.code == code and enrollment.state != ENROLLMENT_STATE.DROPPED and enrollment.state != ENROLLMENT_STATE.ACTIVITY_CANCELLED:
+            if enrollment.user.user_id == user_id and enrollment.activity_code.code == code and enrollment.state != ENROLLMENT_STATE.DROPPED and enrollment.state != ENROLLMENT_STATE.ACTIVITY_CANCELLED:
                 return enrollment
         return None
 
     def create_enrollment(self, enrollment: Enrollment) -> Enrollment:
         self.enrollments.append(enrollment)
         if enrollment.state == ENROLLMENT_STATE.ENROLLED:
-            self.update_activity(code=enrollment.activity.code, new_taken_slots=enrollment.activity.taken_slots + 1)
+            self.update_activity(code=enrollment.activity_code.code, new_taken_slots=enrollment.activity_code.taken_slots + 1)
 
         return enrollment
 
@@ -370,11 +370,11 @@ class ActivityRepositoryMock(IActivityRepository):
 
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.activity.code == code:
+            if enrollment.user.user_id == user_id and enrollment.activity_code.code == code:
                 if new_state == ENROLLMENT_STATE.DROPPED:
-                    self.update_activity(code=code, new_taken_slots=enrollment.activity.taken_slots - 1)
+                    self.update_activity(code=code, new_taken_slots=enrollment.activity_code.taken_slots - 1)
                 elif new_state == ENROLLMENT_STATE.ENROLLED:
-                    self.update_activity(code=code, new_taken_slots=enrollment.activity.taken_slots + 1)
+                    self.update_activity(code=code, new_taken_slots=enrollment.activity_code.taken_slots + 1)
 
                 enrollment.state = new_state
                 return enrollment
@@ -383,7 +383,7 @@ class ActivityRepositoryMock(IActivityRepository):
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
         for activity in self.activities:
             if activity.code == code:
-                enrollments = [enrollment for enrollment in self.enrollments if enrollment.activity.code == code]
+                enrollments = [enrollment for enrollment in self.enrollments if enrollment.activity_code.code == code]
                 return activity, enrollments
         return None, None
 
@@ -453,7 +453,7 @@ class ActivityRepositoryMock(IActivityRepository):
     def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
         new_enrollments = []
         for enrollment in enrollments:
-            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity.code,
+            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity_code.code,
                                                     new_state=state)
             new_enrollments.append(new_enrollment)
 

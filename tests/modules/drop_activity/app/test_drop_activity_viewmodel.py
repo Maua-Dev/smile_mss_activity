@@ -11,7 +11,7 @@ class Test_DropActivityViewmodel:
 
         drop_activity_viewmodel = DropActivityViewmodel(enrollment).to_dict()
 
-        expected = {'activity': {'code': 'COD1468', 'title': 'Atividade da COD 1468',
+        expected = {'activity_code': {'code': 'COD1468', 'title': 'Atividade da COD 1468',
                                  'description': 'Isso definitivamente é uma atividade',
                                  'activity_type': 'HIGH_IMPACT_LECTURES', 'is_extensive': True,
                                  'delivery_model': 'ONLINE', 'start_date': 1671661013000, 'duration': 60,

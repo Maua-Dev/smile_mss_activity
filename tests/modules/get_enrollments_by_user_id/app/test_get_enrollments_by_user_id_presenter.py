@@ -63,7 +63,7 @@ class Test_GetEnrollmentsByUserIdPresenter:
         assert json.loads(response["body"])['message'] == "the enrollments were retrieved"
         assert json.loads(response["body"])['enrollments'] == [
             {
-                'activity': {
+                'activity_code': {
                     'code': 'ECM2345',
                     'title': 'Atividade da ECM 2345',
                     'description': 'Isso é uma atividade',

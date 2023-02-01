@@ -17,7 +17,7 @@ class Test_GetEnrollmentsByUserId:
         expected = {
             'enrollments': [
                 {
-                    'activity': {
+                    'activity_code': {
                         'code': 'ECM2345',
                         'title': 'Atividade da ECM 2345',
                         'description': 'Isso é uma atividade',
@@ -56,7 +56,7 @@ class Test_GetEnrollmentsByUserId:
                     'date_subscribed': 1671315413000
                 },
                 {
-                    'activity': {
+                    'activity_code': {
                         'code': 'ELET355',
                         'title': 'Atividade da ELET 355',
                         'description': 'Isso é uma atividade, sério.',
@@ -95,7 +95,7 @@ class Test_GetEnrollmentsByUserId:
                     'date_subscribed': 1671488213000
                 },
                 {
-                    'activity': {
+                    'activity_code': {
                         'code': 'CAFE',
                         'title': 'Atividade da CAFE',
                         'description': 'Atividade pra tomar café',
@@ -134,7 +134,7 @@ class Test_GetEnrollmentsByUserId:
                     'date_subscribed': 1671488213000
                 },
                 {
-                    'activity': {
+                    'activity_code': {
                         'code': 'ULTIMA',
                         'title': 'Última atividade',
                         'description': 'Atividade pra acabar',

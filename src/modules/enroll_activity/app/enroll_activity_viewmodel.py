@@ -110,14 +110,14 @@ class EnrollActivityViewmodel:
     date_subscribed: datetime.datetime
 
     def __init__(self, enrollment: Enrollment):
-        self.activity = ActivityViewmodel(enrollment.activity)
+        self.activity = ActivityViewmodel(enrollment.activity_code)
         self.user = UserViewmodel(enrollment.user)
         self.state = enrollment.state
         self.date_subscribed = enrollment.date_subscribed
 
     def to_dict(self):
         return {
-            "activity": self.activity.to_dict(),
+            "activity_code": self.activity.to_dict(),
             "user": self.user.to_dict(),
             "state": self.state.value,
             "date_subscribed": self.date_subscribed,

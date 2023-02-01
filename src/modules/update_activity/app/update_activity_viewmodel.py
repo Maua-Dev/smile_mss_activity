@@ -109,6 +109,6 @@ class UpdateActivityViewmodel:
 
     def to_dict(self):
         return {
-            "activity": self.update_activity.to_dict(),
-            "message": "the activity was updated"
+            "activity_code": self.update_activity.to_dict(),
+            "message": "the activity_code was updated"
         }

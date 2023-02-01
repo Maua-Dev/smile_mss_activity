@@ -11,7 +11,7 @@ class Test_GetEnrollmentViewmodel:
 
         get_enrollment_viewmodel = GetEnrollmentViewmodel(enrollment).to_dict()
 
-        expected = {'activity': {'code': 'CODIGO', 'title': 'Atividade da CÓDIGO',
+        expected = {'activity_code': {'code': 'CODIGO', 'title': 'Atividade da CÓDIGO',
                                  'description': 'Isso DEFINITIVAMENTE é uma atividade!',
                                  'activity_type': 'TECHNICAL_VISITS', 'is_extensive': False, 'delivery_model': 'ONLINE',
                                  'start_date': 1672006613000, 'duration': 60,
@@ -35,7 +35,7 @@ class Test_GetEnrollmentViewmodel:
 
         get_enrollment_viewmodel = GetEnrollmentViewmodel(enrollment).to_dict()
 
-        expected = {'activity': {'code': 'ELET355', 'title': 'Atividade da ELET 355',
+        expected = {'activity_code': {'code': 'ELET355', 'title': 'Atividade da ELET 355',
                                  'description': 'Isso é uma atividade, sério.', 'activity_type': 'LECTURES',
                                  'is_extensive': True, 'delivery_model': 'HYBRID',
                                  'start_date': 1671661013000, 'duration': 400,

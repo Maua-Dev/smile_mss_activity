@@ -38,26 +38,26 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 200
-        assert response.body['activity']['code'] == 'ECM2345'
-        assert response.body['activity']['title'] == 'Clean Architecture code review!'
-        assert response.body['activity']['description'] == "Reviewing IMT student's codes"
-        assert response.body['activity']['activity_type'] == 'LECTURES'
-        assert response.body['activity']['is_extensive'] == False
-        assert response.body['activity']['delivery_model'] == 'IN_PERSON'
-        assert response.body['activity']['start_date'] == 1669141012000
-        assert response.body['activity']['duration'] == 90
-        assert response.body['activity']['link'] == None
-        assert response.body['activity']['place'] == 'H331'
-        assert response.body['activity']['responsible_professors'][1]['user_id'] == '62cafdd4-a110-11ed-a8fc-0242ac120002'
-        assert response.body['activity']['responsible_professors'][0]['user_id'] == '03555624-a110-11ed-a8fc-0242ac120002'
-        assert response.body['activity']['speakers'][0]['name'] == 'Robert Cecil Martin'
-        assert response.body['activity']['speakers'][0][
+        assert response.body['activity_code']['code'] == 'ECM2345'
+        assert response.body['activity_code']['title'] == 'Clean Architecture code review!'
+        assert response.body['activity_code']['description'] == "Reviewing IMT student's codes"
+        assert response.body['activity_code']['activity_type'] == 'LECTURES'
+        assert response.body['activity_code']['is_extensive'] == False
+        assert response.body['activity_code']['delivery_model'] == 'IN_PERSON'
+        assert response.body['activity_code']['start_date'] == 1669141012000
+        assert response.body['activity_code']['duration'] == 90
+        assert response.body['activity_code']['link'] == None
+        assert response.body['activity_code']['place'] == 'H331'
+        assert response.body['activity_code']['responsible_professors'][1]['user_id'] == '62cafdd4-a110-11ed-a8fc-0242ac120002'
+        assert response.body['activity_code']['responsible_professors'][0]['user_id'] == '03555624-a110-11ed-a8fc-0242ac120002'
+        assert response.body['activity_code']['speakers'][0]['name'] == 'Robert Cecil Martin'
+        assert response.body['activity_code']['speakers'][0][
                    'bio'] == 'Author of Clean Architecture: A Craftsman\'s Guide to Software Structure and Design'
-        assert response.body['activity']['speakers'][0]['company'] == 'Clean Architecture Company'
-        assert response.body['activity']['total_slots'] == 100
-        assert response.body['activity']['accepting_new_enrollments'] == True
-        assert response.body['activity']['stop_accepting_new_enrollments_before'] == 1666451811000
-        assert response.body['message'] == "the activity was updated"
+        assert response.body['activity_code']['speakers'][0]['company'] == 'Clean Architecture Company'
+        assert response.body['activity_code']['total_slots'] == 100
+        assert response.body['activity_code']['accepting_new_enrollments'] == True
+        assert response.body['activity_code']['stop_accepting_new_enrollments_before'] == 1666451811000
+        assert response.body['message'] == "the activity_code was updated"
 
     def test_update_activity_missing_code(self):
         repo = ActivityRepositoryMock()

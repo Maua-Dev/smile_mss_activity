@@ -55,7 +55,7 @@ class Test_Enrollment:
         )
 
         assert type(enrollment) == Enrollment
-        assert enrollment.activity.code == "1234"
+        assert enrollment.activity_code.code == "1234"
         assert enrollment.user.name == "Marcos"
         assert enrollment.state == ENROLLMENT_STATE.ENROLLED
         assert enrollment.date_subscribed == 1671728165000

@@ -21,9 +21,9 @@ class Test_EnrollActivityUsecase:
 
         assert type(enrollment_activity) == Enrollment
         assert enrollment_activity.user.user_id == repo.users[6].user_id
-        assert enrollment_activity.activity.code == repo.activities[8].code
+        assert enrollment_activity.activity_code.code == repo.activities[8].code
         assert enrollment_activity.state == ENROLLMENT_STATE.ENROLLED
-        assert taken_slots_old + 1 == enrollment_activity.activity.taken_slots
+        assert taken_slots_old + 1 == enrollment_activity.activity_code.taken_slots
 
     def test_enroll_activity_usecase_in_queue(self):
         repo = ActivityRepositoryMock()
@@ -32,7 +32,7 @@ class Test_EnrollActivityUsecase:
 
         assert type(enrollment_activity) == Enrollment
         assert enrollment_activity.user.user_id == repo.users[8].user_id
-        assert enrollment_activity.activity.code == repo.activities[0].code
+        assert enrollment_activity.activity_code.code == repo.activities[0].code
         assert enrollment_activity.state == ENROLLMENT_STATE.IN_QUEUE
 
     def test_enroll_activity_usecase_enrolled(self):
@@ -43,10 +43,10 @@ class Test_EnrollActivityUsecase:
 
         assert type(enrollment_activity) == Enrollment
         assert enrollment_activity.user.user_id == repo.users[3].user_id
-        assert enrollment_activity.activity.code == repo.activities[2].code
-        assert enrollment_activity.activity.taken_slots < enrollment_activity.activity.total_slots
-        assert enrollment_activity.activity.accepting_new_enrollments == True
-        assert taken_slots_old + 1 == enrollment_activity.activity.taken_slots
+        assert enrollment_activity.activity_code.code == repo.activities[2].code
+        assert enrollment_activity.activity_code.taken_slots < enrollment_activity.activity_code.total_slots
+        assert enrollment_activity.activity_code.accepting_new_enrollments == True
+        assert taken_slots_old + 1 == enrollment_activity.activity_code.taken_slots
         assert enrollment_activity.state == ENROLLMENT_STATE.ENROLLED
         
     def test_enroll_activity_usecase_invalid_user_id(self):

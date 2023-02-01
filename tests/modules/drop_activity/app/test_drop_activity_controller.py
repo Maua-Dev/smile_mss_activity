@@ -11,23 +11,23 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': repo.enrollments[7].activity.code})
+        request = HttpRequest(body={'user_id': repo.enrollments[7].user.user_id, 'code': repo.enrollments[7].activity_code.code})
 
         reponse = controller(request)
 
         assert reponse.status_code == 200
         assert reponse.body['message'] == "the enrollment was dropped"
-        assert reponse.body['activity']['code'] == "ELET355"
+        assert reponse.body['activity_code']['code'] == "ELET355"
         assert reponse.body['user']['user_id'] == "0355535e-a110-11ed-a8fc-0242ac120002"
         assert reponse.body['state'] == "DROPPED"
-        assert reponse.body['activity']['stop_accepting_new_enrollments_before'] == None
+        assert reponse.body['activity_code']['stop_accepting_new_enrollments_before'] == None
 
     def test_drop_activity_controller_missing_user_id(self):
         repo = ActivityRepositoryMock()
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[7].activity.code})
+        request = HttpRequest(body={'code': repo.enrollments[7].activity_code.code})
 
         reponse = controller(request)
 
@@ -51,7 +51,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[10].user.user_id, 'code': repo.enrollments[10].activity.code})
+        request = HttpRequest(body={'user_id': repo.enrollments[10].user.user_id, 'code': repo.enrollments[10].activity_code.code})
 
         reponse = controller(request)
 
@@ -75,7 +75,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': "0000-0000-00000-000000-0000000-00000", 'code': repo.enrollments[7].activity.code})
+        request = HttpRequest(body={'user_id': "0000-0000-00000-000000-0000000-00000", 'code': repo.enrollments[7].activity_code.code})
 
         reponse = controller(request)
 
@@ -87,7 +87,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': '1', 'code': repo.enrollments[7].activity.code})
+        request = HttpRequest(body={'user_id': '1', 'code': repo.enrollments[7].activity_code.code})
         reponse = controller(request)
 
         assert reponse.status_code == 400

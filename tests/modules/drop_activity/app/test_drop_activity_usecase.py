@@ -17,7 +17,7 @@ class Test_DropActivityUsecase:
 
         assert type(dropped_enrollment) == Enrollment
         assert dropped_enrollment.user.user_id == repo.users[1].user_id
-        assert dropped_enrollment.activity.code == repo.activities[1].code
+        assert dropped_enrollment.activity_code.code == repo.activities[1].code
         assert dropped_enrollment.state == ENROLLMENT_STATE.DROPPED
         assert taken_slots_before - 1 == repo.activities[1].taken_slots
 
@@ -31,7 +31,7 @@ class Test_DropActivityUsecase:
 
         assert type(dropped_enrollment) == Enrollment
         assert dropped_enrollment.user.user_id == repo.users[2].user_id
-        assert dropped_enrollment.activity.code == repo.activities[0].code
+        assert dropped_enrollment.activity_code.code == repo.activities[0].code
         assert dropped_enrollment.state == ENROLLMENT_STATE.DROPPED
         assert taken_slots_before == repo.activities[1].taken_slots
 
@@ -43,11 +43,11 @@ class Test_DropActivityUsecase:
         usecase = DropActivityUsecase(repo)
         taken_slots_before = repo.activities[1].taken_slots
 
-        dropped_enrollment = usecase(repo.enrollments[4].user.user_id, repo.enrollments[4].activity.code)
+        dropped_enrollment = usecase(repo.enrollments[4].user.user_id, repo.enrollments[4].activity_code.code)
 
         assert type(dropped_enrollment) == Enrollment
         assert dropped_enrollment.user.user_id == repo.enrollments[4].user.user_id
-        assert dropped_enrollment.activity.code == repo.enrollments[4].activity.code
+        assert dropped_enrollment.activity_code.code == repo.enrollments[4].activity_code.code
         assert dropped_enrollment.state == ENROLLMENT_STATE.DROPPED
         assert taken_slots_before == repo.activities[1].taken_slots
 
@@ -61,11 +61,11 @@ class Test_DropActivityUsecase:
             usecase = DropActivityUsecase(repo)
             taken_slots_before = repo.activities[11].taken_slots
 
-            dropped_enrollment = usecase(repo.enrollments[23].user.user_id, repo.enrollments[23].activity.code)
+            dropped_enrollment = usecase(repo.enrollments[23].user.user_id, repo.enrollments[23].activity_code.code)
 
             assert type(dropped_enrollment) == Enrollment
             assert dropped_enrollment.user.user_id == repo.enrollments[23].user.user_id
-            assert dropped_enrollment.activity.code == repo.enrollments[23].activity.code
+            assert dropped_enrollment.activity_code.code == repo.enrollments[23].activity_code.code
             assert dropped_enrollment.state == ENROLLMENT_STATE.DROPPED
             assert taken_slots_before == repo.activities[11].taken_slots
 
@@ -81,7 +81,7 @@ class Test_DropActivityUsecase:
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(ForbiddenAction):
-            dropped_enrollment = usecase(repo.enrollments[10].user.user_id, repo.enrollments[10].activity.code)
+            dropped_enrollment = usecase(repo.enrollments[10].user.user_id, repo.enrollments[10].activity_code.code)
 
     def test_drop_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
