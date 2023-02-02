@@ -710,6 +710,41 @@ class Test_UpdateActivityController:
         assert response.status_code == 400
         assert response.body == "Field new_accepting_new_enrollments is missing"
 
+    def test_update_activity_controller_missing_request_user(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        controller = UpdateActivityController(usecase)
+
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012000,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
+                                                 "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811000,
+                  }
+        )
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == "Field requester_user is missing"
+
+
     @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_update_activity_controller_forbidden_user_not_admin(self):
         repo = ActivityRepositoryMock()

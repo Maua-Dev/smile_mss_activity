@@ -689,6 +689,40 @@ class Test_CreateActivityController:
         assert response.status_code == 400
         assert response.body == "Field accepting_new_enrollments is missing"
 
+    def test_create_activity_controller_missing_request_user(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(body={"code": "ZYX321",
+                                    "title": "Clean Architecture code review!",
+                                    "description": "Reviewing IMT student's codes",
+                                    "activity_type": "LECTURES",
+                                    "is_extensive": False,
+                                    "delivery_model": "IN_PERSON",
+                                    "start_date": 1669141012000,
+                                    "duration": 90,
+                                    "link": None,
+                                    "place": "H331",
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
+                                                               "03555624-a110-11ed-a8fc-0242ac120002"],
+                                    "speakers": [{
+                                        "name": "Robert Cecil Martin",
+                                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                        "company": "Clean Architecture Company"
+                                    }],
+                                    "total_slots": 100,
+                                    "accepting_new_enrollments": True,
+                                    "stop_accepting_new_enrollments_before": 1666451811000,
+                                    }
+                              )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Field requester_user is missing"
+
+
     @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_create_activity_controller_forbidden_not_admin(self):
         repo = ActivityRepositoryMock()
