@@ -1,5 +1,7 @@
 from typing import List, Tuple
 
+from boto3.dynamodb.conditions import Key
+
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker
@@ -35,7 +37,24 @@ class ActivityRepositoryDynamo(IActivityRepository):
         pass
 
     def get_activity(self, code: str) -> Activity:
-        pass
+
+        query_string = Key(self.dynamo.partition_key).eq(self.activity_partition_key_format(code))
+
+        response = self.dynamo.query(
+            key_condition_expression=query_string,
+            Select="ALL_ATTRIBUTES"
+        )
+
+        if response.get("Items") is None:
+            return None
+
+        activity_data = response.get("Items")[0]
+
+        activity_data["taken_slots"] = len(response.get("Items")) - 1
+
+        activity = ActivityDynamoDTO.from_dynamo(activity_data).to_entity()
+
+        return activity
 
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
         pass
