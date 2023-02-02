@@ -1,3 +1,5 @@
+import pytest
+
 from src.modules.create_activity.app.create_activity_controller import CreateActivityController
 from src.modules.create_activity.app.create_activity_usecase import CreateActivityUsecase
 from src.shared.domain.entities.user import User
@@ -30,7 +32,8 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, })
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+        )
 
         response = controller(request=request)
 
@@ -75,9 +78,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -110,10 +111,7 @@ class Test_CreateActivityController:
                     }],
                     "total_slots": 100,
                     "accepting_new_enrollments": True,
-                    "stop_accepting_new_enrollments_before": 1666451811000,
-
-                }
-            )
+                    "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
 
             response = controller(request=request)
 
@@ -145,9 +143,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -179,9 +175,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -213,9 +207,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -247,9 +239,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -280,7 +270,8 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, })
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+        )
 
         response = controller(request=request)
 
@@ -311,9 +302,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -345,9 +334,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -378,7 +365,8 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, })
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+        )
 
         response = controller(request=request)
 
@@ -409,9 +397,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -443,9 +429,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -477,9 +461,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -512,9 +494,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -547,9 +527,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -577,9 +555,7 @@ class Test_CreateActivityController:
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -608,9 +584,7 @@ class Test_CreateActivityController:
                 "speakers": "123",
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -644,9 +618,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -678,9 +650,7 @@ class Test_CreateActivityController:
                     "company": "Clean Architecture Company"
                 }],
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-
-            }
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -712,11 +682,45 @@ class Test_CreateActivityController:
                     "company": "Clean Architecture Company"
                 }],
                 "total_slots": 100,
-                "stop_accepting_new_enrollments_before": 1666451811000,
-            }
-        )
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field accepting_new_enrollments is missing"
+
+    @pytest.mark.skip("Still no ForbiddenAction exception")
+    def test_create_activity_controller_forbidden_not_admin(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(body={"code": "ZYX321",
+                                    "title": "Clean Architecture code review!",
+                                    "description": "Reviewing IMT student's codes",
+                                    "activity_type": "LECTURES",
+                                    "is_extensive": False,
+                                    "delivery_model": "IN_PERSON",
+                                    "start_date": 1669141012000,
+                                    "duration": 90,
+                                    "link": None,
+                                    "place": "H331",
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
+                                                               "03555624-a110-11ed-a8fc-0242ac120002"],
+                                    "speakers": [{
+                                        "name": "Robert Cecil Martin",
+                                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                        "company": "Clean Architecture Company"
+                                    }],
+                                    "total_slots": 100,
+                                    "accepting_new_enrollments": True,
+                                    "stop_accepting_new_enrollments_before": 1666451811000,
+                                    'requester_user': {"sub": repo.users[1].user_id,
+                                                       "cognito:username": repo.users[1].name,
+                                                       "custom:role": repo.users[1].role.value}}
+                              )
+
+        response = controller(request=request)
+
+        assert response.status_code == 403
+        assert response.body == "That action is forbidden for this create_activity, only admins can create activities"

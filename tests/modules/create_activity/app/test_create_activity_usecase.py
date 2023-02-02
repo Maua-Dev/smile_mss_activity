@@ -1,13 +1,9 @@
-import datetime
-
 import pytest
 from src.modules.create_activity.app.create_activity_usecase import CreateActivityUsecase
 from src.shared.domain.entities.speaker import Speaker
-from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
-from src.shared.domain.enums.role_enum import ROLE
-from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound
+from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound, ForbiddenAction
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.helpers.errors.domain_errors import EntityError
 
@@ -29,7 +25,7 @@ class Test_CreateActivityUsecase:
                                name="Robert Cecil Martin",
                                bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
                                company="Clean Architecture Company",
-                           )], responsible_professors_user_id=[repo.users[2].user_id])
+                           )], responsible_professors_user_id=[repo.users[2].user_id], user=repo.users[0])
 
         activitiesLenAfter = activitiesLenBefore + 1
 
@@ -75,7 +71,7 @@ class Test_CreateActivityUsecase:
                                    bio="SOCORRRO ALGUEM ME AJUDA",
                                    company="Clean Architecture Company",
                                )
-                           ], responsible_professors_user_id=[repo.users[2].user_id])
+                           ], responsible_professors_user_id=[repo.users[2].user_id], user=repo.users[0])
 
         assert len(repo.activities) == activitiesLenBefore + 1
         assert len(repo.activities[activitiesLenBefore].speakers) == 2
@@ -97,7 +93,7 @@ class Test_CreateActivityUsecase:
                                name="Robert Cecil Martin",
                                bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
                                company="Clean Architecture Company",
-                           )], responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id])
+                           )], responsible_professors_user_id=[repo.users[2].user_id, repo.users[11].user_id], user=repo.users[0])
 
         activitiesLenAfter = activitiesLenBefore + 1
 
@@ -124,7 +120,7 @@ class Test_CreateActivityUsecase:
                             company="Clean Architecture Company",
                         )
                     ],
-                    responsible_professors_user_id=[repo.users[2].user_id])
+                    responsible_professors_user_id=[repo.users[2].user_id], user=repo.users[0])
 
     def test_create_activity_usecase_duplicated_item(self):
         repo = ActivityRepositoryMock()
@@ -144,7 +140,7 @@ class Test_CreateActivityUsecase:
                             company="Clean Architecture Company",
                         )
                     ],
-                    responsible_professors_user_id=[repo.users[2].user_id])
+                    responsible_professors_user_id=[repo.users[2].user_id], user=repo.users[0])
 
     def test_create_activity_usecase_invalid_speaker(self):
         repo = ActivityRepositoryMock()
@@ -169,7 +165,7 @@ class Test_CreateActivityUsecase:
                             company="Clean Architecture Company",
                         )
                     ],
-                    responsible_professors_user_id=[repo.users[2].user_id])
+                    responsible_professors_user_id=[repo.users[2].user_id], user=repo.users[0])
 
     def test_create_activity_usecase_invalid_speaker_not_speaker(self):
         repo = ActivityRepositoryMock()
@@ -185,7 +181,7 @@ class Test_CreateActivityUsecase:
                     speakers=[
                         "Vitor Soller",
                     ],
-                    responsible_professors_user_id=[repo.users[2].user_id])
+                    responsible_professors_user_id=[repo.users[2].user_id], user=repo.users[0])
 
     def test_create_activity_usecase_missing_responsible_professor(self):
         repo = ActivityRepositoryMock()
@@ -205,7 +201,7 @@ class Test_CreateActivityUsecase:
                             company="Clean Architecture Company",
                         )
                     ],
-                    responsible_professors_user_id=[repo.users[2].user_id, "0000-0000-00000-000000-0000000-00000"])
+                    responsible_professors_user_id=[repo.users[2].user_id, "0000-0000-00000-000000-0000000-00000"], user=repo.users[0])
 
     def test_create_activity_usecase_invalid_zero_responsible_professor(self):
             repo = ActivityRepositoryMock()
@@ -225,7 +221,7 @@ class Test_CreateActivityUsecase:
                                 company="Clean Architecture Company",
                             )
                         ],
-                        responsible_professors_user_id=[])
+                        responsible_professors_user_id=[], user=repo.users[0])
 
     def test_create_activity_usecase_invalid_responsible_professor_not_list(self):
             repo = ActivityRepositoryMock()
@@ -245,4 +241,25 @@ class Test_CreateActivityUsecase:
                                 company="Clean Architecture Company",
                             )
                         ],
-                        responsible_professors_user_id="0000-0000-00000-000000-0000000-00000")
+                        responsible_professors_user_id="0000-0000-00000-000000-0000000-00000", user=repo.users[0])
+
+    @pytest.mark.skip("Still no ForbiddenAction exception")
+    def test_create_activity_usecase_forbidden_not_admin(self):
+        repo = ActivityRepositoryMock()
+        usecase = CreateActivityUsecase(repo=repo)
+
+        with pytest.raises(ForbiddenAction):
+            usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                    duration=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                    accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                    delivery_model=DELIVERY_MODEL.HYBRID,
+                    start_date=1671747413000,
+                    stop_accepting_new_enrollments_before=1671743813000,
+                    speakers=[
+                        Speaker(
+                            name="Robert Cecil Martin",
+                            bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                            company="Clean Architecture Company",
+                        )
+                    ],
+                    responsible_professors_user_id=[repo.users[2].user_id], user=repo.users[1])

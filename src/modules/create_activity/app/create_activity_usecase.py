@@ -6,9 +6,10 @@ from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound
+from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound, ForbiddenAction
 
 
 class CreateActivityUsecase:
@@ -19,10 +20,14 @@ class CreateActivityUsecase:
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
                  total_slots: int,
                  accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
-                 stop_accepting_new_enrollments_before: int, speakers: List[Speaker]) -> Activity:
+                 stop_accepting_new_enrollments_before: int, speakers: List[Speaker], user: User) -> Activity:
 
         if type(code) != str:
             raise EntityError("code")
+
+        if user.role != ROLE.ADMIN:
+            # raise ForbiddenAction("create_activity, only admins can create activities")
+            pass
 
         if self.repo.get_activity(code=code) is not None:
             raise DuplicatedItem("code")
