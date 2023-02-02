@@ -13,7 +13,7 @@ from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadR
 class GetEnrollmentsByUserController:
 
     def __init__(self, usecase: GetEnrollmentsByUserUsecase):
-        self.GetEnrollmentsByUserIdUsecase = usecase
+        self.GetEnrollmentsByUserUsecase = usecase
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
@@ -22,7 +22,7 @@ class GetEnrollmentsByUserController:
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 
-            enrollments = self.GetEnrollmentsByUserIdUsecase(
+            enrollments = self.GetEnrollmentsByUserUsecase(
                 user_id=requester_user.user_id
             )
 
