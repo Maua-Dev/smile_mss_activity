@@ -7,7 +7,7 @@ class Test_GetAllActivitiesAdminViewmodel:
     def test_get_all_activities_admin_viewmodel(self):
         repo = ActivityRepositoryMock()
         usecase = GetAllActivitiesAdminUsecase(repo)
-        all_activities_with_enrollments = usecase()
+        all_activities_with_enrollments = usecase(repo.users[0])
         viewmodel = GetAllActivitiesAdminViewmodel(all_activities_with_enrollments)
 
         expected = {
