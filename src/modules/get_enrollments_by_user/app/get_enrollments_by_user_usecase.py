@@ -6,7 +6,7 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 from src.shared.helpers.errors.domain_errors import EntityError
 
 
-class GetEnrollmentsByUserIdUsecase:
+class GetEnrollmentsByUserUsecase:
     def __init__(self, repo: IActivityRepository):
         self.repo = repo
 

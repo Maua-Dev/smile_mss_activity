@@ -49,16 +49,20 @@ class SpeakerViewmodel:
 class EnrollmentViewmodel:
     user: UserViewmodel
     state: ENROLLMENT_STATE
-    date_subscribed: datetime.datetime
+    date_subscribed: int
 
-    def __init__(self, enrollment: Enrollment):
-        self.user = UserViewmodel(enrollment.user)
+    def __init__(self, enrollment: Enrollment, user: User):
+        self.user = UserViewmodel(user) if type(user) == User else "NOT_FOUND"
         self.state = enrollment.state
         self.date_subscribed = enrollment.date_subscribed
 
     def to_dict(self):
         return {
-            "user": self.user.to_dict(),
+            "user": self.user.to_dict() if type(self.user) == UserViewmodel else {
+                'name': "NOT_FOUND",
+                'user_id': "NOT_FOUND",
+                'role': "NOT_FOUND"
+            },
             "state": self.state.value,
             "date_subscribed": self.date_subscribed,
         }
@@ -83,7 +87,7 @@ class ActivityViewmodel:
     stop_accepting_new_enrollments_before: int
     enrollments: List[EnrollmentViewmodel]
 
-    def __init__(self, activity: Activity, enrollments: List[Enrollment]):
+    def __init__(self, activity: Activity, enrollments: List[Tuple[Enrollment, User]]):
         self.code = activity.code
         self.title = activity.title
         self.description = activity.description
@@ -100,39 +104,41 @@ class ActivityViewmodel:
         self.taken_slots = activity.taken_slots
         self.accepting_new_enrollments = activity.accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
-        self.enrollments = [EnrollmentViewmodel(enrollment) for enrollment in enrollments]
+        self.enrollments = [EnrollmentViewmodel(*enrollment) for enrollment in enrollments]
 
     def to_dict(self):
         return {
-            "code": self.code,
-            "title": self.title,
-            "description": self.description,
-            "activity_type": self.activity_type.value,
-            "is_extensive": self.is_extensive,
-            "delivery_model": self.delivery_model.value,
-            "start_date": self.start_date,
-            "duration": self.duration,
-            "link": self.link,
-            "place": self.place,
-            "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
-            "speakers": [speaker.to_dict() for speaker in self.speakers],
-            "total_slots": self.total_slots,
-            "taken_slots": self.taken_slots,
-            "accepting_new_enrollments": self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
+            "activity": {"code": self.code,
+                         "title": self.title,
+                         "description": self.description,
+                         "activity_type": self.activity_type.value,
+                         "is_extensive": self.is_extensive,
+                         "delivery_model": self.delivery_model.value,
+                         "start_date": self.start_date,
+                         "duration": self.duration,
+                         "link": self.link,
+                         "place": self.place,
+                         "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
+                         "speakers": [speaker.to_dict() for speaker in self.speakers],
+                         "total_slots": self.total_slots,
+                         "taken_slots": self.taken_slots,
+                         "accepting_new_enrollments": self.accepting_new_enrollments,
+                         "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None, },
             "enrollments": [enrollment.to_dict() for enrollment in self.enrollments],
         }
 
 
 class GetAllActivitiesAdminViewmodel:
-    all_activities_with_enrollments: List[Tuple[Activity, List[Enrollment]]]
+    all_activities_dict: dict
 
-    def __init__(self, all_activities_with_enrollments: List[Tuple[Activity, List[Enrollment]]]):
-        self.all_activities_with_enrollments = all_activities_with_enrollments
+    def __init__(self, all_activities_dict: dict):
+        self.all_activities_dict = all_activities_dict
 
     def to_dict(self):
         return {
-            "all_activities_with_enrollments": [ActivityViewmodel(activity, enrollments).to_dict() for activity, enrollments in
-            self.all_activities_with_enrollments],
+            "all_activities_with_enrollments": [ActivityViewmodel(self.all_activities_dict[activity_code]['activity'],
+                                                                  self.all_activities_dict[activity_code][
+                                                                      'enrollments']).to_dict() for activity_code in
+                                                self.all_activities_dict],
             "message": "the activities were retrieved by admin"
         }

@@ -1,6 +1,6 @@
 import json
 
-from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_presenter import lambda_handler
+from src.modules.get_enrollments_by_user.app.get_enrollments_by_user_presenter import lambda_handler
 
 
 class Test_GetEnrollmentsByUserIdPresenter:
@@ -20,22 +20,19 @@ class Test_GetEnrollmentsByUserIdPresenter:
                 "header2": "value1,value2"
             },
             "queryStringParameters": {
-                'user_id': "d61dbf66-a10f-11ed-a8fc-0242ac120002",
+                "parameter1": "value1",
             },
             "requestContext": {
                 "accountId": "123456789012",
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
+                            "cognito:username": "João Vilas",
+                            "custom:role": "ADMIN",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -63,41 +60,7 @@ class Test_GetEnrollmentsByUserIdPresenter:
         assert json.loads(response["body"])['message'] == "the enrollments were retrieved"
         assert json.loads(response["body"])['enrollments'] == [
             {
-                'activity': {
-                    'code': 'ECM2345',
-                    'title': 'Atividade da ECM 2345',
-                    'description': 'Isso é uma atividade',
-                    'activity_type': 'COURSE',
-                    'is_extensive': False,
-                    'delivery_model': 'IN_PERSON',
-                    'start_date': 1671747413000,
-                    'duration': 120,
-                    'link': None,
-                    'place': 'H332',
-                    'responsible_professors': [
-                        {
-                            'name': 'Caio Toledo',
-                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                            'role': 'PROFESSOR'
-                        }
-                    ],
-                    'speakers': [
-                        {
-                            'name': 'Vitor Briquez',
-                            'bio': 'Incrível',
-                            'company': 'Apple'
-                        }
-                    ],
-                    'total_slots': 4,
-                    'taken_slots': 4,
-                    'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671743812000
-                },
-                'user': {
-                    'name': 'João Vilas',
-                    'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002',
-                    'role': 'ADMIN'
-                },
+                'activity_code': 'ECM2345',
                 'state': 'ENROLLED',
                 'date_subscribed': 1671229013000
             }
@@ -130,7 +93,7 @@ class Test_GetEnrollmentsByUserIdPresenter:
                         "callerId": "AIDA...",
                         "cognitoIdentity": None,
                         "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
+                        "userArn": "arn:aws:iam::111122223333:user_id/example-user_id",
                         "userId": "AIDA..."
                     }
                 },
@@ -157,4 +120,4 @@ class Test_GetEnrollmentsByUserIdPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response['body']) == "Field user_id is missing"
+        assert json.loads(response['body']) == "Field requester_user is missing"

@@ -3,6 +3,7 @@ import datetime
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .create_activity_usecase import CreateActivityUsecase
 from .create_activity_viewmodel import CreateActivityViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
@@ -19,6 +20,11 @@ class CreateActivityController:
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
+            if request.data.get('requester_user') is None:
+                raise MissingParameters('requester_user')
+
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
+
             if request.data.get('code') is None:
                 raise MissingParameters('code')
             if request.data.get('title') is None:
@@ -87,7 +93,8 @@ class CreateActivityController:
                     speakers = speakers,
                     total_slots = request.data.get('total_slots'),
                     accepting_new_enrollments = request.data.get('accepting_new_enrollments'),
-                    stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
+                    stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before,
+                    user = requester_user
                     )
                     
             viewmodel = CreateActivityViewmodel(activity)
@@ -101,6 +108,10 @@ class CreateActivityController:
         except MissingParameters as err:
 
             return BadRequest(body=err.message)
+
+        except ForbiddenAction as err:
+
+            return Forbidden(body=err.message)
 
         except DuplicatedItem as err:
 
