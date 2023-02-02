@@ -49,8 +49,8 @@ class Test_ActivityRepositoryMock:
 
     def test_create_enrollment(self):
         repo = ActivityRepositoryMock()
-        enrollment = Enrollment(activity_code='ECM2345', user=repo.users[0],
-                                state=ENROLLMENT_STATE.ENROLLED, date_subscribed=1671229013000)
+        enrollment = Enrollment(activity_code='ECM2345', user_id=repo.users[0], state=ENROLLMENT_STATE.ENROLLED,
+                                date_subscribed=1671229013000)
 
         len_before = len(repo.enrollments)
         enrollment_created = repo.create_enrollment(enrollment=enrollment)
