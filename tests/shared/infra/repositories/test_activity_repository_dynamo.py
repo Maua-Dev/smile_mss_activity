@@ -53,3 +53,14 @@ class Test_ActivityRepositoryDynamo:
         assert activity_gotten.accepting_new_enrollments == activity.accepting_new_enrollments
         assert activity_gotten.stop_accepting_new_enrollments_before == activity.stop_accepting_new_enrollments_before
 
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_create_enrollment(self):
+        os.environ["STAGE"] = "TEST"
+        activity_repository_dynamo = ActivityRepositoryDynamo()
+        activity_repository_mock = ActivityRepositoryMock()
+
+        enrollment = activity_repository_mock.enrollments[0]
+
+        new_enrollment = activity_repository_dynamo.create_enrollment(enrollment)
+
+        assert enrollment == new_enrollment

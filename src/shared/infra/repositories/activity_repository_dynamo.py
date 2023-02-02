@@ -12,6 +12,7 @@ from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.environments import Environments
 from src.shared.infra.dto.activity_dynamo_dto import ActivityDynamoDTO
+from src.shared.infra.dto.enrollment_dynamo_dto import EnrollmentDynamoDTO
 from src.shared.infra.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
 
 
@@ -19,12 +20,21 @@ class ActivityRepositoryDynamo(IActivityRepository):
     dynamo: DynamoDatasource
 
     @staticmethod
-    def activity_partition_key_format(code: str) -> str:
-        return f"{code}"
+    def activity_partition_key_format(activity_code: str) -> str:
+        return f"{activity_code}"
 
     @staticmethod
-    def activity_sort_key_format(code: str) -> str:
-        return f"activity#{code}"
+    def activity_sort_key_format(activity_code: str) -> str:
+        return f"activity#{activity_code}"
+
+    @staticmethod
+    def enrollment_partition_key_format(activity_code: str) -> str:
+        return f"{activity_code}"
+
+    @staticmethod
+    def enrollment_sort_key_format(user_id: str) -> str:
+        return f"enrollment#{user_id}"
+
 
     def __init__(self):
         self.dynamo = DynamoDatasource(endpoint_url=Environments.get_envs().endpoint_url,
@@ -63,7 +73,17 @@ class ActivityRepositoryDynamo(IActivityRepository):
         pass
 
     def create_enrollment(self, enrollment: Enrollment) -> Enrollment:
-        pass
+        item = EnrollmentDynamoDTO.from_entity(enrollment).to_dynamo()
+
+        response = self.dynamo.put_item(
+            item=item,
+            partition_key=self.enrollment_partition_key_format(enrollment.activity_code),
+            sort_key=self.enrollment_sort_key_format(enrollment.user_id),
+            is_decimal=True
+        )
+
+        return enrollment
+
 
     def update_activity(self, code: str, new_title: str = None, new_description: str = None,
                         new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
