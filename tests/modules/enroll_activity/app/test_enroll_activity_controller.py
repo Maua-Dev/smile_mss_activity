@@ -105,20 +105,6 @@ class Test_EnrollActivityController:
         assert response.status_code == 404
         assert response.body == 'No items found for Activity'
 
-    def test_enroll_activity_controller_user_id_not_found(self):
-
-        repo = ActivityRepositoryMock()
-        usecase = EnrollActivityUsecase(repo)
-        controller = EnrollActivityController(usecase)
-
-        request = HttpRequest(body={'code':repo.enrollments[0].activity_code, 'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "cognito:username": repo.users[3].name, "custom:role": repo.users[3].role.value}})
-
-        response = controller(request)
-
-        assert response.status_code == 404
-        assert response.body == 'No items found for User'
-
-
     def test_enroll_activity_controller_invalid_user_id(self):
 
         repo = ActivityRepositoryMock()

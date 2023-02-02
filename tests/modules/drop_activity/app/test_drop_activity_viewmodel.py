@@ -9,7 +9,7 @@ class Test_DropActivityViewmodel:
 
         enrollment = repo.enrollments[8]
 
-        drop_activity_viewmodel = DropActivityViewmodel(enrollment, enrollment.user).to_dict()
+        drop_activity_viewmodel = DropActivityViewmodel(enrollment, repo.users[3]).to_dict()
 
         expected = {'activity_code': "COD1468",
                     'user': {'name': 'Pedro Marcelino', 'user_id': '0355573c-a110-11ed-a8fc-0242ac120002', 'role': 'INTERNATIONAL_STUDENT'},

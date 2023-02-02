@@ -32,7 +32,7 @@ class Test_GetAllActivitiesPresenter:
                         "callerId": "AIDA...",
                         "cognitoIdentity": None,
                         "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
+                        "userArn": "arn:aws:iam::111122223333:user_id/example-user_id",
                         "userId": "AIDA..."
                     }
                 },

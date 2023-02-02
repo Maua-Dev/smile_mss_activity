@@ -24,11 +24,6 @@ class EnrollActivityUsecase:
         if activity is None:
             raise NoItemsFound('Activity')
 
-        user = self.repo.get_user(user_id)
-
-        if user is None:
-            raise NoItemsFound('User')
-
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
 
         if enrollment is not None:
@@ -40,11 +35,11 @@ class EnrollActivityUsecase:
         else:
 
             if activity.taken_slots >= activity.total_slots:
-                enrollment = Enrollment(activity_code=activity.code, user_id=user, state=ENROLLMENT_STATE.IN_QUEUE,
+                enrollment = Enrollment(activity_code=activity.code, user_id=user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                                         date_subscribed=int(datetime.datetime.now().timestamp() * 1000))
 
             else:
-                enrollment = Enrollment(activity_code=activity.code, user_id=user, state=ENROLLMENT_STATE.ENROLLED,
+                enrollment = Enrollment(activity_code=activity.code, user_id=user_id, state=ENROLLMENT_STATE.ENROLLED,
                                         date_subscribed=int(datetime.datetime.now().timestamp() * 1000))
 
         return self.repo.create_enrollment(enrollment)

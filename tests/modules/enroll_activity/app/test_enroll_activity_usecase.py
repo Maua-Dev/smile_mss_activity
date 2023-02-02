@@ -20,7 +20,7 @@ class Test_EnrollActivityUsecase:
         enrollment_activity = usecase(repo.users[6].user_id, repo.activities[8].code)
 
         assert type(enrollment_activity) == Enrollment
-        assert enrollment_activity.user.user_id == repo.users[6].user_id
+        assert enrollment_activity.user_id == repo.users[6].user_id
         assert enrollment_activity.activity_code == repo.activities[8].code
         assert enrollment_activity.state == ENROLLMENT_STATE.ENROLLED
         assert taken_slots_old + 1 == repo.activities[8].taken_slots
@@ -31,7 +31,7 @@ class Test_EnrollActivityUsecase:
         enrollment_activity = usecase(repo.users[8].user_id, repo.activities[0].code)
 
         assert type(enrollment_activity) == Enrollment
-        assert enrollment_activity.user.user_id == repo.users[8].user_id
+        assert enrollment_activity.user_id == repo.users[8].user_id
         assert enrollment_activity.activity_code == repo.activities[0].code
         assert enrollment_activity.state == ENROLLMENT_STATE.IN_QUEUE
 
@@ -42,7 +42,7 @@ class Test_EnrollActivityUsecase:
         enrollment_activity = usecase(repo.users[3].user_id, repo.activities[2].code)
 
         assert type(enrollment_activity) == Enrollment
-        assert enrollment_activity.user.user_id == repo.users[3].user_id
+        assert enrollment_activity.user_id == repo.users[3].user_id
         assert enrollment_activity.activity_code == repo.activities[2].code
         assert repo.activities[2].taken_slots < repo.activities[2].total_slots
         assert repo.activities[2].accepting_new_enrollments == True
@@ -77,14 +77,6 @@ class Test_EnrollActivityUsecase:
 
         with pytest.raises(NoItemsFound):
             enrollment_activity = usecase(repo.users[6].user_id, '')
-
-    def test_enroll_activity_usecase_user_none(self):
-
-        repo = ActivityRepositoryMock()
-        usecase = EnrollActivityUsecase(repo)
-
-        with pytest.raises(NoItemsFound):
-            enrollment_activity = usecase("0000-0000-00000-000000-0000000-00000", repo.activities[0].code)
 
     def test_enroll_activity_usecase_not_accepting_new_enrollment(self):
         repo = ActivityRepositoryMock()

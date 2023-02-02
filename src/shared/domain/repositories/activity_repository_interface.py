@@ -16,7 +16,7 @@ class IActivityRepository(ABC):
     @abstractmethod
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
         """
-        If the user is enrolled in the activity_code, returns the enrollment.
+        If the user_id is enrolled in the activity_code, returns the enrollment.
         else returns None
 
         Ignore dropped enrollments
@@ -36,7 +36,7 @@ class IActivityRepository(ABC):
     @abstractmethod
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
         """
-        If the user is enrolled in the activity_code, updates the state of enrollment.
+        If the user_id is enrolled in the activity_code, updates the state of enrollment.
         else returns None
 
         In dynamoRepo, does not need to call update_activity to change taken_slots
@@ -46,7 +46,7 @@ class IActivityRepository(ABC):
     @abstractmethod
     def get_user(self, user_id:str) -> User:
         """
-        If user with the given code exists, returns it
+        If user_id with the given code exists, returns it
         else returns None
         """
         pass

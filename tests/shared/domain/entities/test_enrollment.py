@@ -14,46 +14,30 @@ from src.shared.helpers.errors.domain_errors import EntityError
 
 class Test_Enrollment:
     def test_enrollment(self):
-        enrollment = Enrollment(activity_code="1234", user_id=User(
-            name="Marcos",
-            role=ROLE.PROFESSOR,
-            user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
-        ), state=ENROLLMENT_STATE.ENROLLED, date_subscribed=1671728165000)
+        enrollment = Enrollment(activity_code="1234", user_id="7f52e72c-a111-11ed-a8fc-0242ac120002", state=ENROLLMENT_STATE.ENROLLED, date_subscribed=1671728165000)
 
         assert type(enrollment) == Enrollment
         assert enrollment.activity_code == "1234"
-        assert enrollment.user.name == "Marcos"
+        assert enrollment.user_id == "7f52e72c-a111-11ed-a8fc-0242ac120002"
         assert enrollment.state == ENROLLMENT_STATE.ENROLLED
         assert enrollment.date_subscribed == 1671728165000
 
 
     def test_enrollment_with_invalid_activity(self):
         with pytest.raises(EntityError):
-            enrollment = Enrollment(activity_code=1, user_id=User(
-                name="Marcos",
-                role=ROLE.PROFESSOR,
-                user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
-            ), state=ENROLLMENT_STATE.ENROLLED, date_subscribed=1671728165000)
+            enrollment = Enrollment(activity_code=1, user_id="7f52e72c-a111-11ed-a8fc-0242ac120002", state=ENROLLMENT_STATE.ENROLLED, date_subscribed=1671728165000)
 
     def test_enrollment_with_invalid_user(self):
         with pytest.raises(EntityError):
-            enrollment = Enrollment(activity_code="1234", user_id="Marcos", state=ENROLLMENT_STATE.ENROLLED,
+            enrollment = Enrollment(activity_code="1234", user_id=1, state=ENROLLMENT_STATE.ENROLLED,
                                     date_subscribed=1671728165000)
 
     def test_enrollment_with_invalid_state(self):
         with pytest.raises(EntityError):
-            enrollment = Enrollment(activity_code="1234", user_id=User(
-                name="Marcos",
-                role=ROLE.PROFESSOR,
-                user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
-            ), state="ENROLLED", date_subscribed=1671728165000)
+            enrollment = Enrollment(activity_code="1234", user_id="7f52e72c-a111-11ed-a8fc-0242ac120002", state="ENROLLED", date_subscribed=1671728165000)
 
     def test_enrollment_with_invalid_date_subscribed(self):
         with pytest.raises(EntityError):
-            enrollment = Enrollment(activity_code="1234", user_id=User(
-                name="Marcos",
-                role=ROLE.PROFESSOR,
-                user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
-            ), state=ENROLLMENT_STATE.ENROLLED, date_subscribed="2022-12-22 13:56:05.430523")
+            enrollment = Enrollment(activity_code="1234", user_id="7f52e72c-a111-11ed-a8fc-0242ac120002", state=ENROLLMENT_STATE.ENROLLED, date_subscribed="2022-12-22 13:56:05.430523")
 
 

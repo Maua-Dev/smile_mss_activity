@@ -16,7 +16,7 @@ class Test_GetEnrollmentController:
 
         assert response.status_code == 200
         assert response.body['activity_code'] == repo.enrollments[0].activity_code
-        assert response.body['user']['user_id'] == repo.enrollments[0].user.user_id
+        assert response.body['user']['user_id'] == repo.enrollments[0].user_id
         assert response.body['state'] == repo.enrollments[0].state.value
         assert response.body['date_subscribed'] == repo.enrollments[0].date_subscribed
         assert response.body['message'] == "the enrollment was retrieved"

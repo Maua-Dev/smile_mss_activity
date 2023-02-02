@@ -277,75 +277,75 @@ class ActivityRepositoryMock(IActivityRepository):
         ]
 
         self.enrollments = [
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[0], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[0].code, user_id=self.users[0].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671229013000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[0].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671315413000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[2], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[0].code, user_id=self.users[2].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671401813000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[3], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[0].code, user_id=self.users[3].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[4], state=ENROLLMENT_STATE.IN_QUEUE,
+            Enrollment(activity_code=self.activities[0].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671574613000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[5], state=ENROLLMENT_STATE.IN_QUEUE,
+            Enrollment(activity_code=self.activities[0].code, user_id=self.users[5].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671574673000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[6], state=ENROLLMENT_STATE.IN_QUEUE,
+            Enrollment(activity_code=self.activities[0].code, user_id=self.users[6].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671574733000),
-            Enrollment(activity_code=self.activities[1].code, user_id=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[1].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[2].code, user_id=self.users[3], state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[2].code, user_id=self.users[3].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671488212000),
-            Enrollment(activity_code=self.activities[2].code, user_id=self.users[4], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[2].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[3].code, user_id=self.users[4], state=ENROLLMENT_STATE.REJECTED,
+            Enrollment(activity_code=self.activities[3].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.REJECTED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[3].code, user_id=self.users[5], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[3].code, user_id=self.users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671574613000),
-            Enrollment(activity_code=self.activities[3].code, user_id=self.users[6], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[3].code, user_id=self.users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671661013000),
-            Enrollment(activity_code=self.activities[4].code, user_id=self.users[5], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[4].code, user_id=self.users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671481013000),
-            Enrollment(activity_code=self.activities[4].code, user_id=self.users[6], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[4].code, user_id=self.users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[5].code, user_id=self.users[6], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[5].code, user_id=self.users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[6].code, user_id=self.users[7], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[6].code, user_id=self.users[7].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[7].code, user_id=self.users[8], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[7].code, user_id=self.users[8].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671401813000),
-            Enrollment(activity_code=self.activities[7].code, user_id=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[7].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[7].code, user_id=self.users[2], state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[7].code, user_id=self.users[2].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671574613000),
-            Enrollment(activity_code=self.activities[8].code, user_id=self.users[9], state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[8].code, user_id=self.users[9].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671315413000),
-            Enrollment(activity_code=self.activities[9].code, user_id=self.users[0], state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[9].code, user_id=self.users[0].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[10].code, user_id=self.users[1], state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[10].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[1], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[11].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1670710613000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[2], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[11].code, user_id=self.users[2].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1670710614000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[3], state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[11].code, user_id=self.users[3].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1670710615000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[5], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[11].code, user_id=self.users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1670710616000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[4], state=ENROLLMENT_STATE.IN_QUEUE,
+            Enrollment(activity_code=self.activities[11].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671661013000),
-            Enrollment(activity_code=self.activities[12].code, user_id=self.users[1], state=ENROLLMENT_STATE.COMPLETED,
+            Enrollment(activity_code=self.activities[12].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.COMPLETED,
                        date_subscribed=1668896213000),
-            Enrollment(activity_code=self.activities[12].code, user_id=self.users[2], state=ENROLLMENT_STATE.COMPLETED,
+            Enrollment(activity_code=self.activities[12].code, user_id=self.users[2].user_id, state=ENROLLMENT_STATE.COMPLETED,
                        date_subscribed=1668982612000),
-            Enrollment(activity_code=self.activities[12].code, user_id=self.users[3], state=ENROLLMENT_STATE.COMPLETED,
+            Enrollment(activity_code=self.activities[12].code, user_id=self.users[3].user_id, state=ENROLLMENT_STATE.COMPLETED,
                        date_subscribed=1669069013000),
-            Enrollment(activity_code=self.activities[12].code, user_id=self.users[4], state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[12].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1669760213000),
         ]
 
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.activity_code == code and enrollment.state != ENROLLMENT_STATE.DROPPED and enrollment.state != ENROLLMENT_STATE.ACTIVITY_CANCELLED:
+            if enrollment.user_id == user_id and enrollment.activity_code == code and enrollment.state != ENROLLMENT_STATE.DROPPED and enrollment.state != ENROLLMENT_STATE.ACTIVITY_CANCELLED:
                 return enrollment
         return None
 
@@ -371,7 +371,7 @@ class ActivityRepositoryMock(IActivityRepository):
 
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.activity_code == code:
+            if enrollment.user_id == user_id and enrollment.activity_code == code:
                 activity = self.get_activity(code=code)
                 if new_state == ENROLLMENT_STATE.DROPPED:
                     self.update_activity(code=code, new_taken_slots=activity.taken_slots - 1)
@@ -455,7 +455,7 @@ class ActivityRepositoryMock(IActivityRepository):
     def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
         new_enrollments = []
         for enrollment in enrollments:
-            new_enrollment = self.update_enrollment(user_id=enrollment.user.user_id, code=enrollment.activity_code,
+            new_enrollment = self.update_enrollment(user_id=enrollment.user_id, code=enrollment.activity_code,
                                                     new_state=state)
             new_enrollments.append(new_enrollment)
 
@@ -476,6 +476,6 @@ class ActivityRepositoryMock(IActivityRepository):
     def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
         enrollments = list()
         for enrollment in self.enrollments:
-            if enrollment.user.user_id == user_id and enrollment.state == ENROLLMENT_STATE.ENROLLED:
+            if enrollment.user_id == user_id and enrollment.state == ENROLLMENT_STATE.ENROLLED:
                 enrollments.append(enrollment)
         return enrollments

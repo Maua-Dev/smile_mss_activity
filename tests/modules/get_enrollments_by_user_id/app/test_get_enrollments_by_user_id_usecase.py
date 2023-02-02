@@ -19,7 +19,7 @@ class Test_GetEnrollmentsByUserId:
         assert len(list_enrollments) == 4
         assert all(type(enrollment) == Enrollment for enrollment in list_enrollments)
         assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED for enrollment in list_enrollments)
-        assert all(enrollment.user == repo.users[1] for enrollment in list_enrollments)
+        assert all(enrollment.user_id == repo.users[1].user_id for enrollment in list_enrollments)
 
     def test_get_enrollments_by_user_id_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
