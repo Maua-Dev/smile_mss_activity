@@ -93,7 +93,7 @@ class LambdaStack(Construct):
         )
 
         self.get_enrollment_function = self.create_lambda_api_gateway_integration(
-            module_name="get_enrollments_by_user_id",
+            module_name="get_enrollments_by_user",
             method="GET",
             mss_student_api_resource=api_gateway_resource,
             environment_variables=environment_variables

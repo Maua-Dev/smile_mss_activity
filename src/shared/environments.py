@@ -40,7 +40,7 @@ class Environments:
         self.stage = STAGE[os.environ.get("STAGE")]
 
         if self.stage == STAGE.TEST:
-            self.s3_bucket_name = "activity-bucket-test"
+            self.s3_bucket_name = "activity_code-bucket-test"
             self.region = "sa-east-1"
             self.endpoint_url = "http://localhost:8000"
             self.dynamo_table_name = "smile_mss_activity-table"
@@ -62,6 +62,17 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
             return ActivityRepositoryMock
+        # elif Environments.get_envs().stage == STAGE.PROD:
+        #     from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
+        #     return ActivityRepositoryDynamo
+        else:
+            raise Exception("No repository found for this stage")
+
+    @staticmethod
+    def get_user_repo() -> IActivityRepository:
+        if Environments.get_envs().stage == STAGE.TEST:
+            from src.shared.infra.repositories.activity_repository_mock import UserRepositoryMock
+            return UserRepositoryMock
         # elif Environments.get_envs().stage == STAGE.PROD:
         #     from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
         #     return ActivityRepositoryDynamo

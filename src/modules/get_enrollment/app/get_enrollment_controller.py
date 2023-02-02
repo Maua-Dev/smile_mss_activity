@@ -1,3 +1,4 @@
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .get_enrollment_usecase import GetEnrollmentUsecase
 from .get_enrollment_viewmodel import GetEnrollmentViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
@@ -14,18 +15,20 @@ class GetEnrollmentController:
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
-            if request.data.get('user_id') is None:
-                raise MissingParameters('user_id')
+            if request.data.get('requester_user') is None:
+                raise MissingParameters('requester_user')
 
             if not request.data.get('code'):
                 raise MissingParameters('code')
 
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
+
             enrollment = self.GetEnrollmentUsecase(
-                user_id=request.data.get('user_id'),
+                user_id=requester_user.user_id,
                 code=request.data.get('code')
             )
 
-            viewmodel = GetEnrollmentViewmodel(enrollment)
+            viewmodel = GetEnrollmentViewmodel(enrollment, requester_user)
 
             return OK(viewmodel.to_dict())
 

@@ -3,6 +3,7 @@ import datetime
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .update_activity_viewmodel import UpdateActivityViewmodel
 from .update_activity_usecase import UpdateActivityUsecase
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
@@ -20,6 +21,11 @@ class UpdateActivityController:
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
+            if request.data.get('requester_user') is None:
+                raise MissingParameters('requester_user')
+
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
+
             if not request.data.get('code'):
                 raise MissingParameters('code')
 
@@ -92,6 +98,7 @@ class UpdateActivityController:
                 new_responsible_professors_user_id=request.data.get('new_responsible_professors'),
                 new_speakers=new_speakers,
                 new_total_slots=request.data.get('new_total_slots'),
+                user=requester_user,
                 new_accepting_new_enrollments=request.data.get('new_accepting_new_enrollments'),
                 new_stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before
             )
@@ -102,6 +109,9 @@ class UpdateActivityController:
 
         except NoItemsFound as err:
             return NotFound(body=err.message)
+
+        except ForbiddenAction as err:
+            return Forbidden(body=err.message)
 
         except MissingParameters as err:
 

@@ -36,7 +36,7 @@ class DropActivityUsecase:
             if len(in_queue_enrollments) > 0:
                 in_queue_enrollments.sort(key=lambda enrollment: enrollment.date_subscribed)
                 oldest_enrollment = in_queue_enrollments[0]
-                new_enrolled_enrollment = self.repo.update_enrollment(user_id=oldest_enrollment.user.user_id, code=code,
+                new_enrolled_enrollment = self.repo.update_enrollment(user_id=oldest_enrollment.user_id, code=code,
                                                                       new_state=ENROLLMENT_STATE.ENROLLED)
 
         return updated_enrollment
