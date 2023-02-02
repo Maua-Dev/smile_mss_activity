@@ -5,8 +5,6 @@ from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 class Test_UserApiGatewayDTO:
 
-    # {'sub': 'd61dbf66-a10f-11ed-a8fc-0242ac120002', 'cognito:username': 'Vitor Soller', 'custom:role': 'ADMIN'}
-
     def test_user_api_gateway_dto_to_entity(self):
 
         user_dto = UserApiGatewayDTO(
