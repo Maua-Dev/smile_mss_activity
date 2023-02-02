@@ -1,6 +1,6 @@
 import json
 
-from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_presenter import lambda_handler
+from src.modules.get_enrollments_by_user.app.get_enrollments_by_user_presenter import lambda_handler
 
 
 class Test_GetEnrollmentsByUserIdPresenter:

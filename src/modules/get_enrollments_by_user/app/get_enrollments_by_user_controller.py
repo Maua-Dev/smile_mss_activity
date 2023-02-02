@@ -1,7 +1,7 @@
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
-from .get_enrollments_by_user_id_usecase import GetEnrollmentsByUserIdUsecase
-from .get_enrollments_by_user_id_viewmodel import \
-    GetEnrollmentsByUserIdViewmodel
+from .get_enrollments_by_user_usecase import GetEnrollmentsByUserUsecase
+from .get_enrollments_by_user_viewmodel import \
+    GetEnrollmentsByUserViewmodel
 
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -10,9 +10,9 @@ from src.shared.helpers.external_interfaces.external_interface import IRequest, 
 from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadRequest, InternalServerError
 
 
-class GetEnrollmentsByUserIdController:
+class GetEnrollmentsByUserController:
 
-    def __init__(self, usecase: GetEnrollmentsByUserIdUsecase):
+    def __init__(self, usecase: GetEnrollmentsByUserUsecase):
         self.GetEnrollmentsByUserIdUsecase = usecase
 
     def __call__(self, request: IRequest) -> IResponse:
@@ -26,7 +26,7 @@ class GetEnrollmentsByUserIdController:
                 user_id=requester_user.user_id
             )
 
-            viewmodel = GetEnrollmentsByUserIdViewmodel(enrollments, requester_user)
+            viewmodel = GetEnrollmentsByUserViewmodel(enrollments, requester_user)
 
             return OK(viewmodel.to_dict())
 

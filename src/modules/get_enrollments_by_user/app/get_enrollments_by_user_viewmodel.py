@@ -63,7 +63,7 @@ class EnrollmentViewmodel:
         }
 
 
-class GetEnrollmentsByUserIdViewmodel:
+class GetEnrollmentsByUserViewmodel:
     enrollments: List[EnrollmentViewmodel]
     user: UserViewmodel
 

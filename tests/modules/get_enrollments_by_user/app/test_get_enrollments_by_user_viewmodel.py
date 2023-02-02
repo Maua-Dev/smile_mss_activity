@@ -1,20 +1,20 @@
-from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_usecase import GetEnrollmentsByUserIdUsecase
-from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_viewmodel import \
-    GetEnrollmentsByUserIdViewmodel
+from src.modules.get_enrollments_by_user.app.get_enrollments_by_user_usecase import GetEnrollmentsByUserUsecase
+from src.modules.get_enrollments_by_user.app.get_enrollments_by_user_viewmodel import \
+    GetEnrollmentsByUserViewmodel
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_GetEnrollmentsByUserId:
 
-    def test_get_enrollments_by_user_id_viewmodel(self):
+    def test_get_enrollments_by_user_viewmodel(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetEnrollmentsByUserIdUsecase(repo)
+        usecase = GetEnrollmentsByUserUsecase(repo)
 
         list_enrollments = usecase(user_id=repo_user.users[1].user_id)
 
-        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments, repo_user.users[1])
+        viewmodel = GetEnrollmentsByUserViewmodel(list_enrollments, repo_user.users[1])
 
         expected = {
             'enrollments': [
@@ -49,14 +49,14 @@ class Test_GetEnrollmentsByUserId:
 
         assert viewmodel.to_dict() == expected
 
-    def test_get_enrollments_by_user_id_viewmodel_zero_enrollments(self):
+    def test_get_enrollments_by_user_viewmodel_zero_enrollments(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetEnrollmentsByUserIdUsecase(repo)
+        usecase = GetEnrollmentsByUserUsecase(repo)
 
         list_enrollments = usecase(user_id=repo_user.users[11].user_id)
 
-        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments, repo_user.users[11])
+        viewmodel = GetEnrollmentsByUserViewmodel(list_enrollments, repo_user.users[11])
 
         expected = {
             'enrollments': [
