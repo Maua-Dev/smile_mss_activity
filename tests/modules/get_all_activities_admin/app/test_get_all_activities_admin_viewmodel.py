@@ -1,13 +1,15 @@
 from src.modules.get_all_activities_admin.app.get_all_activities_admin_usecase import GetAllActivitiesAdminUsecase
 from src.modules.get_all_activities_admin.app.get_all_activities_admin_viewmodel import GetAllActivitiesAdminViewmodel
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_GetAllActivitiesAdminViewmodel:
     def test_get_all_activities_admin_viewmodel(self):
-        repo = ActivityRepositoryMock()
-        usecase = GetAllActivitiesAdminUsecase(repo)
-        all_activities_with_enrollments = usecase(repo.users[0])
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
+        all_activities_with_enrollments = usecase(repo_user.users[0])
         viewmodel = GetAllActivitiesAdminViewmodel(all_activities_with_enrollments)
 
         expected = {

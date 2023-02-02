@@ -6,12 +6,14 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_CreateActivityController:
     def test_create_activity_controller(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(body={"code": "ZYX321",
@@ -32,7 +34,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -55,8 +57,9 @@ class Test_CreateActivityController:
         assert response.body['activity']['stop_accepting_new_enrollments_before'] == 1666451811000
 
     def test_create_activity_controller_missing_code(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -78,7 +81,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -87,8 +90,9 @@ class Test_CreateActivityController:
         assert response.body == "Field code is missing"
 
     def test_create_activity_controller_wrong_code(self):
-            repo = ActivityRepositoryMock()
-            usecase = CreateActivityUsecase(repo=repo)
+            repo_activity = ActivityRepositoryMock()
+            repo_user = UserRepositoryMock()
+            usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
             controller = CreateActivityController(usecase=usecase)
 
             request = HttpRequest(
@@ -111,7 +115,7 @@ class Test_CreateActivityController:
                     }],
                     "total_slots": 100,
                     "accepting_new_enrollments": True,
-                    "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
+                    "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
             response = controller(request=request)
 
@@ -119,8 +123,9 @@ class Test_CreateActivityController:
             assert response.body == "Field code is not valid"
 
     def test_create_activity_controller_duplicated_code(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -143,7 +148,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -152,8 +157,9 @@ class Test_CreateActivityController:
         assert response.body == 'The item alredy exists for this code'
 
     def test_create_activity_controller_missing_title(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -175,7 +181,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -184,8 +190,9 @@ class Test_CreateActivityController:
         assert response.body == "Field title is missing"
 
     def test_create_activity_controller_missing_description(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -207,7 +214,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -216,8 +223,9 @@ class Test_CreateActivityController:
         assert response.body == "Field description is missing"
 
     def test_create_activity_controller_missing_activity_type(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -239,7 +247,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -248,8 +256,9 @@ class Test_CreateActivityController:
         assert response.body == "Field activity_type is missing"
 
     def test_create_activity_controller_invalid_activity_type(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(body={"code": "ZYX321",
@@ -270,7 +279,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -279,8 +288,9 @@ class Test_CreateActivityController:
         assert response.body == "Field activity_type is not valid"
 
     def test_create_activity_controller_missing_is_extensive(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -302,7 +312,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -311,8 +321,9 @@ class Test_CreateActivityController:
         assert response.body == "Field is_extensive is missing"
 
     def test_create_activity_controller_missing_delivery_model(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -334,7 +345,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -343,8 +354,9 @@ class Test_CreateActivityController:
         assert response.body == "Field delivery_model is missing"
 
     def test_create_activity_controller_invalid_delivery_model(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(body={"code": "ZYX321",
@@ -365,7 +377,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -374,8 +386,9 @@ class Test_CreateActivityController:
         assert response.body == "Field delivery_model is not valid"
 
     def test_create_activity_controller_invalid_start_date(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -397,7 +410,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -406,8 +419,9 @@ class Test_CreateActivityController:
         assert response.body == "Field start_date is missing"
 
     def test_create_activity_controller_missing_duration(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -429,7 +443,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -438,8 +452,9 @@ class Test_CreateActivityController:
         assert response.body == "Field duration is missing"
 
     def test_create_activity_controller_missing_responsible_professors(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -461,7 +476,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -470,8 +485,9 @@ class Test_CreateActivityController:
         assert response.body == "Field responsible_professors is missing"
 
     def test_create_activity_invalid_responsible_professors(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -494,7 +510,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -503,8 +519,9 @@ class Test_CreateActivityController:
         assert response.body == "Field responsible_professors is not valid"
 
     def test_create_activity_invalid_responsible_professors_id_invalid(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -527,7 +544,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -536,8 +553,9 @@ class Test_CreateActivityController:
         assert response.body == "No items found for responsible_professors"
 
     def test_create_activity_controller_missing_speakers(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -555,7 +573,7 @@ class Test_CreateActivityController:
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -564,8 +582,9 @@ class Test_CreateActivityController:
         assert response.body == "Field speakers is missing"
 
     def test_create_actvivity_invalid_speaker_type(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -584,7 +603,7 @@ class Test_CreateActivityController:
                 "speakers": "123",
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -593,8 +612,9 @@ class Test_CreateActivityController:
         assert response.body == "Field speakers is not valid"
 
     def test_create_activity_invalid_speaker_parameter(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -618,7 +638,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -627,8 +647,9 @@ class Test_CreateActivityController:
         assert response.body == "Field speakers is not valid"
 
     def test_create_activity_controller_missing_total_slots(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -650,7 +671,7 @@ class Test_CreateActivityController:
                     "company": "Clean Architecture Company"
                 }],
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -659,8 +680,9 @@ class Test_CreateActivityController:
         assert response.body == "Field total_slots is missing"
 
     def test_create_activity_controller_missing_accepting_new_enrollments(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(
@@ -682,7 +704,7 @@ class Test_CreateActivityController:
                     "company": "Clean Architecture Company"
                 }],
                 "total_slots": 100,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request=request)
 
@@ -690,8 +712,9 @@ class Test_CreateActivityController:
         assert response.body == "Field accepting_new_enrollments is missing"
 
     def test_create_activity_controller_missing_request_user(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(body={"code": "ZYX321",
@@ -725,8 +748,9 @@ class Test_CreateActivityController:
 
     @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_create_activity_controller_forbidden_not_admin(self):
-        repo = ActivityRepositoryMock()
-        usecase = CreateActivityUsecase(repo=repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
         controller = CreateActivityController(usecase=usecase)
 
         request = HttpRequest(body={"code": "ZYX321",
@@ -749,9 +773,9 @@ class Test_CreateActivityController:
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
                                     "stop_accepting_new_enrollments_before": 1666451811000,
-                                    'requester_user': {"sub": repo.users[1].user_id,
-                                                       "cognito:username": repo.users[1].name,
-                                                       "custom:role": repo.users[1].role.value}}
+                                    'requester_user': {"sub": repo_user.users[1].user_id,
+                                                       "cognito:username": repo_user.users[1].name,
+                                                       "custom:role": repo_user.users[1].role.value}}
                               )
 
         response = controller(request=request)

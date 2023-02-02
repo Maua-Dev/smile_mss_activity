@@ -8,13 +8,15 @@ from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
+from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound, ForbiddenAction
 
 
 class CreateActivityUsecase:
-    def __init__(self, repo: IActivityRepository):
-        self.repo = repo
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+        self.repo_activity = repo_activity
+        self.repo_user = repo_user
 
     def __call__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
@@ -29,7 +31,7 @@ class CreateActivityUsecase:
             # raise ForbiddenAction("create_activity, only admins can create activities")
             pass
 
-        if self.repo.get_activity(code=code) is not None:
+        if self.repo_activity.get_activity(code=code) is not None:
             raise DuplicatedItem("code")
 
         if type(responsible_professors_user_id) != list:
@@ -44,7 +46,7 @@ class CreateActivityUsecase:
         if not all(type(user_id) == str for user_id in responsible_professors_user_id):
             raise EntityError("responsible_professors")
 
-        responsible_professors = self.repo.get_users(responsible_professors_user_id)
+        responsible_professors = self.repo_user.get_users(responsible_professors_user_id)
 
         if len(responsible_professors) != len(responsible_professors_user_id):
             raise NoItemsFound("responsible_professors")
@@ -68,4 +70,4 @@ class CreateActivityUsecase:
             stop_accepting_new_enrollments_before=stop_accepting_new_enrollments_before
         )
 
-        return self.repo.create_activity(activity)
+        return self.repo_activity.create_activity(activity)

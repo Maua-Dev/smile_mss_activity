@@ -1,15 +1,18 @@
 from src.modules.enroll_activity.app.enroll_activity_viewmodel import EnrollActivityViewmodel
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_EnrollActivityViewmodel:
 
     def test_enroll_activity_viewmodel(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        repo_user = UserRepositoryMock()
 
         enrollment = repo.enrollments[1]
 
-        enroll_activity_viewmodel = EnrollActivityViewmodel(enrollment, repo.users[1]).to_dict()
+        enroll_activity_viewmodel = EnrollActivityViewmodel(enrollment, repo_user.users[1]).to_dict()
 
         expected = {
             'activity_code': 'ECM2345',

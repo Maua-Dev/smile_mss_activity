@@ -6,17 +6,19 @@ from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_DropActivityUsecase:
     def test_drop_activity_usecase_no_queue(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = DropActivityUsecase(repo)
         taken_slots_before = repo.activities[1].taken_slots
-        dropped_enrollment = usecase(repo.users[1].user_id,  repo.activities[1].code)
+        dropped_enrollment = usecase(repo_user.users[1].user_id,  repo.activities[1].code)
 
         assert type(dropped_enrollment) == Enrollment
-        assert dropped_enrollment.user_id == repo.users[1].user_id
+        assert dropped_enrollment.user_id == repo_user.users[1].user_id
         assert dropped_enrollment.activity_code == repo.activities[1].code
         assert dropped_enrollment.state == ENROLLMENT_STATE.DROPPED
         assert taken_slots_before - 1 == repo.activities[1].taken_slots
@@ -25,12 +27,13 @@ class Test_DropActivityUsecase:
 
     def test_drop_activity_usecase_with_queue(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = DropActivityUsecase(repo)
         taken_slots_before = repo.activities[1].taken_slots
-        dropped_enrollment = usecase(repo.users[2].user_id, repo.activities[0].code)
+        dropped_enrollment = usecase(repo_user.users[2].user_id, repo.activities[0].code)
 
         assert type(dropped_enrollment) == Enrollment
-        assert dropped_enrollment.user_id == repo.users[2].user_id
+        assert dropped_enrollment.user_id == repo_user.users[2].user_id
         assert dropped_enrollment.activity_code == repo.activities[0].code
         assert dropped_enrollment.state == ENROLLMENT_STATE.DROPPED
         assert taken_slots_before == repo.activities[1].taken_slots
@@ -40,6 +43,7 @@ class Test_DropActivityUsecase:
 
     def test_drop_activity_already_in_queue(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = DropActivityUsecase(repo)
         taken_slots_before = repo.activities[1].taken_slots
 
@@ -58,6 +62,7 @@ class Test_DropActivityUsecase:
 
     def test_drop_activity_queue_has_one_already_dropped(self):
             repo = ActivityRepositoryMock()
+            repo_user = UserRepositoryMock()
             usecase = DropActivityUsecase(repo)
             taken_slots_before = repo.activities[11].taken_slots
 
@@ -78,6 +83,7 @@ class Test_DropActivityUsecase:
 
     def test_drop_activity_usecase_already_rejected(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(ForbiddenAction):
@@ -85,6 +91,7 @@ class Test_DropActivityUsecase:
 
     def test_drop_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(EntityError):
@@ -93,6 +100,7 @@ class Test_DropActivityUsecase:
 
     def test_drop_activity_usecase_invalid_code(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(EntityError):
@@ -100,6 +108,7 @@ class Test_DropActivityUsecase:
 
     def test_drop_activity_usecase_no_activity_found(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
@@ -108,6 +117,7 @@ class Test_DropActivityUsecase:
 
     def test_drop_activity_usecase_no_enrollment_found(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = DropActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):

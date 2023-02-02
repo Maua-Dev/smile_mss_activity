@@ -43,14 +43,6 @@ class IActivityRepository(ABC):
         """
         pass
 
-    @abstractmethod
-    def get_user(self, user_id:str) -> User:
-        """
-        If user_id with the given code exists, returns it
-        else returns None
-        """
-        pass
-
     @abstractmethod 
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
         """
@@ -105,10 +97,6 @@ class IActivityRepository(ABC):
 
     @abstractmethod
     def create_activity(self, activity:Activity) -> Activity:
-        pass
-
-    @abstractmethod
-    def get_users(self, user_ids: List[str]) -> List[User]:
         pass
 
     @abstractmethod

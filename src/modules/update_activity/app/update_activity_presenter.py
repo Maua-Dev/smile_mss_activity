@@ -3,8 +3,9 @@ from .update_activity_usecase import UpdateActivityUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
-repo = Environments.get_activity_repo()()
-usecase = UpdateActivityUsecase(repo)
+repo_activity = Environments.get_activity_repo()()
+repo_users = Environments.get_user_repo()()
+usecase = UpdateActivityUsecase(repo_activity, repo_users)
 controller = UpdateActivityController(usecase)
 
 def lambda_handler(event, context):

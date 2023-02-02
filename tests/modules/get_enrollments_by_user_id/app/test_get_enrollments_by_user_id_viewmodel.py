@@ -2,17 +2,19 @@ from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_useca
 from src.modules.get_enrollments_by_user_id.app.get_enrollments_by_user_id_viewmodel import \
     GetEnrollmentsByUserIdViewmodel
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_GetEnrollmentsByUserId:
 
     def test_get_enrollments_by_user_id_viewmodel(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = GetEnrollmentsByUserIdUsecase(repo)
 
-        list_enrollments = usecase(user_id=repo.users[1].user_id)
+        list_enrollments = usecase(user_id=repo_user.users[1].user_id)
 
-        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments, repo.users[1])
+        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments, repo_user.users[1])
 
         expected = {
             'enrollments': [
@@ -49,11 +51,12 @@ class Test_GetEnrollmentsByUserId:
 
     def test_get_enrollments_by_user_id_viewmodel_zero_enrollments(self):
         repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
         usecase = GetEnrollmentsByUserIdUsecase(repo)
 
-        list_enrollments = usecase(user_id=repo.users[11].user_id)
+        list_enrollments = usecase(user_id=repo_user.users[11].user_id)
 
-        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments, repo.users[11])
+        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments, repo_user.users[11])
 
         expected = {
             'enrollments': [

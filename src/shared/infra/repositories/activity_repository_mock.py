@@ -10,30 +10,17 @@ from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class ActivityRepositoryMock(IActivityRepository):
     speakers: List[Speaker]
-    users: List[User]
     activities: List[Activity]
     enrollments: List[Enrollment]
 
     def __init__(self):
-        self.users = [
-            User(name="João Vilas", role=ROLE.ADMIN, user_id="d61dbf66-a10f-11ed-a8fc-0242ac120002"),
-            User(name="Bruno Soller", role=ROLE.STUDENT, user_id="0355535e-a110-11ed-a8fc-0242ac120002"),
-            User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002"),
-            User(name="Pedro Marcelino", role=ROLE.INTERNATIONAL_STUDENT, user_id="0355573c-a110-11ed-a8fc-0242ac120002"),
-            User(name="Hector Guerrini", role=ROLE.EXTERNAL, user_id="03555872-a110-11ed-a8fc-0242ac120002"),
-            User(name="Ricardo Soller", role=ROLE.EMPLOYEE, user_id="2f0df47e-a110-11ed-a8fc-0242ac120002"),
-            User(name="Marcos Romanato", role=ROLE.STUDENT, user_id="38c3d7fe-a110-11ed-a8fc-0242ac120002"),
-            User(name="Marco Briquez", role=ROLE.STUDENT, user_id="452a5f9a-a110-11ed-a8fc-0242ac120002"),
-            User(name="Simone Romanato", role=ROLE.EXTERNAL, user_id="4d1d64ae-a110-11ed-a8fc-0242ac120002"),
-            User(name="Viviani Soller", role=ROLE.EXTERNAL, user_id="5a49ad2c-a110-11ed-a8fc-0242ac120002"),
-            User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
-            User(name="Rafael Santos", role=ROLE.PROFESSOR, user_id="62cafdd4-a110-11ed-a8fc-0242ac120002"),
-            User(name="Rodrigo Santos", role=ROLE.PROFESSOR, user_id="71f06f24-a110-11ed-a8fc-0242ac120002"),
-        ]
+        users = UserRepositoryMock().users
+
 
         self.activities = [
             Activity(
@@ -47,7 +34,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=120,
                 link=None,
                 place="H332",
-                responsible_professors=[self.users[2]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=4,
                 taken_slots=4,
@@ -65,7 +52,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=400,
                 link="https://devmaua.com",
                 place="H332",
-                responsible_professors=[self.users[10]],
+                responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=10,
                 taken_slots=1,
@@ -83,7 +70,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=60,
                 link="https://devmaua.com",
                 place=None,
-                responsible_professors=[self.users[2], self.users[10]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002"), User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=50,
                 taken_slots=1,
@@ -101,7 +88,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=60,
                 link="https://devmaua.com",
                 place=None,
-                responsible_professors=[self.users[2]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple"),
                           Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
                           Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
@@ -121,7 +108,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=190,
                 link=None,
                 place="H332",
-                responsible_professors=[self.users[10]],
+                responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=50,
                 taken_slots=2,
@@ -139,7 +126,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=40,
                 link="https://devmaua.com",
                 place="H332",
-                responsible_professors=[self.users[10]],
+                responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=20,
                 taken_slots=1,
@@ -157,7 +144,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=80,
                 link="https://devmaua.com",
                 place=None,
-                responsible_professors=[self.users[2]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=10,
                 taken_slots=1,
@@ -175,7 +162,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=20,
                 link=None,
                 place="H332",
-                responsible_professors=[self.users[10]],
+                responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=2,
                 taken_slots=2,
@@ -193,7 +180,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=120,
                 link="https://devmaua.com",
                 place="H332",
-                responsible_professors=[self.users[2]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=50,
                 taken_slots=0,
@@ -211,7 +198,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=140,
                 link=None,
                 place="H332",
-                responsible_professors=[self.users[2]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=50,
                 taken_slots=0,
@@ -229,7 +216,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=60,
                 link="https://devmaua.com",
                 place="H332",
-                responsible_professors=[self.users[2]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=25,
                 taken_slots=0,
@@ -247,7 +234,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=45,
                 link=None,
                 place="H332",
-                responsible_professors=[self.users[2]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
                 total_slots=3,
                 taken_slots=3,
@@ -265,7 +252,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 duration=45,
                 link=None,
                 place="H332",
-                responsible_professors=[self.users[2]],
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
                 speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung"),
                           Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=10,
@@ -275,71 +262,70 @@ class ActivityRepositoryMock(IActivityRepository):
             ),
 
         ]
-
         self.enrollments = [
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[0].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[0].code, user_id=users[0].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671229013000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[0].code, user_id=users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671315413000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[2].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[0].code, user_id=users[2].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671401813000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[3].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[0].code, user_id=users[3].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+            Enrollment(activity_code=self.activities[0].code, user_id=users[4].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671574613000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[5].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+            Enrollment(activity_code=self.activities[0].code, user_id=users[5].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671574673000),
-            Enrollment(activity_code=self.activities[0].code, user_id=self.users[6].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+            Enrollment(activity_code=self.activities[0].code, user_id=users[6].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671574733000),
-            Enrollment(activity_code=self.activities[1].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[1].code, user_id=users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[2].code, user_id=self.users[3].user_id, state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[2].code, user_id=users[3].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671488212000),
-            Enrollment(activity_code=self.activities[2].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[2].code, user_id=users[4].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[3].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.REJECTED,
+            Enrollment(activity_code=self.activities[3].code, user_id=users[4].user_id, state=ENROLLMENT_STATE.REJECTED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[3].code, user_id=self.users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[3].code, user_id=users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671574613000),
-            Enrollment(activity_code=self.activities[3].code, user_id=self.users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[3].code, user_id=users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671661013000),
-            Enrollment(activity_code=self.activities[4].code, user_id=self.users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[4].code, user_id=users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671481013000),
-            Enrollment(activity_code=self.activities[4].code, user_id=self.users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[4].code, user_id=users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[5].code, user_id=self.users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[5].code, user_id=users[6].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[6].code, user_id=self.users[7].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[6].code, user_id=users[7].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[7].code, user_id=self.users[8].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[7].code, user_id=users[8].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671401813000),
-            Enrollment(activity_code=self.activities[7].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[7].code, user_id=users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[7].code, user_id=self.users[2].user_id, state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[7].code, user_id=users[2].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671574613000),
-            Enrollment(activity_code=self.activities[8].code, user_id=self.users[9].user_id, state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[8].code, user_id=users[9].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671315413000),
-            Enrollment(activity_code=self.activities[9].code, user_id=self.users[0].user_id, state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[9].code, user_id=users[0].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[10].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[10].code, user_id=users[1].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1671488213000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[11].code, user_id=users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1670710613000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[2].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[11].code, user_id=users[2].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1670710614000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[3].user_id, state=ENROLLMENT_STATE.DROPPED,
+            Enrollment(activity_code=self.activities[11].code, user_id=users[3].user_id, state=ENROLLMENT_STATE.DROPPED,
                        date_subscribed=1670710615000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[11].code, user_id=users[5].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1670710616000),
-            Enrollment(activity_code=self.activities[11].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+            Enrollment(activity_code=self.activities[11].code, user_id=users[4].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671661013000),
-            Enrollment(activity_code=self.activities[12].code, user_id=self.users[1].user_id, state=ENROLLMENT_STATE.COMPLETED,
+            Enrollment(activity_code=self.activities[12].code, user_id=users[1].user_id, state=ENROLLMENT_STATE.COMPLETED,
                        date_subscribed=1668896213000),
-            Enrollment(activity_code=self.activities[12].code, user_id=self.users[2].user_id, state=ENROLLMENT_STATE.COMPLETED,
+            Enrollment(activity_code=self.activities[12].code, user_id=users[2].user_id, state=ENROLLMENT_STATE.COMPLETED,
                        date_subscribed=1668982612000),
-            Enrollment(activity_code=self.activities[12].code, user_id=self.users[3].user_id, state=ENROLLMENT_STATE.COMPLETED,
+            Enrollment(activity_code=self.activities[12].code, user_id=users[3].user_id, state=ENROLLMENT_STATE.COMPLETED,
                        date_subscribed=1669069013000),
-            Enrollment(activity_code=self.activities[12].code, user_id=self.users[4].user_id, state=ENROLLMENT_STATE.ENROLLED,
+            Enrollment(activity_code=self.activities[12].code, user_id=users[4].user_id, state=ENROLLMENT_STATE.ENROLLED,
                        date_subscribed=1669760213000),
         ]
 
@@ -356,12 +342,6 @@ class ActivityRepositoryMock(IActivityRepository):
             self.update_activity(code=enrollment.activity_code, new_taken_slots=activity.taken_slots + 1)
 
         return enrollment
-
-    def get_user(self, user_id: str) -> User:
-        for user in self.users:
-            if user.user_id == user_id:
-                return user
-        return None
 
     def get_activity(self, code: str) -> Activity:
         for activity in self.activities:
@@ -465,13 +445,6 @@ class ActivityRepositoryMock(IActivityRepository):
         self.activities.append(activity)
 
         return activity
-
-    def get_users(self, user_ids: List[str]) -> List[User]:
-        users = list()
-        for user in self.users:
-            if user.user_id in user_ids:
-                users.append(user)
-        return users
 
     def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
         enrollments = list()

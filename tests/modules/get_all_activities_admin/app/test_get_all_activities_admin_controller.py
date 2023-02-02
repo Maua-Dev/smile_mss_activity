@@ -4,15 +4,17 @@ from src.modules.get_all_activities_admin.app.get_all_activities_admin_controlle
 from src.modules.get_all_activities_admin.app.get_all_activities_admin_usecase import GetAllActivitiesAdminUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_GetAllActivitiesAdminController:
     def test_get_all_activites_admin_controller(self):
-        repo = ActivityRepositoryMock()
-        usecase = GetAllActivitiesAdminUsecase(repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request=request)
 
@@ -20,11 +22,12 @@ class Test_GetAllActivitiesAdminController:
         assert response.body['message'] == "the activities were retrieved by admin"
 
     def test_get_all_activites_admin_missing_request_user(self):
-        repo = ActivityRepositoryMock()
-        usecase = GetAllActivitiesAdminUsecase(repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'invalid_requester_user': {"sub": repo.users[0].user_id, "cognito:username": repo.users[0].name, "custom:role": repo.users[0].role.value}})
+        request = HttpRequest(body={'invalid_requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request=request)
 
@@ -33,11 +36,12 @@ class Test_GetAllActivitiesAdminController:
 
     @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_get_all_activites_admin_forbidden_not_admin(self):
-        repo = ActivityRepositoryMock()
-        usecase = GetAllActivitiesAdminUsecase(repo)
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'requester_user': {"sub": repo.users[1].user_id, "cognito:username": repo.users[1].name, "custom:role": repo.users[1].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
         response = controller(request=request)
 

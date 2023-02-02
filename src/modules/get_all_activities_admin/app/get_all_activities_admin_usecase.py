@@ -1,18 +1,14 @@
-from typing import List, Tuple, Dict
-
-from src.shared.domain.entities.activity import Activity
-from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
-from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.domain.repositories.user_repository_interface import IUserRepository
 
 
 class GetAllActivitiesAdminUsecase:
 
-    def __init__(self, repo: IActivityRepository):
-        self.repo = repo
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+        self.repo_activity = repo_activity
+        self.repo_user = repo_user
 
     def __call__(self, user: User) -> dict:
 
@@ -20,7 +16,7 @@ class GetAllActivitiesAdminUsecase:
             # raise ForbiddenAction("get_all_activities_with_enrollments, only admins can do this")
             pass
 
-        activities_with_enrollments = self.repo.get_all_activities_admin()
+        activities_with_enrollments = self.repo_activity.get_all_activities_admin()
 
         user_id_list = list()
         for activity, enrollments in activities_with_enrollments:
@@ -28,7 +24,7 @@ class GetAllActivitiesAdminUsecase:
 
         set_user_id_list = set(user_id_list)
 
-        users = self.repo.get_users(list(set_user_id_list))
+        users = self.repo_user.get_users(list(set_user_id_list))
 
         users_dict = {user.user_id: user for user in users}
 
