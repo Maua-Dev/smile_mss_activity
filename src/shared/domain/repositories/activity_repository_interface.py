@@ -16,7 +16,7 @@ class IActivityRepository(ABC):
     @abstractmethod
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
         """
-        If the user_id is enrolled in the activity_code, returns the enrollment.
+        If the user_id is enrolled in the activity, returns the enrollment.
         else returns None
 
         Ignore dropped enrollments
@@ -26,7 +26,7 @@ class IActivityRepository(ABC):
     @abstractmethod
     def get_activity(self, code:str) -> Activity:
         """
-        If activity_code with the given code exists, returns it
+        If activity with the given code exists, returns it
         else returns None
 
         In dynamoRepo it needs to calculate the taken_slots
@@ -36,7 +36,7 @@ class IActivityRepository(ABC):
     @abstractmethod
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
         """
-        If the user_id is enrolled in the activity_code, updates the state of enrollment.
+        If the user_id is enrolled in the activity, updates the state of enrollment.
         else returns None
 
         In dynamoRepo, does not need to call update_activity to change taken_slots
@@ -46,7 +46,7 @@ class IActivityRepository(ABC):
     @abstractmethod 
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
         """
-        If activity_code with the given code exists, returns it and the list of enrollments,
+        If activity with the given code exists, returns it and the list of enrollments,
         else returns None, None
         """
         pass
@@ -69,7 +69,7 @@ class IActivityRepository(ABC):
     @abstractmethod
     def delete_activity(self, code: str) -> Activity:
         """
-        If activity_code with the given code exists, deletes it and returns it
+        If activity with the given code exists, deletes it and returns it
         else returns None
         """
         pass
