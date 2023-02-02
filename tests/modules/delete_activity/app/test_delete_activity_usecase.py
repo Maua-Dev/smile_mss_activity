@@ -4,7 +4,7 @@ from src.modules.delete_activity.app.delete_activity_usecase import DeleteActivi
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 
@@ -13,7 +13,7 @@ class Test_DeleteActivityUsecase:
         repo = ActivityRepositoryMock()
         usecase = DeleteActivityUsecase(repo)
         len_before = len(repo.activities)
-        activity = usecase(code=repo.activities[11].code)
+        activity = usecase(code=repo.activities[11].code, user=repo.users[0])
 
         assert type(activity) == Activity
         assert len(repo.activities) == len_before - 1
@@ -28,7 +28,7 @@ class Test_DeleteActivityUsecase:
         repo.activities.pop(7)
         usecase = DeleteActivityUsecase(repo)
         len_before = len(repo.activities)
-        activity = usecase(code=repo.activities[1].code)
+        activity = usecase(code=repo.activities[1].code, user=repo.users[0])
 
         assert type(activity) == Activity
         assert len(repo.activities) == len_before - 1
@@ -37,12 +37,19 @@ class Test_DeleteActivityUsecase:
         repo = ActivityRepositoryMock()
         usecase = DeleteActivityUsecase(repo)
         with pytest.raises(NoItemsFound):
-            activity = usecase(code="CODIGO_INEXISTENTE")
+            activity = usecase(code="CODIGO_INEXISTENTE", user=repo.users[0])
 
     def test_delete_activity_usecase_wrong_code_type(self):
         repo = ActivityRepositoryMock()
         usecase = DeleteActivityUsecase(repo)
         with pytest.raises(EntityError):
-            activity = usecase(code=123)
+            activity = usecase(code=123, user=repo.users[0])
 
+    @pytest.mark.skip("Still no ForbiddenAction exception")
+    def test_delete_activity_usecase_forbidden(self):
+        repo = ActivityRepositoryMock()
+        usecase = DeleteActivityUsecase(repo)
+        len_before = len(repo.activities)
+        with pytest.raises(ForbiddenAction):
+            activity = usecase(code=repo.activities[11].code, user=repo.users[1])
 
