@@ -21,7 +21,11 @@ class UpdateActivityUsecase:
                  new_responsible_professors_user_id: List[str],
                  new_speakers: List[Speaker], new_total_slots: int,
                  new_accepting_new_enrollments: bool,
-                 new_stop_accepting_new_enrollments_before: int, new_link: str = None) -> Activity:
+                 new_stop_accepting_new_enrollments_before: int, user: User, new_link: str = None) -> Activity:
+
+        if user.role != ROLE.ADMIN:
+            # raise ForbiddenAction("update_activity, only admins can update activities")
+            pass
 
         if type(code) != str:
             raise EntityError("code")
@@ -40,9 +44,6 @@ class UpdateActivityUsecase:
 
         if len(new_responsible_professors) != len(new_responsible_professors_user_id):
             raise NoItemsFound("responsible_professors")
-
-
-
 
         if type(new_title) != str:
             raise EntityError("title")

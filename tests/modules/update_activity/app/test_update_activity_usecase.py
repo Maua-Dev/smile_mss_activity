@@ -33,6 +33,7 @@ class Test_UpdateActivityUsecase:
                                       )
                                   ], new_total_slots=100,
                                   new_accepting_new_enrollments=True,
+                                  user=repo.users[0],
                                   new_stop_accepting_new_enrollments_before=None)
 
         assert type(update_activity) == Activity
@@ -72,6 +73,7 @@ class Test_UpdateActivityUsecase:
                                   new_speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                                   new_total_slots=4,
                                   new_accepting_new_enrollments=True,
+                                  user=repo.users[0],
                                   new_stop_accepting_new_enrollments_before=1671743812000)
 
         assert type(update_activity) == Activity
@@ -90,7 +92,8 @@ class Test_UpdateActivityUsecase:
         assert repo.activities[0].speakers == old_activity.speakers
         assert repo.activities[0].total_slots == old_activity.total_slots
         assert repo.activities[0].accepting_new_enrollments == old_activity.accepting_new_enrollments
-        assert repo.activities[0].stop_accepting_new_enrollments_before == old_activity.stop_accepting_new_enrollments_before
+        assert repo.activities[
+                   0].stop_accepting_new_enrollments_before == old_activity.stop_accepting_new_enrollments_before
 
     def test_update_activity_new_activity_invalid_enum(self):
         repo = ActivityRepositoryMock()
@@ -114,6 +117,7 @@ class Test_UpdateActivityUsecase:
                                           )
                                       ], new_total_slots=100,
                                       new_accepting_new_enrollments=True,
+                                      user=repo.users[0],
                                       new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_invalid_code(self):
@@ -138,6 +142,7 @@ class Test_UpdateActivityUsecase:
                                           )
                                       ], new_total_slots=100,
                                       new_accepting_new_enrollments=True,
+                                      user=repo.users[0],
                                       new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_invalid_title(self):
@@ -162,6 +167,7 @@ class Test_UpdateActivityUsecase:
                                           )
                                       ], new_total_slots=100,
                                       new_accepting_new_enrollments=True,
+                                      user=repo.users[0],
                                       new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_is_not_found(self):
@@ -187,6 +193,7 @@ class Test_UpdateActivityUsecase:
                                           )
                                       ], new_total_slots=100,
                                       new_accepting_new_enrollments=True,
+                                      user=repo.users[0],
                                       new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_invalid_responsible_professors(self):
@@ -212,6 +219,7 @@ class Test_UpdateActivityUsecase:
                                           )
                                       ], new_total_slots=100,
                                       new_accepting_new_enrollments=True,
+                                      user=repo.users[0],
                                       new_stop_accepting_new_enrollments_before=None)
 
     def test_update_activity_invalid_responsible_professors_not_found(self):
@@ -237,4 +245,28 @@ class Test_UpdateActivityUsecase:
                                           )
                                       ], new_total_slots=100,
                                       new_accepting_new_enrollments=True,
+                                      user=repo.users[0],
                                       new_stop_accepting_new_enrollments_before=None)
+
+    @pytest.mark.skip("Still no ForbiddenAction exception")
+    def test_update_activity_usecase_forbidden_requester_not_admin(self):
+        repo = ActivityRepositoryMock()
+        usecase = UpdateActivityUsecase(repo)
+        old_activity = repo.activities[0]
+        with pytest.raises(ForbiddenAction):
+            update_activity = usecase(code=repo.activities[0].code,
+                                      new_title="NOVO TITULO",
+                                      new_description="Isso é uma atividade",
+                                      new_activity_type=ACTIVITY_TYPE.COURSES,
+                                      new_is_extensive=False,
+                                      new_delivery_model=DELIVERY_MODEL.IN_PERSON,
+                                      new_start_date=1671747413000,
+                                      new_duration=120,
+                                      new_link=None,
+                                      new_place="H332",
+                                      new_responsible_professors_user_id=["03555624-a110-11ed-a8fc-0242ac120002"],
+                                      new_speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
+                                      new_total_slots=4,
+                                      new_accepting_new_enrollments=True,
+                                      user=repo.users[1],
+                                      new_stop_accepting_new_enrollments_before=1671743812000)
