@@ -12,52 +12,37 @@ class Test_GetEnrollmentsByUserId:
 
         list_enrollments = usecase(user_id=repo.users[1].user_id)
 
-        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments)
+        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments, repo.users[1])
 
         expected = {
             'enrollments': [
                 {
                     'activity_code': 'ECM2345',
-                    'user': {
-                        'name': 'Bruno Soller',
-                        'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
-                        'role': 'STUDENT'
-                    },
                     'state': 'ENROLLED',
                     'date_subscribed': 1671315413000
                 },
                 {
                     'activity_code': 'ELET355',
-                    'user': {
-                        'name': 'Bruno Soller',
-                        'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
-                        'role': 'STUDENT'
-                    },
                     'state': 'ENROLLED',
                     'date_subscribed': 1671488213000
                 },
                 {
                     'activity_code': 'CAFE',
-                    'user': {
-                        'name': 'Bruno Soller',
-                        'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
-                        'role': 'STUDENT'
-                    },
                     'state': 'ENROLLED',
                     'date_subscribed': 1671488213000
                 },
                 {
                     'activity_code': 'ULTIMA',
-                    'user': {
-                        'name': 'Bruno Soller',
-                        'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
-                        'role': 'STUDENT'
-                    },
                     'state': 'ENROLLED',
                     'date_subscribed': 1670710613000
                 }
             ],
-            'message': "the enrollments were retrieved"
+            'user': {
+                'name': 'Bruno Soller',
+                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
+                'role': 'STUDENT'
+            },
+            'message': 'the enrollments were retrieved'
         }
 
         assert viewmodel.to_dict() == expected
@@ -68,12 +53,17 @@ class Test_GetEnrollmentsByUserId:
 
         list_enrollments = usecase(user_id=repo.users[11].user_id)
 
-        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments)
+        viewmodel = GetEnrollmentsByUserIdViewmodel(list_enrollments, repo.users[11])
 
         expected = {
             'enrollments': [
 
             ],
+            'user': {
+                'name': 'Rafael Santos',
+                'user_id': '62cafdd4-a110-11ed-a8fc-0242ac120002',
+                'role': 'PROFESSOR'
+            },
             'message': 'the enrollments were retrieved'
         }
 

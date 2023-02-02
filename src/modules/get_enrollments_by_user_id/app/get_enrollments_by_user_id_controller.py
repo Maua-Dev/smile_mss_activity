@@ -1,3 +1,4 @@
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .get_enrollments_by_user_id_usecase import GetEnrollmentsByUserIdUsecase
 from .get_enrollments_by_user_id_viewmodel import \
     GetEnrollmentsByUserIdViewmodel
@@ -16,14 +17,16 @@ class GetEnrollmentsByUserIdController:
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
-            if request.data.get('user_id') is None:
-                raise MissingParameters('user_id')
+            if request.data.get('requester_user') is None:
+                raise MissingParameters('requester_user')
+
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 
             enrollments = self.GetEnrollmentsByUserIdUsecase(
-                user_id=request.data.get('user_id')
+                user_id=requester_user.user_id
             )
 
-            viewmodel = GetEnrollmentsByUserIdViewmodel(enrollments)
+            viewmodel = GetEnrollmentsByUserIdViewmodel(enrollments, requester_user)
 
             return OK(viewmodel.to_dict())
 

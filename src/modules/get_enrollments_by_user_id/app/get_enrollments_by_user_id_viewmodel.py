@@ -52,14 +52,12 @@ class EnrollmentViewmodel:
 
     def __init__(self, enrollment: Enrollment):
         self.activity_code = enrollment.activity_code
-        self.user = UserViewmodel(enrollment.user)
         self.state = enrollment.state
         self.date_subscribed = enrollment.date_subscribed
 
     def to_dict(self):
         return {
             "activity_code": self.activity_code,
-            "user": self.user.to_dict(),
             "state": self.state.value,
             "date_subscribed": self.date_subscribed,
         }
@@ -67,12 +65,15 @@ class EnrollmentViewmodel:
 
 class GetEnrollmentsByUserIdViewmodel:
     enrollments: List[EnrollmentViewmodel]
+    user: UserViewmodel
 
-    def __init__(self, enrollments: List[Enrollment]):
+    def __init__(self, enrollments: List[Enrollment], user: User):
         self.enrollments = [EnrollmentViewmodel(enrollment) for enrollment in enrollments]
+        self.user = UserViewmodel(user)
 
     def to_dict(self):
         return {
             "enrollments": [enrollment.to_dict() for enrollment in self.enrollments],
+            "user": self.user.to_dict(),
             "message": "the enrollments were retrieved"
         }
