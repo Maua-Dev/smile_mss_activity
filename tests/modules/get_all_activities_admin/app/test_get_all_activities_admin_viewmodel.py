@@ -19,7 +19,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'code': 'ECM2345',
                         'title': 'Atividade da ECM 2345',
                         'description': 'Isso é uma atividade',
-                        'activity_type': 'COURSE',
+                        'activity_type': 'COURSES',
                         'is_extensive': False,
                         'delivery_model': 'IN_PERSON',
                         'start_date': 1671747413000,
