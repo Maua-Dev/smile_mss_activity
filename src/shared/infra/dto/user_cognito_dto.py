@@ -15,7 +15,8 @@ class UserCognitoDTO:
     @staticmethod
     def from_cognito(cognito_user: dict):
 
-        user_data = {user_attribute["Name"]: user_attribute["Value"] for user_attribute in cognito_user["UserAttributes"]}
+        custom_prefix = "custom:"
+        user_data = {user_attribute["Name"].removeprefix(custom_prefix): user_attribute["Value"] for user_attribute in cognito_user["Attributes"]}
 
         return UserCognitoDTO(
             name=user_data["name"],
