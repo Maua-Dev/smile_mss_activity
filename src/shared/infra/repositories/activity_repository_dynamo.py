@@ -35,7 +35,6 @@ class ActivityRepositoryDynamo(IActivityRepository):
     def enrollment_sort_key_format(user_id: str) -> str:
         return f"enrollment#{user_id}"
 
-
     def __init__(self):
         self.dynamo = DynamoDatasource(endpoint_url=Environments.get_envs().endpoint_url,
                                        dynamo_table_name=Environments.get_envs().dynamo_table_name,
@@ -44,7 +43,21 @@ class ActivityRepositoryDynamo(IActivityRepository):
                                        sort_key=Environments.get_envs().dynamo_sort_key)
 
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
-        pass
+
+        enrollment_data = self.dynamo.get_item(
+                partition_key=self.enrollment_partition_key_format(code),
+                sort_key=self.enrollment_sort_key_format(user_id)
+        )
+
+        if "Item" not in enrollment_data:
+            return None
+
+        enrollment = EnrollmentDynamoDTO.from_dynamo(enrollment_data.get("Item")).to_entity()
+
+        if enrollment.state != ENROLLMENT_STATE.DROPPED:
+            return enrollment
+
+        return None
 
     def get_activity(self, code: str) -> Activity:
 
@@ -60,7 +73,11 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         activity_data = response.get("Items")[0]
 
-        activity_data["taken_slots"] = len(response.get("Items")) - 1
+        activity_data["taken_slots"] = 0
+
+        for enrollment in response.get("Items")[1:]:
+            if enrollment["state"] == ENROLLMENT_STATE.ENROLLED.value or enrollment["state"] == ENROLLMENT_STATE.COMPLETED.value:
+                activity_data["taken_slots"] += 1
 
         activity = ActivityDynamoDTO.from_dynamo(activity_data).to_entity()
 
