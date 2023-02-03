@@ -42,7 +42,7 @@ class Test_UserRepositoryCognito:
         assert users == expected_users
 
 
-    # @pytest.mark.skip("Can't test it locally")
+    @pytest.mark.skip("Can't test it locally")
     def test_get_users_user_not_found(self):
         user_repo_dynamo = UserRepositoryCognito()
         expected_users = [
