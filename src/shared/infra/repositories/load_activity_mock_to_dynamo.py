@@ -87,6 +87,14 @@ def load_mock_to_local_dynamo():
         count += 1
     print(f'{count} activities loaded!\n')
 
+    print('Loading enrollment...')
+    count = 0
+    for enrollemnt in mock_repo.enrollments:
+        print(f'Loading student {enrollemnt.activity_code} | {enrollemnt.user_id}...')
+        dynamo_repo.create_enrollment(enrollemnt)
+        count += 1
+    print(f'{count} enrollments loaded!\n')
+
     print('Done!')
 
 
