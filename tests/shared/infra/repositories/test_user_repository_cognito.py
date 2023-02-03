@@ -41,3 +41,23 @@ class Test_UserRepositoryCognito:
 
         assert users == expected_users
 
+
+    # @pytest.mark.skip("Can't test it locally")
+    def test_get_users_user_not_found(self):
+        user_repo_dynamo = UserRepositoryCognito()
+        expected_users = [
+            User(
+                user_id="c5a416c6-1662-46a8-8a70-68fa5897eba5",
+                name="Vitor Guirão",
+                role=ROLE.PROFESSOR,
+            ),
+        ]
+        expected_users.sort(key=lambda x: x.user_id)
+
+        list_user_id = [expected_users[0].user_id, "0d6738dc-b612-4dd6-88d1-1b6414d23d2f"]
+        users = user_repo_dynamo.get_users(list_user_id)
+
+        users.sort(key=lambda x: x.user_id)
+
+        assert users == expected_users
+
