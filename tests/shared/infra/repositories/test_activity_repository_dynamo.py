@@ -136,3 +136,56 @@ class Test_ActivityRepositoryDynamo:
         enrollment = repo_activity_dynamo.update_enrollment(user_id="03555872-a110-11ed-a8fc-0242ac120002", code="NAO_EXISTE", new_state=ENROLLMENT_STATE.DROPPED)
 
         assert enrollment is None
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        new_activity = repo_activity_dynamo.update_activity(code=repo_activity.activities[0].code,
+                                                             new_title="NOVO TITULO",
+                                                             new_description='nova descricao',
+                                                             new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                                             new_is_extensive=True,
+                                                             new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                                             new_start_date=1630465200000, new_duration=15,
+                                                             new_link="www.google.com.br",
+                                                             new_place="Sala 1",
+                                                             new_responsible_professors=[
+                                                                 repo_user.users[2],
+                                                                 repo_user.users[11]],
+                                                             new_speakers=[
+                                                                 Speaker(
+                                                                     name="Fulano de Tal",
+                                                                     bio="Fulano de Tal é um professor de Engenharia de Software",
+                                                                     company="Universidade Federal de Fulano de tal",
+                                                                 )
+                                                             ], new_total_slots=100,
+                                                             new_accepting_new_enrollments=True,
+                                                             new_stop_accepting_new_enrollments_before=None)
+
+        assert new_activity.code == repo_activity.activities[0].code
+        assert new_activity.title == "NOVO TITULO"
+        assert new_activity.description == 'nova descricao'
+        assert new_activity.activity_type == ACTIVITY_TYPE.LECTURES
+        assert new_activity.is_extensive == True
+        assert new_activity.delivery_model == DELIVERY_MODEL.ONLINE
+        assert new_activity.start_date == 1630465200000
+        assert new_activity.duration == 15
+        assert new_activity.link == 'www.google.com.br'
+        assert new_activity.place == "Sala 1"
+        assert new_activity.responsible_professors == [
+            repo_user.users[2],
+            repo_user.users[11]]
+        assert new_activity.speakers == [
+            Speaker(
+                name="Fulano de Tal",
+                bio="Fulano de Tal é um professor de Engenharia de Software",
+                company="Universidade Federal de Fulano de tal",
+            )
+        ]
+        assert new_activity.total_slots == 100
+        assert new_activity.accepting_new_enrollments == True
+        assert new_activity.stop_accepting_new_enrollments_before is None
+        assert new_activity.taken_slots == repo_activity.activities[0].taken_slots

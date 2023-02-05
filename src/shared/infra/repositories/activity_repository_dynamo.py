@@ -119,7 +119,41 @@ class ActivityRepositoryDynamo(IActivityRepository):
                         new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
                         new_stop_accepting_new_enrollments_before: int = None) -> Activity:
-        pass
+        old_activity = self.get_activity(code) # to get taken_slots
+
+        if old_activity is None:
+            return None
+
+        new_activity = Activity(
+            code=code,
+            title=new_title,
+            description=new_description,
+            activity_type=new_activity_type,
+            is_extensive=new_is_extensive,
+            delivery_model=new_delivery_model,
+            start_date=new_start_date,
+            duration=new_duration,
+            link=new_link,
+            place=new_place,
+            responsible_professors=new_responsible_professors,
+            speakers=new_speakers,
+            total_slots=new_total_slots,
+            taken_slots=old_activity.taken_slots,
+            accepting_new_enrollments=new_accepting_new_enrollments,
+            stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before
+        )
+
+        new_activity_dto = ActivityDynamoDTO.from_entity(new_activity)
+
+        new_activity_dto = new_activity_dto.to_dynamo()
+
+        response = self.dynamo.hard_update_item(
+            partition_key=self.activity_partition_key_format(code),
+            sort_key=self.activity_sort_key_format(code),
+            item=new_activity_dto,
+        )
+
+        return new_activity
 
     def delete_activity(self, code: str) -> Activity:
         pass
