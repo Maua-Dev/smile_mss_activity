@@ -163,6 +163,7 @@ class Test_ActivityRepositoryDynamo:
                                                                  )
                                                              ], new_total_slots=100,
                                                              new_accepting_new_enrollments=True,
+                                                            new_taken_slots=repo_activity.activities[0].taken_slots,
                                                              new_stop_accepting_new_enrollments_before=None)
 
         assert new_activity.code == repo_activity.activities[0].code
