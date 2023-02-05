@@ -265,7 +265,7 @@ class Test_ActivityRepositoryDynamo:
         assert activity is None
         assert enrollments is None
 
-    # @pytest.mark.skip("Can't test dynamo in Github")
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_batch_update_enrollment(self):
         repo_activity_mock = ActivityRepositoryMock()
 
