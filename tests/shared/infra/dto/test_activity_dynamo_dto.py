@@ -80,7 +80,7 @@ class Test_ActivityDynamoDTO:
         )
 
         expected_dynamo = {
-            "code": "ELET355",
+            "activity_code": "ELET355",
             "title": "Atividade da ELET 355",
             "description": "Isso é uma atividade, sério.",
             "activity_type": "LECTURES",
@@ -116,6 +116,7 @@ class Test_ActivityDynamoDTO:
             ],
             "total_slots": 10,
             "accepting_new_enrollments": True,
+            "entity": "activity"
         }
 
         assert expected_dynamo == activity_dynamo_dto.to_dynamo()
@@ -146,7 +147,7 @@ class Test_ActivityDynamoDTO:
         activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
 
         expected_dynamo = {
-            "code": "ELET355",
+            "activity_code": "ELET355",
             "title": "Atividade da ELET 355",
             "description": "Isso é uma atividade, sério.",
             "activity_type": "LECTURES",
@@ -182,6 +183,7 @@ class Test_ActivityDynamoDTO:
             ],
             "total_slots": 10,
             "accepting_new_enrollments": True,
+            "entity": "activity"
         }
 
         assert expected_dynamo == activity_dynamo_dto.to_dynamo()
@@ -210,7 +212,7 @@ class Test_ActivityDynamoDTO:
         activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
 
         expected_dynamo = {
-            "code": "ECM2345",
+            "activity_code": "ECM2345",
             "title": "Atividade da ECM 2345",
             "description": "Isso é uma atividade",
             "activity_type": "COURSES",
@@ -235,7 +237,8 @@ class Test_ActivityDynamoDTO:
             ],
             "total_slots": 4,
             "accepting_new_enrollments": True,
-            "stop_accepting_new_enrollments_before": 1671743812000
+            "stop_accepting_new_enrollments_before": 1671743812000,
+            "entity": "activity"
         }
 
         assert expected_dynamo == activity_dynamo_dto.to_dynamo()
@@ -243,7 +246,7 @@ class Test_ActivityDynamoDTO:
     def test_from_dynamo(self):
         dynamo_data = {
             'Item': {
-                'code': 'ELET355',
+                'activity_code': 'ELET355',
                 'link': 'https://devmaua.com',
                 'total_slots': '10',
                 'description': 'Isso é uma atividade, sério.',
@@ -271,7 +274,8 @@ class Test_ActivityDynamoDTO:
                 'place': 'H332',
                 'PK': 'ELET355',
                 'stop_accepting_new_enrollments_before': None,
-                'start_date': '1671661013000'
+                'start_date': '1671661013000',
+                "entity": "activity"
             },
             'ResponseMetadata': {
                 'RequestId': 'a955a01d-28d9-4da3-964e-801672d847df',
@@ -360,7 +364,7 @@ class Test_ActivityDynamoDTO:
     def test_from_dynamo_to_entity(self):
         dynamo_data = {
             'Item': {
-                'code': 'ELET355',
+                'activity_code': 'ELET355',
                 'link': 'https://devmaua.com',
                 'total_slots': '10',
                 'description': 'Isso é uma atividade, sério.',
@@ -388,7 +392,8 @@ class Test_ActivityDynamoDTO:
                 'place': 'H332',
                 'PK': 'ELET355',
                 'stop_accepting_new_enrollments_before': None,
-                'start_date': '1671661013000'
+                'start_date': '1671661013000',
+                "entity": "activity"
             },
             'ResponseMetadata': {
                 'RequestId': 'a955a01d-28d9-4da3-964e-801672d847df',
@@ -434,7 +439,7 @@ class Test_ActivityDynamoDTO:
     def test_from_dynamo_to_entity_2(self):
         dynamo_data = {
             'Item': {
-                'code': 'ULTIMA',
+                'activity_code': 'ULTIMA',
                 'total_slots':'3',
                 'description': 'Atividade pra acabar',
                 'responsible_professors': [
@@ -461,7 +466,8 @@ class Test_ActivityDynamoDTO:
                 'place': 'H332',
                 'PK': 'ULTIMA',
                 'stop_accepting_new_enrollments_before':'1671733012000',
-                'start_date':'1671733013000'
+                'start_date':'1671733013000',
+                "entity": "activity"
             },
             'ResponseMetadata': {
                 'RequestId': '167ee89a-6bde-44db-9ea7-470bf136e60e',

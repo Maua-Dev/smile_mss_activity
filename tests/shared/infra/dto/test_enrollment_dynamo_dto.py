@@ -37,7 +37,8 @@ class Test_EnrollmentDynamoDTO:
             "activity_code": "activity_code",
             "user_id": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
             "state": "ENROLLED",
-            "date_subscribed": 1671229013000
+            "date_subscribed": 1671229013000,
+            "entity": "enrollment",
         }
 
         assert enrollemnt_dto == expected
@@ -56,7 +57,8 @@ class Test_EnrollmentDynamoDTO:
             "activity_code": "activity_code",
             "user_id": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
             "state": "ENROLLED",
-            "date_subscribed": 1671229013000
+            "date_subscribed": 1671229013000,
+            "entity": "enrollment",
         }
 
         assert enrollemnt_dto == expected
@@ -67,7 +69,8 @@ class Test_EnrollmentDynamoDTO:
             "activity_code": "activity_code",
             "user_id": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
             "state": "ENROLLED",
-            "date_subscribed": 1671229013000
+            "date_subscribed": 1671229013000,
+            "entity": "enrollment",
         }
 
         enrollment_dto = EnrollmentDynamoDTO.from_dynamo(dynamo_data)
@@ -105,7 +108,8 @@ class Test_EnrollmentDynamoDTO:
             "activity_code": "activity_code",
             "user_id": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
             "state": "ENROLLED",
-            "date_subscribed": 1671229013000
+            "date_subscribed": 1671229013000,
+            "entity": "enrollment",
         }
 
         enrollment = EnrollmentDynamoDTO.from_dynamo(dynamo_data).to_entity()

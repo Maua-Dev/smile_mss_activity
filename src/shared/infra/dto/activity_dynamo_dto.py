@@ -75,7 +75,7 @@ class ActivityDynamoDTO:
         Parse data from ActivityDynamoDTO to DynamoDB format
         """
         data = {
-            "code": self.code,
+            "activity_code": self.code,
             "title": self.title,
             "description": self.description,
             "activity_type": self.activity_type.value,
@@ -98,6 +98,7 @@ class ActivityDynamoDTO:
             "total_slots": self.total_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
             "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before,
+            "entity": "activity",
         }
 
         data_without_none_values = {k: v for k, v in data.items() if v is not None}
@@ -110,7 +111,7 @@ class ActivityDynamoDTO:
         Parse data from DynamoDB format to ActivityDynamoDTO
         """
         return ActivityDynamoDTO(
-            code=activity_data.get("code"),
+            code=activity_data.get("activity_code"),
             title=activity_data.get("title"),
             description=activity_data.get("description"),
             activity_type=ACTIVITY_TYPE(activity_data.get("activity_type")),

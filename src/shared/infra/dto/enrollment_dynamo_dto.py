@@ -34,7 +34,8 @@ class EnrollmentDynamoDTO:
             "activity_code": self.activity_code,
             "user_id": self.user_id,
             "state": self.state.value,
-            "date_subscribed": self.date_subscribed
+            "date_subscribed": self.date_subscribed,
+            "entity": "enrollment",
         }
 
     @staticmethod
