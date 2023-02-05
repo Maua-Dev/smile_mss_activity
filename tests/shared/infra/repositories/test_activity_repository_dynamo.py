@@ -286,4 +286,20 @@ class Test_ActivityRepositoryDynamo:
 
         assert new_enrollments == expected_new_enrollments
 
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_enrollments_by_user_id(self):
+        repo_activity = ActivityRepositoryMock()
+
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_user = UserRepositoryMock()
+
+        expected_enrollments = repo_activity.get_enrollments_by_user_id(repo_user.users[0].user_id)
+
+        enrollments = repo_activity_dynamo.get_enrollments_by_user_id(repo_user.users[0].user_id)
+        expected_enrollments.sort(key=lambda enrollment: enrollment.activity_code)
+        enrollments.sort(key=lambda enrollment: enrollment.activity_code)
+
+        assert len(enrollments) == len(expected_enrollments)
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert enrollments == expected_enrollments
 

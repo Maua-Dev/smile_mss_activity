@@ -276,4 +276,16 @@ class ActivityRepositoryDynamo(IActivityRepository):
         return activity
 
     def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
-        pass
+        query_string = Key("GSI1-PK").eq(user_id) & Key("GSI1-SK").begins_with("enrollment#")
+
+        response = self.dynamo.query(
+            key_condition_expression=query_string,
+            IndexName="GSI1"
+        )
+
+        enrollments = list()
+        for item in response["Items"]:
+            if item["state"] == ENROLLMENT_STATE.ENROLLED.value:
+                enrollments.append(EnrollmentDynamoDTO.from_dynamo(item).to_entity())
+
+        return enrollments
