@@ -111,7 +111,6 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         return enrollment
 
-
     def update_activity(self, code: str, new_title: str = None, new_description: str = None,
                         new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
                         new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None, new_duration: int = None,
@@ -119,10 +118,6 @@ class ActivityRepositoryDynamo(IActivityRepository):
                         new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
                         new_stop_accepting_new_enrollments_before: int = None) -> Activity:
-        old_activity = self.get_activity(code) # to get taken_slots
-
-        if old_activity is None:
-            return None
 
         new_activity = Activity(
             code=code,
@@ -138,7 +133,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
             responsible_professors=new_responsible_professors,
             speakers=new_speakers,
             total_slots=new_total_slots,
-            taken_slots=old_activity.taken_slots,
+            taken_slots=new_taken_slots,
             accepting_new_enrollments=new_accepting_new_enrollments,
             stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before
         )
