@@ -84,7 +84,17 @@ class ActivityRepositoryDynamo(IActivityRepository):
         return activity
 
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
-        pass
+
+
+        response  = self.dynamo.update_item(
+            partition_key=self.enrollment_partition_key_format(code),
+            sort_key=self.enrollment_sort_key_format(user_id),
+            update_dict={"state": new_state.value})
+
+        if "Attributes" not in response:
+            return None
+
+        return EnrollmentDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
         pass

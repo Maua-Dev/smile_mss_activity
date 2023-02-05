@@ -4,10 +4,15 @@ from datetime import datetime
 import pytest
 
 from src.shared.domain.entities.activity import Activity
+from src.shared.domain.entities.speaker import Speaker
+from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_ActivityRepositoryDynamo:
@@ -18,9 +23,25 @@ class Test_ActivityRepositoryDynamo:
         activity_repository_dynamo = ActivityRepositoryDynamo()
         activity_repository_mock = ActivityRepositoryMock()
 
-        new_activity = activity_repository_mock.activities[0]
-
-        new_activity.code = "TEST_CODE"
+        new_activity = new_activity = Activity(
+            code="EAD109",
+            title="Curso de verão de cálculo 2",
+            description="curso de verão",
+            activity_type=ACTIVITY_TYPE.COURSES,
+            is_extensive=False,
+            delivery_model=DELIVERY_MODEL.ONLINE,
+            start_date=1671747413000,
+            duration=120,
+            link=None,
+            place="H332",
+            responsible_professors=[
+                User(name="Juliana Vetores", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="João Vitor Branco", bio="Incrível", company="IMT")],
+            total_slots=4,
+            taken_slots=4,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=1671743812000
+        )
 
         activity_created = activity_repository_dynamo.create_activity(new_activity)
 
@@ -86,3 +107,32 @@ class Test_ActivityRepositoryDynamo:
         enrollment_gotten = activity_repository_dynamo.get_enrollment(enrollment.user_id, enrollment.activity_code)
 
         assert enrollment_gotten is None
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_enrollment_drop(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        enrollment = repo_activity_dynamo.update_enrollment(user_id="d61dbf66-a10f-11ed-a8fc-0242ac120002", code="ECM2345",
+                                            new_state=ENROLLMENT_STATE.DROPPED)
+
+        assert enrollment.user_id == "d61dbf66-a10f-11ed-a8fc-0242ac120002"
+        assert enrollment.activity_code == "ECM2345"
+        assert enrollment.state == ENROLLMENT_STATE.DROPPED
+
+    # @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_enrollment_enroll(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        enrollment = repo_activity_dynamo.update_enrollment(user_id="03555872-a110-11ed-a8fc-0242ac120002", code="ECM2345",
+                                            new_state=ENROLLMENT_STATE.ENROLLED)
+
+        assert enrollment.user_id == "03555872-a110-11ed-a8fc-0242ac120002"
+        assert enrollment.activity_code == "ECM2345"
+        assert enrollment.state == ENROLLMENT_STATE.ENROLLED
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_enrollment_not_found(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        enrollment = repo_activity_dynamo.update_enrollment(user_id="03555872-a110-11ed-a8fc-0242ac120002", code="NAO_EXISTE", new_state=ENROLLMENT_STATE.DROPPED)
+
+        assert enrollment is None
