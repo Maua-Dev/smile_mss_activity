@@ -35,6 +35,14 @@ class ActivityRepositoryDynamo(IActivityRepository):
     def enrollment_sort_key_format(user_id: str) -> str:
         return f"enrollment#{user_id}"
 
+    @staticmethod
+    def enrollment_gsi_partition_key_format(user_id: str) -> str:
+        return f"{user_id}"
+
+    @staticmethod
+    def enrollment_gsi_sort_key_format(activity_code: str) -> str:
+        return f"enrollment#{activity_code}"
+
     def __init__(self):
         self.dynamo = DynamoDatasource(endpoint_url=Environments.get_envs().endpoint_url,
                                        dynamo_table_name=Environments.get_envs().dynamo_table_name,
@@ -45,8 +53,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
     def get_enrollment(self, user_id: str, code: str) -> Enrollment:
 
         enrollment_data = self.dynamo.get_item(
-                partition_key=self.enrollment_partition_key_format(code),
-                sort_key=self.enrollment_sort_key_format(user_id)
+            partition_key=self.enrollment_partition_key_format(code),
+            sort_key=self.enrollment_sort_key_format(user_id)
         )
 
         if "Item" not in enrollment_data:
@@ -85,8 +93,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
 
-
-        response  = self.dynamo.update_item(
+        response = self.dynamo.update_item(
             partition_key=self.enrollment_partition_key_format(code),
             sort_key=self.enrollment_sort_key_format(user_id),
             update_dict={"state": new_state.value})
@@ -123,10 +130,10 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         return activity, enrollments
 
-
     def create_enrollment(self, enrollment: Enrollment) -> Enrollment:
         item = EnrollmentDynamoDTO.from_entity(enrollment).to_dynamo()
-
+        item["GSI1-PK"] = self.enrollment_gsi_partition_key_format(enrollment.user_id)
+        item["GSI1-SK"] = self.enrollment_gsi_sort_key_format(enrollment.activity_code)
         response = self.dynamo.put_item(
             item=item,
             partition_key=self.enrollment_partition_key_format(enrollment.activity_code),
@@ -197,6 +204,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
             data = {
                 "PK": self.enrollment_partition_key_format(enrollment['activity_code']),
                 "SK": self.enrollment_sort_key_format(enrollment['user_id']),
+                "GSI1-PK": self.enrollment_gsi_partition_key_format(enrollment.user_id),
+                "GSI1-SK": self.enrollment_gsi_sort_key_format(enrollment['activity_code'])
             }
             data.update(enrollment)
 
@@ -209,7 +218,6 @@ class ActivityRepositoryDynamo(IActivityRepository):
         for enrollment in enrollments:
             enrollment.state = state
             new_enrollments.append(enrollment)
-
 
         return new_enrollments
 
