@@ -68,7 +68,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
             Select="ALL_ATTRIBUTES"
         )
 
-        if response.get("Items") is None:
+        if len(response.get("Items")) == 0:
             return None
 
         activity_data = response.get("Items")[0]
@@ -97,7 +97,32 @@ class ActivityRepositoryDynamo(IActivityRepository):
         return EnrollmentDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
-        pass
+
+        query_string = Key(self.dynamo.partition_key).eq(self.activity_partition_key_format(code))
+
+        response = self.dynamo.query(
+            key_condition_expression=query_string,
+            Select="ALL_ATTRIBUTES"
+        )
+
+        if len(response.get("Items")) == 0:
+            return None, None
+
+        activity_data = response.get("Items")[0]
+
+        activity_data["taken_slots"] = 0
+        enrollments = list()
+
+        for enrollment in response.get("Items")[1:]:
+            enrollments.append(EnrollmentDynamoDTO.from_dynamo(enrollment).to_entity())
+            if enrollment["state"] == ENROLLMENT_STATE.ENROLLED.value or enrollment[
+                "state"] == ENROLLMENT_STATE.COMPLETED.value:
+                activity_data["taken_slots"] += 1
+
+        activity = ActivityDynamoDTO.from_dynamo(activity_data).to_entity()
+
+        return activity, enrollments
+
 
     def create_enrollment(self, enrollment: Enrollment) -> Enrollment:
         item = EnrollmentDynamoDTO.from_entity(enrollment).to_dynamo()

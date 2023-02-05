@@ -4,6 +4,7 @@ from datetime import datetime
 import pytest
 
 from src.shared.domain.entities.activity import Activity
+from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
@@ -73,6 +74,15 @@ class Test_ActivityRepositoryDynamo:
             assert activity_gotten.stop_accepting_new_enrollments_before == activity.stop_accepting_new_enrollments_before
 
     @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_activity_not_found(self):
+        os.environ["STAGE"] = "TEST"
+        activity_repository_dynamo = ActivityRepositoryDynamo()
+
+        activity_gotten = activity_repository_dynamo.get_activity("SEM_CODIGO")
+
+        assert activity_gotten is None
+
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_create_enrollment(self):
         os.environ["STAGE"] = "TEST"
         activity_repository_dynamo = ActivityRepositoryDynamo()
@@ -118,7 +128,7 @@ class Test_ActivityRepositoryDynamo:
         assert enrollment.activity_code == "ECM2345"
         assert enrollment.state == ENROLLMENT_STATE.DROPPED
 
-    # @pytest.mark.skip("Can't test dynamo in Github")
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_update_enrollment_enroll(self):
         repo_activity_dynamo = ActivityRepositoryDynamo()
 
@@ -201,3 +211,22 @@ class Test_ActivityRepositoryDynamo:
         deleted_activity = repo_activity_dynamo.delete_activity(code=activity.code)
 
         assert activity == deleted_activity
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_activity_with_enrollments(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        activity, enrollments = repo_activity_dynamo.get_activity_with_enrollments("COD1468")
+
+        assert type(activity) == Activity
+        assert type(enrollments) == list
+
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert len(enrollments) == 2
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_activity_with_enrollments_not_found(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        activity, enrollments = repo_activity_dynamo.get_activity_with_enrollments("SEM_CODIGO")
+
+        assert activity is None
+        assert enrollments is None
