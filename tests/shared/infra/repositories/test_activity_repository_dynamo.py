@@ -17,6 +17,40 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 
 
 class Test_ActivityRepositoryDynamo:
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_activities_admin(self):
+        os.environ["STAGE"] = "TEST"
+        activity_repository_dynamo = ActivityRepositoryDynamo()
+        activity_repository_mock = ActivityRepositoryMock()
+
+        activities_with_enrollments = activity_repository_dynamo.get_all_activities_admin()
+        expected_activities_with_enrollments = activity_repository_mock.get_all_activities_admin()
+
+        for activity_with_enrollments in activities_with_enrollments:
+            activity_with_enrollments[1].sort(key=lambda x: x.user_id)
+
+        for expected_activity_with_enrollments in expected_activities_with_enrollments:
+            expected_activity_with_enrollments[1].sort(key=lambda x: x.user_id)
+
+        activities_with_enrollments.sort(key=lambda x: x[0].code)
+        expected_activities_with_enrollments.sort(key=lambda x: x[0].code)
+
+        assert expected_activities_with_enrollments == activities_with_enrollments
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_activities(self):
+        os.environ["STAGE"] = "TEST"
+        activity_repository_dynamo = ActivityRepositoryDynamo()
+        activity_repository_mock = ActivityRepositoryMock()
+
+        activities = activity_repository_dynamo.get_all_activities()
+        expected_activities = activity_repository_mock.activities
+
+        activities.sort(key=lambda x: x.code)
+        expected_activities.sort(key=lambda x: x.code)
+
+        assert expected_activities == activities
+
 
     @pytest.mark.skip("Can't test dynamo in Github")
     def test_create_activity(self):

@@ -191,10 +191,48 @@ class ActivityRepositoryDynamo(IActivityRepository):
         pass
 
     def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
-        pass
+        response = self.dynamo.get_all_items()
+
+        activities_dict = list()
+        enrollments = dict()
+        for item in response["Items"]:
+            if item["entity"] == "activity":
+                activities_dict.append(item)
+
+            elif item["entity"] == "enrollment":
+                enrollments[item["activity_code"]] = enrollments.get(item["activity_code"], list())
+                enrollments[item["activity_code"]].append(EnrollmentDynamoDTO.from_dynamo(item).to_entity())
+
+        activities_with_enrollments = list()
+        for activity in activities_dict:
+            activity_to_add = activity
+            activity_to_add["taken_slots"] = len(
+                [enrollment for enrollment in enrollments.get(activity["activity_code"], list()) if
+                 enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED])
+            activities_with_enrollments.append((ActivityDynamoDTO.from_dynamo(activity_to_add).to_entity(), enrollments.get(activity["activity_code"], list())))
+
+        return activities_with_enrollments
 
     def get_all_activities(self) -> List[Activity]:
-        pass
+        response = self.dynamo.get_all_items()
+
+        activities_dict = list()
+        enrollments = dict()
+        for item in response["Items"]:
+            if item["entity"] == "activity":
+                activities_dict.append(item)
+
+            elif item["entity"] == "enrollment":
+                enrollments[item["activity_code"]] = enrollments.get(item["activity_code"], list())
+                enrollments[item["activity_code"]].append(EnrollmentDynamoDTO.from_dynamo(item).to_entity())
+
+        activities = list()
+        for activity in activities_dict:
+            activity_to_add = activity
+            activity_to_add["taken_slots"] = len([enrollment for enrollment in enrollments.get(activity["activity_code"], list()) if enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED])
+            activities.append(ActivityDynamoDTO.from_dynamo(activity_to_add).to_entity())
+
+        return activities
 
     def create_activity(self, activity: Activity) -> Activity:
         activity_dto = ActivityDynamoDTO.from_entity(activity)
