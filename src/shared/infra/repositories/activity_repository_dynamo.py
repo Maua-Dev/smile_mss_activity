@@ -188,7 +188,27 @@ class ActivityRepositoryDynamo(IActivityRepository):
         return ActivityDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
-        pass
+        to_update_list = list()
+
+        for enrollment in enrollments:
+            data = {
+                "PK": self.enrollment_partition_key_format(enrollment.activity_code),
+                "SK": self.enrollment_sort_key_format(enrollment.user_id),
+                "state": state.value
+            }
+
+            to_update_list.append(data)
+
+        response = self.dynamo.batch_write_items(to_update_list)
+
+        new_enrollments = list()
+
+        for enrollment in enrollments:
+            enrollment.state = state
+            new_enrollments.append(enrollment)
+
+
+        return new_enrollments
 
     def get_all_activities_admin(self) -> List[Tuple[Activity, List[Enrollment]]]:
         response = self.dynamo.get_all_items()

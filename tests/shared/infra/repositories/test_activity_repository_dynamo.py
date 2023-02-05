@@ -264,3 +264,26 @@ class Test_ActivityRepositoryDynamo:
 
         assert activity is None
         assert enrollments is None
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_batch_update_enrollment(self):
+        repo_activity_mock = ActivityRepositoryMock()
+
+        enrollments_to_update = [repo_activity_mock.enrollments[10], repo_activity_mock.enrollments[11], repo_activity_mock.enrollments[12]]
+
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        new_enrollments = repo_activity_dynamo.batch_update_enrollment(enrollments_to_update, ENROLLMENT_STATE.ACTIVITY_CANCELLED)
+
+        expected_new_enrollments = list()
+        for enrollment in enrollments_to_update:
+            assert enrollment.state == ENROLLMENT_STATE.ACTIVITY_CANCELLED
+            expected_new_enrollments.append(enrollment)
+
+        expected_new_enrollments.sort(key=lambda enrollment: enrollment.user_id)
+
+        new_enrollments.sort(key=lambda enrollment: enrollment.user_id)
+
+        assert new_enrollments == expected_new_enrollments
+
+
