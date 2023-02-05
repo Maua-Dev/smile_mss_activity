@@ -151,7 +151,16 @@ class ActivityRepositoryDynamo(IActivityRepository):
         return new_activity
 
     def delete_activity(self, code: str) -> Activity:
-        pass
+
+        taken_slots = self.get_activity(code).taken_slots
+
+        response = self.dynamo.delete_item(
+            partition_key=self.activity_partition_key_format(code),
+            sort_key=self.activity_sort_key_format(code))
+
+        response["Attributes"]["taken_slots"] = taken_slots
+
+        return ActivityDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def batch_update_enrollment(self, enrollments: List[Enrollment], state: ENROLLMENT_STATE) -> List[Enrollment]:
         pass

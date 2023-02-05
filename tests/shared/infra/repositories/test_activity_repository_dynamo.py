@@ -190,3 +190,14 @@ class Test_ActivityRepositoryDynamo:
         assert new_activity.accepting_new_enrollments == True
         assert new_activity.stop_accepting_new_enrollments_before is None
         assert new_activity.taken_slots == repo_activity.activities[0].taken_slots
+
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_delete_activity(self):
+        repo_activity = ActivityRepositoryMock()
+        activity = repo_activity.activities[3]
+
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        deleted_activity = repo_activity_dynamo.delete_activity(code=activity.code)
+
+        assert activity == deleted_activity
