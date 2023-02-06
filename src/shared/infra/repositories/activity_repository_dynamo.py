@@ -78,6 +78,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         if len(response.get("Items")) == 0:
             return None
+        elif response.get("Items")[0]["entity"] == "enrollment":
+            return None
 
         activity_data = response.get("Items")[0]
 
@@ -204,7 +206,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
             data = {
                 "PK": self.enrollment_partition_key_format(enrollment['activity_code']),
                 "SK": self.enrollment_sort_key_format(enrollment['user_id']),
-                "GSI1-PK": self.enrollment_gsi_partition_key_format(enrollment.user_id),
+                "GSI1-PK": self.enrollment_gsi_partition_key_format(enrollment['user_id']),
                 "GSI1-SK": self.enrollment_gsi_sort_key_format(enrollment['activity_code'])
             }
             data.update(enrollment)
