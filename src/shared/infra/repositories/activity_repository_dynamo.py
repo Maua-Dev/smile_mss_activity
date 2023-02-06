@@ -121,6 +121,9 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         activity_data = response.get("Items")[0]
 
+        if activity_data['entity'] == "enrollment":
+            return None, None
+
         activity_data["taken_slots"] = 0
         enrollments = list()
 
