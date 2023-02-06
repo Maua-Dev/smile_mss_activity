@@ -24,6 +24,10 @@ class GetActivityWithEnrollmentsUsecase:
         if activity is None:
             raise NoItemsFound('activity')
 
+        if user not in activity.responsible_professors:
+            #raise ForbiddenAction('user')
+            pass
+
         user_id_list = list()
         activity_with_enrollments = list()
         for enrollment in enrollments:
