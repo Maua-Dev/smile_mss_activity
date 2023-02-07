@@ -16,7 +16,7 @@ class Test_UpdateActivityViewmodel:
             'message': 'the activity was updated',
             'activity': {
                 'accepting_new_enrollments': True,
-                'activity_type': 'COURSE',
+                'activity_type': 'COURSES',
                 'code': 'ECM2345',
                 'delivery_model': 'IN_PERSON',
                 'description': 'Isso é uma atividade',
