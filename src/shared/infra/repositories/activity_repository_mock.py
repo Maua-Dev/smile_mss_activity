@@ -251,7 +251,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 taken_slots=3,
                 accepting_new_enrollments=True,
                 stop_accepting_new_enrollments_before=1671733012000,
-                confirmation_code=None
+                confirmation_code="555666"
             ),
             Activity(
                 code="PINOQ1",

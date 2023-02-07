@@ -86,6 +86,7 @@ class ActivityViewmodel:
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int
     enrollments: List[EnrollmentViewmodel]
+    confirmation_code: str
 
     def __init__(self, activity: Activity, enrollments: List[Tuple[Enrollment, User]]):
         self.code = activity.code
@@ -105,6 +106,7 @@ class ActivityViewmodel:
         self.accepting_new_enrollments = activity.accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
         self.enrollments = [EnrollmentViewmodel(*enrollment) for enrollment in enrollments]
+        self.confirmation_code = activity.confirmation_code
 
     def to_dict(self):
         return {
@@ -123,7 +125,8 @@ class ActivityViewmodel:
                          "total_slots": self.total_slots,
                          "taken_slots": self.taken_slots,
                          "accepting_new_enrollments": self.accepting_new_enrollments,
-                         "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None, },
+                         "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
+                         "confirmation_code": self.confirmation_code},
             "enrollments": [enrollment.to_dict() for enrollment in self.enrollments],
         }
 
