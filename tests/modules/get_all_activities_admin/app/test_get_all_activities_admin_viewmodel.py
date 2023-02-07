@@ -19,7 +19,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'code': 'ECM2345',
                         'title': 'Atividade da ECM 2345',
                         'description': 'Isso é uma atividade',
-                        'activity_type': 'COURSE',
+                        'activity_type': 'COURSES',
                         'is_extensive': False,
                         'delivery_model': 'IN_PERSON',
                         'start_date': 1671747413000,
@@ -43,7 +43,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 4,
                         'taken_slots': 4,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671743812000
+                        'stop_accepting_new_enrollments_before': 1671743812000,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -140,7 +141,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 10,
                         'taken_slots': 1,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -188,7 +190,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 50,
                         'taken_slots': 1,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -250,7 +253,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 15,
                         'taken_slots': 2,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671747413000
+                        'stop_accepting_new_enrollments_before': 1671747413000,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -311,7 +315,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 50,
                         'taken_slots': 2,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671574613000
+                        'stop_accepting_new_enrollments_before': 1671574613000,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -363,7 +368,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 20,
                         'taken_slots': 1,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -406,7 +412,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 10,
                         'taken_slots': 1,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -449,7 +456,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 2,
                         'taken_slots': 2,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -510,7 +518,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 50,
                         'taken_slots': 0,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -553,7 +562,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 50,
                         'taken_slots': 0,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -596,7 +606,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 25,
                         'taken_slots': 0,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -639,7 +650,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 3,
                         'taken_slots': 3,
                         'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671733012000
+                        'stop_accepting_new_enrollments_before': 1671733012000,
+                        'confirmation_code': "555666"
                     },
                     'enrollments': [
                         {
@@ -723,7 +735,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'total_slots': 10,
                         'taken_slots': 4,
                         'accepting_new_enrollments': False,
-                        'stop_accepting_new_enrollments_before': 1669918612000
+                        'stop_accepting_new_enrollments_before': 1669918612000,
+                        'confirmation_code': None
                     },
                     'enrollments': [
                         {
@@ -767,5 +780,4 @@ class Test_GetAllActivitiesAdminViewmodel:
             ],
             'message': 'the activities were retrieved by admin'
         }
-
         assert viewmodel.to_dict() == expected

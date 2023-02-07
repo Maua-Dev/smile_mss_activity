@@ -1,5 +1,4 @@
 import abc
-import datetime
 from typing import List
 
 from src.shared.domain.entities.speaker import Speaker
@@ -27,11 +26,12 @@ class Activity(abc.ABC):
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int  # milliseconds
+    confirmation_code: str
 
     def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
                  responsible_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int,
-                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int):
+                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, confirmation_code: str):
         if type(code) != str:
             raise EntityError("code")
         self.code = code
@@ -120,8 +120,23 @@ class Activity(abc.ABC):
 
         self.stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
 
+        if confirmation_code is not None:
+            if not self.validate_confirmation_code(confirmation_code):
+                raise EntityError("confirmation_code")
+        self.confirmation_code = confirmation_code
+
+    @staticmethod
+    def validate_confirmation_code(confirmation_code: str) -> bool:
+        if type(confirmation_code) != str:
+            return False
+        if len(confirmation_code) != 6:
+            return False
+        if not confirmation_code.isnumeric():
+            return False
+        return True
+
     def __repr__(self):
-        return f"Activity(code={self.code}, title={self.title}, description={self.description}, activity_type={self.activity_type.value}, is_extensive={self.is_extensive}, delivery_model={self.delivery_model.value}, start_date={self.start_date}, duration={self.duration}, link={self.link}, place={self.place} responsible_professors={self.responsible_professors}, speakers={self.speakers}, total_slots={self.total_slots}, taken_slots={self.taken_slots}, accepting_new_enrollments={self.accepting_new_enrollments}, stop_accepting_new_enrollments_before={self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None})"
+        return f"Activity({self.code}, {self.title}, {self.description}, {self.activity_type}, {self.is_extensive}, {self.delivery_model}, {self.start_date}, {self.duration}, {self.link}, {self.place}, {self.responsible_professors}, {self.speakers}, {self.total_slots}, {self.taken_slots}, {self.accepting_new_enrollments}, {self.stop_accepting_new_enrollments_before}, {self.confirmation_code})"
 
     def __eq__(self, other):
-        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.link == other.link and self.place == other.place and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.taken_slots == other.taken_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before
+        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.link == other.link and self.place == other.place and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.taken_slots == other.taken_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before and self.confirmation_code == other.confirmation_code

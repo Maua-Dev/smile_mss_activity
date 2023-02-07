@@ -16,7 +16,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'code': 'ECM2345',
                     'title': 'Atividade da ECM 2345',
                     'description': 'Isso é uma atividade',
-                    'activity_type': 'COURSE',
+                    'activity_type': 'COURSES',
                     'is_extensive': False,
                     'delivery_model': 'IN_PERSON',
                     'start_date': 1671747413000,
@@ -33,7 +33,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 4,
                     'taken_slots': 4,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671743812000
+                    'stop_accepting_new_enrollments_before': 1671743812000,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'ELET355',
@@ -56,7 +57,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 10,
                     'taken_slots': 1,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'COD1468',
@@ -79,7 +81,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 50,
                     'taken_slots': 1,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'CODIGO',
@@ -112,7 +115,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 15,
                     'taken_slots': 2,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671747413000
+                    'stop_accepting_new_enrollments_before': 1671747413000,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'AC000',
@@ -135,7 +139,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 50,
                     'taken_slots': 2,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671574613000
+                    'stop_accepting_new_enrollments_before': 1671574613000,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'ECM251',
@@ -158,7 +163,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 20,
                     'taken_slots': 1,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'SC456',
@@ -181,7 +187,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 10,
                     'taken_slots': 1,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'CAFE',
@@ -204,7 +211,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 2,
                     'taken_slots': 2,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'CODE',
@@ -227,7 +235,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 50,
                     'taken_slots': 0,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'PRF246',
@@ -250,7 +259,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 50,
                     'taken_slots': 0,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 {
                     'code': '2468',
@@ -273,7 +283,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 25,
                     'taken_slots': 0,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 {
                     'code': 'ULTIMA',
@@ -296,7 +307,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 3,
                     'taken_slots': 3,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671733012000
+                    'stop_accepting_new_enrollments_before': 1671733012000,
+                    'confirmation_code': "555666"
                 },
                 {
                     'code': 'PINOQ1',
@@ -324,7 +336,8 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'total_slots': 10,
                     'taken_slots': 4,
                     'accepting_new_enrollments': False,
-                    'stop_accepting_new_enrollments_before': 1669918612000
+                    'stop_accepting_new_enrollments_before': 1669918612000,
+                    'confirmation_code': None
                 }
             ],
             'message': 'the activities were retrieved'

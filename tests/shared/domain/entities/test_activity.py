@@ -42,7 +42,8 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=1671724560000
+            stop_accepting_new_enrollments_before=1671724560000,
+            confirmation_code="123456"
         )
 
         assert type(activity) == Activity
@@ -90,7 +91,8 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=1671724565000
+            stop_accepting_new_enrollments_before=1671724565000,
+            confirmation_code=None
         )
 
         assert type(activity) == Activity
@@ -138,7 +140,8 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=1671724565000
+            stop_accepting_new_enrollments_before=1671724565000,
+            confirmation_code=None
         )
 
         assert type(activity) == Activity
@@ -188,7 +191,8 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=1671724565000
+            stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
         )
 
     def test_activity_invalid_code_none(self):
@@ -220,7 +224,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_code_int(self):
@@ -252,7 +257,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_title(self):
@@ -284,7 +290,8 @@ class Test_Activity:
                     total_slots=120,
                     taken_slots=33,
                     accepting_new_enrollments=True,
-                    stop_accepting_new_enrollments_before=1671724565000
+                    stop_accepting_new_enrollments_before=1671724565000,
+                    confirmation_code=None
                 )
 
     def test_activity_invalid_title_none(self):
@@ -316,7 +323,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_description(self):
@@ -348,7 +356,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_activity_type(self):
@@ -380,7 +389,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_is_extensive(self):
@@ -412,7 +422,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_delivery_model(self):
@@ -444,7 +455,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_start_date(self):
@@ -476,7 +488,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_duration(self):
@@ -508,7 +521,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_place(self):
@@ -540,7 +554,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_link(self):
@@ -572,7 +587,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_responsible_professors(self):
@@ -598,7 +614,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_responsible_professors_not_users(self):
@@ -634,7 +651,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
     def test_activity_invalid_responsible_professors_not_professor(self):
         with pytest.raises(EntityError):
@@ -669,7 +687,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_speakers(self):
@@ -701,7 +720,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
 
@@ -735,7 +755,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_total_slots(self):
@@ -768,7 +789,8 @@ class Test_Activity:
                 total_slots=None,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_taken_slots(self):
@@ -801,7 +823,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=None,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_accepting_new_enrollments(self):
@@ -834,7 +857,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=None,
-                stop_accepting_new_enrollments_before=1671724565000
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
             )
 
     def test_activity_invalid_stop_accepting_new_enrollments_before_none(self):
@@ -866,7 +890,8 @@ class Test_Activity:
             total_slots=120,
             taken_slots=33,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code=None
         )
 
         assert activity.stop_accepting_new_enrollments_before is None
@@ -901,7 +926,8 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before="2"
+                stop_accepting_new_enrollments_before="2",
+                confirmation_code=None
             )
     def test_activity_invalid_stop_accepting_new_enrollments_before_after_start(self):
         with pytest.raises(EntityError):
@@ -933,5 +959,39 @@ class Test_Activity:
                 total_slots=120,
                 taken_slots=33,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=datetime.datetime(2022, 12, 25, 13, 56, 5, 430523)
+                stop_accepting_new_enrollments_before=1671728165001,
+                confirmation_code=None
+            )
+    def test_activity_invalid_confirmation_code(self):
+        with pytest.raises(EntityError):
+            activity = Activity(
+                code="1234",
+                title="Palestra Microsoft",
+                description="Palestra informacional de como usar a Azure",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1671728165000,
+                duration=120,
+                link="https://devmaua.com",
+                place="H333",
+                responsible_professors=[
+                    User(
+                        name="Marcos",
+                        role=ROLE.PROFESSOR,
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
+                    )
+                ],
+                speakers=[
+                    Speaker(
+                        name="Marcos Tales",
+                        bio="Salve",
+                        company="Microsoft"
+                    )
+                ],
+                total_slots=120,
+                taken_slots=33,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=1671728164000,
+                confirmation_code=2
             )

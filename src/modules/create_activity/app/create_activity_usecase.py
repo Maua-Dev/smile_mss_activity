@@ -67,7 +67,8 @@ class CreateActivityUsecase:
             total_slots=total_slots,
             taken_slots=0,
             accepting_new_enrollments=accepting_new_enrollments,
-            stop_accepting_new_enrollments_before=stop_accepting_new_enrollments_before
+            stop_accepting_new_enrollments_before=stop_accepting_new_enrollments_before,
+            confirmation_code=None,
         )
 
         return self.repo_activity.create_activity(activity)
