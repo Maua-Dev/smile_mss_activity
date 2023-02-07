@@ -85,33 +85,6 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'state': 'ENROLLED',
                         'date_subscribed': 1671488213000
                     },
-                    {
-                        'user': {
-                            'name': 'Hector Guerrini',
-                            'role': 'EXTERNAL',
-                            'user_id': '03555872-a110-11ed-a8fc-0242ac120002'
-                        },
-                        'state': 'IN_QUEUE',
-                        'date_subscribed': 1671574613000
-                    },
-                    {
-                        'user': {
-                            'name': 'Ricardo Soller',
-                            'role': 'EMPLOYEE',
-                            'user_id': '2f0df47e-a110-11ed-a8fc-0242ac120002'
-                        },
-                        'state': 'IN_QUEUE',
-                        'date_subscribed': 1671574673000
-                    },
-                    {
-                        'user': {
-                            'name': 'Marcos Romanato',
-                            'role': 'STUDENT',
-                            'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002'
-                        },
-                        'state': 'IN_QUEUE',
-                        'date_subscribed': 1671574733000
-                    }
                 ]
             },
             'message': 'the activity was retrieved by the professor'
@@ -157,15 +130,7 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     'stop_accepting_new_enrollments_before': None
                 },
                 'enrollments': [
-                    {
-                        'user': {
-                            'name': 'Viviani Soller',
-                            'role': 'EXTERNAL',
-                            'user_id': '5a49ad2c-a110-11ed-a8fc-0242ac120002'
-                        },
-                        'state': 'DROPPED',
-                        'date_subscribed': 1671315413000
-                    }
+
                 ]
             },
             'message': 'the activity was retrieved by the professor'

@@ -1,10 +1,10 @@
 from src.shared.domain.entities.user import User
+from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
-
 
 class GetActivityWithEnrollmentsUsecase:
 
@@ -19,7 +19,7 @@ class GetActivityWithEnrollmentsUsecase:
 
         if type(code) != str:
             raise EntityError('code')
-        activity, enrollments = self.repo_activity.get_activity_with_enrollments(code=code)
+        activity, all_enrollments = self.repo_activity.get_activity_with_enrollments(code=code)
 
         if activity is None:
             raise NoItemsFound('activity')
@@ -27,7 +27,8 @@ class GetActivityWithEnrollmentsUsecase:
         if user not in activity.responsible_professors:
             #raise ForbiddenAction('user')
             pass
-
+        enrollments = [enrollment for enrollment in all_enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or
+                       enrollment.state == ENROLLMENT_STATE.COMPLETED]
         user_id_list = list()
         activity_with_enrollments = list()
         for enrollment in enrollments:
