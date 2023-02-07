@@ -390,7 +390,7 @@ class ActivityRepositoryMock(IActivityRepository):
                         new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
                         new_stop_accepting_new_enrollments_before: int = None,
-                        confirmation_code: str = None) -> Activity:
+                        new_confirmation_code: str = None) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 if new_title is not None:
@@ -423,7 +423,7 @@ class ActivityRepositoryMock(IActivityRepository):
                     activity.accepting_new_enrollments = new_accepting_new_enrollments
                 if new_stop_accepting_new_enrollments_before is not None:
                     activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
-                if confirmation_code is not None:
+                if new_confirmation_code is not None:
                     activity.confirmation_code = confirmation_code
 
                 return activity
