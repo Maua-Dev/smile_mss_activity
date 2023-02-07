@@ -196,7 +196,8 @@ class Test_ActivityRepositoryMock:
                 total_slots=2,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code="123456",
             )
         )
         assert type(activity) == Activity

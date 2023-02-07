@@ -40,7 +40,8 @@ class Test_CreateActivityViewmodel:
             total_slots=100,
             taken_slots=97,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=1666451812000
+            stop_accepting_new_enrollments_before=1666451812000,
+            confirmation_code="123456"
         )
 
         activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
@@ -107,7 +108,8 @@ class Test_CreateActivityViewmodel:
                 total_slots=100,
                 taken_slots=97,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1666451812000
+                stop_accepting_new_enrollments_before=1666451812000,
+                confirmation_code="123456"
             )
             activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
 

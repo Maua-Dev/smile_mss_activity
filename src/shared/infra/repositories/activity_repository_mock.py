@@ -39,7 +39,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=4,
                 taken_slots=4,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671743812000
+                stop_accepting_new_enrollments_before=1671743812000,
+                confirmation_code=None
             ),
             Activity(
                 code="ELET355",
@@ -57,7 +58,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=10,
                 taken_slots=1,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
             ),
             Activity(
                 code="COD1468",
@@ -75,7 +77,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=50,
                 taken_slots=1,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
             ),
             Activity(
                 code="CODIGO",
@@ -95,7 +98,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=15,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671747413000
+                stop_accepting_new_enrollments_before=1671747413000,
+                confirmation_code=None
             ),
             Activity(
                 code="AC000",
@@ -113,7 +117,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=50,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671574613000
+                stop_accepting_new_enrollments_before=1671574613000,
+                confirmation_code=None
             ),
             Activity(
                 code="ECM251",
@@ -131,7 +136,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=20,
                 taken_slots=1,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
             ),
             Activity(
                 code="SC456",
@@ -149,7 +155,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=10,
                 taken_slots=1,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
             ),
             Activity(
                 code="CAFE",
@@ -167,7 +174,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=2,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
             ),
             Activity(
                 code="CODE",
@@ -185,7 +193,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=50,
                 taken_slots=0,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
             ),
             Activity(
                 code="PRF246",
@@ -203,7 +212,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=50,
                 taken_slots=0,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
             ),
             Activity(
                 code="2468",
@@ -221,7 +231,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=25,
                 taken_slots=0,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=None
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
             ),
             Activity(
                 code="ULTIMA",
@@ -239,7 +250,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=3,
                 taken_slots=3,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671733012000
+                stop_accepting_new_enrollments_before=1671733012000,
+                confirmation_code=None
             ),
             Activity(
                 code="PINOQ1",
@@ -258,7 +270,8 @@ class ActivityRepositoryMock(IActivityRepository):
                 total_slots=10,
                 taken_slots=4,
                 accepting_new_enrollments=False,
-                stop_accepting_new_enrollments_before=1669918612000
+                stop_accepting_new_enrollments_before=1669918612000,
+                confirmation_code=None
             ),
 
         ]
@@ -376,7 +389,8 @@ class ActivityRepositoryMock(IActivityRepository):
                         new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None,
                         new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
-                        new_stop_accepting_new_enrollments_before: int = None) -> Activity:
+                        new_stop_accepting_new_enrollments_before: int = None,
+                        confirmation_code: str = None) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 if new_title is not None:
@@ -409,6 +423,9 @@ class ActivityRepositoryMock(IActivityRepository):
                     activity.accepting_new_enrollments = new_accepting_new_enrollments
                 if new_stop_accepting_new_enrollments_before is not None:
                     activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
+                if confirmation_code is not None:
+                    activity.confirmation_code = confirmation_code
+
                 return activity
 
         return None
