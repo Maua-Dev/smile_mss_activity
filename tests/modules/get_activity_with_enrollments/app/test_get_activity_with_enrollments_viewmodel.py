@@ -22,7 +22,7 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     'code': 'ECM2345',
                     'title': 'Atividade da ECM 2345',
                     'description': 'Isso é uma atividade',
-                    'activity_type': 'COURSE',
+                    'activity_type': 'COURSES',
                     'is_extensive': False,
                     'delivery_model': 'IN_PERSON',
                     'start_date': 1671747413000,
@@ -46,7 +46,9 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     'total_slots': 4,
                     'taken_slots': 4,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': 1671743812000
+                    'stop_accepting_new_enrollments_before': 1671743812000,
+                    'confirmation_code': None
+
                 },
                 'enrollments': [
                     {
@@ -89,7 +91,7 @@ class Test_GetActivityWithEnrollmentsViewmodel:
             },
             'message': 'the activity was retrieved by the professor'
         }
-
+        assert expected == viewmodel.to_dict()
     def test_get_activity_with_enrollments_viewmodel_no_slots_taken(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -127,7 +129,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     'total_slots': 50,
                     'taken_slots': 0,
                     'accepting_new_enrollments': True,
-                    'stop_accepting_new_enrollments_before': None
+                    'stop_accepting_new_enrollments_before': None,
+                    'confirmation_code': None
                 },
                 'enrollments': [
 
@@ -135,3 +138,4 @@ class Test_GetActivityWithEnrollmentsViewmodel:
             },
             'message': 'the activity was retrieved by the professor'
         }
+        assert expected == viewmodel.to_dict()
