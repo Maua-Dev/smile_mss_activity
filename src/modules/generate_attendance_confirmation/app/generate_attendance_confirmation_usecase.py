@@ -1,7 +1,5 @@
-from math import floor
-from random import random
+from random import randint
 
-from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
@@ -55,6 +53,6 @@ class GenerateAttendanceConfirmationUsecase:
 
     @staticmethod
     def generate_confirmation_code() -> str:
-        confirmation_code = "".join([str(floor(random() * 10)) for _ in range(6)])
+        confirmation_code = "".join([str(randint(0, 9)) for _ in range(6)])
 
         return confirmation_code
