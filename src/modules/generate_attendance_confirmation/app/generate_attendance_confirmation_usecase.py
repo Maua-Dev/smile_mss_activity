@@ -18,7 +18,7 @@ class GenerateAttendanceConfirmationUsecase:
             raise EntityError("activity_code")
 
         if requester_user.role != ROLE.PROFESSOR:
-            raise ForbiddenAction("role, not professor")
+            raise ForbiddenAction("user, not professor")
 
         activity = self.repo.get_activity(code)
 
