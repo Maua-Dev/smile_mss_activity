@@ -29,7 +29,8 @@ class Test_ActivityDynamoDTO:
             total_slots=10,
             taken_slots=1,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
         )
 
         activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
@@ -52,10 +53,29 @@ class Test_ActivityDynamoDTO:
                       Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
             total_slots=10,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
         )
 
+        assert activity_dynamo_dto.code == expected_activity_dynamo_dto.code
+        assert activity_dynamo_dto.title == expected_activity_dynamo_dto.title
+        assert activity_dynamo_dto.description == expected_activity_dynamo_dto.description
+        assert activity_dynamo_dto.activity_type == expected_activity_dynamo_dto.activity_type
+        assert activity_dynamo_dto.is_extensive == expected_activity_dynamo_dto.is_extensive
+        assert activity_dynamo_dto.delivery_model == expected_activity_dynamo_dto.delivery_model
+        assert activity_dynamo_dto.start_date == expected_activity_dynamo_dto.start_date
+        assert activity_dynamo_dto.duration == expected_activity_dynamo_dto.duration
+        assert activity_dynamo_dto.link == expected_activity_dynamo_dto.link
+        assert activity_dynamo_dto.place == expected_activity_dynamo_dto.place
+        assert activity_dynamo_dto.responsible_professors == expected_activity_dynamo_dto.responsible_professors
+        assert activity_dynamo_dto.speakers == expected_activity_dynamo_dto.speakers
+        assert activity_dynamo_dto.total_slots == expected_activity_dynamo_dto.total_slots
+        assert activity_dynamo_dto.accepting_new_enrollments == expected_activity_dynamo_dto.accepting_new_enrollments
+        assert activity_dynamo_dto.stop_accepting_new_enrollments_before == expected_activity_dynamo_dto.stop_accepting_new_enrollments_before
+        assert activity_dynamo_dto.confirmation_code == expected_activity_dynamo_dto.confirmation_code
         assert activity_dynamo_dto == expected_activity_dynamo_dto
+
+
 
     def test_to_dynamo(self):
         activity_dynamo_dto = ActivityDynamoDTO(
@@ -76,7 +96,8 @@ class Test_ActivityDynamoDTO:
                       Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
             total_slots=10,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
         )
 
         expected_dynamo = {
@@ -116,6 +137,7 @@ class Test_ActivityDynamoDTO:
             ],
             "total_slots": 10,
             "accepting_new_enrollments": True,
+            "confirmation_code": "123456",
             "entity": "activity"
         }
 
@@ -141,7 +163,8 @@ class Test_ActivityDynamoDTO:
             total_slots=10,
             taken_slots=1,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code=None
         )
 
         activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
@@ -206,7 +229,8 @@ class Test_ActivityDynamoDTO:
             total_slots=4,
             taken_slots=4,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=1671743812000
+            stop_accepting_new_enrollments_before=1671743812000,
+            confirmation_code=None
         )
 
         activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
@@ -275,6 +299,7 @@ class Test_ActivityDynamoDTO:
                 'PK': 'ELET355',
                 'stop_accepting_new_enrollments_before': None,
                 'start_date': '1671661013000',
+                "confirmation_code": "123456",
                 "entity": "activity"
             },
             'ResponseMetadata': {
@@ -313,7 +338,8 @@ class Test_ActivityDynamoDTO:
             total_slots=10,
             taken_slots=1,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
         )
 
         assert expected_activity == activity_dto
@@ -336,7 +362,8 @@ class Test_ActivityDynamoDTO:
             total_slots=10,
             taken_slots=1,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
         )
 
         expected_activity = Activity(
@@ -356,7 +383,8 @@ class Test_ActivityDynamoDTO:
             total_slots=10,
             taken_slots=1,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
         )
 
         assert expected_activity == activity_dynamo_dto.to_entity()
@@ -393,6 +421,7 @@ class Test_ActivityDynamoDTO:
                 'PK': 'ELET355',
                 'stop_accepting_new_enrollments_before': None,
                 'start_date': '1671661013000',
+                "confirmation_code": "123456",
                 "entity": "activity"
             },
             'ResponseMetadata': {
@@ -431,7 +460,8 @@ class Test_ActivityDynamoDTO:
             total_slots=10,
             taken_slots=1,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=None
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
         )
 
         assert expected_activity == activity_dto.to_entity()
@@ -516,7 +546,8 @@ class Test_ActivityDynamoDTO:
             total_slots=3,
             taken_slots=3,
             accepting_new_enrollments=True,
-            stop_accepting_new_enrollments_before=1671733012000
+            stop_accepting_new_enrollments_before=1671733012000,
+            confirmation_code=None
         )
 
         assert expected_activity == activity_dto.to_entity()

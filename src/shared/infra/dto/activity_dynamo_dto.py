@@ -25,11 +25,12 @@ class ActivityDynamoDTO:
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int  # milliseconds
+    confirmation_code: str
 
     def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
                  responsible_professors: List[User], speakers: List[Speaker], total_slots: int,
-                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, taken_slots: int = None):
+                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, taken_slots: int = None, confirmation_code: str = None):
         self.code = code
         self.title = title
         self.description = description
@@ -46,6 +47,7 @@ class ActivityDynamoDTO:
         self.accepting_new_enrollments = accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
         self.taken_slots = taken_slots
+        self.confirmation_code = confirmation_code
 
     @staticmethod
     def from_entity(activity: Activity) -> "ActivityDynamoDTO":
@@ -68,6 +70,7 @@ class ActivityDynamoDTO:
             total_slots=activity.total_slots,
             accepting_new_enrollments=activity.accepting_new_enrollments,
             stop_accepting_new_enrollments_before=activity.stop_accepting_new_enrollments_before,
+            confirmation_code=activity.confirmation_code,
         )
 
     def to_dynamo(self):
@@ -98,6 +101,7 @@ class ActivityDynamoDTO:
             "total_slots": self.total_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
             "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before,
+            "confirmation_code": self.confirmation_code,
             "entity": "activity",
         }
 
@@ -134,7 +138,8 @@ class ActivityDynamoDTO:
             total_slots=int(activity_data.get("total_slots")),
             accepting_new_enrollments=bool(activity_data.get("accepting_new_enrollments")),
             stop_accepting_new_enrollments_before=int(activity_data.get("stop_accepting_new_enrollments_before")) if activity_data.get("stop_accepting_new_enrollments_before") is not None else None,
-            taken_slots=int(activity_data.get("taken_slots"))
+            taken_slots=int(activity_data.get("taken_slots")),
+            confirmation_code=activity_data.get("confirmation_code") if activity_data.get("confirmation_code") is not None else None,
         )
 
     def to_entity(self) -> Activity:
@@ -157,8 +162,9 @@ class ActivityDynamoDTO:
             total_slots=self.total_slots,
             accepting_new_enrollments=self.accepting_new_enrollments,
             stop_accepting_new_enrollments_before=self.stop_accepting_new_enrollments_before,
-            taken_slots=self.taken_slots
+            taken_slots=self.taken_slots,
+            confirmation_code=self.confirmation_code,
         )
 
     def __eq__(self, other):
-        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.link == other.link and self.place == other.place and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before and self.taken_slots == other.taken_slots
+        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.link == other.link and self.place == other.place and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before and self.taken_slots == other.taken_slots and self.confirmation_code == other.confirmation_code

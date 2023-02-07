@@ -22,7 +22,8 @@ class Test_DeleteActivityViewmodel:
                          'responsible_professors': [{'name': 'Caio Toledo', 'user_id': '03555624-a110-11ed-a8fc-0242ac120002', 'role': 'PROFESSOR'}],
                          'speakers': [{'name': 'Vitor Briquez', 'bio': 'Incrível', 'company': 'Apple'}],
                          'total_slots': 4, 'taken_slots': 4, 'accepting_new_enrollments': True,
-                         'stop_accepting_new_enrollments_before': 1671743812000},
+                         'stop_accepting_new_enrollments_before': 1671743812000,
+                         'confirmation_code': None},
             'message': 'the activity was deleted'}
 
         assert viewmodel.to_dict() == expected

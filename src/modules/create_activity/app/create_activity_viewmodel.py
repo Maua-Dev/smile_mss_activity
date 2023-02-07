@@ -61,6 +61,7 @@ class ActivityViewmodel:
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int
+    confirmation_code: str
 
     def __init__(self, activity: Activity):
         self.code = activity.code
@@ -79,6 +80,7 @@ class ActivityViewmodel:
         self.taken_slots = activity.taken_slots
         self.accepting_new_enrollments = activity.accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
+        self.confirmation_code = activity.confirmation_code
 
     def to_dict(self) -> dict:
         return {
@@ -98,6 +100,7 @@ class ActivityViewmodel:
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
             "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before,
+            "confirmation_code": self.confirmation_code
         }
 
 

@@ -36,7 +36,8 @@ class Test_UpdateActivityViewmodel:
                 'stop_accepting_new_enrollments_before': 1671743812000,
                 'taken_slots': 4,
                 'title': 'Atividade da ECM 2345',
-                'total_slots': 4
+                'total_slots': 4,
+                'confirmation_code': None
             }
         }
 

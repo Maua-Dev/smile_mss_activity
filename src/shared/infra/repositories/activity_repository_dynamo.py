@@ -156,7 +156,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
                         new_link: str = None, new_place: str = None, new_responsible_professors: List[User] = None,
                         new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
-                        new_stop_accepting_new_enrollments_before: int = None) -> Activity:
+                        new_stop_accepting_new_enrollments_before: int = None, new_confirmation_code:str = None) -> Activity:
 
         new_activity = Activity(
             code=code,
@@ -174,7 +174,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
             total_slots=new_total_slots,
             taken_slots=new_taken_slots,
             accepting_new_enrollments=new_accepting_new_enrollments,
-            stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before
+            stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before,
+            confirmation_code=new_confirmation_code
         )
 
         new_activity_dto = ActivityDynamoDTO.from_entity(new_activity)
