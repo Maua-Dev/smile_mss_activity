@@ -1,6 +1,6 @@
-from src.modules.get_activity_with_enrollments.app.get_activity_with_enrollments_usecase import \
+from .get_activity_with_enrollments_usecase import \
     GetActivityWithEnrollmentsUsecase
-from src.modules.get_activity_with_enrollments.app.get_activity_with_enrollments_viewmodel import \
+from .get_activity_with_enrollments_viewmodel import \
     GetActivityWithEnrollmentsViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
 from src.shared.helpers.errors.domain_errors import EntityError
