@@ -1,6 +1,5 @@
 import abc
-import datetime
-from typing import List, Optional
+from typing import List
 
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
@@ -27,12 +26,12 @@ class Activity(abc.ABC):
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int  # milliseconds
-    confirmation_code: Optional[str]
+    confirmation_code: str
 
     def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
                  responsible_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int,
-                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, confirmation_code: Optional[str]):
+                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, confirmation_code: str):
         if type(code) != str:
             raise EntityError("code")
         self.code = code
