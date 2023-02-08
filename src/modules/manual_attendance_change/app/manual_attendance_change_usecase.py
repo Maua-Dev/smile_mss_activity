@@ -63,23 +63,22 @@ class ManualAttendanceChangeUsecase:
             new_state=new_state
         )
 
-        #
-        # activity, all_enrollments = self.repo_activity.get_activity_with_enrollments(code=code) !! to do refat in future, less requests
-        #
-        # enrollments = [enrollment for enrollment in all_enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or
-        #                enrollment.state == ENROLLMENT_STATE.COMPLETED]
-        #
-        # user_id_list = list()
-        # activity_with_enrollments = list()
-        # for enrollment in enrollments:
-        #     user_id_list.append(enrollment.user_id)
-        # users = self.repo_user.get_users(user_id_list)
-        # users_dict = {user.user_id: user for user in users}
-        # activity_dict = {
-        #     "activity": activity,
-        #     "enrollments": [
-        #         (enrollment, users_dict.get(enrollment.user_id, "NOT_FOUND")) for enrollment in enrollments
-        #         ]
-        # }
+
+        activity, all_enrollments = self.repo_activity.get_activity_with_enrollments(code=code) #!! to do refat in future, less requests
+
+        enrollments = [enrollment for enrollment in all_enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or
+                       enrollment.state == ENROLLMENT_STATE.COMPLETED]
+
+        user_id_list = list()
+        for enrollment in enrollments:
+            user_id_list.append(enrollment.user_id)
+        users = self.repo_user.get_users(user_id_list)
+        users_dict = {user.user_id: user for user in users}
+        activity_dict = {
+            "activity": activity,
+            "enrollments": [
+                (enrollment, users_dict.get(enrollment.user_id, "NOT_FOUND")) for enrollment in enrollments
+                ]
+        }
 
         return new_enrollment
