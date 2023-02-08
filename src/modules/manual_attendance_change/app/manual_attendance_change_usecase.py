@@ -1,18 +1,3 @@
-"""
-usecase: verificar role, verificar se a pessoa está inscrita, checar o status da inscrição da pessoa,
-UPDATE a depender do status da pessoa.
-
-
-
-manuel change attendance (user_id, code (da atv), state (futuro)) -> Briqz
-
-    - ENROLLED <--> COMPLETED (unitária)
-    - prof responsible verificação
-    - um por um
-    - update_enrollment do cara -> STATE
-        return activity with enrollments
-
-"""
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
@@ -32,7 +17,7 @@ class ManualAttendanceChangeUsecase:
         if type(code) != str:
             raise EntityError('activity_code')
 
-        if type(user_id) != str:
+        if not User.validate_user_id(user_id):
             raise EntityError('user_id')
 
         if type(new_state) != ENROLLMENT_STATE:
@@ -41,13 +26,13 @@ class ManualAttendanceChangeUsecase:
         if requester_user.role != ROLE.PROFESSOR:
             raise ForbiddenAction("user: only responsible professors can do that")
 
+        if new_state != ENROLLMENT_STATE.COMPLETED and new_state != ENROLLMENT_STATE.ENROLLED:
+            raise EntityError('state')
+
         enrollment = self.repo_activity.get_enrollment(code=code, user_id=user_id)
 
         if enrollment is None:
             raise NoItemsFound('enrollment')
-
-        if new_state != ENROLLMENT_STATE.COMPLETED and new_state != ENROLLMENT_STATE.ENROLLED:
-            raise EntityError('state')
 
         if new_state == ENROLLMENT_STATE.COMPLETED:
             if enrollment.state != ENROLLMENT_STATE.ENROLLED:
@@ -55,7 +40,7 @@ class ManualAttendanceChangeUsecase:
 
         if new_state == ENROLLMENT_STATE.ENROLLED:
             if enrollment.state != ENROLLMENT_STATE.COMPLETED:
-                raise ForbiddenAction('enrollment: can\'t enroll')
+                raise ForbiddenAction('enrollment: can\'t be unconfirmed')
 
         new_enrollment = self.repo_activity.update_enrollment(
             user_id=enrollment.user_id,
@@ -81,4 +66,4 @@ class ManualAttendanceChangeUsecase:
                 ]
         }
 
-        return new_enrollment
+        return activity_dict

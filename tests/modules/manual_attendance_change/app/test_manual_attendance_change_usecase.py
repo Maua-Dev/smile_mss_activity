@@ -3,8 +3,11 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+import pytest
 
 
 class Test_ManualAttendanceChangeUsecase:
@@ -17,11 +20,11 @@ class Test_ManualAttendanceChangeUsecase:
         enrollment = repo_activity.enrollments[0] #old one
         requester_user = repo_user.users[2]
 
-        new_enrollment = usecase(code=enrollment.activity_code, requester_user=requester_user,
+        activity_dict = usecase(code=enrollment.activity_code, requester_user=requester_user,
                                  user_id=enrollment.user_id,
                                  new_state=ENROLLMENT_STATE.COMPLETED)
 
-        assert new_enrollment.state == ENROLLMENT_STATE.COMPLETED
+
         assert repo_activity.enrollments[0].state == ENROLLMENT_STATE.COMPLETED
         assert isinstance(activity_dict["activity"], Activity)
         assert activity_dict["activity"] == repo_activity.activities[0]
