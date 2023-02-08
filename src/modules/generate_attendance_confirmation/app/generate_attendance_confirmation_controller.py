@@ -1,6 +1,6 @@
-from src.modules.generate_attendance_confirmation.app.generate_attendance_confirmation_usecase import \
+from .generate_attendance_confirmation_usecase import \
     GenerateAttendanceConfirmationUsecase
-from src.modules.generate_attendance_confirmation.app.generate_attendance_confirmation_viewmodel import \
+from .generate_attendance_confirmation_viewmodel import \
     GenerateAttendanceConfirmationViewmodel
 
 from src.shared.helpers.errors.controller_errors import MissingParameters
