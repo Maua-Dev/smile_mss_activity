@@ -214,7 +214,7 @@ class Test_ManualAttendanceChangeController:
         assert response.status_code == 400
         assert response.body == "Field user_id is not valid"
 
-    def test_manual_attendance_controller_fobidden_not_professor(self):
+    def test_manual_attendance_controller_forbidden_not_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
@@ -258,7 +258,7 @@ class Test_ManualAttendanceChangeController:
         assert response.status_code == 404
         assert response.body == "No items found for enrollment"
 
-    def test_manual_attendance_controller_non_valid_enrollment_status(self):
+    def test_manual_attendance_controller_not_valid_enrollment_status(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
