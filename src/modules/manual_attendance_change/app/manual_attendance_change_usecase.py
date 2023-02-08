@@ -23,7 +23,7 @@ class ManualAttendanceChangeUsecase:
         if type(new_state) != ENROLLMENT_STATE:
             raise EntityError('new_state')
 
-        if requester_user.role != ROLE.PROFESSOR:
+        if requester_user.role != ROLE.PROFESSOR and requester_user.role != ROLE.ADMIN:
             raise ForbiddenAction("user: only responsible professors can do that")
 
         if new_state != ENROLLMENT_STATE.COMPLETED and new_state != ENROLLMENT_STATE.ENROLLED:
