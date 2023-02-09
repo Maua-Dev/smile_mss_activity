@@ -8,31 +8,33 @@ class ConfirmAttendanceUsecase:
     def __init__(self, repo: IActivityRepository):
         self.repo = repo
 
-    def __call__(self, user_id: str, activity_code: str, confirmation_code: str) -> bool:
+    def __call__(self, user_id: str, code: str, confirmation_code: str) -> bool:
 
-        activity = self.repo.get_activity(activity_code)
+        activity = self.repo.get_activity(code)
 
         if activity is None:
-            raise ForbiddenAction("trying to confirm attendance in activity not found")
+            raise ForbiddenAction("Trying to confirm attendance in activity not found")
         
         enrollment = self.repo.get_enrollment(
-            user_id=user_id, code=activity_code
+            user_id=user_id, code=code
         )
 
         if enrollment is None:
-            raise ForbiddenAction("trying to confirm attendance in activity not enrolled")
+            raise ForbiddenAction("Trying to confirm attendance in activity not enrolled")
         
         if enrollment.state == ENROLLMENT_STATE.COMPLETED:
-            raise ForbiddenAction("enrollment already COMPLETED")
+            raise ForbiddenAction("Enrollment Already COMPLETED")
         
         if enrollment.state != ENROLLMENT_STATE.ENROLLED:
-            raise ForbiddenAction("enrollment not in ENROLLED state to confirm attendance")
+            raise ForbiddenAction("Enrollment not in ENROLLED state to confirm attendance")
         
         if activity.confirmation_code == confirmation_code:
             enrollment.state = ENROLLMENT_STATE.COMPLETED
             enrollment_updated = self.repo.update_enrollment(
-                user_id=user_id, code=activity_code, new_state=ENROLLMENT_STATE.COMPLETED)
+                user_id=user_id, code=code, new_state=ENROLLMENT_STATE.COMPLETED)
             if enrollment_updated is not None:
                 return True
+        else:
+            raise ForbiddenAction("Invalid Confirmation Code")
 
         return False
