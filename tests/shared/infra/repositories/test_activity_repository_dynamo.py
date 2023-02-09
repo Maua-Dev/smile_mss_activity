@@ -301,5 +301,6 @@ class Test_ActivityRepositoryDynamo:
 
         assert len(enrollments) == len(expected_enrollments)
         assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE for enrollment in enrollments)
         assert enrollments == expected_enrollments
 

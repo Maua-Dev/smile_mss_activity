@@ -293,7 +293,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         enrollments = list()
         for item in response["Items"]:
-            if item["state"] == ENROLLMENT_STATE.ENROLLED.value:
+            if item["state"] == ENROLLMENT_STATE.ENROLLED.value or item["state"] == ENROLLMENT_STATE.IN_QUEUE.value:
                 enrollments.append(EnrollmentDynamoDTO.from_dynamo(item).to_entity())
 
         return enrollments
