@@ -6,6 +6,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -50,6 +51,6 @@ class Test_GetActivitiesResponsibleProfessorUsecase:
 
         requester_user = repo_user.users[0]
 
-        with pytest.raises(EntityError):
+        with pytest.raises(ForbiddenAction):
             specific_professor_activities_with_enrollments_dict = usecase(requester_user)
 

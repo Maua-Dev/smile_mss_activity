@@ -4,6 +4,7 @@ from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction
 
 
 class GetActivitiesResponsibleProfessorUsecase:
@@ -14,7 +15,7 @@ class GetActivitiesResponsibleProfessorUsecase:
     def __call__(self, requester_user: User) -> dict:
 
         if requester_user.role != ROLE.PROFESSOR:
-            raise EntityError("requester_user")
+            raise ForbiddenAction("requester_user, only professor can do that")
 
         all_activities_with_enrollments = self.repo_activity.get_all_activities_admin()
 
