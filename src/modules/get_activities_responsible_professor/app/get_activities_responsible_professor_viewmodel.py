@@ -1,13 +1,10 @@
-import datetime
-from typing import List, Tuple
+from typing import List
 
 from src.shared.domain.entities.activity import Activity
-from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
-from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 
 
 class UserViewmodel:
@@ -46,28 +43,6 @@ class SpeakerViewmodel:
         }
 
 
-class EnrollmentViewmodel:
-    user: UserViewmodel
-    state: ENROLLMENT_STATE
-    date_subscribed: int
-
-    def __init__(self, enrollment: Enrollment, user: User):
-        self.user = UserViewmodel(user) if type(user) == User else "NOT_FOUND"
-        self.state = enrollment.state
-        self.date_subscribed = enrollment.date_subscribed
-
-    def to_dict(self):
-        return {
-            "user": self.user.to_dict() if type(self.user) == UserViewmodel else {
-                'name': "NOT_FOUND",
-                'user_id': "NOT_FOUND",
-                'role': "NOT_FOUND"
-            },
-            "state": self.state.value,
-            "date_subscribed": self.date_subscribed,
-        }
-
-
 class ActivityViewmodel:
     code: str
     title: str
@@ -85,10 +60,9 @@ class ActivityViewmodel:
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int
-    enrollments: List[EnrollmentViewmodel]
     confirmation_code: str
 
-    def __init__(self, activity: Activity, enrollments: List[Tuple[Enrollment, User]]):
+    def __init__(self, activity: Activity):
         self.code = activity.code
         self.title = activity.title
         self.description = activity.description
@@ -105,43 +79,39 @@ class ActivityViewmodel:
         self.taken_slots = activity.taken_slots
         self.accepting_new_enrollments = activity.accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
-        self.enrollments = [EnrollmentViewmodel(*enrollment) for enrollment in enrollments]
         self.confirmation_code = activity.confirmation_code
 
     def to_dict(self):
         return {
-            "activity": {"code": self.code,
-                         "title": self.title,
-                         "description": self.description,
-                         "activity_type": self.activity_type.value,
-                         "is_extensive": self.is_extensive,
-                         "delivery_model": self.delivery_model.value,
-                         "start_date": self.start_date,
-                         "duration": self.duration,
-                         "link": self.link,
-                         "place": self.place,
-                         "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
-                         "speakers": [speaker.to_dict() for speaker in self.speakers],
-                         "total_slots": self.total_slots,
-                         "taken_slots": self.taken_slots,
-                         "accepting_new_enrollments": self.accepting_new_enrollments,
-                         "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
-                         "confirmation_code": self.confirmation_code},
-            "enrollments": [enrollment.to_dict() for enrollment in self.enrollments],
+            "code": self.code,
+            "title": self.title,
+            "description": self.description,
+            "activity_type": self.activity_type.value,
+            "is_extensive": self.is_extensive,
+            "delivery_model": self.delivery_model.value,
+            "start_date": self.start_date,
+            "duration": self.duration,
+            "link": self.link,
+            "place": self.place,
+            "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
+            "speakers": [speaker.to_dict() for speaker in self.speakers],
+            "total_slots": self.total_slots,
+            "taken_slots": self.taken_slots,
+            "accepting_new_enrollments": self.accepting_new_enrollments,
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
+            "confirmation_code": self.confirmation_code
         }
 
 
 class GetActivitiesResponsibleProfessorViewmodel:
-    all_activities_dict: dict
+    all_activities: List[Activity]
 
-    def __init__(self, all_activities_dict: dict):
-        self.all_activities_dict = all_activities_dict
+    def __init__(self, all_activities: List[Activity]):
+        self.all_activities = all_activities
 
     def to_dict(self):
         return {
-            "specific_professor_activities_with_enrollments": [ActivityViewmodel(self.all_activities_dict[activity_code]['activity'],
-                                                                  self.all_activities_dict[activity_code][
-                                                                      'enrollments']).to_dict() for activity_code in
-                                                self.all_activities_dict],
+            "specific_professor_activities_with_enrollments": [ActivityViewmodel(activity).to_dict() for activity in
+                                                               self.all_activities],
             "message": "the activities were retrieved to responsible professor"
         }

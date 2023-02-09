@@ -1,6 +1,6 @@
-from src.modules.get_activities_responsible_professor.app.get_activities_responsible_professor_usecase import \
+from .get_activities_responsible_professor_usecase import \
     GetActivitiesResponsibleProfessorUsecase
-from src.modules.get_activities_responsible_professor.app.get_activities_responsible_professor_viewmodel import \
+from .get_activities_responsible_professor_viewmodel import \
     GetActivitiesResponsibleProfessorViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError

@@ -12,7 +12,7 @@ class Test_GetActivitiesResponsibleProfessorController:
     def test_get_activities_responsible_professor_controller(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetActivitiesResponsibleProfessorUsecase(repo_activity, repo_user)
+        usecase = GetActivitiesResponsibleProfessorUsecase(repo_activity)
         controller = GetActivitiesResponsibleProfessorController(usecase)
 
         requester_user = repo_user.users[2]
@@ -31,7 +31,7 @@ class Test_GetActivitiesResponsibleProfessorController:
     def test_get_activities_responsible_professor_controller_no_items(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetActivitiesResponsibleProfessorUsecase(repo_activity, repo_user)
+        usecase = GetActivitiesResponsibleProfessorUsecase(repo_activity)
         controller = GetActivitiesResponsibleProfessorController(usecase)
 
         requester_user = repo_user.users[12]
@@ -50,7 +50,7 @@ class Test_GetActivitiesResponsibleProfessorController:
     def test_get_activities_responsible_professor_controller_with_invalid_requester_user(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetActivitiesResponsibleProfessorUsecase(repo_activity, repo_user)
+        usecase = GetActivitiesResponsibleProfessorUsecase(repo_activity)
         controller = GetActivitiesResponsibleProfessorController(usecase)
 
         requester_user = repo_user.users[0]

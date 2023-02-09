@@ -1,52 +1,24 @@
+from typing import List
+
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user import User
-from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
-from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction
 
 
 class GetActivitiesResponsibleProfessorUsecase:
-    def __init__(self, repo_activity: IActivityRepository, repo_user=IUserRepository):
+    def __init__(self, repo_activity: IActivityRepository):
         self.repo_activity = repo_activity
-        self.repo_user = repo_user
 
-    def __call__(self, requester_user: User) -> dict:
-
+    def __call__(self, requester_user: User) -> List[Activity]:
         if requester_user.role != ROLE.PROFESSOR:
             raise ForbiddenAction("requester_user, only professor can do that")
 
-        all_activities_with_enrollments = self.repo_activity.get_all_activities_admin()
+        all_activities = self.repo_activity.get_all_activities()
 
-        specific_professor_activities_with_enrollments = [activity_with_enrollments for activity_with_enrollments in
-                                                          all_activities_with_enrollments
-                                                          if requester_user in activity_with_enrollments[0].responsible_professors]
-        user_id_list = list()
+        specific_professor_activities = [activity_with for activity_with in
+                                          all_activities
+                                          if requester_user in activity_with.responsible_professors]
 
-        for activity, enrollments in specific_professor_activities_with_enrollments:
-            user_id_list.extend([enrollment.user_id for enrollment in enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED])
-
-        set_user_id_list = set(user_id_list)
-
-        users = self.repo_user.get_users(list(set_user_id_list))
-
-        users_dict = {user.user_id: user for user in users}
-
-        specific_professor_activities_with_enrollments_dict = dict()
-        for activity, enrollments in specific_professor_activities_with_enrollments:
-            specific_professor_activities_with_enrollments_dict[activity.code] = {
-                "activity": activity,
-                "enrollments": [
-                    (enrollment, users_dict.get(enrollment.user_id, "NOT_FOUND")) for enrollment in enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED
-                ]
-            }
-
-        return specific_professor_activities_with_enrollments_dict
-
-
-
-
-
-
-
+        return specific_professor_activities
