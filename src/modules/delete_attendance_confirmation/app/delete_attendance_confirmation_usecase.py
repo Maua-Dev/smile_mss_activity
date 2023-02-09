@@ -43,7 +43,7 @@ class DeleteAttendanceConfirmationUsecase:
                      new_taken_slots=activity.taken_slots,
                      new_accepting_new_enrollments=activity.accepting_new_enrollments,
                      new_stop_accepting_new_enrollments_before=activity.stop_accepting_new_enrollments_before,
-                     new_confirmation_code='',
+                     new_confirmation_code=None,
               )
 
               return delete_confirmation_code_activity

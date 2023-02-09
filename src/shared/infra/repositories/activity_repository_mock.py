@@ -423,8 +423,8 @@ class ActivityRepositoryMock(IActivityRepository):
                     activity.accepting_new_enrollments = new_accepting_new_enrollments
                 if new_stop_accepting_new_enrollments_before is not None:
                     activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
-                if new_confirmation_code is not None:
-                    activity.confirmation_code = new_confirmation_code
+
+                activity.confirmation_code = new_confirmation_code
 
                 return activity
 
