@@ -14,18 +14,18 @@ class Test_ConfirmAttendanceUsecase:
         usecase = ConfirmAttendanceUsecase(activity_repo)
 
         user_id = users_repo.users[5].user_id
-        activity_code = activity_repo.activities[11].code
+        code = activity_repo.activities[11].code
         confirmation_code = activity_repo.activities[11].confirmation_code
 
         resp = usecase(
             user_id=user_id,
-            activity_code=activity_code,
+            code=code,
             confirmation_code=confirmation_code
         )
 
         assert resp is True
         assert activity_repo.enrollments[26].state == ENROLLMENT_STATE.COMPLETED
-        assert activity_repo.enrollments[26].activity_code == activity_code
+        assert activity_repo.enrollments[26].activity_code == code
         assert activity_repo.enrollments[26].user_id == user_id
     
     def test_confirm_attendance_usecase_invalid_user_id(self):
@@ -33,29 +33,29 @@ class Test_ConfirmAttendanceUsecase:
         usecase = ConfirmAttendanceUsecase(activity_repo)
 
         user_id = "invalid_user_id" 
-        activity_code = activity_repo.activities[11].code
+        code = activity_repo.activities[11].code
         confirmation_code = activity_repo.activities[11].confirmation_code
 
         with pytest.raises(ForbiddenAction):
             resp = usecase(
                 user_id=user_id,
-                activity_code=activity_code,
+                code=code,
                 confirmation_code=confirmation_code
             )
 
-    def test_confirm_attendance_usecase_invalid_activity_code(self):
+    def test_confirm_attendance_usecase_invalid_code(self):
         activity_repo = ActivityRepositoryMock()
         users_repo = UserRepositoryMock()
         usecase = ConfirmAttendanceUsecase(activity_repo)
 
         user_id = users_repo.users[5].user_id
-        activity_code = "invalid_activity_code"
+        code = "invalid_code"
         confirmation_code = activity_repo.activities[11].confirmation_code
 
         with pytest.raises(ForbiddenAction):
             resp = usecase(
                 user_id=user_id,
-                activity_code=activity_code,
+                code=code,
                 confirmation_code=confirmation_code
             )
         
@@ -65,14 +65,13 @@ class Test_ConfirmAttendanceUsecase:
         usecase = ConfirmAttendanceUsecase(activity_repo)
 
         user_id = users_repo.users[5].user_id
-        activity_code = activity_repo.activities[11].code
+        code = activity_repo.activities[11].code
         confirmation_code = "invalid_confirmation_code"
 
         
-        resp = usecase(
+        with pytest.raises(ForbiddenAction):
+            resp = usecase(
                 user_id=user_id,
-                activity_code=activity_code,
+                code=code,
                 confirmation_code=confirmation_code
             )
-        
-        assert resp is False
