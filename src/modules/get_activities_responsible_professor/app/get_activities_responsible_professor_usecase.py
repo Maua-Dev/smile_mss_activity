@@ -1,4 +1,5 @@
 from src.shared.domain.entities.user import User
+from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
@@ -23,7 +24,7 @@ class GetActivitiesResponsibleProfessorUsecase:
         user_id_list = list()
 
         for activity, enrollments in specific_professor_activities_with_enrollments:
-            user_id_list.extend([enrollment.user_id for enrollment in enrollments])
+            user_id_list.extend([enrollment.user_id for enrollment in enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED])
 
         set_user_id_list = set(user_id_list)
 
@@ -36,7 +37,7 @@ class GetActivitiesResponsibleProfessorUsecase:
             specific_professor_activities_with_enrollments_dict[activity.code] = {
                 "activity": activity,
                 "enrollments": [
-                    (enrollment, users_dict.get(enrollment.user_id, "NOT_FOUND")) for enrollment in enrollments
+                    (enrollment, users_dict.get(enrollment.user_id, "NOT_FOUND")) for enrollment in enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED
                 ]
             }
 
