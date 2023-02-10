@@ -51,7 +51,7 @@ class IacStack(Stack):
         }
 
         auth = CognitoUserPoolsAuthorizer(self, "SmileCognitoAuthorizer",
-                                                     cognito_user_pools=[aws_cognito.UserPool.from_user_pool_id(self, id="smilecognitostacksmileuserpool5E2198EB-lATo3d8qwZx0" ,user_pool_id="us-east-2_uxbW9MaCL")] #todo use envs
+                                                     cognito_user_pools=[aws_cognito.UserPool.from_user_pool_id(self, id="smilecognitostacksmileuserpool5E2198EB-lATo3d8qwZx0" ,user_pool_id="us-east-2_uxbW9MaCL")] #TODO use envs
                                                      )
 
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
@@ -67,7 +67,7 @@ class IacStack(Stack):
                 "cognito-idp:*",
             ],
             resources=[
-                self.cognito_stack.user_pool.user_pool_arn,
+                "arn:aws:cognito-idp:us-east-2:264055331071:userpool/us-east-2_uxbW9MaCL", #TODO use envs
             ]
         )
 
