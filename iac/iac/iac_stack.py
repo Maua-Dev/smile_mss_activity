@@ -1,7 +1,8 @@
 from aws_cdk import (
     # Duration,
-    Stack, aws_cognito
+    Stack, aws_cognito,
     # aws_sqs as sqs,
+    aws_iam
 )
 from aws_cdk.aws_cognito import IUserPool
 from constructs import Construct
@@ -57,6 +58,21 @@ class IacStack(Stack):
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=auth)
 
 
+        for f in self.lambda_stack.functions_that_need_dynamo_permissions:
+            self.dynamo_stack.dynamo_table.grant_read_write_data(f)
+
+        cognito_admin_policy = aws_iam.PolicyStatement(
+            effect=aws_iam.Effect.ALLOW,
+            actions=[
+                "cognito-idp:*",
+            ],
+            resources=[
+                self.cognito_stack.user_pool.user_pool_arn,
+            ]
+        )
+
+        for f in self.lambda_stack.functions_that_need_cognito_permissions:
+            f.add_to_role_policy(cognito_admin_policy)
 
 
 
