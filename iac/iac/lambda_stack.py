@@ -10,6 +10,7 @@ from aws_cdk.aws_apigateway import Resource, LambdaIntegration, CognitoUserPools
 class LambdaStack(Construct):
 
     functions_that_need_dynamo_permissions = []
+    functions_that_need_cognito_permissions = []
 
     def create_lambda_api_gateway_integration(self, module_name: str, method: str, mss_student_api_resource: Resource, environment_variables: dict = {"STAGE": "TEST"}, authorizer=None):
         function = lambda_.Function(
@@ -107,4 +108,32 @@ class LambdaStack(Construct):
             environment_variables=environment_variables,
             authorizer=authorizer
             )
+
+        self.get_activity_with_enrollments = self.create_lambda_api_gateway_integration(
+            module_name="get_activity_with_enrollments",
+            method="GET",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
+        self.functions_that_need_dynamo_permissions = [
+            self.enroll_activity_function,
+            self.drop_activity_function,
+            self.get_enrollment_function,
+            self.create_activity_function,
+            self.delete_activity_function,
+            self.update_activity_function,
+            self.get_all_activities_function,
+            self.get_all_activities_admin_function,
+            self.get_enrollments_by_user_function
+        ]
+
+        self.functions_that_need_cognito_permissions = [
+            self.create_activity_function,
+            self.update_activity_function,
+            self.get_all_activities_admin_function,
+            self.get_activity_with_enrollments
+        ]
+
 

@@ -29,11 +29,11 @@ class DynamoStack(Construct):
 
             self.dynamo_table.add_global_secondary_index(
                 partition_key=aws_dynamodb.Attribute(
-                    name="GSI1_PK",
+                    name="GSI1-PK",
                     type=aws_dynamodb.AttributeType.STRING
                 ),
                 sort_key=aws_dynamodb.Attribute(
-                    name="GSI1_SK",
+                    name="GSI1-SK",
                     type=aws_dynamodb.AttributeType.STRING
                 ),
                 index_name="GSI1"
