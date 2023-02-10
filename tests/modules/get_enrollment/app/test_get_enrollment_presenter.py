@@ -30,7 +30,7 @@ class Test_GetEnrollmentPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -83,7 +83,7 @@ class Test_GetEnrollmentPresenter:
                         "claims":
                             {
                                 "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                                "cognito:username": "João Vilas",
+                                "name": "João Vilas",
                                 "custom:role": "ADMIN",
                             }
                     },
@@ -137,7 +137,7 @@ class Test_GetEnrollmentPresenter:
                      "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },

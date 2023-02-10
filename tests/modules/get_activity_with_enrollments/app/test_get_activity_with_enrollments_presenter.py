@@ -29,7 +29,7 @@ class Test_GetActivityWithEnrollmentsPresenter:
                     "claims":
                         {
                             "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Caio Toledo",
+                            "name": "Caio Toledo",
                             "custom:role": "PROFESSOR",
                         }
                 },
@@ -83,7 +83,7 @@ class Test_GetActivityWithEnrollmentsPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -139,7 +139,7 @@ class Test_GetActivityWithEnrollmentsPresenter:
                     "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },
@@ -193,7 +193,7 @@ class Test_GetActivityWithEnrollmentsPresenter:
                     "claims":
                         {
                             "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Caio Toledo",
+                            "name": "Caio Toledo",
                             "custom:role": "PROFESSOR",
                         }
                 },

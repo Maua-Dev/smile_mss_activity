@@ -29,7 +29,7 @@ class Test_EnrollActivityPresenter:
                     "claims":
                         {
                             "sub": "0355573c-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Pedro Marcelino",
+                            "name": "Pedro Marcelino",
                             "custom:role": "INTERNATIONAL_STUDENT",
                         }
                 },
@@ -84,7 +84,7 @@ class Test_EnrollActivityPresenter:
                     "claims":
                         {
                             "sub": "4d1d64ae-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Simone Romanato",
+                            "name": "Simone Romanato",
                             "custom:role": "EXTERNAL",
                         }
                 },
@@ -186,7 +186,7 @@ class Test_EnrollActivityPresenter:
                     "claims":
                         {
                             "sub": "0355573c-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Pedro Marcelino",
+                            "name": "Pedro Marcelino",
                             "custom:role": "INTERNATIONAL_STUDENT",
                         }
                 },
@@ -241,7 +241,7 @@ class Test_EnrollActivityPresenter:
                     "claims":
                         {
                             "sub": "INVALID_USER_ID",
-                            "cognito:username": "Pedro Marcelino",
+                            "name": "Pedro Marcelino",
                             "custom:role": "INTERNATIONAL_STUDENT",
                         }
                 },
@@ -296,7 +296,7 @@ class Test_EnrollActivityPresenter:
                     "claims":
                         {
                             "sub": "0355573c-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Pedro Marcelino",
+                            "name": "Pedro Marcelino",
                             "custom:role": "INTERNATIONAL_STUDENT",
                         }
                 },
@@ -351,7 +351,7 @@ class Test_EnrollActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -406,7 +406,7 @@ class Test_EnrollActivityPresenter:
                     "claims":
                         {
                             "sub": "0355573c-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Pedro Marcelino",
+                            "name": "Pedro Marcelino",
                             "custom:role": "INTERNATIONAL_STUDENT",
                         }
                 },

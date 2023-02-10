@@ -16,7 +16,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)  
 
-        request = HttpRequest(body={'code': repo.enrollments[8].activity_code, 'requester_user': {"sub": repo_user.users[3].user_id, "cognito:username": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}, 'requester_user': {"sub": repo_user.users[3].user_id, "cognito:username": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[8].activity_code, 'requester_user': {"sub": repo_user.users[3].user_id, "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}, 'requester_user': {"sub": repo_user.users[3].user_id, "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
 
         response = controller(request)
 
@@ -33,7 +33,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)  
 
-        request = HttpRequest(body={'code': repo.activities[0].code, 'requester_user': {"sub": repo_user.users[7].user_id, "cognito:username": repo_user.users[7].name, "custom:role": repo_user.users[7].role.value}})
+        request = HttpRequest(body={'code': repo.activities[0].code, 'requester_user': {"sub": repo_user.users[7].user_id, "name": repo_user.users[7].name, "custom:role": repo_user.users[7].role.value}})
 
         response = controller(request)
 
@@ -50,7 +50,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[8].activity_code, 'nao_eh_requester_user': {"sub": repo_user.users[3].user_id, "cognito:username": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[8].activity_code, 'nao_eh_requester_user': {"sub": repo_user.users[3].user_id, "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
 
         response = controller(request)
 
@@ -64,7 +64,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[3].user_id, "cognito:username": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[3].user_id, "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
 
         response = controller(request)
 
@@ -77,7 +77,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
         response = controller(request)
 
@@ -91,7 +91,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[2].activity_code, 'requester_user': {"sub": repo_user.users[2].user_id, "cognito:username": repo_user.users[2].name, "custom:role": repo_user.users[2].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[2].activity_code, 'requester_user': {"sub": repo_user.users[2].user_id, "name": repo_user.users[2].name, "custom:role": repo_user.users[2].role.value}})
 
         response = controller(request)
 
@@ -106,7 +106,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'code':'CODIGO_INEXISTENTE', 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={'code':'CODIGO_INEXISTENTE', 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request)
 
@@ -120,7 +120,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'code':repo.enrollments[2].activity_code, 'requester_user': {"sub": "1", "cognito:username": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
+        request = HttpRequest(body={'code':repo.enrollments[2].activity_code, 'requester_user': {"sub": "1", "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
 
         response = controller(request)
 
@@ -135,7 +135,7 @@ class Test_EnrollActivityController:
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'code': 123, 'requester_user': {"sub": repo_user.users[3].user_id, "cognito:username": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
+        request = HttpRequest(body={'code': 123, 'requester_user': {"sub": repo_user.users[3].user_id, "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
 
         response = controller(request)
 
