@@ -49,8 +49,11 @@ class UserRepositoryCognito(IUserRepository):
             users_remain = next_page is not None
 
         users = list()
-        for user in response_users:
-            if user["Attributes"][0]["Value"] in user_ids:
-                users.append(UserCognitoDTO.from_cognito(user).to_entity())
+        for user_data in response_users:
+            user = UserCognitoDTO.from_cognito(user_data).to_entity()
+            if user.user_id in user_ids:
+                users.append(user)
+                if len(users) == len(user_ids):
+                    break
 
         return users
