@@ -13,7 +13,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
         reponse = controller(request)
 
         assert reponse.status_code == 200
@@ -42,7 +42,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
 
         reponse = controller(request)
@@ -56,7 +56,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[10].activity_code, 'requester_user': {"sub": repo_user.users[4].user_id, "cognito:username": repo_user.users[4].name, "custom:role": repo_user.users[4].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[10].activity_code, 'requester_user': {"sub": repo_user.users[4].user_id, "name": repo_user.users[4].name, "custom:role": repo_user.users[4].role.value}})
 
 
         reponse = controller(request)
@@ -70,7 +70,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'code': 'CODIGO_INEXISTENTE', 'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'code': 'CODIGO_INEXISTENTE', 'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
 
         reponse = controller(request)
@@ -84,7 +84,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
 
         reponse = controller(request)
@@ -98,7 +98,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": '1', "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[7].activity_code, 'requester_user': {"sub": '1', "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
         reponse = controller(request)
 
@@ -111,7 +111,7 @@ class Test_DropActivityController:
         usecase = DropActivityUsecase(repo)
         controller = DropActivityController(usecase)
 
-        request = HttpRequest(body={'user_id': repo.enrollments[7].user_id, 'code': 1, 'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'user_id': repo.enrollments[7].user_id, 'code': 1, 'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
         reponse = controller(request)
 

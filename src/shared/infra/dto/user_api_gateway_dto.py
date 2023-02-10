@@ -19,7 +19,7 @@ class UserApiGatewayDTO:
         """
 
         return UserApiGatewayDTO(
-            name=user_data['cognito:username'],
+            name=user_data['name'],
             role=ROLE(user_data['custom:role']),
             user_id=user_data['sub']
         )

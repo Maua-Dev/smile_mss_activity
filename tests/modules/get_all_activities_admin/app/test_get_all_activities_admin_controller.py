@@ -14,7 +14,7 @@ class Test_GetAllActivitiesAdminController:
         usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request=request)
 
@@ -27,7 +27,7 @@ class Test_GetAllActivitiesAdminController:
         usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'invalid_requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={'invalid_requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request=request)
 
@@ -41,7 +41,7 @@ class Test_GetAllActivitiesAdminController:
         usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
         response = controller(request=request)
 

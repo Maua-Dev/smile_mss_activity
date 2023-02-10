@@ -22,7 +22,7 @@ class Test_UserApiGatewayDTO:
         assert user == expected_user
 
     def test_user_api_gateway_dto_from_api_gateway(self):
-        user_data = {'sub': 'd61dbf66-a10f-11ed-a8fc-0242ac120002', 'cognito:username': 'Vitor Soller', 'custom:role': 'ADMIN'}
+        user_data = {'sub': 'd61dbf66-a10f-11ed-a8fc-0242ac120002', 'name': 'Vitor Soller', 'custom:role': 'ADMIN'}
 
         user_dto = UserApiGatewayDTO.from_api_gateway(user_data)
 
@@ -34,7 +34,7 @@ class Test_UserApiGatewayDTO:
         assert user_dto == expected_user_dto
 
     def test_user_api_gateway_dto_from_api_gateway_to_entity(self):
-        user_data = {'sub': 'd61dbf66-a10f-11ed-a8fc-0242ac120002', 'cognito:username': 'Vitor Soller', 'custom:role': 'ADMIN'}
+        user_data = {'sub': 'd61dbf66-a10f-11ed-a8fc-0242ac120002', 'name': 'Vitor Soller', 'custom:role': 'ADMIN'}
 
         user_dto = UserApiGatewayDTO.from_api_gateway(user_data)
 

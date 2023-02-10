@@ -12,7 +12,7 @@ class Test_GetEnrollmentController:
         repo_user = UserRepositoryMock()
         usecase = GetEnrollmentUsecase(repo)
         controller = GetEnrollmentController(usecase)
-        request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code}, body={'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code}, body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request)
 
@@ -42,7 +42,7 @@ class Test_GetEnrollmentController:
                 repo_user = UserRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(query_params={}, body={'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+                request = HttpRequest(query_params={}, body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
                 response = controller(request)
 
@@ -55,7 +55,7 @@ class Test_GetEnrollmentController:
                     repo_user = UserRepositoryMock()
                     usecase = GetEnrollmentUsecase(repo)
                     controller = GetEnrollmentController(usecase)
-                    request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code}, body={'requester_user': {"sub": "repo_user.users[0].user_id", "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+                    request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code}, body={'requester_user': {"sub": "repo_user.users[0].user_id", "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
                     response = controller(request)
 
@@ -68,7 +68,7 @@ class Test_GetEnrollmentController:
                 repo_user = UserRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(query_params={'code': 'ECM2345'}, body={'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+                request = HttpRequest(query_params={'code': 'ECM2345'}, body={'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
                 response = controller(request)
 
@@ -81,7 +81,7 @@ class Test_GetEnrollmentController:
                 repo_user = UserRepositoryMock()
                 usecase = GetEnrollmentUsecase(repo)
                 controller = GetEnrollmentController(usecase)
-                request = HttpRequest(query_params={'code': 'ECM2341'}, body={'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+                request = HttpRequest(query_params={'code': 'ECM2341'}, body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
                 response = controller(request)
 

@@ -14,7 +14,7 @@ class Test_GetEnrollmentsByUserIdController:
         usecase = GetEnrollmentsByUserUsecase(repo)
         controller = GetEnrollmentsByUserController(usecase)
 
-        response = controller(HttpRequest(query_params={'user_id': repo_user.users[1].user_id}, body={'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
+        response = controller(HttpRequest(query_params={'user_id': repo_user.users[1].user_id}, body={'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
 
         assert response.status_code == 200
 
@@ -29,7 +29,7 @@ class Test_GetEnrollmentsByUserIdController:
         usecase = GetEnrollmentsByUserUsecase(repo)
         controller = GetEnrollmentsByUserController(usecase)
 
-        response = controller(HttpRequest(body={'invalid_requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
+        response = controller(HttpRequest(body={'invalid_requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
 
         assert response.status_code == 400
         assert response.body == 'Field requester_user is missing'
@@ -40,7 +40,7 @@ class Test_GetEnrollmentsByUserIdController:
         usecase = GetEnrollmentsByUserUsecase(repo)
         controller = GetEnrollmentsByUserController(usecase)
 
-        response = controller(HttpRequest(body={'requester_user': {"sub": "1", "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
+        response = controller(HttpRequest(body={'requester_user': {"sub": "1", "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
 
         assert response.status_code == 400
         assert response.body == 'Field user_id is not valid'

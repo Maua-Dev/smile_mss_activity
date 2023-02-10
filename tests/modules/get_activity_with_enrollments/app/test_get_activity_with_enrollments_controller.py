@@ -15,7 +15,7 @@ class Test_GetActivityWithEnrollmentsController:
         controller = GetActivityWithEnrollmentsController(usecase)
 
         request = HttpRequest(
-            body={'requester_user': {"sub": repo_user.users[2].user_id, "cognito:username": repo_user.users[2].name,
+            body={'requester_user': {"sub": repo_user.users[2].user_id, "name": repo_user.users[2].name,
                                      "custom:role": repo_user.users[2].role.value}, 'code': 'ECM2345'})
 
         response = controller(request=request)
@@ -42,7 +42,7 @@ class Test_GetActivityWithEnrollmentsController:
         controller = GetActivityWithEnrollmentsController(usecase)
 
         request = HttpRequest(
-            body={'requester_user': {"sub": repo_user.users[2].user_id, "cognito:username": repo_user.users[2].name,
+            body={'requester_user': {"sub": repo_user.users[2].user_id, "name": repo_user.users[2].name,
                                      "custom:role": repo_user.users[2].role.value}})
 
         response = controller(request=request)
@@ -56,7 +56,7 @@ class Test_GetActivityWithEnrollmentsController:
         controller = GetActivityWithEnrollmentsController(usecase)
 
         request = HttpRequest(
-            body={'requester_user': {"sub": repo_user.users[2].user_id, "cognito:username": repo_user.users[2].name,
+            body={'requester_user': {"sub": repo_user.users[2].user_id, "name": repo_user.users[2].name,
                                      "custom:role": repo_user.users[2].role.value}, 'code': 1234})
 
         response = controller(request=request)
@@ -70,7 +70,7 @@ class Test_GetActivityWithEnrollmentsController:
         controller = GetActivityWithEnrollmentsController(usecase)
 
         request = HttpRequest(
-            body={'requester_user': {"sub": repo_user.users[2].user_id, "cognito:username": repo_user.users[2].name,
+            body={'requester_user': {"sub": repo_user.users[2].user_id, "name": repo_user.users[2].name,
                                      "custom:role": repo_user.users[2].role.value}, 'code': 'NÃO_EXISTE'})
 
         response = controller(request=request)
@@ -85,7 +85,7 @@ class Test_GetActivityWithEnrollmentsController:
         controller = GetActivityWithEnrollmentsController(usecase)
 
         request = HttpRequest(
-            body={'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name,
+            body={'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name,
                                      "custom:role": repo_user.users[1].role.value}, 'code': 'ECM2345'})
 
         response = controller(request=request)
@@ -100,7 +100,7 @@ class Test_GetActivityWithEnrollmentsController:
         controller = GetActivityWithEnrollmentsController(usecase)
 
         request = HttpRequest(
-            body={'requester_user': {"sub": repo_user.users[11].user_id, "cognito:username": repo_user.users[11].name,
+            body={'requester_user': {"sub": repo_user.users[11].user_id, "name": repo_user.users[11].name,
                                      "custom:role": repo_user.users[11].role.value}, 'code': 'ECM2345'})
 
         response = controller(request=request)

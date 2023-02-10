@@ -34,7 +34,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -81,7 +81,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -115,7 +115,7 @@ class Test_CreateActivityController:
                     }],
                     "total_slots": 100,
                     "accepting_new_enrollments": True,
-                    "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+                    "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
             response = controller(request=request)
 
@@ -148,7 +148,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -181,7 +181,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -214,7 +214,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -247,7 +247,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -279,7 +279,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -312,7 +312,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -345,7 +345,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -377,7 +377,7 @@ class Test_CreateActivityController:
                                     }],
                                     "total_slots": 100,
                                     "accepting_new_enrollments": True,
-                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -410,7 +410,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -443,7 +443,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -476,7 +476,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -510,7 +510,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -544,7 +544,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -573,7 +573,7 @@ class Test_CreateActivityController:
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -603,7 +603,7 @@ class Test_CreateActivityController:
                 "speakers": "123",
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -638,7 +638,7 @@ class Test_CreateActivityController:
                 }],
                 "total_slots": 100,
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -671,7 +671,7 @@ class Test_CreateActivityController:
                     "company": "Clean Architecture Company"
                 }],
                 "accepting_new_enrollments": True,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
         response = controller(request=request)
@@ -704,7 +704,7 @@ class Test_CreateActivityController:
                     "company": "Clean Architecture Company"
                 }],
                 "total_slots": 100,
-                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+                "stop_accepting_new_enrollments_before": 1666451811000,'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request=request)
 
@@ -774,7 +774,7 @@ class Test_CreateActivityController:
                                     "accepting_new_enrollments": True,
                                     "stop_accepting_new_enrollments_before": 1666451811000,
                                     'requester_user': {"sub": repo_user.users[1].user_id,
-                                                       "cognito:username": repo_user.users[1].name,
+                                                       "name": repo_user.users[1].name,
                                                        "custom:role": repo_user.users[1].role.value}}
                               )
 
