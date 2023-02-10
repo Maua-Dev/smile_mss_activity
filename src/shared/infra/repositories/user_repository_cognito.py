@@ -57,10 +57,3 @@ class UserRepositoryCognito(IUserRepository):
                     break
 
         return users
-
-
-if __name__ == '__main__':
-    user_repository = UserRepositoryCognito()
-    users = user_repository.get_users(["693931c5-e364-400b-a155-43a12e185c24"])
-    print(users)
-
