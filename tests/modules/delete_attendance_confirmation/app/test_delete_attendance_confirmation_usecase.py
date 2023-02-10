@@ -17,7 +17,8 @@ class Test_DeleteAttendanceConfirmationUsecase:
               delete_confirmation_code = usecase(code=repo.activities[11].code, requester_user=requester_user)
 
               assert repo.activities[11].confirmation_code == None
-              assert delete_confirmation_code == repo.activities[11]
+              assert delete_confirmation_code == None
+              assert delete_confirmation_code == repo.activities[11].confirmation_code
 
        def test_delete_attendance_confirmation_code_usecase_wrong_code_type(self):
               repo = ActivityRepositoryMock()

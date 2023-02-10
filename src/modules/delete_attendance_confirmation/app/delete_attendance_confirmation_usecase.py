@@ -26,7 +26,9 @@ class DeleteAttendanceConfirmationUsecase:
               if requester_user not in activity.responsible_professors:
                      raise ForbiddenAction("user, not professor of activity")
 
-              delete_confirmation_code_activity = self.repo.update_activity(
+              delete_confirmation_code = None
+
+              update_activity = self.repo.update_activity(
                      code=code,
                      new_title=activity.title,
                      new_description=activity.description,
@@ -43,7 +45,7 @@ class DeleteAttendanceConfirmationUsecase:
                      new_taken_slots=activity.taken_slots,
                      new_accepting_new_enrollments=activity.accepting_new_enrollments,
                      new_stop_accepting_new_enrollments_before=activity.stop_accepting_new_enrollments_before,
-                     new_confirmation_code=None,
+                     new_confirmation_code=delete_confirmation_code,
               )
 
-              return delete_confirmation_code_activity
+              return delete_confirmation_code
