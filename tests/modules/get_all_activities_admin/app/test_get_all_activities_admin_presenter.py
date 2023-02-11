@@ -60,7 +60,6 @@ class Test_GetAllActivitiesAdminPresenter:
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['message'] == "the activities were retrieved by admin"
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_get_all_activities_admin_presenter_forbidden_not_admin(self):
         event = {
             "version": "2.0",

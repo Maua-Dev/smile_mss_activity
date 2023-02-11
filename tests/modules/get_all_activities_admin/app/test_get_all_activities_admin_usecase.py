@@ -27,11 +27,10 @@ class Test_GetAllActivitiesAdminUsecase:
                 assert isinstance(user, User)
 
 
-    @pytest.mark.skip(reason="Still no ForbiddenAction exception")
     def test_get_all_activities_admin_forbidden_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllActivitiesAdminUsecase(repo_activity=repo_activity, repo_user=repo_user)
 
         with pytest.raises(ForbiddenAction):
-            all_activities_with_enrollments = usecase(repo_activity.users[1])
+            all_activities_with_enrollments = usecase(repo_user.users[1])

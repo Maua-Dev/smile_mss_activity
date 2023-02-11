@@ -2,6 +2,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction
 
 
 class GetAllActivitiesAdminUsecase:
@@ -13,8 +14,7 @@ class GetAllActivitiesAdminUsecase:
     def __call__(self, user: User) -> dict:
 
         if user.role != ROLE.ADMIN:
-            # raise ForbiddenAction("get_all_activities_with_enrollments, only admins can do this")
-            pass
+            raise ForbiddenAction("get_all_activities_with_enrollments, only admins can do this")
 
         activities_with_enrollments = self.repo_activity.get_all_activities_admin()
 
