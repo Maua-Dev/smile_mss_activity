@@ -41,6 +41,9 @@ jobs:
             cdk deploy --require-approval never
           env:
             AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+            USER_POOL_ARN: ${{ secrets.USER_POOL_ARN }}
+            USER_POOL_NAME: ${{ secrets.USER_POOL_NAME }}
+            USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
 
 
 
