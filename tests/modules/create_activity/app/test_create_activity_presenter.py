@@ -281,7 +281,6 @@ class Test_CreateActivityPresenter:
             assert response["statusCode"] == 400
             assert json.loads(response["body"]) == 'The item alredy exists for this code'
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_create_activity_presenter_forbidden_not_admin(self):
         event = {
             "version": "2.0",

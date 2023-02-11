@@ -768,8 +768,6 @@ class Test_UpdateActivityController:
         assert response.status_code == 400
         assert response.body == "Field requester_user is missing"
 
-
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_update_activity_controller_forbidden_user_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()

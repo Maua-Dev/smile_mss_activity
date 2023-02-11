@@ -73,7 +73,6 @@ class Test_DeleteActivityController:
         assert response.status_code == 400
         assert response.body == 'Field requester_user is missing'
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_delete_activity_controller_forbidden_not_admin(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()

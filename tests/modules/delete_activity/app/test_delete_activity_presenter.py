@@ -222,7 +222,6 @@ class Test_DeleteActivityPresenter:
         assert response["statusCode"] == 404
         assert json.loads(response["body"]) == "No items found for Activity"
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_drop_activity_presenter_forbidden_not_admin(self):
         event = {
             "version": "2.0",
