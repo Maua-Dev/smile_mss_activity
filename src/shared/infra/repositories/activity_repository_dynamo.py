@@ -297,3 +297,35 @@ class ActivityRepositoryDynamo(IActivityRepository):
                 enrollments.append(EnrollmentDynamoDTO.from_dynamo(item).to_entity())
 
         return enrollments
+
+    def get_all_activities_logged(self, user_id: str) -> Tuple[List[Activity], List[Enrollment]]:
+        response = self.dynamo.get_all_items()
+
+        activities_dict = list()
+        enrollments = dict()
+        for item in response["Items"]:
+            if item["entity"] == "activity":
+                activities_dict.append(item)
+
+            elif item["entity"] == "enrollment":
+                enrollments[item["activity_code"]] = enrollments.get(item["activity_code"], list())
+                enrollments[item["activity_code"]].append(EnrollmentDynamoDTO.from_dynamo(item).to_entity())
+
+        user_enrollments = list()
+        activities = list()
+        for activity in activities_dict:
+            activity_to_add = activity
+            taken_slots = 0
+
+            for enrollment in enrollments.get(activity["activity_code"], list()):
+                if enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED:
+                    taken_slots += 1
+                if enrollment.user_id == user_id and (enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE or enrollment.state == ENROLLMENT_STATE.COMPLETED):
+                    user_enrollments.append(enrollment)
+
+            activity_to_add["taken_slots"] = taken_slots
+
+            activities.append(ActivityDynamoDTO.from_dynamo(activity_to_add).to_entity())
+
+        return activities, user_enrollments
+
