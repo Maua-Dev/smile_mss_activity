@@ -18,6 +18,7 @@ class IacStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
+
         self.user_pool_name = os.environ.get("USER_POOL_NAME")
         self.user_pool_arn = os.environ.get("USER_POOL_ARN")
         self.user_pool_id = os.environ.get("USER_POOL_ID")
@@ -50,7 +51,7 @@ class IacStack(Stack):
             "STAGE": "DEV",
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
-            "USER_POOL":  self.user_pool_name,
+            "USER_POOL":  self.user_pool_id,
             "REGION": self.region,
         }
 
