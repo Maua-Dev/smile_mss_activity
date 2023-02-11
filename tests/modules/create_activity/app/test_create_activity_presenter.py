@@ -29,7 +29,7 @@ class Test_CreateActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -84,7 +84,7 @@ class Test_CreateActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -140,7 +140,7 @@ class Test_CreateActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -195,7 +195,7 @@ class Test_CreateActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -251,7 +251,7 @@ class Test_CreateActivityPresenter:
                         "claims":
                             {
                                 "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                                "cognito:username": "João Vilas",
+                                "name": "João Vilas",
                                 "custom:role": "ADMIN",
                             }
                     },
@@ -281,7 +281,6 @@ class Test_CreateActivityPresenter:
             assert response["statusCode"] == 400
             assert json.loads(response["body"]) == 'The item alredy exists for this code'
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_create_activity_presenter_forbidden_not_admin(self):
         event = {
             "version": "2.0",
@@ -307,7 +306,7 @@ class Test_CreateActivityPresenter:
                     "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },

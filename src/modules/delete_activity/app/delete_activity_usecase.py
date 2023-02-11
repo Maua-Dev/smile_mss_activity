@@ -17,8 +17,7 @@ class DeleteActivityUsecase:
             raise EntityError("code")
 
         if user.role != ROLE.ADMIN:
-            # raise ForbiddenAction("delete_activity, only admins can delete activities")
-            pass
+            raise ForbiddenAction("delete_activity, only admins can delete activities")
 
         activity, enrollments = self.repo.get_activity_with_enrollments(code)
 

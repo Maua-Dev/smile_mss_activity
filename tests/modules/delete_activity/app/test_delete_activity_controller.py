@@ -14,7 +14,7 @@ class Test_DeleteActivityController:
         usecase = DeleteActivityUsecase(repo)
         controller = DeleteActivityController(usecase)
         activity = repo.activities[11]
-        request = HttpRequest(body={"code": repo.activities[11].code, 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={"code": repo.activities[11].code, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request)
 
@@ -29,7 +29,7 @@ class Test_DeleteActivityController:
         repo_user = UserRepositoryMock()
         usecase = DeleteActivityUsecase(repo)
         controller = DeleteActivityController(usecase)
-        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request)
 
@@ -42,7 +42,7 @@ class Test_DeleteActivityController:
         repo_user = UserRepositoryMock()
         usecase = DeleteActivityUsecase(repo)
         controller = DeleteActivityController(usecase)
-        request = HttpRequest(body={"code": "CODIGO_INEXISTENTE", 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={"code": "CODIGO_INEXISTENTE", 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request)
 
@@ -54,7 +54,7 @@ class Test_DeleteActivityController:
         repo_user = UserRepositoryMock()
         usecase = DeleteActivityUsecase(repo)
         controller = DeleteActivityController(usecase)
-        request = HttpRequest(body={"code": 1234, 'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={"code": 1234, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request)
 
@@ -73,7 +73,6 @@ class Test_DeleteActivityController:
         assert response.status_code == 400
         assert response.body == 'Field requester_user is missing'
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_delete_activity_controller_forbidden_not_admin(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -81,7 +80,7 @@ class Test_DeleteActivityController:
         controller = DeleteActivityController(usecase)
         activity = repo.activities[11]
         request = HttpRequest(body={"code": repo.activities[11].code, 'requester_user': {"sub": repo_user.users[1].user_id,
-                                                                                         "cognito:username": repo_user.users[
+                                                                                         "name": repo_user.users[
                                                                                              1].name,
                                                                                          "custom:role": repo_user.users[
                                                                                              1].role.value}})

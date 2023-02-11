@@ -256,7 +256,6 @@ class Test_UpdateActivityUsecase:
                                       user=repo_user.users[0],
                                       new_stop_accepting_new_enrollments_before=None)
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_update_activity_usecase_forbidden_requester_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()

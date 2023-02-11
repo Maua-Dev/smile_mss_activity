@@ -14,7 +14,7 @@ class Test_GetAllActivitiesAdminController:
         usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request=request)
 
@@ -27,21 +27,20 @@ class Test_GetAllActivitiesAdminController:
         usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'invalid_requester_user': {"sub": repo_user.users[0].user_id, "cognito:username": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
+        request = HttpRequest(body={'invalid_requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field requester_user is missing"
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_get_all_activites_admin_forbidden_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
         controller = GetAllActivitiesAdminController(usecase)
 
-        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[1].user_id, "cognito:username": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
+        request = HttpRequest(body={'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
         response = controller(request=request)
 

@@ -31,7 +31,7 @@ class Test_GetAllActivitiesAdminPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -60,7 +60,6 @@ class Test_GetAllActivitiesAdminPresenter:
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['message'] == "the activities were retrieved by admin"
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_get_all_activities_admin_presenter_forbidden_not_admin(self):
         event = {
             "version": "2.0",
@@ -86,7 +85,7 @@ class Test_GetAllActivitiesAdminPresenter:
                     "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },

@@ -28,8 +28,7 @@ class CreateActivityUsecase:
             raise EntityError("code")
 
         if user.role != ROLE.ADMIN:
-            # raise ForbiddenAction("create_activity, only admins can create activities")
-            pass
+            raise ForbiddenAction("create_activity, only admins can create activities")
 
         if self.repo_activity.get_activity(code=code) is not None:
             raise DuplicatedItem("code")

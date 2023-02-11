@@ -29,7 +29,7 @@ class Test_DropActivityPresenter:
                      "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },
@@ -132,7 +132,7 @@ class Test_DropActivityPresenter:
                     "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },
@@ -185,7 +185,7 @@ class Test_DropActivityPresenter:
                     "claims":
                         {
                             "sub": "INVALID_USER_ID",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },
@@ -239,7 +239,7 @@ class Test_DropActivityPresenter:
                     "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },
@@ -293,7 +293,7 @@ class Test_DropActivityPresenter:
                     "claims":
                         {
                             "sub": "03555872-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Hector Guerrini",
+                            "name": "Hector Guerrini",
                             "custom:role": "EXTERNAL",
                         }
                 },
@@ -347,7 +347,7 @@ class Test_DropActivityPresenter:
                     "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },
@@ -401,7 +401,7 @@ class Test_DropActivityPresenter:
                     "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },

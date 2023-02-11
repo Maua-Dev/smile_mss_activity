@@ -27,7 +27,9 @@ class Environments:
     dynamo_partition_key: str
     dynamo_sort_key: str
     cloud_front_distribution_domain: str
-    user_pool: str
+    user_pool_id: str
+    user_pool_name: str
+    user_pool_arn: str
     dynamo_gsi_partition_key: str
     dynamo_gsi_sort_key: str
 
@@ -51,6 +53,8 @@ class Environments:
             self.dynamo_sort_key = "SK"
             self.cloud_front_distribution_domain = "https://d3q9q9q9q9q9q9.cloudfront.net"
             self.user_pool_id = "sa-east-1_be9W9odZS" #TODO fix this
+            self.user_pool_name = "smilecognitostacksmileuserpool5E2198EB-lATo3d8qwZx0" #TODO fix this
+            self.user_pool_arn = "arn:aws:cognito-idp:us-east-2:264055331071:userpool/us-east-2_uxbW9MaCL" #TODO fix this
             self.dynamo_gsi_partition_key = "GSI1-PK"
             self.dynamo_gsi_sort_key = "GSI1-SK"
 
@@ -63,6 +67,8 @@ class Environments:
             self.dynamo_sort_key = os.environ.get("DYNAMO_SORT_KEY")
             self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
             self.user_pool_id = os.environ.get("USER_POOL")
+            self.user_pool_arn = os.environ.get("USER_POOL_ARN")
+            self.user_pool_name = os.environ.get("USER_POOL_NAME")
             self.dynamo_gsi_partition_key = os.environ.get("DYNAMO_GSI_PARTITION_KEY")
             self.dynamo_gsi_sort_key = os.environ.get("DYNAMO_GSI_SORT_KEY")
 
@@ -71,6 +77,9 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
             return ActivityRepositoryMock
+        elif Environments.get_envs().stage == STAGE.DEV:
+            from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
+            return ActivityRepositoryDynamo
         elif Environments.get_envs().stage == STAGE.PROD:
             from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
             return ActivityRepositoryDynamo
@@ -82,9 +91,9 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
             return UserRepositoryMock
-        # elif Environments.get_envs().stage == STAGE.PROD:
-        #     from src.shared.infra.repositories.user_repository_cognito import UserRepositoryCognito
-        #     return UserRepositoryCognito
+        elif Environments.get_envs().stage == STAGE.PROD or Environments.get_envs().stage == STAGE.DEV:
+            from src.shared.infra.repositories.user_repository_cognito import UserRepositoryCognito
+            return UserRepositoryCognito
         else:
             raise Exception("No repository found for this stage")
 

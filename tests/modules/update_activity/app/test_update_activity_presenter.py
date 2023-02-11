@@ -32,7 +32,7 @@ class Test_UpdateActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -86,7 +86,7 @@ class Test_UpdateActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -140,7 +140,7 @@ class Test_UpdateActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -194,7 +194,7 @@ class Test_UpdateActivityPresenter:
                     "claims":
                         {
                             "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -223,7 +223,6 @@ class Test_UpdateActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field code is missing"
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_update_activity_presenter_forbidden(self):
         event = {
             "version": "2.0",
@@ -249,7 +248,7 @@ class Test_UpdateActivityPresenter:
                     "claims":
                         {
                             "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },

@@ -50,7 +50,6 @@ class Test_DeleteActivityUsecase:
         with pytest.raises(EntityError):
             activity = usecase(code=123, user=repo_user.users[0])
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_delete_activity_usecase_forbidden(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()

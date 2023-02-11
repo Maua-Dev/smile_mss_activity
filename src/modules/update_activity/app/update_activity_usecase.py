@@ -26,8 +26,7 @@ class UpdateActivityUsecase:
                  new_stop_accepting_new_enrollments_before: int, user: User, new_link: str = None) -> Activity:
 
         if user.role != ROLE.ADMIN:
-            # raise ForbiddenAction("update_activity, only admins can update activities")
-            pass
+            raise ForbiddenAction("update_activity, only admins can update activities")
 
         if type(code) != str:
             raise EntityError("code")
