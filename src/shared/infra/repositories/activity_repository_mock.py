@@ -469,3 +469,15 @@ class ActivityRepositoryMock(IActivityRepository):
             if enrollment.user_id == user_id and (enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE):
                 enrollments.append(enrollment)
         return enrollments
+
+    def get_all_activities_logged(self, user_id: str) -> Tuple[List[Activity], List[Enrollment]]:
+        activities = list()
+        for activity in self.activities:
+            activities.append(activity)
+
+        user_enrollments = list()
+        for enrollment in self.enrollments:
+            if enrollment.user_id == user_id and (enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE  or enrollment.state == ENROLLMENT_STATE.COMPLETED):
+                user_enrollments.append(enrollment)
+
+        return activities, user_enrollments
