@@ -223,7 +223,6 @@ class Test_UpdateActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field code is missing"
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_update_activity_presenter_forbidden(self):
         event = {
             "version": "2.0",
