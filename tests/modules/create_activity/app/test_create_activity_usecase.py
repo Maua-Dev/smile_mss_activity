@@ -254,7 +254,6 @@ class Test_CreateActivityUsecase:
                         ],
                         responsible_professors_user_id="0000-0000-00000-000000-0000000-00000", user=repo_user.users[0])
 
-    @pytest.mark.skip("Still no ForbiddenAction exception")
     def test_create_activity_usecase_forbidden_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
