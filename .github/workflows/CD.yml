@@ -4,7 +4,7 @@ name: CD
 on:
   push:
     branches:
-      - main
+      - setup-envs
 
   workflow_dispatch:
 
