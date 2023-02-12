@@ -70,7 +70,7 @@ class Test_ConfirmAttendanceUsecase:
         confirmation_code = "invalid_confirmation_code"
 
         
-        with pytest.raises(ForbiddenAction):
+        with pytest.raises(EntityError):
             resp = usecase(
                 user_id=user_id,
                 code=code,

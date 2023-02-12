@@ -79,8 +79,8 @@ class Test_ConfirmAttendanceController:
 
         response = controller(request)
 
-        assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Invalid Confirmation Code'
+        assert response.status_code == 400
+        assert response.body == 'Field Confirmation Code is not valid'
 
     def test_confirm_attendance_controller_invalid_user_id(self):
         repo_user = UserRepositoryMock()

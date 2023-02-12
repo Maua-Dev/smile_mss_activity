@@ -118,8 +118,8 @@ class Test_GetAllActivitiesAdminPresenter:
 
         response = lambda_handler(event, None)
 
-        assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this Invalid Confirmation Code"
+        assert response["statusCode"] == 400
+        assert json.loads(response["body"]) == "Field Confirmation Code is not valid"
     
     def test_confirm_attendance_presenter_presenter(self):
         event = {
