@@ -438,5 +438,5 @@ class Test_GetAllActivitiesAdminViewmodel:
             ],
             'message': 'the activities were retrieved'
         }
-        aaa = str(viewmodel.to_dict())
+
         assert viewmodel.to_dict() == expected
