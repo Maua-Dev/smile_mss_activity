@@ -117,6 +117,14 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        self.get_all_activities_logged = self.create_lambda_api_gateway_integration(
+            module_name="get_all_activities_logged",
+            method="GET",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
         self.functions_that_need_dynamo_permissions = [
             self.enroll_activity_function,
             self.drop_activity_function,
@@ -126,7 +134,8 @@ class LambdaStack(Construct):
             self.update_activity_function,
             self.get_all_activities_function,
             self.get_all_activities_admin_function,
-            self.get_enrollments_by_user_function
+            self.get_enrollments_by_user_function,
+            self.get_all_activities_logged
         ]
 
         self.functions_that_need_cognito_permissions = [
