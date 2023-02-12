@@ -236,7 +236,29 @@ class Test_ManualAttendanceChangeController:
         assert response.status_code == 403
         assert response.body == "That action is forbidden for this user: only responsible professors can do that"
 
-    def test_manual_attendance_controller_enrollment_not_found(self):
+    def test_manual_attendance_controller_forbidden_not_professor_of_activity(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
+        controller = ManualAttendanceChangeController(usecase)
+
+        requester_user = repo_user.users[10]
+        enrollment = repo_activity.enrollments[0]
+
+        request = HttpRequest(body={"code": enrollment.activity_code,
+                                    "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
+                              headers={
+                                  'requester_user': {"sub": requester_user.user_id,
+                                                     "cognito:username": requester_user.name,
+                                                     "custom:role": requester_user.role.value}
+                              })
+
+        response = controller(request)
+
+        assert response.status_code == 403
+        assert response.body == 'That action is forbidden for this user: only responsible professors for this activity can do that'
+
+    def test_manual_attendance_controller_activity_not_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
@@ -247,6 +269,28 @@ class Test_ManualAttendanceChangeController:
 
         request = HttpRequest(body={"code": 'wrong_enrollment',
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
+                              headers={
+                                  'requester_user': {"sub": requester_user.user_id,
+                                                     "cognito:username": requester_user.name,
+                                                     "custom:role": requester_user.role.value}
+                              })
+
+        response = controller(request)
+
+        assert response.status_code == 404
+        assert response.body == "No items found for activity"
+
+    def test_manual_attendance_controller_enrollment_not_found(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
+        controller = ManualAttendanceChangeController(usecase)
+
+        requester_user = repo_user.users[2]
+        enrollment = repo_activity.enrollments[0]
+
+        request = HttpRequest(body={"code": enrollment.activity_code,
+                                    "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": "0"*36},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
                                                      "cognito:username": requester_user.name,

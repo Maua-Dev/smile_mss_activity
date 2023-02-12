@@ -55,6 +55,41 @@ class Test_ManualAttendanceChangeUsecase:
             assert (enrollment[0].state == ENROLLMENT_STATE.ENROLLED) or \
                    (enrollment[0].state == ENROLLMENT_STATE.COMPLETED)
 
+    def test_manual_attendance_change_usecase_admin(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+
+        enrollment = repo_activity.enrollments[0]
+        requester_user = repo_user.users[0]
+
+        activity_dict = usecase(code=enrollment.activity_code, requester_user=requester_user,
+                                user_id=enrollment.user_id,
+                                new_state=ENROLLMENT_STATE.COMPLETED)
+
+        assert repo_activity.enrollments[0].state == ENROLLMENT_STATE.COMPLETED
+        assert isinstance(activity_dict["activity"], Activity)
+        assert activity_dict["activity"] == repo_activity.activities[0]
+
+        for enrollment in activity_dict["enrollments"]:
+            assert type(enrollment[0]) == Enrollment
+            assert type(enrollment[1]) == User
+            assert (enrollment[0].state == ENROLLMENT_STATE.ENROLLED) or \
+                   (enrollment[0].state == ENROLLMENT_STATE.COMPLETED)
+
+    def test_manual_attendance_change_usecase_no_enrollments(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+
+        enrollment = repo_activity.enrollments[0]  # old one
+        requester_user = repo_user.users[2]
+
+        with pytest.raises(NoItemsFound):
+            usecase(requester_user=requester_user, code=enrollment.activity_code, user_id="0"*36,
+                    new_state=ENROLLMENT_STATE.COMPLETED)
+
+
     def test_manual_attendance_change_usecase_wrong_type_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -104,6 +139,20 @@ class Test_ManualAttendanceChangeUsecase:
             activity_dict = usecase(code=enrollment.activity_code, requester_user=requester_user,
                                      user_id=enrollment.user_id,
                                      new_state=ENROLLMENT_STATE.COMPLETED)
+
+    def test_manual_attendance_change_usecase_non_professor_of_activity(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+
+        enrollment = repo_activity.enrollments[0]  # old one
+        requester_user = repo_user.users[10]
+
+        with pytest.raises(ForbiddenAction):
+            activity_dict = usecase(code=enrollment.activity_code, requester_user=requester_user,
+                                    user_id=enrollment.user_id,
+                                    new_state=ENROLLMENT_STATE.COMPLETED)
+
 
 
     def test_manual_attendance_change_usecase_new_state_not_completed_nor_enrolled(self):

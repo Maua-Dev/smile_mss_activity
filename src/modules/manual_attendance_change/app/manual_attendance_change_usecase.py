@@ -29,7 +29,12 @@ class ManualAttendanceChangeUsecase:
         if new_state != ENROLLMENT_STATE.COMPLETED and new_state != ENROLLMENT_STATE.ENROLLED:
             raise EntityError('state')
 
-        enrollment = self.repo_activity.get_enrollment(code=code, user_id=user_id)
+        activity, all_enrollments = self.repo_activity.get_activity_with_enrollments(code=code)
+
+        if activity is None:
+            raise NoItemsFound('activity')
+
+        enrollment = next((enrollment for enrollment in all_enrollments if enrollment.user_id == user_id), None)
 
         if enrollment is None:
             raise NoItemsFound('enrollment')
@@ -42,14 +47,19 @@ class ManualAttendanceChangeUsecase:
             if enrollment.state != ENROLLMENT_STATE.COMPLETED:
                 raise ForbiddenAction('enrollment: can\'t be unconfirmed')
 
+        if requester_user.role == ROLE.PROFESSOR:
+            if requester_user not in activity.responsible_professors:
+                raise ForbiddenAction("user: only responsible professors for this activity can do that")
+
         new_enrollment = self.repo_activity.update_enrollment(
             user_id=enrollment.user_id,
             code=enrollment.activity_code,
             new_state=new_state
         )
 
-
-        activity, all_enrollments = self.repo_activity.get_activity_with_enrollments(code=code) #!! to do refat in future, less requests
+        for enrollment in all_enrollments:
+            if enrollment.user_id == new_enrollment.user_id:
+                enrollment.state = new_enrollment.state
 
         enrollments = [enrollment for enrollment in all_enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or
                        enrollment.state == ENROLLMENT_STATE.COMPLETED]
