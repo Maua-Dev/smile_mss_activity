@@ -23,6 +23,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 120,
                     'link': None,
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Vitor Briquez',
@@ -47,6 +54,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 400,
                     'link': 'https://devmaua.com',
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Patricia Santos',
+                            'role': 'PROFESSOR',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Lucas Soller',
@@ -71,6 +85,18 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 60,
                     'link': 'https://devmaua.com',
                     'place': None,
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        },
+                        {
+                            'name': 'Patricia Santos',
+                            'role': 'PROFESSOR',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Daniel Romanato',
@@ -95,6 +121,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 60,
                     'link': 'https://devmaua.com',
                     'place': None,
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Vitor Briquez',
@@ -129,6 +162,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 190,
                     'link': None,
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Patricia Santos',
+                            'role': 'PROFESSOR',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Lucas Soller',
@@ -153,6 +193,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 40,
                     'link': 'https://devmaua.com',
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Patricia Santos',
+                            'role': 'PROFESSOR',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Daniel Romanato',
@@ -177,6 +224,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 80,
                     'link': 'https://devmaua.com',
                     'place': None,
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Vitor Briquez',
@@ -201,6 +255,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 20,
                     'link': None,
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Patricia Santos',
+                            'role': 'PROFESSOR',
+                            'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Lucas Soller',
@@ -225,6 +286,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 120,
                     'link': 'https://devmaua.com',
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Daniel Romanato',
@@ -249,6 +317,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 140,
                     'link': None,
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Vitor Briquez',
@@ -273,6 +348,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 60,
                     'link': 'https://devmaua.com',
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Lucas Soller',
@@ -297,6 +379,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 45,
                     'link': None,
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Daniel Romanato',
@@ -308,7 +397,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'taken_slots': 3,
                     'accepting_new_enrollments': True,
                     'stop_accepting_new_enrollments_before': 1671733012000,
-                    'confirmation_code': "555666"
+                    'confirmation_code': '555666'
                 },
                 {
                     'code': 'PINOQ1',
@@ -321,6 +410,13 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'duration': 45,
                     'link': None,
                     'place': 'H332',
+                    'responsible_professors': [
+                        {
+                            'name': 'Caio Toledo',
+                            'role': 'PROFESSOR',
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                        }
+                    ],
                     'speakers': [
                         {
                             'name': 'Daniel Romanato',

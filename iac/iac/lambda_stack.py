@@ -173,6 +173,7 @@ class LambdaStack(Construct):
             self.confirm_attendance_function,
             self.delete_attendance_confirmation_function,
             self.manual_attendance_change_function
+            self.get_activity_with_enrollments_function
         ]
 
         self.functions_that_need_cognito_permissions = [
