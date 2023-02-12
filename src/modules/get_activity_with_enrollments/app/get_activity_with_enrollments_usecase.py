@@ -13,9 +13,8 @@ class GetActivityWithEnrollmentsUsecase:
         self.repo_user = repo_user
 
     def __call__(self, user: User, code: str) -> dict:
-        if user.role != ROLE.PROFESSOR:
-            #raise ForbiddenAction("user: only responsible professors can do that")
-            pass
+        if user.role != ROLE.PROFESSOR and user.role != ROLE.ADMIN:
+            raise ForbiddenAction("user: only responsible professors and admin can do that")
 
         if type(code) != str:
             raise EntityError('code')
@@ -24,9 +23,10 @@ class GetActivityWithEnrollmentsUsecase:
         if activity is None:
             raise NoItemsFound('activity')
 
-        if user not in activity.responsible_professors:
-            #raise ForbiddenAction('user')
-            pass
+        if user.role == ROLE.PROFESSOR:
+            if user not in activity.responsible_professors:
+                raise ForbiddenAction('user')
+
         enrollments = [enrollment for enrollment in all_enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or
                        enrollment.state == ENROLLMENT_STATE.COMPLETED]
         user_id_list = list()

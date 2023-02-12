@@ -77,7 +77,6 @@ class Test_GetActivityWithEnrollmentsController:
         assert response.body == 'No items found for activity'
         assert response.status_code == 404
 
-    @pytest.mark.skip(reason="Still no ForbiddenAction exception")
     def test_get_activity_with_enrollments_controller_forbidden_non_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -89,10 +88,9 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[1].role.value}, 'code': 'ECM2345'})
 
         response = controller(request=request)
-        assert response.body == 'That action is forbidden for this user'
+        assert response.body == 'That action is forbidden for this user: only responsible professors and admin can do that'
         assert response.status_code == 403
 
-    @pytest.mark.skip(reason="Still no ForbiddenAction exception")
     def test_get_activity_with_enrollments_controller_forbidden_wrong_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
