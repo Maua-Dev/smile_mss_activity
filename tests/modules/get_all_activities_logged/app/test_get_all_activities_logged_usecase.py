@@ -1,4 +1,4 @@
-from src.modules.get_all_activites_logged.app.get_all_activites_logged_usecase import GetAllActivitiesLoggedUsecase
+from src.modules.get_all_activities_logged.app.get_all_activities_logged_usecase import GetAllActivitiesLoggedUsecase
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE

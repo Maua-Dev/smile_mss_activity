@@ -1,6 +1,6 @@
 import json
 
-from src.modules.get_all_activites_logged.app.get_all_activites_logged_presenter import lambda_handler
+from src.modules.get_all_activities_logged.app.get_all_activities_logged_presenter import lambda_handler
 
 
 class Test_GetAllActivitiesLoggedPresenter:

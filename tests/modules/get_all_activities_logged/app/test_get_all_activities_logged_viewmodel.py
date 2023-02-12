@@ -1,5 +1,5 @@
-from src.modules.get_all_activites_logged.app.get_all_activites_logged_usecase import GetAllActivitiesLoggedUsecase
-from src.modules.get_all_activites_logged.app.get_all_activites_logged_viewmodel import GetAllActivitiesLoggedViewmodel
+from src.modules.get_all_activities_logged.app.get_all_activities_logged_usecase import GetAllActivitiesLoggedUsecase
+from src.modules.get_all_activities_logged.app.get_all_activities_logged_viewmodel import GetAllActivitiesLoggedViewmodel
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 

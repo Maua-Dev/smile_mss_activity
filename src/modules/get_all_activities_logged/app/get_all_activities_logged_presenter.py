@@ -1,6 +1,6 @@
-from .get_all_activites_logged_controller import \
+from .get_all_activities_logged_controller import \
     GetAllActivitiesLoggedController
-from .get_all_activites_logged_usecase import GetAllActivitiesLoggedUsecase
+from .get_all_activities_logged_usecase import GetAllActivitiesLoggedUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
