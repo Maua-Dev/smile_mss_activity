@@ -1,6 +1,5 @@
 from typing import Tuple, List
 
-from src.modules.create_activity.app.create_activity_viewmodel import UserViewmodel
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker
@@ -10,7 +9,7 @@ from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 
 
-class UserViewModel:
+class UserViewmodel:
     name: str
     user_id: str
     role: str
