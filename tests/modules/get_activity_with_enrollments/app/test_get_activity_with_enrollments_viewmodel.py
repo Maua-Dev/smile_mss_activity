@@ -32,8 +32,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     'responsible_professors': [
                         {
                             'name': 'Caio Toledo',
-                            'role': 'PROFESSOR',
-                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
+                            'role': 'PROFESSOR'
                         }
                     ],
                     'speakers': [
@@ -48,14 +48,13 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     'accepting_new_enrollments': True,
                     'stop_accepting_new_enrollments_before': 1671743812000,
                     'confirmation_code': None
-
                 },
                 'enrollments': [
                     {
                         'user': {
                             'name': 'João Vilas',
-                            'role': 'ADMIN',
-                            'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002'
+                            'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002',
+                            'role': 'ADMIN'
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671229013000
@@ -63,8 +62,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     {
                         'user': {
                             'name': 'Bruno Soller',
-                            'role': 'STUDENT',
-                            'user_id': '0355535e-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
+                            'role': 'STUDENT'
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671315413000
@@ -72,8 +71,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     {
                         'user': {
                             'name': 'Caio Toledo',
-                            'role': 'PROFESSOR',
-                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
+                            'role': 'PROFESSOR'
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671401813000
@@ -81,17 +80,46 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     {
                         'user': {
                             'name': 'Pedro Marcelino',
-                            'role': 'INTERNATIONAL_STUDENT',
-                            'user_id': '0355573c-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '0355573c-a110-11ed-a8fc-0242ac120002',
+                            'role': 'INTERNATIONAL_STUDENT'
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671488213000
                     },
+                    {
+                        'user': {
+                            'name': 'Hector Guerrini',
+                            'user_id': '03555872-a110-11ed-a8fc-0242ac120002',
+                            'role': 'EXTERNAL'
+                        },
+                        'state': 'IN_QUEUE',
+                        'date_subscribed': 1671574613000
+                    },
+                    {
+                        'user': {
+                            'name': 'Ricardo Soller',
+                            'user_id': '2f0df47e-a110-11ed-a8fc-0242ac120002',
+                            'role': 'EMPLOYEE'
+                        },
+                        'state': 'IN_QUEUE',
+                        'date_subscribed': 1671574673000
+                    },
+                    {
+                        'user': {
+                            'name': 'Marcos Romanato',
+                            'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002',
+                            'role': 'STUDENT'
+                        },
+                        'state': 'IN_QUEUE',
+                        'date_subscribed': 1671574733000
+                    }
                 ]
             },
             'message': 'the activity was retrieved by the professor'
         }
+
         assert expected == viewmodel.to_dict()
+
     def test_get_activity_with_enrollments_viewmodel_no_slots_taken(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()

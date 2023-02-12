@@ -27,8 +27,7 @@ class GetActivityWithEnrollmentsUsecase:
             if user not in activity.responsible_professors:
                 raise ForbiddenAction('user')
 
-        enrollments = [enrollment for enrollment in all_enrollments if enrollment.state == ENROLLMENT_STATE.ENROLLED or
-                       enrollment.state == ENROLLMENT_STATE.COMPLETED]
+        enrollments = [enrollment for enrollment in all_enrollments if enrollment.state in [ENROLLMENT_STATE.ENROLLED, ENROLLMENT_STATE.IN_QUEUE, ENROLLMENT_STATE.COMPLETED]]
         user_id_list = list()
         activity_with_enrollments = list()
         for enrollment in enrollments:
