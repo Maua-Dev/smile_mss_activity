@@ -1,5 +1,5 @@
-from src.modules.get_all_activites_logged.app.get_all_activites_logged_usecase import GetAllActivitiesLoggedUsecase
-from src.modules.get_all_activites_logged.app.get_all_activites_logged_viewmodel import GetAllActivitiesLoggedViewmodel
+from .get_all_activites_logged_usecase import GetAllActivitiesLoggedUsecase
+from .get_all_activites_logged_viewmodel import GetAllActivitiesLoggedViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, InternalServerError
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
