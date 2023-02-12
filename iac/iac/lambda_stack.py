@@ -125,6 +125,39 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        self.generate_attendance_confirmation_function = self.create_lambda_api_gateway_integration(
+            module_name="generate_attendance_confirmation",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
+        self.confirm_attendance_function = self.create_lambda_api_gateway_integration(
+            module_name="confirm_attendance",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
+        self.delete_attendance_confirmation_function = self.create_lambda_api_gateway_integration(
+            module_name="delete_attendance_confirmation",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
+        self.manual_attendance_change_function = self.create_lambda_api_gateway_integration(
+            module_name="manual_attendance_change",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
+
         self.functions_that_need_dynamo_permissions = [
             self.enroll_activity_function,
             self.drop_activity_function,
@@ -135,7 +168,11 @@ class LambdaStack(Construct):
             self.get_all_activities_function,
             self.get_all_activities_admin_function,
             self.get_enrollments_by_user_function,
-            self.get_all_activities_logged_function
+            self.get_all_activities_logged_function,
+            self.generate_attendance_confirmation_function,
+            self.confirm_attendance_function,
+            self.delete_attendance_confirmation_function,
+            self.manual_attendance_change_function
         ]
 
         self.functions_that_need_cognito_permissions = [
