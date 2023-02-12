@@ -109,7 +109,7 @@ class LambdaStack(Construct):
             authorizer=authorizer
             )
 
-        self.get_activity_with_enrollments = self.create_lambda_api_gateway_integration(
+        self.get_activity_with_enrollments_function = self.create_lambda_api_gateway_integration(
             module_name="get_activity_with_enrollments",
             method="GET",
             mss_student_api_resource=api_gateway_resource,
@@ -117,7 +117,7 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
-        self.get_all_activities_logged = self.create_lambda_api_gateway_integration(
+        self.get_all_activities_logged_function = self.create_lambda_api_gateway_integration(
             module_name="get_all_activities_logged",
             method="GET",
             mss_student_api_resource=api_gateway_resource,
@@ -135,14 +135,14 @@ class LambdaStack(Construct):
             self.get_all_activities_function,
             self.get_all_activities_admin_function,
             self.get_enrollments_by_user_function,
-            self.get_all_activities_logged
+            self.get_all_activities_logged_function
         ]
 
         self.functions_that_need_cognito_permissions = [
             self.create_activity_function,
             self.update_activity_function,
             self.get_all_activities_admin_function,
-            self.get_activity_with_enrollments
+            self.get_activity_with_enrollments_function
         ]
 
 
