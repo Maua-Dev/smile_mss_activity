@@ -135,7 +135,8 @@ class LambdaStack(Construct):
             self.get_all_activities_function,
             self.get_all_activities_admin_function,
             self.get_enrollments_by_user_function,
-            self.get_all_activities_logged_function
+            self.get_all_activities_logged_function,
+            self.get_activity_with_enrollments_function
         ]
 
         self.functions_that_need_cognito_permissions = [
