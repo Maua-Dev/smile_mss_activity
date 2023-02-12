@@ -17,10 +17,10 @@ class Test_ConfirmAttendanceController:
                 'code': repo_activity.activities[11].code, 
                 'requester_user': {
                     "sub": repo_user.users[5].user_id, 
-                    "cognito:username": repo_user.users[5].name, 
+                    "name": repo_user.users[5].name, 
                     "custom:role": repo_user.users[5].role.value}, 
                     'requester_user': {"sub": repo_user.users[5].user_id, 
-                    "cognito:username": repo_user.users[5].name, 
+                    "name": repo_user.users[5].name, 
                     "custom:role": repo_user.users[5].role.value
                     },
                 'confirmation_code': repo_activity.activities[11].confirmation_code
@@ -42,10 +42,10 @@ class Test_ConfirmAttendanceController:
                 'code': 'invalid_code', 
                 'requester_user': {
                     "sub": repo_user.users[5].user_id, 
-                    "cognito:username": repo_user.users[5].name, 
+                    "name": repo_user.users[5].name, 
                     "custom:role": repo_user.users[5].role.value}, 
                     'requester_user': {"sub": repo_user.users[5].user_id, 
-                    "cognito:username": repo_user.users[5].name, 
+                    "name": repo_user.users[5].name, 
                     "custom:role": repo_user.users[5].role.value
                     },
                 'confirmation_code': repo_activity.activities[11].confirmation_code
@@ -67,10 +67,10 @@ class Test_ConfirmAttendanceController:
                 'code': repo_activity.activities[11].code, 
                 'requester_user': {
                     "sub": repo_user.users[5].user_id, 
-                    "cognito:username": repo_user.users[5].name, 
+                    "name": repo_user.users[5].name, 
                     "custom:role": repo_user.users[5].role.value}, 
                     'requester_user': {"sub": repo_user.users[5].user_id, 
-                    "cognito:username": repo_user.users[5].name, 
+                    "name": repo_user.users[5].name, 
                     "custom:role": repo_user.users[5].role.value
                     },
                 'confirmation_code': 'invalid_confirmation_code'
@@ -92,10 +92,10 @@ class Test_ConfirmAttendanceController:
                 'code': repo_activity.activities[11].code, 
                 'requester_user': {
                     "sub": 'invalid_user_id', 
-                    "cognito:username": repo_user.users[5].name, 
+                    "name": repo_user.users[5].name, 
                     "custom:role": repo_user.users[5].role.value}, 
                     'requester_user': {"sub": 'invalid_user_id', 
-                    "cognito:username": repo_user.users[5].name, 
+                    "name": repo_user.users[5].name, 
                     "custom:role": repo_user.users[5].role.value
                     },
                 'confirmation_code': repo_activity.activities[11].confirmation_code
@@ -117,10 +117,10 @@ class Test_ConfirmAttendanceController:
                 'code': repo_activity.activities[12].code, 
                 'requester_user': {
                     "sub": repo_user.users[3].user_id, 
-                    "cognito:username": repo_user.users[3].name, 
+                    "name": repo_user.users[3].name, 
                     "custom:role": repo_user.users[3].role.value}, 
                     'requester_user': {"sub": repo_user.users[3].user_id, 
-                    "cognito:username": repo_user.users[3].name, 
+                    "name": repo_user.users[3].name, 
                     "custom:role": repo_user.users[3].role.value
                     },
                 'confirmation_code': repo_activity.activities[12].confirmation_code

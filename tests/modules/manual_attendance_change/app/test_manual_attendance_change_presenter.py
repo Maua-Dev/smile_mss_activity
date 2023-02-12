@@ -28,7 +28,7 @@ class Test_ManualAttendanceChangePresenter:
                     "claims":
                         {
                             "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Caio Toledo",
+                            "name": "Caio Toledo",
                             "custom:role": "PROFESSOR",
                         }
                 },
@@ -82,7 +82,7 @@ class Test_ManualAttendanceChangePresenter:
                     "claims":
                         {
                             "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Caio Toledo",
+                            "name": "Caio Toledo",
                             "custom:role": "PROFESSOR",
                         }
                 },
@@ -136,7 +136,7 @@ class Test_ManualAttendanceChangePresenter:
                     "claims":
                         {
                             "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Caio Toledo",
+                            "name": "Caio Toledo",
                             "custom:role": "PROFESSOR",
                         }
                 },
@@ -190,7 +190,7 @@ class Test_ManualAttendanceChangePresenter:
                     "claims":
                         {
                             "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Caio Toledo",
+                            "name": "Caio Toledo",
                             "custom:role": "PROFESSOR",
                         }
                 },
@@ -244,7 +244,7 @@ class Test_ManualAttendanceChangePresenter:
                     "claims":
                         {
                             "sub": "0355573c-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Pedro Marcelino",
+                            "name": "Pedro Marcelino",
                             "custom:role": "INTERNATIONAL_STUDENT",
                         }
                 },
@@ -298,7 +298,7 @@ class Test_ManualAttendanceChangePresenter:
                     "claims":
                         {
                             "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                            "cognito:username": "Caio Toledo",
+                            "name": "Caio Toledo",
                             "custom:role": "PROFESSOR",
                         }
                 },

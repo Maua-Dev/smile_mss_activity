@@ -27,7 +27,7 @@ class Test_DeleteAttendanceConfirmationPresenter:
                             "claims":
                                    {
                                           "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                                          "cognito:username": "Caio Toledo",
+                                          "name": "Caio Toledo",
                                           "custom:role": "PROFESSOR",
                                    }
                             },
@@ -81,7 +81,7 @@ class Test_DeleteAttendanceConfirmationPresenter:
                             "claims":
                                    {
                                           "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                                          "cognito:username": "Caio Toledo",
+                                          "name": "Caio Toledo",
                                           "custom:role": "PROFESSOR",
                                    }
                             },
@@ -184,7 +184,7 @@ class Test_DeleteAttendanceConfirmationPresenter:
                             "claims":
                                    {
                                           "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                                          "cognito:username": "Caio Toledo",
+                                          "name": "Caio Toledo",
                                           "custom:role": "PROFESSOR",
                                    }
                             },
@@ -238,7 +238,7 @@ class Test_DeleteAttendanceConfirmationPresenter:
                             "claims":
                                    {
                                           "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                                          "cognito:username": "Caio Toledo",
+                                          "name": "Caio Toledo",
                                           "custom:role": "PROFESSOR",
                                    }
                             },
@@ -292,7 +292,7 @@ class Test_DeleteAttendanceConfirmationPresenter:
                             "claims":
                                    {
                                           "sub": "0355535e-a110-11ed-a8fc-0242ac120002",
-                                          "cognito:username": "Bruno Soller",
+                                          "name": "Bruno Soller",
                                           "custom:role": "STUDENT",
                                    }
                             },
@@ -346,7 +346,7 @@ class Test_DeleteAttendanceConfirmationPresenter:
                             "claims":
                                    {
                                           "sub": "03555624-a110-11ed-a8fc-0242ac120002",
-                                          "cognito:username": "Caio Toledo",
+                                          "name": "Caio Toledo",
                                           "custom:role": "PROFESSOR",
                                    }
                             },
@@ -400,7 +400,7 @@ class Test_DeleteAttendanceConfirmationPresenter:
                             "claims":
                                    {
                                           "sub": "6bb122d4-a110-11ed-a8fc-0242ac120002",
-                                          "cognito:username": "Patricia Santos",
+                                          "name": "Patricia Santos",
                                           "custom:role": "PROFESSOR",
                                    }
                             },

@@ -30,7 +30,7 @@ class Test_GetAllActivitiesAdminPresenter:
                     "claims":
                         {
                             "sub": '2f0df47e-a110-11ed-a8fc-0242ac120002',
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -88,7 +88,7 @@ class Test_GetAllActivitiesAdminPresenter:
                     "claims":
                         {
                             "sub": '2f0df47e-a110-11ed-a8fc-0242ac120002',
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -146,7 +146,7 @@ class Test_GetAllActivitiesAdminPresenter:
                     "claims":
                         {
                             "sub": '2f0df47e-a110-11ed-a8fc-0242ac120002',
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -204,7 +204,7 @@ class Test_GetAllActivitiesAdminPresenter:
                     "claims":
                         {
                             "sub": 'invalid_user_id',
-                            "cognito:username": "João Vilas",
+                            "name": "João Vilas",
                             "custom:role": "ADMIN",
                         }
                 },
@@ -262,7 +262,7 @@ class Test_GetAllActivitiesAdminPresenter:
                     "claims":
                         {
                             "sub": '0355535e-a110-11ed-a8fc-0242ac120002',
-                            "cognito:username": "Bruno Soller",
+                            "name": "Bruno Soller",
                             "custom:role": "STUDENT",
                         }
                 },
@@ -294,4 +294,3 @@ class Test_GetAllActivitiesAdminPresenter:
 
         assert response["statusCode"] == 403
         assert json.loads(response["body"]) == "That action is forbidden for this Enrollment Already COMPLETED"
-    

@@ -23,7 +23,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -46,7 +46,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.ENROLLED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -68,7 +68,7 @@ class Test_ManualAttendanceChangeController:
         request = HttpRequest(body={"new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -110,7 +110,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -132,7 +132,7 @@ class Test_ManualAttendanceChangeController:
             request = HttpRequest(body={"code": enrollment.activity_code, "user_id": enrollment.user_id},
                                   headers={
                                       'requester_user': {"sub": requester_user.user_id,
-                                                         "cognito:username": requester_user.name,
+                                                         "name": requester_user.name,
                                                          "custom:role": requester_user.role.value}
                                   })
 
@@ -155,7 +155,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": 'wrong enum', "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                       "custom:role": requester_user.role.value}
                               })
 
@@ -180,7 +180,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -205,7 +205,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": "CODIGO_INVALIDO"},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -227,7 +227,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -249,7 +249,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -271,7 +271,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -293,7 +293,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": "0"*36},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -315,7 +315,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.COMPLETED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 
@@ -337,7 +337,7 @@ class Test_ManualAttendanceChangeController:
                                     "new_state": ENROLLMENT_STATE.ENROLLED.value, "user_id": enrollment.user_id},
                               headers={
                                   'requester_user': {"sub": requester_user.user_id,
-                                                     "cognito:username": requester_user.name,
+                                                     "name": requester_user.name,
                                                      "custom:role": requester_user.role.value}
                               })
 

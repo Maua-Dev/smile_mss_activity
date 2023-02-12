@@ -13,7 +13,7 @@ class Test_DeleteAttendanceConfirmationController:
               controller = DeleteAttendanceConfirmationController(usecase)
 
               requester_user = repo_user.users[2]
-              request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "cognito:username": requester_user.name, "custom:role": requester_user.role.value}})
+              request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
               response = controller(request)
 
               assert response.status_code == 200
@@ -30,7 +30,7 @@ class Test_DeleteAttendanceConfirmationController:
               controller = DeleteAttendanceConfirmationController(usecase)
 
               requester_user = repo_user.users[2]
-              request = HttpRequest(body={}, headers={'requester_user': {"sub": requester_user.user_id, "cognito:username": requester_user.name, "custom:role": requester_user.role.value}})
+              request = HttpRequest(body={}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
               response = controller(request)
 
               assert response.status_code == 400
@@ -56,7 +56,7 @@ class Test_DeleteAttendanceConfirmationController:
               controller = DeleteAttendanceConfirmationController(usecase)
 
               requester_user = repo_user.users[2]
-              request = HttpRequest(body={"code": 1}, headers={'requester_user': {"sub": requester_user.user_id, "cognito:username": requester_user.name, "custom:role": requester_user.role.value}})
+              request = HttpRequest(body={"code": 1}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
               response = controller(request)
 
               assert response.status_code == 400
@@ -69,7 +69,7 @@ class Test_DeleteAttendanceConfirmationController:
               controller = DeleteAttendanceConfirmationController(usecase)
 
               requester_user = repo_user.users[2]
-              request = HttpRequest(body={"code": "QUALQUER CODIGO"}, headers={'requester_user': {"sub": requester_user.user_id, "cognito:username": requester_user.name, "custom:role": requester_user.role.value}})
+              request = HttpRequest(body={"code": "QUALQUER CODIGO"}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
               response = controller(request)
 
               assert response.status_code == 404
@@ -82,7 +82,7 @@ class Test_DeleteAttendanceConfirmationController:
               controller = DeleteAttendanceConfirmationController(usecase)
 
               requester_user = repo_user.users[0]
-              request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "cognito:username": requester_user.name, "custom:role": requester_user.role.value}})
+              request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
               response = controller(request)
 
               assert response.status_code == 403
@@ -95,7 +95,7 @@ class Test_DeleteAttendanceConfirmationController:
               controller = DeleteAttendanceConfirmationController(usecase)
 
               requester_user = repo_user.users[2]
-              request = HttpRequest(body={"code": repo.activities[0].code}, headers={'requester_user': {"sub": requester_user.user_id, "cognito:username": requester_user.name, "custom:role": requester_user.role.value}})
+              request = HttpRequest(body={"code": repo.activities[0].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
               response = controller(request)
 
               assert response.status_code == 403
@@ -108,7 +108,7 @@ class Test_DeleteAttendanceConfirmationController:
               controller = DeleteAttendanceConfirmationController(usecase)
 
               requester_user = repo_user.users[10]
-              request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "cognito:username": requester_user.name, "custom:role": requester_user.role.value}})
+              request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
               response = controller(request)
 
               assert response.status_code == 403
