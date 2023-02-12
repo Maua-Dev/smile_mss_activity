@@ -301,5 +301,56 @@ class Test_ActivityRepositoryDynamo:
 
         assert len(enrollments) == len(expected_enrollments)
         assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE for enrollment in enrollments)
         assert enrollments == expected_enrollments
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_activities_logged(self):
+        repo_activity = ActivityRepositoryMock()
+
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_user = UserRepositoryMock()
+
+        activities, user_enrollments = repo_activity_dynamo.get_all_activities_logged(repo_user.users[4].user_id)
+
+        expected_activities, expected_enrollments = repo_activity.get_all_activities_logged(repo_user.users[4].user_id)
+
+        expected_activities.sort(key=lambda activity: activity.code)
+        activities.sort(key=lambda activity: activity.code)
+        expected_enrollments.sort(key=lambda enrollment: enrollment.activity_code)
+        user_enrollments.sort(key=lambda enrollment: enrollment.activity_code)
+
+        assert len(activities) == len(expected_activities)
+        assert all(type(activity) == Activity for activity in activities)
+        assert activities == expected_activities
+
+        assert len(user_enrollments) == len(expected_enrollments)
+        assert all(type(enrollment) == Enrollment for enrollment in user_enrollments)
+        assert user_enrollments == expected_enrollments
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_activities_logged_no_enrollments(self):
+        repo_activity = ActivityRepositoryMock()
+
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_user = UserRepositoryMock()
+
+        activities, user_enrollments = repo_activity_dynamo.get_all_activities_logged(repo_user.users[12].user_id)
+
+        expected_activities, expected_enrollments = repo_activity.get_all_activities_logged(repo_user.users[12].user_id)
+
+        expected_activities.sort(key=lambda activity: activity.code)
+        activities.sort(key=lambda activity: activity.code)
+        expected_enrollments.sort(key=lambda enrollment: enrollment.activity_code)
+        user_enrollments.sort(key=lambda enrollment: enrollment.activity_code)
+
+        assert len(activities) == len(expected_activities)
+        assert all(type(activity) == Activity for activity in activities)
+        assert activities == expected_activities
+
+        assert len(user_enrollments) == len(expected_enrollments)
+        assert all(type(enrollment) == Enrollment for enrollment in user_enrollments)
+        assert user_enrollments == expected_enrollments
+
+
 

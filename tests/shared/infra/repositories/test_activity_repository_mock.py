@@ -206,11 +206,12 @@ class Test_ActivityRepositoryMock:
     def test_get_enrollments_by_user_id(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        enrollments = repo.get_enrollments_by_user_id(repo_user.users[8].user_id)
+        enrollments = repo.get_enrollments_by_user_id(repo_user.users[4].user_id)
         assert type(enrollments) == list
         assert all(type(enrollment) == Enrollment for enrollment in enrollments)
-        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED for enrollment in enrollments)
-        assert len(enrollments) == 1
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE for enrollment in enrollments)
+        assert len(enrollments) == 4
+        assert all(enrollment.user_id == repo_user.users[4].user_id for enrollment in enrollments)
 
     def test_get_enrollments_by_user_id_more_enrollments(self):
         repo = ActivityRepositoryMock()
@@ -218,7 +219,7 @@ class Test_ActivityRepositoryMock:
         enrollments = repo.get_enrollments_by_user_id(repo_user.users[1].user_id)
         assert type(enrollments) == list
         assert all(type(enrollment) == Enrollment for enrollment in enrollments)
-        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED for enrollment in enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE for enrollment in enrollments)
         assert len(enrollments) == 4
 
     def test_get_enrollments_by_user_id_no_enrollments(self):
@@ -229,3 +230,30 @@ class Test_ActivityRepositoryMock:
         assert all(type(enrollment) == Enrollment for enrollment in enrollments)
         assert len(enrollments) == 0
 
+    def test_get_all_activities_logged(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        requester_user = repo_user.users[2]
+        activities, user_enrollments = repo.get_all_activities_logged(user_id=requester_user.user_id)
+        assert type(activities) == list
+        assert all(type(activity) == Activity for activity in activities)
+        assert len(activities) == len(repo.activities)
+
+        assert type(user_enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in user_enrollments)
+        assert all(enrollment.user_id == requester_user.user_id for enrollment in user_enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE or enrollment.state == ENROLLMENT_STATE.COMPLETED for enrollment in user_enrollments)
+        assert len(user_enrollments) == 3
+
+    def test_get_all_activities_logged_no_enrollments(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        requester_user = repo_user.users[12]
+        activities, user_enrollments = repo.get_all_activities_logged(user_id=requester_user.user_id)
+        assert type(activities) == list
+        assert all(type(activity) == Activity for activity in activities)
+        assert len(activities) == len(repo.activities)
+
+        assert type(user_enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in user_enrollments)
+        assert len(user_enrollments) == 0
