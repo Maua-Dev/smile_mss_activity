@@ -1,3 +1,5 @@
+import os
+
 from aws_cdk import (
     # Duration,
     Stack, aws_cognito,
@@ -11,12 +13,15 @@ from .dynamo_stack import DynamoStack
 from .lambda_stack import LambdaStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
-
 class IacStack(Stack):
     lambda_stack: LambdaStack
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
+
+        self.user_pool_name = os.environ.get("USER_POOL_NAME")
+        self.user_pool_arn = os.environ.get("USER_POOL_ARN")
+        self.user_pool_id = os.environ.get("USER_POOL_ID")
 
         self.rest_api = RestApi(self, "Smile_RestApi",
                                 rest_api_name="Smile_RestApi",
@@ -46,17 +51,16 @@ class IacStack(Stack):
             "STAGE": "DEV",
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
-            "USER_POOL": "us-east-2_uxbW9MaCL",
+            "USER_POOL":  self.user_pool_id,
             "REGION": self.region,
         }
 
         auth = CognitoUserPoolsAuthorizer(self, "SmileCognitoAuthorizer",
-                                                     cognito_user_pools=[aws_cognito.UserPool.from_user_pool_id(self, id="smilecognitostacksmileuserpool5E2198EB-lATo3d8qwZx0" ,user_pool_id="us-east-2_uxbW9MaCL")] #TODO use envs
+                                                     cognito_user_pools=[aws_cognito.UserPool.from_user_pool_id(self, id=self.user_pool_name, user_pool_id=self.user_pool_id)]
                                                      )
 
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=auth)
-
 
         for f in self.lambda_stack.functions_that_need_dynamo_permissions:
             self.dynamo_stack.dynamo_table.grant_read_write_data(f)
@@ -67,12 +71,10 @@ class IacStack(Stack):
                 "cognito-idp:*",
             ],
             resources=[
-                "arn:aws:cognito-idp:us-east-2:264055331071:userpool/us-east-2_uxbW9MaCL", #TODO use envs
+                self.user_pool_arn
             ]
         )
 
         for f in self.lambda_stack.functions_that_need_cognito_permissions:
             f.add_to_role_policy(cognito_admin_policy)
-
-
 
