@@ -1,5 +1,7 @@
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
+from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction
 
 
@@ -9,6 +11,12 @@ class ConfirmAttendanceUsecase:
         self.repo = repo
 
     def __call__(self, user_id: str, code: str, confirmation_code: str) -> bool:
+
+        if Activity.validate_confirmation_code(confirmation_code=confirmation_code) is False:
+            raise EntityError('Confirmation Code')
+
+        if type(code) is not str:
+            raise EntityError('Activity Code')
 
         activity = self.repo.get_activity(code)
 
