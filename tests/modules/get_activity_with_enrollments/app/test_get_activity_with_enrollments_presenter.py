@@ -113,7 +113,6 @@ class Test_GetActivityWithEnrollmentsPresenter:
         assert json.loads(response["body"]) == 'Field code is missing'
 
 
-    @pytest.mark.skip(reason="Still no ForbiddenAction exception")
     def test_get_activity_with_enrollments_presenter_forbidden_action(self):
         event = {
             "version": "2.0",
@@ -166,7 +165,7 @@ class Test_GetActivityWithEnrollmentsPresenter:
 
         response = lambda_handler(event, None)
         assert response['statusCode'] == 403
-        assert json.loads(response["body"]) == 'That action is forbidden for this user: only responsible professors can do that'
+        assert json.loads(response["body"]) == 'That action is forbidden for this user: only responsible professors and admin can do that'
 
     def test_get_activity_with_enrollments_presenter_no_items_found(self):
         event = {

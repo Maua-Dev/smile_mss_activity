@@ -41,7 +41,6 @@ class Test_GetActivityWithEnrollmentsUsecase:
         with pytest.raises(NoItemsFound):
             activity_dict = usecase(user=repo_user.users[2], code="NÃO_EXISTE")
 
-    @pytest.mark.skip(reason="Still no ForbiddenAction exception")
     def test_get_activity_with_enrollments_forbidden_non_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -50,7 +49,6 @@ class Test_GetActivityWithEnrollmentsUsecase:
         with pytest.raises(ForbiddenAction):
             activity_with_enrollment = usecase(user=repo_user.users[1], code=repo_activity.activities[0].code)
 
-    @pytest.mark.skip(reason="Still no ForbiddenAction exception")
     def test_get_activity_with_enrollments_forbidden_wrong_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
