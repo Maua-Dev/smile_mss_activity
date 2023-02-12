@@ -25,7 +25,7 @@ class Test_UpdateActivityUsecase:
                                   new_start_date=1630465200000, new_duration=15,
                                   new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
                                   new_place="Sala 1",
-                                  new_responsible_professors_user_id=[repo_user.users[2].user_id, repo_user.users[11].user_id],
+                                  new_responsible_professors_user_id=[repo_user.users[2].user_id],
                                   new_speakers=[
                                       Speaker(
                                           name="Fulano de Tal",
@@ -49,7 +49,50 @@ class Test_UpdateActivityUsecase:
         assert repo_activity.activities[0].duration == update_activity.duration
         assert repo_activity.activities[0].link == update_activity.link
         assert repo_activity.activities[0].place == update_activity.place
-        assert repo_activity.activities[0].responsible_professors == update_activity.responsible_professors
+        assert repo_activity.activities[0].responsible_professors == [repo_user.users[2]]
+        assert repo_activity.activities[0].speakers == update_activity.speakers
+        assert repo_activity.activities[0].total_slots == update_activity.total_slots
+        assert repo_activity.activities[0].accepting_new_enrollments == update_activity.accepting_new_enrollments
+        assert repo_activity.activities[
+                   0].stop_accepting_new_enrollments_before == update_activity.stop_accepting_new_enrollments_before
+
+    def test_update_activity_usecase_different_professor(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
+                                  new_description='nova descricao',
+                                  new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                  new_is_extensive=True,
+                                  new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                  new_start_date=1630465200000, new_duration=15,
+                                  new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
+                                  new_place="Sala 1",
+                                  new_responsible_professors_user_id=[repo_user.users[11].user_id],
+                                  new_speakers=[
+                                      Speaker(
+                                          name="Fulano de Tal",
+                                          bio="Fulano de Tal é um professor de Engenharia de Software",
+                                          company="Universidade Federal de Fulano de tal",
+                                      )
+                                  ], new_total_slots=100,
+                                  new_accepting_new_enrollments=True,
+                                  user=repo_user.users[0],
+                                  new_stop_accepting_new_enrollments_before=None)
+
+        assert type(update_activity) == Activity
+
+        assert repo_activity.activities[0].title == update_activity.title
+        assert repo_activity.activities[0].title == "NOVO TITULO"
+        assert repo_activity.activities[0].description == update_activity.description
+        assert repo_activity.activities[0].activity_type == update_activity.activity_type
+        assert repo_activity.activities[0].is_extensive == update_activity.is_extensive
+        assert repo_activity.activities[0].delivery_model == update_activity.delivery_model
+        assert repo_activity.activities[0].start_date == update_activity.start_date
+        assert repo_activity.activities[0].duration == update_activity.duration
+        assert repo_activity.activities[0].link == update_activity.link
+        assert repo_activity.activities[0].place == update_activity.place
+        assert repo_activity.activities[0].responsible_professors == [repo_user.users[11]]
         assert repo_activity.activities[0].speakers == update_activity.speakers
         assert repo_activity.activities[0].total_slots == update_activity.total_slots
         assert repo_activity.activities[0].accepting_new_enrollments == update_activity.accepting_new_enrollments

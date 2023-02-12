@@ -41,10 +41,22 @@ class UpdateActivityUsecase:
         if not all(type(user_id) == str for user_id in new_responsible_professors_user_id):
             raise EntityError("responsible_professors")
 
-        new_responsible_professors = self.repo_user.get_users(new_responsible_professors_user_id)
+        old_responsible_professors = activity.responsible_professors
 
-        if len(new_responsible_professors) != len(new_responsible_professors_user_id):
-            raise NoItemsFound("responsible_professors")
+        old_responsible_professors_user_id = [professor.user_id for professor in old_responsible_professors]
+
+        old_responsible_professors_user_id.sort()
+
+        new_responsible_professors_user_id.sort()
+
+        if old_responsible_professors_user_id != new_responsible_professors_user_id:
+            new_responsible_professors = self.repo_user.get_users(new_responsible_professors_user_id)
+
+            if len(new_responsible_professors) != len(new_responsible_professors_user_id):
+                raise NoItemsFound("responsible_professors")
+
+        else:
+            new_responsible_professors = old_responsible_professors
 
         if type(new_title) != str:
             raise EntityError("title")
