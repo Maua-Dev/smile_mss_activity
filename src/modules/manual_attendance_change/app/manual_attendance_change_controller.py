@@ -1,7 +1,7 @@
 import pytest
 
-from src.modules.manual_attendance_change.app.manual_attendance_change_usecase import ManualAttendanceChangeUsecase
-from src.modules.manual_attendance_change.app.manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
+from .manual_attendance_change_usecase import ManualAttendanceChangeUsecase
+from .manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError

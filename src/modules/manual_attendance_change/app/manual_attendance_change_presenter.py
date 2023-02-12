@@ -1,6 +1,6 @@
-from src.modules.manual_attendance_change.app.manual_attendance_change_controller import \
+from .manual_attendance_change_controller import \
     ManualAttendanceChangeController
-from src.modules.manual_attendance_change.app.manual_attendance_change_usecase import ManualAttendanceChangeUsecase
+from .manual_attendance_change_usecase import ManualAttendanceChangeUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
