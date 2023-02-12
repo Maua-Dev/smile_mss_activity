@@ -1,6 +1,7 @@
 import pytest
 from src.modules.confirm_attendance.app.confirm_attendance_usecase import ConfirmAttendanceUsecase
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
@@ -75,3 +76,35 @@ class Test_ConfirmAttendanceUsecase:
                 code=code,
                 confirmation_code=confirmation_code
             )
+
+    def test_confirm_attendance_usecase_invalid_confirmation_code_not_str(self):
+        activity_repo = ActivityRepositoryMock()
+        users_repo = UserRepositoryMock()
+        usecase = ConfirmAttendanceUsecase(activity_repo)
+
+        user_id = users_repo.users[5].user_id
+        code = activity_repo.activities[11].code
+        confirmation_code = 123456
+
+        
+        with pytest.raises(EntityError):
+            resp = usecase(
+                user_id=user_id,
+                code=code,
+                confirmation_code=confirmation_code)
+    
+    def test_confirm_attendance_usecase_invalid_activity_code_not_str(self):
+        activity_repo = ActivityRepositoryMock()
+        users_repo = UserRepositoryMock()
+        usecase = ConfirmAttendanceUsecase(activity_repo)
+
+        user_id = users_repo.users[5].user_id
+        code = 123456
+        confirmation_code = activity_repo.activities[11].confirmation_code
+
+        
+        with pytest.raises(EntityError):
+            resp = usecase(
+                user_id=user_id,
+                code=code,
+                confirmation_code=confirmation_code)
