@@ -1,10 +1,29 @@
-import datetime
 from typing import List
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker
+from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.domain.enums.role_enum import ROLE
+
+
+class UserViewmodel:
+    name: str
+    role: ROLE
+    user_id: str
+
+    def __init__(self, user: User):
+        self.name = user.name
+        self.role = user.role
+        self.user_id = user.user_id
+
+    def to_dict(self) -> dict:
+        return {
+            "name": self.name,
+            "role": self.role.value,
+            "user_id": self.user_id
+        }
 
 
 class SpeakerViewmodel:
@@ -61,6 +80,8 @@ class ActivityViewmodel:
         self.accepting_new_enrollments = activity.accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
         self.confirmation_code = activity.confirmation_code
+        self.responsible_professors = [UserViewmodel(
+            professor) for professor in activity.responsible_professors]
 
     def to_dict(self):
         return {
@@ -74,6 +95,7 @@ class ActivityViewmodel:
             "duration": self.duration,
             "link": self.link,
             "place": self.place,
+            "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
             "speakers": [speaker.to_dict() for speaker in self.speakers],
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
