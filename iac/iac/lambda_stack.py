@@ -180,7 +180,8 @@ class LambdaStack(Construct):
             self.create_activity_function,
             self.update_activity_function,
             self.get_all_activities_admin_function,
-            self.get_activity_with_enrollments_function
+            self.get_activity_with_enrollments_function,
+            self.manual_attendance_change_function
         ]
 
 
