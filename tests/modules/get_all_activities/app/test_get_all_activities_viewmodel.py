@@ -433,7 +433,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                     'taken_slots': 4,
                     'accepting_new_enrollments': False,
                     'stop_accepting_new_enrollments_before': 1669918612000,
-                    'confirmation_code': None
+                    'confirmation_code': "696969"
                 }
             ],
             'message': 'the activities were retrieved'

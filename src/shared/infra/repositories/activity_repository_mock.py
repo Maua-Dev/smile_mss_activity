@@ -271,7 +271,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 taken_slots=4,
                 accepting_new_enrollments=False,
                 stop_accepting_new_enrollments_before=1669918612000,
-                confirmation_code=None
+                confirmation_code='696969'
             ),
 
         ]
@@ -363,13 +363,18 @@ class ActivityRepositoryMock(IActivityRepository):
         return None
 
     def update_enrollment(self, user_id: str, code: str, new_state: ENROLLMENT_STATE) -> Enrollment:
+        old_enrollment = self.get_enrollment(user_id=user_id, code=code)
+
         for enrollment in self.enrollments:
             if enrollment.user_id == user_id and enrollment.activity_code == code:
                 activity = self.get_activity(code=code)
                 if new_state == ENROLLMENT_STATE.DROPPED:
                     self.update_activity(code=code, new_taken_slots=activity.taken_slots - 1)
                 elif new_state == ENROLLMENT_STATE.ENROLLED:
-                    self.update_activity(code=code, new_taken_slots=activity.taken_slots + 1)
+                    if old_enrollment.state == ENROLLMENT_STATE.IN_QUEUE:
+                        self.update_activity(code=code, new_taken_slots=activity.taken_slots + 1)
+                    else:
+                        self.update_activity(code=code, new_taken_slots=activity.taken_slots)
 
                 enrollment.state = new_state
                 return enrollment
@@ -423,8 +428,8 @@ class ActivityRepositoryMock(IActivityRepository):
                     activity.accepting_new_enrollments = new_accepting_new_enrollments
                 if new_stop_accepting_new_enrollments_before is not None:
                     activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
-                if new_confirmation_code is not None:
-                    activity.confirmation_code = new_confirmation_code
+
+                activity.confirmation_code = new_confirmation_code
 
                 return activity
 
