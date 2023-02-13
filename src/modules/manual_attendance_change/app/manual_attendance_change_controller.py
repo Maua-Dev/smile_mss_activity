@@ -1,5 +1,3 @@
-import pytest
-
 from .manual_attendance_change_usecase import ManualAttendanceChangeUsecase
 from .manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
