@@ -78,7 +78,6 @@ class ActivityViewmodel:
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int
     enrollment: EnrollmentViewmodel
-    confirmation_code: str
 
     def __init__(self, activity_and_state: dict):
         self.code = activity_and_state['activity'].code
@@ -101,7 +100,6 @@ class ActivityViewmodel:
             'activity'].stop_accepting_new_enrollments_before
         self.enrollment = EnrollmentViewmodel(
             activity_and_state['enrollment']) if "enrollment" in activity_and_state else None
-        self.confirmation_code = activity_and_state['activity'].confirmation_code
 
     def to_dict(self):
         to_return = {
@@ -121,7 +119,7 @@ class ActivityViewmodel:
                          "taken_slots": self.taken_slots,
                          "accepting_new_enrollments": self.accepting_new_enrollments,
                          "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
-                         "confirmation_code": self.confirmation_code},
+                         },
             "enrollment": self.enrollment.to_dict() if self.enrollment is not None else None,
         }
 

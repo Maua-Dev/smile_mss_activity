@@ -37,7 +37,6 @@ class Test_UpdateActivityViewmodel:
                 'taken_slots': 4,
                 'title': 'Atividade da ECM 2345',
                 'total_slots': 4,
-                'confirmation_code': None
             }
         }
 

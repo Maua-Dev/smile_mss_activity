@@ -72,7 +72,7 @@ class Test_CreateActivityViewmodel:
             "taken_slots": 97,
             "accepting_new_enrollments": True,
             "stop_accepting_new_enrollments_before": 1666451812000,
-            "confirmation_code": "123456"},
+            },
             "message":"the activity was created",
             }
 
@@ -139,7 +139,7 @@ class Test_CreateActivityViewmodel:
                  "taken_slots": 97,
                  "accepting_new_enrollments": True,
                  "stop_accepting_new_enrollments_before": 1666451812000,
-                 "confirmation_code": None},
+                 },
                 "message":"the activity was created"
                 }
 

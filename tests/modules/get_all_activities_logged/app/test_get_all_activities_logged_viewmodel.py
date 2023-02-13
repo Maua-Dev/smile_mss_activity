@@ -49,7 +49,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 4,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': 1671743812000,
-                        'confirmation_code': None
+
                     },
                     'enrollment': {
                         'state': 'ENROLLED',
@@ -86,7 +86,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 1,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -124,7 +124,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 1,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -167,7 +167,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 2,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': 1671747413000,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -200,7 +200,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 2,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': 1671574613000,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -233,7 +233,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 1,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -266,7 +266,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 1,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -299,7 +299,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 2,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -332,7 +332,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 0,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -365,7 +365,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 0,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -398,7 +398,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 0,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
+
                     }
                 },
                 {
@@ -431,7 +431,6 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 3,
                         'accepting_new_enrollments': True,
                         'stop_accepting_new_enrollments_before': 1671733012000,
-                        'confirmation_code': '555666'
                     },
                     'enrollment': {
                         'state': 'ENROLLED',
@@ -473,7 +472,6 @@ class Test_GetAllActivitiesLoggedViewmodel:
                         'taken_slots': 4,
                         'accepting_new_enrollments': False,
                         'stop_accepting_new_enrollments_before': 1669918612000,
-                        'confirmation_code': "696969"
                     },
                     'enrollment': {
                         'state': 'COMPLETED',
