@@ -172,7 +172,7 @@ class LambdaStack(Construct):
             self.generate_attendance_confirmation_function,
             self.confirm_attendance_function,
             self.delete_attendance_confirmation_function,
-            self.manual_attendance_change_function
+            self.manual_attendance_change_function,
             self.get_activity_with_enrollments_function
         ]
 
