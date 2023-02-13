@@ -23,7 +23,7 @@ class Test_DeleteActivityViewmodel:
                          'speakers': [{'name': 'Vitor Briquez', 'bio': 'Incrível', 'company': 'Apple'}],
                          'total_slots': 4, 'taken_slots': 4, 'accepting_new_enrollments': True,
                          'stop_accepting_new_enrollments_before': 1671743812000,
-                         'confirmation_code': None},
+                         },
             'message': 'the activity was deleted'}
 
         assert viewmodel.to_dict() == expected
