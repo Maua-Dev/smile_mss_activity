@@ -5,20 +5,21 @@ on:
   push:
     branches:
       - main
+      - dev
 
   workflow_dispatch:
 
 jobs:
   DeployToAWS:
+    environment:
+        name: ${{ github.ref_name }}
     runs-on: ubuntu-latest
-    environment: dev
     permissions:
       id-token: write
       contents: read
 
     steps:
         - uses: actions/checkout@v2
-
         - name: Setup AWS Credentials
           uses: aws-actions/configure-aws-credentials@v1
           with:
@@ -26,28 +27,17 @@ jobs:
             role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GithubActionsRole
             role-session-name: github-action
 
+        - name: Stage
+          run: echo "STAGE=${{ github.ref_name }}"
 
         - name: Installing Dependencies
           run: |
             npm install -g aws-cdk
             cd iac
             pip install -r requirements.txt
-                 
 
         - name: DeployWithCDK
           run: |
             cd iac
             cdk synth
             cdk deploy --require-approval never
-          env:
-            AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-            USER_POOL_ARN: ${{ secrets.USER_POOL_ARN }}
-            USER_POOL_NAME: ${{ secrets.USER_POOL_NAME }}
-            USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
-
-
-
-
-
-
-
