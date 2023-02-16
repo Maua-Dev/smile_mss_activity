@@ -6,25 +6,31 @@ from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
+from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound
+from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound, ForbiddenAction
 
 
 class CreateActivityUsecase:
-    def __init__(self, repo: IActivityRepository):
-        self.repo = repo
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+        self.repo_activity = repo_activity
+        self.repo_user = repo_user
 
     def __call__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
                  total_slots: int,
                  accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
-                 stop_accepting_new_enrollments_before: int, speakers: List[Speaker]) -> Activity:
+                 stop_accepting_new_enrollments_before: int, speakers: List[Speaker], user: User) -> Activity:
 
         if type(code) != str:
             raise EntityError("code")
 
-        if self.repo.get_activity(code=code) is not None:
+        if user.role != ROLE.ADMIN:
+            raise ForbiddenAction("create_activity, only admins can create activities")
+
+        if self.repo_activity.get_activity(code=code) is not None:
             raise DuplicatedItem("code")
 
         if type(responsible_professors_user_id) != list:
@@ -39,7 +45,7 @@ class CreateActivityUsecase:
         if not all(type(user_id) == str for user_id in responsible_professors_user_id):
             raise EntityError("responsible_professors")
 
-        responsible_professors = self.repo.get_users(responsible_professors_user_id)
+        responsible_professors = self.repo_user.get_users(responsible_professors_user_id)
 
         if len(responsible_professors) != len(responsible_professors_user_id):
             raise NoItemsFound("responsible_professors")
@@ -60,7 +66,8 @@ class CreateActivityUsecase:
             total_slots=total_slots,
             taken_slots=0,
             accepting_new_enrollments=accepting_new_enrollments,
-            stop_accepting_new_enrollments_before=stop_accepting_new_enrollments_before
+            stop_accepting_new_enrollments_before=stop_accepting_new_enrollments_before,
+            confirmation_code=None,
         )
 
-        return self.repo.create_activity(activity)
+        return self.repo_activity.create_activity(activity)

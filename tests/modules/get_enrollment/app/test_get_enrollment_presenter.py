@@ -20,7 +20,6 @@ class Test_GetEnrollmentPresenter:
                 "header2": "value1,value2"
             },
             "queryStringParameters": {
-                'user_id': "d61dbf66-a10f-11ed-a8fc-0242ac120002",
                 'code': "ECM2345"
             },
             "requestContext": {
@@ -28,15 +27,12 @@ class Test_GetEnrollmentPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
+                            "name": "João Vilas",
+                            "custom:role": "ADMIN",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -77,7 +73,6 @@ class Test_GetEnrollmentPresenter:
                     "header2": "value1,value2"
                 },
                 "queryStringParameters": {
-                    'user_id': "d61dbf66-a10f-11ed-a8fc-0242ac120002",
                     'code': "ECM2341"
                 },
                 "requestContext": {
@@ -85,15 +80,12 @@ class Test_GetEnrollmentPresenter:
                     "apiId": "<urlid>",
                     "authentication": None,
                     "authorizer": {
-                        "iam": {
-                            "accessKey": "AKIA...",
-                            "accountId": "111122223333",
-                            "callerId": "AIDA...",
-                            "cognitoIdentity": None,
-                            "principalOrgId": None,
-                            "userArn": "arn:aws:iam::111122223333:user/example-user",
-                            "userId": "AIDA..."
-                        }
+                        "claims":
+                            {
+                                "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
+                                "name": "João Vilas",
+                                "custom:role": "ADMIN",
+                            }
                     },
                     "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                     "domainPrefix": "<url-id>",
@@ -135,22 +127,19 @@ class Test_GetEnrollmentPresenter:
                 "header2": "value1,value2"
             },
             "queryStringParameters": {
-                'code': "ECM2341"
+                'value1': "value1"
             },
             "requestContext": {
                 "accountId": "123456789012",
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                     "claims":
+                        {
+                            "sub": "d61dbf66-a10f-11ed-a8fc-0242ac120002",
+                            "name": "João Vilas",
+                            "custom:role": "ADMIN",
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -175,4 +164,4 @@ class Test_GetEnrollmentPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response['body']) == "Field user_id is missing"
+        assert json.loads(response['body']) == "Field code is missing"

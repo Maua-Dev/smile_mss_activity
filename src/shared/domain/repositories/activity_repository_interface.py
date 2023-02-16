@@ -43,14 +43,6 @@ class IActivityRepository(ABC):
         """
         pass
 
-    @abstractmethod
-    def get_user(self, user_id:str) -> User:
-        """
-        If user with the given code exists, returns it
-        else returns None
-        """
-        pass
-
     @abstractmethod 
     def get_activity_with_enrollments(self, code: str) -> Tuple[Activity, List[Enrollment]]:
         """
@@ -71,7 +63,7 @@ class IActivityRepository(ABC):
     def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
                  new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None, new_duration: int = None, new_link: str = None, new_place: str = None,
                  new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
-                 new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: int = None) -> Activity:
+                 new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: int = None, new_confirmation_code: str = None) -> Activity:
         pass
 
     @abstractmethod
@@ -108,9 +100,13 @@ class IActivityRepository(ABC):
         pass
 
     @abstractmethod
-    def get_users(self, user_ids: List[str]) -> List[User]:
+    def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
         pass
 
     @abstractmethod
-    def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
+    def get_all_activities_logged(self, user_id: str) -> Tuple[List[Activity], List[Enrollment]]:
+        """
+        Returns all activities and enrollments of the user (IN_QUEUE, ENROLLED. COMPLETED)
+        if user is not enrolled in any activity, returns empty list of enrollments
+        """
         pass

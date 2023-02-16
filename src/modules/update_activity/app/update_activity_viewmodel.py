@@ -97,7 +97,7 @@ class ActivityViewmodel:
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
         }
 
 

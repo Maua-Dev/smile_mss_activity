@@ -54,52 +54,52 @@ class ActivityViewmodel:
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
     start_date: int
-    duration: int  # minutes
+    duration: int
+    link: str
+    place: str
     responsible_professors: List[UserViewmodel]
     speakers: List[SpeakerViewmodel]
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int
-    link: str
-    place: str
 
     def __init__(self, activity: Activity):
         self.code = activity.code
         self.title = activity.title
         self.description = activity.description
-        self.activity_type = activity.activity_type
+        self.activity_type = activity.activity_type.value
         self.is_extensive = activity.is_extensive
-        self.delivery_model = activity.delivery_model
+        self.delivery_model = activity.delivery_model.value
         self.start_date = activity.start_date
         self.duration = activity.duration
+        self.link = activity.link
+        self.place = activity.place
         self.responsible_professors = [UserViewmodel(professor) for professor in activity.responsible_professors]
         self.speakers = [SpeakerViewmodel(speaker) for speaker in activity.speakers]
         self.total_slots = activity.total_slots
         self.taken_slots = activity.taken_slots
         self.accepting_new_enrollments = activity.accepting_new_enrollments
         self.stop_accepting_new_enrollments_before = activity.stop_accepting_new_enrollments_before
-        self.link = activity.link
-        self.place = activity.place
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "code": self.code,
             "title": self.title,
             "description": self.description,
-            "activity_type": self.activity_type.value,
+            "activity_type": self.activity_type,
             "is_extensive": self.is_extensive,
-            "delivery_model": self.delivery_model.value,
+            "delivery_model": self.delivery_model,
             "start_date": self.start_date,
             "duration": self.duration,
-            'link': self.link,
-            'place': self.place,
-            "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],
-            "speakers": [speaker.to_dict() for speaker in self.speakers],
+            "link": self.link,
+            "place": self.place,
+            "responsible_professors": [(professor.to_dict()) for professor in self.responsible_professors],
+            "speakers": [(speaker.to_dict()) for speaker in self.speakers],
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
-            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
+            "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before,
         }
 
 
