@@ -23,12 +23,18 @@ def lambda_handler(event, context):
             activity.accepting_new_enrollments = False
             activities_to_update.append(activity)
 
-    print(activities_to_update)
+    for activity in activities_to_update:
+        print(f"Atualizando atividade {activity.code}")
+        print(f"Inscrição fechou as {datetime.fromtimestamp(activity.stop_accepting_new_enrollments_before/1000)}")
+        print(f"Agora são {datetime.now()}")
+
+    if len(activities_to_update) == 0:
+        print("Nenhuma atividade encontrada para atualizar")
 
     if len(activities_to_update) != 0:
         repo_activity.batch_update_activities(activities_to_update)
 
     return {
         'statusCode': 200,
-        'body': json.dumps('Salve da Lambda!')
+        'body': json.dumps('Inscrições fechadas com sucesso')
     }
