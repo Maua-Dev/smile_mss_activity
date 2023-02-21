@@ -24,9 +24,11 @@ def lambda_handler(event, context):
             activities_to_update.append(activity)
 
     for activity in activities_to_update:
-        print(f"Atualizando atividade {activity.code}")
-        print(f"Inscrição fechou as {datetime.fromtimestamp(activity.stop_accepting_new_enrollments_before/1000) - timedelta(hours=3)} ")
-        print(f"Agora são {datetime.now() - timedelta(hours=3)}")
+        print(f"""
+            Atualizando atividade {activity.code}
+            Inscrição fechou as {datetime.fromtimestamp(activity.stop_accepting_new_enrollments_before/1000) - timedelta(hours=3)}
+            Agora são {datetime.now() - timedelta(hours=3)}
+        """)
 
     if len(activities_to_update) == 0:
         print("Nenhuma atividade encontrada para atualizar")
