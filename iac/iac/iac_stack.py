@@ -10,6 +10,7 @@ from aws_cdk.aws_cognito import IUserPool
 from constructs import Construct
 
 from .dynamo_stack import DynamoStack
+from .event_bridge_stack import EventBridgeStack
 from .lambda_stack import LambdaStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
@@ -61,6 +62,10 @@ class IacStack(Stack):
 
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=auth)
+
+        self.event_bridge = EventBridgeStack(self, "SmileEventBridge", environment_variables=ENVIRONMENT_VARIABLES, lambda_layer=self.lambda_stack.lambda_layer)
+
+        self.dynamo_stack.dynamo_table.grant_read_write_data(self.event_bridge.close_activity_date_function)
 
         for f in self.lambda_stack.functions_that_need_dynamo_permissions:
             self.dynamo_stack.dynamo_table.grant_read_write_data(f)
