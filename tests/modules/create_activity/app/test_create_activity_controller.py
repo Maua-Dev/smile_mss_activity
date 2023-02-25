@@ -87,7 +87,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field code is missing"
+        assert response.body == "Parâmetro ausente: code"
 
     def test_create_activity_controller_wrong_code(self):
             repo_activity = ActivityRepositoryMock()
@@ -120,7 +120,7 @@ class Test_CreateActivityController:
             response = controller(request=request)
 
             assert response.status_code == 400
-            assert response.body == "Field code is not valid"
+            assert response.body == "Parâmetro inválido: code"
 
     def test_create_activity_controller_duplicated_code(self):
         repo_activity = ActivityRepositoryMock()
@@ -154,7 +154,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == 'The item alredy exists for this code'
+        assert response.body == 'Já existe uma atividade com esse código'
 
     def test_create_activity_controller_missing_title(self):
         repo_activity = ActivityRepositoryMock()
@@ -187,7 +187,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field title is missing"
+        assert response.body == "Parâmetro ausente: title"
 
     def test_create_activity_controller_missing_description(self):
         repo_activity = ActivityRepositoryMock()
@@ -220,7 +220,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field description is missing"
+        assert response.body == "Parâmetro ausente: description"
 
     def test_create_activity_controller_missing_activity_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -253,7 +253,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field activity_type is missing"
+        assert response.body == "Parâmetro ausente: activity_type"
 
     def test_create_activity_controller_invalid_activity_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -285,7 +285,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field activity_type is not valid"
+        assert response.body == "Parâmetro inválido: activity_type"
 
     def test_create_activity_controller_missing_is_extensive(self):
         repo_activity = ActivityRepositoryMock()
@@ -318,7 +318,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field is_extensive is missing"
+        assert response.body == "Parâmetro ausente: is_extensive"
 
     def test_create_activity_controller_missing_delivery_model(self):
         repo_activity = ActivityRepositoryMock()
@@ -351,7 +351,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field delivery_model is missing"
+        assert response.body == "Parâmetro ausente: delivery_model"
 
     def test_create_activity_controller_invalid_delivery_model(self):
         repo_activity = ActivityRepositoryMock()
@@ -383,7 +383,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field delivery_model is not valid"
+        assert response.body == "Parâmetro inválido: delivery_model"
 
     def test_create_activity_controller_invalid_start_date(self):
         repo_activity = ActivityRepositoryMock()
@@ -416,7 +416,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field start_date is missing"
+        assert response.body == "Parâmetro ausente: start_date"
 
     def test_create_activity_controller_missing_duration(self):
         repo_activity = ActivityRepositoryMock()
@@ -449,7 +449,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field duration is missing"
+        assert response.body == "Parâmetro ausente: duration"
 
     def test_create_activity_controller_missing_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
@@ -482,7 +482,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field responsible_professors is missing"
+        assert response.body == "Parâmetro ausente: responsible_professors"
 
     def test_create_activity_invalid_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
@@ -516,7 +516,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field responsible_professors is not valid"
+        assert response.body == "Parâmetro inválido: responsible_professors"
 
     def test_create_activity_invalid_responsible_professors_id_invalid(self):
         repo_activity = ActivityRepositoryMock()
@@ -550,7 +550,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 404
-        assert response.body == "No items found for responsible_professors"
+        assert response.body == "Professores responsáveis não encontrados"
 
     def test_create_activity_controller_missing_speakers(self):
         repo_activity = ActivityRepositoryMock()
@@ -579,7 +579,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field speakers is missing"
+        assert response.body == "Parâmetro ausente: speakers"
 
     def test_create_actvivity_invalid_speaker_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -609,7 +609,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field speakers is not valid"
+        assert response.body == "Parâmetro inválido: speakers"
 
     def test_create_activity_invalid_speaker_parameter(self):
         repo_activity = ActivityRepositoryMock()
@@ -644,7 +644,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field speakers is not valid"
+        assert response.body == "Parâmetro inválido: speakers"
 
     def test_create_activity_controller_missing_total_slots(self):
         repo_activity = ActivityRepositoryMock()
@@ -677,7 +677,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field total_slots is missing"
+        assert response.body == "Parâmetro ausente: total_slots"
 
     def test_create_activity_controller_missing_accepting_new_enrollments(self):
         repo_activity = ActivityRepositoryMock()
@@ -709,7 +709,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field accepting_new_enrollments is missing"
+        assert response.body == "Parâmetro ausente: accepting_new_enrollments"
 
     def test_create_activity_controller_missing_request_user(self):
         repo_activity = ActivityRepositoryMock()
@@ -743,7 +743,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field requester_user is missing"
+        assert response.body == "Parâmetro ausente: requester_user"
 
 
     def test_create_activity_controller_forbidden_not_admin(self):
@@ -780,4 +780,4 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this create_activity, only admins can create activities"
+        assert response.body == "Apenas administradores podem criar atividades"

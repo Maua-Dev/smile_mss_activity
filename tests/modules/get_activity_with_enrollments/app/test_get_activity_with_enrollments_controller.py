@@ -33,7 +33,7 @@ class Test_GetActivityWithEnrollmentsController:
 
         response = controller(request=request)
         assert response.status_code == 400
-        assert response.body == 'Field requester_user is missing'
+        assert response.body == 'Parâmetro ausente: requester_user'
 
     def test_get_activity_with_enrollments_controller_missing_code(self):
         repo_activity = ActivityRepositoryMock()
@@ -47,7 +47,7 @@ class Test_GetActivityWithEnrollmentsController:
 
         response = controller(request=request)
         assert response.status_code == 400
-        assert response.body == 'Field code is missing'
+        assert response.body == 'Parâmetro ausente: code'
 
     def test_get_activity_with_enrollments_controller_wrong_code_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -60,7 +60,7 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[2].role.value}, 'code': 1234})
 
         response = controller(request=request)
-        assert response.body == 'Field code is not valid'
+        assert response.body == 'Parâmetro inválido: code'
         assert response.status_code == 400
 
     def test_get_activity_with_enrollments_controller_activity_is_none(self):
@@ -74,7 +74,7 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[2].role.value}, 'code': 'NÃO_EXISTE'})
 
         response = controller(request=request)
-        assert response.body == 'No items found for activity'
+        assert response.body == 'Atividade não encontrada'
         assert response.status_code == 404
 
     def test_get_activity_with_enrollments_controller_forbidden_non_professor(self):
@@ -88,7 +88,7 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[1].role.value}, 'code': 'ECM2345'})
 
         response = controller(request=request)
-        assert response.body == 'That action is forbidden for this user: only responsible professors and admin can do that'
+        assert response.body == 'Apenas professores responsáveis da atividade e administradores podem fazer isso'
         assert response.status_code == 403
 
     def test_get_activity_with_enrollments_controller_forbidden_wrong_professor(self):
@@ -102,7 +102,7 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[11].role.value}, 'code': 'ECM2345'})
 
         response = controller(request=request)
-        assert response.body == 'That action is forbidden for this user'
+        assert response.body == "Apenas professores responsáveis da atividade e administradores podem fazer isso"
         assert response.status_code == 403
 
 

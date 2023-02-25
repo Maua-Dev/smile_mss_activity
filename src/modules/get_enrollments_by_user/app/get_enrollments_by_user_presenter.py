@@ -1,8 +1,8 @@
+from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from .get_enrollments_by_user_controller import \
     GetEnrollmentsByUserController
 from .get_enrollments_by_user_usecase import GetEnrollmentsByUserUsecase
-from src.shared.environments import Environments
 
 repo = Environments.get_activity_repo()()
 usecase = GetEnrollmentsByUserUsecase(repo)

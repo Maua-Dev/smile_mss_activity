@@ -1,8 +1,8 @@
+from src.shared.environments import Environments
+from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from .get_all_activities_logged_controller import \
     GetAllActivitiesLoggedController
 from .get_all_activities_logged_usecase import GetAllActivitiesLoggedUsecase
-from src.shared.environments import Environments
-from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
 repo = Environments.get_activity_repo()()
 usecase = GetAllActivitiesLoggedUsecase(repo)

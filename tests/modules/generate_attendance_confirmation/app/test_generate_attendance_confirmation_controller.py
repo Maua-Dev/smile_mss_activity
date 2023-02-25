@@ -37,7 +37,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field code is missing"
+        assert response.body == "Parâmetro ausente: code"
 
     def test_generate_attendance_confirmation_controller_missing_requester_user(self):
         repo = ActivityRepositoryMock()
@@ -49,7 +49,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field requester_user is missing"
+        assert response.body == "Parâmetro ausente: requester_user"
 
     def test_generate_attendance_confirmation_controller_invalid_activity_code(self):
         repo = ActivityRepositoryMock()
@@ -62,7 +62,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field activity_code is not valid"
+        assert response.body == "Parâmetro inválido: activity_code"
 
     def test_generate_attendance_confirmation_controller_activity_not_found(self):
         repo = ActivityRepositoryMock()
@@ -75,7 +75,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == "No items found for activity"
+        assert response.body == "Atividade não encontrada"
 
     def test_generate_attendance_confirmation_controller_role_not_professor(self):
         repo = ActivityRepositoryMock()
@@ -88,7 +88,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this user, not professor"
+        assert response.body == "Ação não permitida: user, not professor"
 
     def test_generate_attendance_confirmation_controller_activity_already_has_confirmation_code(self):
         repo = ActivityRepositoryMock()
@@ -101,7 +101,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this confirmation_code, already exists"
+        assert response.body == 'Já existe um código de confirmação para esta atividade'
 
     def test_generate_attendance_confirmation_controller_not_responsible_professor(self):
         repo = ActivityRepositoryMock()
@@ -114,6 +114,6 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this user, not professor of activity"
+        assert response.body == "Apenas professores responsáveis da atividade e administradores podem gerar códdigo de confirmação para atividades"
 
 

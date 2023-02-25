@@ -55,7 +55,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field requester_user is missing'
+        assert response.body == 'Parâmetro ausente: requester_user'
 
     def test_enroll_activity_controller_missing_code(self):
 
@@ -69,7 +69,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is missing'
+        assert response.body == 'Parâmetro ausente: code'
 
     def test_enroll_activity_controller_enrollment_already_enrolled(self):
         repo = ActivityRepositoryMock()
@@ -82,7 +82,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Enrollment'
+        assert response.body == "Impossível inscrever usuário"
 
     def test_enroll_activity_controller_forbidden_action_wrong_role(self):
 
@@ -96,7 +96,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Enrollment'
+        assert response.body == "Impossível inscrever usuário"
 
 
     def test_enroll_activity_controller_activity_not_found(self):
@@ -111,7 +111,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == 'No items found for Activity'
+        assert response.body == 'Atividade não encontrada'
 
     def test_enroll_activity_controller_invalid_user_id(self):
 
@@ -125,7 +125,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field user_id is not valid'
+        assert response.body == 'Parâmetro inválido: user_id'
 
 
     def test_enroll_activity_controller_invalid_code(self):
@@ -140,6 +140,6 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is not valid'
+        assert response.body == 'Parâmetro inválido: code'
 
     

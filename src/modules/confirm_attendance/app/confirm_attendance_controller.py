@@ -1,11 +1,10 @@
-from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
-from .confirm_attendance_usecase import ConfirmAttendanceUsecase
-
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import DuplicatedItem, ForbiddenAction, NoItemsFound
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, Forbidden, NotFound, BadRequest, InternalServerError
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from .confirm_attendance_usecase import ConfirmAttendanceUsecase
 
 
 class ConfirmAttendanceController:
@@ -36,16 +35,47 @@ class ConfirmAttendanceController:
             return OK('Success to Confirm Attendance!')
 
         except NoItemsFound as err:
+            message = err.message.lower()
 
-            return NotFound(body=err.message)
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
 
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
+
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
+
+            else:
+                return NotFound(body=f"{message} não encontrada")
         except MissingParameters as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            message = err.message.lower()
+
+            if message == "not_enrolled":
+
+                return Forbidden(body=f"Usuário não está inscrito nesta atividade")
+
+            elif message == "completed":
+
+                return Forbidden(body=f"Presença já confirmada")
+
+            elif message == "enrolled":
+
+                return Forbidden(body=f"Impossível confirmar presença")
+
+            elif message == "confirmation_code":
+
+                return Forbidden(
+                    body=f"Código de confirmação inválido")
+
+            else:
+
+                return Forbidden(body=f"Ação não permitida: {err.message}")
 
         except DuplicatedItem as err:
 
@@ -53,7 +83,7 @@ class ConfirmAttendanceController:
 
         except EntityError as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
 

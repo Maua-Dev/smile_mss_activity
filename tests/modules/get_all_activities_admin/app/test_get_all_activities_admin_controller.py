@@ -32,7 +32,7 @@ class Test_GetAllActivitiesAdminController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field requester_user is missing"
+        assert response.body == "Parâmetro ausente: requester_user"
 
     def test_get_all_activites_admin_forbidden_not_admin(self):
         repo_activity = ActivityRepositoryMock()
@@ -45,4 +45,4 @@ class Test_GetAllActivitiesAdminController:
         response = controller(request=request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this get_all_activities_with_enrollments, only admins can do this"
+        assert response.body == "Apenas administradores podem realizar essa ação"

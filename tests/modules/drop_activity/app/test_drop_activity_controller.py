@@ -34,7 +34,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field requester_user is missing'
+        assert reponse.body == 'Parâmetro ausente: requester_user'
 
     def test_drop_activity_controller_missing_code(self):
         repo = ActivityRepositoryMock()
@@ -48,7 +48,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field code is missing'
+        assert reponse.body == 'Parâmetro ausente: code'
 
     def test_drop_activity_controller_forbbiden_action(self):
         repo = ActivityRepositoryMock()
@@ -62,7 +62,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 403
-        assert reponse.body == 'That action is forbidden for this Enrollment'
+        assert reponse.body == "Impossível desinscrever usuário de atividade que não está inscrito"
 
     def test_drop_activity_controller_activity_not_found(self):
         repo = ActivityRepositoryMock()
@@ -76,7 +76,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 404
-        assert reponse.body == 'No items found for Activity'
+        assert reponse.body == 'Atividade não encontrada'
 
     def test_drop_activity_controller_no_enrollment_found(self):
         repo = ActivityRepositoryMock()
@@ -90,7 +90,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 404
-        assert reponse.body == 'No items found for Enrollment'
+        assert reponse.body == 'Inscrição não encontrada'
 
     def test_drop_activity_invalid_user_id(self):
         repo = ActivityRepositoryMock()
@@ -103,7 +103,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field user_id is not valid'
+        assert reponse.body == 'Parâmetro inválido: user_id'
 
     def test_drop_activity_invalid_code(self):
         repo = ActivityRepositoryMock()
@@ -116,5 +116,5 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field code is not valid'
+        assert reponse.body == 'Parâmetro inválido: code'
 

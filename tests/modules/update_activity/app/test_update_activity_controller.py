@@ -92,7 +92,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is missing'
+        assert response.body == 'Parâmetro ausente: code'
 
     def test_update_activity_controller_activity_not_found(self):
         repo_activity = ActivityRepositoryMock()
@@ -125,7 +125,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == 'No items found for Activity'
+        assert response.body == 'Atividade não encontrada'
 
     def test_update_activity_controller_invalid_code(self):
         repo_activity = ActivityRepositoryMock()
@@ -158,7 +158,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is not valid'
+        assert response.body == 'Parâmetro inválido: code'
 
     def test_update_activity_missing_new_title(self):
         repo_activity = ActivityRepositoryMock()
@@ -190,7 +190,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_title is missing"
+        assert response.body == "Parâmetro ausente: new_title"
 
     def test_update_activity_missing_new_description(self):
         repo_activity = ActivityRepositoryMock()
@@ -222,7 +222,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_description is missing"
+        assert response.body == "Parâmetro ausente: new_description"
 
     def test_update_activity_missing_new_activity_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -254,7 +254,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_activity_type is missing"
+        assert response.body == "Parâmetro ausente: new_activity_type"
 
     def test_update_activity_invalid_new_activity_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -287,7 +287,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_activity_type is not valid"
+        assert response.body == "Parâmetro inválido: new_activity_type"
 
     def test_update_activity_missing_new_is_extensive(self):
         repo_activity = ActivityRepositoryMock()
@@ -319,7 +319,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_is_extensive is missing"
+        assert response.body == "Parâmetro ausente: new_is_extensive"
 
     def test_update_activity_missing_new_delivery_model(self):
         repo_activity = ActivityRepositoryMock()
@@ -351,7 +351,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_delivery_model is missing"
+        assert response.body == "Parâmetro ausente: new_delivery_model"
 
     def test_update_activity_invalid_new_delivery_model(self):
         repo_activity = ActivityRepositoryMock()
@@ -384,7 +384,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_delivery_model is not valid"
+        assert response.body == "Parâmetro inválido: new_delivery_model"
 
     def test_update_activity_missing_new_start_date(self):
         repo_activity = ActivityRepositoryMock()
@@ -416,7 +416,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_start_date is missing"
+        assert response.body == "Parâmetro ausente: new_start_date"
 
     def test_update_activity_missing_new_duration(self):
         repo_activity = ActivityRepositoryMock()
@@ -448,7 +448,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_duration is missing"
+        assert response.body == "Parâmetro ausente: new_duration"
 
     def test_update_activity_missing_new_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
@@ -480,7 +480,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_responsible_professors is missing"
+        assert response.body == "Parâmetro ausente: new_responsible_professors"
 
     def test_update_activity_missing_new_speakers(self):
         repo_activity = ActivityRepositoryMock()
@@ -508,7 +508,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_speakers is missing"
+        assert response.body == "Parâmetro ausente: new_speakers"
 
     def test_update_activity_controller_professor_not_found(self):
         repo_activity = ActivityRepositoryMock()
@@ -541,7 +541,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == "No items found for responsible_professors"
+        assert response.body == "responsible_professors não encontrada"
 
     def test_update_activity_controller_invalid_responsible_professors_int(self):
         repo_activity = ActivityRepositoryMock()
@@ -574,7 +574,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field responsible_professors is not valid"
+        assert response.body == "Parâmetro inválido: responsible_professors"
 
     def test_update_activity_invalid_new_speakers(self):
         repo_activity = ActivityRepositoryMock()
@@ -603,7 +603,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_speakers is not valid"
+        assert response.body == "Parâmetro inválido: new_speakers"
 
     def test_update_activity_invalid_entity_new_speakers(self):
         repo_activity = ActivityRepositoryMock()
@@ -637,7 +637,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_speakers is not valid"
+        assert response.body == "Parâmetro inválido: new_speakers"
 
     def test_update_activity_new_speakers_not_dict(self):
         repo_activity = ActivityRepositoryMock()
@@ -666,7 +666,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_speakers is not valid"
+        assert response.body == "Parâmetro inválido: new_speakers"
 
 
     def test_update_activity_missing_new_total_slots(self):
@@ -699,7 +699,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_total_slots is missing"
+        assert response.body == "Parâmetro ausente: new_total_slots"
 
     def test_update_activity_missing_new_accepting_new_enrollments(self):
         repo_activity = ActivityRepositoryMock()
@@ -731,7 +731,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field new_accepting_new_enrollments is missing"
+        assert response.body == "Parâmetro ausente: new_accepting_new_enrollments"
 
     def test_update_activity_controller_missing_request_user(self):
         repo_activity = ActivityRepositoryMock()
@@ -766,7 +766,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field requester_user is missing"
+        assert response.body == "Parâmetro ausente: requester_user"
 
     def test_update_activity_controller_forbidden_user_not_admin(self):
         repo_activity = ActivityRepositoryMock()
@@ -799,4 +799,4 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this update_activity, only admins can update activities"
+        assert response.body == "Apenas administradores podem atualizar atividades"

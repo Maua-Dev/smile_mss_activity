@@ -1,5 +1,3 @@
-from .manual_attendance_change_usecase import ManualAttendanceChangeUsecase
-from .manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -7,6 +5,8 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenActi
 from src.shared.helpers.external_interfaces.external_interface import IResponse, IRequest
 from src.shared.helpers.external_interfaces.http_codes import InternalServerError, BadRequest, Forbidden, NotFound, OK
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from .manual_attendance_change_usecase import ManualAttendanceChangeUsecase
+from .manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
 
 
 class ManualAttendanceChangeController:
@@ -44,20 +44,42 @@ class ManualAttendanceChangeController:
             return OK(viewmodel.to_dict())
 
         except NoItemsFound as err:
+            message = err.message.lower()
 
-            return NotFound(body=err.message)
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
+
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
+
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
+
+            else:
+                return NotFound(body=f"{message} não encontrada")
+
 
         except MissingParameters as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
+            message = err.message.lower()
+            if message == "completed":
+                return Forbidden(body=f"Não é possível confirmar presença deste usuário")
 
-            return Forbidden(body=err.message)
+            elif message == "enrolled":
+                return Forbidden(body=f"Não é possível cancelar presença deste usuário")
+
+            elif message == "user":
+                return Forbidden(body=f"Apenas professores responsáveis da atividade e administradores podem gerar códdigo de confirmação para atividade")
+
+            else:
+                return Forbidden(body=f"Ação não permitida: {err.message}")
 
         except EntityError as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
 

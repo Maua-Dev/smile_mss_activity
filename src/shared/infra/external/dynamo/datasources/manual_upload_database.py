@@ -1,9 +1,8 @@
-from src.envs import Envs
 import asyncio
-import pprint
 
+from src.envs import Envs
 from src.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
-from src.external.dynamo.datasources.mock_db import CLASSES # arquivo temporario com lista das aulas
+from src.external.dynamo.datasources.mock_db import CLASSES  # arquivo temporario com lista das aulas
 
 access_key = Envs.getConfig().access_key
 secret_key = Envs.getConfig().secret_key

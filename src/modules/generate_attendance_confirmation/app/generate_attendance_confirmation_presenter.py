@@ -1,9 +1,9 @@
+from src.shared.environments import Environments
+from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from .generate_attendance_confirmation_controller import \
     GenerateAttendanceConfirmationController
 from .generate_attendance_confirmation_usecase import \
     GenerateAttendanceConfirmationUsecase
-from src.shared.environments import Environments
-from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
 repo_activity = Environments.get_activity_repo()()
 usecase = GenerateAttendanceConfirmationUsecase(repo_activity)

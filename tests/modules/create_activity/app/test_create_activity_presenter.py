@@ -112,7 +112,7 @@ class Test_CreateActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for responsible_professors'
+        assert json.loads(response["body"]) == 'Professores responsáveis não encontrados'
 
 
     def test_create_activity_presenter_missing_parameter(self):
@@ -168,7 +168,7 @@ class Test_CreateActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == 'Field code is missing'
+        assert json.loads(response["body"]) == 'Parâmetro ausente: code'
 
     def test_create_activity_presenter_entity_error(self):
         event = {
@@ -223,7 +223,7 @@ class Test_CreateActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == 'Field code is not valid'
+        assert json.loads(response["body"]) == 'Parâmetro inválido: code'
 
 
     def test_create_activity_presenter_duplicated_items(self):
@@ -279,7 +279,7 @@ class Test_CreateActivityPresenter:
             response = lambda_handler(event, None)
 
             assert response["statusCode"] == 400
-            assert json.loads(response["body"]) == 'The item alredy exists for this code'
+            assert json.loads(response["body"]) == 'Já existe uma atividade com esse código'
 
     def test_create_activity_presenter_forbidden_not_admin(self):
         event = {
@@ -334,4 +334,4 @@ class Test_CreateActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this create_activity, only admins can create activities"
+        assert json.loads(response["body"]) == "Apenas administradores podem criar atividades"

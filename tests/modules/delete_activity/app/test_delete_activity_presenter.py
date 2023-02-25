@@ -112,7 +112,7 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: code"
 
     def test_delete_activity_presenter_invalid_code(self):
         event = {
@@ -166,7 +166,7 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == 'Field code is not valid'
+        assert json.loads(response["body"]) == 'Parâmetro inválido: code'
 
     def test_delete_activity_no_items_found(self):
         event = {
@@ -220,7 +220,7 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == "No items found for Activity"
+        assert json.loads(response["body"]) == "Atividade não encontrada"
 
     def test_drop_activity_presenter_forbidden_not_admin(self):
         event = {
@@ -274,6 +274,6 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this delete_activity, only admins can delete activities"
+        assert json.loads(response["body"]) == "Apenas administradores podem apagar atividades"
 
 

@@ -107,4 +107,4 @@ class Test_GetAllActivitiesLoggedPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field requester_user is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: requester_user"
