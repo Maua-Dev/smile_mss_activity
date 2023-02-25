@@ -1,8 +1,5 @@
 import abc
-import datetime
 
-from src.shared.domain.entities.activity import Activity
-from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 

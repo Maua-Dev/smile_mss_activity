@@ -1,8 +1,8 @@
+from src.shared.environments import Environments
+from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from .manual_attendance_change_controller import \
     ManualAttendanceChangeController
 from .manual_attendance_change_usecase import ManualAttendanceChangeUsecase
-from src.shared.environments import Environments
-from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
 repo_activity = Environments.get_activity_repo()()
 repo_user = Environments.get_user_repo()()

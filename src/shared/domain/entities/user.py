@@ -1,4 +1,5 @@
 import abc
+
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.errors.domain_errors import EntityError
 

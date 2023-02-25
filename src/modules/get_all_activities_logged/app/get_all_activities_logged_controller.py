@@ -1,9 +1,9 @@
-from .get_all_activities_logged_usecase import GetAllActivitiesLoggedUsecase
-from .get_all_activities_logged_viewmodel import GetAllActivitiesLoggedViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
+from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, InternalServerError
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
-from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
+from .get_all_activities_logged_usecase import GetAllActivitiesLoggedUsecase
+from .get_all_activities_logged_viewmodel import GetAllActivitiesLoggedViewmodel
 
 
 class GetAllActivitiesLoggedController:

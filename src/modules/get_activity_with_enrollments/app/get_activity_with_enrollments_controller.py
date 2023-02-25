@@ -1,13 +1,13 @@
-from .get_activity_with_enrollments_usecase import \
-    GetActivityWithEnrollmentsUsecase
-from .get_activity_with_enrollments_viewmodel import \
-    GetActivityWithEnrollmentsViewmodel
-from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
+from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, Forbidden, BadRequest, InternalServerError, NotFound
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from .get_activity_with_enrollments_usecase import \
+    GetActivityWithEnrollmentsUsecase
+from .get_activity_with_enrollments_viewmodel import \
+    GetActivityWithEnrollmentsViewmodel
 
 
 class GetActivityWithEnrollmentsController:

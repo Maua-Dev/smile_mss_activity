@@ -1,7 +1,7 @@
-from .get_all_activities_admin_controller import GetAllActivitiesAdminController
-from .get_all_activities_admin_usecase import GetAllActivitiesAdminUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
+from .get_all_activities_admin_controller import GetAllActivitiesAdminController
+from .get_all_activities_admin_usecase import GetAllActivitiesAdminUsecase
 
 repo_activity = Environments.get_activity_repo()()
 repo_user = Environments.get_user_repo()()

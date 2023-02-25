@@ -1,4 +1,5 @@
 from typing import List
+
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User

@@ -1,5 +1,4 @@
-import datetime
-from typing import List, Dict
+from typing import List
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker

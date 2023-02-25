@@ -1,8 +1,6 @@
-from src.shared.environments import Environments
-
-import os
 import boto3
 
+from src.shared.environments import Environments
 from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 

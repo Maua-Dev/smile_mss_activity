@@ -1,8 +1,7 @@
 from src.shared.environments import Environments
+from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from .confirm_attendance_controller import ConfirmAttendanceController
 from .confirm_attendance_usecase import ConfirmAttendanceUsecase
-from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
-
 
 repo_activity = Environments.get_activity_repo()()
 usecase = ConfirmAttendanceUsecase(repo_activity)

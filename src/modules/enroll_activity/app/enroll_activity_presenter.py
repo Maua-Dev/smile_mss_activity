@@ -1,7 +1,7 @@
-from .enroll_activity_controller import EnrollActivityController
-from .enroll_activity_usecase import EnrollActivityUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
+from .enroll_activity_controller import EnrollActivityController
+from .enroll_activity_usecase import EnrollActivityUsecase
 
 repo = Environments.get_activity_repo()()
 usecase = EnrollActivityUsecase(repo)

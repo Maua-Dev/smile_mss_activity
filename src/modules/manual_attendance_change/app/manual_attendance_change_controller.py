@@ -1,5 +1,3 @@
-from .manual_attendance_change_usecase import ManualAttendanceChangeUsecase
-from .manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -7,6 +5,8 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenActi
 from src.shared.helpers.external_interfaces.external_interface import IResponse, IRequest
 from src.shared.helpers.external_interfaces.http_codes import InternalServerError, BadRequest, Forbidden, NotFound, OK
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from .manual_attendance_change_usecase import ManualAttendanceChangeUsecase
+from .manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
 
 
 class ManualAttendanceChangeController:
