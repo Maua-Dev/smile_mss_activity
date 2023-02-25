@@ -321,7 +321,7 @@ class Test_GenerateAttendanceConfirmationPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this user, not professor"
+        assert json.loads(response["body"]) == "Ação não permitida: user, not professor"
 
     def test_generate_attendance_confirmation_presenter_activity_already_has_confirmation_code(self):
         event = {
@@ -375,7 +375,7 @@ class Test_GenerateAttendanceConfirmationPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this confirmation_code, already exists"
+        assert json.loads(response["body"]) == 'Já existe um código de confirmação para esta atividade'
 
     def test_generate_attendance_confirmation_presenter_not_responsible_professor(self):
         event = {
@@ -430,5 +430,5 @@ class Test_GenerateAttendanceConfirmationPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this user, not professor of activity"
+        assert json.loads(response["body"]) == "Apenas professores responsáveis da atividade e administradores podem gerar códdigo de confirmação para atividades"
 

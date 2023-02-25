@@ -53,7 +53,7 @@ class DropActivityController:
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            return Forbidden(body="Impossível desinscrever usuário de atividade que não está inscrito")
 
        
 

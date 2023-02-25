@@ -293,4 +293,4 @@ class Test_GetAllActivitiesAdminPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this Enrollment Already COMPLETED"
+        assert json.loads(response["body"]) == 'Presença já confirmada'

@@ -112,5 +112,5 @@ class Test_GetAllActivitiesAdminPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this get_all_activities_with_enrollments, only admins can do this"
+        assert json.loads(response["body"]) == "Apenas administradores podem realizar essa ação"
 

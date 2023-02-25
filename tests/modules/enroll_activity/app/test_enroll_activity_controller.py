@@ -82,7 +82,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Enrollment'
+        assert response.body == "Impossível inscrever usuário"
 
     def test_enroll_activity_controller_forbidden_action_wrong_role(self):
 
@@ -96,7 +96,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Enrollment'
+        assert response.body == "Impossível inscrever usuário"
 
 
     def test_enroll_activity_controller_activity_not_found(self):

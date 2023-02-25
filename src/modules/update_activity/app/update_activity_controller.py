@@ -121,7 +121,8 @@ class UpdateActivityController:
                 return NotFound(body=f"{message} não encontrada")
 
         except ForbiddenAction as err:
-            return Forbidden(body=err.message)
+
+            return Forbidden(body="Apenas administradores podem atualizar atividades")
 
         except MissingParameters as err:
 

@@ -24,10 +24,10 @@ class GenerateAttendanceConfirmationUsecase:
             raise NoItemsFound("activity")
 
         if activity.confirmation_code is not None:
-            raise ForbiddenAction("confirmation_code, already exists")
+            raise ForbiddenAction("confirmation_code")
 
         if requester_user not in activity.responsible_professors:
-            raise ForbiddenAction("user, not professor of activity")
+            raise ForbiddenAction("user")
 
         confirmation_code = self.generate_confirmation_code()
 

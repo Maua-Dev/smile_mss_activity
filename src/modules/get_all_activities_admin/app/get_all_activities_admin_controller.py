@@ -26,7 +26,7 @@ class GetAllActivitiesAdminController:
             return OK(viewmodel.to_dict())
 
         except ForbiddenAction as err:
-            return Forbidden(body=err.message)
+            return Forbidden(body="Apenas administradores podem realizar essa ação")
 
         except MissingParameters as err:
 

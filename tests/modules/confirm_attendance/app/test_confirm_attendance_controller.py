@@ -130,4 +130,4 @@ class Test_ConfirmAttendanceController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Enrollment Already COMPLETED'
+        assert response.body == 'Presença já confirmada'

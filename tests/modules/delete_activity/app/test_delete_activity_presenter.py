@@ -274,6 +274,6 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this delete_activity, only admins can delete activities"
+        assert json.loads(response["body"]) == "Apenas administradores podem apagar atividades"
 
 

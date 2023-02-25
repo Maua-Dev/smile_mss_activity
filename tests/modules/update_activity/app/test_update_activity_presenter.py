@@ -275,4 +275,4 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this update_activity, only admins can update activities"
+        assert json.loads(response["body"]) == "Apenas administradores podem atualizar atividades"

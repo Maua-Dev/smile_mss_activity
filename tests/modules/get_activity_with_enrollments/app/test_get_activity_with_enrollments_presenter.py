@@ -165,7 +165,7 @@ class Test_GetActivityWithEnrollmentsPresenter:
 
         response = lambda_handler(event, None)
         assert response['statusCode'] == 403
-        assert json.loads(response["body"]) == 'That action is forbidden for this user: only responsible professors and admin can do that'
+        assert json.loads(response["body"]) == "Apenas professores responsáveis da atividade e administradores podem fazer isso"
 
     def test_get_activity_with_enrollments_presenter_no_items_found(self):
         event = {

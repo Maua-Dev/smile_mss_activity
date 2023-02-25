@@ -88,4 +88,4 @@ class Test_DeleteActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this delete_activity, only admins can delete activities"
+        assert response.body == "Apenas administradores podem apagar atividades"

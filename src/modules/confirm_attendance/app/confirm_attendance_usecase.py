@@ -28,13 +28,13 @@ class ConfirmAttendanceUsecase:
         )
 
         if enrollment is None:
-            raise ForbiddenAction("Trying to confirm attendance in activity not enrolled")
+            raise ForbiddenAction("not_enrolled")
         
         if enrollment.state == ENROLLMENT_STATE.COMPLETED:
-            raise ForbiddenAction("Enrollment Already COMPLETED")
+            raise ForbiddenAction("completed")
         
         if enrollment.state != ENROLLMENT_STATE.ENROLLED:
-            raise ForbiddenAction("Enrollment not in ENROLLED state to confirm attendance")
+            raise ForbiddenAction("enrolled")
         
         if activity.confirmation_code == confirmation_code:
             enrollment.state = ENROLLMENT_STATE.COMPLETED
@@ -43,6 +43,6 @@ class ConfirmAttendanceUsecase:
             if enrollment_updated is not None:
                 return True
         else:
-            raise ForbiddenAction("Invalid Confirmation Code")
+            raise ForbiddenAction("confirmation_code")
 
         return False

@@ -45,4 +45,4 @@ class Test_GetAllActivitiesAdminController:
         response = controller(request=request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this get_all_activities_with_enrollments, only admins can do this"
+        assert response.body == "Apenas administradores podem realizar essa ação"

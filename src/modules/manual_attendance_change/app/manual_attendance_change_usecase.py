@@ -24,7 +24,7 @@ class ManualAttendanceChangeUsecase:
             raise EntityError('new_state')
 
         if requester_user.role != ROLE.PROFESSOR and requester_user.role != ROLE.ADMIN:
-            raise ForbiddenAction("user: only responsible professors can do that")
+            raise ForbiddenAction("user")
 
         if new_state != ENROLLMENT_STATE.COMPLETED and new_state != ENROLLMENT_STATE.ENROLLED:
             raise EntityError('state')
@@ -41,15 +41,15 @@ class ManualAttendanceChangeUsecase:
 
         if new_state == ENROLLMENT_STATE.COMPLETED:
             if enrollment.state != ENROLLMENT_STATE.ENROLLED:
-                raise ForbiddenAction("enrollment: can\'t confirm it")
+                raise ForbiddenAction("completed")
 
         if new_state == ENROLLMENT_STATE.ENROLLED:
             if enrollment.state != ENROLLMENT_STATE.COMPLETED:
-                raise ForbiddenAction('enrollment: can\'t be unconfirmed')
+                raise ForbiddenAction("enrolled")
 
         if requester_user.role == ROLE.PROFESSOR:
             if requester_user not in activity.responsible_professors:
-                raise ForbiddenAction("user: only responsible professors for this activity can do that")
+                raise ForbiddenAction("user")
 
         new_enrollment = self.repo_activity.update_enrollment(
             user_id=enrollment.user_id,

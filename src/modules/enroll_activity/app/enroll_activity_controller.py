@@ -53,7 +53,7 @@ class EnrollActivityController:
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            return Forbidden(body=f"Impossível inscrever usuário")
 
         except EntityError as err:
 

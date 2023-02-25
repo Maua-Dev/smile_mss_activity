@@ -54,8 +54,16 @@ class DeleteAttendanceConfirmationController:
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
+            message = err.message.lower()
 
-            return Forbidden(body=err.message)
+            if message == "confirmation_code":
+                return Forbidden(body=f"Atividade não possui um código de confirmação")
+
+            elif message == "user":
+                return Forbidden(body=f"Apenas professores responsáveis da atividade e administradores podem deletar o código de confirmação")
+
+            else:
+                return Forbidden(body=f"Ação não permitida: {message}")
 
         except EntityError as err:
 

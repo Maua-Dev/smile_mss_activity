@@ -54,7 +54,28 @@ class ConfirmAttendanceController:
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            message = err.message.lower()
+
+            if message == "not_enrolled":
+
+                return Forbidden(body=f"Usuário não está inscrito nesta atividade")
+
+            elif message == "completed":
+
+                return Forbidden(body=f"Presença já confirmada")
+
+            elif message == "enrolled":
+
+                return Forbidden(body=f"Impossível confirmar presença")
+
+            elif message == "confirmation_code":
+
+                return Forbidden(
+                    body=f"Código de confirmação inválido")
+
+            else:
+
+                return Forbidden(body=f"Ação não permitida: {err.message}")
 
         except DuplicatedItem as err:
 

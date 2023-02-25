@@ -780,4 +780,4 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this create_activity, only admins can create activities"
+        assert response.body == "Apenas administradores podem criar atividades"

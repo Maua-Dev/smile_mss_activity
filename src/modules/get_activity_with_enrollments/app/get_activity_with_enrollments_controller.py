@@ -49,9 +49,10 @@ class GetActivityWithEnrollmentsController:
 
             else:
                 return NotFound(body=f"{message} não encontrada")
+
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            return Forbidden(body="Apenas professores responsáveis da atividade e administradores podem fazer isso")
 
         except EntityError as err:
 

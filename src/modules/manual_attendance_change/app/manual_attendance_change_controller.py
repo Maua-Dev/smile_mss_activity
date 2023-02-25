@@ -64,8 +64,18 @@ class ManualAttendanceChangeController:
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
+            message = err.message.lower()
+            if message == "completed":
+                return Forbidden(body=f"Não é possível confirmar presença deste usuário")
 
-            return Forbidden(body=err.message)
+            elif message == "enrolled":
+                return Forbidden(body=f"Não é possível cancelar presença deste usuário")
+
+            elif message == "user":
+                return Forbidden(body=f"Apenas professores responsáveis da atividade e administradores podem gerar códdigo de confirmação para atividade")
+
+            else:
+                return Forbidden(body=f"Ação não permitida: {err.message}")
 
         except EntityError as err:
 

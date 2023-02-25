@@ -123,7 +123,7 @@ class CreateActivityController:
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            return Forbidden(body="Apenas administradores podem criar atividades")
 
         except DuplicatedItem as err:
 

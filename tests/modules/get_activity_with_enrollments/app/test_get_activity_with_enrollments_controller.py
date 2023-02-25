@@ -88,7 +88,7 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[1].role.value}, 'code': 'ECM2345'})
 
         response = controller(request=request)
-        assert response.body == 'That action is forbidden for this user: only responsible professors and admin can do that'
+        assert response.body == 'Apenas professores responsáveis da atividade e administradores podem fazer isso'
         assert response.status_code == 403
 
     def test_get_activity_with_enrollments_controller_forbidden_wrong_professor(self):
@@ -102,7 +102,7 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[11].role.value}, 'code': 'ECM2345'})
 
         response = controller(request=request)
-        assert response.body == 'That action is forbidden for this user'
+        assert response.body == "Apenas professores responsáveis da atividade e administradores podem fazer isso"
         assert response.status_code == 403
 
 

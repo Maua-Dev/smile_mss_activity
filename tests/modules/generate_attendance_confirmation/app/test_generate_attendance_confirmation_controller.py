@@ -88,7 +88,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this user, not professor"
+        assert response.body == "Ação não permitida: user, not professor"
 
     def test_generate_attendance_confirmation_controller_activity_already_has_confirmation_code(self):
         repo = ActivityRepositoryMock()
@@ -101,7 +101,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this confirmation_code, already exists"
+        assert response.body == 'Já existe um código de confirmação para esta atividade'
 
     def test_generate_attendance_confirmation_controller_not_responsible_professor(self):
         repo = ActivityRepositoryMock()
@@ -114,6 +114,6 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this user, not professor of activity"
+        assert response.body == "Apenas professores responsáveis da atividade e administradores podem gerar códdigo de confirmação para atividades"
 
 

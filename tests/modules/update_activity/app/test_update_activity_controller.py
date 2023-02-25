@@ -799,4 +799,4 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "That action is forbidden for this update_activity, only admins can update activities"
+        assert response.body == "Apenas administradores podem atualizar atividades"

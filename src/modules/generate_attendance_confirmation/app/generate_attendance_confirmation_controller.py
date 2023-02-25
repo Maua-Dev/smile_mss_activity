@@ -54,7 +54,20 @@ class GenerateAttendanceConfirmationController:
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            message = err.message.lower()
+
+            if message == "confirmation_code":
+
+                return Forbidden(body=f"Já existe um código de confirmação para esta atividade")
+
+            elif message == "user":
+
+                return Forbidden(
+                    body=f"Apenas professores responsáveis da atividade e administradores podem gerar códdigo de confirmação para atividades")
+
+            else:
+
+                return Forbidden(body=f"Ação não permitida: {err.message}")
 
         except EntityError as err:
 

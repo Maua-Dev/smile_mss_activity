@@ -48,7 +48,7 @@ class DeleteActivityController:
                 return NotFound(body=f"{message} não encontrada")
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            return Forbidden(body="Apenas administradores podem apagar atividades")
 
         except MissingParameters as err:
 
