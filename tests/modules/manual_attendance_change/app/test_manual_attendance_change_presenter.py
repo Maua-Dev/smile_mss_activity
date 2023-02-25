@@ -109,7 +109,7 @@ class Test_ManualAttendanceChangePresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: code"
 
     def test_manual_attendance_change_presenter_missing_user_id(self):
         event = {
@@ -163,7 +163,7 @@ class Test_ManualAttendanceChangePresenter:
 
         response = lambda_handler(event, None)
         assert response['statusCode'] == 400
-        assert json.loads(response["body"]) == 'Field user_id is missing'
+        assert json.loads(response["body"]) == 'Parâmetro ausente: user_id'
 
     def test_manual_attendance_change_presenter_missing_new_state(self):
         event = {
@@ -217,7 +217,7 @@ class Test_ManualAttendanceChangePresenter:
 
         response = lambda_handler(event, None)
         assert response['statusCode'] == 400
-        assert json.loads(response["body"]) == 'Field new_state is missing'
+        assert json.loads(response["body"]) == 'Parâmetro ausente: new_state'
 
     def test_manual_attendance_change_presenter_forbidden_not_professor(self):
         event = {
@@ -373,4 +373,4 @@ class Test_ManualAttendanceChangePresenter:
 
         response = lambda_handler(event, None)
         assert response['statusCode'] == 400
-        assert json.loads(response["body"]) == 'Field requester_user is missing'
+        assert json.loads(response["body"]) == 'Parâmetro ausente: requester_user'

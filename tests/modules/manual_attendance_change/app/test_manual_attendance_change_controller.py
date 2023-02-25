@@ -75,7 +75,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is missing'
+        assert response.body == 'Parâmetro ausente: code'
 
     def test_manual_attendance_controller_missing_requester_user(self):
         repo_activity = ActivityRepositoryMock()
@@ -95,7 +95,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field requester_user is missing'
+        assert response.body == 'Parâmetro ausente: requester_user'
 
     def test_manual_attendance_controller_missing_user_id(self):
         repo_activity = ActivityRepositoryMock()
@@ -116,7 +116,7 @@ class Test_ManualAttendanceChangeController:
 
         response = controller(request)
 
-        assert response.body == 'Field user_id is missing'
+        assert response.body == 'Parâmetro ausente: user_id'
 
 
 
@@ -139,7 +139,7 @@ class Test_ManualAttendanceChangeController:
             response = controller(request)
 
             assert response.status_code == 400
-            assert response.body == 'Field new_state is missing'
+            assert response.body == 'Parâmetro ausente: new_state'
 
     def test_manual_attendance_controller_wrong_enum(self):
 

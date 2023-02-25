@@ -110,7 +110,7 @@ class Test_GetActivityWithEnrollmentsPresenter:
 
         response = lambda_handler(event, None)
         assert response['statusCode'] == 400
-        assert json.loads(response["body"]) == 'Field code is missing'
+        assert json.loads(response["body"]) == 'Parâmetro ausente: code'
 
 
     def test_get_activity_with_enrollments_presenter_forbidden_action(self):

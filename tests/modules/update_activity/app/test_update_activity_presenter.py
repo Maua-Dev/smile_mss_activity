@@ -221,7 +221,7 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: code"
 
     def test_update_activity_presenter_forbidden(self):
         event = {

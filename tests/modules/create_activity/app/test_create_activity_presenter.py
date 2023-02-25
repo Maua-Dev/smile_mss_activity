@@ -168,7 +168,7 @@ class Test_CreateActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == 'Field code is missing'
+        assert json.loads(response["body"]) == 'Parâmetro ausente: code'
 
     def test_create_activity_presenter_entity_error(self):
         event = {

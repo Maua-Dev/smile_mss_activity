@@ -33,7 +33,7 @@ class Test_GetActivityWithEnrollmentsController:
 
         response = controller(request=request)
         assert response.status_code == 400
-        assert response.body == 'Field requester_user is missing'
+        assert response.body == 'Parâmetro ausente: requester_user'
 
     def test_get_activity_with_enrollments_controller_missing_code(self):
         repo_activity = ActivityRepositoryMock()
@@ -47,7 +47,7 @@ class Test_GetActivityWithEnrollmentsController:
 
         response = controller(request=request)
         assert response.status_code == 400
-        assert response.body == 'Field code is missing'
+        assert response.body == 'Parâmetro ausente: code'
 
     def test_get_activity_with_enrollments_controller_wrong_code_type(self):
         repo_activity = ActivityRepositoryMock()

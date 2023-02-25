@@ -105,7 +105,7 @@ class Test_DropActivityPresenter:
 
             response = lambda_handler(event, None)
             assert response["statusCode"] == 400
-            assert json.loads(response["body"]) == "Field requester_user is missing"
+            assert json.loads(response["body"]) == "Parâmetro ausente: requester_user"
 
     def test_drop_activity_presenter_400_code_mising(self):
         event = {
@@ -159,7 +159,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: code"
     def test_drop_activity_presenter_400_user_id_invalid(self):
         event = {
             "version": "2.0",

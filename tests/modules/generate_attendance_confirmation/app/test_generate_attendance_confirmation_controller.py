@@ -37,7 +37,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field code is missing"
+        assert response.body == "Parâmetro ausente: code"
 
     def test_generate_attendance_confirmation_controller_missing_requester_user(self):
         repo = ActivityRepositoryMock()
@@ -49,7 +49,7 @@ class Test_GenerateAttendanceConfirmationController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field requester_user is missing"
+        assert response.body == "Parâmetro ausente: requester_user"
 
     def test_generate_attendance_confirmation_controller_invalid_activity_code(self):
         repo = ActivityRepositoryMock()

@@ -34,7 +34,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field requester_user is missing'
+        assert reponse.body == 'Parâmetro ausente: requester_user'
 
     def test_drop_activity_controller_missing_code(self):
         repo = ActivityRepositoryMock()
@@ -48,7 +48,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field code is missing'
+        assert reponse.body == 'Parâmetro ausente: code'
 
     def test_drop_activity_controller_forbbiden_action(self):
         repo = ActivityRepositoryMock()

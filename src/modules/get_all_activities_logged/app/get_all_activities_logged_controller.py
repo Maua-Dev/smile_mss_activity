@@ -25,7 +25,8 @@ class GetAllActivitiesLoggedController:
             return OK(viewmodel.to_dict())
 
         except MissingParameters as err:
-            return BadRequest(body=err.message)
+
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except Exception as err:
             return InternalServerError(body=err.args[0])

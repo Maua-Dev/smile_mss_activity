@@ -110,7 +110,7 @@ class Test_GenerateAttendanceConfirmationPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: code"
 
     def test_generate_attendance_confirmation_presenter_missing_requester_user(self):
         event = {
@@ -159,7 +159,7 @@ class Test_GenerateAttendanceConfirmationPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field requester_user is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: requester_user"
 
     def test_generate_attendance_confirmation_presenter_invalid_activity_code(self):
         event = {

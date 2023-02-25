@@ -55,7 +55,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field requester_user is missing'
+        assert response.body == 'Parâmetro ausente: requester_user'
 
     def test_enroll_activity_controller_missing_code(self):
 
@@ -69,7 +69,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is missing'
+        assert response.body == 'Parâmetro ausente: code'
 
     def test_enroll_activity_controller_enrollment_already_enrolled(self):
         repo = ActivityRepositoryMock()

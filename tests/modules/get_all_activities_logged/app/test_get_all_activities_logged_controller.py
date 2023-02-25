@@ -40,4 +40,4 @@ class Test_GetAllActivitiesController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field requester_user is missing"
+        assert response.body == "Parâmetro ausente: requester_user"

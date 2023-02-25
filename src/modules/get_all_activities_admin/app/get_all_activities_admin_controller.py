@@ -30,7 +30,8 @@ class GetAllActivitiesAdminController:
             return Forbidden(body=err.message)
 
         except MissingParameters as err:
-            return BadRequest(body=err.message)
+
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except Exception as err:
             return InternalServerError(body=err.args[0])
