@@ -434,4 +434,4 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for Activity'
+        assert json.loads(response["body"]) == 'Atividade não encontrada'

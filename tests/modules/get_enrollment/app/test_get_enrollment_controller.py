@@ -73,7 +73,7 @@ class Test_GetEnrollmentController:
                 response = controller(request)
 
                 assert response.status_code == 404
-                assert response.body == 'No items found for enrollment'
+                assert response.body == 'Inscrição não encontrada'
 
     def test_get_enrollment_no_items_found_code_not_found(self):
 
@@ -86,5 +86,5 @@ class Test_GetEnrollmentController:
                 response = controller(request)
 
                 assert response.status_code == 404
-                assert response.body == 'No items found for enrollment'
+                assert response.body == 'Inscrição não encontrada'
 

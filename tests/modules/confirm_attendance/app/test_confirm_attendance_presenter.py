@@ -121,7 +121,7 @@ class Test_GetAllActivitiesAdminPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro inválido: Confirmation Code"
     
-    def test_confirm_attendance_presenter_presenter(self):
+    def test_confirm_attendance_presenter_presenter_not_found(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -176,8 +176,8 @@ class Test_GetAllActivitiesAdminPresenter:
 
         response = lambda_handler(event, None)
 
-        assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this Trying to confirm attendance in activity not found"
+        assert response["statusCode"] == 404
+        assert json.loads(response["body"]) == 'Atividade não encontrada'
     
     def test_confirm_attendance_presenter_presenter_invalid_user_id(self):
         event = {

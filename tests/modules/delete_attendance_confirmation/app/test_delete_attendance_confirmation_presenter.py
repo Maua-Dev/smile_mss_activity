@@ -265,7 +265,7 @@ class Test_DeleteAttendanceConfirmationPresenter:
 
               response = lambda_handler(event, None)
               assert response["statusCode"] == 404
-              assert json.loads(response["body"]) == "No items found for activity"
+              assert json.loads(response["body"]) == "Atividade não encontrada"
 
        def test_delete_attendance_confirmation_presenter_role_not_professor(self):
               event = {

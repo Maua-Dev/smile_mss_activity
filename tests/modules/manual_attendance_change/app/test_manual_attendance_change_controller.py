@@ -278,7 +278,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == "No items found for activity"
+        assert response.body == 'Atividade não encontrada'
 
     def test_manual_attendance_controller_enrollment_not_found(self):
         repo_activity = ActivityRepositoryMock()
@@ -300,7 +300,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == "No items found for enrollment"
+        assert response.body == 'Inscrição não encontrada'
 
     def test_manual_attendance_controller_not_valid_enrollment_status(self):
         repo_activity = ActivityRepositoryMock()

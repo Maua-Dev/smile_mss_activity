@@ -74,7 +74,7 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[2].role.value}, 'code': 'NÃO_EXISTE'})
 
         response = controller(request=request)
-        assert response.body == 'No items found for activity'
+        assert response.body == 'Atividade não encontrada'
         assert response.status_code == 404
 
     def test_get_activity_with_enrollments_controller_forbidden_non_professor(self):

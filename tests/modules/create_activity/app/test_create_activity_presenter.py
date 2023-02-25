@@ -112,7 +112,7 @@ class Test_CreateActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for responsible_professors'
+        assert json.loads(response["body"]) == 'Professores responsáveis não encontrados'
 
 
     def test_create_activity_presenter_missing_parameter(self):

@@ -73,7 +73,7 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 404
-              assert response.body == "No items found for activity"
+              assert response.body == "Atividade não encontrada"
 
        def test_delete_attendance_confirmation_controller_role_not_professor(self):
               repo = ActivityRepositoryMock()

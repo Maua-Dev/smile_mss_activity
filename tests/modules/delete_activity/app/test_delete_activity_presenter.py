@@ -220,7 +220,7 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == "No items found for Activity"
+        assert json.loads(response["body"]) == "Atividade não encontrada"
 
     def test_drop_activity_presenter_forbidden_not_admin(self):
         event = {

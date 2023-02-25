@@ -125,7 +125,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == 'No items found for Activity'
+        assert response.body == 'Atividade não encontrada'
 
     def test_update_activity_controller_invalid_code(self):
         repo_activity = ActivityRepositoryMock()
@@ -541,7 +541,7 @@ class Test_UpdateActivityController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == "No items found for responsible_professors"
+        assert response.body == "responsible_professors não encontrada"
 
     def test_update_activity_controller_invalid_responsible_professors_int(self):
         repo_activity = ActivityRepositoryMock()

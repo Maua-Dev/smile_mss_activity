@@ -9,47 +9,58 @@ from .delete_attendance_confirmation_viewmodel import DeleteAttendanceConfirmati
 
 
 class DeleteAttendanceConfirmationController:
-       def __init__(self, usecase: DeleteAttendanceConfirmationUsecase):
-              self.DeleteAttendanceConfirmationUsecase = usecase
+    def __init__(self, usecase: DeleteAttendanceConfirmationUsecase):
+        self.DeleteAttendanceConfirmationUsecase = usecase
 
-       def __call__(self, request: IRequest) -> IResponse:
-              try:
-                     if request.data.get("code") is None:
-                            raise MissingParameters("code")
+    def __call__(self, request: IRequest) -> IResponse:
+        try:
+            if request.data.get("code") is None:
+                raise MissingParameters("code")
 
-                     if request.data.get("requester_user") is None:
-                            raise MissingParameters("requester_user")
+            if request.data.get("requester_user") is None:
+                raise MissingParameters("requester_user")
 
-                     requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 
-                     confirmation_code = self.DeleteAttendanceConfirmationUsecase(
-                            code=request.data.get("code"),
-                            requester_user=requester_user
-                     )
+            confirmation_code = self.DeleteAttendanceConfirmationUsecase(
+                code=request.data.get("code"),
+                requester_user=requester_user
+            )
 
-                     viewmodel = DeleteAttendanceConfirmationViewmodel(
-                            activity_code=request.data.get("code"),
-                            confirmation_code=confirmation_code
-                     )
+            viewmodel = DeleteAttendanceConfirmationViewmodel(
+                activity_code=request.data.get("code"),
+                confirmation_code=confirmation_code
+            )
 
-                     return OK(viewmodel.to_dict())
-              
-              except NoItemsFound as err:
+            return OK(viewmodel.to_dict())
 
-                     return NotFound(body=err.message)
+        except NoItemsFound as err:
+            message = err.message.lower()
 
-              except MissingParameters as err:
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
 
-                     return BadRequest(body=f"Parâmetro ausente: {err.message}")
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
 
-              except ForbiddenAction as err:
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
 
-                     return Forbidden(body=err.message)
+            else:
+                return NotFound(body=f"{message} não encontrada")
 
-              except EntityError as err:
+        except MissingParameters as err:
 
-                     return BadRequest(body=f"Parâmetro inválido: {err.message}")
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
-              except Exception as err:
+        except ForbiddenAction as err:
 
-                     return InternalServerError(body=err.args[0])
+            return Forbidden(body=err.message)
+
+        except EntityError as err:
+
+            return BadRequest(body=f"Parâmetro inválido: {err.message}")
+
+        except Exception as err:
+
+            return InternalServerError(body=err.args[0])

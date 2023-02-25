@@ -101,9 +101,22 @@ class CreateActivityController:
             return Created(viewmodel.to_dict())
 
         except NoItemsFound as err:
+            message = err.message.lower()
 
-            return NotFound(body=err.message)
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
 
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
+
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
+
+            elif message == "responsible_professors":
+                return NotFound(body=f"Professores responsáveis não encontrados")
+
+            else:
+                return NotFound(body=f"{message} não encontrada")
         except MissingParameters as err:
 
             return BadRequest(body=f"Parâmetro ausente: {err.message}")

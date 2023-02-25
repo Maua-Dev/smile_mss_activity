@@ -54,8 +54,8 @@ class Test_ConfirmAttendanceController:
 
         response = controller(request)
 
-        assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Trying to confirm attendance in activity not found'
+        assert response.status_code == 404
+        assert response.body == 'Atividade não encontrada'
 
     def test_confirm_attendance_controller_invalid_confirmation_code(self):
         repo_user = UserRepositoryMock()

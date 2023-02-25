@@ -2,7 +2,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 
 
 class ConfirmAttendanceUsecase:
@@ -21,7 +21,7 @@ class ConfirmAttendanceUsecase:
         activity = self.repo.get_activity(code)
 
         if activity is None:
-            raise ForbiddenAction("Trying to confirm attendance in activity not found")
+            raise NoItemsFound("activity")
         
         enrollment = self.repo.get_enrollment(
             user_id=user_id, code=code

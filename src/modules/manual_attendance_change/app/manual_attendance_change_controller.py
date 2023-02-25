@@ -44,8 +44,20 @@ class ManualAttendanceChangeController:
             return OK(viewmodel.to_dict())
 
         except NoItemsFound as err:
+            message = err.message.lower()
 
-            return NotFound(body=err.message)
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
+
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
+
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
+
+            else:
+                return NotFound(body=f"{message} não encontrada")
+
 
         except MissingParameters as err:
 

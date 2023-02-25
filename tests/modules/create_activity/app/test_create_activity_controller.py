@@ -550,7 +550,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 404
-        assert response.body == "No items found for responsible_professors"
+        assert response.body == "Professores responsáveis não encontrados"
 
     def test_create_activity_controller_missing_speakers(self):
         repo_activity = ActivityRepositoryMock()

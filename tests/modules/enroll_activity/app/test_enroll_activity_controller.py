@@ -111,7 +111,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == 'No items found for Activity'
+        assert response.body == 'Atividade não encontrada'
 
     def test_enroll_activity_controller_invalid_user_id(self):
 

@@ -113,7 +113,7 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == "No items found for Activity"
+        assert json.loads(response["body"]) == 'Atividade não encontrada'
 
     def test_update_activity_presenter_entity_error_code_invalid(self):
         event = {
