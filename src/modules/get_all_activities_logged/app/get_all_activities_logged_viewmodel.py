@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List
 
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker

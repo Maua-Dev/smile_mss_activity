@@ -54,8 +54,8 @@ class Test_ConfirmAttendanceController:
 
         response = controller(request)
 
-        assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Trying to confirm attendance in activity not found'
+        assert response.status_code == 404
+        assert response.body == 'Atividade não encontrada'
 
     def test_confirm_attendance_controller_invalid_confirmation_code(self):
         repo_user = UserRepositoryMock()
@@ -80,7 +80,7 @@ class Test_ConfirmAttendanceController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field Confirmation Code is not valid'
+        assert response.body == 'Parâmetro inválido: Confirmation Code'
 
     def test_confirm_attendance_controller_invalid_user_id(self):
         repo_user = UserRepositoryMock()
@@ -105,7 +105,7 @@ class Test_ConfirmAttendanceController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field user_id is not valid'
+        assert response.body == 'Parâmetro inválido: user_id'
     
     def test_confirm_attendance_controller_already_confirmed(self):
         repo_user = UserRepositoryMock()
@@ -130,4 +130,4 @@ class Test_ConfirmAttendanceController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Enrollment Already COMPLETED'
+        assert response.body == 'Presença já confirmada'

@@ -32,7 +32,7 @@ class Test_GetEnrollmentsByUserIdController:
         response = controller(HttpRequest(body={'invalid_requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
 
         assert response.status_code == 400
-        assert response.body == 'Field requester_user is missing'
+        assert response.body == 'Parâmetro ausente: requester_user'
 
     def test_get_enrollments_by_user_controller_invalid_user_id(self):
         repo = ActivityRepositoryMock()
@@ -43,4 +43,4 @@ class Test_GetEnrollmentsByUserIdController:
         response = controller(HttpRequest(body={'requester_user': {"sub": "1", "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
 
         assert response.status_code == 400
-        assert response.body == 'Field user_id is not valid'
+        assert response.body == 'Parâmetro inválido: user_id'

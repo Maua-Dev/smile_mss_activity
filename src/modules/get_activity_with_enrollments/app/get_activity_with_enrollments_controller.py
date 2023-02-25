@@ -1,13 +1,13 @@
-from .get_activity_with_enrollments_usecase import \
-    GetActivityWithEnrollmentsUsecase
-from .get_activity_with_enrollments_viewmodel import \
-    GetActivityWithEnrollmentsViewmodel
-from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
+from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, Forbidden, BadRequest, InternalServerError, NotFound
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from .get_activity_with_enrollments_usecase import \
+    GetActivityWithEnrollmentsUsecase
+from .get_activity_with_enrollments_viewmodel import \
+    GetActivityWithEnrollmentsViewmodel
 
 
 class GetActivityWithEnrollmentsController:
@@ -33,19 +33,30 @@ class GetActivityWithEnrollmentsController:
 
         except MissingParameters as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except NoItemsFound as err:
+            message = err.message.lower()
 
-            return NotFound(body=err.message)
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
+
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
+
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
+
+            else:
+                return NotFound(body=f"{message} não encontrada")
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            return Forbidden(body="Apenas professores responsáveis da atividade e administradores podem fazer isso")
 
         except EntityError as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
 

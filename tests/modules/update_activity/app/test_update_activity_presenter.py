@@ -113,7 +113,7 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == "No items found for Activity"
+        assert json.loads(response["body"]) == 'Atividade não encontrada'
 
     def test_update_activity_presenter_entity_error_code_invalid(self):
         event = {
@@ -167,7 +167,7 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: code"
 
     def test_update_activity_presenter_missing_parameter_code(self):
         event = {
@@ -221,7 +221,7 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: code"
 
     def test_update_activity_presenter_forbidden(self):
         event = {
@@ -275,4 +275,4 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That action is forbidden for this update_activity, only admins can update activities"
+        assert json.loads(response["body"]) == "Apenas administradores podem atualizar atividades"

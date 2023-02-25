@@ -2,7 +2,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 
 
 class ConfirmAttendanceUsecase:
@@ -21,20 +21,20 @@ class ConfirmAttendanceUsecase:
         activity = self.repo.get_activity(code)
 
         if activity is None:
-            raise ForbiddenAction("Trying to confirm attendance in activity not found")
+            raise NoItemsFound("activity")
         
         enrollment = self.repo.get_enrollment(
             user_id=user_id, code=code
         )
 
         if enrollment is None:
-            raise ForbiddenAction("Trying to confirm attendance in activity not enrolled")
+            raise ForbiddenAction("not_enrolled")
         
         if enrollment.state == ENROLLMENT_STATE.COMPLETED:
-            raise ForbiddenAction("Enrollment Already COMPLETED")
+            raise ForbiddenAction("completed")
         
         if enrollment.state != ENROLLMENT_STATE.ENROLLED:
-            raise ForbiddenAction("Enrollment not in ENROLLED state to confirm attendance")
+            raise ForbiddenAction("enrolled")
         
         if activity.confirmation_code == confirmation_code:
             enrollment.state = ENROLLMENT_STATE.COMPLETED
@@ -43,6 +43,6 @@ class ConfirmAttendanceUsecase:
             if enrollment_updated is not None:
                 return True
         else:
-            raise ForbiddenAction("Invalid Confirmation Code")
+            raise ForbiddenAction("confirmation_code")
 
         return False

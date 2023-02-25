@@ -34,7 +34,7 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 400
-              assert response.body == "Field code is missing"
+              assert response.body == "Parâmetro ausente: code"
 
        def test_delete_attendance_confirmation_controller_missing_requester_user(self):
               repo = ActivityRepositoryMock()
@@ -47,7 +47,7 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 400
-              assert response.body == "Field requester_user is missing"
+              assert response.body == "Parâmetro ausente: requester_user"
 
        def test_delete_attendance_confirmation_controller_invalid_activity_code(self):
               repo = ActivityRepositoryMock()
@@ -60,7 +60,7 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 400
-              assert response.body == "Field activity_code is not valid"
+              assert response.body == "Parâmetro inválido: activity_code"
 
        def test_delete_attendance_confirmation_controller_activity_not_found(self):
               repo = ActivityRepositoryMock()
@@ -73,7 +73,7 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 404
-              assert response.body == "No items found for activity"
+              assert response.body == "Atividade não encontrada"
 
        def test_delete_attendance_confirmation_controller_role_not_professor(self):
               repo = ActivityRepositoryMock()
@@ -86,7 +86,7 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 403
-              assert response.body == "That action is forbidden for this user, not professor"
+              assert response.body == "Apenas professores responsáveis da atividade e administradores podem deletar o código de confirmação"
 
        def test_delete_attendance_confirmation_controller_activity_dont_have_confirmation_code(self):
               repo = ActivityRepositoryMock()
@@ -99,9 +99,9 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 403
-              assert response.body == "That action is forbidden for this confirmation_code, do not exists"
+              assert response.body == 'Atividade não possui um código de confirmação'
 
-       def test_delete_attendance_confirmation_controller_role_not_professor(self):
+       def test_delete_attendance_confirmation_controller_role_not_professor_of_activitiy(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
               usecase = DeleteAttendanceConfirmationUsecase(repo)
@@ -112,4 +112,4 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 403
-              assert response.body == "That action is forbidden for this user, not professor of activity"
+              assert response.body == "Apenas professores responsáveis da atividade e administradores podem deletar o código de confirmação"

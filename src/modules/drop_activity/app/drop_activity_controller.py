@@ -1,11 +1,11 @@
-from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
-from .drop_activity_usecase import DropActivityUsecase
-from .drop_activity_viewmodel import DropActivityViewmodel
-from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
+from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadRequest, InternalServerError, Forbidden
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from .drop_activity_usecase import DropActivityUsecase
+from .drop_activity_viewmodel import DropActivityViewmodel
 
 
 class DropActivityController:
@@ -34,24 +34,32 @@ class DropActivityController:
             return OK(viewmodel.to_dict())
 
         except NoItemsFound as err:
+            message = err.message.lower()
 
-            return NotFound(body=err.message)
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
 
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
+
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
+
+            else:
+                return NotFound(body=f"{message} não encontrada")
         except MissingParameters as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            return Forbidden(body="Impossível desinscrever usuário de atividade que não está inscrito")
 
-        except WrongTypeParameter as err:
-
-            return BadRequest(body=err.message)
+       
 
         except EntityError as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
 

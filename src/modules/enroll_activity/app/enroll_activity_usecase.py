@@ -1,13 +1,12 @@
-import abc
 import datetime
 
 from src.shared.domain.entities.enrollment import Enrollment
-from src.shared.domain.entities.activity import Activity
-from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.entities.user import User
-from src.shared.helpers.errors.domain_errors import EntityError 
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
+from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+
 
 class EnrollActivityUsecase:
     def __init__(self, repo: IActivityRepository):
@@ -25,7 +24,6 @@ class EnrollActivityUsecase:
             raise NoItemsFound('Activity')
 
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
-
         if enrollment is not None:
             raise ForbiddenAction('Enrollment')
                 

@@ -105,7 +105,7 @@ class Test_DropActivityPresenter:
 
             response = lambda_handler(event, None)
             assert response["statusCode"] == 400
-            assert json.loads(response["body"]) == "Field requester_user is missing"
+            assert json.loads(response["body"]) == "Parâmetro ausente: requester_user"
 
     def test_drop_activity_presenter_400_code_mising(self):
         event = {
@@ -159,7 +159,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: code"
     def test_drop_activity_presenter_400_user_id_invalid(self):
         event = {
             "version": "2.0",
@@ -212,7 +212,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field user_id is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: user_id"
 
     def test_drop_activity_presenter_400_code_invalid(self):
         event = {
@@ -266,7 +266,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: code"
 
     def test_drop_activity_presenter_403_forbidden_action(self):
         event = {
@@ -320,7 +320,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == 'That action is forbidden for this Enrollment'
+        assert json.loads(response["body"]) == "Impossível desinscrever usuário de atividade que não está inscrito"
 
     def test_drop_activity_presenter_404_no_items_found_activity(self):
         event = {
@@ -374,7 +374,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for Activity'
+        assert json.loads(response["body"]) == 'Atividade não encontrada'
 
     def test_drop_activity_presenter_404_not_found_enrollment(self):
         event = {
@@ -428,7 +428,7 @@ class Test_DropActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for Enrollment'
+        assert json.loads(response["body"]) == 'Inscrição não encontrada'
 
 
 

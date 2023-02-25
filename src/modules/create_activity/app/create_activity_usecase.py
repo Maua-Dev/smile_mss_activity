@@ -1,5 +1,4 @@
-import datetime
-from typing import List, Dict
+from typing import List
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker
@@ -31,7 +30,7 @@ class CreateActivityUsecase:
             raise ForbiddenAction("create_activity, only admins can create activities")
 
         if self.repo_activity.get_activity(code=code) is not None:
-            raise DuplicatedItem("code")
+            raise DuplicatedItem("activity_code")
 
         if type(responsible_professors_user_id) != list:
             raise EntityError("responsible_professors")
