@@ -279,7 +279,7 @@ class Test_CreateActivityPresenter:
             response = lambda_handler(event, None)
 
             assert response["statusCode"] == 400
-            assert json.loads(response["body"]) == 'The item alredy exists for this code'
+            assert json.loads(response["body"]) == 'Já existe uma atividade com esse código'
 
     def test_create_activity_presenter_forbidden_not_admin(self):
         event = {

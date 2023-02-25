@@ -154,7 +154,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == 'The item alredy exists for this code'
+        assert response.body == 'Já existe uma atividade com esse código'
 
     def test_create_activity_controller_missing_title(self):
         repo_activity = ActivityRepositoryMock()

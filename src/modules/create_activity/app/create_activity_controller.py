@@ -127,7 +127,7 @@ class CreateActivityController:
 
         except DuplicatedItem as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body="Já existe uma atividade com esse código" if err.message == "activity_code" else "Já existe uma atividade com essas informaçãos")
 
         except EntityError as err:
 
