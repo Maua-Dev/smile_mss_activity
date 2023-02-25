@@ -43,4 +43,4 @@ class Test_GetEnrollmentsByUserIdController:
         response = controller(HttpRequest(body={'requester_user': {"sub": "1", "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}}))
 
         assert response.status_code == 400
-        assert response.body == 'Field user_id is not valid'
+        assert response.body == 'Parâmetro inválido: user_id'

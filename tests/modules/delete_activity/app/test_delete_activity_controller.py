@@ -59,7 +59,7 @@ class Test_DeleteActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is not valid'
+        assert response.body == 'Parâmetro inválido: code'
 
     def test_delete_activity_controller_missing_request_user(self):
         repo = ActivityRepositoryMock()

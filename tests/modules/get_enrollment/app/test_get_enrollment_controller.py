@@ -60,7 +60,7 @@ class Test_GetEnrollmentController:
                     response = controller(request)
 
                     assert response.status_code == 400
-                    assert response.body == 'Field user_id is not valid'
+                    assert response.body == 'Parâmetro inválido: user_id'
 
     def test_get_enrollment_no_items_found_user_not_found(self):
 

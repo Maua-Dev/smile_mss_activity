@@ -119,7 +119,7 @@ class Test_GetAllActivitiesAdminPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field Confirmation Code is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: Confirmation Code"
     
     def test_confirm_attendance_presenter_presenter(self):
         event = {
@@ -235,7 +235,7 @@ class Test_GetAllActivitiesAdminPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field user_id is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: user_id"
     
     def test_confirm_attendance_presenter_presenter_already_confirmed(self):
         event = {

@@ -120,7 +120,7 @@ class Test_CreateActivityController:
             response = controller(request=request)
 
             assert response.status_code == 400
-            assert response.body == "Field code is not valid"
+            assert response.body == "Parâmetro inválido: code"
 
     def test_create_activity_controller_duplicated_code(self):
         repo_activity = ActivityRepositoryMock()
@@ -285,7 +285,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field activity_type is not valid"
+        assert response.body == "Parâmetro inválido: activity_type"
 
     def test_create_activity_controller_missing_is_extensive(self):
         repo_activity = ActivityRepositoryMock()
@@ -383,7 +383,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field delivery_model is not valid"
+        assert response.body == "Parâmetro inválido: delivery_model"
 
     def test_create_activity_controller_invalid_start_date(self):
         repo_activity = ActivityRepositoryMock()
@@ -516,7 +516,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field responsible_professors is not valid"
+        assert response.body == "Parâmetro inválido: responsible_professors"
 
     def test_create_activity_invalid_responsible_professors_id_invalid(self):
         repo_activity = ActivityRepositoryMock()
@@ -609,7 +609,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field speakers is not valid"
+        assert response.body == "Parâmetro inválido: speakers"
 
     def test_create_activity_invalid_speaker_parameter(self):
         repo_activity = ActivityRepositoryMock()
@@ -644,7 +644,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field speakers is not valid"
+        assert response.body == "Parâmetro inválido: speakers"
 
     def test_create_activity_controller_missing_total_slots(self):
         repo_activity = ActivityRepositoryMock()

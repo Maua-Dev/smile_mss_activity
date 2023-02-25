@@ -103,7 +103,7 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field user_id is not valid'
+        assert reponse.body == 'Parâmetro inválido: user_id'
 
     def test_drop_activity_invalid_code(self):
         repo = ActivityRepositoryMock()
@@ -116,5 +116,5 @@ class Test_DropActivityController:
         reponse = controller(request)
 
         assert reponse.status_code == 400
-        assert reponse.body == 'Field code is not valid'
+        assert reponse.body == 'Parâmetro inválido: code'
 

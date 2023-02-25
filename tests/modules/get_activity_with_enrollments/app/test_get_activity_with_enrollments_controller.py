@@ -60,7 +60,7 @@ class Test_GetActivityWithEnrollmentsController:
                                      "custom:role": repo_user.users[2].role.value}, 'code': 1234})
 
         response = controller(request=request)
-        assert response.body == 'Field code is not valid'
+        assert response.body == 'Parâmetro inválido: code'
         assert response.status_code == 400
 
     def test_get_activity_with_enrollments_controller_activity_is_none(self):

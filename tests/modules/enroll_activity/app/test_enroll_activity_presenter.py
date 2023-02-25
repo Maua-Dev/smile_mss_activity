@@ -269,7 +269,7 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field user_id is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: user_id"
 
     def test_enroll_activity_presenter_400_code_invalid(self):
         event = {
@@ -324,7 +324,7 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: code"
 
     def test_enroll_activity_presenter_403_forbidden_action(self):
         event = {

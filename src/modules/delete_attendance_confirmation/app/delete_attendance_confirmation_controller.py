@@ -48,7 +48,7 @@ class DeleteAttendanceConfirmationController:
 
               except EntityError as err:
 
-                     return BadRequest(body=err.message)
+                     return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
               except Exception as err:
 

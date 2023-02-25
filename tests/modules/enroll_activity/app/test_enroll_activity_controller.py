@@ -125,7 +125,7 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field user_id is not valid'
+        assert response.body == 'Parâmetro inválido: user_id'
 
 
     def test_enroll_activity_controller_invalid_code(self):
@@ -140,6 +140,6 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is not valid'
+        assert response.body == 'Parâmetro inválido: code'
 
     

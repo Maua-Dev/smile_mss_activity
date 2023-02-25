@@ -213,7 +213,7 @@ class Test_GenerateAttendanceConfirmationPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field activity_code is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: activity_code"
 
     def test_generate_attendance_confirmation_presenter_activity_not_found(self):
         event = {

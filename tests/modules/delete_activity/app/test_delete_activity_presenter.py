@@ -166,7 +166,7 @@ class Test_DeleteActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == 'Field code is not valid'
+        assert json.loads(response["body"]) == 'Parâmetro inválido: code'
 
     def test_delete_activity_no_items_found(self):
         event = {

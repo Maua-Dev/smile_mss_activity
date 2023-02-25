@@ -162,7 +162,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field new_state is not valid'
+        assert response.body == 'Parâmetro inválido: new_state'
 
 
 
@@ -187,7 +187,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field activity_code is not valid'
+        assert response.body == 'Parâmetro inválido: activity_code'
 
 
 
@@ -212,7 +212,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == "Field user_id is not valid"
+        assert response.body == "Parâmetro inválido: user_id"
 
     def test_manual_attendance_controller_forbidden_not_professor(self):
         repo_activity = ActivityRepositoryMock()

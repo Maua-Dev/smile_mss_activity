@@ -167,7 +167,7 @@ class Test_UpdateActivityPresenter:
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: code"
 
     def test_update_activity_presenter_missing_parameter_code(self):
         event = {
