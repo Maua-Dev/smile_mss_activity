@@ -329,3 +329,22 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         return activities, user_enrollments
 
+
+
+    def batch_update_activities(self, to_update_activities: List[Activity]) -> List[Activity]:
+        to_update_list = list()
+
+        activities_dtos = [ActivityDynamoDTO.from_entity(activity).to_dynamo() for activity in to_update_activities]
+
+        for activity in activities_dtos:
+            data = {
+                self.dynamo.partition_key: self.activity_partition_key_format(activity['activity_code']),
+                self.dynamo.sort_key: self.activity_sort_key_format(activity['activity_code']),
+            }
+            data.update(activity)
+
+            to_update_list.append(data)
+
+        response = self.dynamo.batch_write_items(to_update_list)
+
+        return to_update_activities

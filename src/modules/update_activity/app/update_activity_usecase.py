@@ -1,5 +1,5 @@
 from typing import List
-import datetime
+
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
@@ -9,7 +9,7 @@ from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, DuplicatedItem
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 
 
 class UpdateActivityUsecase:

@@ -1,55 +1,74 @@
+from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
-from .delete_attendance_confirmation_viewmodel import DeleteAttendanceConfirmationViewmodel
-from src.shared.helpers.errors.controller_errors import MissingParameters
-from .delete_attendance_confirmation_usecase import DeleteAttendanceConfirmationUsecase
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadRequest, InternalServerError, Forbidden
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from .delete_attendance_confirmation_usecase import DeleteAttendanceConfirmationUsecase
+from .delete_attendance_confirmation_viewmodel import DeleteAttendanceConfirmationViewmodel
 
 
 class DeleteAttendanceConfirmationController:
-       def __init__(self, usecase: DeleteAttendanceConfirmationUsecase):
-              self.DeleteAttendanceConfirmationUsecase = usecase
+    def __init__(self, usecase: DeleteAttendanceConfirmationUsecase):
+        self.DeleteAttendanceConfirmationUsecase = usecase
 
-       def __call__(self, request: IRequest) -> IResponse:
-              try:
-                     if request.data.get("code") is None:
-                            raise MissingParameters("code")
+    def __call__(self, request: IRequest) -> IResponse:
+        try:
+            if request.data.get("code") is None:
+                raise MissingParameters("code")
 
-                     if request.data.get("requester_user") is None:
-                            raise MissingParameters("requester_user")
+            if request.data.get("requester_user") is None:
+                raise MissingParameters("requester_user")
 
-                     requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 
-                     confirmation_code = self.DeleteAttendanceConfirmationUsecase(
-                            code=request.data.get("code"),
-                            requester_user=requester_user
-                     )
+            confirmation_code = self.DeleteAttendanceConfirmationUsecase(
+                code=request.data.get("code"),
+                requester_user=requester_user
+            )
 
-                     viewmodel = DeleteAttendanceConfirmationViewmodel(
-                            activity_code=request.data.get("code"),
-                            confirmation_code=confirmation_code
-                     )
+            viewmodel = DeleteAttendanceConfirmationViewmodel(
+                activity_code=request.data.get("code"),
+                confirmation_code=confirmation_code
+            )
 
-                     return OK(viewmodel.to_dict())
-              
-              except NoItemsFound as err:
+            return OK(viewmodel.to_dict())
 
-                     return NotFound(body=err.message)
+        except NoItemsFound as err:
+            message = err.message.lower()
 
-              except MissingParameters as err:
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
 
-                     return BadRequest(body=err.message)
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
 
-              except ForbiddenAction as err:
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
 
-                     return Forbidden(body=err.message)
+            else:
+                return NotFound(body=f"{message} não encontrada")
 
-              except EntityError as err:
+        except MissingParameters as err:
 
-                     return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
-              except Exception as err:
+        except ForbiddenAction as err:
+            message = err.message.lower()
 
-                     return InternalServerError(body=err.args[0])
+            if message == "confirmation_code":
+                return Forbidden(body=f"Atividade não possui um código de confirmação")
+
+            elif message == "user":
+                return Forbidden(body=f"Apenas professores responsáveis da atividade e administradores podem deletar o código de confirmação")
+
+            else:
+                return Forbidden(body=f"Ação não permitida: {message}")
+
+        except EntityError as err:
+
+            return BadRequest(body=f"Parâmetro inválido: {err.message}")
+
+        except Exception as err:
+
+            return InternalServerError(body=err.args[0])

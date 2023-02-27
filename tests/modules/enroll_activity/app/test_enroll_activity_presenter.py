@@ -159,7 +159,7 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field requester_user is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: requester_user"
 
     def test_enroll_activity_presenter_400_code_missing(self):
         event = {
@@ -214,7 +214,7 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is missing"
+        assert json.loads(response["body"]) == "Parâmetro ausente: code"
 
     def test_enroll_activity_presenter_400_user_id_invalid(self):
         event = {
@@ -269,7 +269,7 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field user_id is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: user_id"
 
     def test_enroll_activity_presenter_400_code_invalid(self):
         event = {
@@ -324,7 +324,7 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field code is not valid"
+        assert json.loads(response["body"]) == "Parâmetro inválido: code"
 
     def test_enroll_activity_presenter_403_forbidden_action(self):
         event = {
@@ -379,7 +379,7 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == 'That action is forbidden for this Enrollment'
+        assert json.loads(response["body"]) == "Impossível inscrever usuário"
 
     def test_enroll_activity_presenter_404_no_items_found_activity(self):
         event = {
@@ -434,4 +434,4 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for Activity'
+        assert json.loads(response["body"]) == 'Atividade não encontrada'

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-import datetime
 from typing import List, Tuple
 
 from src.shared.domain.entities.activity import Activity

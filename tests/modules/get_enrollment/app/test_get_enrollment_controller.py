@@ -34,7 +34,7 @@ class Test_GetEnrollmentController:
             response = controller(request)
 
             assert response.status_code == 400
-            assert response.body == 'Field requester_user is missing'
+            assert response.body == 'Parâmetro ausente: requester_user'
 
     def test_get_enrrolment_missing_code(self):
 
@@ -47,7 +47,7 @@ class Test_GetEnrollmentController:
                 response = controller(request)
 
                 assert response.status_code == 400
-                assert response.body == 'Field code is missing'
+                assert response.body == 'Parâmetro ausente: code'
 
     def test_get_enrollment_entity_error(self):
 
@@ -60,7 +60,7 @@ class Test_GetEnrollmentController:
                     response = controller(request)
 
                     assert response.status_code == 400
-                    assert response.body == 'Field user_id is not valid'
+                    assert response.body == 'Parâmetro inválido: user_id'
 
     def test_get_enrollment_no_items_found_user_not_found(self):
 
@@ -73,7 +73,7 @@ class Test_GetEnrollmentController:
                 response = controller(request)
 
                 assert response.status_code == 404
-                assert response.body == 'No items found for enrollment'
+                assert response.body == 'Inscrição não encontrada'
 
     def test_get_enrollment_no_items_found_code_not_found(self):
 
@@ -86,5 +86,5 @@ class Test_GetEnrollmentController:
                 response = controller(request)
 
                 assert response.status_code == 404
-                assert response.body == 'No items found for enrollment'
+                assert response.body == 'Inscrição não encontrada'
 

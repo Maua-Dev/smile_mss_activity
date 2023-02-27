@@ -13,7 +13,7 @@ class DeleteAttendanceConfirmationUsecase:
                      raise EntityError("activity_code")
 
               if requester_user.role != ROLE.PROFESSOR:
-                     raise ForbiddenAction("user, not professor")
+                     raise ForbiddenAction("user")
 
               activity = self.repo.get_activity(code)
 
@@ -21,10 +21,10 @@ class DeleteAttendanceConfirmationUsecase:
                      raise NoItemsFound("activity")
 
               if activity.confirmation_code is None:
-                     raise ForbiddenAction("confirmation_code, do not exists")
+                     raise ForbiddenAction("confirmation_code")
 
               if requester_user not in activity.responsible_professors:
-                     raise ForbiddenAction("user, not professor of activity")
+                     raise ForbiddenAction("user")
 
               delete_confirmation_code = None
 

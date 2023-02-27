@@ -2,7 +2,7 @@ import pytest
 from src.modules.confirm_attendance.app.confirm_attendance_usecase import ConfirmAttendanceUsecase
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -53,7 +53,7 @@ class Test_ConfirmAttendanceUsecase:
         code = "invalid_code"
         confirmation_code = activity_repo.activities[11].confirmation_code
 
-        with pytest.raises(ForbiddenAction):
+        with pytest.raises(NoItemsFound):
             resp = usecase(
                 user_id=user_id,
                 code=code,

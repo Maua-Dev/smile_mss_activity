@@ -83,6 +83,7 @@ class ActivityViewmodel:
 
     def to_dict(self):
         return {
+            "activity": {
             "code": self.code,
             "title": self.title,
             "description": self.description,
@@ -99,7 +100,7 @@ class ActivityViewmodel:
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
             "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
-        }
+        }}
 
 
 class GetAllActivitiesViewmodel:

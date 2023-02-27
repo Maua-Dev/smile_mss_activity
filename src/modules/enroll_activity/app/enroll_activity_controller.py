@@ -1,11 +1,12 @@
-from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
-from .enroll_activity_usecase import EnrollActivityUsecase
-from .enroll_activity_viewmodel import EnrollActivityViewmodel
-from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
+from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadRequest, InternalServerError, Forbidden
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from .enroll_activity_usecase import EnrollActivityUsecase
+from .enroll_activity_viewmodel import EnrollActivityViewmodel
+
 
 class EnrollActivityController:
 
@@ -30,25 +31,33 @@ class EnrollActivityController:
             viewmodel = EnrollActivityViewmodel(enrollment, requester_user)
 
             return OK(viewmodel.to_dict())
-        
+
         except NoItemsFound as err:
-            return NotFound(body=err.message)
+            message = err.message.lower()
+
+            if message == "enrollment":
+                return NotFound(body=f"Inscrição não encontrada")
+
+            elif message == "activity":
+                return NotFound(body=f"Atividade não encontrada")
+
+            elif message == "user":
+                return NotFound(body=f"Usuário não encontrado")
+
+            else:
+                return NotFound(body=f"{message} não encontrada")
         
         except MissingParameters as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
-
-        except WrongTypeParameter as err:
-
-            return BadRequest(body=err.message)
+            return Forbidden(body=f"Impossível inscrever usuário")
 
         except EntityError as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
 

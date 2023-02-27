@@ -14,6 +14,10 @@ print("Finished adjusting the layer directory")
 
 
 app = cdk.App()
-IacStack(app, "SmileStack-Dev", env=cdk.Environment(account='264055331071', region='us-east-2'))
+
+aws_region = os.environ.get("AWS_REGION")
+aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
+
+IacStack(app, "SmileStack-Dev", env=cdk.Environment(account=aws_account_id, region=aws_region))
 
 app.synth()

@@ -1,6 +1,5 @@
-import enum
-from enum import Enum
 import os
+from enum import Enum
 
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 
