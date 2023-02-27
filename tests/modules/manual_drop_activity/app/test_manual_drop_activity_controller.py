@@ -157,7 +157,7 @@ class Test_ManualDropActivityController:
         assert response.status_code == 403
         assert response.body == 'That action is forbidden for this user: only responsible professors can do that'
 
-    def test_manual_drop_activity_controller_wrong_user(self):
+    def test_manual_drop_activity_controller_wrong_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = ManualDropActivityUsecase(repo_activity, repo_user)
