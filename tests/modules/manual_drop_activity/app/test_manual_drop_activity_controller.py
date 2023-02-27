@@ -70,7 +70,7 @@ class Test_ManualDropActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field code is missing'
+        assert response.body == 'Parâmetro ausente: code'
 
     def test_manual_drop_activity_missing_code(self):
 
@@ -92,7 +92,7 @@ class Test_ManualDropActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field user_id is missing'
+        assert response.body == 'Parâmetro ausente: user_id'
 
     def test_manual_drop_activity_controller_missing_requester_user(self):
         repo_activity = ActivityRepositoryMock()
@@ -111,7 +111,7 @@ class Test_ManualDropActivityController:
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Field requester_user is missing'
+        assert response.body == 'Parâmetro ausente: requester_user'
 
     def test_manual_drop_activity_controller_wrong_professor(self):
         repo_activity = ActivityRepositoryMock()
@@ -133,7 +133,7 @@ class Test_ManualDropActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this user: only responsible professors for this activity can do that'
+        assert response.body == 'Apenas professores responsáveis da atividade e administradores podem desinscrever usuários'
 
     def test_manual_drop_activity_controller_wrong_user(self):
         repo_activity = ActivityRepositoryMock()
@@ -155,7 +155,7 @@ class Test_ManualDropActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this user: only responsible professors can do that'
+        assert response.body == 'Apenas professores responsáveis da atividade e administradores podem desinscrever usuários'
 
     def test_manual_drop_activity_controller_wrong_code(self):
         repo_activity = ActivityRepositoryMock()
@@ -175,7 +175,7 @@ class Test_ManualDropActivityController:
                               })
 
         response = controller(request)
-        assert response.body == 'No items found for Activity'
+        assert response.body == 'Atividade não encontrada'
         assert response.status_code == 404
     def test_manual_drop_activity_controller_wrong_user_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -195,7 +195,7 @@ class Test_ManualDropActivityController:
                               })
 
         response = controller(request)
-        assert response.body == 'Field code is not valid'
+        assert response.body == 'Parâmetro inválido: code'
         assert response.status_code == 400
 
     def test_manual_drop_activity_controller_wrong_user_id(self):
@@ -216,7 +216,7 @@ class Test_ManualDropActivityController:
                               })
 
         response = controller(request)
-        assert response.body == 'Field user_id is not valid'
+        assert response.body == 'Parâmetro inválido: user_id'
         assert response.status_code == 400
 
     def test_manual_drop_activity_controller_already_dropped(self):
@@ -239,4 +239,4 @@ class Test_ManualDropActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'That action is forbidden for this Enrollment'
+        assert response.body == 'Usuário não inscrito na atividade'

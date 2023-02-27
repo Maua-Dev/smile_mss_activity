@@ -42,7 +42,7 @@ class ManualDropActivityUsecase:
 
         original_state = original_enrollment.state
         if original_state != ENROLLMENT_STATE.ENROLLED and original_state != ENROLLMENT_STATE.IN_QUEUE:
-            raise ForbiddenAction('Enrollment')
+            raise ForbiddenAction('enrollment')
 
         updated_enrollment = self.repo_activity.update_enrollment(user_id=user_id, code=code,
                                                                   new_state=ENROLLMENT_STATE.DROPPED)

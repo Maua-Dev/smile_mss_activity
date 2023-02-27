@@ -36,18 +36,37 @@ class ManualDropActivityController:
 
         except NoItemsFound as err:
 
-            return NotFound(body=err.message)
+            message = err.message.lower()
+
+            if message == "enrollment":
+
+                return NotFound(body=f"Inscrição não encontrada")
+
+
+            elif message == "activity":
+
+                return NotFound(body=f"Atividade não encontrada")
+
+
+            elif message == "user":
+
+                return NotFound(body=f"Usuário não encontrado")
+
+
+            else:
+
+                return NotFound(body=f"{message} não encontrada")
 
         except ForbiddenAction as err:
 
-            return Forbidden(body=err.message)
+            return Forbidden(body='Usuário não inscrito na atividade' if err.message == 'enrollment' else 'Apenas professores responsáveis da atividade e administradores podem desinscrever usuários')
 
         except EntityError as err:
 
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except MissingParameters as err:
-            return BadRequest(body=err.message)
+            return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except Exception as err:
 
