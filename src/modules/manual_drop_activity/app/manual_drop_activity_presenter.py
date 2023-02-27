@@ -1,5 +1,5 @@
-from src.modules.manual_drop_activity.app.manual_drop_activity_controller import ManualDropActivityController
-from src.modules.manual_drop_activity.app.manual_drop_activity_usecase import ManualDropActivityUsecase
+from .manual_drop_activity_controller import ManualDropActivityController
+from .manual_drop_activity_usecase import ManualDropActivityUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
