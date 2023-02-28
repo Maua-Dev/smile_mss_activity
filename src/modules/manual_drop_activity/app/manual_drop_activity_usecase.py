@@ -1,4 +1,3 @@
-from src.modules.confirm_attendance.app.confirm_attendance_presenter import repo_activity
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
