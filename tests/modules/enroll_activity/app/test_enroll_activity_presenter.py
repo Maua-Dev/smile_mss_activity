@@ -326,7 +326,7 @@ class Test_EnrollActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro inválido: code"
 
-    def test_enroll_activity_presenter_403_forbidden_action(self):
+    def test_enroll_activity_presenter_403_already_enrolled(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -379,7 +379,7 @@ class Test_EnrollActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "Impossível inscrever usuário"
+        assert json.loads(response["body"]) == "Usuário já inscrito"
 
     def test_enroll_activity_presenter_404_no_items_found_activity(self):
         event = {

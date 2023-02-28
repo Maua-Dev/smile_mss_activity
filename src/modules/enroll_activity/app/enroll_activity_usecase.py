@@ -5,7 +5,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, AlreadyEnrolled, ClosedActivity
 
 
 class EnrollActivityUsecase:
@@ -28,8 +28,10 @@ class EnrollActivityUsecase:
             raise ForbiddenAction('Enrollment')
                 
         if not activity.accepting_new_enrollments:
-            raise ForbiddenAction("Activity")
+            raise ClosedActivity("Activity")
 
+        if enrollment is not None:
+            raise AlreadyEnrolled('Enrollment')
         else:
 
             if activity.taken_slots >= activity.total_slots:

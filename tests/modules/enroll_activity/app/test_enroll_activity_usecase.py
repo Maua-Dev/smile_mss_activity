@@ -4,14 +4,13 @@ from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivi
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, ClosedActivity, AlreadyEnrolled
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_EnrollActivityUsecase:
-
 
     def test_enroll_activity_usecase_accepting_new_enrollments(self):
         repo = ActivityRepositoryMock()
@@ -52,11 +51,11 @@ class Test_EnrollActivityUsecase:
         assert repo.activities[2].accepting_new_enrollments == True
         assert taken_slots_old + 1 == repo.activities[2].taken_slots
         assert enrollment_activity.state == ENROLLMENT_STATE.ENROLLED
-        
+
     def test_enroll_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityUsecase(repo)   
+        usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(EntityError):
             enrollment_activity = usecase('usuario2345', 'code')
@@ -74,14 +73,13 @@ class Test_EnrollActivityUsecase:
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
 
-        with pytest.raises(ForbiddenAction):
+        with pytest.raises(AlreadyEnrolled):
             enrollment_activity = usecase('0355535e-a110-11ed-a8fc-0242ac120002', 'ELET355')
 
     def test_enroll_activity_usecase_activity_none(self):
-
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityUsecase(repo)  
+        usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
             enrollment_activity = usecase(repo_user.users[6].user_id, '')
@@ -91,5 +89,5 @@ class Test_EnrollActivityUsecase:
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
 
-        with pytest.raises(ForbiddenAction):
+        with pytest.raises(ClosedActivity):
             enrollment = usecase(usecase(repo_user.users[4].user_id, repo.activities[12].code))

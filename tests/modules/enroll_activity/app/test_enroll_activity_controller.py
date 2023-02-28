@@ -82,16 +82,16 @@ class Test_EnrollActivityController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == "Impossível inscrever usuário"
+        assert response.body == "Usuário já inscrito"
 
     def test_enroll_activity_controller_forbidden_action_wrong_role(self):
-
+    #teste levantando o erro errado!
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
         controller = EnrollActivityController(usecase)
 
-        request = HttpRequest(body={'code': repo.enrollments[2].activity_code, 'requester_user': {"sub": repo_user.users[2].user_id, "name": repo_user.users[2].name, "custom:role": repo_user.users[2].role.value}})
+        request = HttpRequest(body={'code': repo.enrollments[4].activity_code, 'requester_user': {"sub": repo_user.users[3].user_id, "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
 
         response = controller(request)
 
