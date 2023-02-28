@@ -24,14 +24,14 @@ class EnrollActivityUsecase:
             raise NoItemsFound('Activity')
 
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
-        if enrollment is not None:
-            raise ForbiddenAction('Enrollment')
+
                 
         if not activity.accepting_new_enrollments:
             raise ClosedActivity("Activity")
 
         if enrollment is not None:
             raise AlreadyEnrolled('Enrollment')
+
         else:
 
             if activity.taken_slots >= activity.total_slots:

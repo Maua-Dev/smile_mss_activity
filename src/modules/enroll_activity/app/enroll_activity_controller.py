@@ -51,10 +51,6 @@ class EnrollActivityController:
 
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
-        except ForbiddenAction as err:
-
-            return Forbidden(body=f"Impossível inscrever usuário")
-
         except ClosedActivity as err:
 
             return Forbidden(body=f"Atividade já encerrada")
@@ -62,6 +58,10 @@ class EnrollActivityController:
         except AlreadyEnrolled as err:
 
             return Forbidden(body=f"Usuário já inscrito")
+
+        except ForbiddenAction as err:
+
+            return Forbidden(body=f"Impossível inscrever usuário")
 
         except EntityError as err:
 
