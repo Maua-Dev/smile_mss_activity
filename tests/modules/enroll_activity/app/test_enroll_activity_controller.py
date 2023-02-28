@@ -85,7 +85,7 @@ class Test_EnrollActivityController:
         assert response.body == "Usuário já inscrito"
 
     def test_enroll_activity_controller_forbidden_action_wrong_role(self):
-    #teste levantando o erro errado!
+
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
