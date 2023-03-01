@@ -89,4 +89,4 @@ class Test_EnrollActivityUsecase:
         usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(ClosedActivity):
-            enrollment = usecase(usecase(repo_user.users[4].user_id, repo.activities[12].code))
+            enrollment = usecase(usecase(repo_user.users[5].user_id, repo.activities[12].code))
