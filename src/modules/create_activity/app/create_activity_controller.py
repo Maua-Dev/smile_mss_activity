@@ -101,6 +101,12 @@ class CreateActivityController:
 
             return Created(viewmodel.to_dict())
 
+            if (delivery_model == DELIVERY_MODEL.ONLINE or delivery_model == DELIVERY_MODEL.HYBRID) and link is None:
+                raise NoItemsFound('link')
+
+            if (delivery_model == DELIVERY_MODEL.IN_PERSON or delivery_model == DELIVERY_MODEL.HYBRID) and place is None:
+                raise NoItemsFound('local')
+
         except NoItemsFound as err:
             message = err.message.lower()
 
@@ -118,6 +124,9 @@ class CreateActivityController:
 
             else:
                 return NotFound(body=f"{message} não encontrada")
+
+
+
         except MissingParameters as err:
 
             return BadRequest(body=f"Parâmetro ausente: {err.message}")

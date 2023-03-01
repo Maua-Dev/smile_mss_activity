@@ -807,8 +807,8 @@ class Test_CreateActivityController:
         )
         response = controller(request=request)
 
-        assert response.status_code == 404
-        assert response.body == "place não encontrada"
+        assert response.status_code == 400
+        assert response.body == "Parâmetro inválido: link or place"
 
     def test_create_activity_controller_online_no_link_established(self):
         repo_activity = ActivityRepositoryMock()
@@ -842,8 +842,8 @@ class Test_CreateActivityController:
                               )
         response = controller(request=request)
 
-        assert response.status_code == 404
-        assert response.body == "link não encontrada"
+        assert response.status_code == 400
+        assert response.body == "Parâmetro inválido: link or place"
 
     def test_create_activity_controller_hybrid_no_link_established(self):
         repo_activity = ActivityRepositoryMock()
@@ -877,8 +877,8 @@ class Test_CreateActivityController:
                               )
         response = controller(request=request)
 
-        assert response.status_code == 404
-        assert response.body == "link não encontrada"
+        assert response.status_code == 400
+        assert response.body == "Informação a mais está gerando um conflito: local"
 
     def test_create_activity_controller_in_person_conflicting_link_information(self):
         repo_activity = ActivityRepositoryMock()
@@ -945,5 +945,5 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Informação a mais está gerando um conflito: place"
+        assert response.body == "Informação a mais está gerando um conflito: local"
 

@@ -50,14 +50,8 @@ class CreateActivityUsecase:
         if len(responsible_professors) != len(responsible_professors_user_id):
             raise NoItemsFound("responsible_professors")
 
-        if (delivery_model == DELIVERY_MODEL.ONLINE or delivery_model == DELIVERY_MODEL.HYBRID) and link is None:
-            raise NoItemsFound('link')
-
-        if (delivery_model == DELIVERY_MODEL.IN_PERSON or delivery_model == DELIVERY_MODEL.HYBRID) and place is None:
-            raise NoItemsFound('place')
-
         if delivery_model == DELIVERY_MODEL.ONLINE and place is not None:
-            raise ConflictingInformation('place')
+            raise ConflictingInformation('local')
 
         if delivery_model == DELIVERY_MODEL.IN_PERSON and link is not None:
             raise ConflictingInformation('link')
