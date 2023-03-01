@@ -12,7 +12,7 @@ class ForbiddenAction(BaseError):
     def __init__(self, message: str):
         super().__init__(message)
 
-class AlreadyEnrolled(BaseError):
+class UserAlreadyEnrolled(BaseError):
     def __init__(self, message: str):
         super().__init__(message)
 
