@@ -26,10 +26,10 @@ class EnrollActivityUsecase:
 
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
 
-                
 
         if enrollment is not None:
             raise UserAlreadyEnrolled('Enrollment')
+
         if not activity.accepting_new_enrollments:
             raise ClosedActivity("Activity")
 
