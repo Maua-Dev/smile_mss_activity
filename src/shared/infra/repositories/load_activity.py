@@ -287,7 +287,7 @@ class LoadActivityRepositoryMock:
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1678226400000, #Fri Mar 07 2023 19:00
                 duration=60,
-                link=None,
+                link="www.maua.br",
                 place="H321",
                 responsible_professors=[
                     User(name="Gep Soller", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
@@ -308,8 +308,8 @@ class LoadActivityRepositoryMock:
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1678561200000, #Tue Mar 11 2023 16:00
                 duration=60,
-                link="https://devmaua.com",
-                place=None,
+                link=None,
+                place="H321",
                 responsible_professors=[
                     User(name="Vitor Guirão", role=ROLE.PROFESSOR, user_id="1d092927-2015-4963-b83d-c9ba46547dd2")],
                 speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung")],
