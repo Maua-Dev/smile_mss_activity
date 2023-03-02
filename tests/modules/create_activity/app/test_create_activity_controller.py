@@ -878,7 +878,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Informação a mais está gerando um conflito: local"
+        assert response.body == "Parâmetro a mais está gerando um conflito: local"
 
     def test_create_activity_controller_in_person_conflicting_link_information(self):
         repo_activity = ActivityRepositoryMock()
@@ -910,7 +910,7 @@ class Test_CreateActivityController:
 
 
         assert response.status_code == 400
-        assert response.body == "Informação a mais está gerando um conflito: link"
+        assert response.body == "Parâmetro a mais está gerando um conflito: link"
 
     def test_create_activity_controller_online_conflicting_place_information(self):
         repo_activity = ActivityRepositoryMock()
@@ -945,5 +945,5 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Informação a mais está gerando um conflito: local"
+        assert response.body == "Parâmetro a mais está gerando um conflito: local"
 

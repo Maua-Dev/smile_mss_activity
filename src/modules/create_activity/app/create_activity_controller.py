@@ -132,7 +132,7 @@ class CreateActivityController:
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ConflictingInformation as err:
-            return BadRequest(body=f"Informação a mais está gerando um conflito: {err.message}")
+            return BadRequest(body=f"Parâmetro a mais está gerando um conflito: {err.message}")
 
         except ForbiddenAction as err:
 
