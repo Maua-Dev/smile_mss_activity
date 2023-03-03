@@ -2,8 +2,6 @@ import pytest
 
 from src.modules.create_activity.app.create_activity_controller import CreateActivityController
 from src.modules.create_activity.app.create_activity_usecase import CreateActivityUsecase
-from src.shared.domain.entities.user import User
-from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
@@ -781,3 +779,171 @@ class Test_CreateActivityController:
 
         assert response.status_code == 403
         assert response.body == "Apenas administradores podem criar atividades"
+    def test_create_activity_controller_in_person_no_place_established(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(body={"code": "ZYX321",
+                                    "title": "Clean Architecture code review!",
+                                    "description": "Reviewing IMT student's codes",
+                                    "activity_type": "LECTURES",
+                                    "is_extensive": False,
+                                    "delivery_model": "IN_PERSON",
+                                    "start_date": 1669141012000,
+                                    "duration": 90,
+                                    "link": None,
+                                    "place": None,
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                                    "speakers": [{
+                                        "name": "Robert Cecil Martin",
+                                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                        "company": "Clean Architecture Company"
+                                    }],
+                                    "total_slots": 100,
+                                    "accepting_new_enrollments": True,
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Parâmetro inválido: link or place"
+
+    def test_create_activity_controller_online_no_link_established(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(body={"code": "ZYX321",
+                                    "title": "Clean Architecture code review!",
+                                    "description": "Reviewing IMT student's codes",
+                                    "activity_type": "LECTURES",
+                                    "is_extensive": False,
+                                    "delivery_model": "ONLINE",
+                                    "start_date": 1669141012000,
+                                    "duration": 90,
+                                    "link": None,
+                                    "place": None,
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
+                                                               "03555624-a110-11ed-a8fc-0242ac120002"],
+                                    "speakers": [{
+                                        "name": "Robert Cecil Martin",
+                                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                        "company": "Clean Architecture Company"
+                                    }],
+                                    "total_slots": 100,
+                                    "accepting_new_enrollments": True,
+                                    "stop_accepting_new_enrollments_before": 1666451811000,
+                                    'requester_user': {"sub": repo_user.users[0].user_id,
+                                                       "name": repo_user.users[0].name,
+                                                       "custom:role": repo_user.users[0].role.value}}
+                              )
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Parâmetro inválido: link or place"
+
+    def test_create_activity_controller_hybrid_no_link_established(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(body={"code": "ZYX321",
+                                    "title": "Clean Architecture code review!",
+                                    "description": "Reviewing IMT student's codes",
+                                    "activity_type": "LECTURES",
+                                    "is_extensive": False,
+                                    "delivery_model": "ONLINE",
+                                    "start_date": 1669141012000,
+                                    "duration": 90,
+                                    "link": None,
+                                    "place": "H331",
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
+                                                               "03555624-a110-11ed-a8fc-0242ac120002"],
+                                    "speakers": [{
+                                        "name": "Robert Cecil Martin",
+                                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                        "company": "Clean Architecture Company"
+                                    }],
+                                    "total_slots": 100,
+                                    "accepting_new_enrollments": True,
+                                    "stop_accepting_new_enrollments_before": 1666451811000,
+                                    'requester_user': {"sub": repo_user.users[0].user_id,
+                                                       "name": repo_user.users[0].name,
+                                                       "custom:role": repo_user.users[0].role.value}}
+                              )
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Parâmetro a mais está gerando um conflito: local"
+
+    def test_create_activity_controller_in_person_conflicting_link_information(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(body={"code": "ZYX321",
+                                    "title": "Clean Architecture code review!",
+                                    "description": "Reviewing IMT student's codes",
+                                    "activity_type": "LECTURES",
+                                    "is_extensive": False,
+                                    "delivery_model": "IN_PERSON",
+                                    "start_date": 1669141012000,
+                                    "duration": 90,
+                                    "link": 'www.maua.br',
+                                    "place": 'H123',
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                                    "speakers": [{
+                                        "name": "Robert Cecil Martin",
+                                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                        "company": "Clean Architecture Company"
+                                    }],
+                                    "total_slots": 100,
+                                    "accepting_new_enrollments": True,
+                                    "stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
+        response = controller(request=request)
+
+
+        assert response.status_code == 400
+        assert response.body == "Parâmetro a mais está gerando um conflito: link"
+
+    def test_create_activity_controller_online_conflicting_place_information(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        controller = CreateActivityController(usecase=usecase)
+
+        request = HttpRequest(body={"code": "ZYX321",
+                                    "title": "Clean Architecture code review!",
+                                    "description": "Reviewing IMT student's codes",
+                                    "activity_type": "LECTURES",
+                                    "is_extensive": False,
+                                    "delivery_model": "ONLINE",
+                                    "start_date": 1669141012000,
+                                    "duration": 90,
+                                    "link": 'www.google.com',
+                                    "place": 'H321',
+                                    "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
+                                                               "03555624-a110-11ed-a8fc-0242ac120002"],
+                                    "speakers": [{
+                                        "name": "Robert Cecil Martin",
+                                        "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                        "company": "Clean Architecture Company"
+                                    }],
+                                    "total_slots": 100,
+                                    "accepting_new_enrollments": True,
+                                    "stop_accepting_new_enrollments_before": 1666451811000,
+                                    'requester_user': {"sub": repo_user.users[0].user_id,
+                                                       "name": repo_user.users[0].name,
+                                                       "custom:role": repo_user.users[0].role.value}}
+                              )
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Parâmetro a mais está gerando um conflito: local"
+

@@ -19,3 +19,7 @@ class UserAlreadyEnrolled(BaseError):
 class ClosedActivity(BaseError):
     def __init__(self, message: str):
         super().__init__(message)
+
+class ConflictingInformation(BaseError):
+    def __init__(self, message: str):
+        super().__init__(message)

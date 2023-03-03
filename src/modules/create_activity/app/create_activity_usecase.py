@@ -9,7 +9,8 @@ from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound, ForbiddenAction
+from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound, ForbiddenAction, \
+    ConflictingInformation
 
 
 class CreateActivityUsecase:
@@ -48,6 +49,14 @@ class CreateActivityUsecase:
 
         if len(responsible_professors) != len(responsible_professors_user_id):
             raise NoItemsFound("responsible_professors")
+
+        if delivery_model == DELIVERY_MODEL.ONLINE and place is not None:
+            raise ConflictingInformation('local')
+
+        if delivery_model == DELIVERY_MODEL.IN_PERSON and link is not None:
+            raise ConflictingInformation('link')
+
+
 
         activity = Activity(
             code=code,
