@@ -25,9 +25,10 @@ class LoadActivityRepositoryMock:
                 duration=120,
                 link=None,
                 place="H332",
-                responsible_professors=[
-                    User(name="João Silva, role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
-                speakers=[Speaker(name="Marcos Viktorio", bio="João Silva é o fundador e CEO da Tech Innovate, uma empresa de tecnologia que cria soluções inovadoras para problemas complexos. Ele tem mais de 20 anos de experiência em liderança empresarial e tecnologia. João já foi palestrante em diversas conferências e é reconhecido como uma das principais autoridades em inovação no Brasil.", company="Tech Innovate")],
+                responsible_professors=[User(name="Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
+                speakers=[
+                    Speaker(name="João Silva", bio="João Silva é o fundador e CEO da Tech Innovate, uma empresa de tecnologia que cria soluções inovadoras para problemas complexos. Ele tem mais de 20 anos de experiência em liderança empresarial e tecnologia. João já foi palestrante em diversas conferências e é reconhecido como uma das principais autoridades em inovação no Brasil.", company="Tech Innovate")
+                ],
                 total_slots=4,
                 taken_slots=0,
                 accepting_new_enrollments=True,
@@ -46,7 +47,7 @@ class LoadActivityRepositoryMock:
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
-                    User(name="Vitor Guirão", role=ROLE.PROFESSOR, user_id="1d092927-2015-4963-b83d-c9ba46547dd2")],
+                    User(name="Maria Vernasqui", role=ROLE.PROFESSOR, user_id="590b54c2-afdf-433d-aeaf-a460a3c7df48")],
                 speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
                 total_slots=10,
                 taken_slots=0,
@@ -60,13 +61,13 @@ class LoadActivityRepositoryMock:
                 description="Nesta visita técnica, os participantes terão a oportunidade de conhecer de perto a produção de automóveis elétricos, desde a montagem do chassi até a instalação dos sistemas eletrônicos. Além disso, serão apresentadas as tecnologias utilizadas na fabricação desses veículos, como motores elétricos, baterias de alta capacidade e sistemas de recarga.",
                 activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
                 is_extensive=True,
-                delivery_model=DELIVERY_MODEL.TECHNICAL_VISITS,
+                delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1672327600, #Tue Mar 01 2023 15:00
                 duration=240,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
-                    User(name="Guilherme Santos", role=ROLE.PROFESSOR, user_id="1d092927-2015-4963-b83d-c9ba46547dd2")],
+                    User(name="Maria Vernasqui", role=ROLE.PROFESSOR, user_id="590b54c2-afdf-433d-aeaf-a460a3c7df48")],
                 speakers=[Speaker(name="Rafaela Oliveira ", bio="Rafaela Oliveira é engenheira de materiais e atua na área de pesquisa e desenvolvimento da empresa DEF, fornecedora de peças para a indústria automotiva. Ela possui experiência na fabricação de materiais avançados utilizados em carros elétricos, como ligas de alumínio e polímeros de alta resistência.", company="Samsung")],
                 total_slots=10,
                 taken_slots=1,
@@ -86,7 +87,7 @@ class LoadActivityRepositoryMock:
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
-                    User(name="Gep Soller", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
+                    User(name="Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
                 speakers=[Speaker(name="Ana Silva", bio="Ana Silva é diretora de tecnologia na empresa ABC, onde lidera a equipe de desenvolvimento de software. Ela possui mais de 15 anos de experiência em tecnologia, tendo trabalhado em empresas como Microsoft e Google.", company="Apple"),
                           Speaker(name="Pedro Oliveira", bio="Professor de engenharia de software na universidade XYZ. Ele é um especialista em metodologias ágeis de desenvolvimento de software e tem sido um mentor de sucesso em hackathons anteriores.", company="Microsoft"),
                           Speaker(name="Maria Santos ", bio="Gerente de produto na empresa DEF, onde lidera a equipe de desenvolvimento de novos produtos. Ela é uma especialista em UX/UI design e tem trabalhado em projetos inovadores na área de tecnologia.", company="Samsung")],
@@ -108,7 +109,7 @@ class LoadActivityRepositoryMock:
                 link=None,
                 place="H332",
                 responsible_professors=[
-                    User(name="Ana Costa", role=ROLE.PROFESSOR, user_id="1d092927-2015-4963-b83d-c9ba46547dd2")],
+                    User(name="Maria Vernasqui", role=ROLE.PROFESSOR, user_id="590b54c2-afdf-433d-aeaf-a460a3c7df48")],
                 speakers=[Speaker(name="Lucas Rodrigues", bio="Lucas Rodrigues é diretor de engenharia na empresa Big Tech, uma das líderes mundiais em tecnologia. Ele possui mais de 20 anos de experiência em engenharia de software e liderança de equipes de desenvolvimento, tendo trabalhado em empresas como Microsoft e Google.", company="Big Tech,")],
                 total_slots=15,
                 taken_slots=0,
@@ -128,7 +129,7 @@ class LoadActivityRepositoryMock:
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
-                    User(name="Ana Silva", role=ROLE.PROFESSOR, user_id="1d092927-2015-4963-b83d-c9ba46547dd2")],
+                    User(name="Maria Vernasqui", role=ROLE.PROFESSOR, user_id="590b54c2-afdf-433d-aeaf-a460a3c7df48")],
                 speakers=[Speaker(name="Marcos Oliveira", bio=" é diretor de tecnologia na empresa DEF, onde lidera a equipe responsável pelo desenvolvimento de soluções de internet das coisas para a indústria. Ele possui mais de 20 anos de experiência em tecnologia e engenharia, tendo trabalhado em empresas como Intel e Cisco.", company="DEF")],
                 total_slots=20,
                 taken_slots=1,
@@ -148,7 +149,7 @@ class LoadActivityRepositoryMock:
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
-                    User(name="Gep Soller", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
+                    User(name="Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
                 speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
                 total_slots=10,
                 taken_slots=1,
@@ -168,7 +169,7 @@ class LoadActivityRepositoryMock:
                 link=None,
                 place="H332",
                 responsible_professors=[
-                    User(name="José Silva", role=ROLE.PROFESSOR, user_id="1d092927-2015-4963-b83d-c9ba46547dd2")],
+                    User(name="Maria Vernasqui", role=ROLE.PROFESSOR, user_id="590b54c2-afdf-433d-aeaf-a460a3c7df48")],
                 speakers=[Speaker(name="Ana Santos", bio="Ana Santos é especialista em inteligência artificial e inovação na indústria de engenharia. Ela trabalha na empresa DEF, onde lidera a equipe de pesquisa e desenvolvimento em inteligência artificial. Possui mais de 10 anos de experiência em pesquisa e desenvolvimento em inteligência artificial, tendo trabalhado em projetos inovadores em empresas como IBM e Microsoft.", company="DEF")],
                 total_slots=2,
                 taken_slots=2,
@@ -188,7 +189,7 @@ class LoadActivityRepositoryMock:
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
-                    User(name="Luiz Oliveira ", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
+                    User(name= "Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
                 speakers=[Speaker(name="José Silva", bio="José é gerente de produto na empresa XYZ, uma grande empresa de tecnologia com atuação global. Ela possui mais de 15 anos de experiência em desenvolvimento de produtos e gestão de equipes, tendo liderado projetos de sucesso em diversas áreas da empresa.", company="XYZ")],
                 total_slots=50,
                 taken_slots=0,
@@ -208,7 +209,7 @@ class LoadActivityRepositoryMock:
                 link=None,
                 place="H332",
                 responsible_professors=[
-                    User(name=" João Silva", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
+                    User(name="Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
                 speakers=[Speaker(name="Maria Santos", bio="Maria Santos é diretora de engenharia da empresa SkyTech, onde lidera a equipe de engenheiros de software responsáveis por desenvolver soluções em nuvem. Ela tem mais de 15 anos de experiência em engenharia de software, tendo trabalhado em empresas como Amazon e Oracle.", company="SkyTech")],
                 total_slots=50,
                 taken_slots=0,
@@ -228,7 +229,7 @@ class LoadActivityRepositoryMock:
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
-                    User(name="Pedro Souza", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
+                    User(name="Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
                 speakers=[Speaker(name="José Silva", bio="João é gerente de recursos humanos da empresa TechPlay, onde lidera a equipe responsável pelo recrutamento, seleção e desenvolvimento de talentos. Além disso, Pedro é um ávido jogador de futebol e está ansioso para organizar este campeonato interdepartamental.", company="TechPlay")],
                 total_slots=25,
                 taken_slots=0,
@@ -248,7 +249,7 @@ class LoadActivityRepositoryMock:
                 link=None,
                 place="H332",
                 responsible_professors=[
-                    User(name="Gep Soller", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
+                    User(name="Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
                 speakers=[Speaker(name="João Silva", bio=" ex-aluno da TechPlay e atualmente é líder técnico em uma startup de tecnologia. Ele irá compartilhar sua experiência em trabalhar em empresas de diferentes tamanhos e setores, falar sobre os desafios e oportunidades de trabalhar em uma startup e responder às perguntas dos participantes.", company="TechPlay")],
                 total_slots=3,
                 taken_slots=3,
@@ -268,7 +269,7 @@ class LoadActivityRepositoryMock:
                 link=None,
                 place="H332",
                 responsible_professors=[
-                    User(name="Fernanda Oliveira", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
+                    User(name="Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
                 speakers=[Speaker(name="Gabriel Santos", bio="Gabriel Santos é um ex-estudante da Universidade IMT que participou de um programa de intercâmbio para a França durante sua graduação. Durante sua estadia na França, Gabriel teve a oportunidade de trabalhar em uma empresa de tecnologia e, após retornar ao Brasil, fundou sua própria empresa de tecnologia. Ele é formado em Engenharia de Computação pela Universidade IMT e tem uma vasta experiência no setor de tecnologia.", company="Mauá"),
                           Speaker(name="Ana Silva", bio="João Costa é um ex-estudante da Universidade IMT que participou de um programa de intercâmbio para a Austrália durante sua graduação. Durante sua estadia na Austrália, João teve a oportunidade de trabalhar em uma startup de tecnologia e, após retornar ao Brasil, fundou sua própria startup. Ele é formado em Engenharia de Software pela Universidade IMT e tem uma vasta experiência no setor de startups e empreendedorismo.", company="Mauá")],
                 total_slots=10,
@@ -290,7 +291,7 @@ class LoadActivityRepositoryMock:
                 link="www.maua.br",
                 place="H321",
                 responsible_professors=[
-                    User(name="Gabriela Alves", role=ROLE.PROFESSOR, user_id="31bc6c25-af3b-4fbc-bc38-cc5ef72256b7")],
+                    User(name="Carol Mota", role=ROLE.PROFESSOR, user_id="8ce2e225-bdcd-48eb-a605-df0a652ed361")],
                 speakers=[Speaker(name="Luís Carlos Santos", bio="Luís Carlos Santos é professor de Libras e intérprete com mais de 15 anos de experiência no ensino da língua de sinais e na interpretação para pessoas surdas em diversos contextos, incluindo escolas, empresas e eventos. Ele é formado em Letras/Libras pela Universidade Federal de São Paulo e já trabalhou em diversas organizações e instituições em todo o país. Além disso, Luís Carlos também é um defensor da inclusão e acessibilidade de pessoas surdas na sociedade.", company="LIBRAS Escola")],
                 total_slots=100,
                 taken_slots=0,
@@ -303,7 +304,7 @@ class LoadActivityRepositoryMock:
                 code="UMDOISTRES",
                 title="Transfobia no Brasil: como combatê-la?",
                 description="Palestra destinada a estudantes e profissionais da área de tecnologia e engenharia interessados em entender melhor a luta pela inclusão de pessoas trans e combate à transfobia. Durante a palestra, serão apresentados dados sobre a violência contra pessoas trans no Brasil, bem como as principais formas de discriminação que enfrentam no mercado de trabalho. Os palestrantes irão compartilhar suas experiências pessoais e discutir estratégias para promover a inclusão de pessoas trans em empresas e ambientes acadêmicos. A palestra tem como objetivo conscientizar e inspirar os participantes a agir de forma mais inclusiva e combater a transfobia em suas vidas pessoais e profissionais..",
-                activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURE,
+                activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1678561200000, #Tue Mar 11 2023 16:00
@@ -311,7 +312,7 @@ class LoadActivityRepositoryMock:
                 link=None,
                 place="H321",
                 responsible_professors=[
-                    User(name="Júlia Costa", role=ROLE.PROFESSOR, user_id="1d092927-2015-4963-b83d-c9ba46547dd2")],
+                    User(name="Maria Vernasqui", role=ROLE.PROFESSOR, user_id="590b54c2-afdf-433d-aeaf-a460a3c7df48")],
                 speakers=[Speaker(name="Lucas Souza", bio="Lucas Souza é uma das lideranças do coletivo LGBTI+ da empresa XYZ e tem ampla experiência em projetos de inclusão e diversidade. Ele é formado em Administração pela Universidade Federal de São Paulo e tem mais de 8 anos de experiência em empresas de tecnologia. Lucas é um defensor dos direitos das pessoas trans e tem sido um importante aliado na luta contra a transfobia no ambiente corporativo.", company="Renner")],
                 total_slots=5,
                 taken_slots=5,
