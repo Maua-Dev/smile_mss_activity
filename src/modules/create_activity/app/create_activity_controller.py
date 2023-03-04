@@ -3,7 +3,8 @@ from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, DuplicatedItem
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, DuplicatedItem, \
+    ConflictingInformation
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import BadRequest, Created, Forbidden, InternalServerError, \
     NotFound
@@ -100,6 +101,12 @@ class CreateActivityController:
 
             return Created(viewmodel.to_dict())
 
+            if (delivery_model == DELIVERY_MODEL.ONLINE or delivery_model == DELIVERY_MODEL.HYBRID) and link is None:
+                raise NoItemsFound('link')
+
+            if (delivery_model == DELIVERY_MODEL.IN_PERSON or delivery_model == DELIVERY_MODEL.HYBRID) and place is None:
+                raise NoItemsFound('local')
+
         except NoItemsFound as err:
             message = err.message.lower()
 
@@ -117,9 +124,15 @@ class CreateActivityController:
 
             else:
                 return NotFound(body=f"{message} não encontrada")
+
+
+
         except MissingParameters as err:
 
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
+
+        except ConflictingInformation as err:
+            return BadRequest(body=f"Parâmetro a mais está gerando um conflito: {err.message}")
 
         except ForbiddenAction as err:
 

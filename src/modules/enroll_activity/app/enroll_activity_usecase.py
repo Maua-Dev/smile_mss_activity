@@ -5,7 +5,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, ClosedActivity, \
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, \
     UserAlreadyEnrolled
 
 
@@ -24,14 +24,13 @@ class EnrollActivityUsecase:
         if activity is None:
             raise NoItemsFound('Activity')
 
-        enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
+        if not activity.accepting_new_enrollments:
+            raise ClosedActivity("Activity")
 
+        enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
 
         if enrollment is not None:
             raise UserAlreadyEnrolled('Enrollment')
-
-        if not activity.accepting_new_enrollments:
-            raise ClosedActivity("Activity")
 
         else:
 
