@@ -59,7 +59,7 @@ class LoadActivityRepositoryMock:
                 code="COD1468",
                 title="Exposição de arte contemporânea",
                 description="Nesta visita técnica, os participantes terão a oportunidade de conhecer de perto a produção de automóveis elétricos, desde a montagem do chassi até a instalação dos sistemas eletrônicos. Além disso, serão apresentadas as tecnologias utilizadas na fabricação desses veículos, como motores elétricos, baterias de alta capacidade e sistemas de recarga.",
-                activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
+                activity_type=ACTIVITY_TYPE.TECHNICAL_VISITS,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1672327600, #Tue Mar 01 2023 15:00
@@ -301,7 +301,7 @@ class LoadActivityRepositoryMock:
             ),
 
             Activity(
-                code="UMDOISTRES",
+                code="PTPV12",
                 title="Transfobia no Brasil: como combatê-la?",
                 description="Palestra destinada a estudantes e profissionais da área de tecnologia e engenharia interessados em entender melhor a luta pela inclusão de pessoas trans e combate à transfobia. Durante a palestra, serão apresentados dados sobre a violência contra pessoas trans no Brasil, bem como as principais formas de discriminação que enfrentam no mercado de trabalho. Os palestrantes irão compartilhar suas experiências pessoais e discutir estratégias para promover a inclusão de pessoas trans em empresas e ambientes acadêmicos. A palestra tem como objetivo conscientizar e inspirar os participantes a agir de forma mais inclusiva e combater a transfobia em suas vidas pessoais e profissionais..",
                 activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
