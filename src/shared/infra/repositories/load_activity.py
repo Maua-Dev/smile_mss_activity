@@ -76,7 +76,7 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="CODIGO",
+                code="HACKA355",
                 title="Hackathon de Desenvolvimento de Software",
                 description="O Hackathon de Desenvolvimento de Software é um evento que reunirá estudantes de engenharia e tecnologia para competir em equipes na criação de soluções de software inovadoras. Os participantes terão a oportunidade de trabalhar em projetos desafiadores, aprender novas habilidades e se conectar com profissionais do setor.",
                 activity_type=ACTIVITY_TYPE.HACKATHON,
@@ -98,7 +98,7 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="AC000",
+                code="LECT1231",
                 title="Tendências em tecnologia e engenharia",
                 description="Esta palestra apresentará as tendências mais recentes em tecnologia e engenharia, abordando desde a evolução das linguagens de programação até as novidades em inteligência artificial e robótica. Será uma excelente oportunidade para atualizar-se sobre as mais recentes inovações em áreas tão importantes para a economia mundial.",
                 activity_type=ACTIVITY_TYPE.LECTURES,
@@ -130,7 +130,7 @@ class LoadActivityRepositoryMock:
                 place="H332",
                 responsible_professors=[
                     User(name="Maria Luiza", role=ROLE.PROFESSOR, user_id="e5c26176-6a53-4e48-a085-fc92ea1b1c7f")],
-                speakers=[Speaker(name="Marcos Oliveira", bio=" é diretor de tecnologia na empresa DEF, onde lidera a equipe responsável pelo desenvolvimento de soluções de internet das coisas para a indústria. Ele possui mais de 20 anos de experiência em tecnologia e engenharia, tendo trabalhado em empresas como Intel e Cisco.", company="DEF")],
+                speakers=[Speaker(name="Marcos Oliveira", bio="Diretor de tecnologia na empresa DEF, onde lidera a equipe responsável pelo desenvolvimento de soluções de internet das coisas para a indústria. Ele possui mais de 20 anos de experiência em tecnologia e engenharia, tendo trabalhado em empresas como Intel e Cisco.", company="DEF")],
                 total_slots=20,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -158,7 +158,7 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="CAFE",
+                code="ECM2312",
                 title="Tecnologias disruptivas e o futuro da engenharia",
                 description="Nesta palestra, serão apresentadas as principais tendências e tecnologias disruptivas que estão moldando o futuro da engenharia. Serão discutidos tópicos como inteligência artificial, internet das coisas, realidade virtual e aumentada, além das possibilidades de aplicação dessas tecnologias em diferentes setores da indústria.",
                 activity_type=ACTIVITY_TYPE.LECTURES,
@@ -178,7 +178,7 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="CODE",
+                code="ECM3212",
                 title="Atividade da CODE",
                 description="O Hackathon de Tecnologia e Engenharia é um evento em que equipes multidisciplinares terão a oportunidade de criar soluções inovadoras para desafios reais da indústria de tecnologia e engenharia. O objetivo é fomentar a criatividade, o trabalho em equipe e o desenvolvimento de habilidades técnicas e de negócios.",
                 activity_type=ACTIVITY_TYPE.HACKATHON,
@@ -238,9 +238,9 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="ULTIMA",
+                code="CAFE1231",
                 title="Encontro de Ex-Alunos: Tecnologia e Carreira",
-                description=" O Encontro de Ex-Alunos: Tecnologia e Carreira é um evento organizado pela empresa TechPlay, com o objetivo de reunir ex-alunos da instituição para discutir temas relacionados à tecnologia e ao mercado de trabalho. Durante o evento, os participantes terão a oportunidade de compartilhar suas experiências e aprendizados, trocar ideias e fazer networking.",
+                description="O Encontro de Ex-Alunos: Tecnologia e Carreira é um evento organizado pela empresa TechPlay, com o objetivo de reunir ex-alunos da instituição para discutir temas relacionados à tecnologia e ao mercado de trabalho. Durante o evento, os participantes terão a oportunidade de compartilhar suas experiências e aprendizados, trocar ideias e fazer networking.",
                 activity_type=ACTIVITY_TYPE.ALUMNI_CAFE,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
@@ -280,7 +280,7 @@ class LoadActivityRepositoryMock:
             ),
 
             Activity(
-                code="CODIGODOIS",
+                code="ECM12321",
                 title="Curso de Libras Básico",
                 description="Este curso introdutório de Libras (Língua Brasileira de Sinais) tem como objetivo fornecer aos alunos uma compreensão básica da linguagem de sinais, incluindo a alfabetização em Libras, vocabulário básico, gramática e conversação. O curso também irá apresentar aos alunos a cultura surda e a importância da acessibilidade para pessoas surdas. O curso será ministrado por professores com ampla experiência no ensino de Libras.",
                 activity_type=ACTIVITY_TYPE.COURSES,
