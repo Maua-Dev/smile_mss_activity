@@ -17,7 +17,8 @@ app = cdk.App()
 
 aws_region = os.environ.get("AWS_REGION")
 aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
+stack_name = os.environ.get("STACK_NAME")
 
-IacStack(app, "SmileStack-Dev", env=cdk.Environment(account=aws_account_id, region=aws_region))
+IacStack(app, stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region))
 
 app.synth()

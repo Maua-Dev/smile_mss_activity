@@ -24,12 +24,14 @@ jobs:
         - name: Setup AWS Credentials
           uses: aws-actions/configure-aws-credentials@v1
           with:
-            aws-region: ${{ secrets.AWS_REGION }}
+            aws-region: ${{ vars.AWS_REGION }}
             role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GithubActionsRole
             role-session-name: github-action
 
-        - name: Stage
-          run: echo "STAGE=${{ github.ref_name }}"
+        - name: Setting stage and stack name
+          run: |
+            echo "STAGE=${{ github.ref_name }}" 
+            echo "STACK_NAME=SmileActivity2023Stack${{github.ref_name}}" >> $GITHUB_ENV
 
         - name: Installing Dependencies
           run: |
@@ -48,3 +50,4 @@ jobs:
               USER_POOL_ARN: ${{ secrets.USER_POOL_ARN }}
               USER_POOL_NAME: ${{ secrets.USER_POOL_NAME }}
               USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
+              STACK_NAME: ${{ env.STACK_NAME }}
