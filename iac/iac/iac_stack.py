@@ -23,6 +23,7 @@ class IacStack(Stack):
         self.user_pool_name = os.environ.get("USER_POOL_NAME")
         self.user_pool_arn = os.environ.get("USER_POOL_ARN")
         self.user_pool_id = os.environ.get("USER_POOL_ID")
+        self.github_ref = os.environ.get("GITHUB_REF")
 
         self.rest_api = RestApi(self, "Smile_RestApi",
                                 rest_api_name="Smile_RestApi",
@@ -56,7 +57,7 @@ class IacStack(Stack):
             "REGION": self.region,
         }
 
-        auth = CognitoUserPoolsAuthorizer(self, "SmileCognitoAuthorizer",
+        auth = CognitoUserPoolsAuthorizer(self, f"smile_cognito_stack_{self.github_ref}",
                                                      cognito_user_pools=[aws_cognito.UserPool.from_user_pool_id(self, id=self.user_pool_name, user_pool_id=self.user_pool_id)]
                                                      )
 

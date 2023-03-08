@@ -51,3 +51,4 @@ jobs:
               USER_POOL_NAME: ${{ secrets.USER_POOL_NAME }}
               USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
               STACK_NAME: ${{ env.STACK_NAME }}
+              GITHUB_REF: ${{ github.ref }}
