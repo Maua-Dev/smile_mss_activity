@@ -17,11 +17,11 @@ class LoadActivityRepositoryMock:
             Activity(
                 code="ECM2345",
                 title="Inovação e Tecnologia para o Futuro",
-                description="Isso é uma atividade",
+                description="A atividade trará uma discussão sobre as tendências da tecnologia e sua relação com o futuro. O objetivo é discutir como a inovação pode ser aplicada em diferentes áreas para resolver problemas do futuro, como mudanças climáticas, saúde, economia e sociedade. Serão apresentadas diversas perspectivas sobre o assunto, abrangendo desde a tecnologia em si até a cultura de inovação.",
                 activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1677348000000, #Sat Feb 25 2023 15:00
+                start_date=1680650366000, #Tue Apr 04 2023 23:19:26 GMT+0000
                 duration=120,
                 link=None,
                 place="H332",
@@ -32,23 +32,23 @@ class LoadActivityRepositoryMock:
                 total_slots=4,
                 taken_slots=0,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1677337200000, #Sat Feb 25 2023 12:00
+                stop_accepting_new_enrollments_before=1680447600000, #Sun Apr 02 2023 15:00:00 GMT+0000
                 confirmation_code=None
             ),
             Activity(
                 code="ELET355",
-                title="Atividade da ELET 355",
-                description="Isso é uma atividade, sério.",
-                activity_type=ACTIVITY_TYPE.LECTURES,
+                title="TechArt: Explorando a Interação entre Tecnologia e Arte",
+                description="A atividade TechArt é uma experiência única que explora a interação entre a tecnologia e a arte, mostrando como a tecnologia pode ser usada para criar e transformar a arte. Os participantes terão a oportunidade de ver e interagir com diferentes instalações artísticas que utilizam tecnologias como realidade aumentada, inteligência artificial e robótica. A atividade é aberta a todos os estudantes e profissionais da área de tecnologia e engenharia que têm interesse em explorar a relação entre a tecnologia e a arte.",
+                activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=1677250800000, #Fri Feb 24 2023 12:00
-                duration=400,
+                start_date=1678663166000, #Sun Mar 12 2023 23:19:26 GMT+0000
+                duration=120,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
-                    User(name="Maria Luiza", role=ROLE.PROFESSOR, user_id="e5c26176-6a53-4e48-a085-fc92ea1b1c7f")],
-                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+                    User(name="Joana Silva", role=ROLE.PROFESSOR, user_id="e5c26176-6a53-4e48-a085-fc92ea1b1c7f")],
+                speakers=[Speaker(name="Pedro Alves", bio="Desenvolvedor de software na TechArt Inc., Pedro é responsável por criar as soluções tecnológicas que permitem a interação dos participantes com as instalações artísticas. Ele tem formação em Ciência da Computação e é apaixonado por arte e tecnologia.", company="TechArt")],
                 total_slots=10,
                 taken_slots=0,
                 accepting_new_enrollments=True,
@@ -62,7 +62,7 @@ class LoadActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.TECHNICAL_VISITS,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=1672327600, #Tue Mar 01 2023 15:00
+                start_date=1679440766000, #Tue Mar 21 2023 23:19:26 GMT+0000
                 duration=240,
                 link="https://devmaua.com",
                 place=None,
@@ -76,13 +76,13 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="CODIGO",
+                code="HACKA355",
                 title="Hackathon de Desenvolvimento de Software",
                 description="O Hackathon de Desenvolvimento de Software é um evento que reunirá estudantes de engenharia e tecnologia para competir em equipes na criação de soluções de software inovadoras. Os participantes terão a oportunidade de trabalhar em projetos desafiadores, aprender novas habilidades e se conectar com profissionais do setor.",
                 activity_type=ACTIVITY_TYPE.HACKATHON,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=1661577600, #Wed Mar 02 2023 16:00
+                start_date=1682896766000, #Sun Apr 30 2023 23:19:26 GMT+0000
                 duration=540,
                 link="https://devmaua.com",
                 place=None,
@@ -94,17 +94,17 @@ class LoadActivityRepositoryMock:
                 total_slots=15,
                 taken_slots=2,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1661577600,
+                stop_accepting_new_enrollments_before=1682434800000, #Tue Apr 25 2023 15:00:00 GMT+0000
                 confirmation_code=None
             ),
             Activity(
-                code="AC000",
+                code="LECT1231",
                 title="Tendências em tecnologia e engenharia",
                 description="Esta palestra apresentará as tendências mais recentes em tecnologia e engenharia, abordando desde a evolução das linguagens de programação até as novidades em inteligência artificial e robótica. Será uma excelente oportunidade para atualizar-se sobre as mais recentes inovações em áreas tão importantes para a economia mundial.",
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1664908800, #Fri Mar 05 2023 12:00
+                start_date=1683229161000, #Thu May 04 2023 19:39:21 GMT+0000
                 duration=120,
                 link=None,
                 place="H332",
@@ -124,13 +124,13 @@ class LoadActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=1672474800,#
+                start_date=1682428766000,#Tue Apr 25 2023 13:19:26 GMT+0000
                 duration=120,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
                     User(name="Maria Luiza", role=ROLE.PROFESSOR, user_id="e5c26176-6a53-4e48-a085-fc92ea1b1c7f")],
-                speakers=[Speaker(name="Marcos Oliveira", bio=" é diretor de tecnologia na empresa DEF, onde lidera a equipe responsável pelo desenvolvimento de soluções de internet das coisas para a indústria. Ele possui mais de 20 anos de experiência em tecnologia e engenharia, tendo trabalhado em empresas como Intel e Cisco.", company="DEF")],
+                speakers=[Speaker(name="Marcos Oliveira", bio="Diretor de tecnologia na empresa DEF, onde lidera a equipe responsável pelo desenvolvimento de soluções de internet das coisas para a indústria. Ele possui mais de 20 anos de experiência em tecnologia e engenharia, tendo trabalhado em empresas como Intel e Cisco.", company="DEF")],
                 total_slots=20,
                 taken_slots=1,
                 accepting_new_enrollments=True,
@@ -144,7 +144,7 @@ class LoadActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
-                start_date=1678449600000, #Thu Mar 10 2023 09:10
+                start_date=1682601566000, #Thu Apr 27 2023 13:19:26 GMT+0000
                 duration=80,
                 link="https://devmaua.com",
                 place=None,
@@ -158,13 +158,13 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="CAFE",
+                code="ECM2312",
                 title="Tecnologias disruptivas e o futuro da engenharia",
                 description="Nesta palestra, serão apresentadas as principais tendências e tecnologias disruptivas que estão moldando o futuro da engenharia. Serão discutidos tópicos como inteligência artificial, internet das coisas, realidade virtual e aumentada, além das possibilidades de aplicação dessas tecnologias em diferentes setores da indústria.",
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1646175600,
+                start_date=1679923166000, #Mon Mar 27 2023 13:19:26 GMT+0000
                 duration=180,
                 link=None,
                 place="H332",
@@ -178,13 +178,13 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="CODE",
+                code="ECM3212",
                 title="Atividade da CODE",
                 description="O Hackathon de Tecnologia e Engenharia é um evento em que equipes multidisciplinares terão a oportunidade de criar soluções inovadoras para desafios reais da indústria de tecnologia e engenharia. O objetivo é fomentar a criatividade, o trabalho em equipe e o desenvolvimento de habilidades técnicas e de negócios.",
                 activity_type=ACTIVITY_TYPE.HACKATHON,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=1646247600,
+                start_date=1679833166000, #Sun Mar 26 2023 12:19:26 GMT+0000
                 duration=660,
                 link="https://devmaua.com",
                 place="H332",
@@ -204,7 +204,7 @@ class LoadActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1677852000000, #Tue Mar 03 2023 11:00
+                start_date=1681384766000, #Thu Apr 13 2023 11:19:26 GMT+0000
                 duration=140,
                 link=None,
                 place="H332",
@@ -224,7 +224,7 @@ class LoadActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.SPORTS_ACTIVITY,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=1646896800,
+                start_date=1681729200000, #Mon Apr 17 2023 11:00:00 GMT+0000
                 duration=360,
                 link="https://devmaua.com",
                 place="H332",
@@ -238,13 +238,13 @@ class LoadActivityRepositoryMock:
                 confirmation_code=None
             ),
             Activity(
-                code="ULTIMA",
+                code="CAFE1231",
                 title="Encontro de Ex-Alunos: Tecnologia e Carreira",
-                description=" O Encontro de Ex-Alunos: Tecnologia e Carreira é um evento organizado pela empresa TechPlay, com o objetivo de reunir ex-alunos da instituição para discutir temas relacionados à tecnologia e ao mercado de trabalho. Durante o evento, os participantes terão a oportunidade de compartilhar suas experiências e aprendizados, trocar ideias e fazer networking.",
+                description="O Encontro de Ex-Alunos: Tecnologia e Carreira é um evento organizado pela empresa TechPlay, com o objetivo de reunir ex-alunos da instituição para discutir temas relacionados à tecnologia e ao mercado de trabalho. Durante o evento, os participantes terão a oportunidade de compartilhar suas experiências e aprendizados, trocar ideias e fazer networking.",
                 activity_type=ACTIVITY_TYPE.ALUMNI_CAFE,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1677675600000, #Mon Mar 01 2023 10:00
+                start_date=1681740000000, #Mon Apr 17 2023 14:00:00 GMT+0000
                 duration=45,
                 link=None,
                 place="H332",
@@ -254,7 +254,7 @@ class LoadActivityRepositoryMock:
                 total_slots=3,
                 taken_slots=3,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1677646800000,
+                stop_accepting_new_enrollments_before=1681311600000, #Wed Apr 12 2023 15:00:00 GMT+0000
                 confirmation_code="555666"
             ),
             Activity(
@@ -264,7 +264,7 @@ class LoadActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.INTERNSHIP_FAIR,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1678215600000, #Sat Mar 07 2023 16:00
+                start_date=1679324400000, #Mon Mar 20 2023 15:00:00 GMT+0000
                 duration=120,
                 link=None,
                 place="H332",
@@ -280,13 +280,13 @@ class LoadActivityRepositoryMock:
             ),
 
             Activity(
-                code="CODIGODOIS",
+                code="ECM12321",
                 title="Curso de Libras Básico",
                 description="Este curso introdutório de Libras (Língua Brasileira de Sinais) tem como objetivo fornecer aos alunos uma compreensão básica da linguagem de sinais, incluindo a alfabetização em Libras, vocabulário básico, gramática e conversação. O curso também irá apresentar aos alunos a cultura surda e a importância da acessibilidade para pessoas surdas. O curso será ministrado por professores com ampla experiência no ensino de Libras.",
                 activity_type=ACTIVITY_TYPE.COURSES,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
-                start_date=1678226400000, #Fri Mar 07 2023 19:00
+                start_date=1679583600000, #Thu Mar 23 2023 15:00:00 GMT+0000
                 duration=60,
                 link="www.maua.br",
                 place="H321",
@@ -307,7 +307,7 @@ class LoadActivityRepositoryMock:
                 activity_type=ACTIVITY_TYPE.HIGH_IMPACT_LECTURES,
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1678561200000, #Tue Mar 11 2023 16:00
+                start_date=1681743600000, #Mon Apr 17 2023 15:00:00 GMT+0000
                 duration=60,
                 link=None,
                 place="H321",
@@ -317,7 +317,7 @@ class LoadActivityRepositoryMock:
                 total_slots=5,
                 taken_slots=5,
                 accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1656796800,
+                stop_accepting_new_enrollments_before=1681591435000, #Saturday, April 15, 2023 8:43:55 PM
                 confirmation_code=None
             ),
 
