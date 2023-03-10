@@ -222,68 +222,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         }
                     ]
                 },
-                {
-                    'activity': {
-                        'code': 'CAFE',
-                        'title': 'Atividade da CAFE',
-                        'description': 'Atividade pra tomar café',
-                        'activity_type': 'ALUMNI_CAFE',
-                        'is_extensive': True,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1671661013000, #21 December 2022 22:16:53
-                        'duration': 20,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Patricia Santos',
-                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            }
-                        ],
-                        'total_slots': 2,
-                        'taken_slots': 2,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-                        'confirmation_code': None
-                    },
-                    'enrollments': [
-                        {
-                            'user': {
-                                'name': 'Simone Romanato',
-                                'user_id': '4d1d64ae-a110-11ed-a8fc-0242ac120002',
-                                'role': 'EXTERNAL'
-                            },
-                            'state': 'ENROLLED',
-                            'date_subscribed': 1671401813000
-                        },
-                        {
-                            'user': {
-                                'name': 'Bruno Soller',
-                                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
-                                'role': 'STUDENT'
-                            },
-                            'state': 'ENROLLED',
-                            'date_subscribed': 1671488213000
-                        },
-                        {
-                            'user': {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            },
-                            'state': 'DROPPED',
-                            'date_subscribed': 1671574613000
-                        }
-                    ]
-                },
+                
                 {
                     'activity': {
                         'code': 'COD1468',
@@ -392,6 +331,68 @@ class Test_GetAllActivitiesAdminViewmodel:
                             },
                             'state': 'ENROLLED',
                             'date_subscribed': 1671488213000
+                        }
+                    ]
+                },
+                {
+                    'activity': {
+                        'code': 'CAFE',
+                        'title': 'Atividade da CAFE',
+                        'description': 'Atividade pra tomar café',
+                        'activity_type': 'ALUMNI_CAFE',
+                        'is_extensive': True,
+                        'delivery_model': 'IN_PERSON',
+                        'start_date': 1671661013000, #21 December 2022 22:16:53
+                        'duration': 20,
+                        'link': None,
+                        'place': 'H332',
+                        'responsible_professors': [
+                            {
+                                'name': 'Patricia Santos',
+                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
+                                'role': 'PROFESSOR'
+                            }
+                        ],
+                        'speakers': [
+                            {
+                                'name': 'Lucas Soller',
+                                'bio': 'Daora',
+                                'company': 'Microsoft'
+                            }
+                        ],
+                        'total_slots': 2,
+                        'taken_slots': 2,
+                        'accepting_new_enrollments': True,
+                        'stop_accepting_new_enrollments_before': None,
+                        'confirmation_code': None
+                    },
+                    'enrollments': [
+                        {
+                            'user': {
+                                'name': 'Simone Romanato',
+                                'user_id': '4d1d64ae-a110-11ed-a8fc-0242ac120002',
+                                'role': 'EXTERNAL'
+                            },
+                            'state': 'ENROLLED',
+                            'date_subscribed': 1671401813000
+                        },
+                        {
+                            'user': {
+                                'name': 'Bruno Soller',
+                                'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
+                                'role': 'STUDENT'
+                            },
+                            'state': 'ENROLLED',
+                            'date_subscribed': 1671488213000
+                        },
+                        {
+                            'user': {
+                                'name': 'Caio Toledo',
+                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
+                                'role': 'PROFESSOR'
+                            },
+                            'state': 'DROPPED',
+                            'date_subscribed': 1671574613000
                         }
                     ]
                 },
