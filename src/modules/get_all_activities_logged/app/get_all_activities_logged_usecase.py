@@ -8,6 +8,7 @@ class GetAllActivitiesLoggedUsecase:
     def __call__(self, user_id: str) -> dict:
 
         activities, user_enrollments = self.repo.get_all_activities_logged(user_id=user_id)
+        activities.sort(key=lambda a: a.start_date)
 
         activities_logged = dict()
 
