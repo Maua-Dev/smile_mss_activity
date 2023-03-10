@@ -18,468 +18,383 @@ class Test_GetAllActivitiesLoggedViewmodel:
         viewmodel = GetAllActivitiesLoggedViewmodel(activities_logged=activities_logged)
 
         expected = {
-            'all_activities_and_user_enrollments': [
-                {
-                    'activity': {
-                        'code': 'ECM2345',
-                        'title': 'Atividade da ECM 2345',
-                        'description': 'Isso é uma atividade',
-                        'activity_type': 'COURSES',
-                        'is_extensive': False,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1671747413000,
-                        'duration': 120,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Vitor Briquez',
-                                'bio': 'Incrível',
-                                'company': 'Apple'
-                            }
-                        ],
-                        'total_slots': 4,
-                        'taken_slots': 4,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671743812000,
-
-                    },
-                    'enrollment': {
-                        'state': 'ENROLLED',
-                        'date_subscribed': 1671401813000
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'ELET355',
-                        'title': 'Atividade da ELET 355',
-                        'description': 'Isso é uma atividade, sério.',
-                        'activity_type': 'LECTURES',
-                        'is_extensive': True,
-                        'delivery_model': 'HYBRID',
-                        'start_date': 1671661013000,
-                        'duration': 400,
-                        'link': 'https://devmaua.com',
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Patricia Santos',
-                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            }
-                        ],
-                        'total_slots': 10,
-                        'taken_slots': 1,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'COD1468',
-                        'title': 'Atividade da COD 1468',
-                        'description': 'Isso definitivamente é uma atividade',
-                        'activity_type': 'HIGH_IMPACT_LECTURES',
-                        'is_extensive': True,
-                        'delivery_model': 'ONLINE',
-                        'start_date': 1671661013000,
-                        'duration': 60,
-                        'link': 'https://devmaua.com',
-                        'place': None,
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            },
-                            {
-                                'name': 'Patricia Santos',
-                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Daniel Romanato',
-                                'bio': 'Buscando descobrir o mundo',
-                                'company': 'Samsung'
-                            }
-                        ],
-                        'total_slots': 50,
-                        'taken_slots': 1,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'CODIGO',
-                        'title': 'Atividade da CÓDIGO',
-                        'description': 'Isso DEFINITIVAMENTE é uma atividade!',
-                        'activity_type': 'TECHNICAL_VISITS',
-                        'is_extensive': False,
-                        'delivery_model': 'ONLINE',
-                        'start_date': 1672006613000,
-                        'duration': 60,
-                        'link': 'https://devmaua.com',
-                        'place': None,
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Vitor Briquez',
-                                'bio': 'Incrível',
-                                'company': 'Apple'
-                            },
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            },
-                            {
-                                'name': 'Daniel Romanato',
-                                'bio': 'Buscando descobrir o mundo',
-                                'company': 'Samsung'
-                            }
-                        ],
-                        'total_slots': 15,
-                        'taken_slots': 2,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671747413000,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'AC000',
-                        'title': 'Atividade de competição',
-                        'description': 'Isso é uma guerra',
-                        'activity_type': 'ACADEMIC_COMPETITIONS',
-                        'is_extensive': True,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1671661013000,
-                        'duration': 190,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Patricia Santos',
-                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            }
-                        ],
-                        'total_slots': 50,
-                        'taken_slots': 2,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671574613000,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'ECM251',
-                        'title': 'Atividade da ECM251',
-                        'description': 'Se o professor chegar vai ter atividade...',
-                        'activity_type': 'HACKATHON',
-                        'is_extensive': False,
-                        'delivery_model': 'HYBRID',
-                        'start_date': 1671733013000,
-                        'duration': 40,
-                        'link': 'https://devmaua.com',
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Patricia Santos',
-                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Daniel Romanato',
-                                'bio': 'Buscando descobrir o mundo',
-                                'company': 'Samsung'
-                            }
-                        ],
-                        'total_slots': 20,
-                        'taken_slots': 1,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'SC456',
-                        'title': 'Atividade da SC456',
-                        'description': 'Sem criatividade para descrição',
-                        'activity_type': 'INTERNSHIP_FAIR',
-                        'is_extensive': False,
-                        'delivery_model': 'ONLINE',
-                        'start_date': 1671563813000,
-                        'duration': 80,
-                        'link': 'https://devmaua.com',
-                        'place': None,
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Vitor Briquez',
-                                'bio': 'Incrível',
-                                'company': 'Apple'
-                            }
-                        ],
-                        'total_slots': 10,
-                        'taken_slots': 1,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'CAFE',
-                        'title': 'Atividade da CAFE',
-                        'description': 'Atividade pra tomar café',
-                        'activity_type': 'ALUMNI_CAFE',
-                        'is_extensive': True,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1671661013000,
-                        'duration': 20,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Patricia Santos',
-                                'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            }
-                        ],
-                        'total_slots': 2,
-                        'taken_slots': 2,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'CODE',
-                        'title': 'Atividade da CODE',
-                        'description': 'O mesmo speaker pela 50° vez',
-                        'activity_type': 'PROFESSORS_ACADEMY',
-                        'is_extensive': True,
-                        'delivery_model': 'HYBRID',
-                        'start_date': 1671488213000,
-                        'duration': 120,
-                        'link': 'https://devmaua.com',
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Daniel Romanato',
-                                'bio': 'Buscando descobrir o mundo',
-                                'company': 'Samsung'
-                            }
-                        ],
-                        'total_slots': 50,
-                        'taken_slots': 0,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'PRF246',
-                        'title': 'Atividade da PRF246',
-                        'description': 'Um único professor pra tudo',
-                        'activity_type': 'CULTURAL_ACTIVITY',
-                        'is_extensive': True,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1672006613000,
-                        'duration': 140,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Vitor Briquez',
-                                'bio': 'Incrível',
-                                'company': 'Apple'
-                            }
-                        ],
-                        'total_slots': 50,
-                        'taken_slots': 0,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': '2468',
-                        'title': 'Atividade da 2468',
-                        'description': 'Atividade com números pares',
-                        'activity_type': 'GCSP',
-                        'is_extensive': False,
-                        'delivery_model': 'HYBRID',
-                        'start_date': 1672006613000,
-                        'duration': 60,
-                        'link': 'https://devmaua.com',
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            }
-                        ],
-                        'total_slots': 25,
-                        'taken_slots': 0,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': None,
-
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'ULTIMA',
-                        'title': 'Última atividade',
-                        'description': 'Atividade pra acabar',
-                        'activity_type': 'SPORTS_ACTIVITY',
-                        'is_extensive': False,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1671733013000,
-                        'duration': 45,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Daniel Romanato',
-                                'bio': 'Buscando descobrir o mundo',
-                                'company': 'Samsung'
-                            }
-                        ],
-                        'total_slots': 3,
-                        'taken_slots': 3,
-                        'accepting_new_enrollments': True,
-                        'stop_accepting_new_enrollments_before': 1671733012000,
-                    },
-                    'enrollment': {
-                        'state': 'ENROLLED',
-                        'date_subscribed': 1670710614000
-                    }
-                },
-                {
-                    'activity': {
-                        'code': 'PINOQ1',
-                        'title': 'Atividade da PINOQ1',
-                        'description': 'Não era a última....',
-                        'activity_type': 'CULTURAL_ACTIVITY',
-                        'is_extensive': False,
-                        'delivery_model': 'IN_PERSON',
-                        'start_date': 1670005013000,
-                        'duration': 45,
-                        'link': None,
-                        'place': 'H332',
-                        'responsible_professors': [
-                            {
-                                'name': 'Caio Toledo',
-                                'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
-                                'role': 'PROFESSOR'
-                            }
-                        ],
-                        'speakers': [
-                            {
-                                'name': 'Daniel Romanato',
-                                'bio': 'Buscando descobrir o mundo',
-                                'company': 'Samsung'
-                            },
-                            {
-                                'name': 'Lucas Soller',
-                                'bio': 'Daora',
-                                'company': 'Microsoft'
-                            }
-                        ],
-                        'total_slots': 10,
-                        'taken_slots': 4,
-                        'accepting_new_enrollments': False,
-                        'stop_accepting_new_enrollments_before': 1669918612000,
-                    },
-                    'enrollment': {
-                        'state': 'COMPLETED',
-                        'date_subscribed': 1668982612000
-                    }
-                }
-            ],
-            'message': 'the activities were retrieved to the user'
-        }
+            'all_activities_and_user_enrollments': [{'activity': {'accepting_new_enrollments': False,
+                                                       'activity_type': 'CULTURAL_ACTIVITY',
+                                                       'code': 'PINOQ1',
+                                                       'delivery_model': 'IN_PERSON',
+                                                       'description': 'Não era '
+                                                                      'a '
+                                                                      'última....',
+                                                       'duration': 45,
+                                                       'is_extensive': False,
+                                                       'link': None,
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Buscando '
+                                                                            'descobrir '
+                                                                            'o '
+                                                                            'mundo',
+                                                                     'company': 'Samsung',
+                                                                     'name': 'Daniel '
+                                                                             'Romanato'},
+                                                                    {'bio': 'Daora',
+                                                                     'company': 'Microsoft',
+                                                                     'name': 'Lucas '
+                                                                             'Soller'}],
+                                                       'start_date': 1670005013000,
+                                                       'stop_accepting_new_enrollments_before': 1669918612000,
+                                                       'taken_slots': 4,
+                                                       'title': 'Atividade da '
+                                                                'PINOQ1',
+                                                       'total_slots': 10},
+                                          'enrollment': {'date_subscribed': 1668982612000,
+                                                         'state': 'COMPLETED'}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'PROFESSORS_ACADEMY',
+                                                       'code': 'CODE',
+                                                       'delivery_model': 'HYBRID',
+                                                       'description': 'O mesmo '
+                                                                      'speaker '
+                                                                      'pela '
+                                                                      '50° vez',
+                                                       'duration': 120,
+                                                       'is_extensive': True,
+                                                       'link': 'https://devmaua.com',
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Buscando '
+                                                                            'descobrir '
+                                                                            'o '
+                                                                            'mundo',
+                                                                     'company': 'Samsung',
+                                                                     'name': 'Daniel '
+                                                                             'Romanato'}],
+                                                       'start_date': 1671488213000,
+                                                       'stop_accepting_new_enrollments_before': None,
+                                                       'taken_slots': 0,
+                                                       'title': 'Atividade da '
+                                                                'CODE',
+                                                       'total_slots': 50}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'INTERNSHIP_FAIR',
+                                                       'code': 'SC456',
+                                                       'delivery_model': 'ONLINE',
+                                                       'description': 'Sem '
+                                                                      'criatividade '
+                                                                      'para '
+                                                                      'descrição',
+                                                       'duration': 80,
+                                                       'is_extensive': False,
+                                                       'link': 'https://devmaua.com',
+                                                       'place': None,
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Incrível',
+                                                                     'company': 'Apple',
+                                                                     'name': 'Vitor '
+                                                                             'Briquez'}],
+                                                       'start_date': 1671563813000,
+                                                       'stop_accepting_new_enrollments_before': None,
+                                                       'taken_slots': 1,
+                                                       'title': 'Atividade da '
+                                                                'SC456',
+                                                       'total_slots': 10}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'LECTURES',
+                                                       'code': 'ELET355',
+                                                       'delivery_model': 'HYBRID',
+                                                       'description': 'Isso é '
+                                                                      'uma '
+                                                                      'atividade, '
+                                                                      'sério.',
+                                                       'duration': 400,
+                                                       'is_extensive': True,
+                                                       'link': 'https://devmaua.com',
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Patricia '
+                                                                                           'Santos',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Daora',
+                                                                     'company': 'Microsoft',
+                                                                     'name': 'Lucas '
+                                                                             'Soller'}],
+                                                       'start_date': 1671661013000,
+                                                       'stop_accepting_new_enrollments_before': None,
+                                                       'taken_slots': 1,
+                                                       'title': 'Atividade da '
+                                                                'ELET 355',
+                                                       'total_slots': 10}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'HIGH_IMPACT_LECTURES',
+                                                       'code': 'COD1468',
+                                                       'delivery_model': 'ONLINE',
+                                                       'description': 'Isso '
+                                                                      'definitivamente '
+                                                                      'é uma '
+                                                                      'atividade',
+                                                       'duration': 60,
+                                                       'is_extensive': True,
+                                                       'link': 'https://devmaua.com',
+                                                       'place': None,
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'},
+                                                                                  {'name': 'Patricia '
+                                                                                           'Santos',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Buscando '
+                                                                            'descobrir '
+                                                                            'o '
+                                                                            'mundo',
+                                                                     'company': 'Samsung',
+                                                                     'name': 'Daniel '
+                                                                             'Romanato'}],
+                                                       'start_date': 1671661013000,
+                                                       'stop_accepting_new_enrollments_before': None,
+                                                       'taken_slots': 1,
+                                                       'title': 'Atividade da '
+                                                                'COD 1468',
+                                                       'total_slots': 50}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'ACADEMIC_COMPETITIONS',
+                                                       'code': 'AC000',
+                                                       'delivery_model': 'IN_PERSON',
+                                                       'description': 'Isso é '
+                                                                      'uma '
+                                                                      'guerra',
+                                                       'duration': 190,
+                                                       'is_extensive': True,
+                                                       'link': None,
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Patricia '
+                                                                                           'Santos',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Daora',
+                                                                     'company': 'Microsoft',
+                                                                     'name': 'Lucas '
+                                                                             'Soller'}],
+                                                       'start_date': 1671661013000,
+                                                       'stop_accepting_new_enrollments_before': 1671574613000,
+                                                       'taken_slots': 2,
+                                                       'title': 'Atividade de '
+                                                                'competição',
+                                                       'total_slots': 50}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'ALUMNI_CAFE',
+                                                       'code': 'CAFE',
+                                                       'delivery_model': 'IN_PERSON',
+                                                       'description': 'Atividade '
+                                                                      'pra '
+                                                                      'tomar '
+                                                                      'café',
+                                                       'duration': 20,
+                                                       'is_extensive': True,
+                                                       'link': None,
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Patricia '
+                                                                                           'Santos',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Daora',
+                                                                     'company': 'Microsoft',
+                                                                     'name': 'Lucas '
+                                                                             'Soller'}],
+                                                       'start_date': 1671661013000,
+                                                       'stop_accepting_new_enrollments_before': None,
+                                                       'taken_slots': 2,
+                                                       'title': 'Atividade da '
+                                                                'CAFE',
+                                                       'total_slots': 2}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'HACKATHON',
+                                                       'code': 'ECM251',
+                                                       'delivery_model': 'HYBRID',
+                                                       'description': 'Se o '
+                                                                      'professor '
+                                                                      'chegar '
+                                                                      'vai ter '
+                                                                      'atividade...',
+                                                       'duration': 40,
+                                                       'is_extensive': False,
+                                                       'link': 'https://devmaua.com',
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Patricia '
+                                                                                           'Santos',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Buscando '
+                                                                            'descobrir '
+                                                                            'o '
+                                                                            'mundo',
+                                                                     'company': 'Samsung',
+                                                                     'name': 'Daniel '
+                                                                             'Romanato'}],
+                                                       'start_date': 1671733013000,
+                                                       'stop_accepting_new_enrollments_before': None,
+                                                       'taken_slots': 1,
+                                                       'title': 'Atividade da '
+                                                                'ECM251',
+                                                       'total_slots': 20}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'SPORTS_ACTIVITY',
+                                                       'code': 'ULTIMA',
+                                                       'delivery_model': 'IN_PERSON',
+                                                       'description': 'Atividade '
+                                                                      'pra '
+                                                                      'acabar',
+                                                       'duration': 45,
+                                                       'is_extensive': False,
+                                                       'link': None,
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Buscando '
+                                                                            'descobrir '
+                                                                            'o '
+                                                                            'mundo',
+                                                                     'company': 'Samsung',
+                                                                     'name': 'Daniel '
+                                                                             'Romanato'}],
+                                                       'start_date': 1671733013000,
+                                                       'stop_accepting_new_enrollments_before': 1671733012000,
+                                                       'taken_slots': 3,
+                                                       'title': 'Última '
+                                                                'atividade',
+                                                       'total_slots': 3},
+                                          'enrollment': {'date_subscribed': 1670710614000,
+                                                         'state': 'ENROLLED'}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'COURSES',
+                                                       'code': 'ECM2345',
+                                                       'delivery_model': 'IN_PERSON',
+                                                       'description': 'Isso é '
+                                                                      'uma '
+                                                                      'atividade',
+                                                       'duration': 120,
+                                                       'is_extensive': False,
+                                                       'link': None,
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Incrível',
+                                                                     'company': 'Apple',
+                                                                     'name': 'Vitor '
+                                                                             'Briquez'}],
+                                                       'start_date': 1671747413000,
+                                                       'stop_accepting_new_enrollments_before': 1671743812000,
+                                                       'taken_slots': 4,
+                                                       'title': 'Atividade da '
+                                                                'ECM 2345',
+                                                       'total_slots': 4},
+                                          'enrollment': {'date_subscribed': 1671401813000,
+                                                         'state': 'ENROLLED'}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'TECHNICAL_VISITS',
+                                                       'code': 'CODIGO',
+                                                       'delivery_model': 'ONLINE',
+                                                       'description': 'Isso '
+                                                                      'DEFINITIVAMENTE '
+                                                                      'é uma '
+                                                                      'atividade!',
+                                                       'duration': 60,
+                                                       'is_extensive': False,
+                                                       'link': 'https://devmaua.com',
+                                                       'place': None,
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Incrível',
+                                                                     'company': 'Apple',
+                                                                     'name': 'Vitor '
+                                                                             'Briquez'},
+                                                                    {'bio': 'Daora',
+                                                                     'company': 'Microsoft',
+                                                                     'name': 'Lucas '
+                                                                             'Soller'},
+                                                                    {'bio': 'Buscando '
+                                                                            'descobrir '
+                                                                            'o '
+                                                                            'mundo',
+                                                                     'company': 'Samsung',
+                                                                     'name': 'Daniel '
+                                                                             'Romanato'}],
+                                                       'start_date': 1672006613000,
+                                                       'stop_accepting_new_enrollments_before': 1671747413000,
+                                                       'taken_slots': 2,
+                                                       'title': 'Atividade da '
+                                                                'CÓDIGO',
+                                                       'total_slots': 15}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'CULTURAL_ACTIVITY',
+                                                       'code': 'PRF246',
+                                                       'delivery_model': 'IN_PERSON',
+                                                       'description': 'Um '
+                                                                      'único '
+                                                                      'professor '
+                                                                      'pra '
+                                                                      'tudo',
+                                                       'duration': 140,
+                                                       'is_extensive': True,
+                                                       'link': None,
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Incrível',
+                                                                     'company': 'Apple',
+                                                                     'name': 'Vitor '
+                         
+                                                    'Briquez'}],
+                                                       'start_date': 1672006613000,
+                                                       'stop_accepting_new_enrollments_before': None,
+                                                       'taken_slots': 0,
+                                                       'title': 'Atividade da '
+                                                                'PRF246',
+                                                       'total_slots': 50}},
+                                         {'activity': {'accepting_new_enrollments': True,
+                                                       'activity_type': 'GCSP',
+                                                       'code': '2468',
+                                                       'delivery_model': 'HYBRID',
+                                                       'description': 'Atividade '
+                                                                      'com '
+                                                                      'números '
+                                                                      'pares',
+                                                       'duration': 60,
+                                                       'is_extensive': False,
+                                                       'link': 'https://devmaua.com',
+                                                       'place': 'H332',
+                                                       'responsible_professors': [{'name': 'Caio '
+                                                                                           'Toledo',
+                                                                                   'role': 'PROFESSOR',
+                                                                                   'user_id': '03555624-a110-11ed-a8fc-0242ac120002'}],
+                                                       'speakers': [{'bio': 'Daora',
+                                                                     'company': 'Microsoft',
+                                                                     'name': 'Lucas '
+                                                                             'Soller'}],
+                                                       'start_date': 1672006613000,
+                                                       'stop_accepting_new_enrollments_before': None,
+                                                       'taken_slots': 0,
+                                                       'title': 'Atividade da '
+                                                                '2468',
+                                                       'total_slots': 25}}],
+ 'message': 'the activities were retrieved to the user'}
 
         assert viewmodel.to_dict() == expected
