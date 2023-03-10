@@ -10,4 +10,7 @@ class GetAllActivitiesUsecase:
         self.repo = repo
 
     def __call__(self) -> List[Activity]:
-        return self.repo.get_all_activities()
+        activities = self.repo.get_all_activities()
+        activities.sort(key=lambda x: x.start_date)
+
+        return activities
