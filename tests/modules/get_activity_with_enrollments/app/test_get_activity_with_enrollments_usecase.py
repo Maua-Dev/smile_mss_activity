@@ -2,6 +2,7 @@ from src.modules.get_activity_with_enrollments.app.get_activity_with_enrollments
     GetActivityWithEnrollmentsUsecase
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
@@ -22,7 +23,7 @@ class Test_GetActivityWithEnrollmentsUsecase:
 
         for enrollment in activity_dict["enrollments"]:
             assert type(enrollment[0]) == Enrollment
-            assert type(enrollment[1]) == User
+            assert type(enrollment[1]) == UserInfo
             assert (enrollment[0].state == ENROLLMENT_STATE.ENROLLED) or \
                    (enrollment[0].state == ENROLLMENT_STATE.COMPLETED)
     def test_get_activity_with_enrollments_wrong_type_code(self):
