@@ -17,6 +17,7 @@ class GetAllActivitiesAdminUsecase:
             raise ForbiddenAction("get_all_activities_with_enrollments, only admins can do this")
 
         activities_with_enrollments = self.repo_activity.get_all_activities_admin()
+        activities_with_enrollments.sort(key=lambda a: a[0].start_date)
 
         user_id_list = list()
         for activity, enrollments in activities_with_enrollments:
