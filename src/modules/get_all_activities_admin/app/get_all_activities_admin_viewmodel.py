@@ -4,6 +4,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
@@ -24,6 +25,27 @@ class UserViewmodel:
             "name": self.name,
             "user_id": self.user_id,
             "role": self.role
+        }
+
+
+class UserInfoViewmodel:
+    name: str
+    user_id: str
+    role: str
+    email: str
+
+    def __init__(self, user: UserInfo):
+        self.name = user.name
+        self.user_id = user.user_id
+        self.role = user.role.value
+        self.email = user.email
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "user_id": self.user_id,
+            "role": self.role,
+            "email": self.email
         }
 
 
@@ -50,17 +72,18 @@ class EnrollmentViewmodel:
     state: ENROLLMENT_STATE
     date_subscribed: int
 
-    def __init__(self, enrollment: Enrollment, user: User):
-        self.user = UserViewmodel(user) if type(user) == User else "NOT_FOUND"
+    def __init__(self, enrollment: Enrollment, user: UserInfo):
+        self.user = UserInfoViewmodel(user) if type(user) == UserInfo else "NOT_FOUND"
         self.state = enrollment.state
         self.date_subscribed = enrollment.date_subscribed
 
     def to_dict(self):
         return {
-            "user": self.user.to_dict() if type(self.user) == UserViewmodel else {
+            "user": self.user.to_dict() if type(self.user) == UserInfoViewmodel else {
                 'name': "NOT_FOUND",
                 'user_id': "NOT_FOUND",
-                'role': "NOT_FOUND"
+                'role': "NOT_FOUND",
+                'email': "NOT_FOUND"
             },
             "state": self.state.value,
             "date_subscribed": self.date_subscribed,
