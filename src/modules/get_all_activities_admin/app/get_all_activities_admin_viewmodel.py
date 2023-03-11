@@ -68,7 +68,7 @@ class SpeakerViewmodel:
 
 
 class EnrollmentViewmodel:
-    user: UserViewmodel
+    user: UserInfoViewmodel
     state: ENROLLMENT_STATE
     date_subscribed: int
 
