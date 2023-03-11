@@ -2,6 +2,7 @@ from src.modules.manual_attendance_change.app.manual_attendance_change_usecase i
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
@@ -31,7 +32,7 @@ class Test_ManualAttendanceChangeUsecase:
 
         for enrollment in activity_dict["enrollments"]:
             assert type(enrollment[0]) == Enrollment
-            assert type(enrollment[1]) == User
+            assert type(enrollment[1]) == UserInfo
             assert (enrollment[0].state == ENROLLMENT_STATE.ENROLLED) or \
                    (enrollment[0].state == ENROLLMENT_STATE.COMPLETED)
 
@@ -51,7 +52,7 @@ class Test_ManualAttendanceChangeUsecase:
         assert repo_activity.enrollments[29].state == ENROLLMENT_STATE.ENROLLED
         for enrollment in activity_dict["enrollments"]:
             assert type(enrollment[0]) == Enrollment
-            assert type(enrollment[1]) == User
+            assert type(enrollment[1]) == UserInfo
             assert (enrollment[0].state == ENROLLMENT_STATE.ENROLLED) or \
                    (enrollment[0].state == ENROLLMENT_STATE.COMPLETED)
 
@@ -73,7 +74,7 @@ class Test_ManualAttendanceChangeUsecase:
 
         for enrollment in activity_dict["enrollments"]:
             assert type(enrollment[0]) == Enrollment
-            assert type(enrollment[1]) == User
+            assert type(enrollment[1]) == UserInfo
             assert (enrollment[0].state == ENROLLMENT_STATE.ENROLLED) or \
                    (enrollment[0].state == ENROLLMENT_STATE.COMPLETED)
 

@@ -1,6 +1,7 @@
 from typing import List
 
 from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 
@@ -37,4 +38,12 @@ class UserRepositoryMock(IUserRepository):
         for user in self.users:
             if user.user_id in user_ids:
                 users.append(user)
+        return users
+
+    def get_users_info(self, user_ids: List[str]) -> List[User]:
+        users = list()
+        for user in self.users:
+            if user.user_id in user_ids:
+                user_info = UserInfo(user_id=user.user_id, name=user.name, role=user.role, email="teste@teste.com")
+                users.append(user_info)
         return users

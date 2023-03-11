@@ -54,7 +54,8 @@ class Test_ManualDropActivityViewmodel:
                         'user': {
                             'name': 'Bruno Soller',
                             'role': 'STUDENT',
-                            'user_id': '0355535e-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671315413000
@@ -63,7 +64,8 @@ class Test_ManualDropActivityViewmodel:
                         'user': {
                             'name': 'Caio Toledo',
                             'role': 'PROFESSOR',
-                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671401813000
@@ -72,7 +74,8 @@ class Test_ManualDropActivityViewmodel:
                         'user': {
                             'name': 'Pedro Marcelino',
                             'role': 'INTERNATIONAL_STUDENT',
-                            'user_id': '0355573c-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '0355573c-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671488213000
@@ -81,7 +84,8 @@ class Test_ManualDropActivityViewmodel:
                         'user': {
                             'name': 'Hector Guerrini',
                             'role': 'EXTERNAL',
-                            'user_id': '03555872-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '03555872-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671574613000
@@ -90,7 +94,8 @@ class Test_ManualDropActivityViewmodel:
                         'user': {
                             'name': 'Ricardo Soller',
                             'role': 'EMPLOYEE',
-                            'user_id': '2f0df47e-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '2f0df47e-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'IN_QUEUE',
                         'date_subscribed': 1671574673000
@@ -99,7 +104,8 @@ class Test_ManualDropActivityViewmodel:
                         'user': {
                             'name': 'Marcos Romanato',
                             'role': 'STUDENT',
-                            'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '38c3d7fe-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'IN_QUEUE',
                         'date_subscribed': 1671574733000
