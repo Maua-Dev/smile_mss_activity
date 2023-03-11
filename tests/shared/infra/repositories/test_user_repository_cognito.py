@@ -1,6 +1,7 @@
 import pytest
 
 from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.infra.repositories.user_repository_cognito import UserRepositoryCognito
 
@@ -61,3 +62,28 @@ class Test_UserRepositoryCognito:
 
         assert users == expected_users
 
+    @pytest.mark.skip("Can't test it locally")
+    def test_get_users_info(self):
+        user_repo_cognito = UserRepositoryCognito()
+        expected_users = [
+            UserInfo(
+                user_id="aaa404d9-6ee9-48df-8c65-760777b94992",
+                name="Brenudo Brenas",
+                role=ROLE.STUDENT,
+                email="bamorim.devmaua@gmail.com"
+            ),
+            UserInfo(
+                user_id="30655fce-c069-4751-ab22-ec0ba92a6273",
+                name="Carol Mota",
+                role=ROLE.PROFESSOR,
+                email="carol@mailna.co"
+            ),
+        ]
+        expected_users.sort(key=lambda x: x.user_id)
+
+        list_user_id = ["aaa404d9-6ee9-48df-8c65-760777b94992", "30655fce-c069-4751-ab22-ec0ba92a6273"]
+        users = user_repo_cognito.get_users_info(list_user_id)
+
+        users.sort(key=lambda x: x.user_id)
+
+        assert users == expected_users

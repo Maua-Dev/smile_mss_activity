@@ -1,4 +1,5 @@
 from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_info import UserInfo
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
@@ -29,3 +30,9 @@ class Test_UserRepositoryMock:
         assert all(type(user) == User for user in users)
         assert len(users) == 1
 
+    def test_get_users_info(self):
+        repo = UserRepositoryMock()
+        users = repo.get_users_info(["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"])
+        assert type(users) == list
+        assert all(type(user) == UserInfo for user in users)
+        assert len(users) == 2
