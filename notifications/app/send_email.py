@@ -8,15 +8,14 @@ from botocore.exceptions import ClientError
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user_info import UserInfo
 
-
-client = boto3.client('ses')
+client = boto3.client('ses', region_name="sa-east-1")
 
 
 def compose_html(activity: Activity, user: UserInfo):
     name = user.name.split(" ")[0]
     gmt3_tz = timezone(timedelta(hours=-3))
     message = """
-    
+
                 <!DOCTYPE html>
         <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
         <head>
@@ -308,7 +307,7 @@ def compose_html(activity: Activity, user: UserInfo):
         <p style="line-height: 140%;">&nbsp;</p>
         <p style="line-height: 140%;">Estamos te enviando esse email para lembrar que você está inscrito em {activity_title} que começa daqui alguns minutos!</p>
         <p style="line-height: 140%;">&nbsp;</p>
-        <p style="line-height: 140%;">Essa atividade começa às {time}, não perca o horário, hein!</p>
+        <p style="line-height: 140%;">Essa atividade começa às {time}, não perca o horário!</p>
         </div>
         </td>
         </tr>
@@ -322,7 +321,7 @@ def compose_html(activity: Activity, user: UserInfo):
         <p style="font-size: 14px; line-height: 160%;">Esperamos você lá!</p>
         <p style="font-size: 14px; line-height: 160%;">Atenciosamente,</p>
         <p style="font-size: 14px; line-height: 160%;">&nbsp;</p>
-        <p style="font-size: 14px; line-height: 160%;"><strong>Equipe SMILE 2023</strong></p>
+        <p style="font-size: 14px; line-height: 160%;"><strong>Equipe SMILE 2023 ;)</strong></p>
         </div>
         </td>
         </tr>
@@ -418,18 +417,9 @@ def send_email_notification(activity: Activity, users: List[UserInfo]):
 
     except ClientError as e:
         print(e.response['Error']['Message'])
-        return {
-            'statusCode': 502,
-            'body': json.dumps(e.response['Error']['Message'])
-        }
 
     else:
-        print("Email sent! Message ID:"),
-        print(response['MessageId'])
-        return {
-            'statusCode': 200,
-            'body': json.dumps('Email enviado!')
-        }
+        print("Activity: ", activity.title),
 
 
 
