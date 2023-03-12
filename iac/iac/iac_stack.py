@@ -67,6 +67,7 @@ class IacStack(Stack):
         self.event_bridge = EventBridgeStack(self, "SmileEventBridge", environment_variables=ENVIRONMENT_VARIABLES, lambda_layer=self.lambda_stack.lambda_layer)
 
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.event_bridge.close_activity_date_function)
+        self.dynamo_stack.dynamo_table.grant_read_write_data(self.event_bridge.send_notification_function)
 
         for f in self.lambda_stack.functions_that_need_dynamo_permissions:
             self.dynamo_stack.dynamo_table.grant_read_write_data(f)
@@ -84,3 +85,16 @@ class IacStack(Stack):
         for f in self.lambda_stack.functions_that_need_cognito_permissions:
             f.add_to_role_policy(cognito_admin_policy)
 
+        self.event_bridge.send_notification_function.add_to_role_policy(cognito_admin_policy)
+
+        ses_admin_policy = aws_iam.PolicyStatement(
+            effect=aws_iam.Effect.ALLOW,
+            actions=[
+                "ses:*",
+            ],
+            resources=[
+                "*"
+            ]
+        )
+
+        self.event_bridge.send_notification_function.add_to_role_policy(ses_admin_policy)
