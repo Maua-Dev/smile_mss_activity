@@ -70,13 +70,19 @@ class Test_UserRepositoryCognito:
                 user_id="aaa404d9-6ee9-48df-8c65-760777b94992",
                 name="Brenudo Brenas",
                 role=ROLE.STUDENT,
-                email="bamorim.devmaua@gmail.com"
+                email="bamorim.devmaua@gmail.com",
+                phone=None,
+                accepted_notifications_email=False,
+                accepted_notifications_sms=False,
             ),
             UserInfo(
                 user_id="30655fce-c069-4751-ab22-ec0ba92a6273",
                 name="Carol Mota",
                 role=ROLE.PROFESSOR,
-                email="carol@mailna.co"
+                email="carol@mailna.co",
+                phone="+5511991758098",
+                accepted_notifications_email=True,
+                accepted_notifications_sms=True,
             ),
         ]
         expected_users.sort(key=lambda x: x.user_id)
