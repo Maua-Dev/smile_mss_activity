@@ -410,7 +410,7 @@ def send_email_notification(activity: Activity, users: List[UserInfo]):
                     },
                     'Subject': {
                         'Charset': "UTF-8",
-                        'Data': "SMILE - 2023 Lembrete de atividade",
+                        'Data': "SMILE 2023 - Lembrete de atividade",
                     },
                 },
                 Source="dev@maua.br"
