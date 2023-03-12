@@ -33,8 +33,8 @@ class UserCognitoDTO:
             user_id=user_data["sub"],
             email=user_data["email"],
             phone=user_data.get("phone_number"),
-            accepted_notifications_sms=eval(user_data["acceptedNotificSMS"]),
-            accepted_notifications_email=eval(user_data["acceptedNotificMail"])
+            accepted_notifications_sms=eval(user_data["acceptedNotificSMS"].title()),
+            accepted_notifications_email=eval(user_data["acceptedNotificMail"].title())
         )
 
     def to_entity(self):
