@@ -57,7 +57,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'user': {
                             'name': 'João Vilas',
                             'role': 'ADMIN',
-                            'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002'
+                            'user_id': 'd61dbf66-a10f-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'COMPLETED',
                         'date_subscribed': 1671229013000
@@ -66,7 +67,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'user': {
                             'name': 'Bruno Soller',
                             'role': 'STUDENT',
-                            'user_id': '0355535e-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671315413000
@@ -75,7 +77,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'user': {
                             'name': 'Caio Toledo',
                             'role': 'PROFESSOR',
-                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671401813000
@@ -84,7 +87,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'user': {
                             'name': 'Pedro Marcelino',
                             'role': 'INTERNATIONAL_STUDENT',
-                            'user_id': '0355573c-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '0355573c-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1671488213000
@@ -150,7 +154,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'user': {
                             'name': 'Bruno Soller',
                             'role': 'STUDENT',
-                            'user_id': '0355535e-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '0355535e-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'COMPLETED',
                         'date_subscribed': 1668896213000
@@ -159,7 +164,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'user': {
                             'name': 'Caio Toledo',
                             'role': 'PROFESSOR',
-                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '03555624-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1668982612000
@@ -168,7 +174,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'user': {
                             'name': 'Pedro Marcelino',
                             'role': 'INTERNATIONAL_STUDENT',
-                            'user_id': '0355573c-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '0355573c-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'COMPLETED',
                         'date_subscribed': 1669069013000
@@ -177,7 +184,8 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                         'user': {
                             'name': 'Hector Guerrini',
                             'role': 'EXTERNAL',
-                            'user_id': '03555872-a110-11ed-a8fc-0242ac120002'
+                            'user_id': '03555872-a110-11ed-a8fc-0242ac120002',
+                            'email': "teste@teste.com"
                         },
                         'state': 'ENROLLED',
                         'date_subscribed': 1669760213000

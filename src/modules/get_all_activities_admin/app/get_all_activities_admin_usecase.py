@@ -25,7 +25,7 @@ class GetAllActivitiesAdminUsecase:
 
         set_user_id_list = set(user_id_list)
 
-        users = self.repo_user.get_users(list(set_user_id_list))
+        users = self.repo_user.get_users_info(list(set_user_id_list))
 
         users_dict = {user.user_id: user for user in users}
 

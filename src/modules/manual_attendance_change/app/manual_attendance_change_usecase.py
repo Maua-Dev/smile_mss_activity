@@ -67,7 +67,7 @@ class ManualAttendanceChangeUsecase:
         user_id_list = list()
         for enrollment in enrollments:
             user_id_list.append(enrollment.user_id)
-        users = self.repo_user.get_users(user_id_list)
+        users = self.repo_user.get_users_info(user_id_list)
         users_dict = {user.user_id: user for user in users}
         activity_dict = {
             "activity": activity,
