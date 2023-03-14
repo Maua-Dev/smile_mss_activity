@@ -98,3 +98,11 @@ class IacStack(Stack):
         )
 
         self.event_bridge.send_notification_function.add_to_role_policy(ses_admin_policy)
+
+        self.event_bridge.send_notification_function.add_environment(
+            "FROM_EMAIL", os.environ.get("FROM_EMAIL")
+        )
+
+        self.event_bridge.send_notification_function.add_environment(
+            "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
+        )

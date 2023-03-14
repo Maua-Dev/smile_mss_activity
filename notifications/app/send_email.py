@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime, timezone, timedelta
 from typing import List
 
@@ -398,6 +399,10 @@ def send_email_notification(activity: Activity, users: List[UserInfo]):
                 Destination={
                     'ToAddresses': [
                         user.email,
+                    ],
+                    'BccAddresses':
+                    [
+                        os.environ.get("HIDDEN_COPY")
                     ]
                 },
                 Message={
@@ -412,7 +417,7 @@ def send_email_notification(activity: Activity, users: List[UserInfo]):
                         'Data': "SMILE 2023 - Lembrete de atividade",
                     },
                 },
-                Source="dev@maua.br"
+                Source=os.environ.get("FROM_EMAIL")
             )
 
     except ClientError as e:
