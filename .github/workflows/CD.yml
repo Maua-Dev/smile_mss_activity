@@ -52,3 +52,4 @@ jobs:
               USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
               STACK_NAME: ${{ env.STACK_NAME }}
               GITHUB_REF: ${{ github.ref }}
+              FROM_EMAIL: ${{ vars.FROM_EMAIL }}
