@@ -306,9 +306,9 @@ def compose_html(activity: Activity, user: UserInfo):
         <div class="v-font-size" style="font-size: 15px; line-height: 140%; text-align: justify; word-wrap: break-word;">
         <p style="line-height: 140%; font-size: 14px;"><span style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 21px;"><strong>Olá, {name}</strong></span></p>
         <p style="line-height: 140%;">&nbsp;</p>
-        <p style="line-height: 140%;">Estamos te enviando esse email para lembrar que você está inscrito em {activity_title} que começa daqui alguns minutos!</p>
+        <p style="line-height: 140%;">Estamos te enviando esse email para lembrar que você está inscrito em <strong>{activity_title}</strong> que começa daqui alguns minutos!</p>
         <p style="line-height: 140%;">&nbsp;</p>
-        <p style="line-height: 140%;">Essa atividade começa às {time}, não perca o horário!</p>
+        <p style="line-height: 140%;">Essa atividade começa às <strong>{time}</strong>, não perca o horário!</p>
         </div>
         </td>
         </tr>
@@ -417,7 +417,7 @@ def send_email_notification(activity: Activity, users: List[UserInfo]):
                         'Data': "SMILE 2023 - Lembrete de atividade",
                     },
                 },
-                Source=os.environ.get("FROM_EMAIL")
+                Source=f'Semana Mau\xc3\xa1 de Inova\xc3\xa7\xc3\xa3o Lideran\xc3\xa7a e Empreendedorismo 2023 <{os.environ.get("FROM_EMAIL")}>'
             )
 
     except ClientError as e:
