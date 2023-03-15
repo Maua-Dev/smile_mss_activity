@@ -5,6 +5,8 @@ from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.environments import Environments
 import json
 
+from .send_sms import send_sms_notification
+
 repo_activity = Environments.get_activity_repo()()
 repo_user = Environments.get_user_repo()()
 
@@ -38,8 +40,10 @@ def lambda_handler(event, context):
             users_dict = {user.user_id: user for user in users}
 
             for activity, enrollments in activities_to_send_enrolled:
-                send_email_notification(activity,
-                                        [users_dict.get(enrollment.user_id, "NOT_FOUND") for enrollment in enrollments])
+                users = [users_dict.get(enrollment.user_id, "NOT_FOUND") for enrollment in enrollments]
+                send_email_notification(activity, users)
+                send_sms_notification(activity, users)
+
 
             return {
                 'statusCode': 200,
