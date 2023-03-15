@@ -16,7 +16,7 @@ def compose_sms_message(activity: Activity, user: UserInfo) -> str:
 
     message = f"""Olá, {name}
     
-        Sua atividade {Activity.title} começa às {datetime.fromtimestamp(activity.start_date / 1000).astimezone(gmt3_tz).strftime("%H:%M")}
+        Sua atividade {activity.title} começa às {datetime.fromtimestamp(activity.start_date / 1000).astimezone(gmt3_tz).strftime("%H:%M")}
         Esperamos você lá!
         
         Equipe SMILE 2023 ;)"""
