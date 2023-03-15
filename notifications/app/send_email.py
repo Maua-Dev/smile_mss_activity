@@ -8,6 +8,7 @@ from botocore.exceptions import ClientError
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user_info import UserInfo
+from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 
 client = boto3.client('ses', region_name="sa-east-1")
 
@@ -15,6 +16,14 @@ client = boto3.client('ses', region_name="sa-east-1")
 def compose_html(activity: Activity, user: UserInfo):
     name = user.name.split(" ")[0]
     gmt3_tz = timezone(timedelta(hours=-3))
+
+    if activity.delivery_model == DELIVERY_MODEL.IN_PERSON:
+        place = activity.place
+    elif activity.delivery_model == DELIVERY_MODEL.HYBRID:
+        place = f"{activity.place} ou Online"
+    else:
+        place = "Online"
+
     message = """
 
                 <!DOCTYPE html>
@@ -307,6 +316,7 @@ def compose_html(activity: Activity, user: UserInfo):
         <p style="line-height: 140%; font-size: 14px;"><span style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 21px;"><strong>Olá, {name}</strong></span></p>
         <p style="line-height: 140%;">&nbsp;</p>
         <p style="line-height: 140%;">Estamos te enviando esse email para lembrar que você está inscrito em <strong>{activity_title}</strong> que começa daqui alguns minutos!</p>
+        <p style="line-height: 140%;">Local: {place}</p>
         <p style="line-height: 140%;">&nbsp;</p>
         <p style="line-height: 140%;">Essa atividade começa às <strong>{time}</strong>, não perca o horário!</p>
         </div>
@@ -383,7 +393,7 @@ def compose_html(activity: Activity, user: UserInfo):
     activity_title = activity.title
     time = datetime.fromtimestamp(activity.start_date/1000).astimezone(gmt3_tz).strftime("%H:%M")
 
-    message = message.format(name=name, activity_title=activity_title, time=time)
+    message = message.format(name=name, activity_title=activity_title, time=time, place=place)
 
     return message
 
@@ -424,7 +434,7 @@ def send_email_notification(activity: Activity, users: List[UserInfo]):
         print(e.response['Error']['Message'])
 
     else:
-        print("Activity: ", activity.title),
+        print("EMAIL -> Activity: ", activity.title),
 
 
 
