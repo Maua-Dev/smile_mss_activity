@@ -22,7 +22,7 @@ def compose_sms_message(activity: Activity, user: UserInfo) -> str:
     else:
         place = "Online"
 
-    message = f"""Olá, {name}!\n\nSua atividade {activity.title} começa às {datetime.fromtimestamp(activity.start_date / 1000).astimezone(gmt3_tz).strftime("%H:%M")}\nLocal: {place}\nEsperamos você lá!\n\nEquipe SMILE 2023 ;)"""
+    message = f"""Olá, {name}!\n\nSua atividade {activity.title} começa às {datetime.fromtimestamp(activity.start_date / 1000).astimezone(gmt3_tz).strftime("%H:%M")}\n\nLocal: {place}\n\nEsperamos você lá!\nEquipe SMILE 2023 ;)"""
 
     return message
 
