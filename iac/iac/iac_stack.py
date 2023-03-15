@@ -106,3 +106,15 @@ class IacStack(Stack):
         self.event_bridge.send_notification_function.add_environment(
             "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
         )
+
+        sns_admin_policy = aws_iam.PolicyStatement(
+            effect=aws_iam.Effect.ALLOW,
+            actions=[
+                "sns:*",
+            ],
+            resources=[
+                "*"
+            ]
+        )
+
+        self.event_bridge.send_notification_function.add_to_role_policy(sns_admin_policy)
