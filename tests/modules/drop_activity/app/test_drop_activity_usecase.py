@@ -4,7 +4,7 @@ from src.modules.drop_activity.app.drop_activity_usecase import DropActivityUsec
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction, UserAlreadyCompleted
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -80,7 +80,6 @@ class Test_DropActivityUsecase:
             assert repo.enrollments[26].state == ENROLLMENT_STATE.ENROLLED
             assert repo.enrollments[27].state == ENROLLMENT_STATE.ENROLLED
 
-
     def test_drop_activity_usecase_already_rejected(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -88,6 +87,14 @@ class Test_DropActivityUsecase:
 
         with pytest.raises(ForbiddenAction):
             dropped_enrollment = usecase(repo.enrollments[10].user_id, repo.enrollments[10].activity_code)
+
+    def test_drop_activity_usecase_already_completed(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = DropActivityUsecase(repo)
+
+        with pytest.raises(UserAlreadyCompleted):
+            dropped_enrollment = usecase(repo.enrollments[30].user_id, repo.enrollments[30].activity_code)
 
     def test_drop_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
