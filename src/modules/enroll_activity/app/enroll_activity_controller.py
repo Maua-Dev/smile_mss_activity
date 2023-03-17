@@ -1,6 +1,7 @@
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, UserAlreadyEnrolled
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, UserAlreadyEnrolled, \
+    UserAlreadyCompleted
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadRequest, InternalServerError, Forbidden
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
@@ -54,6 +55,10 @@ class EnrollActivityController:
         except ClosedActivity as err:
 
             return Forbidden(body=f"Inscrições fechadas")
+
+        except UserAlreadyCompleted as err:
+
+            return Forbidden(body=f"Usuário já completou a atividade")
 
         except UserAlreadyEnrolled as err:
 

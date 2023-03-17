@@ -6,7 +6,7 @@ from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, \
-    UserAlreadyEnrolled
+    UserAlreadyEnrolled, UserAlreadyCompleted, ForbiddenAction
 
 
 class EnrollActivityUsecase:
@@ -30,7 +30,15 @@ class EnrollActivityUsecase:
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
 
         if enrollment is not None:
-            raise UserAlreadyEnrolled('Enrollment')
+
+            original_state = enrollment.state
+            if original_state == ENROLLMENT_STATE.ENROLLED or original_state == ENROLLMENT_STATE.IN_QUEUE:
+                raise UserAlreadyEnrolled('Enrollment')
+
+            if original_state == ENROLLMENT_STATE.COMPLETED:
+                raise UserAlreadyCompleted('Enrollment')
+
+            raise ForbiddenAction('Enrollment')
 
         else:
 
@@ -43,3 +51,4 @@ class EnrollActivityUsecase:
                                         date_subscribed=int(datetime.datetime.now().timestamp() * 1000))
 
         return self.repo.create_enrollment(enrollment)
+
