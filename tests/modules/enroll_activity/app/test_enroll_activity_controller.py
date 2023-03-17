@@ -140,4 +140,16 @@ class Test_EnrollActivityController:
         assert response.status_code == 400
         assert response.body == 'Parâmetro inválido: code'
 
-    
+    def test_drop_activity_already_completed(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = EnrollActivityUsecase(repo)
+        controller = EnrollActivityController(usecase)
+        repo.activities[12].accepting_new_enrollments = True
+
+        request = HttpRequest(body={'code': repo.enrollments[30].activity_code, 'requester_user': {"sub": repo_user.users[3].user_id, "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}, 'requester_user': {"sub": repo_user.users[3].user_id, "name": repo_user.users[3].name, "custom:role": repo_user.users[3].role.value}})
+
+        reponse = controller(request)
+
+        assert reponse.status_code == 403
+        assert reponse.body == 'Usuário já completou a atividade'

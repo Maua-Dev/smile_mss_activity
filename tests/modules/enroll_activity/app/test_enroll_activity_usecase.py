@@ -3,7 +3,8 @@ import pytest
 from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivityUsecase
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, UserAlreadyEnrolled
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, UserAlreadyEnrolled, \
+    UserAlreadyCompleted
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
@@ -90,3 +91,11 @@ class Test_EnrollActivityUsecase:
 
         with pytest.raises(ClosedActivity):
             enrollment = usecase(usecase(repo_user.users[5].user_id, repo.activities[12].code))
+
+    def test_enrollment_activity_usecase_already_completed(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = EnrollActivityUsecase(repo)
+        repo.activities[12].accepting_new_enrollments = True
+        with pytest.raises(UserAlreadyCompleted):
+            enrollment_activity = usecase(usecase(repo_user.users[3].user_id, repo.activities[12].code))
