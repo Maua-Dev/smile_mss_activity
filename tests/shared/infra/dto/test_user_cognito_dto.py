@@ -14,6 +14,8 @@ class Test_UserCognitoDTO:
                                        {'Name': 'name', 'Value': "Bruno Vitor Vilardi Bueno"},
                                        {'Name': 'custom:role', 'Value': 'STUDENT'},
                                        {'Name': 'phone_number', 'Value': '+5511999999999'},
+                                       {'Name': 'custom:certWithSocialName', 'Value': 'True'},
+                                       {'Name': 'custom:socialName', 'Value': 'João da Silva'},
                                        {'Name': 'custom:acceptedNotificSMS', 'Value': 'True'},
                                        {'Name': 'custom:acceptedNotificMail', 'Value': 'True'},
                                        {'Name': 'email', 'Value': 'vgsoller@gmail.com'}],
@@ -30,7 +32,9 @@ class Test_UserCognitoDTO:
             email="vgsoller@gmail.com",
             phone="+5511999999999",
             accepted_notifications_sms=True,
-            accepted_notifications_email=True
+            accepted_notifications_email=True,
+            social_name="João da Silva",
+            certificate_with_social_name=True
         )
 
         assert user_dto == expected_user_dto
@@ -88,7 +92,9 @@ class Test_UserCognitoDTO:
             email="vgsoller@gmail.com",
             phone="+5511999999999",
             accepted_notifications_sms=True,
-            accepted_notifications_email=True)
+            accepted_notifications_email=True,
+            social_name="João da Silva",
+            certificate_with_social_name=True)
 
         user_info = user_dto.to_entity_info()
 
@@ -99,7 +105,9 @@ class Test_UserCognitoDTO:
             email="vgsoller@gmail.com",
             phone="+5511999999999",
             accepted_notifications_sms=True,
-            accepted_notifications_email=True)
+            accepted_notifications_email=True,
+            social_name="João da Silva",
+            certificate_with_social_name=True)
 
         assert user_info == expected_user_info
 
@@ -112,6 +120,7 @@ class Test_UserCognitoDTO:
                                        {'Name': 'name', 'Value': "Bruno Vitor Vilardi Bueno"},
                                        {'Name': 'custom:role', 'Value': 'STUDENT'},
                                        {'Name': 'phone_number', 'Value': '+5511999999999'},
+                                       {'Name': 'custom:certWithSocialName', 'Value': 'false'},
                                        {'Name': 'custom:acceptedNotificSMS', 'Value': 'True'},
                                        {'Name': 'custom:acceptedNotificMail', 'Value': 'True'},
                                        {'Name': 'email', 'Value': 'vgsoller@gmail.com'}],
@@ -132,7 +141,9 @@ class Test_UserCognitoDTO:
             email="vgsoller@gmail.com",
             phone="+5511999999999",
             accepted_notifications_sms=True,
-            accepted_notifications_email=True)
+            accepted_notifications_email=True,
+            social_name=None,
+            certificate_with_social_name=False)
 
         assert user_info == expected_user_info
 
@@ -145,6 +156,8 @@ class Test_UserCognitoDTO:
                                        {'Name': 'custom:ra', 'Value': '21014442'},
                                        {'Name': 'name', 'Value': "Bruno Vitor Vilardi Bueno"},
                                        {'Name': 'custom:role', 'Value': 'STUDENT'},
+                                       {'Name': 'custom:socialName', 'Value': 'João da Silva'},
+                                       {'Name': 'custom:certWithSocialName', 'Value': 'false'},
                                        {'Name': 'custom:acceptedNotificSMS', 'Value': 'True'},
                                        {'Name': 'custom:acceptedNotificMail', 'Value': 'True'},
                                        {'Name': 'email', 'Value': 'vgsoller@gmail.com'}],
@@ -163,7 +176,9 @@ class Test_UserCognitoDTO:
             email="vgsoller@gmail.com",
             phone=None,
             accepted_notifications_sms=True,
-            accepted_notifications_email=True)
+            accepted_notifications_email=True,
+            social_name="João da Silva",
+            certificate_with_social_name=False)
 
         assert type(user_info) == UserInfo
         assert user_info == expected_user_info

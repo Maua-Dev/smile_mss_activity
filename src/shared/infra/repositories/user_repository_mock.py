@@ -44,6 +44,6 @@ class UserRepositoryMock(IUserRepository):
         users = list()
         for user in self.users:
             if user.user_id in user_ids:
-                user_info = UserInfo(user_id=user.user_id, name=user.name, role=user.role, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True)
+                user_info = UserInfo(user_id=user.user_id, name=user.name, role=user.role, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True, social_name=None, certificate_with_social_name=False)
                 users.append(user_info)
         return users

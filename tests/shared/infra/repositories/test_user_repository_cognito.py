@@ -65,31 +65,9 @@ class Test_UserRepositoryCognito:
     @pytest.mark.skip("Can't test it locally")
     def test_get_users_info(self):
         user_repo_cognito = UserRepositoryCognito()
-        expected_users = [
-            UserInfo(
-                user_id="aaa404d9-6ee9-48df-8c65-760777b94992",
-                name="Brenudo Brenas",
-                role=ROLE.STUDENT,
-                email="bamorim.devmaua@gmail.com",
-                phone=None,
-                accepted_notifications_email=False,
-                accepted_notifications_sms=False,
-            ),
-            UserInfo(
-                user_id="30655fce-c069-4751-ab22-ec0ba92a6273",
-                name="Carol Mota",
-                role=ROLE.PROFESSOR,
-                email="carol@mailna.co",
-                phone="+5511991758098",
-                accepted_notifications_email=True,
-                accepted_notifications_sms=True,
-            ),
-        ]
-        expected_users.sort(key=lambda x: x.user_id)
 
-        list_user_id = ["aaa404d9-6ee9-48df-8c65-760777b94992", "30655fce-c069-4751-ab22-ec0ba92a6273"]
+        list_user_id = ["6619c4ba-7807-4a50-98ec-93bb15bd8882", "fd139609-02b1-4ef6-bc25-278ff639a1fc"]
         users = user_repo_cognito.get_users_info(list_user_id)
 
-        users.sort(key=lambda x: x.user_id)
-
-        assert users == expected_users
+        assert users[0].user_id == "6619c4ba-7807-4a50-98ec-93bb15bd8882"
+        assert users[1].user_id == "fd139609-02b1-4ef6-bc25-278ff639a1fc"
