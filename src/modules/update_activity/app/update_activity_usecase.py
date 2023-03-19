@@ -28,7 +28,7 @@ class UpdateActivityUsecase:
         if user.role != ROLE.ADMIN:
             raise ForbiddenAction("update_activity, only admins can update activities")
 
-        if type(code) != str:
+        if not Activity.validate_activity_code(code):
             raise EntityError("code")
         activity = self.repo_activity.get_activity(code=code)
 

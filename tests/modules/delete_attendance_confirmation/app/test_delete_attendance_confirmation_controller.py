@@ -60,7 +60,7 @@ class Test_DeleteAttendanceConfirmationController:
               response = controller(request)
 
               assert response.status_code == 400
-              assert response.body == "Parâmetro inválido: activity_code"
+              assert response.body == "Parâmetro inválido: code"
 
        def test_delete_attendance_confirmation_controller_activity_not_found(self):
               repo = ActivityRepositoryMock()
