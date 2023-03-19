@@ -1,3 +1,4 @@
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
@@ -9,8 +10,8 @@ class DeleteAttendanceConfirmationUsecase:
               self.repo = repo
 
        def __call__(self, code: str, requester_user: User) -> str:
-              if type(code) != str:
-                     raise EntityError("activity_code")
+              if not Activity.validate_activity_code(code):
+                     raise EntityError("code")
 
               if requester_user.role != ROLE.PROFESSOR:
                      raise ForbiddenAction("user")

@@ -32,7 +32,8 @@ class Activity(abc.ABC):
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
                  responsible_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int,
                  accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, confirmation_code: str):
-        if type(code) != str:
+
+        if not self.validate_activity_code(code):
             raise EntityError("code")
         self.code = code
 
@@ -128,6 +129,14 @@ class Activity(abc.ABC):
         if len(confirmation_code) != 6:
             return False
         if not confirmation_code.isnumeric():
+            return False
+        return True
+
+    @staticmethod
+    def validate_activity_code(code: str) -> bool:
+        if type(code) != str:
+            return False
+        if len(code) <= 0:
             return False
         return True
 

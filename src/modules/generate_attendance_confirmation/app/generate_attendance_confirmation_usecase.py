@@ -1,5 +1,6 @@
 from random import randint
 
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
@@ -12,7 +13,8 @@ class GenerateAttendanceConfirmationUsecase:
         self.repo = repo
 
     def __call__(self, code: str, requester_user: User) -> str:
-        if type(code) != str:
+
+        if not Activity.validate_activity_code(code):
             raise EntityError("activity_code")
 
         if requester_user.role != ROLE.PROFESSOR:
