@@ -322,7 +322,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'Não é possível confirmar presença deste usuário'
+        assert response.body == 'Não é possível confirmar a presença de um usuário cuja inscrição já foi confirmada'
 
     def test_manual_attendance_controller_not_completed(self):
         repo_activity = ActivityRepositoryMock()
@@ -344,7 +344,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'Não é possível cancelar presença deste usuário'
+        assert response.body == 'Não é possível inscrever usuário já inscrito'
 
 
 
