@@ -324,7 +324,7 @@ class Test_ManualAttendanceChangePresenter:
         }
 
         response = lambda_handler(event, None)
-        assert json.loads(response["body"]) == 'Não é possível confirmar presença deste usuário'
+        assert json.loads(response["body"]) == 'Não é possível confirmar a presença de um usuário cuja inscrição já foi confirmada'
         assert response['statusCode'] == 403
 
     def test_manual_attendance_change_presenter_missing_requester_user(self):
