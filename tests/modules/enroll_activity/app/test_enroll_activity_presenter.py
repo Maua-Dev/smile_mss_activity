@@ -1,9 +1,12 @@
 import json
 
+from freezegun import freeze_time
+
 from src.modules.enroll_activity.app.enroll_activity_presenter import lambda_handler
 
 
 class Test_EnrollActivityPresenter:
+    @freeze_time("2022-12-01")
     def test_enroll_activity_presenter(self):
         event = {
             "version": "2.0",
@@ -59,6 +62,7 @@ class Test_EnrollActivityPresenter:
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['message'] == 'the enrollment was enrolled'
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_presenter_in_queue(self):
         event = {
             "version": "2.0",
@@ -114,6 +118,7 @@ class Test_EnrollActivityPresenter:
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['message'] == 'the enrollment was in queue'
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_presenter_400_user_id_missing(self):
         event = {
             "version": "2.0",
@@ -161,6 +166,7 @@ class Test_EnrollActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro ausente: requester_user"
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_presenter_400_code_missing(self):
         event = {
             "version": "2.0",
@@ -216,6 +222,7 @@ class Test_EnrollActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro ausente: code"
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_presenter_400_user_id_invalid(self):
         event = {
             "version": "2.0",
@@ -271,6 +278,7 @@ class Test_EnrollActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro inválido: user_id"
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_presenter_400_code_invalid(self):
         event = {
             "version": "2.0",
@@ -326,6 +334,7 @@ class Test_EnrollActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro inválido: code"
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_presenter_403_already_enrolled(self):
         event = {
             "version": "2.0",
@@ -381,6 +390,7 @@ class Test_EnrollActivityPresenter:
         assert response["statusCode"] == 403
         assert json.loads(response["body"]) == "Usuário já inscrito"
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_presenter_404_no_items_found_activity(self):
         event = {
             "version": "2.0",
