@@ -344,7 +344,7 @@ class Test_ManualAttendanceChangeController:
         response = controller(request)
 
         assert response.status_code == 403
-        assert response.body == 'Não é possível cancelar a inscrição do usuário porque ela não está completa'
+        assert response.body == 'Não é possível cancelar a presença do usuário porque ela não está completa'
 
 
 

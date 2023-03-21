@@ -69,7 +69,7 @@ class ManualAttendanceChangeController:
                 return Forbidden(body=f"Não é possível confirmar a presença de um usuário cuja inscrição já foi confirmada")
 
             elif message == "enrolled":
-                return Forbidden(body=f"Não é possível cancelar a inscrição do usuário porque ela não está completa")
+                return Forbidden(body=f"Não é possível cancelar a presença do usuário porque ela não está completa")
 
             elif message == "user":
                 return Forbidden(body=f"Apenas professores responsáveis da atividade e administradores podem gerar código de confirmação para atividade")
