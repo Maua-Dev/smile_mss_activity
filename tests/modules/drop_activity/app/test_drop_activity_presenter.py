@@ -1,9 +1,13 @@
 import json
 
+from freezegun import freeze_time
+
 from src.modules.drop_activity.app.drop_activity_presenter import lambda_handler
 
 
 class Test_DropActivityPresenter:
+
+    @freeze_time("2022-12-20")
     def test_drop_activity_presenter(self):
         event = {
             "version": "2.0",
@@ -58,6 +62,8 @@ class Test_DropActivityPresenter:
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['message'] == 'the enrollment was dropped'
 
+
+    @freeze_time("2022-12-20")
     def test_drop_activity_presenter_400_user_id_missing(self):
             event = {
                 "version": "2.0",
@@ -107,6 +113,8 @@ class Test_DropActivityPresenter:
             assert response["statusCode"] == 400
             assert json.loads(response["body"]) == "Parâmetro ausente: requester_user"
 
+
+    @freeze_time("2022-12-20")
     def test_drop_activity_presenter_400_code_mising(self):
         event = {
             "version": "2.0",
@@ -160,6 +168,8 @@ class Test_DropActivityPresenter:
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro ausente: code"
+
+    @freeze_time("2022-12-20")
     def test_drop_activity_presenter_400_user_id_invalid(self):
         event = {
             "version": "2.0",
@@ -214,6 +224,8 @@ class Test_DropActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro inválido: user_id"
 
+
+    @freeze_time("2022-12-20")
     def test_drop_activity_presenter_400_code_invalid(self):
         event = {
             "version": "2.0",
@@ -268,6 +280,8 @@ class Test_DropActivityPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Parâmetro inválido: code"
 
+
+    @freeze_time("2022-12-20")
     def test_drop_activity_presenter_403_forbidden_action(self):
         event = {
             "version": "2.0",
@@ -322,6 +336,8 @@ class Test_DropActivityPresenter:
         assert response["statusCode"] == 403
         assert json.loads(response["body"]) == "Impossível desinscrever usuário de atividade que não está inscrito"
 
+
+    @freeze_time("2022-12-20")
     def test_drop_activity_presenter_404_no_items_found_activity(self):
         event = {
             "version": "2.0",
@@ -376,6 +392,8 @@ class Test_DropActivityPresenter:
         assert response["statusCode"] == 404
         assert json.loads(response["body"]) == 'Atividade não encontrada'
 
+
+    @freeze_time("2022-12-20")
     def test_drop_activity_presenter_404_not_found_enrollment(self):
         event = {
             "version": "2.0",

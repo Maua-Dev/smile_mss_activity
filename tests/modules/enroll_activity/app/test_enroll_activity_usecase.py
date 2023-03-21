@@ -1,4 +1,5 @@
 import pytest
+from freezegun import freeze_time
 
 from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivityUsecase
 from src.shared.domain.entities.enrollment import Enrollment
@@ -12,6 +13,7 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 
 class Test_EnrollActivityUsecase:
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_accepting_new_enrollments(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -26,6 +28,7 @@ class Test_EnrollActivityUsecase:
         assert enrollment_activity.state == ENROLLMENT_STATE.ENROLLED
         assert taken_slots_old + 1 == repo.activities[8].taken_slots
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_in_queue(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -37,6 +40,7 @@ class Test_EnrollActivityUsecase:
         assert enrollment_activity.activity_code == repo.activities[0].code
         assert enrollment_activity.state == ENROLLMENT_STATE.IN_QUEUE
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_enrolled(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -52,6 +56,7 @@ class Test_EnrollActivityUsecase:
         assert taken_slots_old + 1 == repo.activities[2].taken_slots
         assert enrollment_activity.state == ENROLLMENT_STATE.ENROLLED
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_invalid_user_id(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -60,6 +65,7 @@ class Test_EnrollActivityUsecase:
         with pytest.raises(EntityError):
             enrollment_activity = usecase('usuario2345', 'code')
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_invalid_code(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -68,6 +74,7 @@ class Test_EnrollActivityUsecase:
         with pytest.raises(EntityError):
             enrollment_activity = usecase('0355535e-a110-11ed-a8fc-0242ac120002', 852)
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_user_already_enrolled(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -76,14 +83,16 @@ class Test_EnrollActivityUsecase:
         with pytest.raises(UserAlreadyEnrolled):
             enrollment_activity = usecase('0355535e-a110-11ed-a8fc-0242ac120002', 'ELET355')
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_activity_none(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            enrollment_activity = usecase(repo_user.users[6].user_id, '')
+            enrollment_activity = usecase(repo_user.users[6].user_id, 'none')
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_not_accepting_new_enrollment(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -92,6 +101,7 @@ class Test_EnrollActivityUsecase:
         with pytest.raises(ClosedActivity):
             enrollment = usecase(usecase(repo_user.users[5].user_id, repo.activities[12].code))
 
+    @freeze_time("2022-12-01")
     def test_enrollment_activity_usecase_already_completed(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()

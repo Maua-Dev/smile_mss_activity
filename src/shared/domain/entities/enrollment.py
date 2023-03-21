@@ -1,5 +1,6 @@
 import abc
 
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 
@@ -12,7 +13,7 @@ class Enrollment(abc.ABC):
 
     def __init__(self, activity_code: str, user_id: str, state: ENROLLMENT_STATE, date_subscribed: int):
 
-        if type(activity_code) != str:
+        if not Activity.validate_activity_code(activity_code):
             raise EntityError("activity_code")
         self.activity_code = activity_code
 

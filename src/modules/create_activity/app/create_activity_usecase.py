@@ -24,7 +24,7 @@ class CreateActivityUsecase:
                  accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
                  stop_accepting_new_enrollments_before: int, speakers: List[Speaker], user: User) -> Activity:
 
-        if type(code) != str:
+        if not Activity.validate_activity_code(code):
             raise EntityError("code")
 
         if user.role != ROLE.ADMIN:

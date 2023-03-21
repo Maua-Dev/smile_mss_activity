@@ -1,3 +1,5 @@
+from freezegun import freeze_time
+
 from src.modules.enroll_activity.app.enroll_activity_controller import EnrollActivityController
 from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivityUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
@@ -7,6 +9,7 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 
 class Test_EnrollActivityController:
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_enrolled(self):
 
         repo = ActivityRepositoryMock()
@@ -24,6 +27,7 @@ class Test_EnrollActivityController:
         assert response.body['user']['user_id'] == "0355573c-a110-11ed-a8fc-0242ac120002"
         assert response.body['state'] == "ENROLLED"
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_in_queue(self):
 
         repo = ActivityRepositoryMock()
@@ -41,6 +45,7 @@ class Test_EnrollActivityController:
         assert response.body['user']['user_id'] == repo_user.users[7].user_id
         assert response.body['state'] == "IN_QUEUE"
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_missing_user_id(self):
 
         repo = ActivityRepositoryMock()
@@ -55,6 +60,7 @@ class Test_EnrollActivityController:
         assert response.status_code == 400
         assert response.body == 'Parâmetro ausente: requester_user'
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_missing_code(self):
 
         repo = ActivityRepositoryMock()
@@ -69,6 +75,7 @@ class Test_EnrollActivityController:
         assert response.status_code == 400
         assert response.body == 'Parâmetro ausente: code'
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_enrollment_already_enrolled(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -82,6 +89,7 @@ class Test_EnrollActivityController:
         assert response.status_code == 403
         assert response.body == "Usuário já inscrito"
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_forbidden_action_wrong_role(self):
 
         repo = ActivityRepositoryMock()
@@ -97,6 +105,7 @@ class Test_EnrollActivityController:
         assert response.body == "Usuário já inscrito"
 
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_activity_not_found(self):
 
         repo = ActivityRepositoryMock()
@@ -111,6 +120,7 @@ class Test_EnrollActivityController:
         assert response.status_code == 404
         assert response.body == 'Atividade não encontrada'
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_invalid_user_id(self):
 
         repo = ActivityRepositoryMock()
@@ -126,6 +136,7 @@ class Test_EnrollActivityController:
         assert response.body == 'Parâmetro inválido: user_id'
 
 
+    @freeze_time("2022-12-01")
     def test_enroll_activity_controller_invalid_code(self):
 
         repo = ActivityRepositoryMock()
@@ -140,6 +151,7 @@ class Test_EnrollActivityController:
         assert response.status_code == 400
         assert response.body == 'Parâmetro inválido: code'
 
+    @freeze_time("2022-12-01")
     def test_drop_activity_already_completed(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()

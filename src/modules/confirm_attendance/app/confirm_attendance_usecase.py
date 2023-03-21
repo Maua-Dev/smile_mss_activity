@@ -15,8 +15,8 @@ class ConfirmAttendanceUsecase:
         if Activity.validate_confirmation_code(confirmation_code=confirmation_code) is False:
             raise EntityError('Confirmation Code')
 
-        if type(code) is not str:
-            raise EntityError('Activity Code')
+        if not Activity.validate_activity_code(code):
+            raise EntityError("activity_code")
 
         activity = self.repo.get_activity(code)
 

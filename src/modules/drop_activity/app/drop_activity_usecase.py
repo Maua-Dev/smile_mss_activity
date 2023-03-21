@@ -1,9 +1,11 @@
+import datetime
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction, UserAlreadyCompleted
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction, UserAlreadyCompleted, ActivityEnded
 
 
 class DropActivityUsecase:
@@ -14,12 +16,18 @@ class DropActivityUsecase:
         if not User.validate_user_id(user_id):
             raise EntityError('user_id')
 
-        if type(code) is not str:
-            raise EntityError('code')
+        if not Activity.validate_activity_code(code):
+            raise EntityError("code")
 
         activity = self.repo.get_activity(code)
         if activity is None:
             raise NoItemsFound('Activity')
+
+        activity_end_time = activity.start_date + activity.duration * 60 * 1000
+
+        if activity_end_time < datetime.datetime.now().timestamp() * 1000:
+            raise ActivityEnded('activity')
+
         taken_slots = activity.taken_slots
         original_enrollment = self.repo.get_enrollment(user_id, code)
         if original_enrollment is None:
