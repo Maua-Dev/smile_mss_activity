@@ -1,5 +1,6 @@
 import datetime
 
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
@@ -17,8 +18,8 @@ class EnrollActivityUsecase:
         if not User.validate_user_id(user_id):
             raise EntityError('user_id')
     
-        if type(code) is not str:
-            raise EntityError('code')
+        if not Activity.validate_activity_code(code):
+            raise EntityError("code")
 
         activity = self.repo.get_activity(code=code)
         if activity is None:

@@ -1,3 +1,4 @@
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
@@ -14,8 +15,8 @@ class ManualAttendanceChangeUsecase:
 
     def __call__(self, code: str, requester_user: User, user_id: str, new_state: ENROLLMENT_STATE):
 
-        if type(code) != str:
-            raise EntityError('activity_code')
+        if not Activity.validate_activity_code(code):
+            raise EntityError("activity_code")
 
         if not User.validate_user_id(user_id):
             raise EntityError('user_id')

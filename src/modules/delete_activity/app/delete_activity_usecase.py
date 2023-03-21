@@ -13,7 +13,7 @@ class DeleteActivityUsecase:
 
     def __call__(self, code: str, user: User) -> Activity:
 
-        if type(code) != str:
+        if not Activity.validate_activity_code(code):
             raise EntityError("code")
 
         if user.role != ROLE.ADMIN:

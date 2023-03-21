@@ -1,3 +1,4 @@
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
@@ -16,8 +17,8 @@ class GetActivityWithEnrollmentsUsecase:
         if user.role != ROLE.PROFESSOR and user.role != ROLE.ADMIN:
             raise ForbiddenAction("user: only responsible professors and admin can do that")
 
-        if type(code) != str:
-            raise EntityError('code')
+        if not Activity.validate_activity_code(code):
+            raise EntityError("code")
         activity, all_enrollments = self.repo_activity.get_activity_with_enrollments(code=code)
 
         if activity is None:

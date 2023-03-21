@@ -90,7 +90,7 @@ class Test_EnrollActivityUsecase:
         usecase = EnrollActivityUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            enrollment_activity = usecase(repo_user.users[6].user_id, '')
+            enrollment_activity = usecase(repo_user.users[6].user_id, 'none')
 
     @freeze_time("2022-12-01")
     def test_enroll_activity_usecase_not_accepting_new_enrollment(self):
