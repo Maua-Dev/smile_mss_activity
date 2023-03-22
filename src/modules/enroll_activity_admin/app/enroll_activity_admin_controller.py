@@ -1,5 +1,5 @@
-from src.modules.enroll_activity_admin.app.enroll_activity_admin_usecase import EnrollActivityAdminUsecase
-from src.modules.enroll_activity_admin.app.enroll_activity_admin_viewmodel import EnrollActivityAdminViewmodel
+from .enroll_activity_admin_usecase import EnrollActivityAdminUsecase
+from .enroll_activity_admin_viewmodel import EnrollActivityAdminViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, UserAlreadyCompleted, \
