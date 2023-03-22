@@ -116,15 +116,8 @@ class UpdateActivityUsecase:
         if type(new_accepting_new_enrollments) != bool:
             raise EntityError("accepting_new_enrollments")
 
-        if type(new_stop_accepting_new_enrollments_before) == int:
-            if new_stop_accepting_new_enrollments_before > activity.start_date:
-                raise EntityError("stop_accepting_new_enrollments_before")
-
-        elif new_stop_accepting_new_enrollments_before is not None:
+        if type(new_stop_accepting_new_enrollments_before) != int and new_stop_accepting_new_enrollments_before is not None:
             raise EntityError("stop_accepting_new_enrollments_before")
-
-
-        
 
         return self.repo_activity.update_activity(code=code,
                                          new_title=new_title,
