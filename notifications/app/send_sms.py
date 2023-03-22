@@ -8,7 +8,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 
-client = boto3.client('sns', region_name='us-east-1')
+client = boto3.client('sns', region_name='sa-east-1')
 
 
 def compose_sms_message(activity: Activity, user: UserInfo) -> str:

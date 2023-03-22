@@ -271,7 +271,7 @@ class Test_ManualAttendanceChangePresenter:
 
         response = lambda_handler(event, None)
         assert response['statusCode'] == 403
-        assert json.loads(response["body"]) == "Apenas professores responsáveis da atividade e administradores podem gerar códdigo de confirmação para atividade"
+        assert json.loads(response["body"]) == "Apenas professores responsáveis da atividade e administradores podem gerar código de confirmação para atividade"
 
     def test_manual_attendance_change_presenter_forbidden_not_valid_enrollment_status(self):
         event = {
@@ -324,7 +324,7 @@ class Test_ManualAttendanceChangePresenter:
         }
 
         response = lambda_handler(event, None)
-        assert json.loads(response["body"]) == 'Não é possível confirmar presença deste usuário'
+        assert json.loads(response["body"]) == 'Não é possível confirmar a presença de um usuário cuja inscrição já foi confirmada'
         assert response['statusCode'] == 403
 
     def test_manual_attendance_change_presenter_missing_requester_user(self):
