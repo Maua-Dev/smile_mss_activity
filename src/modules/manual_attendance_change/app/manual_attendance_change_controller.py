@@ -66,13 +66,13 @@ class ManualAttendanceChangeController:
         except ForbiddenAction as err:
             message = err.message.lower()
             if message == "completed":
-                return Forbidden(body=f"Não é possível confirmar presença deste usuário")
+                return Forbidden(body=f"Não é possível confirmar a presença de um usuário cuja inscrição já foi confirmada")
 
             elif message == "enrolled":
-                return Forbidden(body=f"Não é possível cancelar presença deste usuário")
+                return Forbidden(body=f"Não é possível cancelar a presença do usuário porque ela não está completa")
 
             elif message == "user":
-                return Forbidden(body=f"Apenas professores responsáveis da atividade e administradores podem gerar códdigo de confirmação para atividade")
+                return Forbidden(body=f"Apenas professores responsáveis da atividade e administradores podem gerar código de confirmação para atividade")
 
             else:
                 return Forbidden(body=f"Ação não permitida: {err.message}")
