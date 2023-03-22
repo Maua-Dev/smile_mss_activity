@@ -17,7 +17,7 @@ class EnrollActivityAdminUsecase:
         self.repo_activity = repo_activity
         self.repo_user = repo_user
 
-    def __call__(self, requester_user: User,  user_id: str, code: str) -> Enrollment:
+    def __call__(self, requester_user: User,  user_id: str, code: str) -> [Enrollment, User]:
 
         if requester_user.role != ROLE.ADMIN:
             raise UserNotAdmin('User')
@@ -28,9 +28,9 @@ class EnrollActivityAdminUsecase:
         if not Activity.validate_activity_code(code):
             raise EntityError("code")
 
-        user = self.repo_user.get_user(user_id=user_id)
+        enroll_user = self.repo_user.get_user(user_id=user_id)
 
-        if user is None:
+        if enroll_user is None:
             raise NoItemsFound('User')
 
         activity = self.repo_activity.get_activity(code=code)
@@ -68,4 +68,4 @@ class EnrollActivityAdminUsecase:
                 enrollment = Enrollment(activity_code=activity.code, user_id=user_id, state=ENROLLMENT_STATE.ENROLLED,
                                         date_subscribed=int(datetime.now().timestamp() * 1000))
 
-        return self.repo_activity.create_enrollment(enrollment)
+        return self.repo_activity.create_enrollment(enrollment), enroll_user
