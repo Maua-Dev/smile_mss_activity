@@ -116,9 +116,14 @@ class Activity(abc.ABC):
 
         if stop_accepting_new_enrollments_before is None:
             self.stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
-
-        elif type(stop_accepting_new_enrollments_before) != int:
-            raise EntityError("stop_accepting_new_enrollments_before")
+            
+        if stop_accepting_new_enrollments_before is not None:
+            
+            if type(stop_accepting_new_enrollments_before) != int:
+                raise EntityError("stop_accepting_new_enrollments_before")
+            
+            if not 1000000000000 < stop_accepting_new_enrollments_before < 10000000000000:
+                raise EntityError("stop_accepting_new_enrollments_before")
 
         self.stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
 
