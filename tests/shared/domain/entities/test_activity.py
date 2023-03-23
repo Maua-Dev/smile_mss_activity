@@ -459,7 +459,7 @@ class Test_Activity:
                 confirmation_code=None
             )
 
-    def test_activity_invalid_start_date(self):
+    def test_activity_invalid_start_date_type(self):
         with pytest.raises(EntityError):
             activity = Activity(
                 code="1234",
@@ -469,6 +469,39 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date="2022-12-22 13:56:05.430523",
+                duration=120,
+                link="https://devmaua.com",
+                place="H333",
+                responsible_professors=[
+                    User(
+                        name="Marcos",
+                        role=ROLE.PROFESSOR,
+                        user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
+                    )
+                ],
+                speakers=[
+                    Speaker(
+                        name="Marcos Tales",
+                        bio="Salve",
+                        company="Microsoft"
+                    )],
+                total_slots=120,
+                taken_slots=33,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=1671724565000,
+                confirmation_code=None
+            )
+            
+    def test_activity_invalid_start_date(self):
+        with pytest.raises(EntityError):
+            activity = Activity(
+                code="1234",
+                title="Palestra Microsoft",
+                description="Palestra informacional de como usar a Azure",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=-3581009612000,
                 duration=120,
                 link="https://devmaua.com",
                 place="H333",
