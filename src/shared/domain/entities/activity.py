@@ -98,9 +98,13 @@ class Activity(abc.ABC):
 
         if type(total_slots) != int:
             raise EntityError("total_slots")
+        if total_slots < 0:
+            raise EntityError("total_slots")
         self.total_slots = total_slots
 
         if type(taken_slots) != int:
+            raise EntityError("taken_slots")
+        if taken_slots < 0:
             raise EntityError("taken_slots")
         self.taken_slots = taken_slots
 
