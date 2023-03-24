@@ -42,7 +42,7 @@ def lambda_handler(event, context):
             for activity, enrollments in activities_to_send_enrolled:
                 users = [users_dict.get(enrollment.user_id, "NOT_FOUND") for enrollment in enrollments]
                 send_email_notification(activity, users)
-                send_sms_notification(activity, users)
+                # send_sms_notification(activity, users)
 
 
             return {
