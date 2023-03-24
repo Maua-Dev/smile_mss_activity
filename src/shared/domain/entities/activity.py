@@ -59,6 +59,8 @@ class Activity(abc.ABC):
 
         if type(start_date) != int:
             raise EntityError("start_date")
+        if not 1000000000000 < start_date < 10000000000000:
+            raise EntityError("start_date")
         self.start_date = start_date
 
         if type(duration) != int:
@@ -99,9 +101,13 @@ class Activity(abc.ABC):
 
         if type(total_slots) != int:
             raise EntityError("total_slots")
+        if total_slots < 0:
+            raise EntityError("total_slots")
         self.total_slots = total_slots
 
         if type(taken_slots) != int:
+            raise EntityError("taken_slots")
+        if taken_slots < 0:
             raise EntityError("taken_slots")
         self.taken_slots = taken_slots
 
@@ -111,9 +117,14 @@ class Activity(abc.ABC):
 
         if stop_accepting_new_enrollments_before is None:
             self.stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
-
-        elif type(stop_accepting_new_enrollments_before) != int:
-            raise EntityError("stop_accepting_new_enrollments_before")
+            
+        if stop_accepting_new_enrollments_before is not None:
+            
+            if type(stop_accepting_new_enrollments_before) != int:
+                raise EntityError("stop_accepting_new_enrollments_before")
+            
+            if not 1000000000000 < stop_accepting_new_enrollments_before < 10000000000000:
+                raise EntityError("stop_accepting_new_enrollments_before")
 
         self.stop_accepting_new_enrollments_before = stop_accepting_new_enrollments_before
 
