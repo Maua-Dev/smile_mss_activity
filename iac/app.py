@@ -23,4 +23,6 @@ stack_name = os.environ.get("STACK_NAME")
 CertificatesS3Stack(app, f"{stack_name}-certificates-s3", env=cdk.Environment(account=aws_account_id, region=aws_region))
 IacStack(app, stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region))
 
+IacStack.add_dependency(CertificatesS3Stack)
+
 app.synth()
