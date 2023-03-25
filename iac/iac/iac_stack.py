@@ -120,9 +120,9 @@ class IacStack(Stack):
 
         self.event_bridge.send_notification_function.add_to_role_policy(sns_admin_policy)
 
-        bucket_name = Fn.import_value(f"CertificateBucketNameValue-{self.github_ref}")
+        bucket_name = Fn.import_value(f"CertificateBucketNameValue")
 
-        cdn_url = Fn.import_value(f"CertificateBucketCdnUrlValue-{self.github_ref}")
+        cdn_url = Fn.import_value(f"CertificateBucketCdnUrlValue")
 
         environment_variables_certificate = {
             "STAGE": "DEV",

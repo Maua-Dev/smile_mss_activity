@@ -53,10 +53,10 @@ class CertificatesS3Stack(Stack):
         
         self.s3_bucket.add_to_resource_policy(policy_statement)
 
-        CfnOutput(self, f"CertificateBucketName-{self.github_ref}",
+        CfnOutput(self, f"CertificateBucketName",
                        value=self.s3_bucket.bucket_name,
-                       export_name=f"CertificateBucketNameValue-{self.github_ref}")
+                       export_name=f"CertificateBucketNameValue")
 
-        CfnOutput(self, f"CertificateBucketCdnUrl-{self.github_ref}",
+        CfnOutput(self, f"CertificateBucketCdnUrl",
             value=f"https://{self.cloudfront_distribution.distribution_domain_name}",
-            export_name=f"CertificateBucketCdnUrlValue-{self.github_ref}")
+            export_name=f"CertificateBucketCdnUrlValue")
