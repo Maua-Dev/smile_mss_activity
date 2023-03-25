@@ -142,6 +142,8 @@ class IacStack(Stack):
         self.lambda_stack_certificate = CertificatesLambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=environment_variables_certificate, authorizer=auth)
 
+        self.lambda_stack_certificate.generate_certificate_function.add_to_role_policy(cognito_admin_policy)
+
         bucket = aws_s3.Bucket.from_bucket_name(self, "MyBucket", bucket_name)
 
         bucket.grant_put(self.lambda_stack_certificate.generate_certificate_function)
