@@ -6,9 +6,7 @@ from aws_cdk import (
     # aws_sqs as sqs,
     aws_iam, Fn, aws_s3
 )
-from aws_cdk.aws_cognito import IUserPool
 from constructs import Construct
-from dotenv import load_dotenv
 
 from .certificates_lambda_stack import CertificatesLambdaStack
 from .dynamo_stack import DynamoStack
