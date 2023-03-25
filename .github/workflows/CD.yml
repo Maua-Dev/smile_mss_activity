@@ -43,8 +43,8 @@ jobs:
           run: |
             cd iac
             cdk synth
-            cdk deploy --require-approval never "${{STACK_NAME}}-certificates-s3"
-            cdk deploy --require-approval never "${{STACK_NAME}}"
+            cdk deploy --require-approval never "${{env.STACK_NAME}}-certificates-s3"
+            cdk deploy --require-approval never "${{env.STACK_NAME}}"
 
           env:
               AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
