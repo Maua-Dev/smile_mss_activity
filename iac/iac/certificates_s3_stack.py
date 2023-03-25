@@ -11,14 +11,7 @@ from aws_cdk import (
     RemovalPolicy,
     aws_iam as iam,
 )
-from aws_cdk.aws_cognito import IUserPool
 from constructs import Construct
-from dotenv import load_dotenv
-
-from .lambda_stack import LambdaStack
-from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
-
-load_dotenv()
 
 class CertificatesS3Stack(Stack):
 
