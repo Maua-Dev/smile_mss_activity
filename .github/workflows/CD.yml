@@ -43,7 +43,9 @@ jobs:
           run: |
             cd iac
             cdk synth
-            cdk deploy --require-approval never
+            cdk deploy "${{env.STACK_NAME}}-certificates-s3" --require-approval never 
+            cdk deploy "${{env.STACK_NAME}}" --require-approval never 
+
           env:
               AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
               AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
@@ -54,3 +56,4 @@ jobs:
               GITHUB_REF: ${{ github.ref }}
               FROM_EMAIL: ${{ vars.FROM_EMAIL }}
               HIDDEN_COPY: ${{ vars.HIDDEN_COPY }}
+              HASH_KEY: ${{ secrets.HASH_KEY }}

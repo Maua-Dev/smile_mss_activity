@@ -4,11 +4,11 @@ from aws_cdk import (
     # Duration,
     Stack, aws_cognito,
     # aws_sqs as sqs,
-    aws_iam
+    aws_iam, Fn, aws_s3
 )
-from aws_cdk.aws_cognito import IUserPool
 from constructs import Construct
 
+from .certificates_lambda_stack import CertificatesLambdaStack
 from .dynamo_stack import DynamoStack
 from .event_bridge_stack import EventBridgeStack
 from .lambda_stack import LambdaStack
@@ -24,6 +24,7 @@ class IacStack(Stack):
         self.user_pool_arn = os.environ.get("USER_POOL_ARN")
         self.user_pool_id = os.environ.get("USER_POOL_ID")
         self.github_ref = os.environ.get("GITHUB_REF")
+        self.aws_region = os.environ.get("AWS_REGION")
 
         self.rest_api = RestApi(self, "Smile_RestApi",
                                 rest_api_name="Smile_RestApi",
@@ -33,7 +34,7 @@ class IacStack(Stack):
                                     "allow_origins": Cors.ALL_ORIGINS,
                                     "allow_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
                                     "allow_headers": ["*"]
-                                },
+                                }
                                 )
 
         api_gateway_resource = self.rest_api.root.add_resource("mss-activity", default_cors_preflight_options=
@@ -54,7 +55,7 @@ class IacStack(Stack):
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
             "USER_POOL":  self.user_pool_id,
-            "REGION": self.region,
+            "REGION": self.aws_region,
         }
 
         auth = CognitoUserPoolsAuthorizer(self, f"smile_cognito_stack_{self.github_ref}",
@@ -118,3 +119,45 @@ class IacStack(Stack):
         )
 
         self.event_bridge.send_notification_function.add_to_role_policy(sns_admin_policy)
+
+        bucket_name = Fn.import_value(f"CertificateBucketNameValue")
+
+        cdn_url = Fn.import_value(f"CertificateBucketCdnUrlValue")
+
+        environment_variables_certificate = {
+            "STAGE": "DEV",
+            "BUCKET_NAME": bucket_name,
+            "DYNAMO_TABLE_NAME": self.dynamo_stack.dynamo_table.table_name,
+            "DYNAMO_PARTITION_KEY": "PK",
+            "DYNAMO_SORT_KEY": "SK",
+            "STAGE": "DEV",
+            "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
+            "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
+            "USER_POOL": self.user_pool_id,
+            "REGION": self.aws_region,
+            "HASH_KEY": os.environ.get("HASH_KEY"),
+            "CDN_URL": cdn_url
+        }
+
+        self.lambda_stack_certificate = CertificatesLambdaStack(self, api_gateway_resource=api_gateway_resource,
+                                        environment_variables=environment_variables_certificate, authorizer=auth)
+
+        self.lambda_stack_certificate.generate_certificate_function.add_to_role_policy(cognito_admin_policy)
+
+        bucket = aws_s3.Bucket.from_bucket_name(self, "MyBucket", bucket_name)
+
+        bucket.grant_put(self.lambda_stack_certificate.generate_certificate_function)
+        self.lambda_stack_certificate.generate_certificate_function.add_to_role_policy(aws_iam.PolicyStatement(
+            actions=["*"],
+            resources=[bucket.bucket_arn + "/*"]
+        ))
+
+        # grant read bucket
+        bucket.grant_read(self.lambda_stack_certificate.get_certificate_function)
+        self.lambda_stack_certificate.get_certificate_function.add_to_role_policy(aws_iam.PolicyStatement(
+            actions=['s3:GetObject', 's3:listObjects'],
+            resources=[bucket.bucket_arn + "/*"]
+        ))
+
+        self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.generate_certificate_function)
+        self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.get_certificate_function)
