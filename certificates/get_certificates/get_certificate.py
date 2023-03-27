@@ -51,7 +51,7 @@ def lambda_handler(event, context):
         response = list()
 
         for file in files:
-            title = activities_dict.get(files[0].split("/")[1].split("_")[0])
+            title = activities_dict.get(file.split("/")[1].split("_")[0])
             response.append({
                 "url": f"{cdn_url}/{file}",
                 "activity": title if title else "Atividade não encontrada"
