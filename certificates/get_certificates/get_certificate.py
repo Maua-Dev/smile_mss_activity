@@ -57,7 +57,7 @@ def lambda_handler(event, context):
                 "activity": title if title else "Atividade não encontrada"
             })
 
-        return LambdaHttpResponse(status_code=200, body={"certificates:": response}).toDict()
+        return LambdaHttpResponse(status_code=200, body={"certificates": response}).toDict()
 
     except Exception as err:
         return LambdaHttpResponse(status_code=500, body=err.args[0]).toDict()
