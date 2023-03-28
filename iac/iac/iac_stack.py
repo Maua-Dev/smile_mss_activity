@@ -27,6 +27,7 @@ class IacStack(Stack):
         self.user_pool_id = os.environ.get("USER_POOL_ID")
         self.github_ref = os.environ.get("GITHUB_REF")
         self.aws_region = os.environ.get("AWS_REGION")
+        self.ses_region = os.environ.get("SES_REGION")
 
         self.rest_api = RestApi(self, "Smile_RestApi",
                                 rest_api_name="Smile_RestApi",
@@ -57,6 +58,7 @@ class IacStack(Stack):
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
             "USER_POOL":  self.user_pool_id,
+            "SES_REGION": self.ses_region,
             "REGION": self.aws_region,
         }
 
