@@ -164,4 +164,7 @@ class IacStack(Stack):
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.generate_certificate_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.get_certificate_function)
 
-        OpenCloseStack(self, "SmileOpenClose", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer)
+        self.open_close_stack = OpenCloseStack(self, "SmileOpenClose", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer)
+
+        self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.open_activity_function)
+        self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.close_activity_function)
