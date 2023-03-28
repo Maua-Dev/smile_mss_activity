@@ -7,6 +7,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
@@ -353,4 +354,26 @@ class Test_ActivityRepositoryDynamo:
         assert user_enrollments == expected_enrollments
 
 
+    @pytest.mark.skip("Can't test ses in Github")
+    def test_send_enrolled_email(self):
 
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_actiivty_mock = ActivityRepositoryMock()
+
+        user = UserInfo(
+            name="Vitor Soller",
+            email="vgsoller@gmail.com",
+            social_name=None,
+            accepted_notifications_email=True,
+            certificate_with_social_name=False,
+            user_id="0"*36,
+            phone=None,
+            accepted_notifications_sms=False,
+            role=ROLE.STUDENT
+        )
+
+        activity = repo_actiivty_mock.activities[0]
+
+        confirmation = repo_activity_dynamo.send_enrolled_email(user, activity)
+
+        assert confirmation
