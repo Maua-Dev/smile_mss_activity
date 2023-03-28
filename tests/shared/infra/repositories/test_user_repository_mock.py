@@ -36,3 +36,18 @@ class Test_UserRepositoryMock:
         assert type(users) == list
         assert all(type(user) == UserInfo for user in users)
         assert len(users) == 2
+
+    def test_get_user_info(self):
+        repo = UserRepositoryMock()
+        user = repo.get_user_info("62cafdd4-a110-11ed-a8fc-0242ac120002")
+        assert type(user) == UserInfo
+        assert user.user_id == "62cafdd4-a110-11ed-a8fc-0242ac120002"
+        assert user.name == "Rafael Santos"
+        assert user.email == "teste@teste.com"
+        assert user.phone == "+5511999999999"
+
+    def test_get_user_info_not_found(self):
+        repo = UserRepositoryMock()
+        user = repo.get_user_info("000")
+        assert user is None
+

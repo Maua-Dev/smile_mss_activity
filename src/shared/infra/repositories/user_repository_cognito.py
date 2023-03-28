@@ -86,3 +86,16 @@ class UserRepositoryCognito(IUserRepository):
                     break
 
         return users
+
+    def get_user_info(self, user_id: str) -> UserInfo:
+        response = self.client.list_users(
+            UserPoolId=self.user_pool_id,
+            Filter=f"sub = \"{user_id}\""
+        )
+
+        if len(response.get("Users")) == 0:
+            return None
+
+        user = UserCognitoDTO.from_cognito(response.get("Users")[0]).to_entity_info()
+
+        return user
