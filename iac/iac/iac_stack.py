@@ -92,6 +92,8 @@ class IacStack(Stack):
 
         self.event_bridge.send_notification_function.add_to_role_policy(cognito_admin_policy)
 
+        self.lambda_stack.drop_activity_function.add_to_role_policy(cognito_admin_policy)
+
         ses_admin_policy = aws_iam.PolicyStatement(
             effect=aws_iam.Effect.ALLOW,
             actions=[
