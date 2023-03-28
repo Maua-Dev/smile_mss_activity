@@ -12,7 +12,9 @@ from .certificates_lambda_stack import CertificatesLambdaStack
 from .dynamo_stack import DynamoStack
 from .event_bridge_stack import EventBridgeStack
 from .lambda_stack import LambdaStack
+from .open_close_stack import OpenCloseStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
+
 
 class IacStack(Stack):
     lambda_stack: LambdaStack
@@ -161,3 +163,5 @@ class IacStack(Stack):
 
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.generate_certificate_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.get_certificate_function)
+
+        OpenCloseStack(self, "SmileOpenClose", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer)
