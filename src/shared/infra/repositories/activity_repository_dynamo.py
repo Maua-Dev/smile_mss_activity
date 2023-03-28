@@ -355,7 +355,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
     def send_enrolled_email(self, user: UserInfo, activity: Activity):
         try:
-            client_ses = boto3.client('ses', region_name="sa-east-1")
+            client_ses = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
 
             composed_html = compose_enrolled_email(activity, user)
             response = client_ses.send_email(

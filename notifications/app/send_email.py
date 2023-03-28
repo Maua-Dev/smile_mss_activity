@@ -10,7 +10,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 
-client = boto3.client('ses', region_name="sa-east-1")
+client = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
 
 
 def compose_html(activity: Activity, user: UserInfo):
