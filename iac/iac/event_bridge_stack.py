@@ -44,8 +44,9 @@ class EventBridgeStack(Construct):
                     handler="app.send_notifications.lambda_handler",
                     runtime=lambda_.Runtime.PYTHON_3_9,
                     layers=[lambda_layer],
-                    timeout=Duration.seconds(15),
-                    environment=environment_variables
+                    timeout=Duration.seconds(60),
+                    environment=environment_variables,
+                    memory_size=2048
                 )
 
         rule_send_notification.add_target(
