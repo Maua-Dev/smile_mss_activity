@@ -113,6 +113,8 @@ class IacStack(Stack):
             ]
         )
 
+        self.lambda_stack.drop_activity_function.add_to_role_policy(ses_admin_policy)
+
         self.event_bridge.send_notification_function.add_to_role_policy(ses_admin_policy)
 
         self.event_bridge.send_notification_function.add_environment(
