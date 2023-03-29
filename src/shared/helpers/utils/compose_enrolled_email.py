@@ -383,7 +383,7 @@ def compose_enrolled_email(activity: Activity, user: UserInfo):
         """
 
     activity_title = activity.title
-    time = datetime.fromtimestamp(activity.start_date/1000).astimezone(gmt3_tz).strftime("%m/%d às %H:%M")
+    time = datetime.fromtimestamp(activity.start_date/1000).astimezone(gmt3_tz).strftime("%d/%m às %H:%M")
 
     message = message.format(name=name, activity_title=activity_title, time=time, place=place)
 
