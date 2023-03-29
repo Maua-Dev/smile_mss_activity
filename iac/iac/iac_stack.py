@@ -98,6 +98,11 @@ class IacStack(Stack):
             "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
         )
 
+        self.lambda_stack.drop_activity_function.add_environment(
+             "FROM_EMAIL", os.environ.get("FROM_EMAIL")
+        )
+
+
         ses_admin_policy = aws_iam.PolicyStatement(
             effect=aws_iam.Effect.ALLOW,
             actions=[
