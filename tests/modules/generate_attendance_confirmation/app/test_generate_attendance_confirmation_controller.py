@@ -83,7 +83,7 @@ class Test_GenerateAttendanceConfirmationController:
         usecase = GenerateAttendanceConfirmationUsecase(repo)
         controller = GenerateAttendanceConfirmationController(usecase)
 
-        requester_user = repo_user.users[0]
+        requester_user = repo_user.users[1]
         request = HttpRequest(body={"code": repo.activities[0].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
         response = controller(request)
 

@@ -12,7 +12,9 @@ from .certificates_lambda_stack import CertificatesLambdaStack
 from .dynamo_stack import DynamoStack
 from .event_bridge_stack import EventBridgeStack
 from .lambda_stack import LambdaStack
+from .open_close_stack import OpenCloseStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
+
 
 class IacStack(Stack):
     lambda_stack: LambdaStack
@@ -25,6 +27,7 @@ class IacStack(Stack):
         self.user_pool_id = os.environ.get("USER_POOL_ID")
         self.github_ref = os.environ.get("GITHUB_REF")
         self.aws_region = os.environ.get("AWS_REGION")
+        self.ses_region = os.environ.get("SES_REGION")
 
         self.rest_api = RestApi(self, "Smile_RestApi",
                                 rest_api_name="Smile_RestApi",
@@ -55,6 +58,7 @@ class IacStack(Stack):
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
             "USER_POOL":  self.user_pool_id,
+            "SES_REGION": self.ses_region,
             "REGION": self.aws_region,
         }
 
@@ -88,6 +92,27 @@ class IacStack(Stack):
 
         self.event_bridge.send_notification_function.add_to_role_policy(cognito_admin_policy)
 
+        self.lambda_stack.drop_activity_function.add_to_role_policy(cognito_admin_policy)
+
+        self.lambda_stack.drop_activity_function.add_environment(
+            "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
+        )
+
+        self.lambda_stack.drop_activity_function.add_environment(
+             "FROM_EMAIL", os.environ.get("FROM_EMAIL")
+        )
+
+        self.lambda_stack.manual_drop_activity_function.add_to_role_policy(cognito_admin_policy)
+
+        self.lambda_stack.manual_drop_activity_function.add_environment(
+                "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
+        )
+
+        self.lambda_stack.manual_drop_activity_function.add_environment(
+                "FROM_EMAIL", os.environ.get("FROM_EMAIL")
+        )
+
+
         ses_admin_policy = aws_iam.PolicyStatement(
             effect=aws_iam.Effect.ALLOW,
             actions=[
@@ -97,6 +122,10 @@ class IacStack(Stack):
                 "*"
             ]
         )
+
+        self.lambda_stack.manual_drop_activity_function.add_to_role_policy(ses_admin_policy)
+
+        self.lambda_stack.drop_activity_function.add_to_role_policy(ses_admin_policy)
 
         self.event_bridge.send_notification_function.add_to_role_policy(ses_admin_policy)
 
@@ -161,3 +190,8 @@ class IacStack(Stack):
 
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.generate_certificate_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.get_certificate_function)
+
+        self.open_close_stack = OpenCloseStack(self, "SmileOpenClose", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer)
+
+        self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.open_all_activities_function)
+        self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.close_all_activities_function)

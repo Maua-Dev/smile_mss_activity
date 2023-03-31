@@ -61,6 +61,14 @@ class ManualDropActivityUsecase:
                 new_enrolled_enrollment = self.repo_activity.update_enrollment(user_id=oldest_enrollment.user_id,
                                                                                code=code,
                                                                                new_state=ENROLLMENT_STATE.ENROLLED)
+
+                user = self.repo_user.get_user_info(user_id=new_enrolled_enrollment.user_id)
+
+                sent_email = self.repo_activity.send_enrolled_email(user, activity)
+
+                if not sent_email:
+                    print('Error sending email to user: ' + user_id)
+
                 for enrollment in all_enrollments:
                     if enrollment.user_id == new_enrolled_enrollment.user_id:
                         enrollment.state = new_enrolled_enrollment.state

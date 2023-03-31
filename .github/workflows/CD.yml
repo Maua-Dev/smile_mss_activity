@@ -57,3 +57,4 @@ jobs:
               FROM_EMAIL: ${{ vars.FROM_EMAIL }}
               HIDDEN_COPY: ${{ vars.HIDDEN_COPY }}
               HASH_KEY: ${{ secrets.HASH_KEY }}
+              SES_REGION: ${{ vars.SES_REGION }}

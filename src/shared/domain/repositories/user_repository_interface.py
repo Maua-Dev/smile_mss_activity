@@ -30,3 +30,9 @@ class IUserRepository(ABC):
         """
         pass
 
+    @abstractmethod
+    def get_user_info(self, user_id: str) -> UserInfo:
+        """
+        If user exists, return it with the user info
+        """
+        pass

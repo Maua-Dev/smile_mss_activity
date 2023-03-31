@@ -45,7 +45,7 @@ class Test_DeleteAttendanceConfirmationUsecase:
               repo_user = UserRepositoryMock()
               usecase = DeleteAttendanceConfirmationUsecase(repo)
 
-              requester_user = repo_user.users[0]
+              requester_user = repo_user.users[1]
 
               with pytest.raises(ForbiddenAction):
                      usecase(code=repo.activities[11].code, requester_user=requester_user)

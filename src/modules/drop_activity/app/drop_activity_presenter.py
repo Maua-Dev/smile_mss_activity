@@ -3,8 +3,9 @@ from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHt
 from .drop_activity_controller import DropActivityController
 from .drop_activity_usecase import DropActivityUsecase
 
-repo = Environments.get_activity_repo()()
-usecase = DropActivityUsecase(repo)
+repo_activity = Environments.get_activity_repo()()
+repo_user = Environments.get_user_repo()()
+usecase = DropActivityUsecase(repo_activity, repo_user)
 controller = DropActivityController(usecase)
 
 def lambda_handler(event, context):

@@ -1,19 +1,11 @@
-import json
-import os
-from datetime import datetime, timezone, timedelta
-from typing import List
-
-import boto3
-from botocore.exceptions import ClientError
+from datetime import timedelta, timezone, datetime
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 
-client = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
 
-
-def compose_html(activity: Activity, user: UserInfo):
+def compose_enrolled_email(activity: Activity, user: UserInfo):
     name = user.name.split(" ")[0] if user.social_name is None else user.social_name.split(" ")[0]
     gmt3_tz = timezone(timedelta(hours=-3))
 
@@ -291,7 +283,7 @@ def compose_html(activity: Activity, user: UserInfo):
         <tbody>
         <tr>
         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:25px 10px 50px;font-family:'Open Sans',sans-serif;" align="left">
-        <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 22px;"><strong>Lembrete de Atividade</strong></h1>
+        <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 22px;"><strong>Nova vaga disponível</strong></h1>
         </td>
         </tr>
         </tbody>
@@ -315,10 +307,10 @@ def compose_html(activity: Activity, user: UserInfo):
         <div class="v-font-size" style="font-size: 15px; line-height: 140%; text-align: justify; word-wrap: break-word;">
         <p style="line-height: 140%; font-size: 14px;"><span style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 21px;"><strong>Olá, {name}</strong></span></p>
         <p style="line-height: 140%;">&nbsp;</p>
-        <p style="line-height: 140%;">Estamos te enviando esse email para lembrar que você está inscrito em <strong>{activity_title}</strong> que começa daqui alguns minutos!</p>
+        <p style="line-height: 140%;">Estamos te enviando esse email para avisar que abriu uma vaga e você agora está inscrito em <strong>{activity_title}</strong>!</p>
         <p style="line-height: 140%;">Local: {place}</p>
+        <p style="line-height: 140%;">Data: {time}</p>
         <p style="line-height: 140%;">&nbsp;</p>
-        <p style="line-height: 140%;">Essa atividade começa às <strong>{time}</strong>, não perca o horário!</p>
         </div>
         </td>
         </tr>
@@ -391,50 +383,8 @@ def compose_html(activity: Activity, user: UserInfo):
         """
 
     activity_title = activity.title
-    time = datetime.fromtimestamp(activity.start_date/1000).astimezone(gmt3_tz).strftime("%H:%M")
+    time = datetime.fromtimestamp(activity.start_date/1000).astimezone(gmt3_tz).strftime("%d/%m às %H:%M")
 
     message = message.format(name=name, activity_title=activity_title, time=time, place=place)
 
     return message
-
-
-def send_email_notification(activity: Activity, users: List[UserInfo]):
-    try:
-        for user in users:
-            if not type(user) == UserInfo or user.email is None or user.accepted_notifications_email is False:
-                continue
-
-            composed_html = compose_html(activity, user)
-            response = client.send_email(
-                Destination={
-                    'ToAddresses': [
-                        user.email,
-                    ],
-                    'BccAddresses':
-                    [
-                        os.environ.get("HIDDEN_COPY")
-                    ]
-                },
-                Message={
-                    'Body': {
-                        'Html': {
-                            'Charset': "UTF-8",
-                            'Data': composed_html,
-                        },
-                    },
-                    'Subject': {
-                        'Charset': "UTF-8",
-                        'Data': "SMILE 2023 - Lembrete de atividade",
-                    },
-                },
-                Source=f'Semana Mau\xc3\xa1 de Inova\xc3\xa7\xc3\xa3o Lideran\xc3\xa7a e Empreendedorismo 2023 <{os.environ.get("FROM_EMAIL")}>'
-            )
-
-    except ClientError as e:
-        print(e.response['Error']['Message'])
-
-    else:
-        print("EMAIL -> Activity: ", activity.title),
-
-
-

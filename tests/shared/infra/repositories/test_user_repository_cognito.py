@@ -71,3 +71,12 @@ class Test_UserRepositoryCognito:
 
         assert users[0].user_id == "6619c4ba-7807-4a50-98ec-93bb15bd8882"
         assert users[1].user_id == "fd139609-02b1-4ef6-bc25-278ff639a1fc"
+
+    @pytest.mark.skip("Can't test it locally")
+    def test_get_user_info(self):
+        user_repo_cognito = UserRepositoryCognito()
+
+        user = user_repo_cognito.get_user_info("5bc1af52-ac75-4d7c-9bd4-b276cd7ff968")
+
+        assert user.user_id == "5bc1af52-ac75-4d7c-9bd4-b276cd7ff968"
+

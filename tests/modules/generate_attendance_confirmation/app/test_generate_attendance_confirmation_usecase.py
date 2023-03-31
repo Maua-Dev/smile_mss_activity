@@ -39,7 +39,7 @@ class Test_GenerateAttendanceConfirmationUsecase:
         repo_user = UserRepositoryMock()
         usecase = GenerateAttendanceConfirmationUsecase(repo)
 
-        requester_user = repo_user.users[0]
+        requester_user = repo_user.users[1]
 
         with pytest.raises(ForbiddenAction):
             usecase(requester_user=requester_user, code=repo.activities[0].code)

@@ -1,16 +1,20 @@
+import os
 from typing import List, Tuple
 
+import boto3
 from boto3.dynamodb.conditions import Key
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
+from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.environments import Environments
+from src.shared.helpers.utils.compose_enrolled_email import compose_enrolled_email
 from src.shared.infra.dto.activity_dynamo_dto import ActivityDynamoDTO
 from src.shared.infra.dto.enrollment_dynamo_dto import EnrollmentDynamoDTO
 from src.shared.infra.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
@@ -348,3 +352,38 @@ class ActivityRepositoryDynamo(IActivityRepository):
         response = self.dynamo.batch_write_items(to_update_list)
 
         return to_update_activities
+
+    def send_enrolled_email(self, user: UserInfo, activity: Activity):
+        try:
+            client_ses = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
+
+            composed_html = compose_enrolled_email(activity, user)
+            response = client_ses.send_email(
+                Destination={
+                    'ToAddresses': [
+                        user.email,
+                    ],
+                    'BccAddresses':
+                        [
+                            os.environ.get("HIDDEN_COPY")
+                        ]
+                },
+                Message={
+                    'Body': {
+                        'Html': {
+                            'Charset': "UTF-8",
+                            'Data': composed_html,
+                        },
+                    },
+                    'Subject': {
+                        'Charset': "UTF-8",
+                        'Data': "SMILE 2023 - Abriu uma vaga!",
+                    },
+                },
+                Source=f'Semana Mau\xc3\xa1 de Inova\xc3\xa7\xc3\xa3o Lideran\xc3\xa7a e Empreendedorismo 2023 <{os.environ.get("FROM_EMAIL")}>'
+            )
+
+            return True
+        except Exception as err:
+            print(err)
+            return False

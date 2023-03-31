@@ -49,7 +49,7 @@ class ManualAttendanceChangeUsecase:
                 raise ForbiddenAction("enrolled")
 
         if requester_user.role == ROLE.PROFESSOR:
-            if requester_user not in activity.responsible_professors:
+            if requester_user.user_id not in [professor.user_id for professor in activity.responsible_professors]:
                 raise ForbiddenAction("user")
 
         new_enrollment = self.repo_activity.update_enrollment(
