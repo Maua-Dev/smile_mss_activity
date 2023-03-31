@@ -17,7 +17,7 @@ class GenerateAttendanceConfirmationUsecase:
         if not Activity.validate_activity_code(code):
             raise EntityError("activity_code")
 
-        if requester_user.role != ROLE.PROFESSOR:
+        if requester_user.role != ROLE.PROFESSOR and requester_user.role != ROLE.ADMIN:
             raise ForbiddenAction("user, not professor")
 
         activity = self.repo.get_activity(code)
@@ -28,8 +28,9 @@ class GenerateAttendanceConfirmationUsecase:
         if activity.confirmation_code is not None:
             raise ForbiddenAction("confirmation_code")
 
-        if requester_user not in activity.responsible_professors:
-            raise ForbiddenAction("user")
+        if requester_user.role == ROLE.PROFESSOR:
+            if requester_user.user_id not in [professor.user_id for professor in activity.responsible_professors]:
+                raise ForbiddenAction("user")
 
         confirmation_code = self.generate_confirmation_code()
 

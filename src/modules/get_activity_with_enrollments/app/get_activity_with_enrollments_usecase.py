@@ -25,7 +25,7 @@ class GetActivityWithEnrollmentsUsecase:
             raise NoItemsFound('activity')
 
         if user.role == ROLE.PROFESSOR:
-            if user not in activity.responsible_professors:
+            if user.user_id not in [professor.user_id for professor in activity.responsible_professors]:
                 raise ForbiddenAction('user')
 
         enrollments = [enrollment for enrollment in all_enrollments if enrollment.state in [ENROLLMENT_STATE.ENROLLED, ENROLLMENT_STATE.IN_QUEUE, ENROLLMENT_STATE.COMPLETED]]
