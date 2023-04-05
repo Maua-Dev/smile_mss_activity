@@ -11,13 +11,8 @@ def install_package(package: str, destination: str):
     print(f"Installing {package} to {destination}")
     root_directory = Path(__file__).parent.parent
     iac_directory = os.path.join(root_directory, IAC_DIRECTORY_NAME)
-    requirement_name = package.split("==")[0]
 
-    layer_destination = os.path.join(iac_directory, destination, requirement_name, "python")
-
-    if os.path.exists(layer_destination):
-        print(f"Removing {layer_destination} because it already exists")
-        shutil.rmtree(layer_destination)
+    layer_destination = os.path.join(iac_directory, destination, "python")
 
     subprocess.check_call(["pip", "install", package, "-t", layer_destination])
 
