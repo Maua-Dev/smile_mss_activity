@@ -1,4 +1,3 @@
-from ast import List
 import io
 import PyPDF2
 from reportlab.pdfgen import canvas
