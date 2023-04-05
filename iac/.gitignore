@@ -10,3 +10,4 @@ __pycache__
 cdk.out
 
 /lambda_layer_out_temp
+/lambda_requirements_layer_temp
