@@ -14,21 +14,43 @@ class CertificatesLambdaStack(Construct):
         self.aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
         self.aws_region = os.environ.get("AWS_REGION")
 
-        self.lambda_layer_certificate = lambda_.LayerVersion(self, "Certificate_layer",
-                                                        code=lambda_.Code.from_asset("./lambda_requirements_layer_temp"),
-                                                        compatible_runtimes=[lambda_.Runtime.PYTHON_3_9])
+        self.lambda_layer_PyPDF2 = lambda_.LayerVersion(self, "PyPDF2_layer",
+                                                        code=lambda_.Code.from_asset(
+                                                            "./lambda_requirements_layer_temp/PyPDF2"),
+                                                        compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
+                                                        )
+
+        self.lambda_layer_reportlab = lambda_.LayerVersion(self, "reportlab_layer",
+                                                           code=lambda_.Code.from_asset(
+                                                               "./lambda_requirements_layer_temp/reportlab"),
+                                                           compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
+                                                           )
+
+        self.lambda_layer_pillow = lambda_.LayerVersion(self, "pillow_layer",
+                                                        code=lambda_.Code.from_asset(
+                                                            "./lambda_requirements_layer_temp/Pillow"),
+                                                        compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
+                                                        )
 
         self.lambda_layer_activity = lambda_.LayerVersion(self, "Smile_Layer",
-                                                 code=lambda_.Code.from_asset("./lambda_layer_out_temp"),
-                                                 compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
-                                                 )
+                                                          code=lambda_.Code.from_asset("./lambda_layer_out_temp"),
+                                                          compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
+                                                          )
+
+        self.lambda_layer_typing_extensions = lambda_.LayerVersion(self, "typing_extensions_layer",
+                                                                   code=lambda_.Code.from_asset(
+                                                                       "./lambda_requirements_layer_temp/typing_extensions"),
+                                                                   compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
+                                                                   )
 
         self.generate_certificate_function = lambda_.Function(
             self, "generate_certificate",
             code=lambda_.Code.from_asset(f"../certificates/generate_certificates"),
             handler=f"generate_certifificates.lambda_handler",
             runtime=lambda_.Runtime.PYTHON_3_9,
-            layers=[self.lambda_layer_activity, self.lambda_layer_certificate],
+            layers=[self.lambda_layer_activity, self.lambda_layer_PyPDF2, self.lambda_layer_reportlab,
+                    self.lambda_layer_typing_extensions,
+                    self.lambda_layer_pillow],
             environment=environment_variables,
             timeout=Duration.seconds(15),
         )
