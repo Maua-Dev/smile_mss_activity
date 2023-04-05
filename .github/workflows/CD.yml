@@ -33,6 +33,11 @@ jobs:
             echo "STAGE=${{ github.ref_name }}" 
             echo "STACK_NAME=SmileActivity2023Stack${{github.ref_name}}" >> $GITHUB_ENV
 
+        - uses: actions/checkout@v3
+        - uses: actions/setup-python@v4
+          with:
+            python-version: '3.9'
+
         - name: Installing Dependencies
           run: |
             npm install -g aws-cdk
