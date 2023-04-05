@@ -28,3 +28,5 @@ def setup_requirements_layers(destination: str):
         install_package(requirement, destination)
 
 
+if __name__ == '__main__':
+    setup_requirements_layers(destination="lambda_requirements_layer_temp")
