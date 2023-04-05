@@ -13,7 +13,7 @@ def install_package(package: str, destination: str):
     iac_directory = os.path.join(root_directory, IAC_DIRECTORY_NAME)
     requirement_name = package.split("==")[0]
 
-    layer_destination = os.path.join(iac_directory, destination, requirement_name, "python", "src")
+    layer_destination = os.path.join(iac_directory, destination, requirement_name, "python")
 
     if os.path.exists(layer_destination):
         print(f"Removing {layer_destination} because it already exists")
