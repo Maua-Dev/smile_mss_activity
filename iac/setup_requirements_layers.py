@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -13,6 +14,11 @@ def install_package(package: str, destination: str):
     requirement_name = package.split("==")[0]
 
     layer_destination = os.path.join(iac_directory, destination, requirement_name, "python", "src")
+
+    if os.path.exists(layer_destination):
+        print(f"Removing {layer_destination} because it already exists")
+        shutil.rmtree(layer_destination)
+
     subprocess.check_call(["pip", "install", package, "-t", layer_destination])
 
 

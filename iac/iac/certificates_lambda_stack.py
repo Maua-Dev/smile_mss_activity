@@ -14,25 +14,20 @@ class CertificatesLambdaStack(Construct):
         self.aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
         self.aws_region = os.environ.get("AWS_REGION")
 
-        self.lambda_layer_PyPDF2 = lambda_.LayerVersion.from_layer_version_arn(
-            self, "PyPDF2_layer", f"arn:aws:lambda:{self.aws_region}:{self.aws_account_id}:layer:PyPDF2:2"
-        )
+        self.lambda_layer_PyPDF2 = lambda_.LayerVersion(self, "PyPDF2_layer",
+                                                        code=lambda_.Code.from_asset("./lambda_requirements_layer_temp/PyPDF2"),
+                                                        compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
+                                                        )
 
-        self.lambda_layer_reportlab = lambda_.LayerVersion.from_layer_version_arn(
-            self, "reportlab_layer", f"arn:aws:lambda:{self.aws_region}:770693421928:layer:Klayers-p38-reportlab:8"
-        )
+        self.lambda_layer_reportlab = lambda_.LayerVersion(self, "reportlab_layer",
+                                                        code=lambda_.Code.from_asset("./lambda_requirements_layer_temp/reportlab"),
+                                                        compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
+                                                        )
 
-        self.lambda_layer_pillow = lambda_.LayerVersion.from_layer_version_arn(
-            self, "pillow_layer", f"arn:aws:lambda:{self.aws_region}:770693421928:layer:Klayers-p39-pillow:1"
-        )
-
-        # pdf_layers = PythonLayerVersion(
-        #     self,
-        #     'CertificatesLayer',
-        #     entry='.certificates/common_layer',
-        #     compatible_runtimes=[lambda_.Runtime.PYTHON_3_9],
-        #     removal_policy=RemovalPolicy.DESTROY,
-        # )
+        self.lambda_layer_pillow = lambda_.LayerVersion(self, "pillow_layer",
+                                                        code=lambda_.Code.from_asset("./lambda_requirements_layer_temp/Pillow"),
+                                                        compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
+                                                        )
 
         self.lambda_layer_activity = lambda_.LayerVersion(self, "Smile_Layer",
                                                  code=lambda_.Code.from_asset("./lambda_layer_out_temp"),
