@@ -46,7 +46,7 @@ class CertificatesLambdaStack(Construct):
             layers=[self.lambda_layer_activity, self.lambda_layer_PyPDF2, self.lambda_layer_reportlab,
                     self.lambda_layer_typing_extensions],
             environment=environment_variables,
-            timeout=Duration.seconds(15),
+            timeout=Duration.seconds(60),
         )
 
         self.get_certificate_function = lambda_.Function(
