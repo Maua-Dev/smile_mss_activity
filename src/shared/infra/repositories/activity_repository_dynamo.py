@@ -380,7 +380,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
                         'Data': "SMILE 2023 - Abriu uma vaga!",
                     },
                 },
-                Source=f'Semana Mau\xc3\xa1 de Inova\xc3\xa7\xc3\xa3o Lideran\xc3\xa7a e Empreendedorismo 2023 <{os.environ.get("FROM_EMAIL")}>'
+                Source=os.environ.get("FROM_EMAIL"),
             )
 
             return True
