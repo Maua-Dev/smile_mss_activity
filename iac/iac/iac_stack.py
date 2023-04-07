@@ -102,6 +102,10 @@ class IacStack(Stack):
              "FROM_EMAIL", os.environ.get("FROM_EMAIL")
         )
 
+        self.lambda_stack.drop_activity_function.add_environment(
+            "REPLY_TO_EMAIL", os.environ.get("REPLY_TO_EMAIL")
+        )
+
         self.lambda_stack.manual_drop_activity_function.add_to_role_policy(cognito_admin_policy)
 
         self.lambda_stack.manual_drop_activity_function.add_environment(
@@ -110,6 +114,10 @@ class IacStack(Stack):
 
         self.lambda_stack.manual_drop_activity_function.add_environment(
                 "FROM_EMAIL", os.environ.get("FROM_EMAIL")
+        )
+
+        self.lambda_stack.manual_drop_activity_function.add_environment(
+                "REPLY_TO_EMAIL", os.environ.get("REPLY_TO_EMAIL")
         )
 
 
@@ -135,6 +143,10 @@ class IacStack(Stack):
 
         self.event_bridge.send_notification_function.add_environment(
             "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
+        )
+
+        self.event_bridge.send_notification_function.add_environment(
+            "REPLY_TO_EMAIL", os.environ.get("REPLY_TO_EMAIL")
         )
 
         sns_admin_policy = aws_iam.PolicyStatement(

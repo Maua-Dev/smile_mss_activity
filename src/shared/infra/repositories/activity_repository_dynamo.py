@@ -380,6 +380,9 @@ class ActivityRepositoryDynamo(IActivityRepository):
                         'Data': "SMILE 2023 - Abriu uma vaga!",
                     },
                 },
+                ReplyToAddresses=[
+                    os.environ.get("REPLY_TO_EMAIL"),
+                ],
                 Source=os.environ.get("FROM_EMAIL"),
             )
 
