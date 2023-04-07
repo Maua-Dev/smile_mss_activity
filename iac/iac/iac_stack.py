@@ -94,32 +94,7 @@ class IacStack(Stack):
 
         self.lambda_stack.drop_activity_function.add_to_role_policy(cognito_admin_policy)
 
-        self.lambda_stack.drop_activity_function.add_environment(
-            "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
-        )
-
-        self.lambda_stack.drop_activity_function.add_environment(
-             "FROM_EMAIL", os.environ.get("FROM_EMAIL")
-        )
-
-        self.lambda_stack.drop_activity_function.add_environment(
-            "REPLY_TO_EMAIL", os.environ.get("REPLY_TO_EMAIL")
-        )
-
         self.lambda_stack.manual_drop_activity_function.add_to_role_policy(cognito_admin_policy)
-
-        self.lambda_stack.manual_drop_activity_function.add_environment(
-                "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
-        )
-
-        self.lambda_stack.manual_drop_activity_function.add_environment(
-                "FROM_EMAIL", os.environ.get("FROM_EMAIL")
-        )
-
-        self.lambda_stack.manual_drop_activity_function.add_environment(
-                "REPLY_TO_EMAIL", os.environ.get("REPLY_TO_EMAIL")
-        )
-
 
         ses_admin_policy = aws_iam.PolicyStatement(
             effect=aws_iam.Effect.ALLOW,
@@ -131,23 +106,17 @@ class IacStack(Stack):
             ]
         )
 
-        self.lambda_stack.manual_drop_activity_function.add_to_role_policy(ses_admin_policy)
+        functions_that_need_email_permissions = [
+            self.lambda_stack.drop_activity_function,
+            self.lambda_stack.manual_drop_activity_function,
+            self.event_bridge.send_notification_function
+        ]
 
-        self.lambda_stack.drop_activity_function.add_to_role_policy(ses_admin_policy)
-
-        self.event_bridge.send_notification_function.add_to_role_policy(ses_admin_policy)
-
-        self.event_bridge.send_notification_function.add_environment(
-            "FROM_EMAIL", os.environ.get("FROM_EMAIL")
-        )
-
-        self.event_bridge.send_notification_function.add_environment(
-            "HIDDEN_COPY", os.environ.get("HIDDEN_COPY")
-        )
-
-        self.event_bridge.send_notification_function.add_environment(
-            "REPLY_TO_EMAIL", os.environ.get("REPLY_TO_EMAIL")
-        )
+        for f in functions_that_need_email_permissions:
+            f.add_environment("HIDDEN_COPY", os.environ.get("HIDDEN_COPY"))
+            f.add_environment("FROM_EMAIL", os.environ.get("FROM_EMAIL"))
+            f.add_environment("REPLY_TO_EMAIL", os.environ.get("REPLY_TO_EMAIL"))
+            f.add_to_role_policy(ses_admin_policy)
 
         sns_admin_policy = aws_iam.PolicyStatement(
             effect=aws_iam.Effect.ALLOW,
