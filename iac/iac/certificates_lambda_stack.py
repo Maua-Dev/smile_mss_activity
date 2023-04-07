@@ -41,17 +41,19 @@ class CertificatesLambdaStack(Construct):
             self, "generate_certificate",
             code=lambda_.Code.from_asset(f"../certificates/generate_certificates"),
             handler=f"generate_certifificates.lambda_handler",
+            memory_size=2048,
             runtime=lambda_.Runtime.PYTHON_3_9,
             layers=[self.lambda_layer_activity, self.lambda_layer_PyPDF2, self.lambda_layer_reportlab,
                     self.lambda_layer_typing_extensions],
             environment=environment_variables,
-            timeout=Duration.seconds(15),
+            timeout=Duration.seconds(60),
         )
 
         self.get_certificate_function = lambda_.Function(
             self, "get_certificate",
             code=lambda_.Code.from_asset(f"../certificates/get_certificates"),
             handler=f"get_certificate.lambda_handler",
+            memory_size=512,
             runtime=lambda_.Runtime.PYTHON_3_9,
             layers=[self.lambda_layer_activity],
             environment=environment_variables,
