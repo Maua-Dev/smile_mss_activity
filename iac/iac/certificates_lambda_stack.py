@@ -19,9 +19,9 @@ class CertificatesLambdaStack(Construct):
                                                           compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
                                                           )
 
-        self.lambda_layer_pillow = lambda_.LayerVersion(self, "Pillow_Layer",
+        self.lambda_layer_pillow = lambda_.LayerVersion(self, "pillow_Layer",
                                                                    code=lambda_.Code.from_asset(
-                                                                       "./lambda_requirements_layer_temp/Pillow"),
+                                                                       "./lambda_requirements_layer_temp/pillow"),
                                                                    compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
                                                                    )
 
