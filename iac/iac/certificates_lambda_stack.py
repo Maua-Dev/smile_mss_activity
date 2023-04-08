@@ -19,7 +19,7 @@ class CertificatesLambdaStack(Construct):
                                                           compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
                                                           )
 
-        self.lambda_layer_typing_extensions = lambda_.LayerVersion(self, "Pillow_Layer",
+        self.lambda_layer_pillow = lambda_.LayerVersion(self, "Pillow_Layer",
                                                                    code=lambda_.Code.from_asset(
                                                                        "./lambda_requirements_layer_temp/Pillow"),
                                                                    compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
@@ -31,8 +31,7 @@ class CertificatesLambdaStack(Construct):
             handler=f"generate_certifificates.lambda_handler",
             memory_size=2048,
             runtime=lambda_.Runtime.PYTHON_3_9,
-            layers=[self.lambda_layer_activity, self.lambda_layer_PyPDF2, self.lambda_layer_reportlab,
-                    self.lambda_layer_typing_extensions],
+            layers=[self.lambda_layer_activity, self.lambda_layer_pillow],
             environment=environment_variables,
             timeout=Duration.seconds(60),
         )
