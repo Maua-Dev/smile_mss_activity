@@ -15,12 +15,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh pr create \
-            -B "dev" \
-            -H "homolg" \ 
-            --title "Merge branch dev -> homolog - Criado Automatico" \
-            --body "Criado Automaticamente" \
-            --reviewer "Maua-Dev/admins-repo"
+           gh pr create \
+            -B 'dev' \
+            -H 'homolg' \ 
+            --title 'Merge branch dev -> homolog - Criado Automatico' \
+            --body 'Criado Automaticamente' \
+            --reviewer 'Maua-Dev/admins-repo'
         
   create-pr-prod:
     if: github.ref == 'refs/heads/homolog'
