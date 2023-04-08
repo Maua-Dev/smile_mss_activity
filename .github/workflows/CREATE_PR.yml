@@ -6,8 +6,18 @@ on:
       - dev
       - homolog
 
-jobs:   
+jobs: 
+  check_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR list
+        run: |
+          lenPrs=$(gh pr list -B homolog -H dev --json id,title --jq '. | length')
+      - name: Validate already exists open PR
+        if: $lenPrs == 1
+        run: exit_with_success
   create-pr-homolog:
+    needs: check_pr
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
     steps:
@@ -23,6 +33,7 @@ jobs:
             gh pr create -B homolog -H dev --title "Merge branch dev -> homolog - Criado Automatico" --body "Criado Automaticamente" --reviewer "$reviewers"
         
   create-pr-prod:
+    needs: check_pr
     if: github.ref == 'refs/heads/homolog'
     runs-on: ubuntu-latest
     steps:
