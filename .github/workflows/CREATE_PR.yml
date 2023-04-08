@@ -27,7 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-            gh pr create -B dev -H homolg --title "Merge branch dev -> homolog - Criado Automatico" --body "Criado Automaticamente" --reviewer $reviewers
+            gh pr create -B dev -H homolg --title "Merge branch dev -> homolog - Criado Automatico" --body "Criado Automaticamente" --reviewer "$reviewers"
         
   create-pr-prod:
     if: github.ref == 'refs/heads/homolog'
@@ -35,8 +35,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Get admins logins
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          repo: ${{ github.repository }}
+        run: |
+          echo $repo
+          reviewers=$(gh api "repos/$repo/collaborators?permission=admin" --jq '[.[] | .login] | join(",")')
+          echo $reviewers
+
       - name: Create PR homolog into prod  
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-            gh pr create -B homolog -H prod --title "Merge branch homolog -> prod - Criado Automatico" --body "Criado Automaticamente" --reviewer "@Maua-Dev/admins-repo"
+            gh pr create -B homolog -H prod --title "Merge branch homolog -> prod - Criado Automatico" --body "Criado Automaticamente" --reviewer "$reviewers"
