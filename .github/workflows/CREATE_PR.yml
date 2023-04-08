@@ -6,17 +6,13 @@ on:
       - dev
       - homolog
 
-jobs:
-  checkout:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+jobs:   
   create-pr-homolog:
-    needs: [checkout]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Create PR dev into homolog
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -24,7 +20,6 @@ jobs:
             gh pr create -B dev -H homolg --title "Merge branch dev -> homolog - Criado Automatico" --body "Criado Automaticamente" --reviewer Maua-Dev/admins-repo
         
   create-pr-prod:
-    needs: [checkout]
     if: github.ref == 'refs/heads/homolog'
     runs-on: ubuntu-latest
     steps:
@@ -32,9 +27,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh pr create \
-            -B "homolog" \
-            -H "prod" \
-            --title "Merge branch homolg -> prod - Criado Automatico" \
-            --body "Criado Automaticamente" \
-            --reviewer "Maua-Dev/admins-repo"
+            gh pr create -B homolog -H prod --title "Merge branch homolog -> prod - Criado Automatico" --body "Criado Automaticamente" --reviewer Maua-Dev/admins-repo
