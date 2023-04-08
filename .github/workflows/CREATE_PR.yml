@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check PR list
+        run: |
+          lenPrs=$(gh pr list -B homolog -H dev --json id,title --jq '. | length')
+      - name: Validate already exists open PR
+        if: $lenPrs == 1
         run: exit_with_success
-      
   create-pr-homolog:
     needs: check_pr
     runs-on: ubuntu-latest
