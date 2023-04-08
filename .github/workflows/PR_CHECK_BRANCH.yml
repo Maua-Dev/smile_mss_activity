@@ -10,6 +10,11 @@ jobs:
   check_branch:
     runs-on: ubuntu-latest
     steps:
+      - name: Echo branches name
+        run: |
+          echo "Base branch: ${{ github.base_ref }}"
+          echo "Head branch: ${{ github.head_ref }}"
+
       - name: Check homolog
         if: github.base_ref == 'homolog' && github.head_ref != 'dev'
         run: |
