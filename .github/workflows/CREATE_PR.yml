@@ -19,7 +19,9 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           repo: ${{ github.repository }}
         run: |
-           reviewers=$(gh api 'repos/$repo/collaborators?permission=admin' --jq '[.[] | .login] | join(",")')
+          echo $repo
+          reviewers=$(gh api "repos/$repo/collaborators?permission=admin" --jq '[.[] | .login] | join(",")')
+          echo $reviewers
 
       - name: Create PR dev into homolog
         env:
