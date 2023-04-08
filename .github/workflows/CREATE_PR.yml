@@ -1,0 +1,36 @@
+name: Create PR
+
+on:
+  push:
+    branches:
+      - dev
+      - homolog
+
+jobs:
+  create-pr-homolog:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
+    steps:
+      - name: Create PR dev into homolog
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh pr create 
+            -B dev 
+            -H homolg 
+            --title 'Merge branch dev -> homolog - Criado Automatico'
+            --reviewer Maua-Dev/admins-repo
+        
+  create-pr-prod:
+    if: github.ref == 'refs/heads/homolog'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create PR homolog into prod  
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh pr create 
+            -B homolog 
+            -H prod 
+            --title 'Merge branch homolg -> prod - Criado Automatico'
+            --reviewer Maua-Dev/admins-repo
