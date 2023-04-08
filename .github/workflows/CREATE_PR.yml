@@ -13,8 +13,9 @@ jobs:
       - name: Check PR list
         run: |
           lenPrs=$(gh pr list -B homolog -H dev --json id,title --jq '. | length')
+          echo "lenPrs=$lenPrs" >> $GITHUB_ENV
       - name: Validate already exists open PR
-        if: $lenPrs == 1
+        if: ${{ env.lenPrs }} == 1
         run: exit_with_success
   create-pr-homolog:
     needs: check_pr
