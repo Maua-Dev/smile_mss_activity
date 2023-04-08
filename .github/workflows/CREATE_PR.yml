@@ -24,7 +24,7 @@ jobs:
   create-pr-homolog:
     needs: check_pr
     runs-on: ubuntu-latest
-    if:  ${{ github.ref == 'refs/heads/dev' && ${{ needs.check_pr.outputs.lenPrs }} == 0 }}
+    if: ${{ github.ref == 'refs/heads/dev' && needs.check_pr.outputs.lenPrs == 0 }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,7 +39,7 @@ jobs:
         
   create-pr-prod:
     needs: check_pr
-    if: ${{ github.ref == 'refs/heads/homolog' && ${{ needs.check_pr.outputs.lenPrs }} == 0 }}
+    if: ${{ github.ref == 'refs/heads/homolog' && needs.check_pr.outputs.lenPrs == 0 }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
