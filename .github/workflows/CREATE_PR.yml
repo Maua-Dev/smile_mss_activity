@@ -13,11 +13,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Get admins logins
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          repo: ${{ github.repository }}
+        run: |
+           reviewers=$(gh api 'repos/$repo/collaborators?permission=admin' --jq '[.[] | .login] | join(",")')
+
       - name: Create PR dev into homolog
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-            gh pr create -B dev -H homolg --title "Merge branch dev -> homolog - Criado Automatico" --body "Criado Automaticamente" --reviewer "@Maua-Dev/admins-repo"
+            gh pr create -B dev -H homolg --title "Merge branch dev -> homolog - Criado Automatico" --body "Criado Automaticamente" --reviewer $reviewers
         
   create-pr-prod:
     if: github.ref == 'refs/heads/homolog'
