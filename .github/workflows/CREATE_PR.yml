@@ -15,11 +15,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh pr create 
-            -B dev 
-            -H homolg 
-            --title 'Merge branch dev -> homolog - Criado Automatico'
-            --body 'Criado Automaticamente'
+          gh pr create \
+            -B dev \
+            -H homolg \ 
+            --title 'Merge branch dev -> homolog - Criado Automatico' \
+            --body 'Criado Automaticamente' \
             --reviewer Maua-Dev/admins-repo
         
   create-pr-prod:
@@ -30,9 +30,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh pr create 
-            -B homolog 
-            -H prod 
-            --title 'Merge branch homolg -> prod - Criado Automatico'
-            --body 'Criado Automaticamente'
+          gh pr create \
+            -B homolog \
+            -H prod \
+            --title 'Merge branch homolg -> prod - Criado Automatico' \
+            --body 'Criado Automaticamente' \
             --reviewer Maua-Dev/admins-repo
