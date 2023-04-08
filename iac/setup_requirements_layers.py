@@ -20,7 +20,7 @@ def install_package(package: str, destination: str):
         print(f"Removing {layer_destination} because it already exists")
         shutil.rmtree(layer_destination)
 
-    subprocess.check_call(["pip", "install", package, "-t", layer_destination])
+    subprocess.check_call(["pip", "install", package, "-t", layer_destination, "--no-cache-dir"])
 
 
 def setup_requirements_layers(destination: str):
