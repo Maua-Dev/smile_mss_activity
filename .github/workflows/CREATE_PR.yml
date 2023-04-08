@@ -18,13 +18,10 @@ jobs:
         run: |
           lenPrs=$(gh pr list -B homolog -H dev --json id,title --jq '. | length')
           echo "lenPrs=$lenPrs" >> $GITHUB_ENV
-      - name: Validate already exists open PR
-        if: ${{ env.lenPrs }} == 1
-        run: exit 0
   create-pr-homolog:
     needs: check_pr
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/dev' && ${{ env.lenPrs }} == 0
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,7 +36,7 @@ jobs:
         
   create-pr-prod:
     needs: check_pr
-    if: github.ref == 'refs/heads/homolog'
+    if: github.ref == 'refs/heads/homolog' && ${{ env.lenPrs }} == 0
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
