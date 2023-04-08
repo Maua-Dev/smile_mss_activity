@@ -20,7 +20,7 @@ jobs:
           echo "lenPrs=$lenPrs" >> $GITHUB_ENV
       - name: Validate already exists open PR
         if: ${{ env.lenPrs }} == 1
-        run: exit_with_success
+        run: exit 0
   create-pr-homolog:
     needs: check_pr
     runs-on: ubuntu-latest
