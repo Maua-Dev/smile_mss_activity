@@ -8,15 +8,23 @@ on:
     types: [submitted]
 
 jobs: 
-  approved:
-    if: github.event.review.state == 'approved'
+  valid_owner:
     runs-on: ubuntu-latest
     env:
       author: ${{ github.event.pull_request.user.login }}
       repo: ${{ github.repository }}
       GITHUB_TOKEN: ${{ github.token }}
     steps:
+      - name: set inicial status
+        if: github.event.type == 'PullRequestEvent'
+        run: |
+          gh api "repos/$repo/statuses/$sha" \
+              -f state="pending" \
+              -f context='Non-admin PR approval' \
+              -f target_url="https://github.com/$repo/actions/runs/$id"
+
       - name: get permission
+        if: github.event.review.state == 'approved'
         run: |
           perm=$(gh api "repos/$repo/collaborators/$author/permission" --jq '.permission')
           echo "perm=$perm" >> $GITHUB_ENV
