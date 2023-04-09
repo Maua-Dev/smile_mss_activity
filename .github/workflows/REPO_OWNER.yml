@@ -30,6 +30,7 @@ jobs:
         env:
           author: ${{ github.event.pull_request.user.login }}
         run: |
+          echo ${{github.event}}
           perm=$(gh api "repos/$repo/collaborators/$author/permission" --jq '.permission')
           echo "perm=$perm" >> $GITHUB_ENV
       - name: set pending run
