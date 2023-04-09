@@ -1,0 +1,31 @@
+name: Check Approve Owner repository
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs: 
+  approved:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+    env:
+      author: ${{ github.event.pull_request.user.login }}
+      repo: ${{ github.repository }}
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - name: get permission
+        run: |
+          perm=$(gh api "repos/$repo/collaborators/$author/permission" --jq '.permission')
+          echo "perm=$perm" >> $GITHUB_ENV
+      - name: 
+        if: env.perm != 'admin'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          sha: ${{ github.event.pull_request.head.sha }}
+          repo: ${{ github.repository }}
+          id: ${{ github.run_id }}
+        run: |
+          gh api "repos/$repo/statuses/$sha" \
+              -f state="pending" \
+              -f context='Non-admin PR approval' \
+              -f target_url="https://github.com/$repo/actions/runs/$id"
