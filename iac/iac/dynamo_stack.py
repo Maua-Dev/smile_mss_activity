@@ -19,6 +19,7 @@ class DynamoStack(Construct):
                     name="PK",
                     type=aws_dynamodb.AttributeType.STRING
                 ),
+                point_in_time_recovery=True,
                 sort_key=aws_dynamodb.Attribute(
                     name="SK",
                     type=aws_dynamodb.AttributeType.STRING
