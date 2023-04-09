@@ -32,13 +32,19 @@ jobs:
         run: |
           perm=$(gh api "repos/$repo/collaborators/$author/permission" --jq '.permission')
           echo "perm=$perm" >> $GITHUB_ENV
-      - name: set pending run
-        if: ${{ env.perm != 'admin' &&  github.event_name != 'pull_request' }}
+          if [[ $perm != 'admin' ]]; then
+              echo "STATE=pending" >> $GITHUB_ENV
+          else
+              echo "STATE=success" >> $GITHUB_ENV
+          fi
+      - name: set aproval check
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           sha: ${{ github.event.pull_request.head.sha }}
           id: ${{ github.run_id }}
+          state: ${{ env.STATE }}
         run: |
           gh api "repos/$repo/statuses/$sha" \
-              -f state="pending" \
+              -f state="$STATE" \
               -f context='Admin PR approval' \
               -f target_url="https://github.com/$repo/actions/runs/$id"
