@@ -42,7 +42,6 @@ jobs:
         env:
           sha: ${{ github.event.pull_request.head.sha }}
           id: ${{ github.run_id }}
-          state: ${{ env.STATE }}
         run: |
           gh api "repos/$repo/statuses/$sha" \
               -f state="$STATE" \
