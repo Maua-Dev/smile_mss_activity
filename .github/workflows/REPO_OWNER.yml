@@ -1,6 +1,9 @@
 name: Check Approve Owner repository
 
 on:
+  pull_request:
+    branches:
+      - homolog
   pull_request_review:
     types: [submitted]
 
@@ -17,7 +20,7 @@ jobs:
         run: |
           perm=$(gh api "repos/$repo/collaborators/$author/permission" --jq '.permission')
           echo "perm=$perm" >> $GITHUB_ENV
-      - name: 
+      - name: set pending run
         if: env.perm != 'admin'
         env:
           GITHUB_TOKEN: ${{ github.token }}
