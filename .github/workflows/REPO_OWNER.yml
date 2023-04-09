@@ -17,14 +17,8 @@ jobs:
     steps:
       - name: set inicial status
         if: github.event_name == 'pull_request'
-        env:
-          sha: ${{ github.event.pull_request.head.sha }}
-          id: ${{ github.run_id }}
         run: |
-          gh api "repos/$repo/statuses/$sha" \
-              -f state="pending" \
-              -f context='admin PR approval' \
-              -f target_url="https://github.com/$repo/actions/runs/$id"
+          exit 1
 
       - name: get permission
         if: github.event.review.state == 'approved'
@@ -33,11 +27,6 @@ jobs:
           echo "perm=$perm" >> $GITHUB_ENV
       - name: set pending run
         if: ${{ env.perm != 'admin' &&  github.event_name != 'pull_request' }}
-        env:
-          sha: ${{ github.event.pull_request.head.sha }}
-          id: ${{ github.run_id }}
         run: |
-          gh api "repos/$repo/statuses/$sha" \
-              -f state="pending" \
-              -f context='Admin PR approval' \
-              -f target_url="https://github.com/$repo/actions/runs/$id"
+          exir 1
+
