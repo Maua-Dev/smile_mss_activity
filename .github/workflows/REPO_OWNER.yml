@@ -16,11 +16,11 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
     steps:
       - name: set inicial status
-        if: github.event.type == 'PullRequestEvent'
+        if: github.event_name == 'pull_request'
         run: |
           gh api "repos/$repo/statuses/$sha" \
               -f state="pending" \
-              -f context='Non-admin PR approval' \
+              -f context='admin PR approval' \
               -f target_url="https://github.com/$repo/actions/runs/$id"
 
       - name: get permission
@@ -29,7 +29,7 @@ jobs:
           perm=$(gh api "repos/$repo/collaborators/$author/permission" --jq '.permission')
           echo "perm=$perm" >> $GITHUB_ENV
       - name: set pending run
-        if: env.perm != 'admin'
+        if: ${{ env.perm != 'admin' &&  github.event_name != 'pull_request' }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
           sha: ${{ github.event.pull_request.head.sha }}
@@ -38,5 +38,5 @@ jobs:
         run: |
           gh api "repos/$repo/statuses/$sha" \
               -f state="pending" \
-              -f context='Non-admin PR approval' \
+              -f context='Noadmin PR approval' \
               -f target_url="https://github.com/$repo/actions/runs/$id"
