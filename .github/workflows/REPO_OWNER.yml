@@ -11,7 +11,6 @@ jobs:
   valid_owner:
     runs-on: ubuntu-latest
     env:
-      author: ${{ github.event.pull_request.user.login }}
       repo: ${{ github.repository }}
       GITHUB_TOKEN: ${{ github.token }}
     steps:
@@ -28,6 +27,8 @@ jobs:
 
       - name: get permission
         if: github.event.review.state == 'approved'
+        env:
+          author: ${{ github.event.pull_request.user.login }}
         run: |
           perm=$(gh api "repos/$repo/collaborators/$author/permission" --jq '.permission')
           echo "perm=$perm" >> $GITHUB_ENV
