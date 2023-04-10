@@ -1,49 +1,26 @@
 name: Check Approve Owner repository
 
 on:
-  pull_request:
-    branches:
-      - homolog
   pull_request_review:
     types: [submitted]
+    branches: [homolog, prod]
 
 jobs: 
   valid_owner:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     env:
       repo: ${{ github.repository }}
       GITHUB_TOKEN: ${{ github.token }}
     steps:
-      - name: set inicial status
-        if: github.event_name == 'pull_request'
-        env:
-          sha: ${{ github.event.pull_request.head.sha }}
-          id: ${{ github.run_id }}
-        run: |
-          gh api "repos/$repo/statuses/$sha" \
-              -f state="pending" \
-              -f context='Admin PR approval' \
-              -f target_url="https://github.com/$repo/actions/runs/$id"
-
-      - name: get permission
-        if: github.event.review.state == 'approved'
+      - name: Validate PR Owner
         env:
           author: ${{ github.event.review.user.login }}
         run: |
           perm=$(gh api "repos/$repo/collaborators/$author/permission" --jq '.permission')
           echo "perm=$perm" >> $GITHUB_ENV
           if [[ $perm != 'admin' ]]; then
-              echo "STATE=pending" >> $GITHUB_ENV
+              echo "::error:: Reviewer NÃO é um admin, solicitar review de um Admin para aprovação"
           else
-              echo "STATE=success" >> $GITHUB_ENV
+              echo "Reviewer é um admin, PR liberado para ser mergeado."
           fi
-      - name: set aproval check
-        if: ${{ github.event_name != 'pull_request' }}
-        env:
-          sha: ${{ github.event.pull_request.head.sha }}
-          id: ${{ github.run_id }}
-        run: |
-          gh api "repos/$repo/statuses/$sha" \
-              -f state="$STATE" \
-              -f context='Admin PR approval' \
-              -f target_url="https://github.com/$repo/actions/runs/$id"
