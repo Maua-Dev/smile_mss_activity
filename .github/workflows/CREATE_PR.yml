@@ -18,13 +18,20 @@ jobs:
         name: Check PR list
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          ref: ${{ github.ref_name }}
         run: |
-          lenPrs=$(gh pr list -B homolog -H dev --json id,title --jq '. | length')
-          echo "lenPrs=$lenPrs" >> "$GITHUB_OUTPUT"
+          if [[ $ref == 'dev' ]]; then
+            lenPrs=$(gh pr list -B homolog -H dev --json id,title --jq '. | length')
+            echo "lenPrs=$lenPrs" >> "$GITHUB_OUTPUT"
+          else
+            lenPrs=$(gh pr list -B prod -H homolog --json id,title --jq '. | length')
+            echo "lenPrs=$lenPrs" >> "$GITHUB_OUTPUT"
+          fi
+          
   create-pr-homolog:
     needs: check_pr
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/dev' && needs.check_pr.outputs.lenPrs == 0 }}
+    if: ${{ github.ref_name == 'dev' && needs.check_pr.outputs.lenPrs == 0 }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
