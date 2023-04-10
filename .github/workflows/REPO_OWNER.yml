@@ -22,6 +22,7 @@ jobs:
           echo "perm=$perm" >> $GITHUB_ENV
           if [[ $perm != 'admin' ]]; then
               echo "::error:: Reviewer NÃO é um admin, solicitar review de um Admin para aprovação"
+              exit 1
           else
               echo "Reviewer é um admin, PR liberado para ser mergeado."
           fi
