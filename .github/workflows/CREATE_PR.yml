@@ -6,56 +6,8 @@ on:
       - dev
       - homolog
 
-jobs: 
-  check_pr:
-    runs-on: ubuntu-latest
-    outputs:
-      lenPrs: ${{ steps.check_pr.outputs.lenPrs }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - id: check_pr
-        name: Check PR list
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          ref: ${{ github.ref_name }}
-        run: |
-          if [[ $ref == 'dev' ]]; then
-            lenPrs=$(gh pr list -B homolog -H dev --json id,title --jq '. | length')
-            echo "lenPrs=$lenPrs" >> "$GITHUB_OUTPUT"
-          else
-            lenPrs=$(gh pr list -B prod -H homolog --json id,title --jq '. | length')
-            echo "lenPrs=$lenPrs" >> "$GITHUB_OUTPUT"
-          fi
-          
-  create-pr-homolog:
-    needs: check_pr
-    runs-on: ubuntu-latest
-    if: ${{ github.ref_name == 'dev' && needs.check_pr.outputs.lenPrs == 0 }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      
-      - name: Create PR dev into homolog
-        env:
-          repo: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-            reviewers=$(gh api "repos/$repo/collaborators?permission=admin" --jq '[.[] | .login] | join(",")')
-            gh pr create -B homolog -H dev --title "Merge branch dev -> homolog - Criado Automatico" --body "Criado Automaticamente" --reviewer "$reviewers"
-        
-  create-pr-prod:
-    needs: check_pr
-    if: ${{ github.ref == 'refs/heads/homolog' && needs.check_pr.outputs.lenPrs == 0 }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Create PR homolog into prod  
-        env:
-          repo: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-            reviewers=$(gh api "repos/$repo/collaborators?permission=admin" --jq '[.[] | .login] | join(",")')
-            gh pr create -B prod -H homolog --title "Merge branch homolog -> prod - Criado Automatico" --body "Criado Automaticamente" --reviewer "$reviewers"
+jobs:
+  pull_request:
+    uses: maua-dev/ci_workflows_reusable/.github/workflows/pull_request.yml@main
+    with:
+      repository: ${{ github.repository }}

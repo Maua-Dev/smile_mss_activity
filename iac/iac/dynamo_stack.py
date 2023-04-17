@@ -1,6 +1,7 @@
-
+import os
 
 from aws_cdk import (
+    CfnOutput,
     aws_dynamodb,
     RemovalPolicy
 )
@@ -12,6 +13,10 @@ class DynamoStack(Construct):
 
         def __init__(self, scope: Construct) -> None:
             super().__init__(scope, "Smile_Dynamo")
+
+            self.github_ref = os.environ.get("GITHUB_REF")
+
+            REMOVAL_POLICY = RemovalPolicy.RETAIN if 'prod' in self.github_ref else RemovalPolicy.DESTROY
 
             self.dynamo_table = aws_dynamodb.Table(
                 self, "Smile_Activity_Table",
@@ -25,7 +30,7 @@ class DynamoStack(Construct):
                     type=aws_dynamodb.AttributeType.STRING
                 ),
                 billing_mode=aws_dynamodb.BillingMode.PAY_PER_REQUEST,
-                removal_policy=RemovalPolicy.DESTROY
+                removal_policy=REMOVAL_POLICY
             )
 
             self.dynamo_table.add_global_secondary_index(
@@ -39,4 +44,10 @@ class DynamoStack(Construct):
                 ),
                 index_name="GSI1"
             )
+
+            CfnOutput(self, 'DynamoRemovalPolicy',
+                        value=REMOVAL_POLICY.value,
+                        export_name='DynamoRemovalPolicyValue')
+
+
 
