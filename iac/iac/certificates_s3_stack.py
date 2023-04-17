@@ -23,11 +23,13 @@ class CertificatesS3Stack(Stack):
         self.aws_region = os.environ.get("AWS_REGION")
         self.aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
 
+        REMOVAL_POLICY = RemovalPolicy.RETAIN if 'prod' in self.github_ref else RemovalPolicy.DESTROY
+
         self.s3_bucket = aws_s3.Bucket(self, "Smile_Certificates_S3_Bucket",
                                        versioned=True,
                                        block_public_access=aws_s3.BlockPublicAccess.BLOCK_ALL,
                                        event_bridge_enabled=False,
-                                       removal_policy=RemovalPolicy.DESTROY
+                                       removal_policy=REMOVAL_POLICY
                                        )
 
         oai = aws_cloudfront.OriginAccessIdentity(self, "Smile_Certificates_OAI")
@@ -60,3 +62,7 @@ class CertificatesS3Stack(Stack):
         CfnOutput(self, f"CertificateBucketCdnUrl",
             value=f"https://{self.cloudfront_distribution.distribution_domain_name}",
             export_name=f"CertificateBucketCdnUrlValue")
+
+        CfnOutput(self, 'S3RemovalPolicy',
+                  value=REMOVAL_POLICY.value,
+                  export_name='S3RemovalPolicyValue')
