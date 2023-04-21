@@ -1,3 +1,5 @@
+import json
+from src.shared.domain.observability.observability_interface import IObservability
 from .enroll_activity_admin_usecase import EnrollActivityAdminUsecase
 from .enroll_activity_admin_viewmodel import EnrollActivityAdminViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
@@ -11,11 +13,13 @@ from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 class EnrollActivityAdminController:
 
-    def __init__(self, usecase: EnrollActivityAdminUsecase):
+    def __init__(self, usecase: EnrollActivityAdminUsecase, observability: IObservability):
         self.EnrollActivityAdminUsecase = usecase
+        self.observability = observability
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
+            self.observability.log_controller_in()
             if request.data.get('requester_user') is None:
                 raise MissingParameters('requester_user')
 
@@ -34,10 +38,12 @@ class EnrollActivityAdminController:
             )
 
             viewmodel = EnrollActivityAdminViewmodel(enrollment, enrolled_user)
-
-            return OK(viewmodel.to_dict())
+            response = OK(viewmodel.to_dict()) 
+            self.observability.log_controller_out(input=json.dumps(response.body))
+            return response
 
         except NoItemsFound as err:
+            self.observability.log_exception(message=err.message)
             message = err.message.lower()
 
             if message == "enrollment":
@@ -53,37 +59,37 @@ class EnrollActivityAdminController:
                 return NotFound(body=f"{message} não encontrada")
 
         except UserNotAdmin as err:
-
+            self.observability.log_exception(message=err.message)
             return Forbidden(body=f"Usuário não é administrador")
 
         except MissingParameters as err:
-
+            self.observability.log_exception(message=err.message)
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
-
+            self.observability.log_exception(message=err.message)
             return Forbidden(body=f"Ação proibida: {err.message}")
 
         except ClosedActivity as err:
-
+            self.observability.log_exception(message=err.message)
             return Forbidden(body=f"Inscrições fechadas")
 
         except UserAlreadyCompleted as err:
-
+            self.observability.log_exception(message=err.message)
             return Forbidden(body=f"Usuário já completou a atividade")
 
         except UserAlreadyEnrolled as err:
-
+            self.observability.log_exception(message=err.message)
             return Forbidden(body=f"Usuário já inscrito")
 
         except EntityError as err:
-
+            self.observability.log_exception(message=err.message)
             return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except ActivityEnded as err:
-
+            self.observability.log_exception(message=err.message)
             return Forbidden(body=f"Impossível inscrever usuário em atividade que já terminou")
 
         except Exception as err:
-
+            self.observability.log_exception(message=err.args[0])
             return InternalServerError(body=err.args[0])
