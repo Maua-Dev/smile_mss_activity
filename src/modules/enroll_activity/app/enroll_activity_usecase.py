@@ -4,6 +4,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, \
@@ -11,10 +12,12 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivit
 
 
 class EnrollActivityUsecase:
-    def __init__(self, repo: IActivityRepository):
+    def __init__(self, repo: IActivityRepository, observability: IObservability):
         self.repo = repo
+        self.observability = observability
 
     def __call__(self, user_id: str, code: str) -> Enrollment:
+        self.observability.log_usecase_in()
         if not User.validate_user_id(user_id):
             raise EntityError('user_id')
     
@@ -56,5 +59,7 @@ class EnrollActivityUsecase:
                 enrollment = Enrollment(activity_code=activity.code, user_id=user_id, state=ENROLLMENT_STATE.ENROLLED,
                                         date_subscribed=int(datetime.datetime.now().timestamp() * 1000))
 
-        return self.repo.create_enrollment(enrollment)
+        enrollment_response = self.repo.create_enrollment(enrollment)
+        self.observability.log_usecase_out()
+        return enrollment_response
 

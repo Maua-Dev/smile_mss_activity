@@ -3,6 +3,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -10,11 +11,13 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenActi
 
 
 class DropActivityUsecase:
-    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository, observability: IObservability):
         self.repo_activity = repo_activity
         self.repo_user = repo_user
+        self.observability = observability
 
     def __call__(self, user_id: str, code: str) -> Enrollment:
+        self.observability.log_usecase_in()
         if not User.validate_user_id(user_id):
             raise EntityError('user_id')
 
@@ -60,4 +63,5 @@ class DropActivityUsecase:
                 if not sent_email:
                     print('Error sending email to user: ' + user_id)
 
+        self.observability.log_usecase_out()
         return updated_enrollment

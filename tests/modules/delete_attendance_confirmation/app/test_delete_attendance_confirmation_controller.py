@@ -1,16 +1,18 @@
 from src.modules.delete_attendance_confirmation.app.delete_attendance_confirmation_controller import DeleteAttendanceConfirmationController
 from src.modules.delete_attendance_confirmation.app.delete_attendance_confirmation_usecase import DeleteAttendanceConfirmationUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="delete_attendance_confirmation")
 
 class Test_DeleteAttendanceConfirmationController:
        def test_delete_attendance_confirmation_controller(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
-              controller = DeleteAttendanceConfirmationController(usecase)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
+              controller = DeleteAttendanceConfirmationController(usecase, observability=observability)
 
               requester_user = repo_user.users[2]
               request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -26,8 +28,8 @@ class Test_DeleteAttendanceConfirmationController:
        def test_delete_attendance_confirmation_controller_missing_code(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
-              controller = DeleteAttendanceConfirmationController(usecase)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
+              controller = DeleteAttendanceConfirmationController(usecase, observability=observability)
 
               requester_user = repo_user.users[2]
               request = HttpRequest(body={}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -39,8 +41,8 @@ class Test_DeleteAttendanceConfirmationController:
        def test_delete_attendance_confirmation_controller_missing_requester_user(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
-              controller = DeleteAttendanceConfirmationController(usecase)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
+              controller = DeleteAttendanceConfirmationController(usecase, observability=observability)
 
               requester_user = repo_user.users[2]
               request = HttpRequest(body={"code": repo.activities[11].code}, headers={})
@@ -52,8 +54,8 @@ class Test_DeleteAttendanceConfirmationController:
        def test_delete_attendance_confirmation_controller_invalid_activity_code(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
-              controller = DeleteAttendanceConfirmationController(usecase)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
+              controller = DeleteAttendanceConfirmationController(usecase, observability=observability)
 
               requester_user = repo_user.users[2]
               request = HttpRequest(body={"code": 1}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -65,8 +67,8 @@ class Test_DeleteAttendanceConfirmationController:
        def test_delete_attendance_confirmation_controller_activity_not_found(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
-              controller = DeleteAttendanceConfirmationController(usecase)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
+              controller = DeleteAttendanceConfirmationController(usecase, observability=observability)
 
               requester_user = repo_user.users[2]
               request = HttpRequest(body={"code": "QUALQUER CODIGO"}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -78,8 +80,8 @@ class Test_DeleteAttendanceConfirmationController:
        def test_delete_attendance_confirmation_controller_role_not_professor(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
-              controller = DeleteAttendanceConfirmationController(usecase)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
+              controller = DeleteAttendanceConfirmationController(usecase, observability=observability)
 
               requester_user = repo_user.users[1]
               request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -91,8 +93,8 @@ class Test_DeleteAttendanceConfirmationController:
        def test_delete_attendance_confirmation_controller_activity_dont_have_confirmation_code(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
-              controller = DeleteAttendanceConfirmationController(usecase)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
+              controller = DeleteAttendanceConfirmationController(usecase, observability=observability)
 
               requester_user = repo_user.users[2]
               request = HttpRequest(body={"code": repo.activities[0].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -104,8 +106,8 @@ class Test_DeleteAttendanceConfirmationController:
        def test_delete_attendance_confirmation_controller_role_not_professor_of_activitiy(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
-              controller = DeleteAttendanceConfirmationController(usecase)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
+              controller = DeleteAttendanceConfirmationController(usecase, observability=observability)
 
               requester_user = repo_user.users[10]
               request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})

@@ -1,3 +1,5 @@
+import json
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import DuplicatedItem, ForbiddenAction, NoItemsFound
@@ -8,12 +10,14 @@ from .confirm_attendance_usecase import ConfirmAttendanceUsecase
 
 
 class ConfirmAttendanceController:
-    def __init__(self, usecase: ConfirmAttendanceUsecase):
+    def __init__(self, usecase: ConfirmAttendanceUsecase, observability: IObservability):
         self.usecase = usecase
+        self.observability = observability
 
     def __call__(self, request: IRequest) -> IResponse:
     
         try:
+            self.observability.log_controller_in()
             if request.data.get('requester_user') is None:
                 raise MissingParameters('requester_user')
             if request.data.get('code') is None:
@@ -32,11 +36,16 @@ class ConfirmAttendanceController:
             if not resp:
                 return BadRequest('Failed to Confirm Attendance.')
 
+            self.observability.log_controller_out(input=json.dumps({
+                "requester_user":request.data.get('requester_user'),
+                "code":request.data.get('code'),
+                "confirmation_code":request.data.get('confirmation_code')
+            }))
             return OK('Success to Confirm Attendance!')
 
         except NoItemsFound as err:
             message = err.message.lower()
-
+            self.observability.log_exception(message=err.message)
             if message == "enrollment":
                 return NotFound(body=f"Inscrição não encontrada")
 
@@ -48,12 +57,13 @@ class ConfirmAttendanceController:
 
             else:
                 return NotFound(body=f"{message} não encontrada")
+            
         except MissingParameters as err:
-
+            self.observability.log_exception(message=err.message)
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
-
+            self.observability.log_exception(message=err.message)
             message = err.message.lower()
 
             if message == "not_enrolled":
@@ -78,13 +88,13 @@ class ConfirmAttendanceController:
                 return Forbidden(body=f"Ação não permitida: {err.message}")
 
         except DuplicatedItem as err:
-
+            self.observability.log_exception(message=err.message)
             return BadRequest(body=err.message)
 
         except EntityError as err:
-
+            self.observability.log_exception(message=err.message)
             return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
-
+            self.observability.log_exception(message=err.args[0])
             return InternalServerError(body=err.args[0])
