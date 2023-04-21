@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+
 
 from aws_cdk import (
     # Duration,
@@ -15,6 +17,7 @@ from .lambda_stack import LambdaStack
 from .open_close_stack import OpenCloseStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
+load_dotenv()
 
 class IacStack(Stack):
     lambda_stack: LambdaStack
@@ -69,7 +72,7 @@ class IacStack(Stack):
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=auth)
 
-        self.event_bridge = EventBridgeStack(self, "SmileEventBridge", environment_variables=ENVIRONMENT_VARIABLES, lambda_layer=self.lambda_stack.lambda_layer)
+        self.event_bridge = EventBridgeStack(self, "SmileEventBridge", environment_variables=ENVIRONMENT_VARIABLES, lambda_layer=self.lambda_stack.lambda_layer, power_tools_layer=self.lambda_stack.lambda_power_tools)
 
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.event_bridge.close_activity_date_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.event_bridge.send_notification_function)
@@ -172,7 +175,7 @@ class IacStack(Stack):
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.generate_certificate_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.get_certificate_function)
 
-        self.open_close_stack = OpenCloseStack(self, "SmileOpenClose", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer)
+        self.open_close_stack = OpenCloseStack(self, "SmileOpenClose", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer, power_tools_layer=self.lambda_stack.lambda_power_tools)
 
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.open_all_activities_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.close_all_activities_function)

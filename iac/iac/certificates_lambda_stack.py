@@ -1,11 +1,16 @@
 import os
 
+from dotenv import load_dotenv
+
 from aws_cdk import (
     aws_lambda as lambda_,
     Duration,
 )
 from constructs import Construct
 from aws_cdk.aws_apigateway import Resource, LambdaIntegration, CognitoUserPoolsAuthorizer, Cors
+
+load_dotenv()
+
 class CertificatesLambdaStack(Construct):
 
     def __init__(self, scope: Construct, api_gateway_resource: Resource, environment_variables: dict, authorizer: CognitoUserPoolsAuthorizer) -> None:

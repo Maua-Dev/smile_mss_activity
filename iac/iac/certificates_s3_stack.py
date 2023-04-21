@@ -1,5 +1,7 @@
 import os
 
+from dotenv import load_dotenv
+
 from aws_cdk import (
     # Duration,
     CfnOutput, Stack, aws_cognito,
@@ -12,6 +14,9 @@ from aws_cdk import (
     aws_iam as iam,
 )
 from constructs import Construct
+
+
+load_dotenv()
 
 class CertificatesS3Stack(Stack):
 
