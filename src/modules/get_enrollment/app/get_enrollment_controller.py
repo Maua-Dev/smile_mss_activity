@@ -1,3 +1,5 @@
+import json
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound
@@ -10,11 +12,14 @@ from .get_enrollment_viewmodel import GetEnrollmentViewmodel
 
 class GetEnrollmentController:
 
-    def __init__(self, usecase: GetEnrollmentUsecase):
+    def __init__(self, usecase: GetEnrollmentUsecase, observability: IObservability):
         self.GetEnrollmentUsecase = usecase
+        self.observability = observability
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
+            self.observability.log_controller_in()
+            
             if request.data.get('requester_user') is None:
                 raise MissingParameters('requester_user')
 
@@ -29,10 +34,15 @@ class GetEnrollmentController:
             )
 
             viewmodel = GetEnrollmentViewmodel(enrollment, requester_user)
+            response = OK(viewmodel.to_dict())
+            self.observability.log_controller_out(input=json.dumps(response.body))
+            
 
-            return OK(viewmodel.to_dict())
+            return response
 
         except NoItemsFound as err:
+            self.observability.log_exception(message=err.message)
+            
             message = err.message.lower()
 
             if message == "enrollment":
@@ -48,15 +58,18 @@ class GetEnrollmentController:
                 return NotFound(body=f"{message} não encontrada")
 
         except MissingParameters as err:
+            self.observability.log_exception(message=err.message)
 
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
        
 
         except EntityError as err:
+            self.observability.log_exception(message=err.message)
 
             return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
+            self.observability.log_exception(message=err.args[0])
 
             return InternalServerError(body=err.args[0])

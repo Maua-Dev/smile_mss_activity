@@ -27,7 +27,7 @@ class EnrollActivityUsecase:
         activity = self.repo.get_activity(code=code)
         if activity is None:
             raise NoItemsFound('Activity')
-
+ 
         if not activity.accepting_new_enrollments:
             raise ClosedActivity("Activity")
 

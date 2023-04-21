@@ -8,7 +8,7 @@ from src.shared.infra.repositories.activity_repository_mock import ActivityRepos
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 observability = ObservabilityMock(module_name="enroll_activity")
-
+ 
 class Test_EnrollActivityController:
 
     @freeze_time("2022-12-01")

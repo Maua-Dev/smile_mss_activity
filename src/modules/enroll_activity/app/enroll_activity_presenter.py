@@ -4,7 +4,7 @@ from .enroll_activity_controller import EnrollActivityController
 from .enroll_activity_usecase import EnrollActivityUsecase
 
 observability = Environments.get_observability()(module_name="enroll_activity")
-
+ 
 repo = Environments.get_activity_repo()()
 usecase = EnrollActivityUsecase(repo, observability=observability)
 controller = EnrollActivityController(usecase, observability=observability)

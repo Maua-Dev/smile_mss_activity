@@ -10,7 +10,7 @@ from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .enroll_activity_usecase import EnrollActivityUsecase
 from .enroll_activity_viewmodel import EnrollActivityViewmodel
 
-
+ 
 class EnrollActivityController:
 
     def __init__(self, usecase: EnrollActivityUsecase, observability: IObservability):
