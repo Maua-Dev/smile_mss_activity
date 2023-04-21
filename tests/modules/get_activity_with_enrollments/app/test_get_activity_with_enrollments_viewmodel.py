@@ -2,17 +2,19 @@ from src.modules.get_activity_with_enrollments.app.get_activity_with_enrollments
     GetActivityWithEnrollmentsUsecase
 from src.modules.get_activity_with_enrollments.app.get_activity_with_enrollments_viewmodel import \
     GetActivityWithEnrollmentsViewmodel
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock \
     import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="get_activity_with_enrollments")
 
 class Test_GetActivityWithEnrollmentsViewmodel:
 
     def test_get_activity_with_enrollments_viewmodel(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetActivityWithEnrollmentsUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = GetActivityWithEnrollmentsUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         activity_with_enrollments = usecase(user=repo_user.users[2], code=repo_activity.activities[0].code)
         viewmodel = GetActivityWithEnrollmentsViewmodel(activity_with_enrollments)
 
@@ -130,7 +132,7 @@ class Test_GetActivityWithEnrollmentsViewmodel:
     def test_get_activity_with_enrollments_viewmodel_no_slots_taken(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetActivityWithEnrollmentsUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = GetActivityWithEnrollmentsUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         activity_with_enrollments = usecase(user=repo_user.users[2], code=repo_activity.activities[8].code)
         viewmodel = GetActivityWithEnrollmentsViewmodel(activity_with_enrollments)
 
