@@ -6,17 +6,19 @@ from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="update_activity")
 
 class Test_UpdateActivityUsecase:
 
     def test_update_activity(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
                                   new_description='nova descricao',
                                   new_activity_type=ACTIVITY_TYPE.LECTURES,
@@ -59,7 +61,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_usecase_different_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
                                   new_description='nova descricao',
                                   new_activity_type=ACTIVITY_TYPE.LECTURES,
@@ -102,7 +104,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_usecase_one_parameter(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         old_activity = repo_activity.activities[0]
         update_activity = usecase(code=repo_activity.activities[0].code,
                                   new_title="NOVO TITULO",
@@ -143,7 +145,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_new_activity_invalid_enum(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         with pytest.raises(EntityError):
             update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
                                       new_description='nova descricao',
@@ -169,7 +171,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_invalid_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(EntityError):
             update_activity = usecase(code=555, new_title="NOVO TITULO", new_description='nova descricao',
@@ -195,7 +197,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_invalid_title(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(EntityError):
             update_activity = usecase(code=repo_activity.activities[0].code, new_title=123, new_description='nova descricao',
@@ -221,7 +223,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_is_not_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(NoItemsFound):
             update_activity = usecase(code=repo_activity.activities[0].code + "1", new_title="NOVO TITULO",
@@ -248,7 +250,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_invalid_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(EntityError):
             update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
@@ -275,7 +277,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_invalid_responsible_professors_not_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(NoItemsFound):
             update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
@@ -302,7 +304,7 @@ class Test_UpdateActivityUsecase:
     def test_update_activity_usecase_forbidden_requester_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         old_activity = repo_activity.activities[0]
         with pytest.raises(ForbiddenAction):
             update_activity = usecase(code=repo_activity.activities[0].code,

@@ -1,21 +1,21 @@
-import datetime
-
 import pytest
 
 from src.modules.update_activity.app.update_activity_controller import UpdateActivityController
 from src.modules.update_activity.app.update_activity_usecase import UpdateActivityUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="update_activity")
 
 class Test_UpdateActivityController:
 
     def test_update_activity_controller(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -66,8 +66,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={
             "new_title": "Clean Architecture code review!",
@@ -97,8 +97,8 @@ class Test_UpdateActivityController:
     def test_update_activity_controller_activity_not_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM23451",
@@ -130,8 +130,8 @@ class Test_UpdateActivityController:
     def test_update_activity_controller_invalid_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": 2345,
@@ -163,8 +163,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_title(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -195,8 +195,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_description(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -227,8 +227,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_activity_type(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -259,8 +259,8 @@ class Test_UpdateActivityController:
     def test_update_activity_invalid_new_activity_type(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -292,8 +292,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_is_extensive(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -324,8 +324,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_delivery_model(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -356,8 +356,8 @@ class Test_UpdateActivityController:
     def test_update_activity_invalid_new_delivery_model(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -389,8 +389,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_start_date(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -421,8 +421,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_duration(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -453,8 +453,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -485,8 +485,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_speakers(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -513,8 +513,8 @@ class Test_UpdateActivityController:
     def test_update_activity_controller_professor_not_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -546,8 +546,8 @@ class Test_UpdateActivityController:
     def test_update_activity_controller_invalid_responsible_professors_int(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -579,8 +579,8 @@ class Test_UpdateActivityController:
     def test_update_activity_invalid_new_speakers(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -608,8 +608,8 @@ class Test_UpdateActivityController:
     def test_update_activity_invalid_entity_new_speakers(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -642,8 +642,8 @@ class Test_UpdateActivityController:
     def test_update_activity_new_speakers_not_dict(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -672,8 +672,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_total_slots(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -704,8 +704,8 @@ class Test_UpdateActivityController:
     def test_update_activity_missing_new_accepting_new_enrollments(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -736,8 +736,8 @@ class Test_UpdateActivityController:
     def test_update_activity_controller_missing_request_user(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
@@ -771,8 +771,8 @@ class Test_UpdateActivityController:
     def test_update_activity_controller_forbidden_user_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity, repo_user)
-        controller = UpdateActivityController(usecase)
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
         request = HttpRequest(
             body={"code": "ECM2345",
