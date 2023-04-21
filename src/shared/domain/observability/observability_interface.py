@@ -49,7 +49,7 @@ class IObservability(ABC):
         1. calculate the processing time of the presenter
         2. use the @tracer.capture_method to trace the presenter
         """
-        def presenter_wrapper(event):    
+        def presenter_wrapper(event, context):    
             pass
         pass
     

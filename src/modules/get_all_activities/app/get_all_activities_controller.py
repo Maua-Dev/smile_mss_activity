@@ -21,5 +21,5 @@ class GetAllActivitiesController:
             return OK(viewmodel.to_dict())
 
         except Exception as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(message=err.args[0])
             return InternalServerError(body=err.args[0])

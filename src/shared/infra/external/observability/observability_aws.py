@@ -43,10 +43,10 @@ class ObservabilityAWS(IObservability):
 
     def presenter_decorators(self, presenter) -> None:
         @self.tracer.capture_method
-        def presenter_wrapper(event):    
+        def presenter_wrapper(event, context):    
             start_time = time.monotonic() # Start - ProcessingTime metrics
             
-            response = presenter(event)
+            response = presenter(event, context)
             
             end_time = time.monotonic()
             processing_time_ms = (end_time - start_time) * 10**3

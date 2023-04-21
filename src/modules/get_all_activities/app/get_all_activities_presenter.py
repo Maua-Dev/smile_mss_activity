@@ -10,7 +10,7 @@ usecase = GetAllActivitiesUsecase(repo, observability=observability)
 controller = GetAllActivitiesController(usecase, observability=observability)
 
 @observability.presenter_decorators
-def get_user_presenter(event, context):
+def get_all_activities_presenter(event, context):
     httpRequest = LambdaHttpRequest(data=event)
     response = controller(httpRequest)
     httpResponse = LambdaHttpResponse(
@@ -21,7 +21,7 @@ def get_user_presenter(event, context):
 @observability.handler_decorators
 def lambda_handler(event, context):
     
-    response = get_user_presenter(event, context)
+    response = get_all_activities_presenter(event, context)
     observability.add_error_count_metric(response["statusCode"]) # ErrorCount metrics
     
     return response
