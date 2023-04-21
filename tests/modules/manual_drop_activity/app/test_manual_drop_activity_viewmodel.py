@@ -1,8 +1,10 @@
 from src.modules.manual_drop_activity.app.manual_drop_activity_usecase import ManualDropActivityUsecase
 from src.modules.manual_drop_activity.app.manual_drop_activity_viewmodel import ManualDropActivityViewmodel
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="manual_drop_activity")
 
 class Test_ManualDropActivityViewmodel:
     def test_get_activity_with_enrollments_viewmodel_disconfirming(self):
@@ -10,7 +12,7 @@ class Test_ManualDropActivityViewmodel:
         repo_user = UserRepositoryMock()
         enrollment = repo_activity.enrollments[0]
         requester_user = repo_user.users[0]
-        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         activity_dict_with_enrollments = usecase(code=enrollment.activity_code, requester_user=requester_user,
                                                  user_id=enrollment.user_id)
 
