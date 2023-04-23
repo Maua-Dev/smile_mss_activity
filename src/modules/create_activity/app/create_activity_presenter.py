@@ -23,6 +23,5 @@ def create_activity_presenter(event, context):
 def lambda_handler(event, context):
     
     response = create_activity_presenter(event, context)
-    observability.add_error_count_metric(response["statusCode"]) # ErrorCount metrics
     
     return response

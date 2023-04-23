@@ -23,6 +23,6 @@ def get_enrollments_by_user_presenter(event, context):
 def lambda_handler(event, context):
     
     response = get_enrollments_by_user_presenter(event, context)
-    observability.add_error_count_metric(response["statusCode"]) # ErrorCount metrics
+    
     
     return response

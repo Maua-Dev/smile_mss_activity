@@ -25,6 +25,6 @@ def generate_attendance_confirmation_presenter(event, context):
 def lambda_handler(event, context):
     
     response = generate_attendance_confirmation_presenter(event, context)
-    observability.add_error_count_metric(response["statusCode"]) # ErrorCount metrics
+    
     
     return response

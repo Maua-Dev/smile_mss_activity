@@ -52,6 +52,8 @@ class IObservability(ABC):
     def add_error_count_metric(self, statusCode:int) -> None:
         pass
             
+            
+    
     @abstractmethod
     def presenter_decorators(self, presenter) -> None:
         """
