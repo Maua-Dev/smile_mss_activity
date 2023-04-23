@@ -41,6 +41,7 @@ class ConfirmAttendanceController:
                 "code":request.data.get('code'),
                 "confirmation_code":request.data.get('confirmation_code')
             }))
+            self.observability.add_confirm_attendance_count_metric()
             return OK('Success to Confirm Attendance!')
 
         except NoItemsFound as err:
