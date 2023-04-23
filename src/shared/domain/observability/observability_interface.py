@@ -33,9 +33,17 @@ class IObservability(ABC):
         pass
     
     @abstractmethod
-    def log_exception(self, message: str) -> None:
+    def log_exception(self, status_code: int, exception_name: str, message: str) -> None:
         pass
             
+    @abstractmethod
+    def log_simple_lambda_in(self) -> None:
+        pass
+    
+    @abstractmethod
+    def log_simple_lambda_out(self) -> None:
+        pass
+    
     @abstractmethod
     def _add_metric(self, name: str, unit: str, value: float) -> None:
         pass

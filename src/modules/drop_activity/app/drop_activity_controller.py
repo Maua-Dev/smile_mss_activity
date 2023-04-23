@@ -39,7 +39,7 @@ class DropActivityController:
             return response
 
         except NoItemsFound as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=404, exception_name="NoItemsFound", message=err.message)
             message = err.message.lower()
 
             if message == "enrollment":
@@ -54,25 +54,25 @@ class DropActivityController:
             else:
                 return NotFound(body=f"{message} não encontrada")
         except MissingParameters as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=400, exception_name="MissingParameters", message=err.message)
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except UserAlreadyCompleted as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=403, exception_name="UserAlreadyCompleted", message=err.message)
             return Forbidden(body=f"Usuário já completou a atividade")
 
         except ForbiddenAction as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=403, exception_name="ForbiddenAction", message=err.message)
             return Forbidden(body="Impossível desinscrever usuário de atividade que não está inscrito")
 
         except ActivityEnded as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=403, exception_name="ActivityEnded", message=err.message)
             return Forbidden(body="Impossível desinscrever usuário de atividade que já foi encerrada")
 
         except EntityError as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=400, exception_name="EntityError", message=err.message)
             return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
-            self.observability.log_exception(message=err.args[0])
+            self.observability.log_exception(status_code=500, exception_name="Exception", message=err.args[0])
             return InternalServerError(body=err.args[0])

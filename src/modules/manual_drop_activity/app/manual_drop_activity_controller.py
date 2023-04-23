@@ -43,7 +43,7 @@ class ManualDropActivityController:
             return response
 
         except NoItemsFound as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=404, exception_name="NoItemsFound", message=err.message)
 
             message = err.message.lower()
 
@@ -67,21 +67,21 @@ class ManualDropActivityController:
                 return NotFound(body=f"{message} não encontrada")
 
         except ForbiddenAction as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=403, exception_name="ForbiddenAction", message=err.message)
 
             return Forbidden(body='Usuário não inscrito na atividade' if err.message == 'enrollment' else 'Apenas professores responsáveis da atividade e administradores podem desinscrever usuários')
 
         except EntityError as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=400, exception_name="EntityError", message=err.message)
 
             return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except MissingParameters as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=400, exception_name="MissingParameters", message=err.message)
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except Exception as err:
-            self.observability.log_exception(message=err.args[0])
+            self.observability.log_exception(status_code=500, exception_name=err.__class__.__name__, message=err.args[0])
 
             return InternalServerError(body=err.args[0])
 

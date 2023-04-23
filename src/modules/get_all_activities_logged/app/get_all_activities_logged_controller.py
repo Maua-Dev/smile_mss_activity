@@ -32,10 +32,10 @@ class GetAllActivitiesLoggedController:
             return OK(viewmodel.to_dict())
 
         except MissingParameters as err:
-            self.observability.log_exception(message=err.message)
+            self.observability.log_exception(status_code=400, exception_name="MissingParameters", message=err.message)
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except Exception as err:
-            self.observability.log_exception(message=err.args[0])
+            self.observability.log_exception(status_code=500, exception_name=err.__class__.__name__, message=err.args[0])
             
             return InternalServerError(body=err.args[0])

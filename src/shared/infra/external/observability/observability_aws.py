@@ -32,14 +32,26 @@ class ObservabilityAWS(IObservability):
     def log_usecase_out(self) -> None:
         self._log_info("Out of Usecase")
             
-    def log_exception(self, message: str) -> None:
-        self.logger.exception(message)
+    def log_exception(self, status_code: int, exception_name: str, message: str) -> None:
+        self.logger.exception(
+            {
+                "statusCode": status_code,
+                "name": exception_name,
+                "message": message
+            }
+        )
+    
+    def log_simple_lambda_in(self) -> None:
+        self._log_info("In Lambda")
+    
+    def log_simple_lambda_out(self) -> None:
+        self._log_info("Out of Lambda")
             
     def _add_metric(self, name: str, unit: str, value: float) -> None:
         self.metrics.add_metric(name, unit, value)
         
     def add_error_count_metric(self, statusCode:int) -> None:
-        self._add_metric(name="ErrorCount", unit="Count", value=1) if statusCode != 200 else None # ErrorCount metrics
+        self._add_metric(name="ErrorCount", unit="Count", value=1) if statusCode not in [200, 201] else None # ErrorCount metrics
 
     def presenter_decorators(self, presenter) -> None:
         @self.tracer.capture_method

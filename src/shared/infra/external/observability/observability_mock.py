@@ -23,8 +23,14 @@ class ObservabilityMock(IObservability):
     def log_usecase_out(self) -> None:
         self._log_info("Out of Usecase")
             
-    def log_exception(self, message: str) -> None:
-        print("Exception message: " + message)
+    def log_exception(self, status_code: int, exception_name: str, message: str) -> None:
+        print(f"{exception_name} with status code {status_code} was raised because {message}")
+        
+    def log_simple_lambda_in(self) -> None:
+        print("In Lambda")
+    
+    def log_simple_lambda_out(self) -> None:
+        print("Out of Lambda")
             
     def _add_metric(self, name: str, unit: str, value: float) -> None:
         print(f"Metric {name} added with value {value} in {unit}")
