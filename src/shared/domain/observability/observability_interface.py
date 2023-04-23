@@ -65,6 +65,10 @@ class IObservability(ABC):
         pass
     
     @abstractmethod
+    def add_email_notifications_count_metric(self) -> None:
+        pass
+    
+    @abstractmethod
     def presenter_decorators(self, presenter) -> None:
         """
         this decorator have the following responsabilities:

@@ -61,6 +61,9 @@ class ObservabilityAWS(IObservability):
 
     def add_get_all_activities_count_metric(self) -> None:
         self._add_metric(name="GetAllActivitiesCount", unit="Count", value=1)
+        
+    def add_email_notifications_count_metric(self) -> None:
+        self._add_metric(name="EmailNotificationsCount", unit="Count", value=1)
 
     def presenter_decorators(self, presenter) -> None:
         @self.tracer.capture_method
