@@ -46,7 +46,7 @@ def get_certificates_presenter(event, context):
         requester_user = httpRequest.data['requester_user']
 
         if not requester_user:
-            observability.log_exception(message=err.message)
+            observability.log_exception(status_code=400, exception_name="MissingParameters", message=err.message)
             return LambdaHttpResponse(status_code=400, body="Parâmetro ausente: requester_user").toDict()
         email = requester_user.get('email')
 
@@ -65,7 +65,7 @@ def get_certificates_presenter(event, context):
         return LambdaHttpResponse(status_code=200, body={"certificates": response}).toDict()
 
     except Exception as err:
-        observability.log_exception(message="Error 500 - "+err.args[0])
+        observability.log_exception(status_code=500, exception_name=err.__class__.__name__, message=err.args[0])
         return LambdaHttpResponse(status_code=500, body=err.args[0]).toDict()
 
 @observability.handler_decorators

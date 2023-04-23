@@ -48,7 +48,7 @@ def close_activity_by_date_presenter(event, context):
             'body': json.dumps('Inscrições fechadas com sucesso')
         }
     except Exception as err:
-        observability.log_exception(message="Error 500 - "+err.args[0])
+        observability.log_exception(status_code=500, exception_name=err.__class__.__name__, message=err.args[0])
         response = InternalServerError(body=err.args[0])
         httpResponse = LambdaHttpResponse(status_code=response.status_code, body=response.body, headers=response.headers)
         return httpResponse.toDict()
