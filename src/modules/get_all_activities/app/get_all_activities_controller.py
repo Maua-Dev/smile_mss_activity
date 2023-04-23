@@ -18,6 +18,7 @@ class GetAllActivitiesController:
 
             viewmodel = GetAllActivitiesViewmodel(all_activities)
             self.observability.log_controller_out(input='')
+            self.observability.add_get_all_activities_count_metric()
             return OK(viewmodel.to_dict())
 
         except Exception as err:

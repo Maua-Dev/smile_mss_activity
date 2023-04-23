@@ -52,7 +52,17 @@ class IObservability(ABC):
     def add_confirm_attendance_count_metric(self) -> None:
         pass
             
-            
+    @abstractmethod
+    def add_drop_activity_count_metric(self) -> None:
+        pass   
+    
+    @abstractmethod
+    def add_enroll_activity_count_metric(self) -> None:
+        pass      
+    
+    @abstractmethod
+    def add_get_all_activities_count_metric(self) -> None:
+        pass
     
     @abstractmethod
     def presenter_decorators(self, presenter) -> None:

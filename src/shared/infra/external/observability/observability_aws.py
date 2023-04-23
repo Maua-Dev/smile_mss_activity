@@ -53,6 +53,15 @@ class ObservabilityAWS(IObservability):
     def add_confirm_attendance_count_metric(self) -> None:
         self._add_metric(name="ConfirmAttendanceCount", unit="Count", value=1)
 
+    def add_drop_activity_count_metric(self) -> None:
+        self._add_metric(name="DropActivityCount", unit="Count", value=1)
+
+    def add_enroll_activity_count_metric(self) -> None:
+        self._add_metric(name="EnrollActivityCount", unit="Count", value=1)
+
+    def add_get_all_activities_count_metric(self) -> None:
+        self._add_metric(name="GetAllActivitiesCount", unit="Count", value=1)
+
     def presenter_decorators(self, presenter) -> None:
         @self.tracer.capture_method
         def presenter_wrapper(event, context):    
