@@ -26,7 +26,7 @@ aws_region = os.environ.get("AWS_REGION")
 aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
 stack_name = os.environ.get("STACK_NAME")
 
-IacStack(app, stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region))
-CertificatesS3Stack(app, f"{stack_name}-certificates-s3", env=cdk.Environment(account=aws_account_id, region=aws_region))
+IacStack(app, stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region), tags={"test": "test"})
+CertificatesS3Stack(app, f"{stack_name}-certificates-s3", env=cdk.Environment(account=aws_account_id, region=aws_region), tags={"test": "test"})
 
 app.synth()
