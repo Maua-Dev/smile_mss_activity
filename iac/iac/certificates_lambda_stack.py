@@ -1,6 +1,5 @@
 import os
 
-from dotenv import load_dotenv
 
 from aws_cdk import (
     aws_lambda as lambda_,
@@ -9,7 +8,6 @@ from aws_cdk import (
 from constructs import Construct
 from aws_cdk.aws_apigateway import Resource, LambdaIntegration, CognitoUserPoolsAuthorizer, Cors
 
-load_dotenv()
 
 class CertificatesLambdaStack(Construct):
 

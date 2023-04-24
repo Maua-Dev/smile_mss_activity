@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 
 
 from aws_cdk import (
@@ -17,7 +16,6 @@ from .lambda_stack import LambdaStack
 from .open_close_stack import OpenCloseStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
-load_dotenv()
 
 class IacStack(Stack):
     lambda_stack: LambdaStack

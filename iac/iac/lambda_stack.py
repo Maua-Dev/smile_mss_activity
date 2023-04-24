@@ -1,7 +1,6 @@
 
 import os
 
-from dotenv import load_dotenv
 from aws_cdk import (
     aws_lambda as lambda_,
     NestedStack, Duration
@@ -9,7 +8,6 @@ from aws_cdk import (
 from constructs import Construct
 from aws_cdk.aws_apigateway import Resource, LambdaIntegration, CognitoUserPoolsAuthorizer
 
-load_dotenv()
 
 class LambdaStack(Construct):
 

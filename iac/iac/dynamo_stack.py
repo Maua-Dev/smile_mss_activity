@@ -1,6 +1,5 @@
 import os
 
-from dotenv import load_dotenv
 
 from aws_cdk import (
     CfnOutput,
@@ -10,8 +9,6 @@ from aws_cdk import (
 from constructs import Construct
 from aws_cdk.aws_apigateway import Resource, LambdaIntegration
 
-
-load_dotenv()
 
 
 class DynamoStack(Construct):
