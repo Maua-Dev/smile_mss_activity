@@ -65,7 +65,7 @@ class IObservability(ABC):
         pass
     
     @abstractmethod
-    def add_email_notifications_count_metric(self) -> None:
+    def add_user_email_notified_count_metric(self) -> None:
         pass
     
     @abstractmethod
