@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from datetime import datetime, timezone, timedelta
 from typing import List
 
@@ -402,6 +403,7 @@ def compose_html(activity: Activity, user: UserInfo):
 def send_email_notification(activity: Activity, users: List[UserInfo], observability: IObservability):
     try:
         for user in users:
+            time.sleep(0.18)
             if not type(user) == UserInfo or user.email is None or user.accepted_notifications_email is False:
                 continue
                 
