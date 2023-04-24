@@ -2,9 +2,11 @@ from src.modules.get_all_activities_logged.app.get_all_activities_logged_usecase
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="get_all_activities_logged")
 
 class Test_GetAllActivitiesLoggedUsecase:
     def test_get_all_activities_logged(self):
@@ -13,7 +15,7 @@ class Test_GetAllActivitiesLoggedUsecase:
 
         requester_user = repo_user.users[2]
 
-        usecase = GetAllActivitiesLoggedUsecase(repo_activity)
+        usecase = GetAllActivitiesLoggedUsecase(repo_activity, observability=observability)
 
         activities_logged = usecase(requester_user.user_id)
 

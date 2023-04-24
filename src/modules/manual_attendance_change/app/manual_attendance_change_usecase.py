@@ -2,6 +2,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -9,11 +10,13 @@ from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFou
 
 
 class ManualAttendanceChangeUsecase:
-    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository, observability: IObservability):
         self.repo_activity = repo_activity
         self.repo_user = repo_user
+        self.observability = observability
 
     def __call__(self, code: str, requester_user: User, user_id: str, new_state: ENROLLMENT_STATE):
+        self.observability.log_usecase_in()
 
         if not Activity.validate_activity_code(code):
             raise EntityError("activity_code")
@@ -76,5 +79,6 @@ class ManualAttendanceChangeUsecase:
                 (enrollment, users_dict.get(enrollment.user_id, "NOT_FOUND")) for enrollment in enrollments
                 ]
         }
+        self.observability.log_usecase_out()
 
         return activity_dict

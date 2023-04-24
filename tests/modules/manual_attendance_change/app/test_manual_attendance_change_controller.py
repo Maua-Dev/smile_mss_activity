@@ -3,18 +3,20 @@ from src.modules.manual_attendance_change.app.manual_attendance_change_controlle
 from src.modules.manual_attendance_change.app.manual_attendance_change_usecase import ManualAttendanceChangeUsecase
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="manual_attendance_change")
 
 class Test_ManualAttendanceChangeController:
 
 
-    def test_manual_attendance_controller(self):
+    def test_manual_attendance_change_controller(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -36,8 +38,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_disconfirming(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[29]
@@ -59,8 +61,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_missing_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -80,8 +82,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_missing_requester_user(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -100,8 +102,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_missing_user_id(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -123,8 +125,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_missing_new_state(self):
             repo_activity = ActivityRepositoryMock()
             repo_user = UserRepositoryMock()
-            usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-            controller = ManualAttendanceChangeController(usecase)
+            usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+            controller = ManualAttendanceChangeController(usecase, observability=observability)
 
             requester_user = repo_user.users[2]
             enrollment = repo_activity.enrollments[0]
@@ -145,8 +147,8 @@ class Test_ManualAttendanceChangeController:
 
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -170,8 +172,8 @@ class Test_ManualAttendanceChangeController:
 
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -195,8 +197,8 @@ class Test_ManualAttendanceChangeController:
 
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -217,8 +219,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_forbidden_not_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[3]
         enrollment = repo_activity.enrollments[0]
@@ -239,8 +241,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_forbidden_not_professor_of_activity(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[10]
         enrollment = repo_activity.enrollments[0]
@@ -261,8 +263,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_activity_not_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -283,8 +285,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_enrollment_not_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -305,8 +307,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_not_valid_enrollment_status(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[5]
@@ -327,8 +329,8 @@ class Test_ManualAttendanceChangeController:
     def test_manual_attendance_controller_not_completed(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user)
-        controller = ManualAttendanceChangeController(usecase)
+        usecase = ManualAttendanceChangeUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualAttendanceChangeController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]

@@ -3,8 +3,11 @@ from freezegun import freeze_time
 from src.modules.drop_activity.app.drop_activity_controller import DropActivityController
 from src.modules.drop_activity.app.drop_activity_usecase import DropActivityUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+
+observability = ObservabilityMock(module_name="drop_activity")
 
 
 class Test_DropActivityController:
@@ -13,8 +16,8 @@ class Test_DropActivityController:
     def test_drop_activity_controller(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'code': repo_activity.enrollments[7].activity_code, 'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
         reponse = controller(request)
@@ -29,8 +32,8 @@ class Test_DropActivityController:
     def test_drop_activity_controller_missing_user_id(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'code': repo_activity.enrollments[7].activity_code})
 
@@ -44,8 +47,8 @@ class Test_DropActivityController:
     def test_drop_activity_controller_missing_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
@@ -59,8 +62,8 @@ class Test_DropActivityController:
     def test_drop_activity_controller_forbbiden_action(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'code': repo_activity.enrollments[10].activity_code, 'requester_user': {"sub": repo_user.users[4].user_id, "name": repo_user.users[4].name, "custom:role": repo_user.users[4].role.value}})
 
@@ -74,8 +77,8 @@ class Test_DropActivityController:
     def test_drop_activity_controller_activity_not_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'code': 'CODIGO_INEXISTENTE', 'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
@@ -89,8 +92,8 @@ class Test_DropActivityController:
     def test_drop_activity_controller_no_enrollment_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'code': repo_activity.enrollments[7].activity_code, 'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
@@ -104,8 +107,8 @@ class Test_DropActivityController:
     def test_drop_activity_invalid_user_id(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'code': repo_activity.enrollments[7].activity_code, 'requester_user': {"sub": '1', "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
@@ -118,8 +121,8 @@ class Test_DropActivityController:
     def test_drop_activity_invalid_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'user_id': repo_activity.enrollments[7].user_id, 'code': 1, 'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 
@@ -132,8 +135,8 @@ class Test_DropActivityController:
     def test_drop_activity_already_completed(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DropActivityUsecase(repo_activity, repo_user)
-        controller = DropActivityController(usecase)
+        usecase = DropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = DropActivityController(usecase, observability=observability)
 
         request = HttpRequest(body={'code': repo_activity.enrollments[30].activity_code, 'requester_user': {"sub": repo_user.users[1].user_id, "name": repo_user.users[1].name, "custom:role": repo_user.users[1].role.value}})
 

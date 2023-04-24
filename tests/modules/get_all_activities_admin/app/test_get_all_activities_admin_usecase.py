@@ -5,16 +5,18 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="get_all_activites_admin")
 
 class Test_GetAllActivitiesAdminUsecase:
     def test_get_all_activities_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetAllActivitiesAdminUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = GetAllActivitiesAdminUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         all_activities_dict = usecase(repo_user.users[0])
 
         assert len(all_activities_dict) == len(repo_activity.activities)
@@ -30,7 +32,7 @@ class Test_GetAllActivitiesAdminUsecase:
     def test_get_all_activities_admin_forbidden_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetAllActivitiesAdminUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = GetAllActivitiesAdminUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(ForbiddenAction):
             all_activities_with_enrollments = usecase(repo_user.users[1])

@@ -1,17 +1,19 @@
 from src.modules.get_enrollment.app.get_enrollment_controller import GetEnrollmentController
 from src.modules.get_enrollment.app.get_enrollment_usecase import GetEnrollmentUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="get_enrollment")
 
 class Test_GetEnrollmentController:
     def test_get_enrollment_controller(self):
 
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetEnrollmentUsecase(repo)
-        controller = GetEnrollmentController(usecase)
+        usecase = GetEnrollmentUsecase(repo, observability=observability)
+        controller = GetEnrollmentController(usecase, observability=observability)
         request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code}, body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
         response = controller(request)
@@ -27,8 +29,8 @@ class Test_GetEnrollmentController:
 
             repo = ActivityRepositoryMock()
             repo_user = UserRepositoryMock()
-            usecase = GetEnrollmentUsecase(repo)
-            controller = GetEnrollmentController(usecase)
+            usecase = GetEnrollmentUsecase(repo, observability=observability)
+            controller = GetEnrollmentController(usecase, observability=observability)
             request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code})
 
             response = controller(request)
@@ -40,8 +42,8 @@ class Test_GetEnrollmentController:
 
                 repo = ActivityRepositoryMock()
                 repo_user = UserRepositoryMock()
-                usecase = GetEnrollmentUsecase(repo)
-                controller = GetEnrollmentController(usecase)
+                usecase = GetEnrollmentUsecase(repo, observability=observability)
+                controller = GetEnrollmentController(usecase, observability=observability)
                 request = HttpRequest(query_params={}, body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
                 response = controller(request)
@@ -53,8 +55,8 @@ class Test_GetEnrollmentController:
 
                     repo = ActivityRepositoryMock()
                     repo_user = UserRepositoryMock()
-                    usecase = GetEnrollmentUsecase(repo)
-                    controller = GetEnrollmentController(usecase)
+                    usecase = GetEnrollmentUsecase(repo, observability=observability)
+                    controller = GetEnrollmentController(usecase, observability=observability)
                     request = HttpRequest(query_params={'code': repo.enrollments[0].activity_code}, body={'requester_user': {"sub": "repo_user.users[0].user_id", "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
                     response = controller(request)
@@ -66,8 +68,8 @@ class Test_GetEnrollmentController:
 
                 repo = ActivityRepositoryMock()
                 repo_user = UserRepositoryMock()
-                usecase = GetEnrollmentUsecase(repo)
-                controller = GetEnrollmentController(usecase)
+                usecase = GetEnrollmentUsecase(repo, observability=observability)
+                controller = GetEnrollmentController(usecase, observability=observability)
                 request = HttpRequest(query_params={'code': 'ECM2345'}, body={'requester_user': {"sub": "0000-0000-00000-000000-0000000-00000", "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
                 response = controller(request)
@@ -79,8 +81,8 @@ class Test_GetEnrollmentController:
 
                 repo = ActivityRepositoryMock()
                 repo_user = UserRepositoryMock()
-                usecase = GetEnrollmentUsecase(repo)
-                controller = GetEnrollmentController(usecase)
+                usecase = GetEnrollmentUsecase(repo, observability=observability)
+                controller = GetEnrollmentController(usecase, observability=observability)
                 request = HttpRequest(query_params={'code': 'ECM2341'}, body={'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}})
 
                 response = controller(request)

@@ -6,7 +6,7 @@ from aws_cdk import (
 
 
 class OpenCloseStack(Construct):
-    def __init__(self, scope: Construct, id: str,  environment_variables: dict, activity_layer, **kwargs) -> None:
+    def __init__(self, scope: Construct, id: str,  environment_variables: dict, activity_layer, power_tools_layer, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         self.open_all_activities_function = lambda_.Function(self, "Open_all_activities",
@@ -15,7 +15,7 @@ class OpenCloseStack(Construct):
                                                              handler="open_all_activities.lambda_handler",
                                                              runtime=lambda_.Runtime.PYTHON_3_9,
                                                              environment=environment_variables,
-                                                             layers=[activity_layer]
+                                                             layers=[activity_layer, power_tools_layer]
                                                              )
 
         self.close_all_activities_function = lambda_.Function(self, "Close_all_activities",
@@ -24,6 +24,6 @@ class OpenCloseStack(Construct):
                                                               handler="close_all_activities.lambda_handler",
                                                               runtime=lambda_.Runtime.PYTHON_3_9,
                                                               environment=environment_variables,
-                                                              layers=[activity_layer]
+                                                              layers=[activity_layer, power_tools_layer]
                                                               )
 

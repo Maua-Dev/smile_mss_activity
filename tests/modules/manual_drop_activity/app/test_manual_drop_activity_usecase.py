@@ -3,17 +3,19 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 import pytest
 
+observability = ObservabilityMock(module_name="manual_drop_activity")
 
 class Test_ManualDropActivityUsecase:
 
     def test_manual_drop_activity_usecase_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         old_activity = repo_activity.activities[1]
         requester_user = repo_user.users[0]
 
@@ -28,7 +30,7 @@ class Test_ManualDropActivityUsecase:
     def test_manual_drop_activity_usecase_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user=repo_user, observability=observability)
         old_activity = repo_activity.activities[1]
         requester_user = repo_user.users[10]
 
@@ -43,7 +45,7 @@ class Test_ManualDropActivityUsecase:
     def test_drop_activity_usecase_with_queue(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         requester_user = repo_user.users[0]
         activity_dict = usecase(repo_user.users[2].user_id, repo_activity.activities[0].code, requester_user=requester_user)
 
@@ -58,7 +60,7 @@ class Test_ManualDropActivityUsecase:
     def test_drop_activity_already_in_queue(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         requester_user = repo_user.users[0]
         activity_dict = usecase(repo_user.users[2].user_id, repo_activity.activities[0].code, requester_user=requester_user)
 
@@ -74,7 +76,7 @@ class Test_ManualDropActivityUsecase:
     def test_drop_activity_usecase_invalid_user_id(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(EntityError):
@@ -84,7 +86,7 @@ class Test_ManualDropActivityUsecase:
     def test_drop_activity_usecase_invalid_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(EntityError):
@@ -93,7 +95,7 @@ class Test_ManualDropActivityUsecase:
     def test_drop_activity_usecase_no_activity_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(NoItemsFound):
@@ -103,7 +105,7 @@ class Test_ManualDropActivityUsecase:
     def test_drop_activity_usecase_no_enrollment_found(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualDropActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(NoItemsFound):

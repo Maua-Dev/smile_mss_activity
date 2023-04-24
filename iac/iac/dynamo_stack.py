@@ -1,5 +1,6 @@
 import os
 
+
 from aws_cdk import (
     CfnOutput,
     aws_dynamodb,
@@ -7,6 +8,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 from aws_cdk.aws_apigateway import Resource, LambdaIntegration
+
 
 
 class DynamoStack(Construct):

@@ -1,16 +1,18 @@
 from src.modules.get_enrollments_by_user.app.get_enrollments_by_user_usecase import GetEnrollmentsByUserUsecase
 from src.modules.get_enrollments_by_user.app.get_enrollments_by_user_viewmodel import \
     GetEnrollmentsByUserViewmodel
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="get_enrollments_by_user")
 
-class Test_GetEnrollmentsByUserId:
+class Test_GetEnrollmentsByUserViewmodel:
 
     def test_get_enrollments_by_user_viewmodel(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetEnrollmentsByUserUsecase(repo)
+        usecase = GetEnrollmentsByUserUsecase(repo, observability=observability)
 
         list_enrollments = usecase(user_id=repo_user.users[1].user_id)
 
@@ -52,7 +54,7 @@ class Test_GetEnrollmentsByUserId:
     def test_get_enrollments_by_user_viewmodel_zero_enrollments(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetEnrollmentsByUserUsecase(repo)
+        usecase = GetEnrollmentsByUserUsecase(repo, observability=observability)
 
         list_enrollments = usecase(user_id=repo_user.users[11].user_id)
 
@@ -75,7 +77,7 @@ class Test_GetEnrollmentsByUserId:
     def test_get_enrollments_by_user_viewmodel_with_in_queue(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetEnrollmentsByUserUsecase(repo)
+        usecase = GetEnrollmentsByUserUsecase(repo, observability=observability)
 
         list_enrollments = usecase(user_id=repo_user.users[4].user_id)
 

@@ -5,16 +5,18 @@ from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFound, ForbiddenAction
 from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="delete_activity")
 
 class Test_CreateActivityUsecase:
 
     def test_create_activity_usecase(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
         activitiesLenBefore = len(repo_activity.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -55,7 +57,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_two_speakers(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
         activitiesLenBefore = len(repo_activity.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -84,7 +86,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_with_two_professors(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
         activitiesLenBefore = len(repo_activity.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -109,7 +111,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_invalid_code_int(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
         with pytest.raises(EntityError):
             usecase(code=00000, title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -130,7 +132,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_duplicated_item(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
         with pytest.raises(DuplicatedItem):
             usecase(code="ECM2345", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -151,7 +153,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_invalid_speaker(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
         with pytest.raises(EntityError):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -177,7 +179,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_invalid_speaker_not_speaker(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
         with pytest.raises(EntityError):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -194,7 +196,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_missing_responsible_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
         with pytest.raises(NoItemsFound):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -215,7 +217,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_invalid_zero_responsible_professor(self):
             repo_activity = ActivityRepositoryMock()
             repo_user = UserRepositoryMock()
-            usecase = CreateActivityUsecase(repo_activity, repo_user)
+            usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
             with pytest.raises(EntityError):
                 usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -236,7 +238,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_invalid_responsible_professor_not_list(self):
             repo_activity = ActivityRepositoryMock()
             repo_user = UserRepositoryMock()
-            usecase = CreateActivityUsecase(repo_activity, repo_user)
+            usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
             with pytest.raises(EntityError):
                 usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
@@ -257,7 +259,7 @@ class Test_CreateActivityUsecase:
     def test_create_activity_usecase_forbidden_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity, repo_user)
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
         with pytest.raises(ForbiddenAction):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",

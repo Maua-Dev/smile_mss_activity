@@ -7,16 +7,18 @@ from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import UserAlreadyEnrolled, NoItemsFound, ClosedActivity, \
     UserAlreadyCompleted, UserNotAdmin
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="enroll_activity_admin")
 
 class Test_EnrollActivityAdmin:
     @freeze_time("2022-12-01")
     def test_enroll_activity_admin_usecase_accepting_new_enrollments(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         taken_slots_old = repo_activity.activities[8].taken_slots
@@ -32,7 +34,7 @@ class Test_EnrollActivityAdmin:
     def test_enroll_activity_admin_usecase_in_queue(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
         enrollment, enrollment_user = usecase(requester_user, repo_user.users[8].user_id, repo_activity.activities[0].code)
 
@@ -45,7 +47,7 @@ class Test_EnrollActivityAdmin:
     def test_enroll_activity_admin_usecase_enrolled(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
         taken_slots_old = repo_activity.activities[2].taken_slots
         enrollment, enrollment_user = usecase(requester_user, repo_user.users[3].user_id, repo_activity.activities[2].code)
@@ -62,7 +64,7 @@ class Test_EnrollActivityAdmin:
     def test_enroll_activity_admin_usecase_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[1]
 
         with pytest.raises(UserNotAdmin):
@@ -72,7 +74,7 @@ class Test_EnrollActivityAdmin:
     def test_enroll_activity_admin_usecase_invalid_user_id(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(EntityError):
@@ -82,7 +84,7 @@ class Test_EnrollActivityAdmin:
     def test_enroll_activity_admin_usecase_invalid_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(EntityError):
@@ -92,7 +94,7 @@ class Test_EnrollActivityAdmin:
     def test_enroll_activity_admin_usecase_user_already_enrolled(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(UserAlreadyEnrolled):
@@ -102,7 +104,7 @@ class Test_EnrollActivityAdmin:
     def test_enroll_activity_admin_usecase_activity_none(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(NoItemsFound):
@@ -112,7 +114,7 @@ class Test_EnrollActivityAdmin:
     def test_enroll_activity_admin_usecase_not_accepting_new_enrollment(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
 
         with pytest.raises(ClosedActivity):
@@ -122,7 +124,7 @@ class Test_EnrollActivityAdmin:
     def test_enrollment_activity_usecase_already_completed(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
+        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
         requester_user = repo_user.users[0]
         repo_activity.activities[12].accepting_new_enrollments = True
 

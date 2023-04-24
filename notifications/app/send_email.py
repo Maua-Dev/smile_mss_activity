@@ -9,6 +9,7 @@ from botocore.exceptions import ClientError
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.domain.observability.observability_interface import IObservability
 
 client = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
 
@@ -398,12 +399,12 @@ def compose_html(activity: Activity, user: UserInfo):
     return message
 
 
-def send_email_notification(activity: Activity, users: List[UserInfo]):
+def send_email_notification(activity: Activity, users: List[UserInfo], observability: IObservability):
     try:
         for user in users:
             if not type(user) == UserInfo or user.email is None or user.accepted_notifications_email is False:
                 continue
-
+                
             composed_html = compose_html(activity, user)
             response = client.send_email(
                 Destination={
@@ -433,6 +434,8 @@ def send_email_notification(activity: Activity, users: List[UserInfo]):
                 Source=os.environ.get("FROM_EMAIL")
             )
 
+            observability.add_user_email_notified_count_metric()
+            
     except ClientError as e:
         print(e.response['Error']['Message'])
 

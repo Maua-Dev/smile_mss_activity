@@ -1,17 +1,19 @@
 from src.modules.confirm_attendance.app.confirm_attendance_controller import ConfirmAttendanceController
 from src.modules.confirm_attendance.app.confirm_attendance_usecase import ConfirmAttendanceUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="confirm_attendance")
 
 class Test_ConfirmAttendanceController:
 
     def test_confirm_attendance_controller(self):
         repo_user = UserRepositoryMock()
         repo_activity = ActivityRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(repo_activity)
-        controller = ConfirmAttendanceController(usecase)
+        usecase = ConfirmAttendanceUsecase(repo_activity, observability=observability)
+        controller = ConfirmAttendanceController(usecase, observability=observability)
         request = HttpRequest(
             body={
                 'code': repo_activity.activities[11].code, 
@@ -35,8 +37,8 @@ class Test_ConfirmAttendanceController:
     def test_confirm_attendance_controller_invalid_activity_code(self):
         repo_user = UserRepositoryMock()
         repo_activity = ActivityRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(repo_activity)
-        controller = ConfirmAttendanceController(usecase)
+        usecase = ConfirmAttendanceUsecase(repo_activity, observability=observability)
+        controller = ConfirmAttendanceController(usecase, observability=observability)
         request = HttpRequest(
             body={
                 'code': 'invalid_code', 
@@ -60,8 +62,8 @@ class Test_ConfirmAttendanceController:
     def test_confirm_attendance_controller_invalid_confirmation_code(self):
         repo_user = UserRepositoryMock()
         repo_activity = ActivityRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(repo_activity)
-        controller = ConfirmAttendanceController(usecase)
+        usecase = ConfirmAttendanceUsecase(repo_activity, observability=observability)
+        controller = ConfirmAttendanceController(usecase, observability=observability)
         request = HttpRequest(
             body={
                 'code': repo_activity.activities[11].code, 
@@ -85,8 +87,8 @@ class Test_ConfirmAttendanceController:
     def test_confirm_attendance_controller_invalid_user_id(self):
         repo_user = UserRepositoryMock()
         repo_activity = ActivityRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(repo_activity)
-        controller = ConfirmAttendanceController(usecase)
+        usecase = ConfirmAttendanceUsecase(repo_activity, observability=observability)
+        controller = ConfirmAttendanceController(usecase, observability=observability)
         request = HttpRequest(
             body={
                 'code': repo_activity.activities[11].code, 
@@ -110,8 +112,8 @@ class Test_ConfirmAttendanceController:
     def test_confirm_attendance_controller_already_confirmed(self):
         repo_user = UserRepositoryMock()
         repo_activity = ActivityRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(repo_activity)
-        controller = ConfirmAttendanceController(usecase)
+        usecase = ConfirmAttendanceUsecase(repo_activity, observability=observability)
+        controller = ConfirmAttendanceController(usecase, observability=observability)
         request = HttpRequest(
             body={
                 'code': repo_activity.activities[12].code, 

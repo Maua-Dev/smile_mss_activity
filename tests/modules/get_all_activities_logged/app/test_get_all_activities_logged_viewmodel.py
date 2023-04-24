@@ -1,8 +1,10 @@
 from src.modules.get_all_activities_logged.app.get_all_activities_logged_usecase import GetAllActivitiesLoggedUsecase
 from src.modules.get_all_activities_logged.app.get_all_activities_logged_viewmodel import GetAllActivitiesLoggedViewmodel
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="get_all_activities_logged")
 
 class Test_GetAllActivitiesLoggedViewmodel:
     def test_get_all_activities_viewmodel(self):
@@ -11,7 +13,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
 
         requester_user = repo_user.users[2]
 
-        usecase = GetAllActivitiesLoggedUsecase(repo_activity)
+        usecase = GetAllActivitiesLoggedUsecase(repo_activity, observability=observability)
 
         activities_logged = usecase(requester_user.user_id)
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 
+
 import aws_cdk as cdk
 
 from adjust_layer_directory import adjust_layer_directory
@@ -19,6 +20,7 @@ setup_requirements_layers(destination="lambda_requirements_layer_temp")
 print("Finished setting up the requirements layers")
 
 app = cdk.App()
+
 
 aws_region = os.environ.get("AWS_REGION")
 aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
