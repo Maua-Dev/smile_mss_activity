@@ -40,7 +40,7 @@ class ConfirmAttendanceController:
                 "requester_user":request.data.get('requester_user'),
                 "code":request.data.get('code'),
                 "confirmation_code":request.data.get('confirmation_code')
-            }))
+            }), status_code=200)
             self.observability.add_confirm_attendance_count_metric()
             return OK('Success to Confirm Attendance!')
 

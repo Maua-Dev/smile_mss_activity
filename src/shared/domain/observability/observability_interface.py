@@ -21,7 +21,7 @@ class IObservability(ABC):
         pass
     
     @abstractmethod    
-    def log_controller_out(self) -> None:
+    def log_controller_out(self, input: str, status_code: int) -> None:
         pass
     
     @abstractmethod    

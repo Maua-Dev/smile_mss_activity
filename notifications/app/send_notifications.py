@@ -69,6 +69,7 @@ def send_notifications_presenter(event, context):
                 'statusCode': 404,
                 'body': json.dumps("Nenhuma atividade para enviar notificações!")
             }
+            
     except Exception as err:
         observability.log_exception(status_code=500, exception_name=err.__class__.__name__, message=err.args[0])
         response = InternalServerError(body=err.args[0])

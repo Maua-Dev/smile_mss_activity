@@ -14,8 +14,13 @@ class ObservabilityMock(IObservability):
     def log_controller_in(self) -> None:
         self._log_info("In Controller")
         
-    def log_controller_out(self, input) -> None:
-        self._log_info(f"Out of Controller with this input: {input}")
+    def log_controller_out(self, input: str, status_code: int) -> None:
+        self._log_info(
+            {
+                "statusCode": status_code,
+                "message": f"Out of Controller with this input: {input}"
+            }
+        )
         
     def log_usecase_in(self) -> None:
         self._log_info("In Usecase")

@@ -35,7 +35,7 @@ class DropActivityController:
 
             viewmodel = DropActivityViewmodel(enrollment, requester_user)
             response = OK(viewmodel.to_dict())
-            self.observability.log_controller_out(input=json.dumps(response.body))
+            self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
             self.observability.add_drop_activity_count_metric() 
             return response
 
