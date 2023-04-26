@@ -1,7 +1,4 @@
 from datetime import datetime
-
-from aws_cdk.aws_iam import User
-
 from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
