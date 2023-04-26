@@ -51,3 +51,10 @@ class Test_UserRepositoryMock:
         user = repo.get_user_info("000")
         assert user is None
 
+    def test_delete_user(self):
+        repo = UserRepositoryMock()
+        len_before = len(repo.users)
+        is_deleted = repo.delete_user("teste@teste.com")
+
+        assert is_deleted is True
+        assert len(repo.users) == len_before - 1
