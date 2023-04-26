@@ -104,6 +104,10 @@ class IActivityRepository(ABC):
         pass
 
     @abstractmethod
+    def get_enrollments_by_user_id_with_dropped(self, user_id: str) -> List[Enrollment]:
+        pass
+
+    @abstractmethod
     def get_all_activities_logged(self, user_id: str) -> Tuple[List[Activity], List[Enrollment]]:
         """
         Returns all activities and enrollments of the user (IN_QUEUE, ENROLLED. COMPLETED)

@@ -305,6 +305,20 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         return enrollments
 
+    def get_enrollments_by_user_id_with_dropped(self, user_id: str) -> List[Enrollment]:
+        query_string = Key(self.dynamo.gsi_partition_key).eq(user_id) & Key(self.dynamo.gsi_sort_key).begins_with("enrollment#")
+
+        response = self.dynamo.query(
+            key_condition_expression=query_string,
+            IndexName="GSI1"
+        )
+
+        enrollments = list()
+        for item in response["Items"]:
+            enrollments.append(EnrollmentDynamoDTO.from_dynamo(item).to_entity())
+
+        return enrollments
+
     def get_all_activities_logged(self, user_id: str) -> Tuple[List[Activity], List[Enrollment]]:
         response = self.dynamo.get_all_items()
 

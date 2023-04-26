@@ -416,4 +416,11 @@ class Test_ActivityRepositoryDynamo:
 
         assert True
 
+    # @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_enrollments_by_user_id_with_dropped(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
 
+        enrollments = repo_activity_dynamo.get_enrollments_by_user_id_with_dropped("e51d5fd4-b509-4338-a029-ee5f0372968d")
+
+        assert len(enrollments) == 33
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)

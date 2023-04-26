@@ -503,3 +503,10 @@ class ActivityRepositoryMock(IActivityRepository):
     def delete_certificates(self, email: str) -> True:
         # delete certificates in real
         return True
+
+    def get_enrollments_by_user_id_with_dropped(self, user_id: str) -> List[Enrollment]:
+        enrollments = list()
+        for enrollment in self.enrollments:
+            if enrollment.user_id == user_id:
+                enrollments.append(enrollment)
+        return enrollments
