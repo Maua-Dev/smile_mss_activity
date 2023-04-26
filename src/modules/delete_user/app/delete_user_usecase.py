@@ -25,7 +25,9 @@ class DeleteUserUsecase:
 
         for enrollment in user_enrollments:
             self.repo_activity.delete_enrollment(enrollment.user_id, enrollment.activity_code)
-            activity = all_activities_dict[enrollment.activity_code]
+            activity = all_activities_dict.get(enrollment.activity_code)
+            if activity is None:
+                continue
             if activity.taken_slots >= activity.total_slots and enrollment.state == ENROLLMENT_STATE.ENROLLED and datetime.now().timestamp()*1000 < activity.start_date:
                 activity, enrollments = self.repo_activity.get_activity_with_enrollments(activity.code)
                 in_queue_enrollments = list(
