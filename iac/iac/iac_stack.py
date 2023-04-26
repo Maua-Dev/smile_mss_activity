@@ -186,7 +186,7 @@ class IacStack(Stack):
             "CDN_URL": cdn_url
         }
 
-        for key, value in delete_user_variables:
+        for key, value in delete_user_variables.items():
             self.lambda_stack.delete_user_function.add_environment(key, value)
 
         self.lambda_stack.delete_user_function.add_to_role_policy(bucket_all_policy)
