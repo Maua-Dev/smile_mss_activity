@@ -270,7 +270,7 @@ def compose_deleted_user_email(user: UserInfo):
         <tbody>
         <tr>
         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:25px 10px 50px;font-family:'Open Sans',sans-serif;" align="left">
-        <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 22px;"><strong>Exclusão da conta 2023</strong></h1>
+        <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 22px;"><strong>Exclusão da conta</strong></h1>
         </td>
         </tr>
         </tbody>
