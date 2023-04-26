@@ -416,7 +416,7 @@ class Test_ActivityRepositoryDynamo:
 
         assert True
 
-    # @pytest.mark.skip("Can't test dynamo in Github")
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_get_enrollments_by_user_id_with_dropped(self):
         repo_activity_dynamo = ActivityRepositoryDynamo()
 
