@@ -25,6 +25,7 @@ class UserRepositoryMock(IUserRepository):
             User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
             User(name="Rafael Santos", role=ROLE.PROFESSOR, user_id="62cafdd4-a110-11ed-a8fc-0242ac120002"),
             User(name="Rodrigo Santos", role=ROLE.PROFESSOR, user_id="71f06f24-a110-11ed-a8fc-0242ac120002"),
+            UserInfo(user_id="d61dbf66-a10f-11ed-a8fc-0242ac120002", name="João Vilas", role=ROLE.ADMIN, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True, social_name=None, certificate_with_social_name=False),
         ]
 
     def get_user(self, user_id: str) -> User:
@@ -56,3 +57,12 @@ class UserRepositoryMock(IUserRepository):
                 return user_info
 
         return None
+
+    def delete_user(self, email: str) -> bool:
+        for idx, user in enumerate(self.users):
+            if type(user) == UserInfo:
+                if user.email == email:
+                    self.users.pop(idx)
+                    return True
+
+
