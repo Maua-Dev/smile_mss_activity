@@ -1,3 +1,4 @@
+import hashlib
 import os
 from typing import List, Tuple
 
@@ -14,6 +15,8 @@ from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.environments import Environments
+from src.shared.helpers.errors.usecase_errors import NoItemsFound
+from src.shared.helpers.utils.compose_deleted_user_email import compose_deleted_user_email
 from src.shared.helpers.utils.compose_enrolled_email import compose_enrolled_email
 from src.shared.infra.dto.activity_dynamo_dto import ActivityDynamoDTO
 from src.shared.infra.dto.enrollment_dynamo_dto import EnrollmentDynamoDTO
@@ -390,3 +393,81 @@ class ActivityRepositoryDynamo(IActivityRepository):
         except Exception as err:
             print(err)
             return False
+
+    def send_deleted_user_email(self, user: UserInfo) -> bool:
+        try:
+            client_ses = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
+
+            delete_email_composed_html = compose_deleted_user_email(user)
+
+            response = client_ses.send_email(
+                Destination={
+                    'ToAddresses': [
+                        user.email,
+                    ],
+                    'BccAddresses':
+                        [
+                            os.environ.get("HIDDEN_COPY")
+                        ]
+                },
+                Message={
+                    'Body': {
+                        'Html': {
+                            'Charset': "UTF-8",
+                            'Data': delete_email_composed_html,
+                        },
+                    },
+                    'Subject': {
+                        'Charset': "UTF-8",
+                        'Data': "SMILE 2023 - Exclusão de conta",
+                    },
+                },
+                ReplyToAddresses=[
+                    os.environ.get("REPLY_TO_EMAIL"),
+                ],
+                Source=os.environ.get("FROM_EMAIL"),
+            )
+
+            return True
+
+        except Exception as err:
+            print(err)
+            return False
+
+    def delete_enrollment(self, user_id: str, code: str) -> Enrollment:
+        resp = self.dynamo.delete_item(partition_key=self.enrollment_partition_key_format(code),
+                                       sort_key=self.enrollment_sort_key_format(user_id))
+
+        if "Attributes" not in resp:
+            raise NoItemsFound("user_id")
+
+        return EnrollmentDynamoDTO.from_dynamo(resp['Attributes']).to_entity()
+
+    def delete_certificates(self, email: str) -> True:
+        client_s3 = boto3.client('s3', region_name=os.environ.get('AWS_REGION'))
+        bucket = os.environ.get('BUCKET_NAME')
+        hash_key = os.environ.get('HASH_KEY')
+        prefix = hashlib.sha256((email + hash_key).encode('utf-8')).hexdigest()
+
+        try:
+
+            itens = client_s3.list_objects_v2(
+                Bucket=bucket,
+                Prefix=prefix
+            )
+
+            print(itens)
+
+            for item in itens['Contents']:
+                client_s3.delete_object(
+                    Bucket=bucket,
+                    Key=item['Key']
+                )
+
+
+            return True
+
+        except Exception as err:
+            print(err)
+            return False
+

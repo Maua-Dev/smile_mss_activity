@@ -116,6 +116,30 @@ class IActivityRepository(ABC):
         """
         When user is enrolled after stay in queue, notify the user and return True.
 
-        Only in real mock
+        Only in real repo
+        """
+        pass
+
+    @abstractmethod
+    def send_deleted_user_email(self, user: UserInfo) -> bool:
+        """
+        When user is deleted, notify the user and return True.
+
+        Only in real repo
+        """
+        pass
+
+    @abstractmethod
+    def delete_enrollment(self, user_id: str, code: str) -> Enrollment:
+        """
+        If the user is enrolled in the activity, deletes the enrollment.
+        else returns None
+        """
+        pass
+
+    @abstractmethod
+    def delete_certificates(self, email: str) -> True:
+        """
+        Deletes all certificates
         """
         pass

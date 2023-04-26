@@ -377,3 +377,43 @@ class Test_ActivityRepositoryDynamo:
         confirmation = repo_activity_dynamo.send_enrolled_email(user, activity)
 
         assert confirmation
+
+    @pytest.mark.skip("Can't test ses in Github")
+    def test_send_deleted_user_email(self):
+
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        user = UserInfo(
+            name="Vitor Soller",
+            email="vgsoller@gmail.com",
+            social_name=None,
+            accepted_notifications_email=True,
+            certificate_with_social_name=False,
+            user_id="0"*36,
+            phone=None,
+            accepted_notifications_sms=False,
+            role=ROLE.STUDENT
+        )
+
+        send_email = repo_activity_dynamo.send_deleted_user_email(user)
+
+        assert send_email
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_delete_enrollment(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.delete_enrollment(user_id="e51d5fd4-b509-4338-a029-ee5f0372968d", code="SOSTECNOLOGIA")
+
+        assert True
+
+
+    @pytest.mark.skip("Can't test s3 in Github")
+    def test_delete_certificates(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.delete_certificates(email="vgsoller@gmail.com")
+
+        assert True
+
+

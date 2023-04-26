@@ -490,3 +490,16 @@ class ActivityRepositoryMock(IActivityRepository):
     def send_enrolled_email(self, user: UserInfo, activity: Activity):
         # send email in real
         return True
+
+    def send_deleted_user_email(self, user: UserInfo) -> bool:
+        # send email in real
+        return True
+
+    def delete_enrollment(self, user_id: str, code: str) -> Enrollment:
+        for idx, enrollment in enumerate(self.enrollments):
+            if enrollment.user_id == user_id and enrollment.activity_code == code:
+                return self.enrollments.pop(idx)
+
+    def delete_certificates(self, email: str) -> True:
+        # delete certificates in real
+        return True
