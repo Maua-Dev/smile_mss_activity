@@ -355,7 +355,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
     def send_enrolled_email(self, user: UserInfo, activity: Activity):
 
-        if not UserInfo.accepted_notifications_email:
+        if not user.accepted_notifications_email:
             print("User has not accepted notifications email")
             return True
 
