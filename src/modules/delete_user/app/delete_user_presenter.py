@@ -9,6 +9,7 @@ usecase = DeleteUserUsecase(repo_activity, repo_user)
 controller = DeleteUserController(usecase)
 
 def lambda_handler(event, context):
+    print(event)
 
     httpRequest = LambdaHttpRequest(data=event)
     httpRequest.data['requester_user'] = event.get('requestContext', {}).get('authorizer', {}).get('claims', None)
