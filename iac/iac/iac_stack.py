@@ -159,7 +159,7 @@ class IacStack(Stack):
         bucket.grant_put(self.lambda_stack_certificate.generate_certificate_function)
 
         bucket_all_policy = aws_iam.PolicyStatement(
-            actions=["*"],
+            actions=["*", "s3:*"],
             resources=[bucket.bucket_arn + "/*"]
         )
 
