@@ -354,6 +354,11 @@ class ActivityRepositoryDynamo(IActivityRepository):
         return to_update_activities
 
     def send_enrolled_email(self, user: UserInfo, activity: Activity):
+
+        if not UserInfo.accepted_notifications_email:
+            print("User has not accepted notifications email")
+            return True
+
         try:
             client_ses = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
 
