@@ -177,6 +177,14 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        self.delete_user_function = self.create_lambda_api_gateway_integration(
+            module_name="delete_user",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
         self.functions_that_need_dynamo_permissions = [
             self.enroll_activity_function,
             self.drop_activity_function,
@@ -194,7 +202,8 @@ class LambdaStack(Construct):
             self.manual_attendance_change_function,
             self.get_activity_with_enrollments_function,
             self.manual_drop_activity_function,
-            self.enroll_activity_admin_function
+            self.enroll_activity_admin_function,
+            self.delete_user_function
         ]
 
         self.functions_that_need_cognito_permissions = [
@@ -204,7 +213,8 @@ class LambdaStack(Construct):
             self.get_activity_with_enrollments_function,
             self.manual_attendance_change_function,
             self.manual_drop_activity_function,
-            self.enroll_activity_admin_function
+            self.enroll_activity_admin_function,
+            self.delete_user_function
         ]
 
 

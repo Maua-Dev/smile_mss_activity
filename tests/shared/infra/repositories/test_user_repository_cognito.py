@@ -80,3 +80,12 @@ class Test_UserRepositoryCognito:
 
         assert user.user_id == "5bc1af52-ac75-4d7c-9bd4-b276cd7ff968"
 
+    @pytest.mark.skip("Can't test it locally")
+    def test_delete_user(self):
+        user_repo_cognito = UserRepositoryCognito()
+
+        deleted = user_repo_cognito.delete_user("checkz+in123+2@gmail.com")
+
+        assert deleted == True
+
+

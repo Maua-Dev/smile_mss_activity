@@ -36,3 +36,10 @@ class IUserRepository(ABC):
         If user exists, return it with the user info
         """
         pass
+
+    @abstractmethod
+    def delete_user(self, email: str) -> bool:
+        """
+        If user exists, delete it and return True
+        """
+        pass

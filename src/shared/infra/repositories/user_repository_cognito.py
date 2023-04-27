@@ -99,3 +99,16 @@ class UserRepositoryCognito(IUserRepository):
         user = UserCognitoDTO.from_cognito(response.get("Users")[0]).to_entity_info()
 
         return user
+
+    def delete_user(self, email: str) -> bool:
+        try:
+            response = self.client.admin_delete_user(
+                UserPoolId=self.user_pool_id,
+                Username=email
+            )
+
+            return response.get("ResponseMetadata").get("HTTPStatusCode") == 200
+
+        except Exception as e:
+            print(e)
+            return False
