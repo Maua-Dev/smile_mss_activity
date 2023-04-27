@@ -190,3 +190,5 @@ class IacStack(Stack):
             self.lambda_stack.delete_user_function.add_environment(key, value)
 
         self.lambda_stack.delete_user_function.add_to_role_policy(bucket_all_policy)
+        
+        bucket.grant_read_write(self.lambda_stack.delete_user_function)
