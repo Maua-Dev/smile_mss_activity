@@ -62,7 +62,7 @@ class GetEnrollmentController:
 
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
-       
+
 
         except EntityError as err:
             self.observability.log_exception(status_code=400, exception_name="EntityError", message=err.message)

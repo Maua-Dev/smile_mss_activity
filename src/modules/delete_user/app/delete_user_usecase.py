@@ -6,6 +6,7 @@ from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
+from src.shared.helpers.errors.usecase_errors import NoItemsFound
 
 
 class DeleteUserUsecase:
@@ -16,8 +17,14 @@ class DeleteUserUsecase:
 
     def __call__(self, user: User) -> UserInfo:
 
+
+            
         self.observability.log_usecase_in()
         user_info = self.repo_user.get_user_info(user.user_id)
+        
+        if user_info is None:
+            raise NoItemsFound("user")
+        
         all_activities = self.repo_activity.get_all_activities()
 
         all_activities_dict = {activity.code: activity for activity in all_activities}

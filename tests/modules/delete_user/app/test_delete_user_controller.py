@@ -46,3 +46,20 @@ class Test_DeleteUserController:
         assert response.status_code == 200
         assert response.body['message'] == "Usuário '0355535e-a110-11ed-a8fc-0242ac120002' deletado com sucesso."
 
+    def test_delete_user_controller_user_not_found(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        usecase = DeleteUserUsecase(repo_activity, repo_user, observability=observability)
+        controller = DeleteUserController(usecase, observability=observability)
+
+        requester_user = repo_user.users[1]
+
+        request = HttpRequest(
+            body={"requester_user": {"sub": "0"*36, "custom:role": requester_user.role.value,
+                                     "name": requester_user.name}})
+
+        response = controller(request)
+
+        assert response.status_code == 404
+        assert response.body == "Usuário já deletado"
