@@ -52,6 +52,8 @@ def send_notifications_presenter(event, context):
                     # send_sms_notification(activity, users)
 
                 observability.log_simple_lambda_out()
+                observability.add_error_count_metric(statusCode=200)
+                
                 return {
                     'statusCode': 200,
                     'body': json.dumps('Notificações enviadas!')

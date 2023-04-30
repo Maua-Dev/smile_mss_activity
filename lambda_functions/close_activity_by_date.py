@@ -42,6 +42,7 @@ def close_activity_by_date_presenter(event, context):
             repo_activity.batch_update_activities(activities_to_update)
 
         observability.log_simple_lambda_out()
+        observability.add_error_count_metric(statusCode=200)
 
         return {
             'statusCode': 200,
