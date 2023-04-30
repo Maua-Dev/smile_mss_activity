@@ -23,5 +23,4 @@ def confirm_attendance_presenter(event, context):
 def lambda_handler(event, context):
     
     response = confirm_attendance_presenter(event, context)
-    
     return response

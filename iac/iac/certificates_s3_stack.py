@@ -14,7 +14,8 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-
+from dotenv import load_dotenv
+load_dotenv()
 
 class CertificatesS3Stack(Stack):
 

@@ -37,7 +37,6 @@ class EnrollActivityController:
             response = OK(viewmodel.to_dict())
 
             self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
-            self.observability.add_enroll_activity_count_metric()
             return response
         
         except NoItemsFound as err:
