@@ -22,7 +22,7 @@ class EventBridgeStack(Construct):
                     handler="close_activity_by_date.lambda_handler",
                     runtime=lambda_.Runtime.PYTHON_3_9,
                     layers=[lambda_layer, power_tools_layer],
-                    timeout=Duration.seconds(15),
+                    timeout=Duration.seconds(60),
                     environment=environment_variables
                 )
 
@@ -44,7 +44,7 @@ class EventBridgeStack(Construct):
                     handler="app.send_notifications.lambda_handler",
                     runtime=lambda_.Runtime.PYTHON_3_9,
                     layers=[lambda_layer, power_tools_layer],
-                    timeout=Duration.seconds(60),
+                    timeout=Duration.minutes(10),
                     environment=environment_variables,
                     memory_size=2048
                 )

@@ -257,3 +257,48 @@ class Test_ActivityRepositoryMock:
         assert type(user_enrollments) == list
         assert all(type(enrollment) == Enrollment for enrollment in user_enrollments)
         assert len(user_enrollments) == 0
+
+    def test_delete_enrollment(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        len_before = len(repo.enrollments)
+
+        requester_user = repo_user.users[4]
+
+        deleted_enrollment = repo.delete_enrollment(user_id=requester_user.user_id, code='ECM2345')
+
+        assert len(repo.enrollments) == len_before - 1
+        assert  type(deleted_enrollment) == Enrollment
+
+
+    def test_delete_enrollment_not_found(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        len_before = len(repo.enrollments)
+
+        requester_user = repo_user.users[4]
+
+        deleted_enrollment = repo.delete_enrollment(user_id=requester_user.user_id, code='CODIGO_INEXISTENTE')
+
+        assert len(repo.enrollments) == len_before
+        assert deleted_enrollment is None
+
+    def test_delete_certificates(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        requester_user = repo_user.users[-1]
+
+        deleted_certificates = repo.delete_certificates(email=requester_user.email)
+
+        assert deleted_certificates is True
+
+    def test_send_deleted_user_email(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        requester_user = repo_user.users[-1]
+
+        deleted_certificates = repo.send_deleted_user_email(user = requester_user)
+
+        assert deleted_certificates is True

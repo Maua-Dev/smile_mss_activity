@@ -1,30 +1,7 @@
-import json
-import os
-import time
-from datetime import datetime, timezone, timedelta
-from typing import List
-
-import boto3
-from botocore.exceptions import ClientError
-
-from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user_info import UserInfo
-from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
-from src.shared.domain.observability.observability_interface import IObservability
 
-client = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
-
-
-def compose_html(activity: Activity, user: UserInfo):
+def compose_deleted_user_email(user: UserInfo):
     name = user.name.split(" ")[0] if user.social_name is None else user.social_name.split(" ")[0]
-    gmt3_tz = timezone(timedelta(hours=-3))
-
-    if activity.delivery_model == DELIVERY_MODEL.IN_PERSON:
-        place = activity.place
-    elif activity.delivery_model == DELIVERY_MODEL.HYBRID:
-        place = f"{activity.place} ou Online"
-    else:
-        place = "Online"
 
     message = """
 
@@ -293,7 +270,7 @@ def compose_html(activity: Activity, user: UserInfo):
         <tbody>
         <tr>
         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:25px 10px 50px;font-family:'Open Sans',sans-serif;" align="left">
-        <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 22px;"><strong>Lembrete de Atividade</strong></h1>
+        <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 22px;"><strong>Exclusão da conta</strong></h1>
         </td>
         </tr>
         </tbody>
@@ -317,10 +294,9 @@ def compose_html(activity: Activity, user: UserInfo):
         <div class="v-font-size" style="font-size: 15px; line-height: 140%; text-align: justify; word-wrap: break-word;">
         <p style="line-height: 140%; font-size: 14px;"><span style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 21px;"><strong>Olá, {name}</strong></span></p>
         <p style="line-height: 140%;">&nbsp;</p>
-        <p style="line-height: 140%;">Estamos te enviando esse email para lembrar que você está inscrito em <strong>{activity_title}</strong> que começa daqui alguns minutos!</p>
-        <p style="line-height: 140%;">Local: {place}</p>
+        <p style="line-height: 140%;">Estamos te enviando esse email para avisar que você solicitou a remoção total de dados da Smile 2023!</p>
+        <p style="line-height: 140%;">Seu pedido já foi processado e todos os dados de cadastro além de inscrições e certificados já foram deletados.</p>
         <p style="line-height: 140%;">&nbsp;</p>
-        <p style="line-height: 140%;">Essa atividade começa às <strong>{time}</strong>, não perca o horário!</p>
         </div>
         </td>
         </tr>
@@ -331,7 +307,6 @@ def compose_html(activity: Activity, user: UserInfo):
         <tr>
         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:15px 10px 50px 50px;font-family:'Open Sans',sans-serif;" align="left">
         <div class="v-font-size" style="line-height: 160%; text-align: left; word-wrap: break-word;">
-        <p style="font-size: 14px; line-height: 160%;">Esperamos você lá!</p>
         <p style="font-size: 14px; line-height: 160%;">Atenciosamente,</p>
         <p style="font-size: 14px; line-height: 160%;">&nbsp;</p>
         <p style="font-size: 14px; line-height: 160%;"><strong>Equipe SMILE 2023 ;)</strong></p>
@@ -392,57 +367,6 @@ def compose_html(activity: Activity, user: UserInfo):
         </html>
         """
 
-    activity_title = activity.title
-    time = datetime.fromtimestamp(activity.start_date/1000).astimezone(gmt3_tz).strftime("%H:%M")
-
-    message = message.format(name=name, activity_title=activity_title, time=time, place=place)
+    message = message.format(name=name)
 
     return message
-
-
-def send_email_notification(activity: Activity, users: List[UserInfo], observability: IObservability):
-    try:
-        for user in users:
-            if not type(user) == UserInfo or user.email is None or user.accepted_notifications_email is False:
-                continue
-            time.sleep(0.18)
-                
-            composed_html = compose_html(activity, user)
-            response = client.send_email(
-                Destination={
-                    'ToAddresses': [
-                        user.email,
-                    ],
-                    'BccAddresses':
-                    [
-                        os.environ.get("HIDDEN_COPY")
-                    ]
-                },
-                Message={
-                    'Body': {
-                        'Html': {
-                            'Charset': "UTF-8",
-                            'Data': composed_html,
-                        },
-                    },
-                    'Subject': {
-                        'Charset': "UTF-8",
-                        'Data': "SMILE 2023 - Lembrete de atividade",
-                    },
-                },
-                ReplyToAddresses=[
-                    os.environ.get("REPLY_TO_EMAIL"),
-                ],
-                Source=os.environ.get("FROM_EMAIL")
-            )
-
-            observability.add_user_email_notified_count_metric()
-            
-    except ClientError as e:
-        print(e.response['Error']['Message'])
-
-    else:
-        print("EMAIL -> Activity: ", activity.title),
-
-
-
