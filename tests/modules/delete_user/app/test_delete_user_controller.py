@@ -2,17 +2,20 @@ from src.modules.delete_user.app.delete_user_controller import DeleteUserControl
 from src.modules.delete_user.app.delete_user_usecase import DeleteUserUsecase
 from src.shared.domain.entities.user_info import UserInfo
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
-
+ 
+observability = ObservabilityMock(module_name="delete_user")
+ 
 class Test_DeleteUserController:
     def test_delete_user_controller(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
 
-        usecase = DeleteUserUsecase(repo_activity, repo_user)
-        controller = DeleteUserController(usecase)
+        usecase = DeleteUserUsecase(repo_activity, repo_user, observability=observability)
+        controller = DeleteUserController(usecase, observability=observability)
 
         len_before = len(repo_user.users)
         requester_user = repo_user.users[13]
@@ -28,8 +31,8 @@ class Test_DeleteUserController:
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
 
-        usecase = DeleteUserUsecase(repo_activity, repo_user)
-        controller = DeleteUserController(usecase)
+        usecase = DeleteUserUsecase(repo_activity, repo_user, observability=observability)
+        controller = DeleteUserController(usecase, observability=observability)
 
         len_before = len(repo_user.users)
         requester_user = repo_user.users[1]

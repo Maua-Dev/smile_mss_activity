@@ -1,3 +1,5 @@
+import json
+from src.shared.domain.observability.observability_interface import IObservability
 from .delete_user_usecase import DeleteUserUsecase
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
@@ -7,11 +9,13 @@ from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 class DeleteUserController:
 
-    def __init__(self, usecase: DeleteUserUsecase):
+    def __init__(self, usecase: DeleteUserUsecase, observability: IObservability):
         self.DeleteUserUsecase = usecase
+        self.observability = observability
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
+            self.observability.log_controller_in()
             if request.data.get('requester_user') is None:
                 raise MissingParameters('requester_user')
 
@@ -21,10 +25,13 @@ class DeleteUserController:
                 user=requester_user,
             )
 
-            message = {"message": f"Usuário '{requester_user.user_id}' deletado com sucesso."}
+            message = {"message": f"Usuário '{user.user_id}' deletado com sucesso."}
+            response = OK(message) 
+            self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
 
-            return OK(message)
+            return response
 
         except Exception as err:
+            self.observability.log_exception(status_code=500, exception_name="Exception", message=err.args[0])
 
             return InternalServerError(body=f"Erro favor contato o suporte. - {err}")

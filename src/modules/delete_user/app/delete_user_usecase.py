@@ -3,17 +3,20 @@ from datetime import datetime
 from src.shared.domain.entities.user import User
 from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 
 
 class DeleteUserUsecase:
-    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository, observability: IObservability):
         self.repo_activity = repo_activity
         self.repo_user = repo_user
+        self.observability = observability
 
     def __call__(self, user: User) -> UserInfo:
 
+        self.observability.log_usecase_in()
         user_info = self.repo_user.get_user_info(user.user_id)
 
         all_activities = self.repo_activity.get_all_activities()
@@ -46,6 +49,7 @@ class DeleteUserUsecase:
         self.repo_activity.delete_certificates(email=user_info.email)
         self.repo_user.delete_user(email=user_info.email)
         self.repo_activity.send_deleted_user_email(user_info)
+        self.observability.log_usecase_out()
         return user_info
 
 
