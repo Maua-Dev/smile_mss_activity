@@ -109,7 +109,8 @@ class IacStack(Stack):
         functions_that_need_email_permissions = [
             self.lambda_stack.drop_activity_function,
             self.lambda_stack.manual_drop_activity_function,
-            self.event_bridge.send_notification_function
+            self.event_bridge.send_notification_function,
+            self.lambda_stack.delete_user_function
         ]
 
         for f in functions_that_need_email_permissions:
@@ -140,7 +141,6 @@ class IacStack(Stack):
             "DYNAMO_TABLE_NAME": self.dynamo_stack.dynamo_table.table_name,
             "DYNAMO_PARTITION_KEY": "PK",
             "DYNAMO_SORT_KEY": "SK",
-            "STAGE": "DEV",
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
             "USER_POOL": self.user_pool_id,
@@ -157,10 +157,13 @@ class IacStack(Stack):
         bucket = aws_s3.Bucket.from_bucket_name(self, "MyBucket", bucket_name)
 
         bucket.grant_put(self.lambda_stack_certificate.generate_certificate_function)
-        self.lambda_stack_certificate.generate_certificate_function.add_to_role_policy(aws_iam.PolicyStatement(
-            actions=["*"],
+
+        bucket_all_policy = aws_iam.PolicyStatement(
+            actions=["*", "s3:*"],
             resources=[bucket.bucket_arn + "/*"]
-        ))
+        )
+
+        self.lambda_stack_certificate.generate_certificate_function.add_to_role_policy(bucket_all_policy)
 
         # grant read bucket
         bucket.grant_read(self.lambda_stack_certificate.get_certificate_function)
@@ -176,3 +179,16 @@ class IacStack(Stack):
 
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.open_all_activities_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.close_all_activities_function)
+
+        delete_user_variables = {
+            "BUCKET_NAME": bucket_name,
+            "HASH_KEY": os.environ.get("HASH_KEY"),
+            "CDN_URL": cdn_url
+        }
+
+        for key, value in delete_user_variables.items():
+            self.lambda_stack.delete_user_function.add_environment(key, value)
+
+        self.lambda_stack.delete_user_function.add_to_role_policy(bucket_all_policy)
+        
+        bucket.grant_read_write(self.lambda_stack.delete_user_function)
