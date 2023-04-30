@@ -52,7 +52,6 @@ def send_notifications_presenter(event, context):
                     # send_sms_notification(activity, users)
 
                 observability.log_simple_lambda_out()
-                observability.add_error_count_metric(statusCode=200)
                 
                 return {
                     'statusCode': 200,
@@ -82,6 +81,7 @@ def send_notifications_presenter(event, context):
 def lambda_handler(event, context):
     
     response = send_notifications_presenter(event, context)
+    observability.add_error_count_metric(statusCode=response.get('statusCode', 500))
     
     
     return response
