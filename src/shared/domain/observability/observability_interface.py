@@ -49,7 +49,7 @@ class IObservability(ABC):
         pass
             
     @abstractmethod
-    def add_error_count_metric(self) -> None:
+    def add_error_count_metric(self, statusCode:int) -> None:
         pass
     
     @abstractmethod

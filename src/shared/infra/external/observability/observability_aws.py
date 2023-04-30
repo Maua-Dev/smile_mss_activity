@@ -58,8 +58,8 @@ class ObservabilityAWS(IObservability):
     def add_user_email_notified_count_metric(self) -> None:
         self._add_metric(name="UsersEmailNotified", unit="Count", value=1)
         
-    def add_error_count_metric(self) -> None:
-        self._add_metric(name="ErrorCount", unit="Count", value=1)
+    def add_error_count_metric(self, statusCode:int) -> None:
+        self._add_metric(name="ErrorCount", unit="Count", value=1) if statusCode not in [200, 201] else None
 
     def presenter_decorators(self, presenter) -> None:
         @self.tracer.capture_method

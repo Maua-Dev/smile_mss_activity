@@ -38,10 +38,10 @@ class ObservabilityMock(IObservability):
         print("Out of Lambda")
             
     def _add_metric(self, name: str, unit: str, value: float) -> None:
-        print(f"Metric {name} added with value {value} in {unit}")
+        print(f"Metric {name} added with value {value} in {unit} unit")
             
-    def add_error_count_metric(self) -> None:
-        self._add_metric(name="ErrorCount", unit="Count", value=1)
+    def add_error_count_metric(self, statusCode:int) -> None:
+        self._add_metric(name="ErrorCount", unit="Count", value=1) if statusCode not in [200, 201] else None
     
     def add_user_email_notified_count_metric(self) -> None:
         self._add_metric(name="UsersEmailNotified", unit="Count", value=1)

@@ -39,6 +39,7 @@ class DeleteActivityController:
 
         except NoItemsFound as err:
             self.observability.log_exception(status_code=404, exception_name="NoItemsFound", message=err.message)
+            
             message = err.message.lower()
 
             if message == "enrollment":
