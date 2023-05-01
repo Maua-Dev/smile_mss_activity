@@ -9,9 +9,6 @@ from aws_cdk import (
 from constructs import Construct
 from aws_cdk.aws_apigateway import Resource, LambdaIntegration
 
-from dotenv import load_dotenv
-load_dotenv()
-
 class DynamoStack(Construct):
 
         def __init__(self, scope: Construct) -> None:

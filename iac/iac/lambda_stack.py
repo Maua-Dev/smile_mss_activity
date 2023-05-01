@@ -8,9 +8,6 @@ from aws_cdk import (
 from constructs import Construct
 from aws_cdk.aws_apigateway import Resource, LambdaIntegration, CognitoUserPoolsAuthorizer
 
-from dotenv import load_dotenv
-load_dotenv()
-
 class LambdaStack(Construct):
 
     functions_that_need_dynamo_permissions = []

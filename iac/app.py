@@ -4,8 +4,6 @@ import os
 
 import aws_cdk as cdk
 
-from dotenv import load_dotenv
-load_dotenv()
 
 from adjust_layer_directory import adjust_layer_directory
 from iac.certificates_s3_stack import CertificatesS3Stack
