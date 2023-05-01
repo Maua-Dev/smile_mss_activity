@@ -3,13 +3,15 @@ from .enroll_activity_admin_usecase import EnrollActivityAdminUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
+observability = Environments.get_observability()(module_name="enroll_activity_admin")
+
 repo_activity = Environments.get_activity_repo()()
 repo_user = Environments.get_user_repo()()
-usecase = EnrollActivityAdminUsecase(repo_activity, repo_user)
-controller = EnrollActivityAdminController(usecase)
+usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
+controller = EnrollActivityAdminController(usecase, observability=observability)
 
-
-def lambda_handler(event, context):
+@observability.presenter_decorators
+def enroll_activity_admin_presenter(event, context):
     httpRequest = LambdaHttpRequest(data=event)
     httpRequest.data['requester_user'] = event.get('requestContext', {}).get('authorizer', {}).get('claims', None)
     response = controller(httpRequest)
@@ -17,3 +19,10 @@ def lambda_handler(event, context):
 
     return httpResponse.toDict()
 
+@observability.handler_decorators
+def lambda_handler(event, context):
+    
+    response = enroll_activity_admin_presenter(event, context)
+    
+    
+    return response

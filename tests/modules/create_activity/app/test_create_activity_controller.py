@@ -3,16 +3,19 @@ import pytest
 from src.modules.create_activity.app.create_activity_controller import CreateActivityController
 from src.modules.create_activity.app.create_activity_usecase import CreateActivityUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+
+observability = ObservabilityMock(module_name="create_activity")
 
 
 class Test_CreateActivityController:
     def test_create_activity_controller(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -57,8 +60,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -90,8 +93,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_wrong_code(self):
             repo_activity = ActivityRepositoryMock()
             repo_user = UserRepositoryMock()
-            usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-            controller = CreateActivityController(usecase=usecase)
+            usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+            controller = CreateActivityController(usecase=usecase, observability=observability)
 
             request = HttpRequest(
                 body={
@@ -123,8 +126,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_duplicated_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -157,8 +160,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_title(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -190,8 +193,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_description(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -223,8 +226,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_activity_type(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -256,8 +259,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_invalid_activity_type(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -288,8 +291,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_is_extensive(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -321,8 +324,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_delivery_model(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -354,8 +357,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_invalid_delivery_model(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -386,8 +389,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_invalid_start_date(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -419,8 +422,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_duration(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -452,8 +455,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -485,8 +488,8 @@ class Test_CreateActivityController:
     def test_create_activity_invalid_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -519,8 +522,8 @@ class Test_CreateActivityController:
     def test_create_activity_invalid_responsible_professors_id_invalid(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -553,8 +556,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_speakers(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -582,8 +585,8 @@ class Test_CreateActivityController:
     def test_create_actvivity_invalid_speaker_type(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -612,8 +615,8 @@ class Test_CreateActivityController:
     def test_create_activity_invalid_speaker_parameter(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -647,8 +650,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_total_slots(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -680,8 +683,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_accepting_new_enrollments(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(
             body={
@@ -712,8 +715,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_missing_request_user(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -747,8 +750,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_forbidden_not_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -782,8 +785,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_in_person_no_place_established(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -813,8 +816,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_online_no_link_established(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -848,8 +851,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_hybrid_no_link_established(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -883,8 +886,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_in_person_conflicting_link_information(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",
@@ -915,8 +918,8 @@ class Test_CreateActivityController:
     def test_create_activity_controller_online_conflicting_place_information(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user)
-        controller = CreateActivityController(usecase=usecase)
+        usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+        controller = CreateActivityController(usecase=usecase, observability=observability)
 
         request = HttpRequest(body={"code": "ZYX321",
                                     "title": "Clean Architecture code review!",

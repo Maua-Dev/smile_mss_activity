@@ -1,4 +1,6 @@
 
+import os
+
 from aws_cdk import (
     aws_lambda as lambda_,
     NestedStack, Duration
@@ -19,7 +21,7 @@ class LambdaStack(Construct):
             handler=f"app.{module_name}_presenter.lambda_handler",
             memory_size=512,
             runtime=lambda_.Runtime.PYTHON_3_9,
-            layers=[self.lambda_layer],
+            layers=[self.lambda_layer, self.lambda_power_tools],
             environment=environment_variables,
             timeout=Duration.seconds(15)
         )
@@ -38,6 +40,8 @@ class LambdaStack(Construct):
                                                  code=lambda_.Code.from_asset("./lambda_layer_out_temp"),
                                                  compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
                                                  )
+
+        self.lambda_power_tools = lambda_.LayerVersion.from_layer_version_arn(self, "Lambda_Power_Tools", layer_version_arn=f"arn:aws:lambda:{os.environ.get('AWS_REGION')}:017000801446:layer:AWSLambdaPowertoolsPythonV2:22")
 
         self.enroll_activity_function = self.create_lambda_api_gateway_integration(
             module_name="enroll_activity",

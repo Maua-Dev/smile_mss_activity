@@ -1,6 +1,8 @@
+import json
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, DuplicatedItem, \
@@ -15,11 +17,13 @@ from .create_activity_viewmodel import CreateActivityViewmodel
 
 class CreateActivityController:
 
-    def __init__(self, usecase: CreateActivityUsecase):
+    def __init__(self, usecase: CreateActivityUsecase, observability: IObservability):
         self.CreateActivityUsecase = usecase
+        self.observability = observability
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
+            self.observability.log_controller_in()
             if request.data.get('requester_user') is None:
                 raise MissingParameters('requester_user')
 
@@ -98,8 +102,10 @@ class CreateActivityController:
                     )
                     
             viewmodel = CreateActivityViewmodel(activity)
-
-            return Created(viewmodel.to_dict())
+            response = Created(viewmodel.to_dict())
+            self.observability.log_controller_out(input=json.dumps(response.body))
+            
+            return response
 
             if (delivery_model == DELIVERY_MODEL.ONLINE or delivery_model == DELIVERY_MODEL.HYBRID) and link is None:
                 raise NoItemsFound('link')
@@ -108,6 +114,7 @@ class CreateActivityController:
                 raise NoItemsFound('local')
 
         except NoItemsFound as err:
+            self.observability.log_exception(status_code=404, exception_name="NoItemsFound", message=err.message)
             message = err.message.lower()
 
             if message == "enrollment":
@@ -128,24 +135,25 @@ class CreateActivityController:
 
 
         except MissingParameters as err:
-
+            self.observability.log_exception(status_code=400, exception_name="MissingParameters", message=err.message)
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ConflictingInformation as err:
+            self.observability.log_exception(status_code=400, exception_name="ConflictingInformation", message=err.message)
             return BadRequest(body=f"Parâmetro a mais está gerando um conflito: {err.message}")
 
         except ForbiddenAction as err:
-
+            self.observability.log_exception(status_code=403, exception_name="ForbiddenAction", message=err.message)
             return Forbidden(body="Apenas administradores podem criar atividades")
 
         except DuplicatedItem as err:
-
+            self.observability.log_exception(status_code=400, exception_name="DuplicatedItem", message=err.message)
             return BadRequest(body="Já existe uma atividade com esse código" if err.message == "activity_code" else "Já existe uma atividade com essas informaçãos")
 
         except EntityError as err:
-
+            self.observability.log_exception(status_code=400, exception_name="EntityError", message=err.message)
             return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
-
+            self.observability.log_exception(status_code=500, exception_name=err.__class__.__name__, message=err.args[0])
             return InternalServerError(body=err.args[0])

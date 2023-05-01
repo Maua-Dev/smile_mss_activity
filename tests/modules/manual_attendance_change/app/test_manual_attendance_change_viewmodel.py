@@ -1,9 +1,11 @@
 from src.modules.manual_attendance_change.app.manual_attendance_change_usecase import ManualAttendanceChangeUsecase
 from src.modules.manual_attendance_change.app.manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="manual_attendance_change")
 
 class Test_GetActivityWithEnrollmentsViewmodel:
 
@@ -12,7 +14,7 @@ class Test_GetActivityWithEnrollmentsViewmodel:
         repo_user = UserRepositoryMock()
         enrollment = repo_activity.enrollments[0]
         requester_user = repo_user.users[2]
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         activity_dict_with_enrollments = usecase(code=enrollment.activity_code, requester_user=requester_user,
                                                  user_id=enrollment.user_id,
@@ -104,7 +106,7 @@ class Test_GetActivityWithEnrollmentsViewmodel:
         repo_user = UserRepositoryMock()
         enrollment = repo_activity.enrollments[29]
         requester_user = repo_user.users[2]
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         activity_dict_with_enrollments = usecase(code=enrollment.activity_code, requester_user=requester_user,
                                                  user_id=enrollment.user_id,

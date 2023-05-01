@@ -1,14 +1,16 @@
 from src.modules.get_all_activities_admin.app.get_all_activities_admin_usecase import GetAllActivitiesAdminUsecase
 from src.modules.get_all_activities_admin.app.get_all_activities_admin_viewmodel import GetAllActivitiesAdminViewmodel
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="get_all_activities_admin")
 
 class Test_GetAllActivitiesAdminViewmodel:
     def test_get_all_activities_admin_viewmodel(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user)
+        usecase = GetAllActivitiesAdminUsecase(repo_activity, repo_user, observability=observability)
         all_activities_with_enrollments = usecase(repo_user.users[0])
         viewmodel = GetAllActivitiesAdminViewmodel(all_activities_with_enrollments)
 

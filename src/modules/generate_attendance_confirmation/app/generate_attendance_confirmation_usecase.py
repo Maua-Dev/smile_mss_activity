@@ -3,17 +3,19 @@ from random import randint
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction
 
 
 class GenerateAttendanceConfirmationUsecase:
-    def __init__(self, repo: IActivityRepository):
+    def __init__(self, repo: IActivityRepository, observability: IObservability):
         self.repo = repo
+        self.observability = observability
 
     def __call__(self, code: str, requester_user: User) -> str:
-
+        self.observability.log_usecase_in()
         if not Activity.validate_activity_code(code):
             raise EntityError("activity_code")
 
@@ -52,6 +54,7 @@ class GenerateAttendanceConfirmationUsecase:
                                          new_stop_accepting_new_enrollments_before=activity.stop_accepting_new_enrollments_before,
                                          new_confirmation_code=confirmation_code,)
 
+        self.observability.log_usecase_out()
         return confirmation_code
 
     @staticmethod

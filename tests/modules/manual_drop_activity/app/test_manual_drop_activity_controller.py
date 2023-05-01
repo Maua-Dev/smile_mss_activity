@@ -1,17 +1,19 @@
 from src.modules.manual_drop_activity.app.manual_drop_activity_controller import ManualDropActivityController
 from src.modules.manual_drop_activity.app.manual_drop_activity_usecase import ManualDropActivityUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="manual_drop_activity")
 
 class Test_ManualDropActivityController:
 
     def test_manual_drop_activity_controller(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -31,8 +33,8 @@ class Test_ManualDropActivityController:
     def test_manual_drop_activity_controller(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -54,8 +56,8 @@ class Test_ManualDropActivityController:
 
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -76,8 +78,8 @@ class Test_ManualDropActivityController:
 
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -97,8 +99,8 @@ class Test_ManualDropActivityController:
     def test_manual_drop_activity_controller_missing_requester_user(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -116,8 +118,8 @@ class Test_ManualDropActivityController:
     def test_manual_drop_activity_controller_wrong_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[11]
         enrollment = repo_activity.enrollments[0]
@@ -138,8 +140,8 @@ class Test_ManualDropActivityController:
     def test_manual_drop_activity_controller_wrong_user(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[1]
         enrollment = repo_activity.enrollments[0]
@@ -160,8 +162,8 @@ class Test_ManualDropActivityController:
     def test_manual_drop_activity_controller_wrong_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -180,8 +182,8 @@ class Test_ManualDropActivityController:
     def test_manual_drop_activity_controller_wrong_user_type(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -201,8 +203,8 @@ class Test_ManualDropActivityController:
     def test_manual_drop_activity_controller_wrong_user_id(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[0]
@@ -222,8 +224,8 @@ class Test_ManualDropActivityController:
     def test_manual_drop_activity_controller_already_dropped(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualDropActivityUsecase(repo_activity, repo_user)
-        controller = ManualDropActivityController(usecase)
+        usecase = ManualDropActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = ManualDropActivityController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         enrollment = repo_activity.enrollments[8]

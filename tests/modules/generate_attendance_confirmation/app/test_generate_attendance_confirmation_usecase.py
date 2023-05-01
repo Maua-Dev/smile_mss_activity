@@ -4,15 +4,17 @@ from src.modules.generate_attendance_confirmation.app.generate_attendance_confir
     GenerateAttendanceConfirmationUsecase
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="generate_attendance_confirmation")
 
 class Test_GenerateAttendanceConfirmationUsecase:
     def test_generate_attendance_confirmation_usecase(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
 
         requester_user = repo_user.users[2]
 
@@ -27,7 +29,7 @@ class Test_GenerateAttendanceConfirmationUsecase:
     def test_generate_attendance_confirmation_usecase_wrong_code_type(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
 
         requester_user = repo_user.users[2]
 
@@ -37,7 +39,7 @@ class Test_GenerateAttendanceConfirmationUsecase:
     def test_generate_attendance_confirmation_usecase_wrong_role(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
 
         requester_user = repo_user.users[1]
 
@@ -47,7 +49,7 @@ class Test_GenerateAttendanceConfirmationUsecase:
     def test_generate_attendance_confirmation_usecase_wrong_user(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
 
         requester_user = repo_user.users[10]
 
@@ -57,7 +59,7 @@ class Test_GenerateAttendanceConfirmationUsecase:
     def test_generate_attendance_confirmation_usecase_activity_not_found(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
 
         requester_user = repo_user.users[2]
 
@@ -67,7 +69,7 @@ class Test_GenerateAttendanceConfirmationUsecase:
     def test_generate_attendance_confirmation_usecase_activity_already_has_confirmation_code(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
 
         requester_user = repo_user.users[2]
 

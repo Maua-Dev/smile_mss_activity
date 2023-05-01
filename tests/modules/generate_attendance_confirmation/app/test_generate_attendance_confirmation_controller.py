@@ -3,17 +3,19 @@ from src.modules.generate_attendance_confirmation.app.generate_attendance_confir
 from src.modules.generate_attendance_confirmation.app.generate_attendance_confirmation_usecase import \
     GenerateAttendanceConfirmationUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="generate_attendance_confirmation")
 
 class Test_GenerateAttendanceConfirmationController:
 
     def test_generate_attendance_confirmation_controller(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
-        controller = GenerateAttendanceConfirmationController(usecase)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
+        controller = GenerateAttendanceConfirmationController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         request = HttpRequest(body={"code": repo.activities[0].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -29,8 +31,8 @@ class Test_GenerateAttendanceConfirmationController:
     def test_generate_attendance_confirmation_controller_missing_code(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
-        controller = GenerateAttendanceConfirmationController(usecase)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
+        controller = GenerateAttendanceConfirmationController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         request = HttpRequest(body={}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -42,8 +44,8 @@ class Test_GenerateAttendanceConfirmationController:
     def test_generate_attendance_confirmation_controller_missing_requester_user(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
-        controller = GenerateAttendanceConfirmationController(usecase)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
+        controller = GenerateAttendanceConfirmationController(usecase, observability=observability)
 
         request = HttpRequest(body={"code": repo.activities[0].code}, headers={})
         response = controller(request)
@@ -54,8 +56,8 @@ class Test_GenerateAttendanceConfirmationController:
     def test_generate_attendance_confirmation_controller_invalid_activity_code(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
-        controller = GenerateAttendanceConfirmationController(usecase)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
+        controller = GenerateAttendanceConfirmationController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         request = HttpRequest(body={"code": 1}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -67,8 +69,8 @@ class Test_GenerateAttendanceConfirmationController:
     def test_generate_attendance_confirmation_controller_activity_not_found(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
-        controller = GenerateAttendanceConfirmationController(usecase)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
+        controller = GenerateAttendanceConfirmationController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         request = HttpRequest(body={"code": "CODIGO_INEXISTENTE"}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -80,8 +82,8 @@ class Test_GenerateAttendanceConfirmationController:
     def test_generate_attendance_confirmation_controller_role_not_professor(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
-        controller = GenerateAttendanceConfirmationController(usecase)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
+        controller = GenerateAttendanceConfirmationController(usecase, observability=observability)
 
         requester_user = repo_user.users[1]
         request = HttpRequest(body={"code": repo.activities[0].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -93,8 +95,8 @@ class Test_GenerateAttendanceConfirmationController:
     def test_generate_attendance_confirmation_controller_activity_already_has_confirmation_code(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
-        controller = GenerateAttendanceConfirmationController(usecase)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
+        controller = GenerateAttendanceConfirmationController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
         request = HttpRequest(body={"code": repo.activities[11].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})
@@ -106,8 +108,8 @@ class Test_GenerateAttendanceConfirmationController:
     def test_generate_attendance_confirmation_controller_not_responsible_professor(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GenerateAttendanceConfirmationUsecase(repo)
-        controller = GenerateAttendanceConfirmationController(usecase)
+        usecase = GenerateAttendanceConfirmationUsecase(repo, observability=observability)
+        controller = GenerateAttendanceConfirmationController(usecase, observability=observability)
 
         requester_user = repo_user.users[10]
         request = HttpRequest(body={"code": repo.activities[0].code}, headers={'requester_user': {"sub": requester_user.user_id, "name": requester_user.name, "custom:role": requester_user.role.value}})

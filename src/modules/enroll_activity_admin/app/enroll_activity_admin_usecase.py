@@ -1,10 +1,12 @@
 from datetime import datetime
+from typing import Tuple
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -13,12 +15,12 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivit
 
 
 class EnrollActivityAdminUsecase:
-    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository, observability: IObservability):
         self.repo_activity = repo_activity
         self.repo_user = repo_user
-
-    def __call__(self, requester_user: User,  user_id: str, code: str) -> [Enrollment, User]:
-
+        self.observability = observability
+    def __call__(self, requester_user: User,  user_id: str, code: str) -> Tuple[Enrollment, User]:
+        self.observability.log_usecase_in()
         if requester_user.role != ROLE.ADMIN:
             raise UserNotAdmin('User')
 
@@ -68,4 +70,6 @@ class EnrollActivityAdminUsecase:
                 enrollment = Enrollment(activity_code=activity.code, user_id=user_id, state=ENROLLMENT_STATE.ENROLLED,
                                         date_subscribed=int(datetime.now().timestamp() * 1000))
 
-        return self.repo_activity.create_enrollment(enrollment), enroll_user
+        response = self.repo_activity.create_enrollment(enrollment), enroll_user
+        self.observability.log_usecase_out()
+        return response

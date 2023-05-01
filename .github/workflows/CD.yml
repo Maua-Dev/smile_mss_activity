@@ -64,3 +64,4 @@ jobs:
               HASH_KEY: ${{ secrets.HASH_KEY }}
               SES_REGION: ${{ vars.SES_REGION }}
               REPLY_TO_EMAIL: ${{ vars.REPLY_TO_EMAIL }}
+              MSS_NAME: ${{ github.event.repository.name }}

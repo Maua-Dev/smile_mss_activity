@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 
+
 import aws_cdk as cdk
 
 from adjust_layer_directory import adjust_layer_directory
@@ -20,11 +21,30 @@ print("Finished setting up the requirements layers")
 
 app = cdk.App()
 
+
 aws_region = os.environ.get("AWS_REGION")
 aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
 stack_name = os.environ.get("STACK_NAME")
 
-IacStack(app, stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region))
-CertificatesS3Stack(app, f"{stack_name}-certificates-s3", env=cdk.Environment(account=aws_account_id, region=aws_region))
+if 'prod' in stack_name:
+    stage = 'PROD'
+
+elif 'homolog' in stack_name:
+    stage = 'HOMOLOG'
+
+elif 'dev' in stack_name:
+    stage = 'DEV'
+
+else:
+    stage = 'TEST'
+
+tags = {
+    'project': 'Smile2023',
+    'stage': stage,
+    'stack': 'BACK'
+}
+
+IacStack(app, stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region), tags=tags)
+CertificatesS3Stack(app, f"{stack_name}-certificates-s3", env=cdk.Environment(account=aws_account_id, region=aws_region), tags=tags)
 
 app.synth()
