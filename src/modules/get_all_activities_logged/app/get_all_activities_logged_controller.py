@@ -27,7 +27,7 @@ class GetAllActivitiesLoggedController:
 
             viewmodel = GetAllActivitiesLoggedViewmodel(all_activities_with_enrollments)
             response = OK(viewmodel.to_dict())
-            self.observability.log_controller_out(input=json.dumps(response.body))
+            self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
             
             return OK(viewmodel.to_dict())
 

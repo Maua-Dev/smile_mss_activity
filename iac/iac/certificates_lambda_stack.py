@@ -1,6 +1,5 @@
 import os
 
-
 from aws_cdk import (
     aws_lambda as lambda_,
     Duration,

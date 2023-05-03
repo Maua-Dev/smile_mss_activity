@@ -57,6 +57,7 @@ def close_activity_by_date_presenter(event, context):
 def lambda_handler(event, context):
     
     response = close_activity_by_date_presenter(event, context)
-    
+    observability.add_error_count_metric(statusCode=response.get('statusCode', 500))
+
     
     return response

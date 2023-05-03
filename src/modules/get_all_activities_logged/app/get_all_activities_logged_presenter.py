@@ -23,6 +23,7 @@ def get_all_activities_logged_presenter(event, context):
 def lambda_handler(event, context):
     
     response = get_all_activities_logged_presenter(event, context)
+    observability.add_error_count_metric(statusCode=response.get('statusCode', 500))
     
     
     return response
