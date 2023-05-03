@@ -47,7 +47,7 @@ jobs:
         - name: DeployWithCDK
           run: |
             cd iac
-            cdk synth+
+            cdk synth
             cdk deploy "${{env.STACK_NAME}}-certificates-s3" --require-approval never 
             cdk deploy "${{env.STACK_NAME}}" --require-approval never 
 
