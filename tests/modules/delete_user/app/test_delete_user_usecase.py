@@ -4,10 +4,12 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.domain.enums.role_enum import ROLE
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from freezegun import freeze_time
 
+observability = ObservabilityMock(module_name="delete_user")
 
 class Test_DeleteUserUsecase:
 
@@ -15,7 +17,7 @@ class Test_DeleteUserUsecase:
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
 
-        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user)
+        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user, observability=observability)
 
         user_info = repo_user.users[13]
 
@@ -36,7 +38,7 @@ class Test_DeleteUserUsecase:
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
 
-        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user)
+        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user, observability=observability)
 
         user_info = repo_user.users[13]
 
@@ -82,7 +84,7 @@ class Test_DeleteUserUsecase:
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
 
-        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user)
+        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user, observability=observability)
 
         user_info = repo_user.users[13]
 
@@ -145,7 +147,7 @@ class Test_DeleteUserUsecase:
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
 
-        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user)
+        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user, observability=observability)
 
         user_info = repo_user.users[13]
 
@@ -208,7 +210,7 @@ class Test_DeleteUserUsecase:
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
 
-        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user)
+        delete_user_usecase = DeleteUserUsecase(repo_activity, repo_user, observability=observability)
 
         user_info = repo_user.users[13]
 

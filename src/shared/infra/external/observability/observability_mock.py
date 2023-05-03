@@ -14,8 +14,13 @@ class ObservabilityMock(IObservability):
     def log_controller_in(self) -> None:
         self._log_info("In Controller")
         
-    def log_controller_out(self, input) -> None:
-        self._log_info(f"Out of Controller with this input: {input}")
+    def log_controller_out(self, input: str, status_code: int) -> None:
+        self._log_info(
+            {
+                "statusCode": status_code,
+                "message": f"Out of Controller with this input: {input}"
+            }
+        )
         
     def log_usecase_in(self) -> None:
         self._log_info("In Usecase")
@@ -33,19 +38,10 @@ class ObservabilityMock(IObservability):
         print("Out of Lambda")
             
     def _add_metric(self, name: str, unit: str, value: float) -> None:
-        print(f"Metric {name} added with value {value} in {unit}")
+        print(f"Metric {name} added with value {value} in {unit} unit")
             
-    def add_confirm_attendance_count_metric(self) -> None:
-        self._add_metric(name="ConfirmAttendanceCount", unit="Count", value=1)
-            
-    def add_drop_activity_count_metric(self) -> None:
-        self._add_metric(name="DropActivityCount", unit="Count", value=1)
-    
-    def add_enroll_activity_count_metric(self) -> None:
-        self._add_metric(name="EnrollActivityCount", unit="Count", value=1)
-    
-    def add_get_all_activities_count_metric(self) -> None:
-        self._add_metric(name="GetAllActivitiesCount", unit="Count", value=1)
+    def add_error_count_metric(self, statusCode:int) -> None:
+        self._add_metric(name="ErrorCount", unit="Count", value=1) if statusCode not in [200, 201] else None
     
     def add_user_email_notified_count_metric(self) -> None:
         self._add_metric(name="UsersEmailNotified", unit="Count", value=1)

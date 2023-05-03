@@ -52,6 +52,7 @@ def send_notifications_presenter(event, context):
                     # send_sms_notification(activity, users)
 
                 observability.log_simple_lambda_out()
+                
                 return {
                     'statusCode': 200,
                     'body': json.dumps('Notificações enviadas!')
@@ -69,6 +70,7 @@ def send_notifications_presenter(event, context):
                 'statusCode': 404,
                 'body': json.dumps("Nenhuma atividade para enviar notificações!")
             }
+            
     except Exception as err:
         observability.log_exception(status_code=500, exception_name=err.__class__.__name__, message=err.args[0])
         response = InternalServerError(body=err.args[0])
@@ -79,6 +81,7 @@ def send_notifications_presenter(event, context):
 def lambda_handler(event, context):
     
     response = send_notifications_presenter(event, context)
+    observability.add_error_count_metric(statusCode=response.get('statusCode', 500))
     
     
     return response
