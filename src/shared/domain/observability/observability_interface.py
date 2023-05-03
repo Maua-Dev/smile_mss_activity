@@ -21,7 +21,7 @@ class IObservability(ABC):
         pass
     
     @abstractmethod    
-    def log_controller_out(self) -> None:
+    def log_controller_out(self, input: str, status_code: int) -> None:
         pass
     
     @abstractmethod    
@@ -49,19 +49,7 @@ class IObservability(ABC):
         pass
             
     @abstractmethod
-    def add_confirm_attendance_count_metric(self) -> None:
-        pass
-            
-    @abstractmethod
-    def add_drop_activity_count_metric(self) -> None:
-        pass   
-    
-    @abstractmethod
-    def add_enroll_activity_count_metric(self) -> None:
-        pass      
-    
-    @abstractmethod
-    def add_get_all_activities_count_metric(self) -> None:
+    def add_error_count_metric(self, statusCode:int) -> None:
         pass
     
     @abstractmethod

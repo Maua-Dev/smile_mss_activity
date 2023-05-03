@@ -1,3 +1,4 @@
+import json
 from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction
@@ -26,7 +27,7 @@ class GetAllActivitiesAdminController:
 
             viewmodel = GetAllActivitiesAdminViewmodel(all_activities_with_enrollments)
             response = OK(viewmodel.to_dict())
-            self.observability.log_controller_out(input='')
+            self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
 
             return response
 

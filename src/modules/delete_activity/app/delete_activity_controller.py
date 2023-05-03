@@ -34,11 +34,12 @@ class DeleteActivityController:
 
             viewmodel = DeleteActivityViewmodel(enrollment)
             response = OK(viewmodel.to_dict())
-            self.observability.log_controller_out(input=json.dumps(response.body))
+            self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
             return response
 
         except NoItemsFound as err:
             self.observability.log_exception(status_code=404, exception_name="NoItemsFound", message=err.message)
+            
             message = err.message.lower()
 
             if message == "enrollment":

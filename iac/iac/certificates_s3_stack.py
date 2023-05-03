@@ -15,7 +15,6 @@ from aws_cdk import (
 from constructs import Construct
 
 
-
 class CertificatesS3Stack(Stack):
 
 
