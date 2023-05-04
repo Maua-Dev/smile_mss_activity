@@ -6,6 +6,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.role_enum import ROLE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -13,9 +14,10 @@ from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFou
 
 
 class UpdateActivityUsecase:
-    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository, observability: IObservability):
         self.repo_activity = repo_activity
         self.repo_user = repo_user
+        self.observability = observability
 
     def __call__(self, code: str, new_title: str, new_description: str, new_activity_type: ACTIVITY_TYPE,
                  new_is_extensive: bool, new_delivery_model: DELIVERY_MODEL,
@@ -24,6 +26,7 @@ class UpdateActivityUsecase:
                  new_speakers: List[Speaker], new_total_slots: int,
                  new_accepting_new_enrollments: bool,
                  new_stop_accepting_new_enrollments_before: int, user: User, new_link: str = None) -> Activity:
+        self.observability.log_usecase_in()
 
         if user.role != ROLE.ADMIN:
             raise ForbiddenAction("update_activity, only admins can update activities")
@@ -119,7 +122,8 @@ class UpdateActivityUsecase:
         if type(new_stop_accepting_new_enrollments_before) != int and new_stop_accepting_new_enrollments_before is not None:
             raise EntityError("stop_accepting_new_enrollments_before")
 
-        return self.repo_activity.update_activity(code=code,
+
+        activity = self.repo_activity.update_activity(code=code,
                                          new_title=new_title,
                                          new_description=new_description,
                                          new_activity_type=new_activity_type,
@@ -135,3 +139,6 @@ class UpdateActivityUsecase:
                                          new_taken_slots=activity.taken_slots,
                                          new_accepting_new_enrollments=new_accepting_new_enrollments,
                                          new_stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before)
+
+        self.observability.log_usecase_out()
+        return activity

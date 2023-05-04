@@ -1,4 +1,6 @@
+import json
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, ForbiddenAction
@@ -10,12 +12,15 @@ from .manual_attendance_change_viewmodel import ManualAttendanceChangeViewmodel
 
 
 class ManualAttendanceChangeController:
-    def __init__(self, usecase: ManualAttendanceChangeUsecase):
+    def __init__(self, usecase: ManualAttendanceChangeUsecase, observability: IObservability):
         self.ManualAttendanceChangeUsecase = usecase
+        self.observability = observability
 
     def __call__(self, request: IRequest) -> IResponse:
 
         try:
+            self.observability.log_controller_in()
+            
             if request.data.get('code') is None:
                 raise MissingParameters('code')
 
@@ -41,9 +46,13 @@ class ManualAttendanceChangeController:
 
             viewmodel = ManualAttendanceChangeViewmodel(activity_dict=activity_dict_with_enrollments)
 
-            return OK(viewmodel.to_dict())
+            response = OK(viewmodel.to_dict())
+
+            self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
+            return response
 
         except NoItemsFound as err:
+            self.observability.log_exception(status_code=404, exception_name="NoItemsFound", message=err.message)
             message = err.message.lower()
 
             if message == "enrollment":
@@ -60,10 +69,13 @@ class ManualAttendanceChangeController:
 
 
         except MissingParameters as err:
+            self.observability.log_exception(status_code=400, exception_name="MissingParameters", message=err.message)
 
             return BadRequest(body=f"Parâmetro ausente: {err.message}")
 
         except ForbiddenAction as err:
+            self.observability.log_exception(status_code=403, exception_name="ForbiddenAction", message=err.message)
+            
             message = err.message.lower()
             if message == "completed":
                 return Forbidden(body=f"Não é possível confirmar a presença de um usuário cuja inscrição já foi confirmada")
@@ -78,10 +90,12 @@ class ManualAttendanceChangeController:
                 return Forbidden(body=f"Ação não permitida: {err.message}")
 
         except EntityError as err:
+            self.observability.log_exception(status_code=400, exception_name="EntityError", message=err.message)
 
             return BadRequest(body=f"Parâmetro inválido: {err.message}")
 
         except Exception as err:
+            self.observability.log_exception(status_code=500, exception_name=err.__class__.__name__, message=err.args[0])
 
             return InternalServerError(body=err.args[0])
 

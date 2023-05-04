@@ -5,9 +5,11 @@ from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivi
 from src.modules.enroll_activity_admin.app.enroll_activity_admin_controller import EnrollActivityAdminController
 from src.modules.enroll_activity_admin.app.enroll_activity_admin_usecase import EnrollActivityAdminUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="enroll_activity_admin")
 
 class Test_EnrollActivityAdminController:
 
@@ -15,8 +17,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_enrolled(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
 
         requester_user = repo_user.users[0]
 
@@ -38,8 +40,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_not_admin(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
 
         requester_user = repo_user.users[1]
 
@@ -58,8 +60,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_in_queue(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={'code': repo.activities[0].code,
@@ -80,8 +82,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_missing_user_id(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={'code': repo.enrollments[8].activity_code,
@@ -99,8 +101,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_missing_user_id(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={'code': repo.enrollments[8].activity_code,
@@ -117,8 +119,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_missing_code(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={
@@ -135,8 +137,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_enrollment_already_enrolled(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={'code': repo.enrollments[7].activity_code,
@@ -155,8 +157,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_forbidden_action_wrong_role(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={'code': repo.enrollments[4].activity_code,
@@ -174,8 +176,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_activity_not_found(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={'code': 'ATIVIDADE_INEXISTENTE',
@@ -193,8 +195,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_invalid_user_id(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={'code': repo.enrollments[2].activity_code,
@@ -211,8 +213,8 @@ class Test_EnrollActivityAdminController:
     def test_enroll_activity_admin_controller_invalid_code(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
 
         request = HttpRequest(body={'code': 123,
@@ -230,8 +232,8 @@ class Test_EnrollActivityAdminController:
     def test_drop_activity_already_completed(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo, repo_user)
-        controller = EnrollActivityAdminController(usecase)
+        usecase = EnrollActivityAdminUsecase(repo, repo_user, observability=observability)
+        controller = EnrollActivityAdminController(usecase, observability=observability)
         requester_user = repo_user.users[0]
         repo.activities[12].accepting_new_enrollments = True
 

@@ -1,5 +1,6 @@
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction
@@ -7,11 +8,13 @@ from src.shared.helpers.errors.usecase_errors import ForbiddenAction
 
 class GetAllActivitiesAdminUsecase:
 
-    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository, observability: IObservability):
         self.repo_activity = repo_activity
         self.repo_user = repo_user
+        self.observability = observability
 
     def __call__(self, user: User) -> dict:
+        self.observability.log_usecase_in()
 
         if user.role != ROLE.ADMIN:
             raise ForbiddenAction("get_all_activities_with_enrollments, only admins can do this")
@@ -37,5 +40,6 @@ class GetAllActivitiesAdminUsecase:
                     (enrollment, users_dict.get(enrollment.user_id, "NOT_FOUND")) for enrollment in enrollments
                 ]
             }
-
+            
+        self.observability.log_usecase_out()
         return all_activities_dict

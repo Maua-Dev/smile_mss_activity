@@ -3,14 +3,17 @@ import pytest
 from src.modules.delete_attendance_confirmation.app.delete_attendance_confirmation_usecase import DeleteAttendanceConfirmationUsecase
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+
+observability = ObservabilityMock(module_name="delete_attendance_confirmation")
 
 class Test_DeleteAttendanceConfirmationUsecase:
        def test_delete_attendance_confirmation_code_usecase(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
 
               requester_user = repo_user.users[2]
 
@@ -23,7 +26,7 @@ class Test_DeleteAttendanceConfirmationUsecase:
        def test_delete_attendance_confirmation_code_usecase_wrong_code_type(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
 
               requester_user = repo_user.users[2]
 
@@ -33,7 +36,7 @@ class Test_DeleteAttendanceConfirmationUsecase:
        def test_delete_attendance_confirmation_code_usecase_wrong_role(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
 
               requester_user = repo_user.users[0]
 
@@ -43,7 +46,7 @@ class Test_DeleteAttendanceConfirmationUsecase:
        def test_delete_attendance_confirmation_code_usecase_wrong_user(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
 
               requester_user = repo_user.users[1]
 
@@ -53,7 +56,7 @@ class Test_DeleteAttendanceConfirmationUsecase:
        def test_delete_attendance_confirmation_code_activity_not_found(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
 
               requester_user = repo_user.users[2]
 
@@ -63,7 +66,7 @@ class Test_DeleteAttendanceConfirmationUsecase:
        def test_delete_attendance_confirmation_code_activity_do_not_have_confirmation_code(self):
               repo = ActivityRepositoryMock()
               repo_user = UserRepositoryMock()
-              usecase = DeleteAttendanceConfirmationUsecase(repo)
+              usecase = DeleteAttendanceConfirmationUsecase(repo, observability=observability)
 
               requester_user = repo_user.users[2]
 

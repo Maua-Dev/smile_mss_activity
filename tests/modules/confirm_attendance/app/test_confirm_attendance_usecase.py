@@ -3,16 +3,18 @@ from src.modules.confirm_attendance.app.confirm_attendance_usecase import Confir
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="confirm_attendance")
 
 class Test_ConfirmAttendanceUsecase:
 
     def test_confirm_attendance_usecase(self):
         activity_repo = ActivityRepositoryMock()
         users_repo = UserRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(activity_repo)
+        usecase = ConfirmAttendanceUsecase(activity_repo, observability=observability)
 
         user_id = users_repo.users[5].user_id
         code = activity_repo.activities[11].code
@@ -31,7 +33,7 @@ class Test_ConfirmAttendanceUsecase:
     
     def test_confirm_attendance_usecase_invalid_user_id(self):
         activity_repo = ActivityRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(activity_repo)
+        usecase = ConfirmAttendanceUsecase(activity_repo, observability=observability)
 
         user_id = "invalid_user_id" 
         code = activity_repo.activities[11].code
@@ -47,7 +49,7 @@ class Test_ConfirmAttendanceUsecase:
     def test_confirm_attendance_usecase_invalid_code(self):
         activity_repo = ActivityRepositoryMock()
         users_repo = UserRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(activity_repo)
+        usecase = ConfirmAttendanceUsecase(activity_repo, observability=observability)
 
         user_id = users_repo.users[5].user_id
         code = "invalid_code"
@@ -63,7 +65,7 @@ class Test_ConfirmAttendanceUsecase:
     def test_confirm_attendance_usecase_invalid_confirmation_code(self):
         activity_repo = ActivityRepositoryMock()
         users_repo = UserRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(activity_repo)
+        usecase = ConfirmAttendanceUsecase(activity_repo, observability=observability)
 
         user_id = users_repo.users[5].user_id
         code = activity_repo.activities[11].code
@@ -80,7 +82,7 @@ class Test_ConfirmAttendanceUsecase:
     def test_confirm_attendance_usecase_invalid_confirmation_code_not_str(self):
         activity_repo = ActivityRepositoryMock()
         users_repo = UserRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(activity_repo)
+        usecase = ConfirmAttendanceUsecase(activity_repo, observability=observability)
 
         user_id = users_repo.users[5].user_id
         code = activity_repo.activities[11].code
@@ -96,13 +98,12 @@ class Test_ConfirmAttendanceUsecase:
     def test_confirm_attendance_usecase_invalid_activity_code_not_str(self):
         activity_repo = ActivityRepositoryMock()
         users_repo = UserRepositoryMock()
-        usecase = ConfirmAttendanceUsecase(activity_repo)
+        usecase = ConfirmAttendanceUsecase(activity_repo, observability=observability)
 
         user_id = users_repo.users[5].user_id
         code = 123456
         confirmation_code = activity_repo.activities[11].confirmation_code
 
-        
         with pytest.raises(EntityError):
             resp = usecase(
                 user_id=user_id,

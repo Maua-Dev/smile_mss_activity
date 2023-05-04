@@ -6,17 +6,19 @@ from src.shared.domain.entities.user_info import UserInfo
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 import pytest
 
+observability = ObservabilityMock(module_name="manual_attendance_change")
 
 class Test_ManualAttendanceChangeUsecase:
 
     def test_manual_attendance_change_usecase(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0] #old one
         requester_user = repo_user.users[2]
@@ -40,7 +42,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_disconfirming(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[29]  # old one
         requester_user = repo_user.users[2]
@@ -59,7 +61,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_admin(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0]
         requester_user = repo_user.users[0]
@@ -81,7 +83,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_no_enrollments(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0]  # old one
         requester_user = repo_user.users[2]
@@ -94,7 +96,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_wrong_type_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0] #old one
         requester_user = repo_user.users[2]
@@ -106,7 +108,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_invalid_user_id(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0] #old one
         requester_user = repo_user.users[2]
@@ -118,7 +120,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_wrong_type_state(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0] #old one
         requester_user = repo_user.users[2]
@@ -131,7 +133,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_non_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0] #old one
         requester_user = repo_user.users[1]
@@ -144,7 +146,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_non_professor_of_activity(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0]  # old one
         requester_user = repo_user.users[10]
@@ -159,7 +161,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_new_state_not_completed_nor_enrolled(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[1] #old one
         requester_user = repo_user.users[2]
@@ -173,7 +175,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_not_enrolled_to_confirm(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[5] #old one
         requester_user = repo_user.users[2]
@@ -186,7 +188,7 @@ class Test_ManualAttendanceChangeUsecase:
     def test_manual_attendance_change_usecase_not_complete_to_disconfirm(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user)
+        usecase = ManualAttendanceChangeUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         enrollment = repo_activity.enrollments[0] #old one
         requester_user = repo_user.users[2]

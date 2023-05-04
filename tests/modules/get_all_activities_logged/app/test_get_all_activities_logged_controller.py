@@ -2,16 +2,18 @@ from src.modules.get_all_activities_logged.app.get_all_activities_logged_control
     GetAllActivitiesLoggedController
 from src.modules.get_all_activities_logged.app.get_all_activities_logged_usecase import GetAllActivitiesLoggedUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+observability = ObservabilityMock(module_name="get_all_activities_logged")
 
 class Test_GetAllActivitiesController:
     def test_get_all_activities_logged(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetAllActivitiesLoggedUsecase(repo_activity)
-        controller = GetAllActivitiesLoggedController(usecase)
+        usecase = GetAllActivitiesLoggedUsecase(repo_activity, observability=observability)
+        controller = GetAllActivitiesLoggedController(usecase, observability=observability)
 
         requester_user = repo_user.users[2]
 
@@ -29,8 +31,8 @@ class Test_GetAllActivitiesController:
     def test_get_all_activities_logged_missing_request_user(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = GetAllActivitiesLoggedUsecase(repo_activity)
-        controller = GetAllActivitiesLoggedController(usecase)
+        usecase = GetAllActivitiesLoggedUsecase(repo_activity, observability=observability)
+        controller = GetAllActivitiesLoggedController(usecase, observability=observability)
 
         request = HttpRequest(headers={
             'invalid_requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name,

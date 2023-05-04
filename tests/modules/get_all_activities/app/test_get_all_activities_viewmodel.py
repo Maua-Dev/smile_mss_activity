@@ -1,12 +1,15 @@
 from src.modules.get_all_activities.app.get_all_activities_usecase import GetAllActivitiesUsecase
 from src.modules.get_all_activities.app.get_all_activities_viewmodel import GetAllActivitiesViewmodel
+from src.shared.domain.observability.observability_interface import IObservability
+from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
+observability = ObservabilityMock(module_name="get_all_activites")
 
-class Test_GetAllActivitiesAdminViewmodel:
+class Test_GetAllActivitiesViewmodel:
     def test_get_all_activities_viewmodel(self):
         repo = ActivityRepositoryMock()
-        usecase = GetAllActivitiesUsecase(repo)
+        usecase = GetAllActivitiesUsecase(repo, observability=observability)
         all_activities = usecase()
         viewmodel = GetAllActivitiesViewmodel(all_activities)
 

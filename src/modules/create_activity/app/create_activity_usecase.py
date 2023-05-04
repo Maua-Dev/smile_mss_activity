@@ -6,6 +6,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.role_enum import ROLE
+from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -14,9 +15,10 @@ from src.shared.helpers.errors.usecase_errors import DuplicatedItem, NoItemsFoun
 
 
 class CreateActivityUsecase:
-    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository):
+    def __init__(self, repo_activity: IActivityRepository, repo_user: IUserRepository, observability: IObservability):
         self.repo_activity = repo_activity
         self.repo_user = repo_user
+        self.observability = observability
 
     def __call__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
@@ -24,6 +26,7 @@ class CreateActivityUsecase:
                  accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
                  stop_accepting_new_enrollments_before: int, speakers: List[Speaker], user: User) -> Activity:
 
+        self.observability.log_usecase_in()
         if not Activity.validate_activity_code(code):
             raise EntityError("code")
 
@@ -77,5 +80,6 @@ class CreateActivityUsecase:
             stop_accepting_new_enrollments_before=stop_accepting_new_enrollments_before,
             confirmation_code=None,
         )
-
-        return self.repo_activity.create_activity(activity)
+        activity = self.repo_activity.create_activity(activity)
+        self.observability.log_usecase_out()
+        return activity
