@@ -93,14 +93,12 @@ class Environments:
 
     @staticmethod
     def get_observability() -> IObservability:
-        if Environments.get_envs().stage == STAGE.TEST:
-            from src.shared.infra.external.observability.observability_mock import ObservabilityMock
-            return ObservabilityMock
-        elif Environments.get_envs().stage == STAGE.DEV:
+        if Environments.get_envs().stage == STAGE.PROD:
             from src.shared.infra.external.observability.observability_aws import ObservabilityAWS
             return ObservabilityAWS
         else:
-            raise Exception("No observability class found for this stage")
+            from src.shared.infra.external.observability.observability_mock import ObservabilityMock
+            return ObservabilityMock
 
     @staticmethod
     def get_envs() -> "Environments":
