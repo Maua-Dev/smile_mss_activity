@@ -72,10 +72,7 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
             return ActivityRepositoryMock
-        elif Environments.get_envs().stage == STAGE.DEV:
-            from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
-            return ActivityRepositoryDynamo
-        elif Environments.get_envs().stage == STAGE.PROD:
+        elif Environments.get_envs().stage in [STAGE.DEV, STAGE.HOMOLOG, STAGE.PROD]:
             from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
             return ActivityRepositoryDynamo
         else:
@@ -86,7 +83,7 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
             return UserRepositoryMock
-        elif Environments.get_envs().stage == STAGE.PROD or Environments.get_envs().stage == STAGE.DEV:
+        elif Environments.get_envs().stage in [STAGE.DEV, STAGE.HOMOLOG, STAGE.PROD]:
             from src.shared.infra.repositories.user_repository_cognito import UserRepositoryCognito
             return UserRepositoryCognito
         else:
