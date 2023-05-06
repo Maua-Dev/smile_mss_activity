@@ -8,6 +8,7 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 class STAGE(Enum):
     DOTENV = "DOTENV"
     DEV = "DEV"
+    HOMOLOG = "HOMOLOG"
     PROD = "PROD"
     TEST = "TEST"
 
