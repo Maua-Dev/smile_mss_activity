@@ -30,6 +30,18 @@ class IacStack(Stack):
         self.ses_region = os.environ.get("SES_REGION")
         self.mss_name = os.environ.get("MSS_NAME")
 
+        if 'prod' in self.github_ref:
+            stage = 'PROD'
+
+        elif 'homolog' in self.github_ref:
+            stage = 'HOMOLOG'
+
+        elif 'dev' in self.github_ref:
+            stage = 'DEV'
+
+        else:
+            stage = 'TEST'
+
         self.rest_api = RestApi(self, "Smile_RestApi",
                                 rest_api_name="Smile_RestApi",
                                 description="This is the Smile RestApi",
@@ -55,7 +67,7 @@ class IacStack(Stack):
             "DYNAMO_TABLE_NAME": self.dynamo_stack.dynamo_table.table_name,
             "DYNAMO_PARTITION_KEY": "PK",
             "DYNAMO_SORT_KEY": "SK",
-            "STAGE": "DEV",
+            "STAGE": stage,
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
             "USER_POOL":  self.user_pool_id,
@@ -138,7 +150,7 @@ class IacStack(Stack):
         cdn_url = Fn.import_value(f"CertificateBucketCdnUrlValue")
 
         environment_variables_certificate = {
-            "STAGE": "DEV",
+            "STAGE": stage,
             "BUCKET_NAME": bucket_name,
             "DYNAMO_TABLE_NAME": self.dynamo_stack.dynamo_table.table_name,
             "DYNAMO_PARTITION_KEY": "PK",
