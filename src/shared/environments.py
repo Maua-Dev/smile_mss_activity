@@ -8,6 +8,7 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 class STAGE(Enum):
     DOTENV = "DOTENV"
     DEV = "DEV"
+    HOMOLOG = "HOMOLOG"
     PROD = "PROD"
     TEST = "TEST"
 
@@ -71,10 +72,7 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
             return ActivityRepositoryMock
-        elif Environments.get_envs().stage == STAGE.DEV:
-            from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
-            return ActivityRepositoryDynamo
-        elif Environments.get_envs().stage == STAGE.PROD:
+        elif Environments.get_envs().stage in [STAGE.DEV, STAGE.HOMOLOG, STAGE.PROD]:
             from src.shared.infra.repositories.activity_repository_dynamo import ActivityRepositoryDynamo
             return ActivityRepositoryDynamo
         else:
@@ -85,7 +83,7 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
             return UserRepositoryMock
-        elif Environments.get_envs().stage == STAGE.PROD or Environments.get_envs().stage == STAGE.DEV:
+        elif Environments.get_envs().stage in [STAGE.DEV, STAGE.HOMOLOG, STAGE.PROD]:
             from src.shared.infra.repositories.user_repository_cognito import UserRepositoryCognito
             return UserRepositoryCognito
         else:
@@ -93,14 +91,12 @@ class Environments:
 
     @staticmethod
     def get_observability() -> IObservability:
-        if Environments.get_envs().stage == STAGE.TEST:
-            from src.shared.infra.external.observability.observability_mock import ObservabilityMock
-            return ObservabilityMock
-        elif Environments.get_envs().stage == STAGE.DEV:
+        if Environments.get_envs().stage == STAGE.PROD:
             from src.shared.infra.external.observability.observability_aws import ObservabilityAWS
             return ObservabilityAWS
         else:
-            raise Exception("No observability class found for this stage")
+            from src.shared.infra.external.observability.observability_mock import ObservabilityMock
+            return ObservabilityMock
 
     @staticmethod
     def get_envs() -> "Environments":
