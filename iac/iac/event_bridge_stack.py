@@ -34,8 +34,8 @@ class EventBridgeStack(Construct):
 
         rule_send_notification = events.Rule(self, "SendNotificationRule",
                             enabled=False,
-                            schedule=events.Schedule.cron(minute="0/15", hour="10-00", month="*", week_day="*", year="*"),
-                            description="Send notification to users every 15 minutes between 7am and 9pm in GMT -3"
+                            schedule=events.Schedule.cron(minute="0/15", hour="09-00", month="*", week_day="*", year="*"),
+                            description="Send notification to users every 15 minutes between 6am and 9pm in GMT -3"
                             )
 
         self.send_notification_function = lambda_.Function(
