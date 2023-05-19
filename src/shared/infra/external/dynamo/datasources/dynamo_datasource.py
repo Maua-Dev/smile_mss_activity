@@ -135,6 +135,19 @@ class DynamoDatasource:
         """
 
         resp = self.dynamo_table.scan(Select='ALL_ATTRIBUTES')
+
+        items = resp['Items']
+
+        while 'LastEvaluatedKey' in resp:
+            response = self.dynamo_table.scan(ExclusiveStartKey=resp['LastEvaluatedKey'])
+            items.extend(response['Items'])
+
+            resp = response
+
+        resp['Items'] = items
+        resp['Count'] = len(items)
+        resp['ScannedCount'] = len(items)
+
         return resp
 
     def scan_items(self, filter_expression, **kwargs):
