@@ -139,18 +139,18 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
             draw = ImageDraw.Draw(img)
 
             # Largura e altura do certificado
-            W, H = (2667, 1500)
-            spc = 8
+            W, H = (2667, 1300)
+            spc = 7
 
             # obs: y=0 é a altura no meio da imagem
             # Capturar largura e altura do primeiro bloco de texto
             # espaçamento do espaço é spc = 4
 
-            _, _, w, h = draw.textbbox((0, 300), firstBlockA, font=firstFont)
+            _, _, w, h = draw.textbbox((0, 550), firstBlockA, font=firstFont)
             w1 = w + spc
-            _, _, w, h = draw.textbbox((0, 300), firstBlockB, font=firstFontbd)
+            _, _, w, h = draw.textbbox((0, 550), firstBlockB, font=firstFontbd)
             w2 = w1 + w + spc
-            _, _, w, h = draw.textbbox((0, 300), firstBlockC, font=firstFont)
+            _, _, w, h = draw.textbbox((0, 550), firstBlockC, font=firstFont)
             w3 = w2 + w
 
             # coeficiente k de disposição dos textos ao longo do eixo y:
@@ -188,9 +188,9 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
             _, _, w, h = draw.textbbox((0, 300), ThirdBlock_c3, font=thirdFontbd)
             w2 = w + w2
 
-            draw.text(((W - w3) / 2, (h_terceira_linha + 50)), ThirdBlock_c1, font=thirdFont, fill='black')
-            draw.text((((W - w3) / 2) + w1, (h_terceira_linha + 50)), ThirdBlock_c2, font=thirdFontbd, fill='black')
-            draw.text((((W - w3) / 2) + w2 - w + spc, (h_terceira_linha + 50)), ThirdBlock_c3, font=thirdFont,
+            draw.text(((W - w3) / 2, (h_terceira_linha + 44)), ThirdBlock_c1, font=thirdFont, fill='black')
+            draw.text((((W - w3) / 2) + w1, (h_terceira_linha + 44)), ThirdBlock_c2, font=thirdFontbd, fill='black')
+            draw.text((((W - w3) / 2) + w2 - w + spc, (h_terceira_linha + 44)), ThirdBlock_c3, font=thirdFont,
                       fill='black')
 
             _, _, w, h = draw.textbbox((0, (-200) * yk), ThirdBlock_d, font=thirdFontbd)
@@ -203,11 +203,11 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
             _, _, w, h = draw.textbbox((0, 300), ThirdBlock_e2, font=thirdFontbd)
             w2 = w1 + w
 
-            draw.text(((W - w2) / 2, (h_terceira_linha + 155)), ThirdBlock_e1, font=thirdFont, fill='black')
-            draw.text((((W - w2) / 2) + w1, (h_terceira_linha + 155)), ThirdBlock_e2, font=thirdFontbd, fill='black')
+            draw.text(((W - w2) / 2, (h_terceira_linha + 132)), ThirdBlock_e1, font=thirdFont, fill='black')
+            draw.text((((W - w2) / 2) + w1, (h_terceira_linha + 132)), ThirdBlock_e2, font=thirdFontbd, fill='black')
 
             # Capturar largura e altura do primeiro bloco de texto
-            _, _, w, h = draw.textbbox((0, -320 * yk), FourthBlock, font=fourthFont)
+            _, _, w, h = draw.textbbox((0, -280 * yk), FourthBlock, font=fourthFont)
             # plotar primeiro bloco de texto
             draw.text(((W - w) / 2, (H - h) / 1.8), FourthBlock, font=fourthFont, fill='black')
 
