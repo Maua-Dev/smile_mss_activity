@@ -264,5 +264,3 @@ def lambda_handler(event, context):
 
         generate_certificate(activity=activity, users=users, template_file=file_content, bucket_name=bucket_name)
 
-if __name__ == '__main__':
-    lambda_handler(None, None)
