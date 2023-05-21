@@ -104,7 +104,7 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
 
             secondBlock = name
 
-            thirdBlock_a = "o presente certificado, por ter participado da:"
+            thirdBlock_a = "o presente certificado, por ter participado da atividade:"
             thirdBlock_b = title
             ThirdBlock_c1 = "realizada no dia "
             ThirdBlock_c2 = text_date
@@ -166,7 +166,7 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
             # Capturar largura e altura do primeiro bloco de texto
             _, _, w, h = draw.textbbox((0, 80 * yk), secondBlock, font=secondFont)
             # plotar primeiro bloco de texto
-            draw.text(((W - w) / 2, (H - h) / 2), secondBlock, font=secondFont, fill='black')
+            draw.text(((W - w) / 2, (H - h) / 2 - 50), secondBlock, font=secondFont, fill='black')
 
             # Capturar largura e altura do primeiro bloco de texto
             _, _, w, h = draw.textbbox((5, -68 * yk), thirdBlock_a, font=thirdFont)
@@ -263,3 +263,6 @@ def lambda_handler(event, context):
                  enrollment.state == ENROLLMENT_STATE.COMPLETED]
 
         generate_certificate(activity=activity, users=users, template_file=file_content, bucket_name=bucket_name)
+
+if __name__ == '__main__':
+    lambda_handler(None, None)
