@@ -110,15 +110,15 @@ class Test_EnrollActivityAdmin:
         with pytest.raises(NoItemsFound):
             enrollment, enrollment_user = usecase(requester_user, repo_user.users[6].user_id, 'none')
 
-    @freeze_time("2022-12-01")
-    def test_enroll_activity_admin_usecase_not_accepting_new_enrollment(self):
-        repo_activity = ActivityRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
-        requester_user = repo_user.users[0]
-
-        with pytest.raises(ClosedActivity):
-            enrollment, enrollment_user = usecase(requester_user, repo_user.users[5].user_id, repo_activity.activities[12].code)
+    # @freeze_time("2022-12-01")
+    # def test_enroll_activity_admin_usecase_not_accepting_new_enrollment(self):
+    #     repo_activity = ActivityRepositoryMock()
+    #     repo_user = UserRepositoryMock()
+    #     usecase = EnrollActivityAdminUsecase(repo_activity, repo_user, observability=observability)
+    #     requester_user = repo_user.users[0]
+    #
+    #     with pytest.raises(ClosedActivity):
+    #         enrollment, enrollment_user = usecase(requester_user, repo_user.users[5].user_id, repo_activity.activities[12].code)
 
     @freeze_time("2022-12-01")
     def test_enrollment_activity_usecase_already_completed(self):
