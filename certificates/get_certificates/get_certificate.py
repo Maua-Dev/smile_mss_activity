@@ -38,7 +38,7 @@ def get_certificates_presenter(event, context):
     try:
         all_activities = repo.get_all_activities()
 
-        activities_dict = {activity.code: activity.title for activity in all_activities}
+        activities_dict = {activity.code.replace('/', '').replace('_', '').replace(".", ""): activity.title for activity in all_activities}
 
         httpRequest = LambdaHttpRequest(data=event)
 
