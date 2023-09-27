@@ -10,10 +10,8 @@ class UserInfo(User):
     phone: str
     accepted_notifications_sms: bool
     accepted_notifications_email: bool
-    social_name: str
-    certificate_with_social_name: bool
-
-    def __init__(self, user_id: str, name: str, role: ROLE, email: str, phone: str, accepted_notifications_sms: bool, accepted_notifications_email: bool, social_name: str, certificate_with_social_name: bool):
+    
+    def __init__(self, user_id: str, name: str, role: ROLE, email: str, phone: str, accepted_notifications_sms: bool, accepted_notifications_email: bool):
         super().__init__(name, role, user_id)
 
         if not UserInfo.validate_email(email):
@@ -31,17 +29,6 @@ class UserInfo(User):
         if type(accepted_notifications_email) != bool:
             raise EntityError("accepted_notifications_email")
         self.accepted_notifications_email = accepted_notifications_email
-
-        if social_name is not None:
-            if not User.validate_name(social_name):
-                raise EntityError("social_name")
-            self.social_name = social_name.title()
-        else:
-            self.social_name = None
-
-        if type(certificate_with_social_name) != bool:
-            raise EntityError("certificate_with_social_name")
-        self.certificate_with_social_name = certificate_with_social_name
 
     def __repr__(self):
         return f"UserInfo(name={self.name}, role={self.role.value}, user_id={self.user_id}, email={self.email})"
