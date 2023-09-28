@@ -1,7 +1,7 @@
 from src.shared.domain.entities.user_info import UserInfo
 
 def compose_deleted_user_email(user: UserInfo):
-    name = user.name.split(" ")[0] if user.social_name is None else user.social_name.split(" ")[0]
+    name = user.name.split(" ")[0]
 
     message = """
 
