@@ -145,9 +145,9 @@ class IacStack(Stack):
 
         self.event_bridge.send_notification_function.add_to_role_policy(sns_admin_policy)
 
-        bucket_name = Fn.import_value(f"CertificateBucketNameValue")
+        bucket_name = Fn.import_value(f"CertificateBucketNameValue2024")
 
-        cdn_url = Fn.import_value(f"CertificateBucketCdnUrlValue")
+        cdn_url = Fn.import_value(f"CertificateBucketCdnUrlValue2024")
 
         environment_variables_certificate = {
             "STAGE": stage,
