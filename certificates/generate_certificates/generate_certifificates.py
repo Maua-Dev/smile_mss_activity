@@ -46,10 +46,6 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
                 continue
 
             name = user.name
-            social_name = user.social_name
-
-            if user.certificate_with_social_name and social_name:
-                name = social_name
 
             MONTH_DICT = {
                 1: "janeiro",

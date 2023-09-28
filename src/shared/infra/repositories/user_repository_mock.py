@@ -25,7 +25,7 @@ class UserRepositoryMock(IUserRepository):
             User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
             User(name="Rafael Santos", role=ROLE.PROFESSOR, user_id="62cafdd4-a110-11ed-a8fc-0242ac120002"),
             User(name="Rodrigo Santos", role=ROLE.PROFESSOR, user_id="71f06f24-a110-11ed-a8fc-0242ac120002"),
-            UserInfo(user_id="7"*36, name="João Vilas", role=ROLE.ADMIN, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True, social_name=None, certificate_with_social_name=False),
+            UserInfo(user_id="7"*36, name="João Vilas", role=ROLE.ADMIN, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True),
         ]
 
     def get_user(self, user_id: str) -> User:
@@ -45,14 +45,14 @@ class UserRepositoryMock(IUserRepository):
         users = list()
         for user in self.users:
             if user.user_id in user_ids:
-                user_info = UserInfo(user_id=user.user_id, name=user.name, role=user.role, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True, social_name=None, certificate_with_social_name=False)
+                user_info = UserInfo(user_id=user.user_id, name=user.name, role=user.role, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True)
                 users.append(user_info)
         return users
 
     def get_user_info(self, user_id: str) -> UserInfo:
         for user in self.users:
             if user.user_id == user_id:
-                user_info = UserInfo(user_id=user.user_id, name=user.name, role=user.role, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True, social_name=None, certificate_with_social_name=False)
+                user_info = UserInfo(user_id=user.user_id, name=user.name, role=user.role, email="teste@teste.com", phone="+5511999999999", accepted_notifications_email=True, accepted_notifications_sms=True)
 
                 return user_info
 

@@ -16,7 +16,7 @@ client = boto3.client('ses', region_name=os.environ.get('SES_REGION'))
 
 
 def compose_html(activity: Activity, user: UserInfo):
-    name = user.name.split(" ")[0] if user.social_name is None else user.social_name.split(" ")[0]
+    name = user.name.split(" ")[0]
     gmt3_tz = timezone(timedelta(hours=-3))
 
     if activity.delivery_model == DELIVERY_MODEL.IN_PERSON:

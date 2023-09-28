@@ -34,8 +34,7 @@ class Test_UserInfo:
                 email="21.01444-2maua.br",
                 phone="+5511999999999",
                 accepted_notifications_sms=True,
-                accepted_notifications_email=True, social_name="test",
-                certificate_with_social_name=True)
+                accepted_notifications_email=True)
 
 
 

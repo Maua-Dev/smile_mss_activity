@@ -363,9 +363,7 @@ class Test_ActivityRepositoryDynamo:
         user = UserInfo(
             name="Vitor Soller",
             email="vgsoller@gmail.com",
-            social_name=None,
             accepted_notifications_email=True,
-            certificate_with_social_name=False,
             user_id="0"*36,
             phone=None,
             accepted_notifications_sms=False,
@@ -386,9 +384,7 @@ class Test_ActivityRepositoryDynamo:
         user = UserInfo(
             name="Vitor Soller",
             email="vgsoller@gmail.com",
-            social_name=None,
             accepted_notifications_email=True,
-            certificate_with_social_name=False,
             user_id="0"*36,
             phone=None,
             accepted_notifications_sms=False,
