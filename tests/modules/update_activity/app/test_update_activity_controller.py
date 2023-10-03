@@ -22,8 +22,8 @@ class Test_UpdateActivityController:
                   "new_title": "Clean Architecture code review!",
                   "new_description": "Reviewing IMT student's codes",
                   "new_activity_type": "LECTURES",
-                  "new_is_extensive": False,
-                  "new_delivery_model": "IN_PERSON",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
                   "new_start_date": 1669141012000,
                   "new_duration": 90,
                   "new_link": None,
@@ -35,7 +35,7 @@ class Test_UpdateActivityController:
                       "company": "Clean Architecture Company"
                   }],
                   "new_total_slots": 100,
-                  "new_accepting_new_enrollments": True,
+                  "new_accepting_new_enrollments": None,
                   "new_stop_accepting_new_enrollments_before": 1666451811000, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
         )
 
@@ -46,7 +46,7 @@ class Test_UpdateActivityController:
         assert response.body['activity']['title'] == 'Clean Architecture code review!'
         assert response.body['activity']['description'] == "Reviewing IMT student's codes"
         assert response.body['activity']['activity_type'] == 'LECTURES'
-        assert response.body['activity']['is_extensive'] == False
+        assert response.body['activity']['is_extensive'] == True
         assert response.body['activity']['delivery_model'] == 'IN_PERSON'
         assert response.body['activity']['start_date'] == 1669141012000
         assert response.body['activity']['duration'] == 90
@@ -170,7 +170,7 @@ class Test_UpdateActivityController:
             body={"code": "ECM2345",
                   "new_description": "Reviewing IMT student's codes",
                   "new_activity_type": "LECTURES",
-                  "new_is_extensive": False,
+                  "new_is_extensive": True,
                   "new_delivery_model": "IN_PERSON",
                   "new_start_date": 1669141012,
                   "new_duration": 90,
