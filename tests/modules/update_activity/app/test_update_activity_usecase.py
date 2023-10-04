@@ -35,7 +35,7 @@ class Test_UpdateActivityUsecase:
                                           company="Universidade Federal de Fulano de tal",
                                       )
                                   ], new_total_slots=100,
-                                  new_accepting_new_enrollments=True,
+                                  new_accepting_new_enrollments=False,
                                   user=repo_user.users[0],
                                   new_stop_accepting_new_enrollments_before=None)
 
@@ -78,7 +78,7 @@ class Test_UpdateActivityUsecase:
                                           company="Universidade Federal de Fulano de tal",
                                       )
                                   ], new_total_slots=100,
-                                  new_accepting_new_enrollments=True,
+                                  new_accepting_new_enrollments=False,
                                   user=repo_user.users[0],
                                   new_stop_accepting_new_enrollments_before=None)
 
@@ -108,27 +108,27 @@ class Test_UpdateActivityUsecase:
         old_activity = repo_activity.activities[0]
         update_activity = usecase(code=repo_activity.activities[0].code,
                                   new_title="NOVO TITULO",
-                                  new_description="Isso é uma atividade",
-                                  new_activity_type=ACTIVITY_TYPE.COURSES,
-                                  new_is_extensive=False,
-                                  new_delivery_model=DELIVERY_MODEL.IN_PERSON,
-                                  new_start_date=1671747413000,
-                                  new_duration=120,
+                                  new_description="Isso é uma atividade!",
+                                  new_activity_type=ACTIVITY_TYPE.ACADEMIC_COMPETITIONS,
+                                  new_is_extensive=True,
+                                  new_delivery_model=DELIVERY_MODEL.HYBRID,
+                                  new_start_date=None,
+                                  new_duration=None,
                                   new_link=None,
-                                  new_place="H332",
+                                  new_place=None,
                                   new_responsible_professors_user_id=["03555624-a110-11ed-a8fc-0242ac120002"],
-                                  new_speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
-                                  new_total_slots=4,
-                                  new_accepting_new_enrollments=True,
+                                  new_speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Google")],
+                                  new_total_slots=None,
+                                  new_accepting_new_enrollments=None,
                                   user=repo_user.users[0],
-                                  new_stop_accepting_new_enrollments_before=1671743812000)
+                                  new_stop_accepting_new_enrollments_before=None)
 
         assert type(update_activity) == Activity
 
         assert repo_activity.activities[0].title == old_activity.title
         assert repo_activity.activities[0].description == old_activity.description
         assert repo_activity.activities[0].activity_type == old_activity.activity_type
-        assert repo_activity.activities[0].activity_type == ACTIVITY_TYPE.COURSES
+        assert repo_activity.activities[0].activity_type == ACTIVITY_TYPE.ACADEMIC_COMPETITIONS
         assert repo_activity.activities[0].is_extensive == old_activity.is_extensive
         assert repo_activity.activities[0].delivery_model == old_activity.delivery_model
         assert repo_activity.activities[0].start_date == old_activity.start_date
@@ -164,7 +164,7 @@ class Test_UpdateActivityUsecase:
                                               company="Universidade Federal de Fulano de tal",
                                           )
                                       ], new_total_slots=100,
-                                      new_accepting_new_enrollments=True,
+                                      new_accepting_new_enrollments=False,
                                       user=repo_user.users[0],
                                       new_stop_accepting_new_enrollments_before=None)
 
@@ -175,7 +175,7 @@ class Test_UpdateActivityUsecase:
 
         with pytest.raises(EntityError):
             update_activity = usecase(code=555, new_title="NOVO TITULO", new_description='nova descricao',
-                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                      new_activity_type=ACTIVITY_TYPE.COURSES,
                                       new_is_extensive=True,
                                       new_delivery_model=DELIVERY_MODEL.ONLINE,
                                       new_start_date=1630465200000, new_duration=15,

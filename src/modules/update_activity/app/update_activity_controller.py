@@ -23,14 +23,13 @@ class UpdateActivityController:
     def __call__(self, request: IRequest) -> IResponse:
         try:
             self.observability.log_controller_in()
-            
             if request.data.get('requester_user') is None:
                 raise MissingParameters('requester_user')
 
-            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
-
             if request.data.get('code') is None:
                 raise MissingParameters('code') 
+
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 
             new_activity_type = request.data.get('new_activity_type')
             if new_activity_type not in [activity_type_value.value for activity_type_value in ACTIVITY_TYPE]:

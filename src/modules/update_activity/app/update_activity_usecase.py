@@ -19,13 +19,13 @@ class UpdateActivityUsecase:
         self.repo_user = repo_user
         self.observability = observability
 
-    def __call__(self, code: str, new_title: Optional[str] = None, new_description: Optional[str] = None, new_activity_type: Optional[ACTIVITY_TYPE] = None,
+    def __call__(self, code: str, user: User, new_title: Optional[str] = None, new_description: Optional[str] = None, new_activity_type: Optional[ACTIVITY_TYPE] = None,
                  new_is_extensive: Optional[bool] = None, new_delivery_model: Optional[DELIVERY_MODEL] = None,
                  new_start_date: Optional[int] = None, new_duration: Optional[int] = None, new_place: Optional[str] = None,
                  new_responsible_professors_user_id: Optional[List[str]] = None,
                  new_speakers: Optional[List[Speaker]] = None, new_total_slots: Optional[int] = None,
                  new_accepting_new_enrollments: Optional[bool] = None,
-                 new_stop_accepting_new_enrollments_before: Optional[int] = None, user: Optional[User] = None, new_link: Optional[str] = None) -> Activity:
+                 new_stop_accepting_new_enrollments_before: Optional[int] = None, new_link: Optional[str] = None) -> Activity:
         self.observability.log_usecase_in()
 
         if user.role != ROLE.ADMIN:
@@ -78,6 +78,9 @@ class UpdateActivityUsecase:
             new_activity.description = new_description
         
         if new_activity_type is not None:
+            if type(new_activity_type) != ACTIVITY_TYPE:
+                raise EntityError("activity_type")
+            
             if new_activity_type == activity.activity_type:
                 raise UnecessaryUpdate("activity_type")
             
@@ -135,6 +138,7 @@ class UpdateActivityUsecase:
             new_activity.place = new_place
 
         if new_responsible_professors_user_id  is not None:
+            print(new_responsible_professors_user_id)
             if type(new_responsible_professors_user_id) != list:
                 raise EntityError("responsible_professors")
 
@@ -154,6 +158,8 @@ class UpdateActivityUsecase:
 
                 if len(new_responsible_professors) != len(new_responsible_professors_user_id):
                     raise NoItemsFound("responsible_professors")
+                print(old_responsible_professors_user_id)
+                print(new_responsible_professors_user_id)
 
             else:
                 new_responsible_professors = old_responsible_professors
@@ -168,6 +174,7 @@ class UpdateActivityUsecase:
                 elif not all([encharged_professor.role == ROLE.PROFESSOR for encharged_professor in
                             new_responsible_professors]):
                     raise EntityError("responsible_professors")
+            new_activity.responsible_professors = new_responsible_professors
         
         if new_speakers is not None:
             if type(new_speakers) != list:
@@ -207,7 +214,6 @@ class UpdateActivityUsecase:
                 raise UnecessaryUpdate("stop_accepting_new_enrollments_before")
             
             new_activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
-
 
         activity = self.repo_activity.update_activity(code=code,
                                          new_title=new_activity.title,
