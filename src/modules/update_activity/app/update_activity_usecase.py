@@ -96,6 +96,9 @@ class UpdateActivityUsecase:
             new_activity.is_extensive = new_is_extensive
         
         if new_delivery_model is not None:
+            if type(new_delivery_model) != DELIVERY_MODEL:
+                raise EntityError("delivery_model")
+
             if new_delivery_model == activity.delivery_model:
                 raise UnecessaryUpdate("delivery_model")
             
@@ -138,9 +141,11 @@ class UpdateActivityUsecase:
             new_activity.place = new_place
 
         if new_responsible_professors_user_id  is not None:
-            print(new_responsible_professors_user_id)
             if type(new_responsible_professors_user_id) != list:
                 raise EntityError("responsible_professors")
+            
+            if new_responsible_professors_user_id == [activity.responsible_professors[0].user_id]:
+                raise UnecessaryUpdate("responsible_professors")
 
             if not all(type(user_id) == str for user_id in new_responsible_professors_user_id):
                 raise EntityError("responsible_professors")
@@ -158,8 +163,6 @@ class UpdateActivityUsecase:
 
                 if len(new_responsible_professors) != len(new_responsible_professors_user_id):
                     raise NoItemsFound("responsible_professors")
-                print(old_responsible_professors_user_id)
-                print(new_responsible_professors_user_id)
 
             else:
                 new_responsible_professors = old_responsible_professors

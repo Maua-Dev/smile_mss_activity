@@ -160,354 +160,347 @@ class Test_UpdateActivityController:
         assert response.status_code == 400
         assert response.body == 'Parâmetro inválido: code'
 
-    # def test_update_activity_missing_new_title(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_title(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": True,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 200
+        assert response.status_code == 200
 
-    # def test_update_activity_missing_new_description(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_description(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_description"
+        assert response.status_code == 200
 
-    # def test_update_activity_missing_new_activity_type(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_activity_type(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_activity_type"
+        assert response.status_code == 200
+        # assert response.body == "Parâmetro inválido: new_activity_type"
 
-    # def test_update_activity_invalid_new_activity_type(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_invalid_new_activity_type(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "INVALID",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "INVALID",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "IN_PERSON",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro inválido: new_activity_type"
+        assert response.status_code == 400
+        assert response.body == "Parâmetro inválido: new_activity_type"
 
-    # def test_update_activity_missing_new_is_extensive(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_is_extensive(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_delivery_model": "HYBRID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_is_extensive"
+        assert response.status_code == 200
 
-    # def test_update_activity_missing_new_delivery_model(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_delivery_model(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": False,
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": True,
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_delivery_model"
+        assert response.status_code == 200
 
-    # def test_update_activity_invalid_new_delivery_model(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_invalid_new_delivery_model(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "INVALID",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": False,
+                  "new_delivery_model": "INVALID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": True,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro inválido: new_delivery_model"
+        assert response.status_code == 400
+        assert response.body == "Parâmetro inválido: new_delivery_model"
 
-    # def test_update_activity_missing_new_start_date(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_start_date(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_start_date"
+        assert response.status_code == 200
 
-    # def test_update_activity_missing_new_duration(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_duration(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
+                  "new_start_date": 1669141012,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_duration"
+        assert response.status_code == 200
 
-    # def test_update_activity_missing_new_responsible_professors(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_responsible_professors(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_responsible_professors"
+        assert response.status_code == 200
 
-    # def test_update_activity_missing_new_speakers(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_speakers(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_speakers"
+        assert response.status_code == 200
 
     def test_update_activity_controller_professor_not_found(self):
         repo_activity = ActivityRepositoryMock()
@@ -668,70 +661,68 @@ class Test_UpdateActivityController:
         assert response.body == "Parâmetro inválido: new_speakers"
 
 
-    # def test_update_activity_missing_new_total_slots(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_total_slots(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": False,
-    #               "new_delivery_model": "IN_PERSON",
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": True,
+                  "new_delivery_model": "HYBRID",
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": 1666451811, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_total_slots"
+        assert response.status_code == 200
 
-    # def test_update_activity_missing_new_accepting_new_enrollments(self):
-    #     repo_activity = ActivityRepositoryMock()
-    #     repo_user = UserRepositoryMock()
-    #     usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
-    #     controller = UpdateActivityController(usecase, observability=observability)
+    def test_update_activity_missing_new_accepting_new_enrollments(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
 
-    #     request = HttpRequest(
-    #         body={"code": "ECM2345",
-    #               "new_title": "Clean Architecture code review!",
-    #               "new_description": "Reviewing IMT student's codes",
-    #               "new_activity_type": "LECTURES",
-    #               "new_is_extensive": None,
-    #               "new_delivery_model": None,
-    #               "new_start_date": 1669141012,
-    #               "new_duration": 90,
-    #               "new_link": None,
-    #               "new_place": "H331",
-    #               "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
-    #               "new_speakers": [{
-    #                   "name": "Robert Cecil Martin",
-    #                   "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-    #                   "company": "Clean Architecture Company"
-    #               }],
-    #               "new_total_slots": 100,
-    #               "new_accepting_new_enrollments": True,
-    #               "new_stop_accepting_new_enrollments_before": None, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
-    #     )
+        request = HttpRequest(
+            body={"code": "ECM2345",
+                  "new_title": "Clean Architecture code review!",
+                  "new_description": "Reviewing IMT student's codes",
+                  "new_activity_type": "LECTURES",
+                  "new_is_extensive": None,
+                  "new_delivery_model": None,
+                  "new_start_date": 1669141012,
+                  "new_duration": 90,
+                  "new_link": None,
+                  "new_place": "H331",
+                  "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+                  "new_speakers": [{
+                      "name": "Robert Cecil Martin",
+                      "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                      "company": "Clean Architecture Company"
+                  }],
+                  "new_total_slots": 100,
+                  "new_accepting_new_enrollments": False,
+                  "new_stop_accepting_new_enrollments_before": None, 'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}}
+        )
 
-    #     response = controller(request)
+        response = controller(request)
 
-    #     assert response.status_code == 400
-    #     assert response.body == "Parâmetro ausente: new_accepting_new_enrollments"
+        assert response.status_code == 200
 
     def test_update_activity_controller_missing_request_user(self):
         repo_activity = ActivityRepositoryMock()
@@ -743,10 +734,6 @@ class Test_UpdateActivityController:
             body={"code": "ECM2345",
                   "new_title": "Clean Architecture code review!",
                   "new_description": "Reviewing IMT student's codes",
-                  "new_activity_type": "LECTURES",
-                  "new_is_extensive": False,
-                  "new_delivery_model": "IN_PERSON",
-                  "new_start_date": 1669141012000,
                   "new_duration": 90,
                   "new_link": None,
                   "new_place": "H331",
@@ -758,7 +745,7 @@ class Test_UpdateActivityController:
                       "company": "Clean Architecture Company"
                   }],
                   "new_total_slots": 100,
-                  "new_accepting_new_enrollments": True,
+                  "new_accepting_new_enrollments": False,
                   "new_stop_accepting_new_enrollments_before": 1666451811000,
                   }
         )
