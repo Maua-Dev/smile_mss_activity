@@ -57,7 +57,217 @@ class Test_UpdateActivityUsecase:
         assert repo_activity.activities[0].accepting_new_enrollments == update_activity.accepting_new_enrollments
         assert repo_activity.activities[
                    0].stop_accepting_new_enrollments_before == update_activity.stop_accepting_new_enrollments_before
-        
+
+    def test_update_activity_usecase_update_only_title(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+        update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].title == update_activity.title
+        assert repo_activity.activities[0].title == "NOVO TITULO"
+
+    def test_update_activity_usecase_update_only_description(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+        update_activity = usecase(code=repo_activity.activities[0].code,
+                                  new_description='nova descricao',
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].description == update_activity.description
+        assert repo_activity.activities[0].description == "nova descricao"
+
+    def test_update_activity_usecase_update_only_activity_type(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+        update_activity = usecase(code=repo_activity.activities[0].code,
+                                  new_activity_type=ACTIVITY_TYPE.LECTURES,
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].activity_type == update_activity.activity_type
+        assert repo_activity.activities[0].activity_type == ACTIVITY_TYPE.LECTURES
+    
+    def test_update_activity_usecase_update_only_is_extensive(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+        update_activity = usecase(code=repo_activity.activities[0].code,
+                                  new_is_extensive=True,
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].is_extensive == update_activity.is_extensive
+        assert repo_activity.activities[0].is_extensive == True
+    
+    def test_update_activity_usecase_update_only_delivery_model(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+        update_activity = usecase(code=repo_activity.activities[0].code,
+                                  new_delivery_model=DELIVERY_MODEL.ONLINE,
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].delivery_model == update_activity.delivery_model
+        assert repo_activity.activities[0].delivery_model == DELIVERY_MODEL.ONLINE
+    
+    def test_update_activity_usecase_update_only_start_date(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+
+        update_activity = usecase(code=repo_activity.activities[0].code,
+                                  new_start_date=1630465200000,
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].start_date == update_activity.start_date
+        assert repo_activity.activities[0].start_date == 1630465200000
+    
+    def test_update_activity_usecase_update_only_duration(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user,
+                                        observability=observability)
+
+        update_activity = usecase(code=repo_activity.activities[0].code,
+                                  new_duration=15,
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].duration == update_activity.duration
+        assert repo_activity.activities[0].duration == 15
+
+    def test_update_activity_usecase_update_only_link(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+
+        update_activity = usecase(code=repo_activity.activities[1].code,
+                                  new_link="https://maua.br",
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[1].link == update_activity.link
+        assert repo_activity.activities[1].link == "https://maua.br"
+
+    def test_update_activity_usecase_update_only_place(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user,
+                                        observability=observability)
+
+        update_activity = usecase(code=repo_activity.activities[0].code,
+                                  new_place="H204",
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].place == update_activity.place
+        assert repo_activity.activities[0].place == "H204"
+
+    def test_update_activity_usecase_update_only_responsible_professors_user_id(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+
+        update_activity = usecase(code=repo_activity.activities[0].code,
+                                  new_responsible_professors_user_id=[repo_user.users[3].user_id],
+                                  user=repo_user.users[0])
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].responsible_professors == [repo_user.users[3]]
+
+    def test_update_activity_usecase_update_only_speakers(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+
+        update_activity = usecase(
+            code=repo_activity.activities[0].code,
+            new_speakers=[
+                Speaker(
+                    name="Fulano de Tal",
+                    bio="Fulano de Tal é um professor de Engenharia de Software",
+                    company="Universidade Federal de Fulano de tal",
+                )
+            ],
+            user=repo_user.users[0]
+        )
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].speakers == update_activity.speakers
+
+    def test_update_activity_usecase_update_only_total_slots(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user, observability=observability)
+
+        update_activity = usecase(
+            code=repo_activity.activities[0].code,
+            new_total_slots=100,
+            user=repo_user.users[0]
+        )
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].total_slots == update_activity.total_slots
+        assert repo_activity.activities[0].total_slots == 100
+    
+    def test_update_activity_usecase_update_only_accepting_new_enrollments(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
+
+        update_activity = usecase(
+            code=repo_activity.activities[0].code,
+            new_accepting_new_enrollments=False,
+            user=repo_user.users[0]
+        )
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].accepting_new_enrollments == update_activity.accepting_new_enrollments
+        assert repo_activity.activities[0].accepting_new_enrollments == False
+    
+    def test_update_activity_usecase_update_only_stop_accepting_new_enrollments_before(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user, observability=observability)
+
+        update_activity = usecase(
+            code=repo_activity.activities[0].code,
+            new_stop_accepting_new_enrollments_before=1671743785000,
+            user=repo_user.users[0]
+        )
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].stop_accepting_new_enrollments_before == update_activity.stop_accepting_new_enrollments_before
+        assert repo_activity.activities[0].stop_accepting_new_enrollments_before == 1671743785000
+
     def test_update_activity_usecase_same_title(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -65,6 +275,7 @@ class Test_UpdateActivityUsecase:
         with pytest.raises(UnecessaryUpdate):
             first_activity = repo_activity.activities[0]    
             update_activity = usecase(code=repo_activity.activities[0].code, new_title=first_activity.title, user=repo_user.users[0])
+
 
     def test_update_activity_usecase_same_description(self):
         repo_activity = ActivityRepositoryMock()
@@ -337,12 +548,3 @@ class Test_UpdateActivityUsecase:
                                       user=repo_user.users[1],
                                       new_stop_accepting_new_enrollments_before=1671743812000)
             
-    def test_update_activitty_usecase_no_parameters_changed(self):
-        repo_activity = ActivityRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
-                                        repo_user=repo_user,
-                                        observability=observability)
-        with pytest.raises(UnecessaryUpdate):
-            update_activity = usecase(code=repo_activity.activities[0].code,
-                                      user=repo_user.users[0])

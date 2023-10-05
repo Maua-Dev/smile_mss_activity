@@ -63,6 +63,22 @@ class Test_UpdateActivityController:
         assert response.body['activity']['stop_accepting_new_enrollments_before'] == 1666451811000
         assert response.body['message'] == "the activity was updated"
 
+    def test_update_activity_controller_no_parameters(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase, observability=observability)
+
+        request = HttpRequest(body={
+            'code': "ECM2345",
+            'requester_user': {"sub": repo_user.users[0].user_id, "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}
+        })
+
+        response = controller(request)
+
+        assert response.status_code == 400
+        assert response.body == 'Parâmetro ausente: Um ou mais parâmetros devem ser informados'
+
     def test_update_activity_missing_code(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()

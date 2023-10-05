@@ -23,11 +23,31 @@ class UpdateActivityController:
     def __call__(self, request: IRequest) -> IResponse:
         try:
             self.observability.log_controller_in()
+            
+
             if request.data.get('requester_user') is None:
                 raise MissingParameters('requester_user')
 
             if request.data.get('code') is None:
                 raise MissingParameters('code') 
+            
+            if all([
+                request.data.get('new_title') is None,
+                request.data.get('new_description') is None,
+                request.data.get('new_activity_type') is None,
+                request.data.get('new_is_extensive') is None,
+                request.data.get('new_delivery_model') is None,
+                request.data.get('new_start_date') is None,
+                request.data.get('new_duration') is None,
+                request.data.get('new_link') is None,
+                request.data.get('new_place') is None,
+                request.data.get('new_responsible_professors') is None,
+                request.data.get('new_speakers') is None,
+                request.data.get('new_total_slots') is None,
+                request.data.get('new_accepting_new_enrollments') is None,
+                request.data.get('new_stop_accepting_new_enrollments_before') is None,
+            ]):
+                raise MissingParameters('Um ou mais parâmetros devem ser informados')
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 

@@ -28,13 +28,6 @@ class UpdateActivityUsecase:
                  new_stop_accepting_new_enrollments_before: Optional[int] = None, new_link: Optional[str] = None) -> Activity:
         self.observability.log_usecase_in()
 
-        if all([new_title is None, new_description is None, new_activity_type is None, new_is_extensive is None,
-                new_delivery_model is None, new_start_date is None, new_duration is None, new_place is None,
-                new_responsible_professors_user_id is None, new_speakers is None, new_total_slots is None,
-                new_accepting_new_enrollments is None, new_stop_accepting_new_enrollments_before is None,
-                new_link is None]):
-            raise UnecessaryUpdate("activity")
-
         if user.role != ROLE.ADMIN:
             raise ForbiddenAction("update_activity, only admins can update activities")
 
