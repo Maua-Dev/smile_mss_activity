@@ -32,20 +32,20 @@ class UpdateActivityController:
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 
             new_activity_type = request.data.get('new_activity_type')
-            if request.data.get("new_activity_type") is not None:
+            if new_activity_type is not None:
                 if new_activity_type not in [activity_type_value.value for activity_type_value in ACTIVITY_TYPE]:
                     raise EntityError('new_activity_type')
                 new_activity_type = ACTIVITY_TYPE[new_activity_type]
             
             new_delivery_model = request.data.get('new_delivery_model')
-            if request.data.get("new_delivery_model") is not None:
+            if new_delivery_model is not None:
                 if new_delivery_model not in [delivery_model_value.value for delivery_model_value in DELIVERY_MODEL]:
                     raise EntityError('new_delivery_model')
                 new_delivery_model = DELIVERY_MODEL[new_delivery_model]
 
 
             new_speakers = request.data.get('new_speakers')
-            if request.data.get("new_speakers") is not None:
+            if new_speakers is not None:
                 if type(new_speakers) != list:
                     raise EntityError('new_speakers')
                 try:
