@@ -85,6 +85,7 @@ class Test_UpdateActivityUsecase:
             first_activity = repo_activity.activities[0]
             update_activity = usecase(code=repo_activity.activities[0].code,
                                       new_activity_type=first_activity.activity_type, user=repo_user.users[0])
+            
     def test_update_activity_usecase_same_is_extensive(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -262,26 +263,9 @@ class Test_UpdateActivityUsecase:
         repo_user = UserRepositoryMock()
         usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
         with pytest.raises(EntityError):
-            update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
-                                      new_description='nova descricao',
+            update_activity = usecase(code=repo_activity.activities[0].code,
                                       new_activity_type="LECTURES",
-                                      new_is_extensive=True,
-                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                      new_start_date=1630465200000, new_duration=15,
-                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                      new_place="Sala 1",
-                                      new_responsible_professors_user_id=[repo_user.users[2].user_id,
-                                                                          repo_user.users[11].user_id],
-                                      new_speakers=[
-                                          Speaker(
-                                              name="Fulano de Tal",
-                                              bio="Fulano de Tal é um professor de Engenharia de Software",
-                                              company="Universidade Federal de Fulano de tal",
-                                          )
-                                      ], new_total_slots=100,
-                                      new_accepting_new_enrollments=False,
-                                      user=repo_user.users[0],
-                                      new_stop_accepting_new_enrollments_before=None)
+                                      user=repo_user.users[0])
             
     def test_update_activity_new_activity_invalid_enum_2(self):
         repo_activity = ActivityRepositoryMock()
@@ -296,25 +280,9 @@ class Test_UpdateActivityUsecase:
         usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(EntityError):
-            update_activity = usecase(code=555, new_title="NOVO TITULO", new_description='nova descricao',
-                                      new_activity_type=ACTIVITY_TYPE.COURSES,
-                                      new_is_extensive=True,
-                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                      new_start_date=1630465200000, new_duration=15,
-                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                      new_place="Sala 1",
-                                      new_responsible_professors_user_id=[repo_user.users[2].user_id,
-                                                                          repo_user.users[11].user_id],
-                                      new_speakers=[
-                                          Speaker(
-                                              name="Fulano de Tal",
-                                              bio="Fulano de Tal é um professor de Engenharia de Software",
-                                              company="Universidade Federal de Fulano de tal",
-                                          )
-                                      ], new_total_slots=100,
+            update_activity = usecase(code=555,
                                       new_accepting_new_enrollments=True,
-                                      user=repo_user.users[0],
-                                      new_stop_accepting_new_enrollments_before=None)
+                                      user=repo_user.users[0])
 
     def test_update_activity_invalid_title(self):
         repo_activity = ActivityRepositoryMock()
@@ -322,25 +290,8 @@ class Test_UpdateActivityUsecase:
         usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(EntityError):
-            update_activity = usecase(code=repo_activity.activities[0].code, new_title=123, new_description='nova descricao',
-                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                      new_is_extensive=True,
-                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                      new_start_date=1630465200000, new_duration=15,
-                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                      new_place="Sala 1",
-                                      new_responsible_professors_user_id=[repo_user.users[2].user_id,
-                                                                          repo_user.users[11].user_id],
-                                      new_speakers=[
-                                          Speaker(
-                                              name="Fulano de Tal",
-                                              bio="Fulano de Tal é um professor de Engenharia de Software",
-                                              company="Universidade Federal de Fulano de tal",
-                                          )
-                                      ], new_total_slots=100,
-                                      new_accepting_new_enrollments=True,
-                                      user=repo_user.users[0],
-                                      new_stop_accepting_new_enrollments_before=None)
+            update_activity = usecase(code=repo_activity.activities[0].code, new_title=123,
+                                      user=repo_user.users[0])
 
     def test_update_activity_is_not_found(self):
         repo_activity = ActivityRepositoryMock()
@@ -348,26 +299,9 @@ class Test_UpdateActivityUsecase:
         usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(NoItemsFound):
-            update_activity = usecase(code=repo_activity.activities[0].code + "1", new_title="NOVO TITULO",
-                                      new_description='nova descricao',
-                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                      new_is_extensive=True,
-                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                      new_start_date=1630465200000, new_duration=15,
-                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                      new_place="Sala 1",
-                                      new_responsible_professors_user_id=[repo_user.users[2].user_id,
-                                                                          repo_user.users[11].user_id],
-                                      new_speakers=[
-                                          Speaker(
-                                              name="Fulano de Tal",
-                                              bio="Fulano de Tal é um professor de Engenharia de Software",
-                                              company="Universidade Federal de Fulano de tal",
-                                          )
-                                      ], new_total_slots=100,
-                                      new_accepting_new_enrollments=True,
+            update_activity = usecase(code=repo_activity.activities[0].code + "1",
                                       user=repo_user.users[0],
-                                      new_stop_accepting_new_enrollments_before=None)
+                                      new_stop_accepting_new_enrollments_before=1671743812000)
 
     def test_update_activity_invalid_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
@@ -375,26 +309,11 @@ class Test_UpdateActivityUsecase:
         usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(EntityError):
-            update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
-                                      new_description='nova descricao',
-                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                      new_is_extensive=True,
-                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                      new_start_date=1630465200000, new_duration=15,
-                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                      new_place="Sala 1",
+            update_activity = usecase(code=repo_activity.activities[0].code, 
                                       new_responsible_professors_user_id=[repo_user.users[2].user_id, repo_user.users[11].user_id,
                                                                           999],
-                                      new_speakers=[
-                                          Speaker(
-                                              name="Fulano de Tal",
-                                              bio="Fulano de Tal é um professor de Engenharia de Software",
-                                              company="Universidade Federal de Fulano de tal",
-                                          )
-                                      ], new_total_slots=100,
-                                      new_accepting_new_enrollments=True,
-                                      user=repo_user.users[0],
-                                      new_stop_accepting_new_enrollments_before=None)
+                                      user=repo_user.users[0]
+                                     )
 
     def test_update_activity_invalid_responsible_professors_not_found(self):
         repo_activity = ActivityRepositoryMock()
@@ -402,26 +321,10 @@ class Test_UpdateActivityUsecase:
         usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
 
         with pytest.raises(NoItemsFound):
-            update_activity = usecase(code=repo_activity.activities[0].code, new_title="NOVO TITULO",
-                                      new_description='nova descricao',
-                                      new_activity_type=ACTIVITY_TYPE.LECTURES,
-                                      new_is_extensive=True,
-                                      new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                      new_start_date=1630465200000, new_duration=15,
-                                      new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
-                                      new_place="Sala 1",
+            update_activity = usecase(code=repo_activity.activities[0].code,
                                       new_responsible_professors_user_id=[repo_user.users[2].user_id, repo_user.users[11].user_id,
                                                                           "9999"],
-                                      new_speakers=[
-                                          Speaker(
-                                              name="Fulano de Tal",
-                                              bio="Fulano de Tal é um professor de Engenharia de Software",
-                                              company="Universidade Federal de Fulano de tal",
-                                          )
-                                      ], new_total_slots=100,
-                                      new_accepting_new_enrollments=True,
-                                      user=repo_user.users[0],
-                                      new_stop_accepting_new_enrollments_before=None)
+                                      user=repo_user.users[0])
 
     def test_update_activity_usecase_forbidden_requester_not_admin(self):
         repo_activity = ActivityRepositoryMock()
@@ -431,17 +334,15 @@ class Test_UpdateActivityUsecase:
         with pytest.raises(ForbiddenAction):
             update_activity = usecase(code=repo_activity.activities[0].code,
                                       new_title="NOVO TITULO",
-                                      new_description="Isso é uma atividade",
-                                      new_activity_type=ACTIVITY_TYPE.COURSES,
-                                      new_is_extensive=False,
-                                      new_delivery_model=DELIVERY_MODEL.IN_PERSON,
-                                      new_start_date=1671747413000,
-                                      new_duration=120,
-                                      new_link=None,
-                                      new_place="H332",
-                                      new_responsible_professors_user_id=["03555624-a110-11ed-a8fc-0242ac120002"],
-                                      new_speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
-                                      new_total_slots=4,
-                                      new_accepting_new_enrollments=True,
                                       user=repo_user.users[1],
                                       new_stop_accepting_new_enrollments_before=1671743812000)
+            
+    def test_update_activitty_usecase_no_parameters_changed(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+        with pytest.raises(UnecessaryUpdate):
+            update_activity = usecase(code=repo_activity.activities[0].code,
+                                      user=repo_user.users[0])
