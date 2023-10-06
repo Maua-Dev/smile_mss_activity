@@ -4,7 +4,6 @@ import pytest
 from src.modules.delete_attendance_confirmation.app.delete_attendance_confirmation_presenter import lambda_handler
 
 class Test_DeleteAttendanceConfirmationPresenter:
-       @pytest.mark.skip(reason="Temporary Skip")
        def test_delete_attendance_confirmation_presenter(self):
               event = {
                      "version": "2.0",

@@ -4,7 +4,6 @@ from src.modules.generate_attendance_confirmation.app.generate_attendance_confir
 
 
 class Test_GenerateAttendanceConfirmationPresenter:
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_generate_attendance_confirmation_presenter(self):
         event = {
             "version": "2.0",
@@ -324,7 +323,6 @@ class Test_GenerateAttendanceConfirmationPresenter:
         assert response["statusCode"] == 403
         assert json.loads(response["body"]) == "Ação não permitida: user, not professor"
 
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_generate_attendance_confirmation_presenter_activity_already_has_confirmation_code(self):
         event = {
             "version": "2.0",

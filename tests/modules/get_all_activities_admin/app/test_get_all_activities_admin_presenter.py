@@ -6,7 +6,6 @@ from src.modules.get_all_activities_admin.app.get_all_activities_admin_presenter
 
 
 class Test_GetAllActivitiesAdminPresenter:
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_get_all_activities_admin_presenter(self):
         event = {
             "version": "2.0",

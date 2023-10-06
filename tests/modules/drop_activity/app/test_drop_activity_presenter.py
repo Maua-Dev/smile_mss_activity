@@ -8,7 +8,6 @@ from src.modules.drop_activity.app.drop_activity_presenter import lambda_handler
 class Test_DropActivityPresenter:
 
     @freeze_time("2022-12-20")
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_drop_activity_presenter(self):
         event = {
             "version": "2.0",

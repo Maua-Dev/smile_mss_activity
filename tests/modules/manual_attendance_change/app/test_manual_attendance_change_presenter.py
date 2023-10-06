@@ -5,7 +5,6 @@ from src.modules.manual_attendance_change.app.manual_attendance_change_presenter
 
 class Test_ManualAttendanceChangePresenter:
 
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_manual_attendance_change_presenter(self):
         event = {
             "version": "2.0",

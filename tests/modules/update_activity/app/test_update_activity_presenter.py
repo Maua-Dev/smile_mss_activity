@@ -7,7 +7,6 @@ from src.modules.update_activity.app.update_activity_presenter import lambda_han
 
 class Test_UpdateActivityPresenter:
 
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_update_activity_presenter(self):
         event = {
             "version": "2.0",

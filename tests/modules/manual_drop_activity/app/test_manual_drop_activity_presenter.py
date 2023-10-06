@@ -4,7 +4,6 @@ import json
 
 class Test_ManualDropActivityPresenter:
 
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_manual_drop_activity_presenter(self):
         event = {
             "version": "2.0",

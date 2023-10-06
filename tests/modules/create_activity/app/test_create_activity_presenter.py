@@ -3,7 +3,6 @@ from src.modules.create_activity.app.create_activity_presenter import lambda_han
 
 import pytest
 class Test_CreateActivityPresenter:
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_create_activity(self):
         event = {
             "version": "2.0",
@@ -58,7 +57,7 @@ class Test_CreateActivityPresenter:
 
         assert response["statusCode"] == 201
         assert json.loads(response["body"])["message"] == "the activity was created"
-    @pytest.mark.skip(reason="Temporary Skip")
+
     def test_create_activity_presenter_no_items_found(self):
         event = {
             "version": "2.0",

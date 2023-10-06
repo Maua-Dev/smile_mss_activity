@@ -5,7 +5,6 @@ from src.modules.delete_user.app.delete_user_presenter import lambda_handler
 
 
 class Test_DeleteUserPresenter:
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_delete_user(self):
         event = {
             "version": "2.0",

@@ -5,7 +5,6 @@ from src.modules.confirm_attendance.app.confirm_attendance_presenter import lamb
 
 
 class Test_GetAllActivitiesAdminPresenter:
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_confirm_attendance_presenter_presenter(self):
         event = {
             "version": "2.0",

@@ -6,7 +6,6 @@ from src.modules.delete_activity.app.delete_activity_presenter import lambda_han
 
 
 class Test_DeleteActivityPresenter:
-    @pytest.mark.skip(reason="Temporary Skip")
     def test_drop_activity_presenter(self):
         event = {
             "version": "2.0",
