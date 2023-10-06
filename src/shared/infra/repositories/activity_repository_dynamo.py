@@ -172,22 +172,22 @@ class ActivityRepositoryDynamo(IActivityRepository):
         
         update_dict = {
             "code": code,
-            "title": new_title if new_title is not None else None,
-            "description": new_description if new_description is not None else None,
+            "title": new_title,
+            "description": new_description,
             "activity_type": new_activity_type.value if new_activity_type is not None else None,
-            "is_extensive": new_is_extensive if new_is_extensive is not None else None,
+            "is_extensive": new_is_extensive,
             "delivery_model": new_delivery_model.value if new_delivery_model is not None else None,
             "start_date": Decimal(str(new_start_date)) if new_start_date is not None else None,
-            "duration": new_duration if new_duration is not None else None,
-            "link": new_link if new_link is not None else None,
-            "place": new_place if new_place is not None else None,
-            "responsible_professors": new_responsible_professors if new_responsible_professors is not None else None,
-            "speakers": new_speakers if new_speakers is not None else None,
-            "total_slots": new_total_slots if new_total_slots is not None else None,
+            "duration": new_duration,
+            "link": new_link,
+            "place": new_place,
+            "responsible_professors": new_responsible_professors,
+            "speakers": new_speakers,
+            "total_slots": new_total_slots,
             "taken_slots": new_taken_slots if new_taken_slots is not None else None,
-            "accepting_new_enrollments": new_accepting_new_enrollments if new_accepting_new_enrollments is not None else None,
+            "accepting_new_enrollments": new_accepting_new_enrollments,
             "stop_accepting_new_enrollments_before": Decimal(str(new_stop_accepting_new_enrollments_before)) if new_stop_accepting_new_enrollments_before is not None else None,
-            "confirmation_code": new_confirmation_code
+            "confirmation_code": new_confirmation_code if new_confirmation_code is not None else None
         }
 
         update_dict_without_none_values = {

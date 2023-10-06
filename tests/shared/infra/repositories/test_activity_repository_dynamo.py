@@ -420,3 +420,20 @@ class Test_ActivityRepositoryDynamo:
 
         assert len(enrollments) == 33
         assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_description(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.update_activity(code="ECM2345", new_description="nova descricao")
+
+        assert True
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_taken_slots(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.update_activity(code="ECM2345", new_taken_slots=120)
+
+        assert True
