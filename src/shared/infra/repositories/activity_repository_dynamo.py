@@ -1,3 +1,4 @@
+from decimal import Decimal
 import hashlib
 import os
 from typing import List, Tuple
@@ -164,38 +165,44 @@ class ActivityRepositoryDynamo(IActivityRepository):
                         new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
                         new_stop_accepting_new_enrollments_before: int = None, new_confirmation_code:str = None) -> Activity:
+        activity_to_update = self.get_activity(code)
 
-        new_activity = Activity(
-            code=code,
-            title=new_title,
-            description=new_description,
-            activity_type=new_activity_type,
-            is_extensive=new_is_extensive,
-            delivery_model=new_delivery_model,
-            start_date=new_start_date,
-            duration=new_duration,
-            link=new_link,
-            place=new_place,
-            responsible_professors=new_responsible_professors,
-            speakers=new_speakers,
-            total_slots=new_total_slots,
-            taken_slots=new_taken_slots,
-            accepting_new_enrollments=new_accepting_new_enrollments,
-            stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before,
-            confirmation_code=new_confirmation_code
-        )
+        if activity_to_update is None:
+            return None
+        
+        update_dict = {
+            "code": code,
+            "title": new_title if new_title is not None else None,
+            "description": new_description if new_description is not None else None,
+            "activity_type": new_activity_type.value if new_activity_type is not None else None,
+            "is_extensive": new_is_extensive if new_is_extensive is not None else None,
+            "delivery_model": new_delivery_model.value if new_delivery_model is not None else None,
+            "start_date": Decimal(str(new_start_date)) if new_start_date is not None else None,
+            "duration": new_duration if new_duration is not None else None,
+            "link": new_link if new_link is not None else None,
+            "place": new_place if new_place is not None else None,
+            "responsible_professors": new_responsible_professors if new_responsible_professors is not None else None,
+            "speakers": new_speakers if new_speakers is not None else None,
+            "total_slots": new_total_slots if new_total_slots is not None else None,
+            "taken_slots": new_taken_slots if new_taken_slots is not None else None,
+            "accepting_new_enrollments": new_accepting_new_enrollments if new_accepting_new_enrollments is not None else None,
+            "stop_accepting_new_enrollments_before": Decimal(str(new_stop_accepting_new_enrollments_before)) if new_stop_accepting_new_enrollments_before is not None else None,
+            "confirmation_code": new_confirmation_code
+        }
 
-        new_activity_dto = ActivityDynamoDTO.from_entity(new_activity)
+        update_dict_without_none_values = {
+            k: v for k, v in update_dict.items() if v is not None}
 
-        new_activity_dto = new_activity_dto.to_dynamo()
-
-        response = self.dynamo.hard_update_item(
+        response = self.dynamo.update_item(
             partition_key=self.activity_partition_key_format(code),
             sort_key=self.activity_sort_key_format(code),
-            item=new_activity_dto,
+            update_dict=update_dict_without_none_values,
         )
 
-        return new_activity
+        if "Attributes" not in response:
+            return None
+        
+        return ActivityDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def delete_activity(self, code: str) -> Activity:
 
