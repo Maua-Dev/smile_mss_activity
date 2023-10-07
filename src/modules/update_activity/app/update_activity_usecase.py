@@ -219,7 +219,7 @@ class UpdateActivityUsecase:
                 raise UnecessaryUpdate("stop_accepting_new_enrollments_before")
             
             new_activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
-
+    
         activity = self.repo_activity.update_activity(code=code,
                                          new_title=new_activity.title,
                                          new_description=new_activity.description,

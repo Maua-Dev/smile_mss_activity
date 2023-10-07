@@ -165,11 +165,13 @@ class ActivityRepositoryDynamo(IActivityRepository):
                         new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
                         new_stop_accepting_new_enrollments_before: int = None, new_confirmation_code:str = None) -> Activity:
+        
         activity_to_update = self.get_activity(code)
 
         if activity_to_update is None:
             return None
         
+
         update_dict = {
             "code": code,
             "title": new_title,
@@ -181,8 +183,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
             "duration": new_duration,
             "link": new_link,
             "place": new_place,
-            "responsible_professors": new_responsible_professors,
-            "speakers": new_speakers,
+            "responsible_professors": [{"name": professor.name, "user_id": professor.user_id, "role": professor.role.value} for professor in new_responsible_professors] if new_responsible_professors is not None else [],
+            "speakers": [{"name": speaker.name, "bio": speaker.bio, "company": speaker.company} for speaker in new_speakers] if new_speakers is not None else [],
             "total_slots": new_total_slots,
             "taken_slots": new_taken_slots if new_taken_slots is not None else None,
             "accepting_new_enrollments": new_accepting_new_enrollments,
