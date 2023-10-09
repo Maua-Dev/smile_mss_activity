@@ -208,6 +208,7 @@ class UpdateActivityUsecase:
                 while i < new_activity.total_slots:
                     new_enrollments.append(enrollments[i])
                     i += 1
+                new_enrollments.sort(key=lambda enrollment: enrollment.date_subscribed)
                 self.repo_activity.batch_update_enrollment(enrollments=new_enrollments, state=ENROLLMENT_STATE.ENROLLED)
             
             new_activity.total_slots = new_total_slots	
