@@ -203,7 +203,12 @@ class UpdateActivityUsecase:
                 raise UnecessaryUpdate("total_slots")
             
             if (new_activity.total_slots > activity.total_slots) and (activity.taken_slots >= activity.total_slots):
-                new_enrollments = [enrollment for enrollment in enrollments if enrollment.state == ENROLLMENT_STATE.IN_QUEUE]
+                i = 0
+                new_enrollments = []
+                while i < (new_activity.total_slots - activity.total_slots):
+                    if enrollments[i].state == ENROLLMENT_STATE.IN_QUEUE:
+                        new_enrollments.append(enrollments[i])
+                    i += 1
                 self.repo_activity.batch_update_enrollment(enrollments=new_enrollments, state=ENROLLMENT_STATE.ENROLLED)
             
             new_activity.total_slots = new_total_slots	
