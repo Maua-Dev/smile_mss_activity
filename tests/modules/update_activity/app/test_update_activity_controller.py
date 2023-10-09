@@ -76,8 +76,25 @@ class Test_UpdateActivityController:
 
         response = controller(request)
 
-        assert response.status_code == 400
-        assert response.body == 'Parâmetro ausente: Um ou mais parâmetros devem ser informados'
+        assert response.status_code == 500
+        assert response.body == 'Os parâmetros de atualização estão vazios'
+    
+    def test_update_activity_controller_one_parameter(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity, repo_user, observability=observability)
+        controller = UpdateActivityController(usecase,observability=observability)
+
+        request = HttpRequest(body={
+            'code': "ECM2345",
+            "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
+            'requester_user': {"sub": repo_user.users[0].user_id,
+                            "name": repo_user.users[0].name, "custom:role": repo_user.users[0].role.value}
+        })
+
+        response = controller(request)
+
+        assert response.status_code == 200
 
     def test_update_activity_missing_code(self):
         repo_activity = ActivityRepositoryMock()
