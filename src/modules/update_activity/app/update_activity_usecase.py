@@ -11,6 +11,7 @@ from src.shared.domain.repositories.activity_repository_interface import IActivi
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, UnecessaryUpdate
+from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 
 
 class UpdateActivityUsecase:
@@ -33,7 +34,7 @@ class UpdateActivityUsecase:
 
         if not Activity.validate_activity_code(code):
             raise EntityError("code")
-        activity = self.repo_activity.get_activity(code=code)
+        activity, enrollments = self.repo_activity.get_activity_with_enrollments(code=code)
 
         if activity is None:
             raise NoItemsFound("Activity")
@@ -59,6 +60,7 @@ class UpdateActivityUsecase:
                                 stop_accepting_new_enrollments_before=activity.stop_accepting_new_enrollments_before,
                                 confirmation_code=activity.confirmation_code)
  
+        
 
         if new_title is not None:
             if type(new_title) != str:
@@ -200,6 +202,10 @@ class UpdateActivityUsecase:
             if new_total_slots == activity.total_slots:
                 raise UnecessaryUpdate("total_slots")
             
+            if (new_activity.total_slots > activity.total_slots) and (activity.taken_slots >= activity.total_slots):
+                new_enrollments = [enrollment for enrollment in enrollments if enrollment.state == ENROLLMENT_STATE.IN_QUEUE]
+                self.repo_activity.batch_update_enrollment(enrollments=new_enrollments, state=ENROLLMENT_STATE.ENROLLED)
+            
             new_activity.total_slots = new_total_slots	
 
         if new_accepting_new_enrollments is not None:
@@ -219,6 +225,8 @@ class UpdateActivityUsecase:
                 raise UnecessaryUpdate("stop_accepting_new_enrollments_before")
             
             new_activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
+
+
     
         activity = self.repo_activity.update_activity(code=code,
                                          new_title=new_activity.title,

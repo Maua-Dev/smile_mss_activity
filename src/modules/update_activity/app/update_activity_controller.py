@@ -33,7 +33,6 @@ class UpdateActivityController:
             
             #Check if all parameters are None except requester_user and code
             if all(value is None for key, value in request.data.items() if key not in ['requester_user', 'code']):
-
                 raise UnecessaryUpdate("Os parâmetros de atualização estão vazios")
             
 
