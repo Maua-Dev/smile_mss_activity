@@ -21,7 +21,7 @@ class CreateActivityUsecase:
         self.observability = observability
 
     def __call__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
+                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: str, place: str,
                  total_slots: int,
                  accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
                  stop_accepting_new_enrollments_before: int, speakers: List[Speaker], user: User) -> Activity:
@@ -69,7 +69,7 @@ class CreateActivityUsecase:
             is_extensive=is_extensive,
             delivery_model=delivery_model,
             start_date=start_date,
-            duration=duration,
+            end_date=end_date,
             link=link,
             place=place,
             responsible_professors=responsible_professors,

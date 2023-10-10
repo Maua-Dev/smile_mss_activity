@@ -17,7 +17,7 @@ class Activity(abc.ABC):
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
     start_date: int  # milliseconds
-    duration: int  # minutes
+    end_date: int  # minutes
     link: str
     place: str
     responsible_professors: List[User]
@@ -29,7 +29,7 @@ class Activity(abc.ABC):
     confirmation_code: str
 
     def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
+                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: str, place: str,
                  responsible_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int,
                  accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, confirmation_code: str):
 
@@ -63,9 +63,9 @@ class Activity(abc.ABC):
             raise EntityError("start_date")
         self.start_date = start_date
 
-        if type(duration) != int:
-            raise EntityError("duration")
-        self.duration = duration
+        if type(end_date) != int:
+            raise EntityError("end_date")
+        self.end_date = end_date
 
         if link is None and place is None:
             raise EntityError("link or place")
@@ -152,7 +152,7 @@ class Activity(abc.ABC):
         return True
 
     def __repr__(self):
-        return f"Activity({self.code}, {self.title}, {self.description}, {self.activity_type}, {self.is_extensive}, {self.delivery_model}, {self.start_date}, {self.duration}, {self.link}, {self.place}, {self.responsible_professors}, {self.speakers}, {self.total_slots}, {self.taken_slots}, {self.accepting_new_enrollments}, {self.stop_accepting_new_enrollments_before}, {self.confirmation_code})"
+        return f"Activity({self.code}, {self.title}, {self.description}, {self.activity_type}, {self.is_extensive}, {self.delivery_model}, {self.start_date}, {self.end_date}, {self.link}, {self.place}, {self.responsible_professors}, {self.speakers}, {self.total_slots}, {self.taken_slots}, {self.accepting_new_enrollments}, {self.stop_accepting_new_enrollments_before}, {self.confirmation_code})"
 
     def __eq__(self, other):
-        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.link == other.link and self.place == other.place and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.taken_slots == other.taken_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before and self.confirmation_code == other.confirmation_code
+        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.end_date == other.end_date and self.link == other.link and self.place == other.place and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.taken_slots == other.taken_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before and self.confirmation_code == other.confirmation_code

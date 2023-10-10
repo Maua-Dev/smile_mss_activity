@@ -22,7 +22,7 @@ class UpdateActivityUsecase:
 
     def __call__(self, code: str, user: User, new_title: Optional[str] = None, new_description: Optional[str] = None, new_activity_type: Optional[ACTIVITY_TYPE] = None,
                  new_is_extensive: Optional[bool] = None, new_delivery_model: Optional[DELIVERY_MODEL] = None,
-                 new_start_date: Optional[int] = None, new_duration: Optional[int] = None, new_place: Optional[str] = None,
+                 new_start_date: Optional[int] = None, new_end_date: Optional[int] = None, new_place: Optional[str] = None,
                  new_responsible_professors_user_id: Optional[List[str]] = None,
                  new_speakers: Optional[List[Speaker]] = None, new_total_slots: Optional[int] = None,
                  new_accepting_new_enrollments: Optional[bool] = None,
@@ -49,7 +49,7 @@ class UpdateActivityUsecase:
                                 is_extensive=activity.is_extensive,
                                 delivery_model=activity.delivery_model,
                                 start_date=activity.start_date,
-                                duration=activity.duration,
+                                end_date=activity.end_date,
                                 link=activity.link,
                                 place=activity.place,
                                 responsible_professors=activity.responsible_professors,
@@ -116,14 +116,14 @@ class UpdateActivityUsecase:
             
             new_activity.start_date = new_start_date
         
-        if new_duration is not None:
-            if type(new_duration) != int:
-                raise EntityError("duration")
+        if new_end_date is not None:
+            if type(new_end_date) != int:
+                raise EntityError("end_date")
 
-            if new_duration == activity.duration:
-                raise UnecessaryUpdate("duration")
+            if new_end_date == activity.end_date:
+                raise UnecessaryUpdate("end_date")
             
-            new_activity.duration = new_duration
+            new_activity.end_date = new_end_date
 
         if new_link is not None:
             if type(new_link) != str:
@@ -239,7 +239,7 @@ class UpdateActivityUsecase:
                                          new_is_extensive=new_activity.is_extensive,
                                          new_delivery_model=new_activity.delivery_model,
                                          new_start_date=new_activity.start_date,
-                                         new_duration=new_activity.duration,
+                                         new_end_date=new_activity.end_date,
                                          new_link=new_activity.link,
                                          new_place=new_activity.place,
                                          new_responsible_professors=new_activity.responsible_professors,

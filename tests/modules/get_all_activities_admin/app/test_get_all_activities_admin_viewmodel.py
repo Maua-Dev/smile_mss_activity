@@ -25,7 +25,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': False,
                         'delivery_model': 'IN_PERSON',
                         'start_date': 1670005013000,
-                        'duration': 45,
+                        'end_date': 45,
                         'link': None,
                         'place': 'H332',
                         'responsible_professors': [
@@ -105,7 +105,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': True,
                         'delivery_model': 'HYBRID',
                         'start_date': 1671488213000,
-                        'duration': 120,
+                        'end_date': 120,
                         'link': 'https://devmaua.com',
                         'place': 'H332',
                         'responsible_professors': [
@@ -150,7 +150,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': False,
                         'delivery_model': 'ONLINE',
                         'start_date': 1671563813000,
-                        'duration': 80,
+                        'end_date': 80,
                         'link': 'https://devmaua.com',
                         'place': None,
                         'responsible_professors': [
@@ -195,7 +195,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': True,
                         'delivery_model': 'HYBRID',
                         'start_date': 1671661013000,
-                        'duration': 400,
+                        'end_date': 400,
                         'link': 'https://devmaua.com',
                         'place': 'H332',
                         'responsible_professors': [
@@ -240,7 +240,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': True,
                         'delivery_model': 'ONLINE',
                         'start_date': 1671661013000,
-                        'duration': 60,
+                        'end_date': 60,
                         'link': 'https://devmaua.com',
                         'place': None,
                         'responsible_professors': [
@@ -300,7 +300,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': True,
                         'delivery_model': 'IN_PERSON',
                         'start_date': 1671661013000,
-                        'duration': 190,
+                        'end_date': 190,
                         'link': None,
                         'place': 'H332',
                         'responsible_professors': [
@@ -355,7 +355,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': True,
                         'delivery_model': 'IN_PERSON',
                         'start_date': 1671661013000,
-                        'duration': 20,
+                        'end_date': 20,
                         'link': None,
                         'place': 'H332',
                         'responsible_professors': [
@@ -420,7 +420,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': False,
                         'delivery_model': 'HYBRID',
                         'start_date': 1671733013000,
-                        'duration': 40,
+                        'end_date': 40,
                         'link': 'https://devmaua.com',
                         'place': 'H332',
                         'responsible_professors': [
@@ -465,7 +465,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': False,
                         'delivery_model': 'IN_PERSON',
                         'start_date': 1671733013000,
-                        'duration': 45,
+                        'end_date': 45,
                         'link': None,
                         'place': 'H332',
                         'responsible_professors': [
@@ -550,7 +550,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': False,
                         'delivery_model': 'IN_PERSON',
                         'start_date': 1671747413000,
-                        'duration': 120,
+                        'end_date': 120,
                         'link': None,
                         'place': 'H332',
                         'responsible_professors': [
@@ -655,7 +655,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': False,
                         'delivery_model': 'ONLINE',
                         'start_date': 1672006613000,
-                        'duration': 60,
+                        'end_date': 60,
                         'link': 'https://devmaua.com',
                         'place': None,
                         'responsible_professors': [
@@ -730,7 +730,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': True,
                         'delivery_model': 'IN_PERSON',
                         'start_date': 1672006613000,
-                        'duration': 140,
+                        'end_date': 140,
                         'link': None,
                         'place': 'H332',
                         'responsible_professors': [
@@ -775,7 +775,7 @@ class Test_GetAllActivitiesAdminViewmodel:
                         'is_extensive': False,
                         'delivery_model': 'HYBRID',
                         'start_date': 1672006613000,
-                        'duration': 60,
+                        'end_date': 60,
                         'link': 'https://devmaua.com',
                         'place': 'H332',
                         'responsible_professors': [

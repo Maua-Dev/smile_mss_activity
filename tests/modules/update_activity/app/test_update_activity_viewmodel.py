@@ -20,7 +20,7 @@ class Test_UpdateActivityViewmodel:
                 'code': 'ECM2345',
                 'delivery_model': 'IN_PERSON',
                 'description': 'Isso é uma atividade',
-                'duration': 120,
+                'end_date': 120,
                 'link': None,
                 'place': 'H332',
                 'is_extensive': False,

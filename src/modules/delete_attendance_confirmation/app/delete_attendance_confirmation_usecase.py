@@ -41,7 +41,7 @@ class DeleteAttendanceConfirmationUsecase:
                      new_is_extensive=activity.is_extensive,
                      new_delivery_model=activity.delivery_model,
                      new_start_date=activity.start_date,
-                     new_duration=activity.duration,
+                     new_end_date=activity.end_date,
                      new_link=activity.link,
                      new_place=activity.place,
                      new_responsible_professors=activity.responsible_professors,

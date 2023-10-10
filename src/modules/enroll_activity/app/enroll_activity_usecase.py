@@ -31,7 +31,7 @@ class EnrollActivityUsecase:
         if not activity.accepting_new_enrollments:
             raise ClosedActivity("Activity")
 
-        activity_end_time = activity.start_date + activity.duration * 60 * 1000
+        activity_end_time = activity.start_date + activity.end_date * 60 * 1000
 
         if activity_end_time < datetime.datetime.now().timestamp() * 1000:
             raise ActivityEnded("Activity")

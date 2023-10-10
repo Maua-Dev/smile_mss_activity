@@ -22,7 +22,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1680650366000, #Tue Apr 04 2023 23:19:26 GMT+0000
-                duration=120,
+                end_date=120,
                 link=None,
                 place="H332",
                 responsible_professors=[User(name="Carol Santarelli", role=ROLE.PROFESSOR, user_id="995eb33a-88f6-4c47-8ed1-7834302d0579")],
@@ -43,7 +43,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1678663166000, #Sun Mar 12 2023 23:19:26 GMT+0000
-                duration=120,
+                end_date=120,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
@@ -63,7 +63,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1679440766000, #Tue Mar 21 2023 23:19:26 GMT+0000
-                duration=240,
+                end_date=240,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
@@ -83,7 +83,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1682896766000, #Sun Apr 30 2023 23:19:26 GMT+0000
-                duration=540,
+                end_date=540,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
@@ -105,7 +105,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1683229161000, #Thu May 04 2023 19:39:21 GMT+0000
-                duration=120,
+                end_date=120,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -125,7 +125,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1682428766000,#Tue Apr 25 2023 13:19:26 GMT+0000
-                duration=120,
+                end_date=120,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
@@ -145,7 +145,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1682601566000, #Thu Apr 27 2023 13:19:26 GMT+0000
-                duration=80,
+                end_date=80,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
@@ -165,7 +165,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1679923166000, #Mon Mar 27 2023 13:19:26 GMT+0000
-                duration=180,
+                end_date=180,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -185,7 +185,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1679833166000, #Sun Mar 26 2023 12:19:26 GMT+0000
-                duration=660,
+                end_date=660,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
@@ -205,7 +205,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1681384766000, #Thu Apr 13 2023 11:19:26 GMT+0000
-                duration=140,
+                end_date=140,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -225,7 +225,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1681729200000, #Mon Apr 17 2023 11:00:00 GMT+0000
-                duration=360,
+                end_date=360,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
@@ -245,7 +245,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1681740000000, #Mon Apr 17 2023 14:00:00 GMT+0000
-                duration=45,
+                end_date=45,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -265,7 +265,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1679324400000, #Mon Mar 20 2023 15:00:00 GMT+0000
-                duration=120,
+                end_date=120,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -287,7 +287,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1679583600000, #Thu Mar 23 2023 15:00:00 GMT+0000
-                duration=60,
+                end_date=60,
                 link="www.maua.br",
                 place="H321",
                 responsible_professors=[
@@ -308,7 +308,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1681743600000, #Mon Apr 17 2023 15:00:00 GMT+0000
-                duration=60,
+                end_date=60,
                 link=None,
                 place="H321",
                 responsible_professors=[

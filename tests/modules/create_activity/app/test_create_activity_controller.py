@@ -24,7 +24,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "IN_PERSON",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": None,
                                     "place": "H331",
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -49,7 +49,7 @@ class Test_CreateActivityController:
         assert response.body['activity']['delivery_model'] == 'IN_PERSON'
         assert response.body['activity']['start_date'] == 1669141012000
         assert response.body['activity']['place'] == 'H331'
-        assert response.body['activity']['duration'] == 90
+        assert response.body['activity']['end_date'] == 90
         assert response.body['activity']['responsible_professors'][1]['user_id'] == '62cafdd4-a110-11ed-a8fc-0242ac120002'
         assert response.body['activity']['speakers'][0]['name'] == "Robert Cecil Martin"
         assert response.body['activity']['total_slots'] == 100
@@ -71,7 +71,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -105,7 +105,7 @@ class Test_CreateActivityController:
                     "is_extensive": False,
                     "delivery_model": "IN_PERSON",
                     "start_date": 1669141012000,
-                    "duration": 90,
+                    "end_date": 90,
                     "link": None,
                     "place": "H331",
                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -138,7 +138,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -171,7 +171,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -204,7 +204,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -237,7 +237,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -269,7 +269,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "IN_PERSON",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": None,
                                     "place": "H331",
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -302,7 +302,7 @@ class Test_CreateActivityController:
                 "activity_type": "LECTURES",
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -335,7 +335,7 @@ class Test_CreateActivityController:
                 "activity_type": "LECTURES",
                 "is_extensive": False,
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -367,7 +367,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "INVALID_TYPE",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": None,
                                     "place": "H331",
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -400,7 +400,7 @@ class Test_CreateActivityController:
                 "activity_type": "LECTURES",
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -419,7 +419,7 @@ class Test_CreateActivityController:
         assert response.status_code == 400
         assert response.body == "Parâmetro ausente: start_date"
 
-    def test_create_activity_controller_missing_duration(self):
+    def test_create_activity_controller_missing_end_date(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = CreateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user, observability=observability)
@@ -450,7 +450,7 @@ class Test_CreateActivityController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Parâmetro ausente: duration"
+        assert response.body == "Parâmetro ausente: end_date"
 
     def test_create_activity_controller_missing_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
@@ -467,7 +467,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "speakers": [{
@@ -500,7 +500,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": 123,
@@ -534,7 +534,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ['123'],
@@ -568,7 +568,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -597,7 +597,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -627,7 +627,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -662,7 +662,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -695,7 +695,7 @@ class Test_CreateActivityController:
                 "is_extensive": False,
                 "delivery_model": "IN_PERSON",
                 "start_date": 1669141012000,
-                "duration": 90,
+                "end_date": 90,
                 "link": None,
                 "place": "H331",
                 "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -725,7 +725,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "IN_PERSON",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": None,
                                     "place": "H331",
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
@@ -760,7 +760,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "IN_PERSON",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": None,
                                     "place": "H331",
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
@@ -795,7 +795,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "IN_PERSON",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": None,
                                     "place": None,
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -826,7 +826,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "ONLINE",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": None,
                                     "place": None,
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
@@ -861,7 +861,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "ONLINE",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": None,
                                     "place": "H331",
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
@@ -896,7 +896,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "IN_PERSON",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": 'www.maua.br',
                                     "place": 'H123',
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -928,7 +928,7 @@ class Test_CreateActivityController:
                                     "is_extensive": False,
                                     "delivery_model": "ONLINE",
                                     "start_date": 1669141012000,
-                                    "duration": 90,
+                                    "end_date": 90,
                                     "link": 'www.google.com',
                                     "place": 'H321',
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",

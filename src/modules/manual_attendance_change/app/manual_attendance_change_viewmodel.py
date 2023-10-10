@@ -96,7 +96,7 @@ class ActivityViewmodel:
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
     start_date: int
-    duration: int  # minutes
+    end_date: int  # minutes
     link: str
     place: str
     responsible_professors: List[UserViewmodel]
@@ -116,7 +116,7 @@ class ActivityViewmodel:
         self.is_extensive = activity.is_extensive
         self.delivery_model = activity.delivery_model
         self.start_date = activity.start_date
-        self.duration = activity.duration
+        self.end_date = activity.end_date
         self.link = activity.link
         self.place = activity.place
         self.responsible_professors = [UserViewmodel(professor) for professor in activity.responsible_professors]
@@ -137,7 +137,7 @@ class ActivityViewmodel:
                          "is_extensive": self.is_extensive,
                          "delivery_model": self.delivery_model.value,
                          "start_date": self.start_date,
-                         "duration": self.duration,
+                         "end_date": self.end_date,
                          "link": self.link,
                          "place": self.place,
                          "responsible_professors": [professor.to_dict() for professor in self.responsible_professors],

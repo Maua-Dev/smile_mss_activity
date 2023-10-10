@@ -25,7 +25,7 @@ class Test_UpdateActivityUsecase:
                                   new_activity_type=ACTIVITY_TYPE.LECTURES,
                                   new_is_extensive=True,
                                   new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=1630465200000, new_duration=15,
+                                  new_start_date=1630465200000, new_end_date=15,
                                   new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
                                   new_place="Sala 1",
                                   new_responsible_professors_user_id=[repo_user.users[3].user_id],
@@ -49,7 +49,7 @@ class Test_UpdateActivityUsecase:
         assert repo_activity.activities[0].is_extensive == update_activity.is_extensive
         assert repo_activity.activities[0].delivery_model == update_activity.delivery_model
         assert repo_activity.activities[0].start_date == update_activity.start_date
-        assert repo_activity.activities[0].duration == update_activity.duration
+        assert repo_activity.activities[0].end_date == update_activity.end_date
         assert repo_activity.activities[0].link == update_activity.link
         assert repo_activity.activities[0].place == update_activity.place
         assert repo_activity.activities[0].responsible_professors == [repo_user.users[3]]
@@ -143,19 +143,19 @@ class Test_UpdateActivityUsecase:
         assert repo_activity.activities[0].start_date == update_activity.start_date
         assert repo_activity.activities[0].start_date == 1630465200000
     
-    def test_update_activity_usecase_update_only_duration(self):
+    def test_update_activity_usecase_update_only_end_date(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user,
                                         observability=observability)
 
         update_activity = usecase(code=repo_activity.activities[0].code,
-                                  new_duration=15,
+                                  new_end_date=15,
                                   user=repo_user.users[0])
 
         assert type(update_activity) == Activity
-        assert repo_activity.activities[0].duration == update_activity.duration
-        assert repo_activity.activities[0].duration == 15
+        assert repo_activity.activities[0].end_date == update_activity.end_date
+        assert repo_activity.activities[0].end_date == 15
 
     def test_update_activity_usecase_update_only_link(self):
         repo_activity = ActivityRepositoryMock()
@@ -325,7 +325,7 @@ class Test_UpdateActivityUsecase:
             first_activity = repo_activity.activities[0]
             update_activity = usecase(code=repo_activity.activities[0].code,
                                       new_start_date=first_activity.start_date, user=repo_user.users[0])
-    def test_update_activity_usecase_same_duration(self):
+    def test_update_activity_usecase_same_end_date(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user,
@@ -333,7 +333,7 @@ class Test_UpdateActivityUsecase:
         with pytest.raises(UnecessaryUpdate):
             first_activity = repo_activity.activities[0]
             update_activity = usecase(code=repo_activity.activities[0].code,
-                                      new_duration=first_activity.duration, user=repo_user.users[0])
+                                      new_end_date=first_activity.end_date, user=repo_user.users[0])
     def test_update_activity_usecase_same_link(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -441,7 +441,7 @@ class Test_UpdateActivityUsecase:
                                   new_is_extensive=True,
                                   new_delivery_model=DELIVERY_MODEL.HYBRID,
                                   new_start_date=1630465200000,
-                                  new_duration=90,
+                                  new_end_date=90,
                                   new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
                                   new_place="H311",
                                   new_responsible_professors_user_id=["6bb122d4-a110-11ed-a8fc-0242ac120002"],
@@ -460,7 +460,7 @@ class Test_UpdateActivityUsecase:
         assert repo_activity.activities[0].is_extensive == old_activity.is_extensive
         assert repo_activity.activities[0].delivery_model == old_activity.delivery_model
         assert repo_activity.activities[0].start_date == old_activity.start_date
-        assert repo_activity.activities[0].duration == old_activity.duration
+        assert repo_activity.activities[0].end_date == old_activity.end_date
         assert repo_activity.activities[0].link == old_activity.link
         assert repo_activity.activities[0].place == old_activity.place
         assert repo_activity.activities[1].responsible_professors == old_activity.responsible_professors

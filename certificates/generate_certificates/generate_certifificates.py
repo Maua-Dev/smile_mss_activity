@@ -72,7 +72,7 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
 
             # Defina o timestamp
             timestamp = activity.start_date / 1000  # dividido por 1000 para obter o valor em segundos
-            duration = activity.duration
+            duration = activity.end_date
 
             # Converta o timestamp em um objeto datetime
             dt = datetime.datetime.fromtimestamp(timestamp).astimezone(gmt3_tz)
