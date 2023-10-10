@@ -5,6 +5,7 @@ from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
+from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, UnecessaryUpdate
 from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
@@ -547,4 +548,42 @@ class Test_UpdateActivityUsecase:
                                       new_title="NOVO TITULO",
                                       user=repo_user.users[1],
                                       new_stop_accepting_new_enrollments_before=1671743812000)
-            
+        
+    def test_update_activity_batch_update_enrollment(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+
+        update_activity = usecase(
+            code=repo_activity.activities[0].code,
+            new_total_slots=5,
+            user=repo_user.users[0]
+        )
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].total_slots == update_activity.total_slots
+        assert repo_activity.activities[0].total_slots == 5
+        assert repo_activity.enrollments[4].state == ENROLLMENT_STATE.ENROLLED
+    
+    def test_update_activity_batch_update_enrollment_2(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user,
+                                        observability=observability)
+
+        update_activity = usecase(
+            code=repo_activity.activities[0].code,
+            new_total_slots=7,
+            user=repo_user.users[0]
+        )
+
+        assert type(update_activity) == Activity
+        assert repo_activity.activities[0].total_slots == update_activity.total_slots
+        assert repo_activity.activities[0].total_slots == 7
+        assert repo_activity.enrollments[4].state == ENROLLMENT_STATE.ENROLLED
+        assert repo_activity.enrollments[5].state == ENROLLMENT_STATE.ENROLLED
+        assert repo_activity.enrollments[6].state == ENROLLMENT_STATE.ENROLLED
+    
