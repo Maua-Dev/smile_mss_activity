@@ -20,7 +20,7 @@ class Test_CreateActivityUsecase:
         activitiesLenBefore = len(repo_activity.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                           end_date=120, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
+                           end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
                            start_date=1671747413000,
@@ -39,7 +39,7 @@ class Test_CreateActivityUsecase:
         assert repo_activity.activities[activitiesLenBefore].description == "Isso é uma atividade"
         assert repo_activity.activities[activitiesLenBefore].activity_type == ACTIVITY_TYPE.LECTURES
         assert repo_activity.activities[activitiesLenBefore].delivery_model == DELIVERY_MODEL.HYBRID
-        assert repo_activity.activities[activitiesLenBefore].end_date == 120
+        assert repo_activity.activities[activitiesLenBefore].end_date == 1671754613000
         assert repo_activity.activities[activitiesLenBefore].link == "www.zoom.br/123"
         assert repo_activity.activities[activitiesLenBefore].place == "H332"
         assert repo_activity.activities[activitiesLenBefore].total_slots == 4
@@ -61,7 +61,7 @@ class Test_CreateActivityUsecase:
         activitiesLenBefore = len(repo_activity.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                           end_date=120, link='www.zoom.br/123', place="H332", total_slots=4, is_extensive=True,
+                           end_date=1671754613000, link='www.zoom.br/123', place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
                            start_date=1671747413000,
@@ -90,7 +90,7 @@ class Test_CreateActivityUsecase:
         activitiesLenBefore = len(repo_activity.activities)
 
         activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                           end_date=120, link='www.zoom.br/1234', place="H332", total_slots=4, is_extensive=True,
+                           end_date=1671754613000, link='www.zoom.br/1234', place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
                            start_date=1671747413000,
@@ -115,7 +115,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(EntityError):
             usecase(code=00000, title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    end_date=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                    end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=1671747413000,
@@ -136,7 +136,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(DuplicatedItem):
             usecase(code="ECM2345", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    end_date=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                    end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=1671747413000,
@@ -157,7 +157,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(EntityError):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    end_date=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                    end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=1671747413000,
@@ -183,7 +183,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(EntityError):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    end_date=120, link='www.zoom.br/321', place="H332", total_slots=4, is_extensive=True,
+                    end_date=1671754613000, link='www.zoom.br/321', place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=1671747413000,
@@ -200,7 +200,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(NoItemsFound):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    end_date=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                    end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=1671747413000,
@@ -221,7 +221,7 @@ class Test_CreateActivityUsecase:
 
             with pytest.raises(EntityError):
                 usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                        end_date=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                        end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
                         accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                         delivery_model=DELIVERY_MODEL.HYBRID,
                         start_date=1671747413000,
@@ -242,7 +242,7 @@ class Test_CreateActivityUsecase:
 
             with pytest.raises(EntityError):
                 usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                        end_date=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                        end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
                         accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                         delivery_model=DELIVERY_MODEL.HYBRID,
                         start_date=1671747413000,
@@ -263,7 +263,7 @@ class Test_CreateActivityUsecase:
 
         with pytest.raises(ForbiddenAction):
             usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
-                    end_date=120, link=None, place="H332", total_slots=4, is_extensive=True,
+                    end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
                     accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                     delivery_model=DELIVERY_MODEL.HYBRID,
                     start_date=1671747413000,

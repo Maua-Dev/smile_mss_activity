@@ -10,7 +10,7 @@ from src.shared.domain.observability.observability_interface import IObservabili
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, UnecessaryUpdate
+from src.shared.helpers.errors.usecase_errors import ConflictingInformation, ForbiddenAction, NoItemsFound, UnecessaryUpdate
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
 
 
@@ -230,6 +230,8 @@ class UpdateActivityUsecase:
             
             new_activity.stop_accepting_new_enrollments_before = new_stop_accepting_new_enrollments_before
 
+        if new_activity.start_date >= new_activity.end_date:
+            raise ConflictingInformation('start_date')
 
     
         activity = self.repo_activity.update_activity(code=code,

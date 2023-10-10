@@ -59,7 +59,8 @@ class CreateActivityUsecase:
         if delivery_model == DELIVERY_MODEL.IN_PERSON and link is not None:
             raise ConflictingInformation('link')
 
-
+        if start_date >= end_date:
+            raise ConflictingInformation('start_date')
 
         activity = Activity(
             code=code,

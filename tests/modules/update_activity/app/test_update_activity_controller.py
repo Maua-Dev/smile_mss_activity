@@ -25,7 +25,7 @@ class Test_UpdateActivityController:
                   "new_is_extensive": True,
                   "new_delivery_model": "HYBRID",
                   "new_start_date": 1669141012000,
-                  "new_end_date": 90,
+                  "new_end_date": 1730465200000,
                   "new_link": None,
                   "new_place": "H331",
                   "new_responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
@@ -49,7 +49,7 @@ class Test_UpdateActivityController:
         assert response.body['activity']['is_extensive'] == True
         assert response.body['activity']['delivery_model'] == 'HYBRID'
         assert response.body['activity']['start_date'] == 1669141012000
-        assert response.body['activity']['end_date'] == 90
+        assert response.body['activity']['end_date'] == 1730465200000
         assert response.body['activity']['link'] == None
         assert response.body['activity']['place'] == 'H331'
         assert response.body['activity']['responsible_professors'][0]['user_id'] == '03555624-a110-11ed-a8fc-0242ac120002'

@@ -6,7 +6,7 @@ from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, UnecessaryUpdate
+from src.shared.helpers.errors.usecase_errors import ConflictingInformation, ForbiddenAction, NoItemsFound, UnecessaryUpdate
 from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -25,7 +25,7 @@ class Test_UpdateActivityUsecase:
                                   new_activity_type=ACTIVITY_TYPE.LECTURES,
                                   new_is_extensive=True,
                                   new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                  new_start_date=1630465200000, new_end_date=15,
+                                  new_start_date=1630465200000, new_end_date=1730465200000,
                                   new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
                                   new_place="Sala 1",
                                   new_responsible_professors_user_id=[repo_user.users[3].user_id],
@@ -150,12 +150,12 @@ class Test_UpdateActivityUsecase:
                                         observability=observability)
 
         update_activity = usecase(code=repo_activity.activities[0].code,
-                                  new_end_date=15,
+                                  new_end_date=1730465200000,
                                   user=repo_user.users[0])
 
         assert type(update_activity) == Activity
         assert repo_activity.activities[0].end_date == update_activity.end_date
-        assert repo_activity.activities[0].end_date == 15
+        assert repo_activity.activities[0].end_date == 1730465200000
 
     def test_update_activity_usecase_update_only_link(self):
         repo_activity = ActivityRepositoryMock()
@@ -441,7 +441,7 @@ class Test_UpdateActivityUsecase:
                                   new_is_extensive=True,
                                   new_delivery_model=DELIVERY_MODEL.HYBRID,
                                   new_start_date=1630465200000,
-                                  new_end_date=90,
+                                  new_end_date=1730465200000,
                                   new_link="https://www.youtube.com/watch?v=1q2w3e4r5t6y7u8i9o0p",
                                   new_place="H311",
                                   new_responsible_professors_user_id=["6bb122d4-a110-11ed-a8fc-0242ac120002"],
@@ -586,4 +586,16 @@ class Test_UpdateActivityUsecase:
         assert repo_activity.enrollments[4].state == ENROLLMENT_STATE.ENROLLED
         assert repo_activity.enrollments[5].state == ENROLLMENT_STATE.ENROLLED
         assert repo_activity.enrollments[6].state == ENROLLMENT_STATE.ENROLLED
+
+    def test_update_activity_start_date_after_end_date(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity, repo_user=repo_user,
+                                        observability=observability)
+
+        with pytest.raises(ConflictingInformation):
+            update_activity = usecase(code=repo_activity.activities[0].code,
+                                      new_start_date=1730465200000,
+                                      new_end_date=1630465200000,
+                                      user=repo_user.users[0])
     
