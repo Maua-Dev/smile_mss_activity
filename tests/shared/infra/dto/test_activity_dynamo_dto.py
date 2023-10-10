@@ -18,7 +18,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.HYBRID,
             start_date=1671661013000,
-            end_date=400,
+            end_date=1695661013000,
             link="https://devmaua.com",
             place="H332",
             responsible_professors=[
@@ -43,7 +43,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.HYBRID,
             start_date=1671661013000,
-            end_date=400,
+            end_date=1695661013000,
             link="https://devmaua.com",
             place="H332",
             responsible_professors=[
@@ -86,7 +86,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.HYBRID,
             start_date=1671661013000,
-            end_date=400,
+            end_date=1695661013000,
             link="https://devmaua.com",
             place="H332",
             responsible_professors=[
@@ -108,7 +108,7 @@ class Test_ActivityDynamoDTO:
             "is_extensive": True,
             "delivery_model": "HYBRID",
             "start_date": 1671661013000,
-            "end_date": 400,
+            "end_date": 1695661013000,
             "link": "https://devmaua.com",
             "place": "H332",
             "responsible_professors": [
@@ -152,7 +152,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.HYBRID,
             start_date=1671661013000,
-            end_date=400,
+            end_date=1695661013000,
             link="https://devmaua.com",
             place="H332",
             responsible_professors=[
@@ -177,7 +177,7 @@ class Test_ActivityDynamoDTO:
             "is_extensive": True,
             "delivery_model": "HYBRID",
             "start_date": 1671661013000,
-            "end_date": 400,
+            "end_date": 1695661013000,
             "link": "https://devmaua.com",
             "place": "H332",
             "responsible_professors": [
@@ -220,7 +220,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=False,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=1671747413000,
-            end_date=120,
+            end_date=1695661013000,
             link=None,
             place="H332",
             responsible_professors=[
@@ -243,7 +243,7 @@ class Test_ActivityDynamoDTO:
             "is_extensive": False,
             "delivery_model": "IN_PERSON",
             "start_date": 1671747413000,
-            "end_date": 120,
+            "end_date": 1695661013000,
             "place": "H332",
             "responsible_professors": [
                 {
@@ -285,7 +285,7 @@ class Test_ActivityDynamoDTO:
                 'delivery_model': 'HYBRID',
                 'title': 'Atividade da ELET 355',
                 'is_extensive': True,
-                'end_date': '400',
+                'end_date': '1695661013000',
                 'activity_type': 'LECTURES',
                 'speakers': [
                     {
@@ -329,7 +329,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.HYBRID,
             start_date=1671661013000,
-            end_date=400,
+            end_date=1695661013000,
             link="https://devmaua.com",
             place="H332",
             responsible_professors=[
@@ -353,7 +353,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.HYBRID,
             start_date=1671661013000,
-            end_date=400,
+            end_date=1695661013000,
             link="https://devmaua.com",
             place="H332",
             responsible_professors=[
@@ -374,7 +374,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.HYBRID,
             start_date=1671661013000,
-            end_date=400,
+            end_date=1695661013000,
             link="https://devmaua.com",
             place="H332",
             responsible_professors=[
@@ -407,7 +407,7 @@ class Test_ActivityDynamoDTO:
                 'delivery_model': 'HYBRID',
                 'title': 'Atividade da ELET 355',
                 'is_extensive': True,
-                'end_date': '400',
+                'end_date': '1695661013000',
                 'activity_type': 'LECTURES',
                 'speakers': [
                     {
@@ -451,7 +451,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.HYBRID,
             start_date=1671661013000,
-            end_date=400,
+            end_date=1695661013000,
             link="https://devmaua.com",
             place="H332",
             responsible_professors=[
@@ -483,7 +483,7 @@ class Test_ActivityDynamoDTO:
                 'delivery_model': 'IN_PERSON',
                 'title': 'Última atividade',
                 'is_extensive': False,
-                'end_date':'45',
+                'end_date':'1695661013000',
                 'activity_type': 'SPORTS_ACTIVITY',
                 'speakers': [
                     {
@@ -526,7 +526,7 @@ class Test_ActivityDynamoDTO:
             is_extensive=False,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=1671733013000,
-            end_date=45,
+            end_date=1695661013000,
             link=None,
             place="H332",
             responsible_professors=[
