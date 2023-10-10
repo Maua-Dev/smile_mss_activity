@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
@@ -387,15 +387,15 @@ class ActivityRepositoryMock(IActivityRepository):
                 return activity, enrollments
         return None, None
 
-    def update_activity(self, code: str, new_title: str = None, new_description: str = None,
-                        new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None,
-                        new_duration: int = None, new_link: str = None, new_place: str = None,
-                        new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None,
-                        new_total_slots: int = None, new_taken_slots: int = None,
-                        new_accepting_new_enrollments: bool = None,
-                        new_stop_accepting_new_enrollments_before: int = None,
-                        new_confirmation_code: str = None) -> Activity:
+    def update_activity(self, code: Optional[str], new_title: Optional[str] = None, new_description: Optional[str] = None,
+                        new_activity_type: Optional[ACTIVITY_TYPE] = None, new_is_extensive: Optional[bool] = None,
+                        new_delivery_model: Optional[DELIVERY_MODEL] = None, new_start_date: Optional[int] = None,
+                        new_duration: Optional[int] = None, new_link: Optional[str] = None, new_place: Optional[str] = None,
+                        new_responsible_professors: Optional[List[User]] = None, new_speakers: Optional[List[Speaker]] = None,
+                        new_total_slots: Optional[int] = None, new_taken_slots: Optional[int] = None,
+                        new_accepting_new_enrollments: Optional[bool] = None,
+                        new_stop_accepting_new_enrollments_before: Optional[int] = None,
+                        new_confirmation_code: Optional[str] = None) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 if new_title is not None:

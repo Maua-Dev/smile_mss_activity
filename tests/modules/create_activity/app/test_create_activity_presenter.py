@@ -3,7 +3,6 @@ from src.modules.create_activity.app.create_activity_presenter import lambda_han
 
 import pytest
 class Test_CreateActivityPresenter:
-
     def test_create_activity(self):
         event = {
             "version": "2.0",

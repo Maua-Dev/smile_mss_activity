@@ -188,7 +188,7 @@ class Test_ActivityRepositoryDynamo:
         repo_user = UserRepositoryMock()
 
         repo_activity_dynamo = ActivityRepositoryDynamo()
-        new_activity = repo_activity_dynamo.update_activity(code=repo_activity.activities[0].code,
+        new_activity = repo_activity_dynamo.update_activity(code="PINOQ1",
                                                              new_title="NOVO TITULO",
                                                              new_description='nova descricao',
                                                              new_activity_type=ACTIVITY_TYPE.LECTURES,
@@ -199,7 +199,7 @@ class Test_ActivityRepositoryDynamo:
                                                              new_place="Sala 1",
                                                              new_responsible_professors=[
                                                                  repo_user.users[2],
-                                                                 repo_user.users[11]],
+                                                                 repo_user.users[10]],
                                                              new_speakers=[
                                                                  Speaker(
                                                                      name="Fulano de Tal",
@@ -211,7 +211,7 @@ class Test_ActivityRepositoryDynamo:
                                                             new_taken_slots=repo_activity.activities[0].taken_slots,
                                                              new_stop_accepting_new_enrollments_before=None)
 
-        assert new_activity.code == repo_activity.activities[0].code
+        assert new_activity.code == "PINOQ1"
         assert new_activity.title == "NOVO TITULO"
         assert new_activity.description == 'nova descricao'
         assert new_activity.activity_type == ACTIVITY_TYPE.LECTURES
@@ -223,7 +223,7 @@ class Test_ActivityRepositoryDynamo:
         assert new_activity.place == "Sala 1"
         assert new_activity.responsible_professors == [
             repo_user.users[2],
-            repo_user.users[11]]
+            repo_user.users[10]]
         assert new_activity.speakers == [
             Speaker(
                 name="Fulano de Tal",
@@ -233,7 +233,7 @@ class Test_ActivityRepositoryDynamo:
         ]
         assert new_activity.total_slots == 100
         assert new_activity.accepting_new_enrollments == True
-        assert new_activity.stop_accepting_new_enrollments_before is None
+        assert new_activity.stop_accepting_new_enrollments_before == 1669918612000
         assert new_activity.taken_slots == repo_activity.activities[0].taken_slots
 
 
@@ -420,3 +420,37 @@ class Test_ActivityRepositoryDynamo:
 
         assert len(enrollments) == 33
         assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_description(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.update_activity(code="CODIGO", new_description="abuble")
+
+        assert True
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_taken_slots(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.update_activity(code="ULTIMA", new_taken_slots=159)
+
+        assert True
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_responsible_professors(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        user_repository_mock = UserRepositoryMock()
+
+        repo_activity_dynamo.update_activity(code="PRF246", new_responsible_professors=[user_repository_mock.users[9], user_repository_mock.users[2]])
+
+        assert True
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_speakers(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.update_activity(code="ULTIMA", new_speakers=[Speaker(name="Fulano de Tal", bio="Fulano de Tal é um professor de Engenharia de Software", company="Universidade Federal de Fulano de tal")])
+
+        assert True
+    

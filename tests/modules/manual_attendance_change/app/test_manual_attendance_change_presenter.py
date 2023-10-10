@@ -1,4 +1,6 @@
 import json
+
+import pytest
 from src.modules.manual_attendance_change.app.manual_attendance_change_presenter import lambda_handler
 
 class Test_ManualAttendanceChangePresenter:

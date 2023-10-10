@@ -5,7 +5,7 @@ from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, UnecessaryUpdate
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadRequest, InternalServerError, Forbidden
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
@@ -24,68 +24,42 @@ class UpdateActivityController:
         try:
             self.observability.log_controller_in()
             
+
             if request.data.get('requester_user') is None:
                 raise MissingParameters('requester_user')
 
+            if request.data.get('code') is None:
+                raise MissingParameters('code') 
+            
+            #Check if all parameters are None except requester_user and code
+            if all(value is None for key, value in request.data.items() if key not in ['requester_user', 'code']):
+                raise UnecessaryUpdate("")
+            
+
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
 
-            if not request.data.get('code'):
-                raise MissingParameters('code')
-
-            if request.data.get('new_title') is None:
-                raise MissingParameters('new_title')
-
-            if request.data.get('new_description') is None:
-                raise MissingParameters('new_description')
-
-            if request.data.get('new_activity_type') is None:
-                raise MissingParameters('new_activity_type')
-
             new_activity_type = request.data.get('new_activity_type')
-            if new_activity_type not in [activity_type_value.value for activity_type_value in ACTIVITY_TYPE]:
-                raise EntityError('new_activity_type')
-            new_activity_type = ACTIVITY_TYPE[new_activity_type]
-
-            if request.data.get('new_is_extensive') is None:
-                raise MissingParameters('new_is_extensive')
-
+            if new_activity_type is not None:
+                if new_activity_type not in [activity_type_value.value for activity_type_value in ACTIVITY_TYPE]:
+                    raise EntityError('new_activity_type')
+                new_activity_type = ACTIVITY_TYPE[new_activity_type]
+            
             new_delivery_model = request.data.get('new_delivery_model')
-            if new_delivery_model is None:
-                raise MissingParameters('new_delivery_model')
-            if new_delivery_model not in [delivery_model_value.value for delivery_model_value in DELIVERY_MODEL]:
-                raise EntityError('new_delivery_model')
-            new_delivery_model = DELIVERY_MODEL[new_delivery_model]
+            if new_delivery_model is not None:
+                if new_delivery_model not in [delivery_model_value.value for delivery_model_value in DELIVERY_MODEL]:
+                    raise EntityError('new_delivery_model')
+                new_delivery_model = DELIVERY_MODEL[new_delivery_model]
 
-            if request.data.get('new_start_date') is None:
-                raise MissingParameters('new_start_date')
-
-            new_start_date = request.data.get('new_start_date')
-
-            if request.data.get('new_duration') is None:
-                raise MissingParameters('new_duration')
-
-            if request.data.get('new_responsible_professors') is None:
-                raise MissingParameters('new_responsible_professors')
 
             new_speakers = request.data.get('new_speakers')
-            if new_speakers is None:
-                raise MissingParameters('new_speakers')
-
-            if type(new_speakers) != list:
-                raise EntityError('new_speakers')
-
-            try:
-                new_speakers = [Speaker(**speaker) for speaker in new_speakers]
-            except:
-                raise EntityError("new_speakers")
-
-            if request.data.get('new_total_slots') is None:
-                raise MissingParameters('new_total_slots')
-
-            if request.data.get('new_accepting_new_enrollments') is None:
-                raise MissingParameters('new_accepting_new_enrollments')
-
-            new_stop_accepting_new_enrollments_before = request.data.get('new_stop_accepting_new_enrollments_before')
+            if new_speakers is not None:
+                if type(new_speakers) != list:
+                    raise EntityError('new_speakers')
+                try:
+                    new_speakers = [Speaker(**speaker) for speaker in new_speakers]
+                except:
+                    raise EntityError("new_speakers")
+            
 
             updated_activity = self.UpdateActivityUsecase(
                 code=request.data.get('code'),
@@ -94,7 +68,7 @@ class UpdateActivityController:
                 new_activity_type=new_activity_type,
                 new_is_extensive=request.data.get('new_is_extensive'),
                 new_delivery_model=new_delivery_model,
-                new_start_date=new_start_date,
+                new_start_date=request.data.get('new_start_date'),
                 new_duration=request.data.get('new_duration'),
                 new_link=request.data.get('new_link'),
                 new_place=request.data.get('new_place'),
@@ -103,7 +77,7 @@ class UpdateActivityController:
                 new_total_slots=request.data.get('new_total_slots'),
                 user=requester_user,
                 new_accepting_new_enrollments=request.data.get('new_accepting_new_enrollments'),
-                new_stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before
+                new_stop_accepting_new_enrollments_before=request.data.get('new_stop_accepting_new_enrollments_before'),
             )
 
             viewmodel = UpdateActivityViewmodel(updated_activity)
@@ -129,7 +103,12 @@ class UpdateActivityController:
 
             else:
                 return NotFound(body=f"{message} não encontrada")
-
+        
+        except UnecessaryUpdate as err:
+            self.observability.log_exception(status_code=400, exception_name="UnecessaryUpdate", message=err.message)
+            
+            return BadRequest(body=f"Os parâmetros de atualização estão vazios")
+        
         except ForbiddenAction as err:
             self.observability.log_exception(status_code=403, exception_name="ForbiddenAction", message=err.message)
 
