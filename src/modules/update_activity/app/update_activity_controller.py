@@ -33,7 +33,7 @@ class UpdateActivityController:
             
             #Check if all parameters are None except requester_user and code
             if all(value is None for key, value in request.data.items() if key not in ['requester_user', 'code']):
-                raise UnecessaryUpdate("Os parâmetros de atualização estão vazios")
+                raise UnecessaryUpdate("")
             
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
@@ -103,7 +103,12 @@ class UpdateActivityController:
 
             else:
                 return NotFound(body=f"{message} não encontrada")
-
+        
+        except UnecessaryUpdate as err:
+            self.observability.log_exception(status_code=400, exception_name="UnecessaryUpdate", message=err.message)
+            
+            return BadRequest(body=f"Os parâmetros de atualização estão vazios")
+        
         except ForbiddenAction as err:
             self.observability.log_exception(status_code=403, exception_name="ForbiddenAction", message=err.message)
 

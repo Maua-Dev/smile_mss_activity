@@ -76,7 +76,7 @@ class Test_UpdateActivityController:
 
         response = controller(request)
 
-        assert response.status_code == 500
+        assert response.status_code == 400
         assert response.body == 'Os parâmetros de atualização estão vazios'
     
     def test_update_activity_controller_one_parameter(self):
