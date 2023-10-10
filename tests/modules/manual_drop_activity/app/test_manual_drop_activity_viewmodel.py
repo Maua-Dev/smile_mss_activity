@@ -28,7 +28,7 @@ class Test_ManualDropActivityViewmodel:
                     'is_extensive': False,
                     'delivery_model': 'IN_PERSON',
                     'start_date': 1671747413000,
-                    'end_date': 120,
+                    'end_date': 120*60*1000 + 1671747413000,
                     'link': None,
                     'place': 'H332',
                     'responsible_professors': [
