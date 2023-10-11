@@ -16,7 +16,7 @@ class ActivityDynamoDTO:
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
     start_date: int  # milliseconds
-    end_date: int  # minutes
+    end_date: int  # milliseconds
     link: str
     place: str
     responsible_professors: List[User]

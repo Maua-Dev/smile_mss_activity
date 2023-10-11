@@ -51,8 +51,8 @@ class ActivityViewmodel:
     activity_type: ACTIVITY_TYPE
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
-    start_date: int
-    end_date: int  # minutes
+    start_date: int # milliseconds
+    end_date: int  # milliseconds
     link: str
     place: str
     speakers: List[SpeakerViewmodel]
