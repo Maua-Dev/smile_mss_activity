@@ -67,7 +67,7 @@ class Test_ActivityRepositoryDynamo:
             is_extensive=False,
             delivery_model=DELIVERY_MODEL.ONLINE,
             start_date=1671747413000,
-            duration=120,
+            end_date=1671754613000,
             link=None,
             place="H332",
             responsible_professors=[
@@ -98,7 +98,7 @@ class Test_ActivityRepositoryDynamo:
             assert activity_gotten.delivery_model == activity.delivery_model
             assert activity_gotten.activity_type == activity.activity_type
             assert activity_gotten.start_date == activity.start_date
-            assert activity_gotten.duration == activity.duration
+            assert activity_gotten.end_date == activity.end_date
             assert activity_gotten.link == activity.link
             assert activity_gotten.place == activity.place
             assert activity_gotten.responsible_professors == activity.responsible_professors
@@ -194,7 +194,7 @@ class Test_ActivityRepositoryDynamo:
                                                              new_activity_type=ACTIVITY_TYPE.LECTURES,
                                                              new_is_extensive=True,
                                                              new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                                             new_start_date=1630465200000, new_duration=15,
+                                                             new_start_date=1630465200000, new_end_date=1630466100000,
                                                              new_link="www.google.com.br",
                                                              new_place="Sala 1",
                                                              new_responsible_professors=[
@@ -218,7 +218,7 @@ class Test_ActivityRepositoryDynamo:
         assert new_activity.is_extensive == True
         assert new_activity.delivery_model == DELIVERY_MODEL.ONLINE
         assert new_activity.start_date == 1630465200000
-        assert new_activity.duration == 15
+        assert new_activity.end_date == 1630466100000
         assert new_activity.link == 'www.google.com.br'
         assert new_activity.place == "Sala 1"
         assert new_activity.responsible_professors == [

@@ -69,7 +69,7 @@ class UpdateActivityController:
                 new_is_extensive=request.data.get('new_is_extensive'),
                 new_delivery_model=new_delivery_model,
                 new_start_date=request.data.get('new_start_date'),
-                new_duration=request.data.get('new_duration'),
+                new_end_date=request.data.get('new_end_date'),
                 new_link=request.data.get('new_link'),
                 new_place=request.data.get('new_place'),
                 new_responsible_professors_user_id=request.data.get('new_responsible_professors'),

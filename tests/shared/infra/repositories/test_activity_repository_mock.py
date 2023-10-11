@@ -184,7 +184,7 @@ class Test_ActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671743813000,
-                duration=20,
+                end_date=1671745013000,
                 link=None,
                 place="H332",
                 responsible_professors=[

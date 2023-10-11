@@ -22,7 +22,7 @@ class Test_Activity:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=1671728165000,
-            duration=120,
+            end_date=167173365000,
             link="https://devmaua.com",
             place="H333",
             responsible_professors=[
@@ -54,7 +54,7 @@ class Test_Activity:
         assert activity.is_extensive == True
         assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
         assert activity.start_date == 1671728165000
-        assert activity.duration == 120
+        assert activity.end_date == 167173365000
         assert activity.responsible_professors[0].name == "Marcos"
         assert activity.speakers[0].name == "Marcos Tales"
         assert activity.total_slots == 120
@@ -71,7 +71,7 @@ class Test_Activity:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=1671728165000,
-            duration=120,
+            end_date=167173365000,
             link=None,
             place="H333",
             responsible_professors=[
@@ -103,7 +103,7 @@ class Test_Activity:
         assert activity.is_extensive == True
         assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
         assert activity.start_date == 1671728165000
-        assert activity.duration == 120
+        assert activity.end_date == 167173365000
         assert activity.responsible_professors[0].name == "Marcos"
         assert activity.speakers[0].name == "Marcos Tales"
         assert activity.total_slots == 120
@@ -120,7 +120,7 @@ class Test_Activity:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=1671728165000,
-            duration=120,
+            end_date=167173365000,
             link="https://devmaua.com",
             place=None,
             responsible_professors=[
@@ -152,7 +152,7 @@ class Test_Activity:
         assert activity.is_extensive == True
         assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
         assert activity.start_date == 1671728165000
-        assert activity.duration == 120
+        assert activity.end_date == 167173365000
         assert activity.responsible_professors[0].name == "Marcos"
         assert activity.speakers[0].name == "Marcos Tales"
         assert activity.total_slots == 120
@@ -171,7 +171,7 @@ class Test_Activity:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=1671728165000,
-            duration=120,
+            end_date=167173365000,
             link=None,
             place=None,
             responsible_professors=[
@@ -205,7 +205,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -238,7 +238,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -271,7 +271,7 @@ class Test_Activity:
                     is_extensive=True,
                     delivery_model=DELIVERY_MODEL.IN_PERSON,
                     start_date=1671728165000,
-                    duration=120,
+                    end_date=167173365000,
                     link="https://devmaua.com",
                     place="H333",
                     responsible_professors=[
@@ -304,7 +304,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -337,7 +337,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -370,7 +370,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -403,7 +403,7 @@ class Test_Activity:
                 is_extensive="True",
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -436,7 +436,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model="IN_PERSON",
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -469,7 +469,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date="2022-12-22 13:56:05.430523",
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -502,7 +502,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=-3581009612000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -525,7 +525,7 @@ class Test_Activity:
                 confirmation_code=None
             )
 
-    def test_activity_invalid_duration(self):
+    def test_activity_invalid_end_date(self):
         with pytest.raises(EntityError):
             activity = Activity(
                 code="1234",
@@ -535,7 +535,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration="DUAS HORAS",
+                end_date="DUAS HORAS",
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -568,7 +568,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place=123,
                 responsible_professors=[
@@ -601,7 +601,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link=123,
                 place="H333",
                 responsible_professors=[
@@ -634,7 +634,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=None,
@@ -661,7 +661,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -697,7 +697,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -734,7 +734,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -768,7 +768,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -802,7 +802,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -836,7 +836,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -870,7 +870,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -904,7 +904,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -938,7 +938,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -971,7 +971,7 @@ class Test_Activity:
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
             start_date=1671728165000,
-            duration=120,
+            end_date=167173365000,
             link="https://devmaua.com",
             place="H333",
             responsible_professors=[
@@ -1007,7 +1007,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -1041,7 +1041,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[
@@ -1075,7 +1075,7 @@ class Test_Activity:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671728165000,
-                duration=120,
+                end_date=167173365000,
                 link="https://devmaua.com",
                 place="H333",
                 responsible_professors=[

@@ -16,7 +16,7 @@ class ActivityDynamoDTO:
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
     start_date: int  # milliseconds
-    duration: int  # minutes
+    end_date: int  # milliseconds
     link: str
     place: str
     responsible_professors: List[User]
@@ -28,7 +28,7 @@ class ActivityDynamoDTO:
     confirmation_code: str
 
     def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: int, duration: int, link: str, place: str,
+                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: str, place: str,
                  responsible_professors: List[User], speakers: List[Speaker], total_slots: int,
                  accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, taken_slots: int = None, confirmation_code: str = None):
         self.code = code
@@ -38,7 +38,7 @@ class ActivityDynamoDTO:
         self.is_extensive = is_extensive
         self.delivery_model = delivery_model
         self.start_date = start_date
-        self.duration = duration
+        self.end_date = end_date
         self.link = link
         self.place = place
         self.responsible_professors = responsible_professors
@@ -62,7 +62,7 @@ class ActivityDynamoDTO:
             is_extensive=activity.is_extensive,
             delivery_model=activity.delivery_model,
             start_date=activity.start_date,
-            duration=activity.duration,
+            end_date=activity.end_date,
             link=activity.link,
             place=activity.place,
             responsible_professors=activity.responsible_professors,
@@ -85,7 +85,7 @@ class ActivityDynamoDTO:
             "is_extensive": self.is_extensive,
             "delivery_model": self.delivery_model.value,
             "start_date": self.start_date,
-            "duration": self.duration,
+            "end_date": self.end_date,
             "link": self.link,
             "place": self.place,
             "responsible_professors": [{
@@ -122,7 +122,7 @@ class ActivityDynamoDTO:
             is_extensive=bool(activity_data.get("is_extensive")),
             delivery_model=DELIVERY_MODEL(activity_data.get("delivery_model")),
             start_date=int(activity_data.get("start_date")),
-            duration=int(activity_data.get("duration")),
+            end_date=int(activity_data.get("end_date")),
             link=activity_data.get("link"),
             place=activity_data.get("place"),
             responsible_professors=[User(
@@ -154,7 +154,7 @@ class ActivityDynamoDTO:
             is_extensive=self.is_extensive,
             delivery_model=self.delivery_model,
             start_date=self.start_date,
-            duration=self.duration,
+            end_date=self.end_date,
             link=self.link,
             place=self.place,
             responsible_professors=self.responsible_professors,
@@ -167,4 +167,4 @@ class ActivityDynamoDTO:
         )
 
     def __eq__(self, other):
-        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.duration == other.duration and self.link == other.link and self.place == other.place and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before and self.taken_slots == other.taken_slots and self.confirmation_code == other.confirmation_code
+        return self.code == other.code and self.title == other.title and self.description == other.description and self.activity_type == other.activity_type and self.is_extensive == other.is_extensive and self.delivery_model == other.delivery_model and self.start_date == other.start_date and self.end_date == other.end_date and self.link == other.link and self.place == other.place and self.responsible_professors == other.responsible_professors and self.speakers == other.speakers and self.total_slots == other.total_slots and self.accepting_new_enrollments == other.accepting_new_enrollments and self.stop_accepting_new_enrollments_before == other.stop_accepting_new_enrollments_before and self.taken_slots == other.taken_slots and self.confirmation_code == other.confirmation_code

@@ -160,7 +160,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
     def update_activity(self, code: str, new_title: str = None, new_description: str = None,
                         new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None, new_duration: int = None,
+                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None, new_end_date: int = None,
                         new_link: str = None, new_place: str = None, new_responsible_professors: List[User] = None,
                         new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
@@ -180,7 +180,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
             "is_extensive": new_is_extensive,
             "delivery_model": new_delivery_model.value if new_delivery_model is not None else None,
             "start_date": Decimal(str(new_start_date)) if new_start_date is not None else None,
-            "duration": new_duration,
+            "end_date": new_end_date,
             "link": new_link,
             "place": new_place,
             "responsible_professors": [{"name": professor.name, "user_id": professor.user_id, "role": professor.role.value} for professor in new_responsible_professors] if new_responsible_professors is not None else [],
