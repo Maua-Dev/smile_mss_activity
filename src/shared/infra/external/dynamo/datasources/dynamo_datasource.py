@@ -199,4 +199,20 @@ class DynamoDatasource:
         with self.dynamo_table.batch_writer() as batch:
             for k in keys:
                 batch.delete_item(Key=k)
+    def batch_get_items(self, keys):
+        """
+        Get a list of items from the table. Each item must have only the keys (Partition and Sort).
+        @param keys: list of dicts with the keys (Partition and Sort)
+        Example: keys=[ {'Partition': {'S': 'partition1'}, 'Sort': {'S': 'sort2'}}, {'Partition': {'S': 'partition1'}, 'Sort': {'S': 'sort2'}}}}]
+        """
+        # pk':{'S':item},'sk': {'S':'ITEM'}}
+
+        resp = self.dynamo_resoruce.batch_get_item(
+                RequestItems={
+                    self.dynamo_table.name: {
+                        'Keys': keys
+                    }
+            }
+        )
+        return resp
 
