@@ -39,3 +39,7 @@ class UserNotAdmin(BaseError):
 class UnecessaryUpdate(BaseError):
     def  __init__(self, message: str):
         super().__init__(message)
+
+class ImpossibleEnrollment(BaseError):
+    def  __init__(self, message: str):
+        super().__init__(message)
