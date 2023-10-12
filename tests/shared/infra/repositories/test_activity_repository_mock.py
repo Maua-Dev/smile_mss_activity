@@ -302,3 +302,52 @@ class Test_ActivityRepositoryMock:
         deleted_certificates = repo.send_deleted_user_email(user = requester_user)
 
         assert deleted_certificates is True
+    
+    def test_batch_get_activities(self):
+        repo = ActivityRepositoryMock()
+
+        activities = repo.batch_get_activities(['ECM2345', 'ELET355'])
+
+        assert type(activities) == list
+        assert all(type(activity) == Activity for activity in activities)
+        
+        assert activities[0] == Activity(
+                code="ECM2345",
+                title="Atividade da ECM 2345",
+                description="Isso é uma atividade",
+                activity_type=ACTIVITY_TYPE.COURSES,
+                is_extensive=False,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1671747413000,
+                end_date=1671754613000,
+                link=None,
+                place="H332",
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+                speakers=[Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")],
+                total_slots=4,
+                taken_slots=4,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=1671743812000,
+                confirmation_code=None
+            )
+        assert activities[1] == Activity(
+                code="ELET355",
+                title="Atividade da ELET 355",
+                description="Isso é uma atividade, sério.",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.HYBRID,
+                start_date=1671661013000,
+                end_date=1695661013000,
+                link="https://devmaua.com",
+                place="H332",
+                responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+                total_slots=10,
+                taken_slots=1,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code=None
+            )
+
+

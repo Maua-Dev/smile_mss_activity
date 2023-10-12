@@ -510,3 +510,10 @@ class ActivityRepositoryMock(IActivityRepository):
             if enrollment.user_id == user_id:
                 enrollments.append(enrollment)
         return enrollments
+    
+    def batch_get_activities(self, codes: List[str]) -> List[Activity]:
+        activities = list()
+        for activity in self.activities:
+            if activity.code in codes:
+                activities.append(activity)
+        return activities	
