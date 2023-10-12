@@ -37,6 +37,8 @@ class EnrollActivityUsecase:
 
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
 
+        enrollments = self.repo.get_enrollments_by_user_id(user_id=user_id)
+
         if enrollment is not None:
 
             original_state = enrollment.state
