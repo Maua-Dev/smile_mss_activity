@@ -100,6 +100,10 @@ class IActivityRepository(ABC):
         pass
 
     @abstractmethod
+    def batch_get_activities(self, codes=List[str]) -> List[Activity]:
+        pass
+
+    @abstractmethod
     def get_enrollments_by_user_id(self, user_id: str) -> List[Enrollment]:
         pass
 
