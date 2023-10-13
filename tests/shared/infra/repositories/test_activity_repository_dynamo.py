@@ -432,8 +432,9 @@ class Test_ActivityRepositoryDynamo:
     @pytest.mark.skip("Can't test dynamo in Github")
     def test_update_activity_only_taken_slots(self):
         repo_activity_dynamo = ActivityRepositoryDynamo()
-
-        repo_activity_dynamo.update_activity(code="ULTIMA", new_taken_slots=159)
+        
+        repo_activity_dynamo.update_activity(code="CODIGO", new_taken_slots=2)
+        repo_activity_dynamo.update_activity(code="ULTIMA", new_taken_slots=3)
 
         assert True
     
@@ -453,4 +454,16 @@ class Test_ActivityRepositoryDynamo:
         repo_activity_dynamo.update_activity(code="ULTIMA", new_speakers=[Speaker(name="Fulano de Tal", bio="Fulano de Tal é um professor de Engenharia de Software", company="Universidade Federal de Fulano de tal")])
 
         assert True
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_batch_get_activities(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_activity_mock = ActivityRepositoryMock()
+
+        mock_activities = repo_activity_mock.batch_get_activities(["CODIGO", "ULTIMA"])
+
+        activities = repo_activity_dynamo.batch_get_activities(["CODIGO", "ULTIMA"])
+
+        assert len(activities) == 2
+        assert all(type(activity) == Activity for activity in activities)
     

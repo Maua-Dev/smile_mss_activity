@@ -498,4 +498,15 @@ class ActivityRepositoryDynamo(IActivityRepository):
         except Exception as err:
             print(err)
             return False
+        
+    def batch_get_activities(self, codes: List[str]) -> List[Activity]:
+        codes = [{self.dynamo.partition_key: self.activity_partition_key_format(code), self.dynamo.sort_key: self.activity_sort_key_format(code)} for code in codes]
+
+        response = self.dynamo.batch_get_items(keys=codes)
+        print(response)
+        activities = list()
+        for item in response["Responses"][self.dynamo.dynamo_table.name]:
+            activities.append(ActivityDynamoDTO.from_dynamo(item).to_entity())
+
+        return activities
 
