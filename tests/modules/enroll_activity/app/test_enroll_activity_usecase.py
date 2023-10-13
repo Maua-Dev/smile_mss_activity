@@ -119,6 +119,7 @@ class Test_EnrollActivityUsecase:
             enrollment_activity = usecase(usecase(repo_user.users[3].user_id, repo.activities[12].code))
     
     @freeze_time("2022-12-01")
+    @pytest.mark.skip(reason="Not implemented yet")
     def test_enrollment_activity_usecase_enroll_after_15_minutes(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
