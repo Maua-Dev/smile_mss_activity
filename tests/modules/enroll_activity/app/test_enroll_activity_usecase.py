@@ -2,9 +2,15 @@ import pytest
 from freezegun import freeze_time
 
 from src.modules.enroll_activity.app.enroll_activity_usecase import EnrollActivityUsecase
+from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
+from src.shared.domain.entities.speaker import Speaker
+from src.shared.domain.entities.user import User
+from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
+from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, UserAlreadyEnrolled, \
+from src.shared.domain.enums.role_enum import ROLE
+from src.shared.helpers.errors.usecase_errors import ImpossibleEnrollment, NoItemsFound, ClosedActivity, UserAlreadyEnrolled, \
     UserAlreadyCompleted
 from src.shared.infra.external.observability.observability_mock import ObservabilityMock
 from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
@@ -111,3 +117,13 @@ class Test_EnrollActivityUsecase:
         repo.activities[12].accepting_new_enrollments = True
         with pytest.raises(UserAlreadyCompleted):
             enrollment_activity = usecase(usecase(repo_user.users[3].user_id, repo.activities[12].code))
+    
+    @freeze_time("2022-12-01")
+    def test_enrollment_activity_usecase_enroll_after_15_minutes(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = EnrollActivityUsecase(repo, observability=observability)
+        with pytest.raises(ImpossibleEnrollment):
+            pass
+            
+            

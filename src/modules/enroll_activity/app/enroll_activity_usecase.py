@@ -8,7 +8,7 @@ from src.shared.domain.observability.observability_interface import IObservabili
 from src.shared.domain.repositories.activity_repository_interface import IActivityRepository
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, \
-    UserAlreadyEnrolled, UserAlreadyCompleted, ForbiddenAction, ActivityEnded
+    UserAlreadyEnrolled, UserAlreadyCompleted, ForbiddenAction, ActivityEnded, ImpossibleEnrollment
 
 
 class EnrollActivityUsecase:
@@ -36,9 +36,6 @@ class EnrollActivityUsecase:
             raise ActivityEnded("Activity")
 
         enrollment = self.repo.get_enrollment(user_id=user_id, code=code)
-
-        enrollments = self.repo.get_enrollments_by_user_id(user_id=user_id)
-
         if enrollment is not None:
 
             original_state = enrollment.state
@@ -51,10 +48,17 @@ class EnrollActivityUsecase:
             raise ForbiddenAction('Enrollment')
 
         else:
+            enrollments = self.repo.get_enrollments_by_user_id(user_id=user_id)
 
+            user_activities = self.repo.batch_get_activities([enrollment.activity_code for enrollment in enrollments])
+
+            for user_activity in user_activities:
+                if user_activity.start_date - 900000 < activity.end_date < user_activity.end_date:
+                    raise ImpossibleEnrollment("Activity")
+                
             if activity.taken_slots >= activity.total_slots:
                 enrollment = Enrollment(activity_code=activity.code, user_id=user_id, state=ENROLLMENT_STATE.IN_QUEUE,
-                                        date_subscribed=int(datetime.datetime.now().timestamp() * 1000))
+                                    date_subscribed=int(datetime.datetime.now().timestamp() * 1000))
 
             else:
                 enrollment = Enrollment(activity_code=activity.code, user_id=user_id, state=ENROLLMENT_STATE.ENROLLED,
