@@ -29,7 +29,7 @@ class DeleteActivityUsecase:
         activity = self.repo.delete_activity(code)
 
         if len(enrollments) > 0:
-            new_enrollemnts = self.repo.batch_update_enrollment(enrollments, ENROLLMENT_STATE.ACTIVITY_CANCELLED)
+            self.repo.batch_delete_enrollments([enrollment.user_id for enrollment in enrollments], code)
 
         self.observability.log_usecase_out()
         return activity
