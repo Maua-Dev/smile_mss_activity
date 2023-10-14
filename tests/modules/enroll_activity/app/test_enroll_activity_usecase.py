@@ -123,7 +123,7 @@ class Test_EnrollActivityUsecase:
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo, observability=observability)
-        repo.activities.append(            Activity(
+        repo.activities.append(Activity(
                 code="TESTE123",
                 title="Atividade teste",
                 description="Essa é uma atividade teste",
@@ -151,7 +151,7 @@ class Test_EnrollActivityUsecase:
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo, observability=observability)
-        repo.activities.append(            Activity(
+        repo.activities.append(Activity(
                 code="TESTE123",
                 title="Atividade teste",
                 description="Essa é uma atividade teste",
@@ -183,7 +183,7 @@ class Test_EnrollActivityUsecase:
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo, observability=observability)
-        repo.activities.append(            Activity(
+        repo.activities.append(Activity(
                 code="TESTE123",
                 title="Atividade teste",
                 description="Essa é uma atividade teste",
@@ -215,7 +215,7 @@ class Test_EnrollActivityUsecase:
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo, observability=observability)
-        repo.activities.append(            Activity(
+        repo.activities.append(Activity(
                 code="TESTE123",
                 title="Atividade teste",
                 description="Essa é uma atividade teste",
@@ -240,7 +240,7 @@ class Test_EnrollActivityUsecase:
         assert enrollment.user_id == repo_user.users[4].user_id
         assert enrollment.activity_code == repo.activities[-1].code
         assert enrollment.state == ENROLLMENT_STATE.ENROLLED
-        assert repo.activities[-1].taken_slots == 5
+        assert repo.activities[-1].taken_slots == 5 
             
             
             

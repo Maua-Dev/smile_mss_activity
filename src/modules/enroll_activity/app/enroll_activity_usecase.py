@@ -56,7 +56,7 @@ class EnrollActivityUsecase:
 
             for user_activity in user_activities:
                 if (activity.start_date - user_activity.end_date)/60000 > 15 and activity.start_date//86400000 == user_activity.start_date//86400000:
-                    raise ImpossibleEnrollment("Activity")
+                    raise ImpossibleEnrollment(f"{user_activity.code} - {user_activity.title}")
                 
             if activity.taken_slots >= activity.total_slots:
                 enrollment = Enrollment(activity_code=activity.code, user_id=user_id, state=ENROLLMENT_STATE.IN_QUEUE,
