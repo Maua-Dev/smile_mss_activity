@@ -144,6 +144,13 @@ class IActivityRepository(ABC):
         else returns None
         """
         pass
+    
+    @abstractmethod
+    def batch_delete_enrollments(self, user_ids: List[str], code: str) -> List[Enrollment]:
+        """
+        Deletes all enrollments in an activity, when the activity is deleted
+        """
+        pass
 
     @abstractmethod
     def delete_certificates(self, email: str) -> True:
