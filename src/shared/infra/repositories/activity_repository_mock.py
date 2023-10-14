@@ -516,4 +516,18 @@ class ActivityRepositoryMock(IActivityRepository):
         for activity in self.activities:
             if activity.code in codes:
                 activities.append(activity)
-        return activities	
+        return activities
+    
+    def batch_delete_enrollments(self, user_ids: List[str], code: str) -> List[Enrollment]:
+        deleted_enrollments = []
+        
+        for enrollment in self.enrollments:
+            if enrollment.user_id in user_ids and enrollment.activity_code == code:
+                deleted_enrollments.append(enrollment)
+            
+        for enrollment in deleted_enrollments:
+            self.enrollments.remove(enrollment)
+            
+        
+        return deleted_enrollments
+
