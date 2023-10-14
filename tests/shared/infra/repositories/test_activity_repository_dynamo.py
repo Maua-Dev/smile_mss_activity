@@ -466,4 +466,14 @@ class Test_ActivityRepositoryDynamo:
 
         assert len(activities) == 2
         assert all(type(activity) == Activity for activity in activities)
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_batch_delete_enrollments(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        activity, enrollments = repo_activity_dynamo.get_activity_with_enrollments("SC456")
+
+        deleted_enrollments = repo_activity_dynamo.batch_delete_enrollments([enrollment.user_id for enrollment in enrollments], activity.code)
+
+        assert True
     
