@@ -55,7 +55,7 @@ class EnrollActivityUsecase:
             user_activities = self.repo.batch_get_activities([enrollment.activity_code for enrollment in enrollmentes_filtered])
 
             for user_activity in user_activities:
-                if (activity.start_date - user_activity.end_date)/60000 > 15 and activity.start_date//86400000 == user_activity.start_date//86400000:
+                if (activity.start_date - user_activity.end_date) > 15*60*1000 and activity.start_date//(24*60*60*1000) == user_activity.start_date//(24*60*60*1000):
                     raise ImpossibleEnrollment(f"{user_activity.code} - {user_activity.title}")
                 
             if activity.taken_slots >= activity.total_slots:
