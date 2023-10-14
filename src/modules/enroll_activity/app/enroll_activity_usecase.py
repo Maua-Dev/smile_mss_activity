@@ -50,10 +50,12 @@ class EnrollActivityUsecase:
         else:
             enrollments = self.repo.get_enrollments_by_user_id(user_id=user_id)
 
-            user_activities = self.repo.batch_get_activities([enrollment.activity_code for enrollment in enrollments])
+            enrollmentes_filtered = list(filter(lambda enrollment: enrollment.state == ENROLLMENT_STATE.ENROLLED, enrollments))
+
+            user_activities = self.repo.batch_get_activities([enrollment.activity_code for enrollment in enrollmentes_filtered])
 
             for user_activity in user_activities:
-                if user_activity.start_date - 900000 < activity.end_date < user_activity.end_date:
+                if (activity.start_date - user_activity.end_date)/60000 > 15 and activity.start_date//86400000 == user_activity.start_date//86400000:
                     raise ImpossibleEnrollment("Activity")
                 
             if activity.taken_slots >= activity.total_slots:

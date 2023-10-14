@@ -119,12 +119,128 @@ class Test_EnrollActivityUsecase:
             enrollment_activity = usecase(usecase(repo_user.users[3].user_id, repo.activities[12].code))
     
     @freeze_time("2022-12-01")
-    @pytest.mark.skip(reason="Not implemented yet")
     def test_enrollment_activity_usecase_enroll_after_15_minutes(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = EnrollActivityUsecase(repo, observability=observability)
+        repo.activities.append(            Activity(
+                code="TESTE123",
+                title="Atividade teste",
+                description="Essa é uma atividade teste",
+                activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
+                is_extensive=False,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1670007713000 + 900001,
+                end_date=1670009513000,
+                link=None,
+                place="H332",
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung"),
+                          Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+                total_slots=10,
+                taken_slots=4,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code='696969'
+            ))
         with pytest.raises(ImpossibleEnrollment):
-            pass
+            enrollment_activity = usecase(repo_user.users[4].user_id, repo.activities[-1].code)
+
+    @freeze_time("2022-12-01")
+    def test_enrollment_activity_usecase_enroll_in_exactly_15_minutes(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = EnrollActivityUsecase(repo, observability=observability)
+        repo.activities.append(            Activity(
+                code="TESTE123",
+                title="Atividade teste",
+                description="Essa é uma atividade teste",
+                activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
+                is_extensive=False,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1670007713000 + 900000,
+                end_date=1670009513000,
+                link=None,
+                place="H332",
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung"),
+                          Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+                total_slots=10,
+                taken_slots=4,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code='696969'
+            ))
+        enrollment = usecase(repo_user.users[4].user_id, repo.activities[-1].code)
+        assert type(enrollment) == Enrollment
+        assert enrollment.user_id == repo_user.users[4].user_id
+        assert enrollment.activity_code == repo.activities[-1].code
+        assert enrollment.state == ENROLLMENT_STATE.ENROLLED
+        assert repo.activities[-1].taken_slots == 5
+
+    @freeze_time("2022-12-01")
+    def test_enrollment_activity_usecase_enroll_before_15_minutes(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = EnrollActivityUsecase(repo, observability=observability)
+        repo.activities.append(            Activity(
+                code="TESTE123",
+                title="Atividade teste",
+                description="Essa é uma atividade teste",
+                activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
+                is_extensive=False,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1670007713000 + 899999,
+                end_date=1670009513000,
+                link=None,
+                place="H332",
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung"),
+                          Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+                total_slots=10,
+                taken_slots=4,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code='696969'
+            ))
+        enrollment = usecase(repo_user.users[4].user_id, repo.activities[-1].code)
+        assert type(enrollment) == Enrollment
+        assert enrollment.user_id == repo_user.users[4].user_id
+        assert enrollment.activity_code == repo.activities[-1].code
+        assert enrollment.state == ENROLLMENT_STATE.ENROLLED
+        assert repo.activities[-1].taken_slots == 5
+    
+    @freeze_time("2022-12-01")
+    def test_enrollment_activity_usecase_enroll_different_day(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = EnrollActivityUsecase(repo, observability=observability)
+        repo.activities.append(            Activity(
+                code="TESTE123",
+                title="Atividade teste",
+                description="Essa é uma atividade teste",
+                activity_type=ACTIVITY_TYPE.CULTURAL_ACTIVITY,
+                is_extensive=False,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1670007713000 + 86400000,
+                end_date=1670009513000,
+                link=None,
+                place="H332",
+                responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+                speakers=[Speaker(name="Daniel Romanato", bio="Buscando descobrir o mundo", company="Samsung"),
+                          Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+                total_slots=10,
+                taken_slots=4,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code='696969'
+            ))
+        enrollment = usecase(repo_user.users[4].user_id, repo.activities[-1].code)
+        assert type(enrollment) == Enrollment
+        assert enrollment.user_id == repo_user.users[4].user_id
+        assert enrollment.activity_code == repo.activities[-1].code
+        assert enrollment.state == ENROLLMENT_STATE.ENROLLED
+        assert repo.activities[-1].taken_slots == 5
+            
             
             
