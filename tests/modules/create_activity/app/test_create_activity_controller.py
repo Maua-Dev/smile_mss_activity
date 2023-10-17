@@ -220,8 +220,7 @@ class Test_CreateActivityController:
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Parâmetro ausente: description"
+        assert response.status_code == 201
 
     def test_create_activity_controller_missing_activity_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -482,8 +481,7 @@ class Test_CreateActivityController:
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Parâmetro ausente: responsible_professors"
+        assert response.status_code == 201
 
     def test_create_activity_invalid_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
@@ -579,8 +577,7 @@ class Test_CreateActivityController:
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Parâmetro ausente: speakers"
+        assert response.status_code == 201
 
     def test_create_actvivity_invalid_speaker_type(self):
         repo_activity = ActivityRepositoryMock()

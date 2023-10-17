@@ -144,3 +144,182 @@ class Test_CreateActivityViewmodel:
                 }
 
             assert expected == activity_viewmodel
+
+    def test_create_activity_viewmodel_description_is_none(self):
+         
+            user = User(
+                name = "Dummy Name",
+                role = ROLE.PROFESSOR,
+                user_id = "71f06f24-a110-11ed-a8fc-0242ac120002"
+            )
+
+
+            speaker = Speaker(
+                name = "Robert Cecil Martin",
+                bio = "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                company = "Clean Architecture Company"
+            )
+
+            activity = Activity(
+                code="ZYX321",
+                title="Clean Architecture code review!",
+                description=None,
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=False,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1669141013000,
+                end_date=1684151213000,
+                link="www.google.com",
+                place="H331",
+                responsible_professors=[user],
+                speakers=[speaker],
+                total_slots=100,
+                taken_slots=97,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=1666451812000,
+                confirmation_code=None
+            )
+            activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
+
+            expected = {"activity":
+                {"code": "ZYX321",
+                 "title": "Clean Architecture code review!",
+                 "description": None,
+                 "activity_type": "LECTURES",
+                 "is_extensive": False,
+                 "delivery_model": "IN_PERSON",
+                 "start_date": 1669141013000,
+                 "end_date": 1684151213000,
+                 "link": "www.google.com",
+                 "place": "H331",
+                 "responsible_professors": [{
+                     "name": "Dummy Name",
+                     "role": "PROFESSOR",
+                     "user_id": "71f06f24-a110-11ed-a8fc-0242ac120002"
+                 }],
+                 "speakers": [{
+                     "name": "Robert Cecil Martin",
+                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                     "company": "Clean Architecture Company"
+                 }],
+                 "total_slots": 100,
+                 "taken_slots": 97,
+                 "accepting_new_enrollments": True,
+                 "stop_accepting_new_enrollments_before": 1666451812000,
+                 },
+                "message":"the activity was created"
+                }
+
+            assert expected == activity_viewmodel
+    
+    def test_create_activity_viewmodel_professors_is_none(self):
+            
+            speaker = Speaker(
+                name = "Robert Cecil Martin",
+                bio = "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                company = "Clean Architecture Company"
+            )
+
+            activity = Activity(
+                code="ZYX321",
+                title="Clean Architecture code review!",
+                description="Reviewing IMT student's codes",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=False,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1669141013000,
+                end_date=1684151213000,
+                link="www.google.com",
+                place="H331",
+                responsible_professors=None,
+                speakers=[speaker],
+                total_slots=100,
+                taken_slots=97,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=1666451812000,
+                confirmation_code=None
+            )
+            activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
+
+            expected = {"activity":
+                {"code": "ZYX321",
+                 "title": "Clean Architecture code review!",
+                 "description": "Reviewing IMT student's codes",
+                 "activity_type": "LECTURES",
+                 "is_extensive": False,
+                 "delivery_model": "IN_PERSON",
+                 "start_date": 1669141013000,
+                 "end_date": 1684151213000,
+                 "link": "www.google.com",
+                 "place": "H331",
+                 "responsible_professors": None,
+                 "speakers": [{
+                     "name": "Robert Cecil Martin",
+                     "bio": "Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                     "company": "Clean Architecture Company"
+                 }],
+                 "total_slots": 100,
+                 "taken_slots": 97,
+                 "accepting_new_enrollments": True,
+                 "stop_accepting_new_enrollments_before": 1666451812000,
+                 },
+                "message":"the activity was created"
+                }
+
+            assert expected == activity_viewmodel
+    
+    def test_create_activity_viewmodel_speakers_is_none(self):  
+          
+            user = User(
+                name = "Dummy Name",
+                role = ROLE.PROFESSOR,
+                user_id = "71f06f24-a110-11ed-a8fc-0242ac120002"
+            )
+
+            activity = Activity(
+                code="ZYX321",
+                title="Clean Architecture code review!",
+                description="Reviewing IMT student's codes",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=False,
+                delivery_model=DELIVERY_MODEL.IN_PERSON,
+                start_date=1669141013000,
+                end_date=1684151213000,
+                link="www.google.com",
+                place="H331",
+                responsible_professors=[user],
+                speakers=None,
+                total_slots=100,
+                taken_slots=97,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=1666451812000,
+                confirmation_code=None
+            )
+            activity_viewmodel = CreateActivityViewmodel(activity=activity).to_dict()
+
+            expected = {"activity":
+                {"code": "ZYX321",
+                 "title": "Clean Architecture code review!",
+                 "description": "Reviewing IMT student's codes",
+                 "activity_type": "LECTURES",
+                 "is_extensive": False,
+                 "delivery_model": "IN_PERSON",
+                 "start_date": 1669141013000,
+                 "end_date": 1684151213000,
+                 "link": "www.google.com",
+                 "place": "H331",
+                 "responsible_professors": [{
+                     "name": "Dummy Name",
+                     "role": "PROFESSOR",
+                     "user_id": "71f06f24-a110-11ed-a8fc-0242ac120002"
+                 }],
+                 "speakers": None,
+                 "total_slots": 100,
+                 "taken_slots": 97,
+                 "accepting_new_enrollments": True,
+                 "stop_accepting_new_enrollments_before": 1666451812000,
+                 },
+                "message":"the activity was created"
+                }
+
+            assert expected == activity_viewmodel

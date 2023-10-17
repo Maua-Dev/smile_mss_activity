@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker
@@ -20,11 +20,11 @@ class CreateActivityUsecase:
         self.repo_user = repo_user
         self.observability = observability
 
-    def __call__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
+    def __call__(self, code: str, title: str, description: Optional[str], activity_type: ACTIVITY_TYPE, is_extensive: bool,
                  delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: str, place: str,
                  total_slots: int,
-                 accepting_new_enrollments: bool, responsible_professors_user_id: List[str],
-                 stop_accepting_new_enrollments_before: int, speakers: List[Speaker], user: User) -> Activity:
+                 accepting_new_enrollments: bool,stop_accepting_new_enrollments_before: int,
+                speakers: Optional[List[Speaker]], user: User,responsible_professors_user_id: Optional[List[str]]) -> Activity:
 
         self.observability.log_usecase_in()
         if not Activity.validate_activity_code(code):
@@ -35,23 +35,25 @@ class CreateActivityUsecase:
 
         if self.repo_activity.get_activity(code=code) is not None:
             raise DuplicatedItem("activity_code")
+        
+        responsible_professors = None  
+        if responsible_professors_user_id is not None:
+            if type(responsible_professors_user_id) != list:
+                raise EntityError("responsible_professors")
 
-        if type(responsible_professors_user_id) != list:
-            raise EntityError("responsible_professors")
+            if len(responsible_professors_user_id) == 0:
+                raise EntityError("responsible_professors")
 
-        if len(responsible_professors_user_id) == 0:
-            raise EntityError("responsible_professors")
+            if type(responsible_professors_user_id) != list:
+                raise EntityError("responsible_professors")
 
-        if type(responsible_professors_user_id) != list:
-            raise EntityError("responsible_professors")
+            if not all(type(user_id) == str for user_id in responsible_professors_user_id):
+                raise EntityError("responsible_professors")
 
-        if not all(type(user_id) == str for user_id in responsible_professors_user_id):
-            raise EntityError("responsible_professors")
+            responsible_professors = self.repo_user.get_users(responsible_professors_user_id)
 
-        responsible_professors = self.repo_user.get_users(responsible_professors_user_id)
-
-        if len(responsible_professors) != len(responsible_professors_user_id):
-            raise NoItemsFound("responsible_professors")
+            if len(responsible_professors) != len(responsible_professors_user_id):
+                raise NoItemsFound("responsible_professors")
 
         if delivery_model == DELIVERY_MODEL.ONLINE and place is not None:
             raise ConflictingInformation('local')
