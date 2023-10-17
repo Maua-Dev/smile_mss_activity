@@ -20,11 +20,12 @@ class CreateActivityUsecase:
         self.repo_user = repo_user
         self.observability = observability
 
-    def __call__(self, code: str, title: str, description: Optional[str], activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: str, place: str,
+    def __call__(self, code: str, title: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
+                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, 
                  total_slots: int,
-                 accepting_new_enrollments: bool,stop_accepting_new_enrollments_before: int,
-                speakers: Optional[List[Speaker]], user: User,responsible_professors_user_id: Optional[List[str]]) -> Activity:
+                 accepting_new_enrollments: bool,stop_accepting_new_enrollments_before: int,user: User,
+                speakers: Optional[List[Speaker]]=None, responsible_professors_user_id: Optional[List[str]]=None,
+                description: Optional[str]=None, link: Optional[str]=None, place: Optional[str]=None) -> Activity:
 
         self.observability.log_usecase_in()
         if not Activity.validate_activity_code(code):

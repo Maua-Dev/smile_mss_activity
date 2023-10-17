@@ -1075,7 +1075,6 @@ class Test_Activity:
         activity = Activity(
             code="1234",
             title="Palestra Microsoft",
-            description=None,
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
@@ -1111,7 +1110,6 @@ class Test_Activity:
         activity = Activity(
             code="1234",
             title="Palestra Microsoft",
-            description=None,
             activity_type=ACTIVITY_TYPE.LECTURES,
             is_extensive=True,
             delivery_model=DELIVERY_MODEL.IN_PERSON,
@@ -1119,7 +1117,6 @@ class Test_Activity:
             end_date=167173365000,
             link="https://devmaua.com",
             place="H333",
-            responsible_professors=None,
             speakers=[
                 Speaker(
                     name="Marcos Tales",
@@ -1141,7 +1138,6 @@ class Test_Activity:
         activity = Activity(
         code="1234",
         title="Palestra Microsoft",
-        description=None,
         activity_type=ACTIVITY_TYPE.LECTURES,
         is_extensive=True,
         delivery_model=DELIVERY_MODEL.IN_PERSON,
@@ -1156,7 +1152,6 @@ class Test_Activity:
                 user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
             )
         ],
-        speakers=None,
         total_slots=120,
         taken_slots=33,
         accepting_new_enrollments=True,

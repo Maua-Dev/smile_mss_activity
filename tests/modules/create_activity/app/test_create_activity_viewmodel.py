@@ -163,7 +163,6 @@ class Test_CreateActivityViewmodel:
             activity = Activity(
                 code="ZYX321",
                 title="Clean Architecture code review!",
-                description=None,
                 activity_type=ACTIVITY_TYPE.LECTURES,
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
@@ -231,7 +230,6 @@ class Test_CreateActivityViewmodel:
                 end_date=1684151213000,
                 link="www.google.com",
                 place="H331",
-                responsible_professors=None,
                 speakers=[speaker],
                 total_slots=100,
                 taken_slots=97,
@@ -288,7 +286,6 @@ class Test_CreateActivityViewmodel:
                 link="www.google.com",
                 place="H331",
                 responsible_professors=[user],
-                speakers=None,
                 total_slots=100,
                 taken_slots=97,
                 accepting_new_enrollments=True,

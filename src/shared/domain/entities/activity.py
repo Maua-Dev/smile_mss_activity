@@ -28,10 +28,11 @@ class Activity(abc.ABC):
     stop_accepting_new_enrollments_before: int  # milliseconds
     confirmation_code: str
 
-    def __init__(self, code: str, title: str, description: Optional[str], activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: Optional[str], place: Optional[str],
-                 responsible_professors: Optional[List[User]], speakers: Optional[List[Speaker]], total_slots: int, taken_slots: int,
-                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, confirmation_code: str):
+    def __init__(self, code: str, title: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
+                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, 
+                total_slots: int, taken_slots: int,
+                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, confirmation_code: str,link: Optional[str] = None,
+                 place: Optional[str]=None,description: Optional[str]=None,responsible_professors: Optional[List[User]]=None,speakers: Optional[List[Speaker]]=None):
 
         if not self.validate_activity_code(code):
             raise EntityError("code")

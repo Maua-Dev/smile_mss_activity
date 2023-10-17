@@ -282,7 +282,7 @@ class Test_CreateActivityUsecase:
         repo_user = UserRepositoryMock()
         usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-        activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description=None,
+        activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345",
                            end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
@@ -301,7 +301,7 @@ class Test_CreateActivityUsecase:
             repo_user = UserRepositoryMock()
             usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description=None,
+            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
                                end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
                                accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                                delivery_model=DELIVERY_MODEL.HYBRID,
@@ -311,7 +311,7 @@ class Test_CreateActivityUsecase:
                                    name="Robert Cecil Martin",
                                    bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
                                    company="Clean Architecture Company",
-                               )], responsible_professors_user_id=None, user=repo_user.users[0])
+                               )], user=repo_user.users[0])
             
             assert repo_activity.activities[len(repo_activity.activities)-1].responsible_professors == None
     
@@ -320,13 +320,13 @@ class Test_CreateActivityUsecase:
             repo_user = UserRepositoryMock()
             usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description=None,
+            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
                                end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
                                accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                                delivery_model=DELIVERY_MODEL.HYBRID,
                                start_date=1671747413000,
                                stop_accepting_new_enrollments_before=1671743813000,
-                               speakers=None, responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
+                               responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
             
             assert repo_activity.activities[len(repo_activity.activities)-1].speakers == None  
     
@@ -335,8 +335,8 @@ class Test_CreateActivityUsecase:
             repo_user = UserRepositoryMock()
             usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description=None,
-                               end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
+            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                               end_date=1671754613000, place="H332", total_slots=4, is_extensive=True,
                                accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                                delivery_model=DELIVERY_MODEL.HYBRID,
                                start_date=1671747413000,
@@ -354,8 +354,8 @@ class Test_CreateActivityUsecase:
             repo_user = UserRepositoryMock()
             usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description=None,
-                               end_date=1671754613000, link="www.zoom.br/123", place=None, total_slots=4, is_extensive=True,
+            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                               end_date=1671754613000, link="www.zoom.br/123", total_slots=4, is_extensive=True,
                                accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                                delivery_model=DELIVERY_MODEL.HYBRID,
                                start_date=1671747413000,
