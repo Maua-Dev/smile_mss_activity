@@ -1,5 +1,5 @@
 import abc
-from typing import List
+from typing import List, Optional
 
 from src.shared.domain.entities.speaker import Speaker
 from src.shared.domain.entities.user import User
@@ -12,25 +12,25 @@ from src.shared.helpers.errors.domain_errors import EntityError
 class Activity(abc.ABC):
     code: str
     title: str
-    description: str
+    description: Optional[str]
     activity_type: ACTIVITY_TYPE
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
     start_date: int  # milliseconds
     end_date: int  # milliseconds
-    link: str
-    place: str
-    responsible_professors: List[User]
-    speakers: List[Speaker]
+    link: Optional[str]
+    place: Optional[str]
+    responsible_professors: Optional[List[User]]
+    speakers: Optional[List[Speaker]]
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int  # milliseconds
     confirmation_code: str
 
-    def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: str, place: str,
-                 responsible_professors: List[User], speakers: List[Speaker], total_slots: int, taken_slots: int,
+    def __init__(self, code: str, title: str, description: Optional[str], activity_type: ACTIVITY_TYPE, is_extensive: bool,
+                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: Optional[str], place: Optional[str],
+                 responsible_professors: Optional[List[User]], speakers: Optional[List[Speaker]], total_slots: int, taken_slots: int,
                  accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, confirmation_code: str):
 
         if not self.validate_activity_code(code):
@@ -41,7 +41,7 @@ class Activity(abc.ABC):
             raise EntityError("title")
         self.title = title
 
-        if type(description) != str:
+        if type(description) != str and description is not None:
             raise EntityError("description")
         self.description = description
 
@@ -83,7 +83,7 @@ class Activity(abc.ABC):
             raise EntityError("responsible_professors")
 
         elif not all([type(encharged_professor) == User for encharged_professor in
-                      responsible_professors]):  # check if all elements are User
+                      responsible_professors if encharged_professor]):  # check if all elements are User
             raise EntityError("responsible_professors")
 
         elif not all([encharged_professor.role == ROLE.PROFESSOR for encharged_professor in
@@ -92,10 +92,10 @@ class Activity(abc.ABC):
 
         self.responsible_professors = responsible_professors
 
-        if type(speakers) != list:
+        if type(speakers) != list and speakers is not None:
             raise EntityError("speakers")
 
-        if not all([type(speaker) == Speaker for speaker in speakers]):  # check if all elements are Speaker
+        if not all([type(speaker) == Speaker for speaker in speakers if speaker is not None]):  # check if all elements are Speaker
             raise EntityError("speakers")
         self.speakers = speakers
 
