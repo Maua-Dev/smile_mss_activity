@@ -63,7 +63,6 @@ class CreateActivityController:
             if speakers is not None:
                 if type(speakers) != list:
                     raise EntityError('speakers')
-                print("teste")
                 try:
                     speakers = [Speaker(**speaker) for speaker in speakers]
                 except:

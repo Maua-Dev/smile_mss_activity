@@ -551,5 +551,596 @@ class Test_ActivityDynamoDTO:
         )
 
         assert expected_activity == activity_dto.to_entity()
+    
+    def test_from_entity_missing_description(self):
+        activity = Activity(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
+
+        expected_activity_dynamo_dto = ActivityDynamoDTO(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+        assert activity_dynamo_dto.description == None
+        assert activity_dynamo_dto.description == expected_activity_dynamo_dto.description
+    
+    def test_from_entity_missing_link(self):
+        activity = Activity(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
+
+        expected_activity_dynamo_dto = ActivityDynamoDTO(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        assert activity_dynamo_dto.link == None
+        assert activity_dynamo_dto.link == expected_activity_dynamo_dto.link
+
+    def test_from_entity_missing_place(self):
+        activity = Activity(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
+
+        expected_activity_dynamo_dto = ActivityDynamoDTO(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        assert activity_dynamo_dto.place == None
+        assert activity_dynamo_dto.place == expected_activity_dynamo_dto.place
+    
+    def test_from_entity_missing_responsible_professors(self):
+        activity = Activity(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
+
+        expected_activity_dynamo_dto = ActivityDynamoDTO(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        assert activity_dynamo_dto.responsible_professors == None
+        assert activity_dynamo_dto.responsible_professors == expected_activity_dynamo_dto.responsible_professors
+    
+    def test_from_entity_missing_speakers(self):
+        activity = Activity(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        activity_dynamo_dto = ActivityDynamoDTO.from_entity(activity)
+
+        expected_activity_dynamo_dto = ActivityDynamoDTO(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+
+            total_slots=10,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        assert activity_dynamo_dto.speakers == None
+        assert activity_dynamo_dto.speakers == expected_activity_dynamo_dto.speakers
+    
+    def test_to_dynamo_missing_description(self):
+        activity_dynamo_dto = ActivityDynamoDTO(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="5bb122d4-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft"),
+                      Speaker(name="Lucas Vitor", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        expected_dynamo = {
+            "activity_code": "ELET355",
+            "title": "Atividade da ELET 355",
+            "activity_type": "LECTURES",
+            "is_extensive": True,
+            "delivery_model": "HYBRID",
+            "start_date": 1671661013000,
+            "end_date": 1695661013000,
+            "link": "https://devmaua.com",
+            "place": "H332",
+            "responsible_professors": [
+                {
+                    "name": "Patricia Santos",
+                    "role": "PROFESSOR",
+                    "user_id": "6bb122d4-a110-11ed-a8fc-0242ac120002"
+                },
+                {
+                    "name": "Lucas Vitor",
+                    "role": "PROFESSOR",
+                    "user_id": "5bb122d4-a110-11ed-a8fc-0242ac120002"
+                }
+            ],
+            "speakers": [
+                {
+                    "name": "Lucas Soller",
+                    "bio": "Daora",
+                    "company": "Microsoft"
+                },
+                {
+                    "name": "Lucas Vitor",
+                    "bio": "Daora",
+                    "company": "Microsoft"
+                }
+            ],
+            "total_slots": 10,
+            "accepting_new_enrollments": True,
+            "confirmation_code": "123456",
+            "entity": "activity"
+        }
+
+        assert expected_dynamo == activity_dynamo_dto.to_dynamo()
+    
+    def test_to_dynamo_missing_speakers(self):
+        activity_dynamo_dto = ActivityDynamoDTO(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002"),
+                User(name="Lucas Vitor", role=ROLE.PROFESSOR, user_id="5bb122d4-a110-11ed-a8fc-0242ac120002")],
+            total_slots=10,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        expected_dynamo = {
+            "activity_code": "ELET355",
+            "title": "Atividade da ELET 355",
+            "description": "Isso é uma atividade, sério.",
+            "activity_type": "LECTURES",
+            "is_extensive": True,
+            "delivery_model": "HYBRID",
+            "start_date": 1671661013000,
+            "end_date": 1695661013000,
+            "link": "https://devmaua.com",
+            "place": "H332",
+            "responsible_professors": [
+                {
+                    "name": "Patricia Santos",
+                    "role": "PROFESSOR",
+                    "user_id": "6bb122d4-a110-11ed-a8fc-0242ac120002"
+                },
+                {
+                    "name": "Lucas Vitor",
+                    "role": "PROFESSOR",
+                    "user_id": "5bb122d4-a110-11ed-a8fc-0242ac120002"
+                }
+            ],
+            "total_slots": 10,
+            "accepting_new_enrollments": True,
+            "confirmation_code": "123456",
+            "entity": "activity"
+        }
+
+        assert expected_dynamo == activity_dynamo_dto.to_dynamo()
+    
+    def test_from_dynamo_missing_description(self):
+        dynamo_data = {
+            'Item': {
+                'activity_code': 'ELET355',
+                'link': 'https://devmaua.com',
+                'total_slots': '10',
+                'responsible_professors': [
+                    {
+                        'name': 'Patricia Santos',
+                        'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
+                        'role': 'PROFESSOR'
+                    }
+                ],
+                'accepting_new_enrollments': True,
+                'delivery_model': 'HYBRID',
+                'title': 'Atividade da ELET 355',
+                'is_extensive': True,
+                'end_date': '1695661013000',
+                'activity_type': 'LECTURES',
+                'speakers': [
+                    {
+                        'name': 'Lucas Soller',
+                        'bio': 'Daora',
+                        'company': 'Microsoft'
+                    }
+                ],
+                'SK': 'activity#ELET355',
+                'place': 'H332',
+                'PK': 'ELET355',
+                'stop_accepting_new_enrollments_before': None,
+                'start_date': '1671661013000',
+                "confirmation_code": "123456",
+                "entity": "activity"
+            },
+            'ResponseMetadata': {
+                'RequestId': 'a955a01d-28d9-4da3-964e-801672d847df',
+                'HTTPStatusCode': 200,
+                'HTTPHeaders': {
+                    'date': 'Thu, 02 Feb 2023 19:11:33 GMT',
+                    'content-type': 'application/x-amz-json-1.0',
+                    'x-amz-crc32': '4255886215',
+                    'x-amzn-requestid': 'a955a01d-28d9-4da3-964e-801672d847df',
+                    'content-length': '759',
+                    'server': 'Jetty(9.4.48.v20220622)'
+                },
+                'RetryAttempts': 0
+            }
+        }
+
+        dynamo_data['Item']['taken_slots'] = 1
+
+        activity_dto = ActivityDynamoDTO.from_dynamo(dynamo_data['Item'])
+
+        expected_activity = Activity(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        assert expected_activity.description == None
+        assert expected_activity == activity_dto.to_entity()
+    
+    def test_from_dynamo_missing_speakers(self):
+        dynamo_data = {
+            'Item': {
+                'activity_code': 'ELET355',
+                'link': 'https://devmaua.com',
+                'total_slots': '10',
+                'description': 'Isso é uma atividade, sério.',
+                'responsible_professors': [
+                    {
+                        'name': 'Patricia Santos',
+                        'user_id': '6bb122d4-a110-11ed-a8fc-0242ac120002',
+                        'role': 'PROFESSOR'
+                    }
+                ],
+                'accepting_new_enrollments': True,
+                'delivery_model': 'HYBRID',
+                'title': 'Atividade da ELET 355',
+                'is_extensive': True,
+                'end_date': '1695661013000',
+                'activity_type': 'LECTURES',
+                'SK': 'activity#ELET355',
+                'place': 'H332',
+                'PK': 'ELET355',
+                'stop_accepting_new_enrollments_before': None,
+                'start_date': '1671661013000',
+                "confirmation_code": "123456",
+                "entity": "activity"
+            },
+            'ResponseMetadata': {
+                'RequestId': 'a955a01d-28d9-4da3-964e-801672d847df',
+                'HTTPStatusCode': 200,
+                'HTTPHeaders': {
+                    'date': 'Thu, 02 Feb 2023 19:11:33 GMT',
+                    'content-type': 'application/x-amz-json-1.0',
+                    'x-amz-crc32': '4255886215',
+                    'x-amzn-requestid': 'a955a01d-28d9-4da3-964e-801672d847df',
+                    'content-length': '759',
+                    'server': 'Jetty(9.4.48.v20220622)'
+                },
+                'RetryAttempts': 0
+            }
+        }
+
+        dynamo_data['Item']['taken_slots'] = 1
+
+        activity_dto = ActivityDynamoDTO.from_dynamo(dynamo_data['Item'])
+
+        expected_activity = Activity(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        assert expected_activity.speakers == None
+        assert expected_activity == activity_dto.to_entity()
+    
+        def test_to_entity_missing_description(self):
+            activity_dynamo_dto = ActivityDynamoDTO(
+                code="ELET355",
+                title="Atividade da ELET 355",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.HYBRID,
+                start_date=1671661013000,
+                end_date=1695661013000,
+                link="https://devmaua.com",
+                place="H332",
+                responsible_professors=[
+                    User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+                total_slots=10,
+                taken_slots=1,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code="123456"
+            )
+
+            expected_activity = Activity(
+                code="ELET355",
+                title="Atividade da ELET 355",
+                activity_type=ACTIVITY_TYPE.LECTURES,
+                is_extensive=True,
+                delivery_model=DELIVERY_MODEL.HYBRID,
+                start_date=1671661013000,
+                end_date=1695661013000,
+                link="https://devmaua.com",
+                place="H332",
+                responsible_professors=[
+                    User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+                speakers=[Speaker(name="Lucas Soller", bio="Daora", company="Microsoft")],
+                total_slots=10,
+                taken_slots=1,
+                accepting_new_enrollments=True,
+                stop_accepting_new_enrollments_before=None,
+                confirmation_code="123456"
+            )
+
+            assert expected_activity == activity_dynamo_dto.to_entity()
+
+    def test_to_entity_missing_speakers(self):
+        activity_dynamo_dto = ActivityDynamoDTO(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        expected_activity = Activity(
+            code="ELET355",
+            title="Atividade da ELET 355",
+            description="Isso é uma atividade, sério.",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.HYBRID,
+            start_date=1671661013000,
+            end_date=1695661013000,
+            link="https://devmaua.com",
+            place="H332",
+            responsible_professors=[
+                User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
+            total_slots=10,
+            taken_slots=1,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=None,
+            confirmation_code="123456"
+        )
+
+        assert expected_activity == activity_dynamo_dto.to_entity()
+
+
+
+
 
 

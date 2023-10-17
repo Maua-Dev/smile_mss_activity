@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.speaker import Speaker
@@ -11,26 +11,27 @@ from src.shared.domain.enums.role_enum import ROLE
 class ActivityDynamoDTO:
     code: str
     title: str
-    description: str
+    description: Optional[str]
     activity_type: ACTIVITY_TYPE
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
     start_date: int  # milliseconds
     end_date: int  # milliseconds
-    link: str
-    place: str
-    responsible_professors: List[User]
-    speakers: List[Speaker]
+    link: Optional[str]
+    place: Optional[str]
+    responsible_professors: Optional[List[User]]
+    speakers: Optional[List[Speaker]]
     total_slots: int
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int  # milliseconds
     confirmation_code: str
 
-    def __init__(self, code: str, title: str, description: str, activity_type: ACTIVITY_TYPE, is_extensive: bool,
-                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, link: str, place: str,
-                 responsible_professors: List[User], speakers: List[Speaker], total_slots: int,
-                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, taken_slots: int = None, confirmation_code: str = None):
+    def __init__(self, code: str, title: str,  activity_type: ACTIVITY_TYPE, is_extensive: bool,
+                 delivery_model: DELIVERY_MODEL, start_date: int, end_date: int, total_slots: int,
+                 accepting_new_enrollments: bool, stop_accepting_new_enrollments_before: int, taken_slots: int = None, confirmation_code: str = None,
+                 description: Optional[str]=None,link: Optional[str]=None,place: Optional[str]=None,responsible_professors: Optional[List[User]]=None,
+                 speakers: Optional[List[Speaker]]=None):
         self.code = code
         self.title = title
         self.description = description
@@ -80,24 +81,24 @@ class ActivityDynamoDTO:
         data = {
             "activity_code": self.code,
             "title": self.title,
-            "description": self.description,
+            "description": self.description if self.description is not None else None,
             "activity_type": self.activity_type.value,
             "is_extensive": self.is_extensive,
             "delivery_model": self.delivery_model.value,
             "start_date": self.start_date,
             "end_date": self.end_date,
-            "link": self.link,
-            "place": self.place,
+            "link": self.link if self.link is not None else None,
+            "place": self.place if self.place is not None else None,
             "responsible_professors": [{
                 "name": professor.name,
                 "user_id": professor.user_id,
                 "role": professor.role.value,
-            } for professor in self.responsible_professors],
+            } for professor in self.responsible_professors] if self.responsible_professors is not None else None,
             "speakers": [{
                 "name": speaker.name,
                 "bio": speaker.bio,
                 "company": speaker.company,
-            } for speaker in self.speakers],
+            } for speaker in self.speakers] if self.speakers is not None else None,
             "total_slots": self.total_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
             "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before,
@@ -117,24 +118,24 @@ class ActivityDynamoDTO:
         return ActivityDynamoDTO(
             code=activity_data.get("activity_code"),
             title=activity_data.get("title"),
-            description=activity_data.get("description"),
+            description=activity_data.get("description") if activity_data.get("description") is not None else None,
             activity_type=ACTIVITY_TYPE(activity_data.get("activity_type")),
             is_extensive=bool(activity_data.get("is_extensive")),
             delivery_model=DELIVERY_MODEL(activity_data.get("delivery_model")),
             start_date=int(activity_data.get("start_date")),
             end_date=int(activity_data.get("end_date")),
-            link=activity_data.get("link"),
-            place=activity_data.get("place"),
+            link=activity_data.get("link") if activity_data.get("link") is not None else None,
+            place=activity_data.get("place") if activity_data.get("place") is not None else None,
             responsible_professors=[User(
                 name=professor["name"],
                 user_id=professor["user_id"],
                 role=ROLE(professor["role"]),
-            ) for professor in activity_data["responsible_professors"]],
+            ) for professor in activity_data["responsible_professors"]] if activity_data.get("responsible_professors") is not None else None,
             speakers=[Speaker(
                 speaker["name"],
                 speaker["bio"],
                 speaker["company"],
-            ) for speaker in activity_data["speakers"]],
+            ) for speaker in activity_data["speakers"]] if activity_data.get("speakers") is not None else None,
             total_slots=int(activity_data.get("total_slots")),
             accepting_new_enrollments=bool(activity_data.get("accepting_new_enrollments")),
             stop_accepting_new_enrollments_before=int(activity_data.get("stop_accepting_new_enrollments_before")) if activity_data.get("stop_accepting_new_enrollments_before") is not None else None,
