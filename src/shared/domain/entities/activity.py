@@ -79,14 +79,14 @@ class Activity(abc.ABC):
         self.link = link
         self.place = place
 
-        if type(responsible_professors) != list:
+        if type(responsible_professors) != list and responsible_professors is not None: 
             raise EntityError("responsible_professors")
 
-        elif not all([type(encharged_professor) == User for encharged_professor in
+        elif responsible_professors is not None and not all([type(encharged_professor) == User for encharged_professor in
                       responsible_professors if encharged_professor]):  # check if all elements are User
             raise EntityError("responsible_professors")
 
-        elif not all([encharged_professor.role == ROLE.PROFESSOR for encharged_professor in
+        elif responsible_professors is not None and not all([encharged_professor.role == ROLE.PROFESSOR for encharged_professor in
                       responsible_professors]):  # check if all elements are professors
             raise EntityError("responsible_professors")
 
@@ -95,7 +95,7 @@ class Activity(abc.ABC):
         if type(speakers) != list and speakers is not None:
             raise EntityError("speakers")
 
-        if not all([type(speaker) == Speaker for speaker in speakers if speaker is not None]):  # check if all elements are Speaker
+        if speakers is not None and not all([type(speaker) == Speaker for speaker in speakers if speaker is not None]):  # check if all elements are Speaker
             raise EntityError("speakers")
         self.speakers = speakers
 

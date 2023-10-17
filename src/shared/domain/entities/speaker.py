@@ -1,10 +1,11 @@
+from typing import Optional
 from src.shared.helpers.errors.domain_errors import EntityError
 
 
 class Speaker:
     name: str
-    bio: str
-    company: str
+    bio: Optional[str]
+    company: Optional[str]
     MIN_NAME_LENGTH = 2
 
     def __init__(self, name, bio, company):
@@ -12,11 +13,11 @@ class Speaker:
             raise EntityError("name")
         self.name = name
 
-        if type(bio) != str:
+        if type(bio) != str and bio is not None:
             raise EntityError("bio")
         self.bio = bio
 
-        if type(company) != str:
+        if type(company) != str and company is not None:
             raise EntityError("company")
         self.company = company
 
