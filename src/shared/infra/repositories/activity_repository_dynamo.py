@@ -501,6 +501,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
         
     def batch_get_activities(self, codes: List[str]) -> List[Activity]:
         codes = [{self.dynamo.partition_key: self.activity_partition_key_format(code), self.dynamo.sort_key: self.activity_sort_key_format(code)} for code in codes]
+        if len(codes) == 0:
+            return []
 
         response = self.dynamo.batch_get_items(keys=codes)
         activities = list()
