@@ -69,7 +69,6 @@ class Activity(abc.ABC):
 
         if type(link) != str and link is not None:
             raise EntityError("link")
-        
         self.link = link
 
         if type(place) != str and place is not None:

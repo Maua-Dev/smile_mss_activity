@@ -39,6 +39,9 @@ class UpdateActivityUsecase:
         if activity is None:
             raise NoItemsFound("Activity")
         
+        if all(value is None for value in [new_title, new_description, new_activity_type, new_is_extensive, new_delivery_model, new_start_date, new_end_date, new_place, new_responsible_professors_user_id, new_speakers, new_total_slots, new_accepting_new_enrollments, new_stop_accepting_new_enrollments_before, new_link]):
+            raise UnecessaryUpdate("Activity")
+
         if type(activity.taken_slots) != int:
             raise EntityError("taken_slots")
         
