@@ -220,8 +220,7 @@ class Test_CreateActivityController:
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Parâmetro ausente: description"
+        assert response.status_code == 201
 
     def test_create_activity_controller_missing_activity_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -482,8 +481,7 @@ class Test_CreateActivityController:
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Parâmetro ausente: responsible_professors"
+        assert response.status_code == 201
 
     def test_create_activity_invalid_responsible_professors(self):
         repo_activity = ActivityRepositoryMock()
@@ -579,8 +577,7 @@ class Test_CreateActivityController:
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Parâmetro ausente: speakers"
+        assert response.status_code == 201
 
     def test_create_actvivity_invalid_speaker_type(self):
         repo_activity = ActivityRepositoryMock()
@@ -796,8 +793,6 @@ class Test_CreateActivityController:
                                     "delivery_model": "IN_PERSON",
                                     "start_date": 1669141012000,
                                     "end_date": 1671754613000,
-                                    "link": None,
-                                    "place": None,
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002", "03555624-a110-11ed-a8fc-0242ac120002"],
                                     "speakers": [{
                                         "name": "Robert Cecil Martin",
@@ -810,8 +805,7 @@ class Test_CreateActivityController:
         )
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Parâmetro inválido: link or place"
+        assert response.status_code == 201
 
     def test_create_activity_controller_online_no_link_established(self):
         repo_activity = ActivityRepositoryMock()
@@ -827,8 +821,6 @@ class Test_CreateActivityController:
                                     "delivery_model": "ONLINE",
                                     "start_date": 1669141012000,
                                     "end_date": 1671754613000,
-                                    "link": None,
-                                    "place": None,
                                     "responsible_professors": ["62cafdd4-a110-11ed-a8fc-0242ac120002",
                                                                "03555624-a110-11ed-a8fc-0242ac120002"],
                                     "speakers": [{
@@ -845,8 +837,7 @@ class Test_CreateActivityController:
                               )
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Parâmetro inválido: link or place"
+        assert response.status_code == 201
 
     def test_create_activity_controller_hybrid_no_link_established(self):
         repo_activity = ActivityRepositoryMock()

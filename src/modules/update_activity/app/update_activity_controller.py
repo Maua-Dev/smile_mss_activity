@@ -31,9 +31,8 @@ class UpdateActivityController:
             if request.data.get('code') is None:
                 raise MissingParameters('code') 
             
-            #Check if all parameters are None except requester_user and code
             if all(value is None for key, value in request.data.items() if key not in ['requester_user', 'code']):
-                raise UnecessaryUpdate("")
+                raise UnecessaryUpdate("Activity")
             
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()

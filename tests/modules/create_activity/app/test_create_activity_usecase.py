@@ -193,7 +193,7 @@ class Test_CreateActivityUsecase:
                     ],
                     responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
 
-    def test_create_activity_usecase_missing_responsible_professor(self):
+    def test_create_activity_usecase_invalid_responsible_professor(self):
         repo_activity = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
@@ -276,3 +276,95 @@ class Test_CreateActivityUsecase:
                         )
                     ],
                     responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[1])
+    
+    def test_create_activity_usecase_missing_description(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
+
+        activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345",
+                           end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
+                           accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                           delivery_model=DELIVERY_MODEL.HYBRID,
+                           start_date=1671747413000,
+                           stop_accepting_new_enrollments_before=1671743813000,
+                           speakers=[Speaker(
+                               name="Robert Cecil Martin",
+                               bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                               company="Clean Architecture Company",
+                           )], responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
+    
+        assert repo_activity.activities[len(repo_activity.activities)-1].description == None
+    
+    def test_create_activity_usecase_missing_professors(self):
+            repo_activity = ActivityRepositoryMock()
+            repo_user = UserRepositoryMock()
+            usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
+
+            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                               end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
+                               accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                               delivery_model=DELIVERY_MODEL.HYBRID,
+                               start_date=1671747413000,
+                               stop_accepting_new_enrollments_before=1671743813000,
+                               speakers=[Speaker(
+                                   name="Robert Cecil Martin",
+                                   bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                   company="Clean Architecture Company",
+                               )], user=repo_user.users[0])
+            
+            assert repo_activity.activities[len(repo_activity.activities)-1].responsible_professors == None
+    
+    def test_create_activity_usecase_missing_speakers(self):
+            repo_activity = ActivityRepositoryMock()
+            repo_user = UserRepositoryMock()
+            usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
+
+            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                               end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
+                               accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                               delivery_model=DELIVERY_MODEL.HYBRID,
+                               start_date=1671747413000,
+                               stop_accepting_new_enrollments_before=1671743813000,
+                               responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
+            
+            assert repo_activity.activities[len(repo_activity.activities)-1].speakers == None  
+    
+    def test_create_activity_usecase_missing_link(self):
+            repo_activity = ActivityRepositoryMock()
+            repo_user = UserRepositoryMock()
+            usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
+
+            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                               end_date=1671754613000, place="H332", total_slots=4, is_extensive=True,
+                               accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                               delivery_model=DELIVERY_MODEL.HYBRID,
+                               start_date=1671747413000,
+                               stop_accepting_new_enrollments_before=1671743813000,
+                               speakers=[Speaker(
+                                   name="Robert Cecil Martin",
+                                   bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                   company="Clean Architecture Company",
+                               )], responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
+            
+            assert repo_activity.activities[len(repo_activity.activities)-1].link == None
+    
+    def test_create_activity_usecase_missing_place(self):
+            repo_activity = ActivityRepositoryMock()
+            repo_user = UserRepositoryMock()
+            usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
+
+            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                               end_date=1671754613000, link="www.zoom.br/123", total_slots=4, is_extensive=True,
+                               accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                               delivery_model=DELIVERY_MODEL.HYBRID,
+                               start_date=1671747413000,
+                               stop_accepting_new_enrollments_before=1671743813000,
+                               speakers=[Speaker(
+                                   name="Robert Cecil Martin",
+                                   bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                   company="Clean Architecture Company",
+                               )], responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
+            
+            assert repo_activity.activities[len(repo_activity.activities)-1].place == None
+
