@@ -162,8 +162,7 @@ class Test_Activity:
 
 
     def test_activity_none_link_place(self):
-        with pytest.raises(EntityError):
-            activity = Activity(
+        activity = Activity(
             code="1234",
             title="Palestra Microsoft",
             description="Palestra informacional de como usar a Azure",
@@ -194,6 +193,10 @@ class Test_Activity:
             stop_accepting_new_enrollments_before=1671724565000,
                 confirmation_code=None
         )
+    
+        assert type(activity) == Activity
+        assert activity.link == None
+        assert activity.place == None
 
     def test_activity_invalid_code_none(self):
         with pytest.raises(EntityError):

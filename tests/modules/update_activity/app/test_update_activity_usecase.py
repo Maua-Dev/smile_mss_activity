@@ -599,3 +599,13 @@ class Test_UpdateActivityUsecase:
                                       new_end_date=1630465200000,
                                       user=repo_user.users[0])
     
+    def test_update_activity_usecase_no_parameters(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = UpdateActivityUsecase(repo_activity=repo_activity,
+                                        repo_user=repo_user, observability=observability)
+
+        with pytest.raises(UnecessaryUpdate):
+            update_activity = usecase(code=repo_activity.activities[0].code,
+                                      user=repo_user.users[0])
+    

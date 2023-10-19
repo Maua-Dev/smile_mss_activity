@@ -68,16 +68,13 @@ class Activity(abc.ABC):
             raise EntityError("end_date")
         self.end_date = end_date
 
-        if link is None and place is None:
-            raise EntityError("link or place")
-
         if type(link) != str and link is not None:
             raise EntityError("link")
+        self.link = link
 
         if type(place) != str and place is not None:
             raise EntityError("place")
 
-        self.link = link
         self.place = place
 
         if type(responsible_professors) != list and responsible_professors is not None: 

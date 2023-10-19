@@ -313,3 +313,5 @@ class Test_UpdateActivityController:
 
         assert response.status_code == 403
         assert response.body == "Apenas administradores podem atualizar atividades"
+
+
