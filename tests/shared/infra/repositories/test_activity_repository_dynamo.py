@@ -466,4 +466,31 @@ class Test_ActivityRepositoryDynamo:
 
         assert len(activities) == 2
         assert all(type(activity) == Activity for activity in activities)
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_activity_with_enrollments_sort(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_user = UserRepositoryMock()
+
+
+        enrollment1 = Enrollment(activity_code='2468', user_id=repo_user.users[7].user_id, state=ENROLLMENT_STATE.COMPLETED,    
+                                date_subscribed=1671229013000)
+        enrollment2 = Enrollment(activity_code='2468', user_id=repo_user.users[8].user_id, state=ENROLLMENT_STATE.COMPLETED,
+                                    date_subscribed=1670229013000)
+        enrollment3 = Enrollment(activity_code='2468', user_id=repo_user.users[0].user_id, state=ENROLLMENT_STATE.ENROLLED,
+                                    date_subscribed=1671229013000)
+        enrollment4 = Enrollment(activity_code='2468', user_id=repo_user.users[1].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+                                    date_subscribed=1670229013000)  
+
+        # repo_activity_dynamo.create_enrollment(enrollment1)
+        # repo_activity_dynamo.create_enrollment(enrollment2)
+        # repo_activity_dynamo.create_enrollment(enrollment3)	
+        # repo_activity_dynamo.create_enrollment(enrollment4)
+
+        activity, enrollments = repo_activity_dynamo.get_activity_with_enrollments("2468")
+
+        assert enrollments[0] == enrollment2
+        assert enrollments[1] == enrollment1
+        assert enrollments[2] == enrollment4
+        assert enrollments[3] == enrollment3
     

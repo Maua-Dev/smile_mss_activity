@@ -356,7 +356,7 @@ class Test_ActivityRepositoryMock:
         repo.enrollments.append(Enrollment(activity_code='ECM2345', user_id=repo_user.users[7].user_id, state=ENROLLMENT_STATE.COMPLETED,    
                                 date_subscribed=1671229013000))
         repo.enrollments.append(Enrollment(activity_code='ECM2345', user_id=repo_user.users[8].user_id, state=ENROLLMENT_STATE.COMPLETED,
-                                    date_subscribed=1670229013000)) 
+                                    date_subscribed=1669229013000)) 
         activity, enrollments = repo.get_activity_with_enrollments("ECM2345")
 
 
@@ -368,7 +368,7 @@ class Test_ActivityRepositoryMock:
         assert len(enrollments) == 9
         
         assert enrollments[0] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[8].user_id, state=ENROLLMENT_STATE.COMPLETED,
-                                    date_subscribed=1670229013000)
+                                    date_subscribed=1669229013000)
         assert enrollments[1] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[7].user_id, state=ENROLLMENT_STATE.COMPLETED,
                                     date_subscribed=1671229013000)
         assert enrollments[2] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[0].user_id, state=ENROLLMENT_STATE.ENROLLED,
