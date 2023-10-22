@@ -512,4 +512,10 @@ class ActivityRepositoryDynamo(IActivityRepository):
             activities.append(ActivityDynamoDTO.from_dynamo(item).to_entity())
 
         return activities
+    
+    def batch_delete_enrollments(self, users_ids: List[str], code: str) -> List[Enrollment]:
+        users_ids = [{self.dynamo.partition_key: self.enrollment_partition_key_format(code), self.dynamo.sort_key: self.enrollment_sort_key_format(user_id)} for user_id in users_ids]
 
+        response = self.dynamo.batch_delete_items(keys=users_ids)
+        
+        return None

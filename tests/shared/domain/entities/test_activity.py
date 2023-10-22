@@ -627,33 +627,6 @@ class Test_Activity:
                 confirmation_code=None
             )
 
-    def test_activity_invalid_responsible_professors(self):
-        with pytest.raises(EntityError):
-            activity = Activity(
-                code="1234",
-                title="Palestra Microsoft",
-                description="Palestra informacional de como usar a Azure",
-                activity_type=ACTIVITY_TYPE.LECTURES,
-                is_extensive=True,
-                delivery_model=DELIVERY_MODEL.IN_PERSON,
-                start_date=1671728165000,
-                end_date=167173365000,
-                link="https://devmaua.com",
-                place="H333",
-                responsible_professors=None,
-                speakers=[
-                    Speaker(
-                        name="Marcos Tales",
-                        bio="Salve",
-                        company="Microsoft"
-                    )],
-                total_slots=120,
-                taken_slots=33,
-                accepting_new_enrollments=True,
-                stop_accepting_new_enrollments_before=1671724565000,
-                confirmation_code=None
-            )
-
     def test_activity_invalid_responsible_professors_not_users(self):
         with pytest.raises(EntityError):
             activity = Activity(
@@ -1101,3 +1074,94 @@ class Test_Activity:
                 stop_accepting_new_enrollments_before=1671728164000,
                 confirmation_code=2
             )
+    def test_activity_none_description(self):
+        activity = Activity(
+            code="1234",
+            title="Palestra Microsoft",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.IN_PERSON,
+            start_date=1671728165000,
+            end_date=167173365000,
+            link="https://devmaua.com",
+            place="H333",
+            responsible_professors=[
+                User(
+                    name="Marcos",
+                    role=ROLE.PROFESSOR,
+                    user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
+                )
+            ],
+            speakers=[
+                Speaker(
+                    name="Marcos Tales",
+                    bio="Salve",
+                    company="Microsoft"
+                )
+            ],
+            total_slots=120,
+            taken_slots=33,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=1671724560000,
+            confirmation_code="123456"
+        )
+
+        assert type(activity) == Activity
+        assert activity.description is None
+
+    def test_activity_none_professors(self):
+        activity = Activity(
+            code="1234",
+            title="Palestra Microsoft",
+            activity_type=ACTIVITY_TYPE.LECTURES,
+            is_extensive=True,
+            delivery_model=DELIVERY_MODEL.IN_PERSON,
+            start_date=1671728165000,
+            end_date=167173365000,
+            link="https://devmaua.com",
+            place="H333",
+            speakers=[
+                Speaker(
+                    name="Marcos Tales",
+                    bio="Salve",
+                    company="Microsoft"
+                )
+            ],
+            total_slots=120,
+            taken_slots=33,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=1671724560000,
+            confirmation_code="123456"
+        )
+    
+        assert type(activity) == Activity
+        assert activity.responsible_professors is None        
+    
+    def test_activity_none_speakers(self):
+        activity = Activity(
+        code="1234",
+        title="Palestra Microsoft",
+        activity_type=ACTIVITY_TYPE.LECTURES,
+        is_extensive=True,
+        delivery_model=DELIVERY_MODEL.IN_PERSON,
+        start_date=1671728165000,
+        end_date=167173365000,
+        link="https://devmaua.com",
+        place="H333",
+        responsible_professors=[
+            User(
+                name="Marcos",
+                role=ROLE.PROFESSOR,
+                user_id="7f52e72c-a111-11ed-a8fc-0242ac120002"
+            )
+        ],
+        total_slots=120,
+        taken_slots=33,
+        accepting_new_enrollments=True,
+        stop_accepting_new_enrollments_before=1671724560000,
+        confirmation_code="123456"
+        )
+
+        assert type(activity) == Activity
+        assert activity.speakers is None
+

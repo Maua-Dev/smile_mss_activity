@@ -349,6 +349,19 @@ class Test_ActivityRepositoryMock:
                 stop_accepting_new_enrollments_before=None,
                 confirmation_code=None
             )
+        
+    def test_batch_delete_enrollments(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        requester_user = repo_user.users[-1]
+
+        activity, enrollments = repo.get_activity_with_enrollments('CODIGO')
+
+        deleted_enrollments = repo.batch_delete_enrollments([enrollment.user_id for enrollment in enrollments], activity.code)
+
+        assert deleted_enrollments == enrollments  
+
     def test_get_activity_with_enrollments_sort(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
