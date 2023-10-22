@@ -384,6 +384,7 @@ class ActivityRepositoryMock(IActivityRepository):
         for activity in self.activities:
             if activity.code == code:
                 enrollments = [enrollment for enrollment in self.enrollments if enrollment.activity_code == code]
+                enrollments.sort(key=lambda x: (x.state != ENROLLMENT_STATE.COMPLETED, x.date_subscribed))
                 return activity, enrollments
         return None, None
 
