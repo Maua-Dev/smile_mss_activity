@@ -13,7 +13,7 @@ class Enrollment(abc.ABC):
     date_subscribed: int # milliseconds
     position: int
 
-    def __init__(self, activity_code: str, user_id: str, state: ENROLLMENT_STATE, date_subscribed: int, position: Optional[int]):
+    def __init__(self, activity_code: str, user_id: str, state: ENROLLMENT_STATE, date_subscribed: int, position: Optional[int] = None):
 
         if not Activity.validate_activity_code(activity_code):
             raise EntityError("activity_code")
@@ -31,6 +31,8 @@ class Enrollment(abc.ABC):
             raise EntityError("date_subscribed")
         self.date_subscribed = date_subscribed
 
+        if position is not None and type(position) != int:
+            raise EntityError("position")
         self.position = position
 
     def __repr__(self):
