@@ -1,4 +1,5 @@
 import abc
+from typing import Optional
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.enums.enrollment_state_enum import ENROLLMENT_STATE
@@ -10,8 +11,9 @@ class Enrollment(abc.ABC):
     user_id: str
     state: ENROLLMENT_STATE
     date_subscribed: int # milliseconds
+    position: int
 
-    def __init__(self, activity_code: str, user_id: str, state: ENROLLMENT_STATE, date_subscribed: int):
+    def __init__(self, activity_code: str, user_id: str, state: ENROLLMENT_STATE, date_subscribed: int, position: Optional[int]):
 
         if not Activity.validate_activity_code(activity_code):
             raise EntityError("activity_code")
@@ -28,6 +30,8 @@ class Enrollment(abc.ABC):
         if type(date_subscribed) != int:
             raise EntityError("date_subscribed")
         self.date_subscribed = date_subscribed
+
+        self.position = position
 
     def __repr__(self):
         return f"Enrollment(activity_code={self.activity_code}, user_id={self.user_id}, state={self.state.value}, date_subscribed={self.date_subscribed})"
