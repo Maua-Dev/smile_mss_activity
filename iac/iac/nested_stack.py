@@ -82,6 +82,6 @@ class DeployStack(NestedStack):
         Stage(self, "Stage", deployment=deployment)
 
 
-app = App()
-RootStack(app, "integ-restapi-import-RootStack")
-app.synth()
+
+
+

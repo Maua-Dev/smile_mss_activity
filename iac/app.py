@@ -7,6 +7,7 @@ import aws_cdk as cdk
 
 from adjust_layer_directory import adjust_layer_directory
 from iac.certificates_s3_stack import CertificatesS3Stack
+from iac.iac.nested_stack import RootStack
 from iac.iac_stack import IacStack
 from setup_requirements_layers import setup_requirements_layers
 
@@ -46,7 +47,7 @@ tags = {
     'owner': 'DevCommunity'
 }
 
-IacStack(app, stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region), tags=tags)
-CertificatesS3Stack(app, f"{stack_name}-certificates-s3", env=cdk.Environment(account=aws_account_id, region=aws_region), tags=tags)
-
+#IacStack(app, stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region), tags=tags)
+#CertificatesS3Stack(app, f"{stack_name}-certificates-s3", env=cdk.Environment(account=aws_account_id, region=aws_region), tags=tags)
+RootStack(app, "integ-restapi-import-RootStack")
 app.synth()
