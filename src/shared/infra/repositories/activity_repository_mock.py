@@ -482,8 +482,12 @@ class ActivityRepositoryMock(IActivityRepository):
             activities.append(activity)
 
         user_enrollments = list()
+        pos = 1
         for enrollment in self.enrollments:
             if enrollment.user_id == user_id and (enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE  or enrollment.state == ENROLLMENT_STATE.COMPLETED):
+                if enrollment.state == ENROLLMENT_STATE.IN_QUEUE:
+                    enrollment.position = pos
+                    pos += 1
                 user_enrollments.append(enrollment)
 
         return activities, user_enrollments
