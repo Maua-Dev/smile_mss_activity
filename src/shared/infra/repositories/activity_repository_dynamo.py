@@ -345,14 +345,17 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         user_enrollments = list()
         activities = list()
+        pos = 1
         for activity in activities_dict:
             activity_to_add = activity
             taken_slots = 0
-
             for enrollment in enrollments.get(activity["activity_code"], list()):
                 if enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED:
                     taken_slots += 1
                 if enrollment.user_id == user_id and (enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE or enrollment.state == ENROLLMENT_STATE.COMPLETED):
+                    if enrollment.state == ENROLLMENT_STATE.IN_QUEUE:
+                        enrollment.position = pos
+                        pos += 1
                     user_enrollments.append(enrollment)
 
             activity_to_add["taken_slots"] = taken_slots
