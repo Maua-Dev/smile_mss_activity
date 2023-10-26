@@ -398,5 +398,29 @@ class Test_ActivityRepositoryMock:
                        date_subscribed=1671574673000)
         assert enrollments[8] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[6].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
                        date_subscribed=1671574733000)
+        
+    def test_get_all_activities_logged_positions(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        requester_user = repo_user.users[2]
+
+        repo.enrollments.append(Enrollment(activity_code='ECM2345', user_id=repo_user.users[2].user_id, state=ENROLLMENT_STATE.IN_QUEUE,    
+                                    date_subscribed=1671229013000))
+        repo.enrollments.append(Enrollment(activity_code='ECM2345', user_id=repo_user.users[2].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+                                    date_subscribed=1669229013000)) 
+        
+        activities, user_enrollments = repo.get_all_activities_logged(user_id=requester_user.user_id)
+        assert type(activities) == list
+        assert all(type(activity) == Activity for activity in activities)
+        assert len(activities) == len(repo.activities)
+
+        assert type(user_enrollments) == list
+        assert all(type(enrollment) == Enrollment for enrollment in user_enrollments)
+        assert all(enrollment.user_id == requester_user.user_id for enrollment in user_enrollments)
+        assert all(enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE or enrollment.state == ENROLLMENT_STATE.COMPLETED for enrollment in user_enrollments)
+        assert len(user_enrollments) == 5
+
+        assert user_enrollments[len(user_enrollments) - 2].position == 1
+        assert user_enrollments[len(user_enrollments) - 1].position == 2
 
 

@@ -33,7 +33,6 @@ class GetActivityWithEnrollmentsUsecase:
 
         enrollments = [enrollment for enrollment in all_enrollments if enrollment.state in [ENROLLMENT_STATE.ENROLLED, ENROLLMENT_STATE.IN_QUEUE, ENROLLMENT_STATE.COMPLETED]]
         user_id_list = list()
-        activity_with_enrollments = list()
         for enrollment in enrollments:
             user_id_list.append(enrollment.user_id)
 

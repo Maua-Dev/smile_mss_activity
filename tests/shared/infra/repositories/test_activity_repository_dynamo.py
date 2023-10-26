@@ -503,4 +503,41 @@ class Test_ActivityRepositoryDynamo:
         deleted_enrollments = repo_activity_dynamo.batch_delete_enrollments([enrollment.user_id for enrollment in enrollments], activity.code)
 
         assert True
+
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_activitites_logged_positions(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_user = UserRepositoryMock()
+        repo = ActivityRepositoryMock()
+
+        enrollment1 = Enrollment(activity_code='AC000', user_id=repo_user.users[2].user_id, state=ENROLLMENT_STATE.IN_QUEUE,    
+                                    date_subscribed=1671229013000)
+        
+        enrollment2 = Enrollment(activity_code='AC000', user_id=repo_user.users[2].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+                                    date_subscribed=1669229013000) 
+        repo.enrollments.append(enrollment1)
+        repo.enrollments.append(enrollment2)
+
+        activities, user_enrollments = repo_activity_dynamo.get_all_activities_logged(repo_user.users[2].user_id)
+
+        # repo_activity_dynamo.create_enrollment(enrollment1)
+        # repo_activity_dynamo.create_enrollment(enrollment2)
+
+        expected_activities, expected_enrollments = repo_activity_dynamo.get_all_activities_logged(repo_user.users[2].user_id)
+
+        assert len(activities) == len(expected_activities)
+        assert all(type(activity) == Activity for activity in activities)
+        assert activities == expected_activities
+
+        assert len(user_enrollments) == len(expected_enrollments)
+        assert all(type(enrollment) == Enrollment for enrollment in user_enrollments)
+        assert user_enrollments == expected_enrollments
+
+        assert user_enrollments[len(user_enrollments)-2].position == 1
+        assert user_enrollments[len(user_enrollments)-1].position == 2
+
+        assert expected_enrollments[len(expected_enrollments)-2].position == 1
+        assert expected_enrollments[len(expected_enrollments)-1].position == 2
+
     

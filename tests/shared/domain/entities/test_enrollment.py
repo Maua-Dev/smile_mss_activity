@@ -40,4 +40,16 @@ class Test_Enrollment:
         with pytest.raises(EntityError):
             enrollment = Enrollment(activity_code="1234", user_id="7f52e72c-a111-11ed-a8fc-0242ac120002", state=ENROLLMENT_STATE.ENROLLED, date_subscribed="2022-12-22 13:56:05.430523")
 
+    def test_enrollment_with_position(self):
+        enrollment = Enrollment(activity_code="1234", user_id="7f52e72c-a111-11ed-a8fc-0242ac120002", state=ENROLLMENT_STATE.ENROLLED, date_subscribed=1671728165000, position=1)
 
+        assert type(enrollment) == Enrollment
+        assert enrollment.activity_code == "1234"
+        assert enrollment.user_id == "7f52e72c-a111-11ed-a8fc-0242ac120002"
+        assert enrollment.state == ENROLLMENT_STATE.ENROLLED
+        assert enrollment.date_subscribed == 1671728165000
+        assert enrollment.position == 1
+    
+    def test_enrollment_with_invalid_position(self):
+        with pytest.raises(EntityError):
+            enrollment = Enrollment(activity_code="1234", user_id="7f52e72c-a111-11ed-a8fc-0242ac120002", state=ENROLLMENT_STATE.ENROLLED, date_subscribed=1671728165000, position="1")

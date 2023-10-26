@@ -59,6 +59,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                     },
                     'enrollment':{
                         'date_subscribed':1668982612000,
+                        'position': None,
                         'state':'COMPLETED'
                     }
                 },
@@ -324,6 +325,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                     },
                     'enrollment':{
                         'date_subscribed':1670710614000,
+                        'position': None,
                         'state':'ENROLLED'
                     }
                 },
@@ -360,6 +362,7 @@ class Test_GetAllActivitiesLoggedViewmodel:
                     },
                     'enrollment':{
                         'date_subscribed':1671401813000,
+                        'position': None,
                         'state':'ENROLLED'
                     }
                 },
