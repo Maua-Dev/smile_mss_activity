@@ -11,7 +11,7 @@ class Enrollment(abc.ABC):
     user_id: str
     state: ENROLLMENT_STATE
     date_subscribed: int # milliseconds
-    position: int
+    position: Optional[int]
 
     def __init__(self, activity_code: str, user_id: str, state: ENROLLMENT_STATE, date_subscribed: int, position: Optional[int] = None):
 
