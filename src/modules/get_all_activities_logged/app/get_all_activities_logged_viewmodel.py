@@ -48,15 +48,18 @@ class EnrollmentViewmodel:
     user: UserViewmodel
     state: ENROLLMENT_STATE
     date_subscribed: int
+    position: int
 
     def __init__(self, enrollment: Enrollment):
         self.state = enrollment.state
         self.date_subscribed = enrollment.date_subscribed
+        self.position = enrollment.position
 
     def to_dict(self):
         return {
             "state": self.state.value,
             "date_subscribed": self.date_subscribed,
+            "position": self.position if self.position is not None else None
         }
 
 
