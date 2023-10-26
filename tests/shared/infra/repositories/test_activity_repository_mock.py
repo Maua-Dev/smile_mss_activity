@@ -349,6 +349,7 @@ class Test_ActivityRepositoryMock:
                 stop_accepting_new_enrollments_before=None,
                 confirmation_code=None
             )
+        
     def test_batch_delete_enrollments(self):
         repo = ActivityRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -359,5 +360,43 @@ class Test_ActivityRepositoryMock:
 
         deleted_enrollments = repo.batch_delete_enrollments([enrollment.user_id for enrollment in enrollments], activity.code)
 
-        assert deleted_enrollments == enrollments
+        assert deleted_enrollments == enrollments  
+
+    def test_get_activity_with_enrollments_sort(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        repo.enrollments.append(Enrollment(activity_code='ECM2345', user_id=repo_user.users[7].user_id, state=ENROLLMENT_STATE.COMPLETED,    
+                                date_subscribed=1671229013000))
+        repo.enrollments.append(Enrollment(activity_code='ECM2345', user_id=repo_user.users[8].user_id, state=ENROLLMENT_STATE.COMPLETED,
+                                    date_subscribed=1669229013000)) 
+        activity, enrollments = repo.get_activity_with_enrollments("ECM2345")
+
+
+
+        assert type(activity) == Activity
+        assert type(enrollments) == list
+
+        assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+        assert len(enrollments) == 9
+        
+        assert enrollments[0] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[8].user_id, state=ENROLLMENT_STATE.COMPLETED,
+                                    date_subscribed=1669229013000)
+        assert enrollments[1] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[7].user_id, state=ENROLLMENT_STATE.COMPLETED,
+                                    date_subscribed=1671229013000)
+        assert enrollments[2] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[0].user_id, state=ENROLLMENT_STATE.ENROLLED,
+                       date_subscribed=1671229013000)
+        assert enrollments[3] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[1].user_id, state=ENROLLMENT_STATE.ENROLLED,
+                       date_subscribed=1671315413000)
+        assert enrollments[4] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[2].user_id, state=ENROLLMENT_STATE.ENROLLED,
+                       date_subscribed=1671401813000)
+        assert enrollments[5] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[3].user_id, state=ENROLLMENT_STATE.ENROLLED,
+                       date_subscribed=1671488213000)
+        assert enrollments[6] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[4].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+                       date_subscribed=1671574613000)
+        assert enrollments[7] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[5].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+                       date_subscribed=1671574673000)
+        assert enrollments[8] == Enrollment(activity_code='ECM2345', user_id=repo_user.users[6].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+                       date_subscribed=1671574733000)
+
 

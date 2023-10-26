@@ -141,6 +141,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
                 "state"] == ENROLLMENT_STATE.COMPLETED.value:
                 activity_data["taken_slots"] += 1
 
+        enrollments.sort(key=lambda x: (x.state != ENROLLMENT_STATE.COMPLETED, x.date_subscribed))
+
         activity = ActivityDynamoDTO.from_dynamo(activity_data).to_entity()
 
         return activity, enrollments
