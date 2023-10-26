@@ -2,6 +2,7 @@ from aws_cdk.aws_apigateway import IntegrationResponse, MethodResponse, MockInte
 from aws_cdk.core import App, CfnOutput, NestedStack, Stack
 from aws_cdk.aws_apigateway import Deployment, RestApi, Stage
 
+#pip install aws-cdk.core aws-cdk.aws-apigateway
 
 class RootStack(Stack):
     def __init__(self, scope, id):
