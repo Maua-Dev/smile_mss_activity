@@ -504,6 +504,8 @@ class Test_ActivityRepositoryDynamo:
 
         assert True
 
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_get_all_activitites_logged_positions(self):
         repo_activity_dynamo = ActivityRepositoryDynamo()
         repo_user = UserRepositoryMock()
