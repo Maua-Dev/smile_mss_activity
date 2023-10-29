@@ -1,3 +1,4 @@
+import re
 from typing import List, Optional
 
 from src.shared.domain.entities.activity import Activity
@@ -37,6 +38,10 @@ class CreateActivityUsecase:
         if self.repo_activity.get_activity(code=code) is not None:
             raise DuplicatedItem("activity_code")
         
+        regex = re.compile(r"^[A-Z0-9-]+$")
+        if not regex.match(code):
+            raise EntityError("code")
+ 
         responsible_professors = None  
         if responsible_professors_user_id is not None:
             if type(responsible_professors_user_id) != list:

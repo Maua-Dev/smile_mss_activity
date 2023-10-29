@@ -19,7 +19,7 @@ class Test_CreateActivityUsecase:
         usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
         activitiesLenBefore = len(repo_activity.activities)
 
-        activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+        activity = usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
                            end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
@@ -34,7 +34,7 @@ class Test_CreateActivityUsecase:
         activitiesLenAfter = activitiesLenBefore + 1
 
         assert len(repo_activity.activities) == activitiesLenAfter
-        assert repo_activity.activities[activitiesLenBefore].code == "CodigoNovo"
+        assert repo_activity.activities[activitiesLenBefore].code == "CODIGONOVO"
         assert repo_activity.activities[activitiesLenBefore].title == "Atividade da ECM 2345"
         assert repo_activity.activities[activitiesLenBefore].description == "Isso é uma atividade"
         assert repo_activity.activities[activitiesLenBefore].activity_type == ACTIVITY_TYPE.LECTURES
@@ -60,7 +60,7 @@ class Test_CreateActivityUsecase:
         usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
         activitiesLenBefore = len(repo_activity.activities)
 
-        activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+        activity = usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
                            end_date=1671754613000, link='www.zoom.br/123', place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
@@ -89,7 +89,7 @@ class Test_CreateActivityUsecase:
         usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
         activitiesLenBefore = len(repo_activity.activities)
 
-        activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+        activity = usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
                            end_date=1671754613000, link='www.zoom.br/1234', place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
@@ -282,7 +282,7 @@ class Test_CreateActivityUsecase:
         repo_user = UserRepositoryMock()
         usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-        activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345",
+        activity = usecase(code="CODIGONOVO", title="Atividade da ECM 2345",
                            end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
                            accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                            delivery_model=DELIVERY_MODEL.HYBRID,
@@ -301,7 +301,7 @@ class Test_CreateActivityUsecase:
             repo_user = UserRepositoryMock()
             usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+            activity = usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
                                end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
                                accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                                delivery_model=DELIVERY_MODEL.HYBRID,
@@ -320,7 +320,7 @@ class Test_CreateActivityUsecase:
             repo_user = UserRepositoryMock()
             usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+            activity = usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
                                end_date=1671754613000, link="www.zoom.br/123", place="H332", total_slots=4, is_extensive=True,
                                accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                                delivery_model=DELIVERY_MODEL.HYBRID,
@@ -335,7 +335,7 @@ class Test_CreateActivityUsecase:
             repo_user = UserRepositoryMock()
             usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+            activity = usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
                                end_date=1671754613000, place="H332", total_slots=4, is_extensive=True,
                                accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                                delivery_model=DELIVERY_MODEL.HYBRID,
@@ -354,7 +354,7 @@ class Test_CreateActivityUsecase:
             repo_user = UserRepositoryMock()
             usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
 
-            activity = usecase(code="CodigoNovo", title="Atividade da ECM 2345", description="Isso é uma atividade",
+            activity = usecase(code="CODIGONOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
                                end_date=1671754613000, link="www.zoom.br/123", total_slots=4, is_extensive=True,
                                accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
                                delivery_model=DELIVERY_MODEL.HYBRID,
@@ -367,4 +367,68 @@ class Test_CreateActivityUsecase:
                                )], responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
             
             assert repo_activity.activities[len(repo_activity.activities)-1].place == None
+    
+    def test_create_activity_usecase_invalid_code_regex(self):
+            repo_activity = ActivityRepositoryMock()
+            repo_user = UserRepositoryMock()
+            usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
+
+            with pytest.raises(EntityError):
+                usecase(code="CODIGO NOVO", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                        end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
+                        accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                        delivery_model=DELIVERY_MODEL.HYBRID,
+                        start_date=1671747413000,
+                        stop_accepting_new_enrollments_before=1671743813000,
+                        speakers=[
+                            Speaker(
+                                name="Robert Cecil Martin",
+                                bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                                company="Clean Architecture Company",
+                            )
+                        ],
+                        responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
+    
+    def test_create_activity_usecase_invalid_code_regex2(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
+
+        with pytest.raises(EntityError):
+            usecase(code="codigo_novo123", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                    end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
+                    accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                    delivery_model=DELIVERY_MODEL.HYBRID,
+                    start_date=1671747413000,
+                    stop_accepting_new_enrollments_before=1671743813000,
+                    speakers=[
+                        Speaker(
+                            name="Robert Cecil Martin",
+                            bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                            company="Clean Architecture Company",
+                        )
+                    ],
+                    responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
+    
+    def test_create_activity_usecase_invalid_code_regex3(self):
+        repo_activity = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateActivityUsecase(repo_activity, repo_user, observability=observability)
+
+        with pytest.raises(EntityError):
+            usecase(code="ECm-2345", title="Atividade da ECM 2345", description="Isso é uma atividade",
+                    end_date=1671754613000, link=None, place="H332", total_slots=4, is_extensive=True,
+                    accepting_new_enrollments=True, activity_type=ACTIVITY_TYPE.LECTURES,
+                    delivery_model=DELIVERY_MODEL.HYBRID,
+                    start_date=1671747413000,
+                    stop_accepting_new_enrollments_before=1671743813000,
+                    speakers=[
+                        Speaker(
+                            name="Robert Cecil Martin",
+                            bio="Author of Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                            company="Clean Architecture Company",
+                        )
+                    ],
+                    responsible_professors_user_id=[repo_user.users[2].user_id], user=repo_user.users[0])
+
 
