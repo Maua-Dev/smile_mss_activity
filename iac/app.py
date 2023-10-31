@@ -22,7 +22,8 @@ setup_requirements_layers(destination="lambda_requirements_layer_temp")
 print("Finished setting up the requirements layers")
 
 app = cdk.App()
-
+#baixar
+load_dotenv()
 
 aws_region = os.environ.get("AWS_REGION")
 aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
