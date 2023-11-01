@@ -102,7 +102,7 @@ class Test_CreateActivityPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"code": "CODIGO_NOVO", "title": "Clean Architecture code review!", "description": "Reviewing IMT student\'s codes", "activity_type": "LECTURES", "is_extensive": false, "delivery_model": "IN_PERSON", "start_date": 1669141012, "end_date": 90, "link": null, "place": "H331", "responsible_professors": ["ZERO", "03555624-a110-11ed-a8fc-0242ac120002"], "speakers": [{"name": "Robert Cecil Martin", "bio": "Author of Clean Architecture: A Craftsman\'s Guide to Software Structure and Design", "company": "Clean Architecture Company"}], "total_slots": 100, "accepting_new_enrollments": true, "stop_accepting_new_enrollments_before": 1666451811}',
+            "body": '{"code": "CODIGONOVO", "title": "Clean Architecture code review!", "description": "Reviewing IMT student\'s codes", "activity_type": "LECTURES", "is_extensive": false, "delivery_model": "IN_PERSON", "start_date": 1669141012, "end_date": 90, "link": null, "place": "H331", "responsible_professors": ["ZERO", "03555624-a110-11ed-a8fc-0242ac120002"], "speakers": [{"name": "Robert Cecil Martin", "bio": "Author of Clean Architecture: A Craftsman\'s Guide to Software Structure and Design", "company": "Clean Architecture Company"}], "total_slots": 100, "accepting_new_enrollments": true, "stop_accepting_new_enrollments_before": 1666451811}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
