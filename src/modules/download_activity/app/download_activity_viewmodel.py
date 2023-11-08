@@ -60,7 +60,7 @@ class DownloadActivityViewmodel:
     taken_slots: int
     accepting_new_enrollments: bool
     stop_accepting_new_enrollments_before: int
-    
+
 
     def __init__(self, activity: Activity, requester_user: User):
         self.code = activity.code
@@ -102,5 +102,6 @@ class DownloadActivityViewmodel:
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,
             "stop_accepting_new_enrollments_before": self.stop_accepting_new_enrollments_before if self.stop_accepting_new_enrollments_before is not None else None,
-        }}
+        },
+        "requester_user": self.requester_user.to_dict()}
     
