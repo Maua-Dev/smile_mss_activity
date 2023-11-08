@@ -1,4 +1,5 @@
 import json
+from src.modules.download_activity.app.download_activity_viewmodel import DownloadActivityViewmodel
 from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from .download_activity_usecase import DownloadActivityUsecase
@@ -28,7 +29,10 @@ class DownloadActivityController:
                 requester_user=requester_user,
             )
 
-            response = OK(usecase)
+            viewmodel = DownloadActivityViewmodel(usecase, requester_user)
+            response = OK(viewmodel.to_dict())
+
+            print(response.body)
 
             self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
             return response
