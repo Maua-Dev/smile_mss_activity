@@ -215,5 +215,3 @@ class LambdaStack(Construct):
             self.enroll_activity_admin_function,
             self.delete_user_function
         ]
-
-

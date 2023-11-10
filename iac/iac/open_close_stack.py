@@ -26,4 +26,3 @@ class OpenCloseStack(Construct):
                                                               environment=environment_variables,
                                                               layers=[activity_layer, power_tools_layer]
                                                               )
-

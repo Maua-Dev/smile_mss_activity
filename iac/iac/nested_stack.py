@@ -1,3 +1,4 @@
+"""
 from aws_cdk.aws_apigateway import IntegrationResponse, MethodResponse, MockIntegration, PassthroughBehavior
 from aws_cdk.core import App, CfnOutput, NestedStack, Stack
 from aws_cdk.aws_apigateway import Deployment, RestApi, Stage
@@ -85,3 +86,4 @@ class DeployStack(NestedStack):
 
 
 
+"""
