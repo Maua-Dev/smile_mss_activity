@@ -55,5 +55,3 @@ class CertificatesLambdaStack(Construct):
                                                                             self.get_certificate_function),
                                                                         authorizer=authorizer,
                                                                         )
-
-
