@@ -522,3 +522,30 @@ class ActivityRepositoryDynamo(IActivityRepository):
         response = self.dynamo.batch_delete_items(keys=users_ids)
         
         return None
+
+    def download_activities(self, activity_code: str) -> bytes:
+        client_s3 = boto3.client('s3', region_name=os.environ.get('AWS_REGION'))
+        bucket = os.environ.get('BUCKET_NAME')
+        hash_key = os.environ.get('HASH_KEY')
+        prefix = hashlib.sha256((hash_key).encode('utf-8')).hexdigest()
+        try:
+
+            itens = client_s3.list_objects_v2(
+                Bucket=bucket,
+                Prefix=prefix
+            )
+
+            for item in itens['Contents']:
+                if activity_code in item['Key']:
+                    response = client_s3.get_object(
+                        Bucket=bucket,
+                        Key=item['Key']
+                    )
+                    
+                    return response['Body'].read()
+
+            return None
+
+        except Exception as err:
+            print(err)
+            return None

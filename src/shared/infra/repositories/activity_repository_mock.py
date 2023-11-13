@@ -539,5 +539,5 @@ class ActivityRepositoryMock(IActivityRepository):
     def download_activities(self, code: str): 
         #download csv of activity in real
 
-        return True
+        return ""
 
