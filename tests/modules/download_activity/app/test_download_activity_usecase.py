@@ -28,21 +28,7 @@ class TestDownloadActivityUsecase:
         
         activity = usecase(activity_code, requester_user)
         
-        assert activity.code == activity_code
-        assert activity.title == "Atividade da ECM 2345"
-        assert activity.description == "Isso é uma atividade"
-        assert activity.activity_type == ACTIVITY_TYPE.COURSES
-        assert activity.is_extensive == False
-        assert activity.delivery_model == DELIVERY_MODEL.IN_PERSON
-        assert activity.start_date == 1671747413000
-        assert activity.end_date == 1671754613000
-        assert activity.place == "H332"
-        assert activity.responsible_professors == [User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")]
-        assert activity.speakers == [Speaker(name="Vitor Briquez", bio="Incrível", company="Apple")]
-        assert activity.total_slots == 4
-        assert activity.taken_slots == 4
-        assert activity.accepting_new_enrollments == True
-        assert activity.stop_accepting_new_enrollments_before == 1671743812000
+        assert type(activity) == str
     
     def test_download_activity_usecase_with_invalid_code(self):
         repo = ActivityRepositoryMock()

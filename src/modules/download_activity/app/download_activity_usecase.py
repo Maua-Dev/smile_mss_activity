@@ -26,7 +26,7 @@ class DownloadActivityUsecase:
             if requester_user.user_id not in [professor.user_id for professor in activity.responsible_professors]:
                 raise ForbiddenAction("user")
             
-        #TODO: Add method to download activity
+        download_link = self.repo.download_activities(code)
 
         self.observability.log_usecase_out()
-        return activity
+        return download_link
