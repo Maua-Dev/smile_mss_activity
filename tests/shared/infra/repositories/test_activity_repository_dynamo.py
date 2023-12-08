@@ -540,4 +540,58 @@ class Test_ActivityRepositoryDynamo:
         assert expected_enrollments[len(expected_enrollments)-2].position == 1
         assert expected_enrollments[len(expected_enrollments)-1].position == 2
 
-    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_enroll_activity_same_time(self):
+        os.environ["STAGE"] = "TEST"
+        activity_repository_dynamo = ActivityRepositoryDynamo()
+        activity_repository_mock = ActivityRepositoryMock()
+
+        new_activity = new_activity = Activity(
+            code="EAD109",
+            title="Curso de verão de cálculo 2",
+            description="curso de verão",
+            activity_type=ACTIVITY_TYPE.COURSES,
+            is_extensive=False,
+            delivery_model=DELIVERY_MODEL.ONLINE,
+            start_date=1671747413000,
+            end_date=1671754613000,
+            link=None,
+            place="H332",
+            responsible_professors=[
+                User(name="Juliana Vetores", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="João Vitor Branco", bio="Incrível", company="IMT")],
+            total_slots=4,
+            taken_slots=4,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=1671743812000,
+            confirmation_code="123456"
+        )
+
+        new_activity2 = new_activity2 = Activity(
+            code="EAD100",
+            title="Curso de verão de cálculo 2",
+            description="curso de verão",
+            activity_type=ACTIVITY_TYPE.COURSES,
+            is_extensive=False,
+            delivery_model=DELIVERY_MODEL.ONLINE,
+            start_date=1671747413000,
+            end_date=1671754613000,
+            link=None,
+            place="H332",
+            responsible_professors=[
+                User(name="Juliana Vetores", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="João Vitor Branco", bio="Incrível", company="IMT")],
+            total_slots=4,
+            taken_slots=4,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=1671743812000,
+            confirmation_code="123456"
+        )
+
+        repo_user = UserRepositoryMock()
+        user = repo_user.users[0]
+
+        user_activities = activity_repository_dynamo.get_all_activities_logged(user.user_id)
+        activities = activity_repository_dynamo.batch_get_activities([a.code for a in user_activities[0]])
+
+        assert activities[4].code == new_activity.code
