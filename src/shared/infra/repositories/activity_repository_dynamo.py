@@ -523,13 +523,24 @@ class ActivityRepositoryDynamo(IActivityRepository):
         
         return None
 
+    def create_csv_activity(self, activity: Activity, enrollments: List[Enrollment]) -> bytes:
+        #I need to create a csv file with the activity and its enrollments 
+
+        csv = f'''Código, Titulo, Descrição, Tipo, Extensiva, Modelo da atividade, Data de Inicio, Data de Fim, Link, Local, Total de vagas, Vagas ocupadas, Aceitando novas inscrições, Parar de aceitar novas inscrições antes de, Código de confirmação, Inscrições\n
+        {activity.code}, {activity.title}, {activity.description}, {activity.activity_type.value}, {activity.is_extensive}, {activity.delivery_model.value}, {activity.start_date}, {activity.end_date}, {activity.link}, {activity.place}, {activity.total_slots}, {activity.taken_slots}, {activity.accepting_new_enrollments}, {activity.stop_accepting_new_enrollments_before}, {activity.confirmation_code}, {enrollments}'''
+
+        return csv.encode('utf-8')
+
+
+
     def download_activities(self, activity_code: str) -> bytes:
         client_s3 = boto3.client('s3', region_name=os.environ.get('AWS_REGION'))
         bucket = os.environ.get('BUCKET_NAME')
         hash_key = os.environ.get('HASH_KEY')
         prefix = hashlib.sha256((hash_key).encode('utf-8')).hexdigest()
-        try:
 
+
+        try:
             itens = client_s3.list_objects_v2(
                 Bucket=bucket,
                 Prefix=prefix
