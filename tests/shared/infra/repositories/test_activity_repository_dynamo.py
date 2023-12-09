@@ -539,5 +539,15 @@ class Test_ActivityRepositoryDynamo:
 
         assert expected_enrollments[len(expected_enrollments)-2].position == 1
         assert expected_enrollments[len(expected_enrollments)-1].position == 2
+    
+    @pytest.mark.skip("Can't test dynamo and s3 in Github")
+    def test_download_activity(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        csv = repo_activity_dynamo.download_activities("AC000")
+
+        assert True
+
+
 
     

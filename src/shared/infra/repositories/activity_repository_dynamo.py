@@ -524,12 +524,46 @@ class ActivityRepositoryDynamo(IActivityRepository):
         return None
 
     def create_csv_activity(self, activity: Activity, enrollments: List[Enrollment]) -> bytes:
-        #I need to create a csv file with the activity and its enrollments 
+        client_s3 = boto3.client('s3', region_name=os.environ.get('AWS_REGION'))
+        bucket = os.environ.get('BUCKET_NAME')
+        hash_key = os.environ.get('HASH_KEY')
+        prefix = hashlib.sha256((hash_key).encode('utf-8')).hexdigest()
 
-        csv = f'''Código, Titulo, Descrição, Tipo, Extensiva, Modelo da atividade, Data de Inicio, Data de Fim, Link, Local, Total de vagas, Vagas ocupadas, Aceitando novas inscrições, Parar de aceitar novas inscrições antes de, Código de confirmação, Inscrições\n
-        {activity.code}, {activity.title}, {activity.description}, {activity.activity_type.value}, {activity.is_extensive}, {activity.delivery_model.value}, {activity.start_date}, {activity.end_date}, {activity.link}, {activity.place}, {activity.total_slots}, {activity.taken_slots}, {activity.accepting_new_enrollments}, {activity.stop_accepting_new_enrollments_before}, {activity.confirmation_code}, {enrollments}'''
+        csv = (
+        f'Código, Titulo, Descrição, Tipo, Extensiva, Modelo da atividade, Data de Inicio, Data de Fim, Link, Local, '
+        f'Total de vagas, Vagas ocupadas, Aceitando novas inscrições, Parar de aceitar novas inscrições antes de, '
+        f'Código de confirmação, Inscrições\n'
+        )
 
-        return csv.encode('utf-8')
+        activity_info = (
+            f'{activity.code}, {activity.title}, {activity.description}, {activity.activity_type.value}, '
+            f'{activity.is_extensive}, {activity.delivery_model.value}, {activity.start_date}, {activity.end_date}, '
+            f'{activity.link}, {activity.place}, {activity.total_slots}, {activity.taken_slots}, '
+            f'{activity.accepting_new_enrollments}, {activity.stop_accepting_new_enrollments_before}, '
+            f'{activity.confirmation_code}\n'
+        )
+
+        csv += activity_info
+
+        for enrollment in enrollments:
+            enrollment_info = (
+                f'{enrollment.user_id}, {enrollment.state.value}, {enrollment.date_subscribed}, {enrollment.position}\n'
+            )
+
+            csv += enrollment_info
+
+        try:
+            client_s3.put_object(
+                Bucket=bucket,
+                Key=f"{prefix}/{activity.code}.csv",
+                Body=csv
+            )
+
+            return None
+        
+        except Exception as err:
+            print(err)
+            return None
 
 
 
@@ -539,6 +573,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
         hash_key = os.environ.get('HASH_KEY')
         prefix = hashlib.sha256((hash_key).encode('utf-8')).hexdigest()
 
+        activity, enrollments = self.get_activity_with_enrollments(activity_code)
+        self.create_csv_activity(activity, enrollments)
 
         try:
             itens = client_s3.list_objects_v2(
