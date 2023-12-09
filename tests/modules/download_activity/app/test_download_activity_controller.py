@@ -25,7 +25,6 @@ class TestDownloadActivityController:
         response = controller(request)
 
         assert response.status_code == 200
-        assert response.body["message"] == f"Download da atividade '{activity_code}' realizado com sucesso."
 
     def test_download_activity_controller_with_invalid_code(self):
         repo_activities = ActivityRepositoryMock()

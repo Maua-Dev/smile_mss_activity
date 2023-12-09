@@ -30,7 +30,7 @@ class DownloadActivityController:
                 requester_user=requester_user,
             )
 
-            message = {"message": f"Download da atividade '{code}' realizado com sucesso."}
+            message = {"Link": usecase}
             response = OK(message)
 
             self.observability.log_controller_out(input=json.dumps(response.body), status_code=response.status_code)
