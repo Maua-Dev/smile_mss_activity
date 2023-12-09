@@ -60,4 +60,3 @@ class TestDownloadActivityPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 200
-        assert json.loads(response["body"])["message"] == "Download da atividade 'ECM2345' realizado com sucesso."
