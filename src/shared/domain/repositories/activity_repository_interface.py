@@ -158,3 +158,10 @@ class IActivityRepository(ABC):
         Deletes all certificates
         """
         pass
+    
+    @abstractmethod
+    def download_activities(self, code: str):
+        """
+        Downloads a csv file with an activity
+        """
+        pass
