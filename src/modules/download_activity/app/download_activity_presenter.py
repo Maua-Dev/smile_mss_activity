@@ -24,7 +24,7 @@ def download_activity_presenter(event, context):
 @observability.handler_decorators
 def lambda_handler(event, context):
     
-    response = delete_user_presenter(event, context)
+    response = download_activity_presenter(event, context)
     observability.add_error_count_metric(statusCode=response.get('statusCode', 500))
     
     return response
