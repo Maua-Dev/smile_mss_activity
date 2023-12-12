@@ -188,7 +188,8 @@ class LambdaStack(Construct):
             module_name="download_activity",
             method="POST",
             mss_student_api_resource=api_gateway_resource,
-            environment_variables=environment_variables
+            environment_variables=environment_variables,
+            authorizer=authorizer
         )
 
         self.functions_that_need_dynamo_permissions = [
