@@ -50,9 +50,9 @@ class EnrollActivityUsecase:
         else:
             enrollments = self.repo.get_enrollments_by_user_id(user_id=user_id)
 
-            enrollmentes_filtered = list(filter(lambda enrollment: enrollment.state == ENROLLMENT_STATE.ENROLLED, enrollments))
+            enrollments_filtered = list(filter(lambda enrollment: enrollment.state == ENROLLMENT_STATE.ENROLLED, enrollments))
 
-            user_activities = self.repo.batch_get_activities([enrollment.activity_code for enrollment in enrollmentes_filtered])
+            user_activities = self.repo.batch_get_activities([enrollment.activity_code for enrollment in enrollments_filtered])
 
             for user_activity in user_activities:
                 if (activity.start_date - user_activity.end_date) > 15*60*1000 and activity.start_date//(24*60*60*1000) == user_activity.start_date//(24*60*60*1000):

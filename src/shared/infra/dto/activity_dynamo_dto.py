@@ -139,7 +139,7 @@ class ActivityDynamoDTO:
             total_slots=int(activity_data.get("total_slots")),
             accepting_new_enrollments=bool(activity_data.get("accepting_new_enrollments")),
             stop_accepting_new_enrollments_before=int(activity_data.get("stop_accepting_new_enrollments_before")) if activity_data.get("stop_accepting_new_enrollments_before") is not None else None,
-            taken_slots=int(activity_data.get("taken_slots")),
+            taken_slots=int(activity_data.get("taken_slots")) if activity_data.get("taken_slots") is not None else 0,
             confirmation_code=activity_data.get("confirmation_code") if activity_data.get("confirmation_code") is not None else None,
         )
 
