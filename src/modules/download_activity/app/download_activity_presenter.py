@@ -11,7 +11,7 @@ usecase = DownloadActivityUsecase(repo_activity, observability=observability)
 controller = DownloadActivityController(usecase, observability=observability)
 
 @observability.presenter_decorators
-def delete_user_presenter(event, context):
+def download_activity_presenter(event, context):
     print(event)
 
     httpRequest = LambdaHttpRequest(data=event)
