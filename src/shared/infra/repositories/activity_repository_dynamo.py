@@ -527,6 +527,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
         client_s3 = boto3.client('s3', region_name=os.environ.get('AWS_REGION'))
         bucket = os.environ.get('BUCKET_NAME')
         hash_key = os.environ.get('HASH_KEY')
+        print("create")
         prefix = hashlib.sha256((hash_key).encode('utf-8')).hexdigest()
 
         csv = (
@@ -571,6 +572,7 @@ class ActivityRepositoryDynamo(IActivityRepository):
         client_s3 = boto3.client('s3', region_name=os.environ.get('AWS_REGION'))
         bucket = os.environ.get('BUCKET_NAME')
         hash_key = os.environ.get('HASH_KEY')
+        print("download")
         prefix = hashlib.sha256((hash_key).encode('utf-8')).hexdigest()
 
         activity, enrollments = self.get_activity_with_enrollments(activity_code)
