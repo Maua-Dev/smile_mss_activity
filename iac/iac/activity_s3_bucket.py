@@ -64,4 +64,4 @@ class ActivityS3Bucket(Construct):
 
         CfnOutput(self, 'S3RemovalPolicy',
                   value=REMOVAL_POLICY.value,
-                  export_name='S3RemovalPolicyValue2024')
+                  export_name='S3RemovalPolicyActivityValue2024')

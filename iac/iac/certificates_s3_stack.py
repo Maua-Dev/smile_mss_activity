@@ -67,4 +67,4 @@ class CertificatesS3Stack(Stack):
 
         CfnOutput(self, 'S3RemovalPolicy',
                   value=REMOVAL_POLICY.value,
-                  export_name='S3RemovalPolicyValue2024')
+                  export_name='S3RemovalPolicyCertificatesValue2024')
