@@ -15,8 +15,8 @@ from aws_cdk import (
 from constructs import Construct
 
 class ActivityS3Bucket(Construct):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-        super().__init__(scope, construct_id, **kwargs)
+    def __init__(self, scope: Construct) -> None:
+        super().__init__(scope, "Activity_S3_Bucket")
 
         self.github_ref = os.environ.get("GITHUB_REF")
         self.aws_region = os.environ.get("AWS_REGION")
