@@ -207,5 +207,12 @@ class IacStack(Stack):
         self.lambda_stack.delete_user_function.add_to_role_policy(bucket_all_policy)
         
         bucket.grant_read_write(self.lambda_stack.delete_user_function)
+        
+        self.tags = {
+            'project': 'Smile2024',
+            'stage': stage,
+            'stack': 'BACK',
+            'owner': 'DevCommunity'
+        }
 
-        self.dynamo_activity_bucket = ActivityS3Bucket(self, "SmileActivityS3Bucket", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer, power_tools_layer=self.lambda_stack.lambda_power_tools)
+        self.dynamo_activity_bucket = ActivityS3Bucket(self, "SmileActivityS3Bucket", env=(os.environ.get("AWS_ACCOUNT_ID"), os.environ.get("AWS_REGION")), tags=self.tags)
