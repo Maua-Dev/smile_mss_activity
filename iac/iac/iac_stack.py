@@ -208,5 +208,5 @@ class IacStack(Stack):
         
         bucket.grant_read_write(self.lambda_stack.delete_user_function)
 
-        self.activity_s3_bucket = ActivityS3Bucket(self, "SmileActivityS3Bucket", env= (self.account, self.region), tags={'project': 'Smile2024','stage': stage,'stack': 'BACK','owner': 'DevCommunity'})
+        self.activity_s3_bucket = ActivityS3Bucket(self)
         
