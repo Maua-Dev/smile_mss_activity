@@ -10,6 +10,7 @@ from aws_cdk import (
 from constructs import Construct
 
 from .certificates_lambda_stack import CertificatesLambdaStack
+from .activity_s3_bucket import ActivityS3Bucket
 from .dynamo_stack import DynamoStack
 from .event_bridge_stack import EventBridgeStack
 from .lambda_stack import LambdaStack
@@ -206,3 +207,5 @@ class IacStack(Stack):
         self.lambda_stack.delete_user_function.add_to_role_policy(bucket_all_policy)
         
         bucket.grant_read_write(self.lambda_stack.delete_user_function)
+
+        self.dynamo_activity_bucket = ActivityS3Bucket(self, "SmileActivityS3Bucket", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer, power_tools_layer=self.lambda_stack.lambda_power_tools)
