@@ -1,3 +1,4 @@
+import time
 from typing import List
 
 from src.shared.domain.entities.activity import Activity
@@ -7,6 +8,7 @@ from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.environments import Environments
+from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 
 class LoadActivityRepositoryMock:
@@ -324,16 +326,43 @@ class LoadActivityRepositoryMock:
         ]
 
 
-if __name__ == '__main__':
-
+def load_test():
     repo_activity = Environments.get_activity_repo()()
-    activities = LoadActivityRepositoryMock().activities
+    stage = Environments.get_envs().stage
+    dynamo_table_name = Environments.get_envs().dynamo_table_name
+    print(stage, dynamo_table_name)
+    activities = ActivityRepositoryMock().activities
+    enrollments = ActivityRepositoryMock().enrollments
 
-    for activity in activities:
-        try:
-            new_activity = repo_activity.create_activity(activity)
+    print('Loading mock data to dynamo...')
 
-            print(new_activity)
+    print('Loading activities with enrollments...')
+    
+    activity_example = activities[0]
+    enrollment_example = enrollments[0]
+    print(enrollment_example)
 
-        except Exception as e:
-            print("Erro ao criar atividade: ", e)
+    start = time.time()
+    for i in range(100):
+        activity_example.code = f"ACT{i}"
+        activity_example.title = f"Activity {i}"
+        repo_activity.create_activity(activity_example)
+        print(f'Loading activity {activity_example.code} | {activity_example.title}...')
+
+        for j in range(50):
+            enrollment_example.activity_code = f"ACT{i}"
+            enrollment_example.user_id = f"USER{i}{j}"
+            print(type(enrollment_example))
+            repo_activity.create_enrollment(enrollment=enrollment_example)
+
+        print(f'Loading enrollments {enrollment_example.activity_code} | {enrollment_example.user_id}...')
+        
+    end = time.time()
+    
+    print(f'100 activities with 50 enrollments each loaded in {end - start} seconds!\n')
+
+
+if __name__ == '__main__':
+    # load_test()
+
+

@@ -190,11 +190,6 @@ class IacStack(Stack):
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.generate_certificate_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.get_certificate_function)
 
-        self.open_close_stack = OpenCloseStack(self, "SmileOpenClose", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer, power_tools_layer=self.lambda_stack.lambda_power_tools)
-
-        self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.open_all_activities_function)
-        self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.close_all_activities_function)
-
         delete_user_variables = {
             "BUCKET_NAME": bucket_name,
             "HASH_KEY": os.environ.get("HASH_KEY"),
@@ -207,6 +202,4 @@ class IacStack(Stack):
         self.lambda_stack.delete_user_function.add_to_role_policy(bucket_all_policy)
         
         bucket.grant_read_write(self.lambda_stack.delete_user_function)
-
-        self.activity_s3_bucket = ActivityS3Bucket(self)
         

@@ -191,6 +191,23 @@ class LambdaStack(Construct):
             environment_variables=environment_variables,
             authorizer=authorizer
         )
+        self.open_all_activities_function = lambda_.Function(self, "Open_all_activities",
+                                                             code=lambda_.Code.from_asset(
+                                                                 "../open_close/open_all_activities"),
+                                                             handler="open_all_activities.lambda_handler",
+                                                             runtime=lambda_.Runtime.PYTHON_3_9,
+                                                             environment=environment_variables,
+                                                             layers=[self.lambda_layer, self.lambda_power_tools]
+                                                             )
+
+        self.close_all_activities_function = lambda_.Function(self, "Close_all_activities",
+                                                              code=lambda_.Code.from_asset(
+                                                                  "../open_close/close_all_activities"),
+                                                              handler="close_all_activities.lambda_handler",
+                                                              runtime=lambda_.Runtime.PYTHON_3_9,
+                                                              environment=environment_variables,
+                                                              layers=[self.lambda_layer, self.lambda_power_tools]
+                                                              )
 
         self.functions_that_need_dynamo_permissions = [
             self.enroll_activity_function,
