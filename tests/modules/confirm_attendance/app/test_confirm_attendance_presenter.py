@@ -1,10 +1,10 @@
 import json
+import pytest 
 
 from src.modules.confirm_attendance.app.confirm_attendance_presenter import lambda_handler
 
 
 class Test_GetAllActivitiesAdminPresenter:
-
     def test_confirm_attendance_presenter_presenter(self):
         event = {
             "version": "2.0",

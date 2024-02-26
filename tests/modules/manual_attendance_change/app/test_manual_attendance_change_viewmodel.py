@@ -31,7 +31,7 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     'is_extensive': False,
                     'delivery_model': 'IN_PERSON',
                     'start_date': 1671747413000,
-                    'duration': 120,
+                    'end_date': 120*60*1000 + 1671747413000,
                     'link': None,
                     'place': 'H332',
                     'responsible_professors': [
@@ -123,7 +123,7 @@ class Test_GetActivityWithEnrollmentsViewmodel:
                     'is_extensive': False,
                     'delivery_model': 'IN_PERSON',
                     'start_date': 1670005013000,
-                    'duration': 45,
+                    'end_date': 45*60*1000 + 1670005013000,
                     'link': None,
                     'place': 'H332',
                     'responsible_professors': [

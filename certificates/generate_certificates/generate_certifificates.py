@@ -46,10 +46,6 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
                 continue
 
             name = user.name
-            social_name = user.social_name
-
-            if user.certificate_with_social_name and social_name:
-                name = social_name
 
             MONTH_DICT = {
                 1: "janeiro",
@@ -76,7 +72,7 @@ def generate_certificate(bucket_name: str, activity: Activity, template_file, us
 
             # Defina o timestamp
             timestamp = activity.start_date / 1000  # dividido por 1000 para obter o valor em segundos
-            duration = activity.duration
+            duration = activity.end_date
 
             # Converta o timestamp em um objeto datetime
             dt = datetime.datetime.fromtimestamp(timestamp).astimezone(gmt3_tz)

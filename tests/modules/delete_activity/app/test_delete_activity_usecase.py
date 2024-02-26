@@ -17,15 +17,13 @@ class Test_DeleteActivityUsecase:
         repo_user = UserRepositoryMock()
         usecase = DeleteActivityUsecase(repo, observability=observability)
         len_before = len(repo.activities)
+        len_enrollments_before = len(repo.enrollments)  
         activity = usecase(code=repo.activities[11].code, user=repo_user.users[0])
 
         assert type(activity) == Activity
         assert len(repo.activities) == len_before - 1
-        assert repo.enrollments[23].state == ENROLLMENT_STATE.ACTIVITY_CANCELLED
-        assert repo.enrollments[24].state == ENROLLMENT_STATE.ACTIVITY_CANCELLED
-        assert repo.enrollments[25].state == ENROLLMENT_STATE.ACTIVITY_CANCELLED
-        assert repo.enrollments[26].state == ENROLLMENT_STATE.ACTIVITY_CANCELLED
-        assert repo.enrollments[27].state == ENROLLMENT_STATE.ACTIVITY_CANCELLED
+        assert len(repo.enrollments) == len_enrollments_before - 5
+
 
     def test_delete_activity_usecase_no_enrollments(self):
         repo = ActivityRepositoryMock()
@@ -59,4 +57,16 @@ class Test_DeleteActivityUsecase:
         len_before = len(repo.activities)
         with pytest.raises(ForbiddenAction):
             activity = usecase(code=repo.activities[11].code, user=repo_user.users[1])
+    
+    def test_delete_activity_usecase_with_enrollments(self):
+        repo = ActivityRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = DeleteActivityUsecase(repo, observability=observability)
+        len_before = len(repo.activities)
+        len_enrollments_before = len(repo.enrollments)  
+        activity = usecase(code=repo.activities[12].code, user=repo_user.users[0])
+
+        assert type(activity) == Activity
+        assert len(repo.activities) == len_before - 1
+        assert len(repo.enrollments) == len_enrollments_before - 4
 

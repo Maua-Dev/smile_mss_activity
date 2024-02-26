@@ -52,7 +52,7 @@ class ActivityViewmodel:
     is_extensive: bool
     delivery_model: DELIVERY_MODEL
     start_date: int
-    duration: int
+    end_date: int
     link: str
     place: str
     responsible_professors: List[UserViewmodel]
@@ -70,11 +70,11 @@ class ActivityViewmodel:
         self.is_extensive = activity.is_extensive
         self.delivery_model = activity.delivery_model.value
         self.start_date = activity.start_date
-        self.duration = activity.duration
+        self.end_date = activity.end_date
         self.link = activity.link
         self.place = activity.place
-        self.responsible_professors = [UserViewmodel(professor) for professor in activity.responsible_professors]
-        self.speakers = [SpeakerViewmodel(speaker) for speaker in activity.speakers]
+        self.responsible_professors = [UserViewmodel(professor) for professor in activity.responsible_professors] if activity.responsible_professors is not None else None
+        self.speakers = [SpeakerViewmodel(speaker) for speaker in activity.speakers] if activity.speakers is not None else None 
         self.total_slots = activity.total_slots
         self.taken_slots = activity.taken_slots
         self.accepting_new_enrollments = activity.accepting_new_enrollments
@@ -89,11 +89,11 @@ class ActivityViewmodel:
             "is_extensive": self.is_extensive,
             "delivery_model": self.delivery_model,
             "start_date": self.start_date,
-            "duration": self.duration,
+            "end_date": self.end_date,
             "link": self.link,
             "place": self.place,
-            "responsible_professors": [(professor.to_dict()) for professor in self.responsible_professors],
-            "speakers": [(speaker.to_dict()) for speaker in self.speakers],
+            "responsible_professors": [(professor.to_dict()) for professor in self.responsible_professors] if self.responsible_professors is not None else None,
+            "speakers": [(speaker.to_dict()) for speaker in self.speakers] if self.speakers is not None else None,
             "total_slots": self.total_slots,
             "taken_slots": self.taken_slots,
             "accepting_new_enrollments": self.accepting_new_enrollments,

@@ -6,7 +6,7 @@ from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 
 
 def compose_enrolled_email(activity: Activity, user: UserInfo):
-    name = user.name.split(" ")[0] if user.social_name is None else user.social_name.split(" ")[0]
+    name = user.name.split(" ")[0]
     gmt3_tz = timezone(timedelta(hours=-3))
 
     if activity.delivery_model == DELIVERY_MODEL.IN_PERSON:

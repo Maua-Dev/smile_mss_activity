@@ -59,12 +59,12 @@ class CertificatesS3Stack(Stack):
 
         CfnOutput(self, f"CertificateBucketName",
                        value=self.s3_bucket.bucket_name,
-                       export_name=f"CertificateBucketNameValue")
+                       export_name=f"CertificateBucketNameValue2024")
 
         CfnOutput(self, f"CertificateBucketCdnUrl",
             value=f"https://{self.cloudfront_distribution.distribution_domain_name}",
-            export_name=f"CertificateBucketCdnUrlValue")
+            export_name=f"CertificateBucketCdnUrlValue2024")
 
         CfnOutput(self, 'S3RemovalPolicy',
                   value=REMOVAL_POLICY.value,
-                  export_name='S3RemovalPolicyValue')
+                  export_name='S3RemovalPolicyCertificatesValue2024')

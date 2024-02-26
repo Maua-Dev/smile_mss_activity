@@ -61,7 +61,7 @@ class IActivityRepository(ABC):
 
     @abstractmethod
     def update_activity(self, code: str, new_title: str = None, new_description: str = None, new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None, new_duration: int = None, new_link: str = None, new_place: str = None,
+                 new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None, new_end_date: int = None, new_link: str = None, new_place: str = None,
                  new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                  new_accepting_new_enrollments: bool = None, new_stop_accepting_new_enrollments_before: int = None, new_confirmation_code: str = None) -> Activity:
         pass
@@ -97,6 +97,10 @@ class IActivityRepository(ABC):
 
     @abstractmethod
     def create_activity(self, activity:Activity) -> Activity:
+        pass
+
+    @abstractmethod
+    def batch_get_activities(self, codes=List[str]) -> List[Activity]:
         pass
 
     @abstractmethod
@@ -140,10 +144,24 @@ class IActivityRepository(ABC):
         else returns None
         """
         pass
+    
+    @abstractmethod
+    def batch_delete_enrollments(self, user_ids: List[str], code: str) -> List[Enrollment]:
+        """
+        Deletes all enrollments in an activity, when the activity is deleted
+        """
+        pass
 
     @abstractmethod
     def delete_certificates(self, email: str) -> True:
         """
         Deletes all certificates
+        """
+        pass
+    
+    @abstractmethod
+    def download_activities(self, code: str):
+        """
+        Downloads a csv file with an activity
         """
         pass

@@ -67,7 +67,7 @@ class Test_ActivityRepositoryDynamo:
             is_extensive=False,
             delivery_model=DELIVERY_MODEL.ONLINE,
             start_date=1671747413000,
-            duration=120,
+            end_date=1671754613000,
             link=None,
             place="H332",
             responsible_professors=[
@@ -98,7 +98,7 @@ class Test_ActivityRepositoryDynamo:
             assert activity_gotten.delivery_model == activity.delivery_model
             assert activity_gotten.activity_type == activity.activity_type
             assert activity_gotten.start_date == activity.start_date
-            assert activity_gotten.duration == activity.duration
+            assert activity_gotten.end_date == activity.end_date
             assert activity_gotten.link == activity.link
             assert activity_gotten.place == activity.place
             assert activity_gotten.responsible_professors == activity.responsible_professors
@@ -188,18 +188,18 @@ class Test_ActivityRepositoryDynamo:
         repo_user = UserRepositoryMock()
 
         repo_activity_dynamo = ActivityRepositoryDynamo()
-        new_activity = repo_activity_dynamo.update_activity(code=repo_activity.activities[0].code,
+        new_activity = repo_activity_dynamo.update_activity(code="PINOQ1",
                                                              new_title="NOVO TITULO",
                                                              new_description='nova descricao',
                                                              new_activity_type=ACTIVITY_TYPE.LECTURES,
                                                              new_is_extensive=True,
                                                              new_delivery_model=DELIVERY_MODEL.ONLINE,
-                                                             new_start_date=1630465200000, new_duration=15,
+                                                             new_start_date=1630465200000, new_end_date=1630466100000,
                                                              new_link="www.google.com.br",
                                                              new_place="Sala 1",
                                                              new_responsible_professors=[
                                                                  repo_user.users[2],
-                                                                 repo_user.users[11]],
+                                                                 repo_user.users[10]],
                                                              new_speakers=[
                                                                  Speaker(
                                                                      name="Fulano de Tal",
@@ -211,19 +211,19 @@ class Test_ActivityRepositoryDynamo:
                                                             new_taken_slots=repo_activity.activities[0].taken_slots,
                                                              new_stop_accepting_new_enrollments_before=None)
 
-        assert new_activity.code == repo_activity.activities[0].code
+        assert new_activity.code == "PINOQ1"
         assert new_activity.title == "NOVO TITULO"
         assert new_activity.description == 'nova descricao'
         assert new_activity.activity_type == ACTIVITY_TYPE.LECTURES
         assert new_activity.is_extensive == True
         assert new_activity.delivery_model == DELIVERY_MODEL.ONLINE
         assert new_activity.start_date == 1630465200000
-        assert new_activity.duration == 15
+        assert new_activity.end_date == 1630466100000
         assert new_activity.link == 'www.google.com.br'
         assert new_activity.place == "Sala 1"
         assert new_activity.responsible_professors == [
             repo_user.users[2],
-            repo_user.users[11]]
+            repo_user.users[10]]
         assert new_activity.speakers == [
             Speaker(
                 name="Fulano de Tal",
@@ -233,7 +233,7 @@ class Test_ActivityRepositoryDynamo:
         ]
         assert new_activity.total_slots == 100
         assert new_activity.accepting_new_enrollments == True
-        assert new_activity.stop_accepting_new_enrollments_before is None
+        assert new_activity.stop_accepting_new_enrollments_before == 1669918612000
         assert new_activity.taken_slots == repo_activity.activities[0].taken_slots
 
 
@@ -363,9 +363,7 @@ class Test_ActivityRepositoryDynamo:
         user = UserInfo(
             name="Vitor Soller",
             email="vgsoller@gmail.com",
-            social_name=None,
             accepted_notifications_email=True,
-            certificate_with_social_name=False,
             user_id="0"*36,
             phone=None,
             accepted_notifications_sms=False,
@@ -386,9 +384,7 @@ class Test_ActivityRepositoryDynamo:
         user = UserInfo(
             name="Vitor Soller",
             email="vgsoller@gmail.com",
-            social_name=None,
             accepted_notifications_email=True,
-            certificate_with_social_name=False,
             user_id="0"*36,
             phone=None,
             accepted_notifications_sms=False,
@@ -424,3 +420,188 @@ class Test_ActivityRepositoryDynamo:
 
         assert len(enrollments) == 33
         assert all(type(enrollment) == Enrollment for enrollment in enrollments)
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_description(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.update_activity(code="CODIGO", new_description="abuble")
+
+        assert True
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_taken_slots(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        
+        repo_activity_dynamo.update_activity(code="CODIGO", new_taken_slots=2)
+        repo_activity_dynamo.update_activity(code="ULTIMA", new_taken_slots=3)
+
+        assert True
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_responsible_professors(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        user_repository_mock = UserRepositoryMock()
+
+        repo_activity_dynamo.update_activity(code="PRF246", new_responsible_professors=[user_repository_mock.users[9], user_repository_mock.users[2]])
+
+        assert True
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_activity_only_speakers(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        repo_activity_dynamo.update_activity(code="ULTIMA", new_speakers=[Speaker(name="Fulano de Tal", bio="Fulano de Tal é um professor de Engenharia de Software", company="Universidade Federal de Fulano de tal")])
+
+        assert True
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_batch_get_activities(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_activity_mock = ActivityRepositoryMock()
+
+        mock_activities = repo_activity_mock.batch_get_activities(["CODIGO", "ULTIMA"])
+
+        activities = repo_activity_dynamo.batch_get_activities(["CODIGO", "ULTIMA"])
+
+        assert len(activities) == 2
+        assert all(type(activity) == Activity for activity in activities)
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_activity_with_enrollments_sort(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_user = UserRepositoryMock()
+
+
+        enrollment1 = Enrollment(activity_code='2468', user_id=repo_user.users[7].user_id, state=ENROLLMENT_STATE.COMPLETED,    
+                                date_subscribed=1671229013000)
+        enrollment2 = Enrollment(activity_code='2468', user_id=repo_user.users[8].user_id, state=ENROLLMENT_STATE.COMPLETED,
+                                    date_subscribed=1670229013000)
+        enrollment3 = Enrollment(activity_code='2468', user_id=repo_user.users[0].user_id, state=ENROLLMENT_STATE.ENROLLED,
+                                    date_subscribed=1671229013000)
+        enrollment4 = Enrollment(activity_code='2468', user_id=repo_user.users[1].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+                                    date_subscribed=1670229013000)  
+
+        # repo_activity_dynamo.create_enrollment(enrollment1)
+        # repo_activity_dynamo.create_enrollment(enrollment2)
+        # repo_activity_dynamo.create_enrollment(enrollment3)	
+        # repo_activity_dynamo.create_enrollment(enrollment4)
+
+        activity, enrollments = repo_activity_dynamo.get_activity_with_enrollments("2468")
+
+        assert enrollments[0] == enrollment2
+        assert enrollments[1] == enrollment1
+        assert enrollments[2] == enrollment4
+        assert enrollments[3] == enrollment3
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_batch_delete_enrollments(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        activity, enrollments = repo_activity_dynamo.get_activity_with_enrollments("SC456")
+
+        deleted_enrollments = repo_activity_dynamo.batch_delete_enrollments([enrollment.user_id for enrollment in enrollments], activity.code)
+
+        assert True
+
+    
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_activitites_logged_positions(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+        repo_user = UserRepositoryMock()
+        repo = ActivityRepositoryMock()
+
+        enrollment1 = Enrollment(activity_code='AC000', user_id=repo_user.users[2].user_id, state=ENROLLMENT_STATE.IN_QUEUE,    
+                                    date_subscribed=1671229013000)
+        
+        enrollment2 = Enrollment(activity_code='AC000', user_id=repo_user.users[2].user_id, state=ENROLLMENT_STATE.IN_QUEUE,
+                                    date_subscribed=1669229013000) 
+        repo.enrollments.append(enrollment1)
+        repo.enrollments.append(enrollment2)
+
+        activities, user_enrollments = repo_activity_dynamo.get_all_activities_logged(repo_user.users[2].user_id)
+
+        # repo_activity_dynamo.create_enrollment(enrollment1)
+        # repo_activity_dynamo.create_enrollment(enrollment2)
+
+        expected_activities, expected_enrollments = repo_activity_dynamo.get_all_activities_logged(repo_user.users[2].user_id)
+
+        assert len(activities) == len(expected_activities)
+        assert all(type(activity) == Activity for activity in activities)
+        assert activities == expected_activities
+
+        assert len(user_enrollments) == len(expected_enrollments)
+        assert all(type(enrollment) == Enrollment for enrollment in user_enrollments)
+        assert user_enrollments == expected_enrollments
+
+        assert user_enrollments[len(user_enrollments)-2].position == 1
+        assert user_enrollments[len(user_enrollments)-1].position == 2
+
+        assert expected_enrollments[len(expected_enrollments)-2].position == 1
+        assert expected_enrollments[len(expected_enrollments)-1].position == 2
+    
+    @pytest.mark.skip("Can't test dynamo and s3 in Github")
+    def test_download_activity(self):
+        repo_activity_dynamo = ActivityRepositoryDynamo()
+
+        csv = repo_activity_dynamo.download_activities("AC000")
+
+        assert True
+
+
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_enroll_activity_same_time(self):
+        os.environ["STAGE"] = "TEST"
+        activity_repository_dynamo = ActivityRepositoryDynamo()
+        activity_repository_mock = ActivityRepositoryMock()
+
+        new_activity = new_activity = Activity(
+            code="EAD109",
+            title="Curso de verão de cálculo 2",
+            description="curso de verão",
+            activity_type=ACTIVITY_TYPE.COURSES,
+            is_extensive=False,
+            delivery_model=DELIVERY_MODEL.ONLINE,
+            start_date=1671747413000,
+            end_date=1671754613000,
+            link=None,
+            place="H332",
+            responsible_professors=[
+                User(name="Juliana Vetores", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="João Vitor Branco", bio="Incrível", company="IMT")],
+            total_slots=4,
+            taken_slots=4,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=1671743812000,
+            confirmation_code="123456"
+        )
+
+        new_activity2 = new_activity2 = Activity(
+            code="EAD100",
+            title="Curso de verão de cálculo 2",
+            description="curso de verão",
+            activity_type=ACTIVITY_TYPE.COURSES,
+            is_extensive=False,
+            delivery_model=DELIVERY_MODEL.ONLINE,
+            start_date=1671747413000,
+            end_date=1671754613000,
+            link=None,
+            place="H332",
+            responsible_professors=[
+                User(name="Juliana Vetores", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
+            speakers=[Speaker(name="João Vitor Branco", bio="Incrível", company="IMT")],
+            total_slots=4,
+            taken_slots=4,
+            accepting_new_enrollments=True,
+            stop_accepting_new_enrollments_before=1671743812000,
+            confirmation_code="123456"
+        )
+
+        repo_user = UserRepositoryMock()
+        user = repo_user.users[0]
+
+        user_activities = activity_repository_dynamo.get_all_activities_logged(user.user_id)
+        activities = activity_repository_dynamo.batch_get_activities([a.code for a in user_activities[0]])
+
+        assert activities[4].code == new_activity.code

@@ -1,3 +1,4 @@
+import pytest
 from src.modules.manual_drop_activity.app.manual_drop_activity_presenter import lambda_handler
 import json
 

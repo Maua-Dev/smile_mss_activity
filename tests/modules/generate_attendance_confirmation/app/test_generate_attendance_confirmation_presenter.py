@@ -1,5 +1,5 @@
 import json
-
+import pytest
 from src.modules.generate_attendance_confirmation.app.generate_attendance_confirmation_presenter import lambda_handler
 
 

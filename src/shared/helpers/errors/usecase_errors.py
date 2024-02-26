@@ -35,3 +35,11 @@ class ActivityEnded(BaseError):
 class UserNotAdmin(BaseError):
     def  __init__(self, message: str):
         super().__init__(message)
+        
+class UnecessaryUpdate(BaseError):
+    def  __init__(self, message: str):
+        super().__init__(message)
+
+class ImpossibleEnrollment(BaseError):
+    def  __init__(self, message: str):
+        super().__init__(message)

@@ -1,12 +1,12 @@
 # smile_mss_activity 😃
 
-Microservice for activity management in [Smile 2023](https://smile.maua.br/) project for Mauá Institute of Technology.
+Microservice for activity management in [Smile 2024](https://smile.maua.br/) project for Mauá Institute of Technology.
 
 ## The Project 📽
 
 ### Introduction and Objectives ⁉
 
-The project aims to create a system that will be used by the anyone to join Smile 2023 by Mauá Institute of Technology to enroll in activity, such as: courses, workshops, events, etc.
+The project aims to create a system that will be used by the anyone to join Smile 2024 by Mauá Institute of Technology to enroll in activity, such as: courses, workshops, events, etc.
 
 ### Clean Architecture 🧼🏰
 
@@ -69,7 +69,7 @@ Clone the repository using template
 
 - [Dev. Community Mauá](https://www.instagram.com/devcommunitymaua/)
 - [Mauá Institute of Technology](https://www.maua.br/)
-- [Smile 2023](https://smile.maua.br/)
+- [Smile 2024](https://smile.maua.br/)
 
 
 

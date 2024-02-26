@@ -1,3 +1,4 @@
+import time
 from typing import List
 
 from src.shared.domain.entities.activity import Activity
@@ -7,6 +8,7 @@ from src.shared.domain.enums.activity_type_enum import ACTIVITY_TYPE
 from src.shared.domain.enums.delivery_model_enum import DELIVERY_MODEL
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.environments import Environments
+from src.shared.infra.repositories.activity_repository_mock import ActivityRepositoryMock
 
 
 class LoadActivityRepositoryMock:
@@ -22,7 +24,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1680650366000, #Tue Apr 04 2023 23:19:26 GMT+0000
-                duration=120,
+                end_date=1680657566000,
                 link=None,
                 place="H332",
                 responsible_professors=[User(name="Carol Santarelli", role=ROLE.PROFESSOR, user_id="995eb33a-88f6-4c47-8ed1-7834302d0579")],
@@ -43,7 +45,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1678663166000, #Sun Mar 12 2023 23:19:26 GMT+0000
-                duration=120,
+                end_date=1678670366000,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
@@ -63,7 +65,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1679440766000, #Tue Mar 21 2023 23:19:26 GMT+0000
-                duration=240,
+                end_date=1679455166000,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
@@ -83,7 +85,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1682896766000, #Sun Apr 30 2023 23:19:26 GMT+0000
-                duration=540,
+                end_date=1682929166000,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
@@ -105,7 +107,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1683229161000, #Thu May 04 2023 19:39:21 GMT+0000
-                duration=120,
+                end_date=1683236361000,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -125,7 +127,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1682428766000,#Tue Apr 25 2023 13:19:26 GMT+0000
-                duration=120,
+                end_date=1682435966000,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
@@ -145,7 +147,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1682601566000, #Thu Apr 27 2023 13:19:26 GMT+0000
-                duration=80,
+                end_date=1682606366000,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[
@@ -165,7 +167,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1679923166000, #Mon Mar 27 2023 13:19:26 GMT+0000
-                duration=180,
+                end_date=1680021966000,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -185,7 +187,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1679833166000, #Sun Mar 26 2023 12:19:26 GMT+0000
-                duration=660,
+                end_date=1680212766000,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
@@ -205,7 +207,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1681384766000, #Thu Apr 13 2023 11:19:26 GMT+0000
-                duration=140,
+                end_date=1681393166000,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -225,7 +227,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1681729200000, #Mon Apr 17 2023 11:00:00 GMT+0000
-                duration=360,
+                end_date=1681740800000,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[
@@ -245,7 +247,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1681740000000, #Mon Apr 17 2023 14:00:00 GMT+0000
-                duration=45,
+                end_date=1681742700000,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -265,7 +267,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1679324400000, #Mon Mar 20 2023 15:00:00 GMT+0000
-                duration=120,
+                end_date=1679331600000,
                 link=None,
                 place="H332",
                 responsible_professors=[
@@ -287,7 +289,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1679583600000, #Thu Mar 23 2023 15:00:00 GMT+0000
-                duration=60,
+                end_date=1679587200000,
                 link="www.maua.br",
                 place="H321",
                 responsible_professors=[
@@ -308,7 +310,7 @@ class LoadActivityRepositoryMock:
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1681743600000, #Mon Apr 17 2023 15:00:00 GMT+0000
-                duration=60,
+                end_date=1681747200000,
                 link=None,
                 place="H321",
                 responsible_professors=[
@@ -324,16 +326,43 @@ class LoadActivityRepositoryMock:
         ]
 
 
-if __name__ == '__main__':
-
+def load_test():
     repo_activity = Environments.get_activity_repo()()
-    activities = LoadActivityRepositoryMock().activities
+    stage = Environments.get_envs().stage
+    dynamo_table_name = Environments.get_envs().dynamo_table_name
+    print(stage, dynamo_table_name)
+    activities = ActivityRepositoryMock().activities
+    enrollments = ActivityRepositoryMock().enrollments
 
-    for activity in activities:
-        try:
-            new_activity = repo_activity.create_activity(activity)
+    print('Loading mock data to dynamo...')
 
-            print(new_activity)
+    print('Loading activities with enrollments...')
+    
+    activity_example = activities[0]
+    enrollment_example = enrollments[0]
+    print(enrollment_example)
 
-        except Exception as e:
-            print("Erro ao criar atividade: ", e)
+    start = time.time()
+    for i in range(100):
+        activity_example.code = f"ACT{i}"
+        activity_example.title = f"Activity {i}"
+        repo_activity.create_activity(activity_example)
+        print(f'Loading activity {activity_example.code} | {activity_example.title}...')
+
+        for j in range(50):
+            enrollment_example.activity_code = f"ACT{i}"
+            enrollment_example.user_id = f"USER{i}{j}"
+            print(type(enrollment_example))
+            repo_activity.create_enrollment(enrollment=enrollment_example)
+
+        print(f'Loading enrollments {enrollment_example.activity_code} | {enrollment_example.user_id}...')
+        
+    end = time.time()
+    
+    print(f'100 activities with 50 enrollments each loaded in {end - start} seconds!\n')
+
+
+if __name__ == '__main__':
+    # load_test()
+
+

@@ -10,10 +10,10 @@ from aws_cdk import (
 from constructs import Construct
 
 from .certificates_lambda_stack import CertificatesLambdaStack
+from .activity_s3_bucket import ActivityS3Bucket
 from .dynamo_stack import DynamoStack
 from .event_bridge_stack import EventBridgeStack
 from .lambda_stack import LambdaStack
-from .open_close_stack import OpenCloseStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
 class IacStack(Stack):
@@ -145,9 +145,9 @@ class IacStack(Stack):
 
         self.event_bridge.send_notification_function.add_to_role_policy(sns_admin_policy)
 
-        bucket_name = Fn.import_value(f"CertificateBucketNameValue")
+        bucket_name = Fn.import_value(f"CertificateBucketNameValue2024")
 
-        cdn_url = Fn.import_value(f"CertificateBucketCdnUrlValue")
+        cdn_url = Fn.import_value(f"CertificateBucketCdnUrlValue2024")
 
         environment_variables_certificate = {
             "STAGE": stage,
@@ -189,11 +189,6 @@ class IacStack(Stack):
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.generate_certificate_function)
         self.dynamo_stack.dynamo_table.grant_read_write_data(self.lambda_stack_certificate.get_certificate_function)
 
-        self.open_close_stack = OpenCloseStack(self, "SmileOpenClose", environment_variables=ENVIRONMENT_VARIABLES, activity_layer=self.lambda_stack.lambda_layer, power_tools_layer=self.lambda_stack.lambda_power_tools)
-
-        self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.open_all_activities_function)
-        self.dynamo_stack.dynamo_table.grant_read_write_data(self.open_close_stack.close_all_activities_function)
-
         delete_user_variables = {
             "BUCKET_NAME": bucket_name,
             "HASH_KEY": os.environ.get("HASH_KEY"),
@@ -206,3 +201,4 @@ class IacStack(Stack):
         self.lambda_stack.delete_user_function.add_to_role_policy(bucket_all_policy)
         
         bucket.grant_read_write(self.lambda_stack.delete_user_function)
+        

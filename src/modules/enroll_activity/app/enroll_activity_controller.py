@@ -2,7 +2,7 @@ import json
 from src.shared.domain.observability.observability_interface import IObservability
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, ClosedActivity, UserAlreadyEnrolled, \
+from src.shared.helpers.errors.usecase_errors import ImpossibleEnrollment, NoItemsFound, ClosedActivity, UserAlreadyEnrolled, \
     UserAlreadyCompleted, ActivityEnded
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadRequest, InternalServerError, Forbidden
@@ -26,13 +26,12 @@ class EnrollActivityController:
             if not request.data.get('code'):
                 raise MissingParameters('code')
 
-            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user')).to_entity()            
 
             enrollment = self.EnrollActivityUsecase(
                 user_id = requester_user.user_id,
                 code =  request.data.get('code')
             )
-
             viewmodel = EnrollActivityViewmodel(enrollment, requester_user)
             response = OK(viewmodel.to_dict())
 
@@ -70,6 +69,10 @@ class EnrollActivityController:
         except UserAlreadyEnrolled as err:
             self.observability.log_exception(status_code=403, exception_name="UserAlreadyEnrolled", message=err.message)
             return Forbidden(body=f"Usuário já inscrito")
+        
+        except ImpossibleEnrollment as err:
+            self.observability.log_exception(status_code=403, exception_name="ImpossibleEnrollment", message=err.message)
+            return Forbidden(body=f"A atividade que você esta tentando se inscrever acontecerá no mesmo horário que {err.message}")
 
         except EntityError as err:
             self.observability.log_exception(status_code=400, exception_name="EntityError", message=err.message)

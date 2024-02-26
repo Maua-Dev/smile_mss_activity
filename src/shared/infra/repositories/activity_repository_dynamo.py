@@ -1,3 +1,4 @@
+from decimal import Decimal
 import hashlib
 import os
 from typing import List, Tuple
@@ -140,6 +141,8 @@ class ActivityRepositoryDynamo(IActivityRepository):
                 "state"] == ENROLLMENT_STATE.COMPLETED.value:
                 activity_data["taken_slots"] += 1
 
+        enrollments.sort(key=lambda x: (x.state != ENROLLMENT_STATE.COMPLETED, x.date_subscribed))
+
         activity = ActivityDynamoDTO.from_dynamo(activity_data).to_entity()
 
         return activity, enrollments
@@ -159,43 +162,51 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
     def update_activity(self, code: str, new_title: str = None, new_description: str = None,
                         new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None, new_duration: int = None,
+                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None, new_end_date: int = None,
                         new_link: str = None, new_place: str = None, new_responsible_professors: List[User] = None,
                         new_speakers: List[Speaker] = None, new_total_slots: int = None, new_taken_slots: int = None,
                         new_accepting_new_enrollments: bool = None,
                         new_stop_accepting_new_enrollments_before: int = None, new_confirmation_code:str = None) -> Activity:
+        
+        activity_to_update = self.get_activity(code)
 
-        new_activity = Activity(
-            code=code,
-            title=new_title,
-            description=new_description,
-            activity_type=new_activity_type,
-            is_extensive=new_is_extensive,
-            delivery_model=new_delivery_model,
-            start_date=new_start_date,
-            duration=new_duration,
-            link=new_link,
-            place=new_place,
-            responsible_professors=new_responsible_professors,
-            speakers=new_speakers,
-            total_slots=new_total_slots,
-            taken_slots=new_taken_slots,
-            accepting_new_enrollments=new_accepting_new_enrollments,
-            stop_accepting_new_enrollments_before=new_stop_accepting_new_enrollments_before,
-            confirmation_code=new_confirmation_code
-        )
+        if activity_to_update is None:
+            return None
+        
 
-        new_activity_dto = ActivityDynamoDTO.from_entity(new_activity)
+        update_dict = {
+            "code": code,
+            "title": new_title,
+            "description": new_description,
+            "activity_type": new_activity_type.value if new_activity_type is not None else None,
+            "is_extensive": new_is_extensive,
+            "delivery_model": new_delivery_model.value if new_delivery_model is not None else None,
+            "start_date": Decimal(str(new_start_date)) if new_start_date is not None else None,
+            "end_date": new_end_date,
+            "link": new_link,
+            "place": new_place,
+            "responsible_professors": [{"name": professor.name, "user_id": professor.user_id, "role": professor.role.value} for professor in new_responsible_professors] if new_responsible_professors is not None else [],
+            "speakers": [{"name": speaker.name, "bio": speaker.bio, "company": speaker.company} for speaker in new_speakers] if new_speakers is not None else [],
+            "total_slots": new_total_slots,
+            "taken_slots": new_taken_slots if new_taken_slots is not None else None,
+            "accepting_new_enrollments": new_accepting_new_enrollments,
+            "stop_accepting_new_enrollments_before": Decimal(str(new_stop_accepting_new_enrollments_before)) if new_stop_accepting_new_enrollments_before is not None else None,
+            "confirmation_code": new_confirmation_code if new_confirmation_code is not None else None
+        }
 
-        new_activity_dto = new_activity_dto.to_dynamo()
+        update_dict_without_none_values = {
+            k: v for k, v in update_dict.items() if v is not None}
 
-        response = self.dynamo.hard_update_item(
+        response = self.dynamo.update_item(
             partition_key=self.activity_partition_key_format(code),
             sort_key=self.activity_sort_key_format(code),
-            item=new_activity_dto,
+            update_dict=update_dict_without_none_values,
         )
 
-        return new_activity
+        if "Attributes" not in response:
+            return None
+        
+        return ActivityDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def delete_activity(self, code: str) -> Activity:
 
@@ -334,14 +345,17 @@ class ActivityRepositoryDynamo(IActivityRepository):
 
         user_enrollments = list()
         activities = list()
+        pos = 1
         for activity in activities_dict:
             activity_to_add = activity
             taken_slots = 0
-
             for enrollment in enrollments.get(activity["activity_code"], list()):
                 if enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.COMPLETED:
                     taken_slots += 1
                 if enrollment.user_id == user_id and (enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE or enrollment.state == ENROLLMENT_STATE.COMPLETED):
+                    if enrollment.state == ENROLLMENT_STATE.IN_QUEUE:
+                        enrollment.position = pos
+                        pos += 1
                     user_enrollments.append(enrollment)
 
             activity_to_add["taken_slots"] = taken_slots
@@ -489,4 +503,98 @@ class ActivityRepositoryDynamo(IActivityRepository):
         except Exception as err:
             print(err)
             return False
+        
+    def batch_get_activities(self, codes: List[str]) -> List[Activity]:
+        codes = [{self.dynamo.partition_key: self.activity_partition_key_format(code), self.dynamo.sort_key: self.activity_sort_key_format(code)} for code in codes]
+        if len(codes) == 0:
+            return []
 
+        response = self.dynamo.batch_get_items(keys=codes)
+        activities = list()
+        for item in response["Responses"][self.dynamo.dynamo_table.name]:
+            activities.append(ActivityDynamoDTO.from_dynamo(item).to_entity())
+
+        return activities
+    
+    def batch_delete_enrollments(self, users_ids: List[str], code: str) -> List[Enrollment]:
+        users_ids = [{self.dynamo.partition_key: self.enrollment_partition_key_format(code), self.dynamo.sort_key: self.enrollment_sort_key_format(user_id)} for user_id in users_ids]
+
+        response = self.dynamo.batch_delete_items(keys=users_ids)
+        
+        return None
+
+    def create_csv_activity(self, activity: Activity, enrollments: List[Enrollment]) -> bytes:
+        client_s3 = boto3.client('s3', region_name=os.environ.get('AWS_REGION'))
+        bucket = os.environ.get('BUCKET_NAME')
+        hash_key = os.environ.get('HASH_KEY')
+        print("create")
+        prefix = hashlib.sha256((hash_key).encode('utf-8')).hexdigest()
+
+        csv = (
+        f'Código, Titulo, Descrição, Tipo, Extensiva, Modelo da atividade, Data de Inicio, Data de Fim, Link, Local, '
+        f'Total de vagas, Vagas ocupadas, Aceitando novas inscrições, Parar de aceitar novas inscrições antes de, '
+        f'Código de confirmação, Inscrições\n'
+        )
+
+        activity_info = (
+            f'{activity.code}, {activity.title}, {activity.description}, {activity.activity_type.value}, '
+            f'{activity.is_extensive}, {activity.delivery_model.value}, {activity.start_date}, {activity.end_date}, '
+            f'{activity.link}, {activity.place}, {activity.total_slots}, {activity.taken_slots}, '
+            f'{activity.accepting_new_enrollments}, {activity.stop_accepting_new_enrollments_before}, '
+            f'{activity.confirmation_code}\n'
+        )
+
+        csv += activity_info
+
+        for enrollment in enrollments:
+            enrollment_info = (
+                f'{enrollment.user_id}, {enrollment.state.value}, {enrollment.date_subscribed}, {enrollment.position}\n'
+            )
+
+            csv += enrollment_info
+
+        try:
+            client_s3.put_object(
+                Bucket=bucket,
+                Key=f"{prefix}/{activity.code}.csv",
+                Body=csv
+            )
+
+            return None
+        
+        except Exception as err:
+            print(err)
+            return None
+
+
+
+    def download_activities(self, activity_code: str) -> bytes:
+        client_s3 = boto3.client('s3', region_name=os.environ.get('AWS_REGION'))
+        bucket = os.environ.get('BUCKET_NAME')
+        hash_key = os.environ.get('HASH_KEY')
+        print("download")
+        prefix = hashlib.sha256((hash_key).encode('utf-8')).hexdigest()
+
+        activity, enrollments = self.get_activity_with_enrollments(activity_code)
+        self.create_csv_activity(activity, enrollments)
+
+        try:
+            itens = client_s3.list_objects_v2(
+                Bucket=bucket,
+                Prefix=prefix
+            )
+
+            for item in itens['Contents']:
+                if activity_code in item['Key']:
+                    response = client_s3.get_object(
+                        Bucket=bucket,
+                        Key=item['Key']
+                    )
+                    
+                    return response['Body'].read()
+
+            return None
+
+        except Exception as err:
+            print(err)
+            return None

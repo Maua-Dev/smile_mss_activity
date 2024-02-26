@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 from src.shared.domain.entities.activity import Activity
 from src.shared.domain.entities.enrollment import Enrollment
@@ -31,7 +31,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671747413000,
-                duration=120,
+                end_date=1671754613000,
                 link=None,
                 place="H332",
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
@@ -50,7 +50,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1671661013000,
-                duration=400,
+                end_date=1695661013000,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
@@ -69,7 +69,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1671661013000,
-                duration=60,
+                end_date=1671664613000,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002"), User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
@@ -88,7 +88,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1672006613000,
-                duration=60,
+                end_date=1672010213000,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
@@ -109,7 +109,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671661013000,
-                duration=190,
+                end_date=1671672413000,
                 link=None,
                 place="H332",
                 responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
@@ -128,7 +128,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1671733013000,
-                duration=40,
+                end_date=1671735413000,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
@@ -147,7 +147,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.ONLINE,
                 start_date=1671563813000,
-                duration=80,
+                end_date=1671568613000,
                 link="https://devmaua.com",
                 place=None,
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
@@ -166,7 +166,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671661013000,
-                duration=20,
+                end_date=1671662213000,
                 link=None,
                 place="H332",
                 responsible_professors=[User(name="Patricia Santos", role=ROLE.PROFESSOR, user_id="6bb122d4-a110-11ed-a8fc-0242ac120002")],
@@ -185,7 +185,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1671488213000,
-                duration=120,
+                end_date=1671495413000,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
@@ -204,7 +204,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=True,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1672006613000,
-                duration=140,
+                end_date=1672015013000,
                 link=None,
                 place="H332",
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
@@ -223,7 +223,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.HYBRID,
                 start_date=1672006613000,
-                duration=60,
+                end_date=1672010213000,
                 link="https://devmaua.com",
                 place="H332",
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
@@ -242,7 +242,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1671733013000,
-                duration=45,
+                end_date=1671735713000,
                 link=None,
                 place="H332",
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
@@ -261,7 +261,7 @@ class ActivityRepositoryMock(IActivityRepository):
                 is_extensive=False,
                 delivery_model=DELIVERY_MODEL.IN_PERSON,
                 start_date=1670005013000,
-                duration=45,
+                end_date=1670007713000,
                 link=None,
                 place="H332",
                 responsible_professors=[User(name="Caio Toledo", role=ROLE.PROFESSOR, user_id="03555624-a110-11ed-a8fc-0242ac120002")],
@@ -384,18 +384,19 @@ class ActivityRepositoryMock(IActivityRepository):
         for activity in self.activities:
             if activity.code == code:
                 enrollments = [enrollment for enrollment in self.enrollments if enrollment.activity_code == code]
+                enrollments.sort(key=lambda x: (x.state != ENROLLMENT_STATE.COMPLETED, x.date_subscribed))
                 return activity, enrollments
         return None, None
 
-    def update_activity(self, code: str, new_title: str = None, new_description: str = None,
-                        new_activity_type: ACTIVITY_TYPE = None, new_is_extensive: bool = None,
-                        new_delivery_model: DELIVERY_MODEL = None, new_start_date: int = None,
-                        new_duration: int = None, new_link: str = None, new_place: str = None,
-                        new_responsible_professors: List[User] = None, new_speakers: List[Speaker] = None,
-                        new_total_slots: int = None, new_taken_slots: int = None,
-                        new_accepting_new_enrollments: bool = None,
-                        new_stop_accepting_new_enrollments_before: int = None,
-                        new_confirmation_code: str = None) -> Activity:
+    def update_activity(self, code: Optional[str], new_title: Optional[str] = None, new_description: Optional[str] = None,
+                        new_activity_type: Optional[ACTIVITY_TYPE] = None, new_is_extensive: Optional[bool] = None,
+                        new_delivery_model: Optional[DELIVERY_MODEL] = None, new_start_date: Optional[int] = None,
+                        new_end_date: Optional[int] = None, new_link: Optional[str] = None, new_place: Optional[str] = None,
+                        new_responsible_professors: Optional[List[User]] = None, new_speakers: Optional[List[Speaker]] = None,
+                        new_total_slots: Optional[int] = None, new_taken_slots: Optional[int] = None,
+                        new_accepting_new_enrollments: Optional[bool] = None,
+                        new_stop_accepting_new_enrollments_before: Optional[int] = None,
+                        new_confirmation_code: Optional[str] = None) -> Activity:
         for activity in self.activities:
             if activity.code == code:
                 if new_title is not None:
@@ -410,8 +411,8 @@ class ActivityRepositoryMock(IActivityRepository):
                     activity.delivery_model = new_delivery_model
                 if new_start_date is not None:
                     activity.start_date = new_start_date
-                if new_duration is not None:
-                    activity.duration = new_duration
+                if new_end_date is not None:
+                    activity.end_date = new_end_date
                 if new_link is not None:
                     activity.link = new_link
                 if new_place is not None:
@@ -481,8 +482,12 @@ class ActivityRepositoryMock(IActivityRepository):
             activities.append(activity)
 
         user_enrollments = list()
+        pos = 1
         for enrollment in self.enrollments:
             if enrollment.user_id == user_id and (enrollment.state == ENROLLMENT_STATE.ENROLLED or enrollment.state == ENROLLMENT_STATE.IN_QUEUE  or enrollment.state == ENROLLMENT_STATE.COMPLETED):
+                if enrollment.state == ENROLLMENT_STATE.IN_QUEUE:
+                    enrollment.position = pos
+                    pos += 1
                 user_enrollments.append(enrollment)
 
         return activities, user_enrollments
@@ -510,3 +515,29 @@ class ActivityRepositoryMock(IActivityRepository):
             if enrollment.user_id == user_id:
                 enrollments.append(enrollment)
         return enrollments
+    
+    def batch_get_activities(self, codes: List[str]) -> List[Activity]:
+        activities = list()
+        for activity in self.activities:
+            if activity.code in codes:
+                activities.append(activity)
+        return activities
+    
+    def batch_delete_enrollments(self, user_ids: List[str], code: str) -> List[Enrollment]:
+        deleted_enrollments = []
+        
+        for enrollment in self.enrollments:
+            if enrollment.user_id in user_ids and enrollment.activity_code == code:
+                deleted_enrollments.append(enrollment)
+            
+        for enrollment in deleted_enrollments:
+            self.enrollments.remove(enrollment)
+            
+        
+        return deleted_enrollments
+
+    def download_activities(self, code: str): 
+        #download csv of activity in real
+
+        return ""
+

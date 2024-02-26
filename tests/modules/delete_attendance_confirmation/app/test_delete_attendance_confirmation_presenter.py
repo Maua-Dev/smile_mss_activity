@@ -1,4 +1,6 @@
 import json
+
+import pytest
 from src.modules.delete_attendance_confirmation.app.delete_attendance_confirmation_presenter import lambda_handler
 
 class Test_DeleteAttendanceConfirmationPresenter:

@@ -54,5 +54,3 @@ class EventBridgeStack(Construct):
                 self.send_notification_function
             )
         )
-
-

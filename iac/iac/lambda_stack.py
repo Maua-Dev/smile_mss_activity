@@ -184,6 +184,31 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        self.download_activity_function = self.create_lambda_api_gateway_integration(
+            module_name="download_activity",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+        self.open_all_activities_function = lambda_.Function(self, "Open_all_activities",
+                                                             code=lambda_.Code.from_asset(
+                                                                 "../open_close/open_all_activities"),
+                                                             handler="open_all_activities.lambda_handler",
+                                                             runtime=lambda_.Runtime.PYTHON_3_9,
+                                                             environment=environment_variables,
+                                                             layers=[self.lambda_layer, self.lambda_power_tools]
+                                                             )
+
+        self.close_all_activities_function = lambda_.Function(self, "Close_all_activities",
+                                                              code=lambda_.Code.from_asset(
+                                                                  "../open_close/close_all_activities"),
+                                                              handler="close_all_activities.lambda_handler",
+                                                              runtime=lambda_.Runtime.PYTHON_3_9,
+                                                              environment=environment_variables,
+                                                              layers=[self.lambda_layer, self.lambda_power_tools]
+                                                              )
+
         self.functions_that_need_dynamo_permissions = [
             self.enroll_activity_function,
             self.drop_activity_function,
@@ -202,7 +227,8 @@ class LambdaStack(Construct):
             self.get_activity_with_enrollments_function,
             self.manual_drop_activity_function,
             self.enroll_activity_admin_function,
-            self.delete_user_function
+            self.delete_user_function,
+            self.download_activity_function
         ]
 
         self.functions_that_need_cognito_permissions = [
@@ -213,7 +239,6 @@ class LambdaStack(Construct):
             self.manual_attendance_change_function,
             self.manual_drop_activity_function,
             self.enroll_activity_admin_function,
-            self.delete_user_function
+            self.delete_user_function,
+            self.download_activity_function
         ]
-
-

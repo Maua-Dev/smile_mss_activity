@@ -33,8 +33,6 @@ class CreateActivityController:
                 raise MissingParameters('code')
             if request.data.get('title') is None:
                 raise MissingParameters('title')
-            if request.data.get('description') is None:
-                raise MissingParameters('description')
             if request.data.get('activity_type') is None:
                 raise MissingParameters('activity_type')
                 
@@ -58,22 +56,17 @@ class CreateActivityController:
 
             start_date = request.data.get('start_date')
 
-            if request.data.get('duration') is None:
-                raise MissingParameters('duration')
-            if request.data.get('responsible_professors') is None:
-                raise MissingParameters('responsible_professors')
+            if request.data.get('end_date') is None:
+                raise MissingParameters('end_date')
 
             speakers = request.data.get('speakers')
-            if speakers is None:
-                raise MissingParameters('speakers')
-
-            if type(speakers) != list:
-                raise EntityError('speakers')
-
-            try:
-                speakers = [Speaker(**speaker) for speaker in speakers]
-            except:
-                raise EntityError("speakers")
+            if speakers is not None:
+                if type(speakers) != list:
+                    raise EntityError('speakers')
+                try:
+                    speakers = [Speaker(**speaker) for speaker in speakers]
+                except:
+                    raise EntityError("speakers")
 
             if request.data.get('total_slots') is None:
                 raise MissingParameters('total_slots')
@@ -90,7 +83,7 @@ class CreateActivityController:
                     is_extensive = request.data.get('is_extensive'),
                     delivery_model = delivery_model,
                     start_date = start_date,    
-                    duration = request.data.get('duration'),
+                    end_date = request.data.get('end_date'),
                     link = request.data.get('link'),
                     place = request.data.get('place'),
                     responsible_professors_user_id = request.data.get('responsible_professors'),
