@@ -14,7 +14,6 @@ from .activity_s3_bucket import ActivityS3Bucket
 from .dynamo_stack import DynamoStack
 from .event_bridge_stack import EventBridgeStack
 from .lambda_stack import LambdaStack
-from .open_close_stack import OpenCloseStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
 class IacStack(Stack):
